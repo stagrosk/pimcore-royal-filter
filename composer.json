@@ -1,5 +1,5 @@
 {
-  "name": "pimcore/skeleton",
+  "name": "stagro/pimcore-royal-filter",
   "type": "project",
   "license": "GPL-3.0-or-later",
   "config": {
@@ -12,6 +12,7 @@
   },
   "prefer-stable": true,
   "require": {
+    "php": ">=8.2",
     "doctrine/orm": "^2.19",
     "pimcore/admin-ui-classic-bundle": "^1.0",
     "pimcore/pimcore": "^11.0.4",

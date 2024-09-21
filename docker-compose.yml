@@ -14,7 +14,7 @@ services:
         depends_on:
             - royal-filter-db
         networks:
-            - alpin
+            - stagro
             - traefik
         env_file:
             - .env.docker
@@ -31,7 +31,7 @@ services:
         environment:
             - discovery.type=single-node
         networks:
-            - alpin
+            - stagro
             - traefik
         env_file:
             - .env.docker
@@ -51,7 +51,7 @@ services:
             - traefik.enable=true
             - traefik.port=15672
         networks:
-            - alpin
+            - stagro
             - traefik
         env_file:
             - .env.docker
@@ -62,7 +62,7 @@ services:
         ports:
             - "8970:6379"
         networks:
-            - alpin
+            - stagro
             - traefik
         env_file:
             - .env.docker
@@ -79,7 +79,7 @@ services:
         ports:
             - "25070:3306"
         networks:
-            - alpin
+            - stagro
             - traefik
         env_file:
             - .env.docker
@@ -103,7 +103,7 @@ services:
         depends_on:
             - royal-filter-php
         networks:
-            - alpin
+            - stagro
             - traefik
         env_file:
             - .env.docker
@@ -143,7 +143,7 @@ services:
             - royal-filter-db
             - royal-filter-redis
         networks:
-            - alpin
+            - stagro
             - traefik
         environment:
             - PHP_IDE_CONFIG="serverName=localhost"
@@ -160,21 +160,10 @@ services:
             - royal-filter-db
             - royal-filter-redis
         networks:
-            - alpin
+            - stagro
             - traefik
         environment:
             - PHP_IDE_CONFIG="serverName=localhost"
-        env_file:
-            - .env.docker
-
-    royal-filter-blackfire:
-        image: blackfire/blackfire:2
-        container_name: royal-filter-blackfire
-        ports:
-            - "8374:8307"
-        networks:
-            - alpin
-            - traefik
         env_file:
             - .env.docker
 
@@ -197,7 +186,7 @@ services:
             - traefik.enable=true
             - traefik.port=8025
         networks:
-            - alpin
+            - stagro
             - traefik
 
     royal-filter-supervisord:
@@ -209,11 +198,11 @@ services:
             - .:/var/www/html:cached
             - ./.docker/supervisord.conf:/etc/supervisor/conf.d/pimcore.conf:ro
         networks:
-            - alpin
+            - stagro
             - traefik
 
 networks:
-    alpin:
+    stagro:
         internal: true
     traefik:
         external: true

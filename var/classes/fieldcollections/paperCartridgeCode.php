@@ -2,16 +2,16 @@
 
 /**
  * Fields Summary:
- * - companyName [input]
+ * - company [manyToOneRelation]
  * - code [numeric]
  */
 
 return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
    'dao' => NULL,
-   'key' => 'paperCartridgeCodes',
+   'key' => 'paperCartridgeCode',
    'parentClass' => '',
    'implementsInterfaces' => '',
-   'title' => '',
+   'title' => 'Paper cartridge code',
    'group' => '',
    'layoutDefinitions' => 
   \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
@@ -42,9 +42,9 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
          'children' => 
         array (
           0 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
-             'name' => 'companyName',
-             'title' => 'Company Name',
+          \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
+             'name' => 'company',
+             'title' => 'Company',
              'tooltip' => '',
              'mandatory' => false,
              'noteditable' => false,
@@ -53,23 +53,35 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'style' => '',
              'permissions' => NULL,
              'fieldtype' => '',
-             'relationType' => false,
+             'relationType' => true,
              'invisible' => false,
              'visibleGridView' => false,
              'visibleSearch' => false,
              'blockedVarsForExport' => 
             array (
             ),
-             'defaultValue' => NULL,
-             'columnLength' => 190,
-             'regex' => '',
-             'regexFlags' => 
+             'classes' => 
+            array (
+              0 => 
+              array (
+                'classes' => 'Company',
+              ),
+            ),
+             'displayMode' => 'grid',
+             'pathFormatterClass' => '',
+             'assetInlineDownloadAllowed' => false,
+             'assetUploadPath' => '',
+             'allowToClearRelation' => true,
+             'objectsAllowed' => true,
+             'assetsAllowed' => false,
+             'assetTypes' => 
             array (
             ),
-             'unique' => false,
-             'showCharCount' => false,
+             'documentsAllowed' => false,
+             'documentTypes' => 
+            array (
+            ),
              'width' => '',
-             'defaultValueGenerator' => '',
           )),
           1 => 
           \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(

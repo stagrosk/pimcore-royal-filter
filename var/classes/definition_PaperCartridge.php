@@ -5,8 +5,7 @@
  * Variants: no
  *
  * Fields Summary:
- * - name [input]
- * - companies [manyToManyRelation]
+ * - title [input]
  * - codes [fieldcollections]
  * - top [select]
  * - bottom [select]
@@ -17,6 +16,7 @@
  * - diameterWithoutThread [numeric]
  * - pitch [numeric]
  * - threadImages [imageGallery]
+ * - defaultImage [image]
  * - images [imageGallery]
  */
 
@@ -27,7 +27,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1719599827,
+   'modificationDate' => 1726934935,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -86,8 +86,8 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
             array (
               0 => 
               \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
-                 'name' => 'name',
-                 'title' => 'Name',
+                 'name' => 'title',
+                 'title' => 'Title',
                  'tooltip' => '',
                  'mandatory' => false,
                  'noteditable' => false,
@@ -115,51 +115,6 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'defaultValueGenerator' => '',
               )),
               1 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToManyRelation::__set_state(array(
-                 'name' => 'companies',
-                 'title' => 'Companies',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'fieldtype' => '',
-                 'relationType' => true,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-                 'blockedVarsForExport' => 
-                array (
-                ),
-                 'classes' => 
-                array (
-                  0 => 
-                  array (
-                    'classes' => 'Company',
-                  ),
-                ),
-                 'displayMode' => NULL,
-                 'pathFormatterClass' => '',
-                 'maxItems' => NULL,
-                 'assetInlineDownloadAllowed' => false,
-                 'assetUploadPath' => '',
-                 'allowToClearRelation' => true,
-                 'objectsAllowed' => true,
-                 'assetsAllowed' => false,
-                 'assetTypes' => 
-                array (
-                ),
-                 'documentsAllowed' => false,
-                 'documentTypes' => 
-                array (
-                ),
-                 'enableTextSelection' => false,
-                 'width' => '',
-                 'height' => '',
-              )),
-              2 => 
               \Pimcore\Model\DataObject\ClassDefinition\Data\Fieldcollections::__set_state(array(
                  'name' => 'codes',
                  'title' => 'Codes',
@@ -604,6 +559,29 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'children' => 
             array (
               0 => 
+              \Pimcore\Model\DataObject\ClassDefinition\Data\Image::__set_state(array(
+                 'name' => 'defaultImage',
+                 'title' => 'Default Image',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'fieldtype' => '',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+                 'blockedVarsForExport' => 
+                array (
+                ),
+                 'uploadPath' => '',
+                 'width' => '',
+                 'height' => '',
+              )),
+              1 => 
               \Pimcore\Model\DataObject\ClassDefinition\Data\ImageGallery::__set_state(array(
                  'name' => 'images',
                  'title' => 'Images',
