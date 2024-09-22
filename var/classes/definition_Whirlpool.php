@@ -25,7 +25,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1727018816,
+   'modificationDate' => 1727019603,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -231,7 +231,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'documentTypes' => 
                     array (
                     ),
-                     'width' => '',
+                     'width' => '600px',
                   )),
                   2 => 
                   \Pimcore\Model\DataObject\ClassDefinition\Data\Objectbricks::__set_state(array(

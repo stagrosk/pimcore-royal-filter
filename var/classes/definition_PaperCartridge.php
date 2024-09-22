@@ -31,7 +31,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1727018850,
+   'modificationDate' => 1727019701,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -150,7 +150,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                         ),
                          'unique' => false,
                          'showCharCount' => false,
-                         'width' => '',
+                         'width' => '600px',
                          'defaultValueGenerator' => '',
                       )),
                     ),
@@ -212,7 +212,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'documentTypes' => 
                     array (
                     ),
-                     'width' => '',
+                     'width' => '600px',
                   )),
                   2 => 
                   \Pimcore\Model\DataObject\ClassDefinition\Data\Link::__set_state(array(
@@ -528,7 +528,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                         array (
                         ),
                          'defaultValue' => NULL,
-                         'integer' => true,
+                         'integer' => false,
                          'unsigned' => false,
                          'minValue' => NULL,
                          'maxValue' => NULL,
@@ -558,7 +558,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                         array (
                         ),
                          'defaultValue' => NULL,
-                         'integer' => true,
+                         'integer' => false,
                          'unsigned' => false,
                          'minValue' => NULL,
                          'maxValue' => NULL,
@@ -588,7 +588,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                         array (
                         ),
                          'defaultValue' => NULL,
-                         'integer' => true,
+                         'integer' => false,
                          'unsigned' => false,
                          'minValue' => NULL,
                          'maxValue' => NULL,
