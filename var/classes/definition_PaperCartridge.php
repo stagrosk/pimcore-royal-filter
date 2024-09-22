@@ -7,6 +7,7 @@
  * Fields Summary:
  * - localizedfields [localizedfields]
  * -- title [input]
+ * - manufacturer [manyToOneRelation]
  * - url [link]
  * - codes [fieldcollections]
  * - defaultImage [image]
@@ -30,7 +31,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1727015942,
+   'modificationDate' => 1727018850,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -172,6 +173,48 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'fieldDefinitionsCache' => NULL,
                   )),
                   1 => 
+                  \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
+                     'name' => 'manufacturer',
+                     'title' => 'Manufacturer',
+                     'tooltip' => '',
+                     'mandatory' => false,
+                     'noteditable' => false,
+                     'index' => false,
+                     'locked' => false,
+                     'style' => '',
+                     'permissions' => NULL,
+                     'fieldtype' => '',
+                     'relationType' => true,
+                     'invisible' => false,
+                     'visibleGridView' => false,
+                     'visibleSearch' => false,
+                     'blockedVarsForExport' => 
+                    array (
+                    ),
+                     'classes' => 
+                    array (
+                      0 => 
+                      array (
+                        'classes' => 'Manufacturer',
+                      ),
+                    ),
+                     'displayMode' => 'grid',
+                     'pathFormatterClass' => '',
+                     'assetInlineDownloadAllowed' => false,
+                     'assetUploadPath' => '',
+                     'allowToClearRelation' => true,
+                     'objectsAllowed' => true,
+                     'assetsAllowed' => false,
+                     'assetTypes' => 
+                    array (
+                    ),
+                     'documentsAllowed' => false,
+                     'documentTypes' => 
+                    array (
+                    ),
+                     'width' => '',
+                  )),
+                  2 => 
                   \Pimcore\Model\DataObject\ClassDefinition\Data\Link::__set_state(array(
                      'name' => 'url',
                      'title' => 'Url',
@@ -201,7 +244,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                     array (
                     ),
                   )),
-                  2 => 
+                  3 => 
                   \Pimcore\Model\DataObject\ClassDefinition\Data\Fieldcollections::__set_state(array(
                      'name' => 'codes',
                      'title' => 'Codes',
