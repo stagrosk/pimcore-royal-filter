@@ -11,6 +11,7 @@
  * - volumeOfWater [numeric]
  * - weightWithoutWater [numeric]
  * - weightWithWater [numeric]
+ * - jetsType [select]
  * - amountOfJets [numeric]
  * - numberOfPersons [numeric]
  * - solinator [checkbox]
@@ -338,6 +339,47 @@ return \Pimcore\Model\DataObject\Objectbrick\Definition::__set_state(array(
              'defaultValueGenerator' => '',
           )),
           9 => 
+          \Pimcore\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
+             'name' => 'jetsType',
+             'title' => 'Jets Type',
+             'tooltip' => '',
+             'mandatory' => false,
+             'noteditable' => false,
+             'index' => false,
+             'locked' => false,
+             'style' => '',
+             'permissions' => NULL,
+             'fieldtype' => '',
+             'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => false,
+             'visibleSearch' => false,
+             'blockedVarsForExport' => 
+            array (
+            ),
+             'options' => 
+            array (
+              0 => 
+              array (
+                'key' => 'Air jets',
+                'value' => 'Air jets',
+              ),
+              1 => 
+              array (
+                'key' => 'Standard jets',
+                'value' => 'Standard jets',
+              ),
+            ),
+             'defaultValue' => '',
+             'columnLength' => 190,
+             'dynamicOptions' => false,
+             'defaultValueGenerator' => '',
+             'width' => '',
+             'optionsProviderType' => 'configure',
+             'optionsProviderClass' => '',
+             'optionsProviderData' => '',
+          )),
+          10 => 
           \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
              'name' => 'amountOfJets',
              'title' => 'Amount of jets',
@@ -367,7 +409,7 @@ return \Pimcore\Model\DataObject\Objectbrick\Definition::__set_state(array(
              'width' => '',
              'defaultValueGenerator' => '',
           )),
-          10 => 
+          11 => 
           \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
              'name' => 'numberOfPersons',
              'title' => 'Number Of Persons',
@@ -397,7 +439,7 @@ return \Pimcore\Model\DataObject\Objectbrick\Definition::__set_state(array(
              'width' => '',
              'defaultValueGenerator' => '',
           )),
-          11 => 
+          12 => 
           \Pimcore\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
              'name' => 'solinator',
              'title' => 'Solinator',
