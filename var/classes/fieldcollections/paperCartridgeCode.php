@@ -2,7 +2,7 @@
 
 /**
  * Fields Summary:
- * - company [manyToOneRelation]
+ * - manufacturer [manyToOneRelation]
  * - code [input]
  */
 
@@ -43,8 +43,8 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
         array (
           0 => 
           \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
-             'name' => 'company',
-             'title' => 'Company',
+             'name' => 'manufacturer',
+             'title' => 'Manufacturer',
              'tooltip' => '',
              'mandatory' => true,
              'noteditable' => false,
@@ -64,7 +64,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
             array (
               0 => 
               array (
-                'classes' => 'Company',
+                'classes' => 'Manufacturer',
               ),
             ),
              'displayMode' => 'grid',
