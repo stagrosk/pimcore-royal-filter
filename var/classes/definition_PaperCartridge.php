@@ -5,19 +5,22 @@
  * Variants: no
  *
  * Fields Summary:
- * - title [input]
+ * - localizedfields [localizedfields]
+ * -- title [input]
+ * - url [link]
  * - codes [fieldcollections]
+ * - defaultImage [image]
+ * - images [imageGallery]
  * - top [select]
  * - bottom [select]
  * - length [numeric]
  * - diameter [numeric]
+ * - centerDiameter [numeric]
  * - threadPosition [select]
  * - diameterWithThread [numeric]
  * - diameterWithoutThread [numeric]
  * - pitch [numeric]
  * - threadImages [imageGallery]
- * - defaultImage [image]
- * - images [imageGallery]
  */
 
 return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
@@ -27,7 +30,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1726934935,
+   'modificationDate' => 1726996781,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -57,7 +60,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
      'children' => 
     array (
       0 => 
-      \Pimcore\Model\DataObject\ClassDefinition\Layout\Tabpanel::__set_state(array(
+      \Pimcore\Model\DataObject\ClassDefinition\Layout\Region::__set_state(array(
          'name' => 'Layout',
          'type' => NULL,
          'region' => NULL,
@@ -72,98 +75,11 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
         array (
           0 => 
           \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
-             'name' => 'Base',
+             'name' => 'West',
              'type' => NULL,
-             'region' => NULL,
-             'title' => 'Base',
-             'width' => '',
-             'height' => '',
-             'collapsible' => false,
-             'collapsed' => false,
-             'bodyStyle' => '',
-             'datatype' => 'layout',
-             'children' => 
-            array (
-              0 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
-                 'name' => 'title',
-                 'title' => 'Title',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'fieldtype' => '',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-                 'blockedVarsForExport' => 
-                array (
-                ),
-                 'defaultValue' => NULL,
-                 'columnLength' => 190,
-                 'regex' => '',
-                 'regexFlags' => 
-                array (
-                ),
-                 'unique' => false,
-                 'showCharCount' => false,
-                 'width' => '',
-                 'defaultValueGenerator' => '',
-              )),
-              1 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\Fieldcollections::__set_state(array(
-                 'name' => 'codes',
-                 'title' => 'Codes',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'fieldtype' => '',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-                 'blockedVarsForExport' => 
-                array (
-                ),
-                 'allowedTypes' => 
-                array (
-                  0 => 'paperCartridgeCodes',
-                ),
-                 'lazyLoading' => true,
-                 'maxItems' => NULL,
-                 'disallowAddRemove' => false,
-                 'disallowReorder' => false,
-                 'collapsed' => false,
-                 'collapsible' => false,
-                 'border' => false,
-              )),
-            ),
-             'locked' => false,
-             'blockedVarsForExport' => 
-            array (
-            ),
-             'fieldtype' => 'panel',
-             'layout' => NULL,
-             'border' => false,
-             'icon' => '',
-             'labelWidth' => 100,
-             'labelAlign' => 'left',
-          )),
-          1 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
-             'name' => 'Dimensions',
-             'type' => NULL,
-             'region' => NULL,
-             'title' => 'Dimensions',
-             'width' => '',
+             'region' => 'west',
+             'title' => '',
+             'width' => '50%',
              'height' => '',
              'collapsible' => false,
              'collapsed' => false,
@@ -186,55 +102,79 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'children' => 
                 array (
                   0 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
-                     'name' => 'top',
-                     'title' => 'Top',
-                     'tooltip' => '',
+                  \Pimcore\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
+                     'name' => 'localizedfields',
+                     'title' => '',
+                     'tooltip' => NULL,
                      'mandatory' => false,
                      'noteditable' => false,
                      'index' => false,
                      'locked' => false,
-                     'style' => '',
+                     'style' => NULL,
                      'permissions' => NULL,
                      'fieldtype' => '',
                      'relationType' => false,
                      'invisible' => false,
-                     'visibleGridView' => false,
-                     'visibleSearch' => false,
+                     'visibleGridView' => true,
+                     'visibleSearch' => true,
                      'blockedVarsForExport' => 
                     array (
                     ),
-                     'options' => 
+                     'children' => 
                     array (
                       0 => 
-                      array (
-                        'key' => 'Thread',
-                        'value' => 'thread',
-                      ),
-                      1 => 
-                      array (
-                        'key' => 'Hole',
-                        'value' => 'hole',
-                      ),
-                      2 => 
-                      array (
-                        'key' => 'Handle',
-                        'value' => 'handle',
-                      ),
+                      \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+                         'name' => 'title',
+                         'title' => 'Title',
+                         'tooltip' => '',
+                         'mandatory' => true,
+                         'noteditable' => false,
+                         'index' => false,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'fieldtype' => '',
+                         'relationType' => false,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'defaultValue' => NULL,
+                         'columnLength' => 190,
+                         'regex' => '',
+                         'regexFlags' => 
+                        array (
+                        ),
+                         'unique' => false,
+                         'showCharCount' => false,
+                         'width' => '',
+                         'defaultValueGenerator' => '',
+                      )),
                     ),
-                     'defaultValue' => '',
-                     'columnLength' => 190,
-                     'dynamicOptions' => false,
-                     'defaultValueGenerator' => '',
+                     'region' => NULL,
+                     'layout' => NULL,
+                     'maxTabs' => NULL,
+                     'border' => false,
+                     'provideSplitView' => false,
+                     'tabPosition' => 'top',
+                     'hideLabelsWhenTabsReached' => NULL,
+                     'referencedFields' => 
+                    array (
+                    ),
+                     'permissionView' => NULL,
+                     'permissionEdit' => NULL,
+                     'labelWidth' => 100,
+                     'labelAlign' => 'left',
                      'width' => '',
-                     'optionsProviderType' => 'configure',
-                     'optionsProviderClass' => '',
-                     'optionsProviderData' => '',
+                     'height' => '',
+                     'fieldDefinitionsCache' => NULL,
                   )),
                   1 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
-                     'name' => 'bottom',
-                     'title' => 'Bottom',
+                  \Pimcore\Model\DataObject\ClassDefinition\Data\Link::__set_state(array(
+                     'name' => 'url',
+                     'title' => 'Url',
                      'tooltip' => '',
                      'mandatory' => false,
                      'noteditable' => false,
@@ -250,37 +190,21 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'blockedVarsForExport' => 
                     array (
                     ),
-                     'options' => 
+                     'allowedTypes' => 
                     array (
-                      0 => 
-                      array (
-                        'key' => 'Thread',
-                        'value' => 'thread',
-                      ),
-                      1 => 
-                      array (
-                        'key' => 'Hole',
-                        'value' => 'hole',
-                      ),
-                      2 => 
-                      array (
-                        'key' => 'Handle',
-                        'value' => 'handle',
-                      ),
                     ),
-                     'defaultValue' => '',
-                     'columnLength' => 190,
-                     'dynamicOptions' => false,
-                     'defaultValueGenerator' => '',
-                     'width' => '',
-                     'optionsProviderType' => 'configure',
-                     'optionsProviderClass' => '',
-                     'optionsProviderData' => '',
+                     'allowedTargets' => 
+                    array (
+                      0 => '_blank',
+                    ),
+                     'disabledFields' => 
+                    array (
+                    ),
                   )),
                   2 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
-                     'name' => 'length',
-                     'title' => 'Length',
+                  \Pimcore\Model\DataObject\ClassDefinition\Data\Fieldcollections::__set_state(array(
+                     'name' => 'codes',
+                     'title' => 'Codes',
                      'tooltip' => '',
                      'mandatory' => false,
                      'noteditable' => false,
@@ -296,46 +220,17 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'blockedVarsForExport' => 
                     array (
                     ),
-                     'defaultValue' => NULL,
-                     'integer' => false,
-                     'unsigned' => false,
-                     'minValue' => NULL,
-                     'maxValue' => NULL,
-                     'unique' => false,
-                     'decimalSize' => NULL,
-                     'decimalPrecision' => NULL,
-                     'width' => '',
-                     'defaultValueGenerator' => '',
-                  )),
-                  3 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
-                     'name' => 'diameter',
-                     'title' => 'Diameter',
-                     'tooltip' => '',
-                     'mandatory' => false,
-                     'noteditable' => false,
-                     'index' => false,
-                     'locked' => false,
-                     'style' => '',
-                     'permissions' => NULL,
-                     'fieldtype' => '',
-                     'relationType' => false,
-                     'invisible' => false,
-                     'visibleGridView' => false,
-                     'visibleSearch' => false,
-                     'blockedVarsForExport' => 
+                     'allowedTypes' => 
                     array (
+                      0 => 'paperCartridgeCode',
                     ),
-                     'defaultValue' => NULL,
-                     'integer' => false,
-                     'unsigned' => false,
-                     'minValue' => NULL,
-                     'maxValue' => NULL,
-                     'unique' => false,
-                     'decimalSize' => NULL,
-                     'decimalPrecision' => NULL,
-                     'width' => '',
-                     'defaultValueGenerator' => '',
+                     'lazyLoading' => true,
+                     'maxItems' => NULL,
+                     'disallowAddRemove' => false,
+                     'disallowReorder' => false,
+                     'collapsed' => false,
+                     'collapsible' => false,
+                     'border' => false,
                   )),
                 ),
                  'locked' => false,
@@ -349,12 +244,38 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'labelWidth' => 100,
                  'labelAlign' => 'left',
               )),
-              1 => 
+            ),
+             'locked' => false,
+             'blockedVarsForExport' => 
+            array (
+            ),
+             'fieldtype' => 'panel',
+             'layout' => NULL,
+             'border' => false,
+             'icon' => '',
+             'labelWidth' => 100,
+             'labelAlign' => 'left',
+          )),
+          1 => 
+          \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+             'name' => 'East',
+             'type' => NULL,
+             'region' => 'east',
+             'title' => '',
+             'width' => '50%',
+             'height' => '',
+             'collapsible' => false,
+             'collapsed' => false,
+             'bodyStyle' => '',
+             'datatype' => 'layout',
+             'children' => 
+            array (
+              0 => 
               \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
-                 'name' => 'Thread',
+                 'name' => 'Assets',
                  'type' => NULL,
-                 'region' => NULL,
-                 'title' => 'Thread',
+                 'region' => '',
+                 'title' => 'Assets',
                  'width' => '',
                  'height' => '',
                  'collapsible' => false,
@@ -364,9 +285,9 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'children' => 
                 array (
                   0 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
-                     'name' => 'threadPosition',
-                     'title' => 'Thread Position',
+                  \Pimcore\Model\DataObject\ClassDefinition\Data\Image::__set_state(array(
+                     'name' => 'defaultImage',
+                     'title' => 'Default Image',
                      'tooltip' => '',
                      'mandatory' => false,
                      'noteditable' => false,
@@ -382,122 +303,14 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'blockedVarsForExport' => 
                     array (
                     ),
-                     'options' => 
-                    array (
-                      0 => 
-                      array (
-                        'key' => 'Outside',
-                        'value' => 'outside',
-                      ),
-                      1 => 
-                      array (
-                        'key' => 'Inside',
-                        'value' => 'inside',
-                      ),
-                    ),
-                     'defaultValue' => '',
-                     'columnLength' => 190,
-                     'dynamicOptions' => false,
-                     'defaultValueGenerator' => '',
+                     'uploadPath' => '',
                      'width' => '',
-                     'optionsProviderType' => 'configure',
-                     'optionsProviderClass' => '',
-                     'optionsProviderData' => '',
+                     'height' => '',
                   )),
                   1 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
-                     'name' => 'diameterWithThread',
-                     'title' => 'Diameter With Thread',
-                     'tooltip' => 'Priemer so zavitom',
-                     'mandatory' => false,
-                     'noteditable' => false,
-                     'index' => false,
-                     'locked' => false,
-                     'style' => '',
-                     'permissions' => NULL,
-                     'fieldtype' => '',
-                     'relationType' => false,
-                     'invisible' => false,
-                     'visibleGridView' => false,
-                     'visibleSearch' => false,
-                     'blockedVarsForExport' => 
-                    array (
-                    ),
-                     'defaultValue' => NULL,
-                     'integer' => false,
-                     'unsigned' => false,
-                     'minValue' => NULL,
-                     'maxValue' => NULL,
-                     'unique' => false,
-                     'decimalSize' => NULL,
-                     'decimalPrecision' => NULL,
-                     'width' => '',
-                     'defaultValueGenerator' => '',
-                  )),
-                  2 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
-                     'name' => 'diameterWithoutThread',
-                     'title' => 'Diameter Without Thread',
-                     'tooltip' => 'Priemer bez zavitu',
-                     'mandatory' => false,
-                     'noteditable' => false,
-                     'index' => false,
-                     'locked' => false,
-                     'style' => '',
-                     'permissions' => NULL,
-                     'fieldtype' => '',
-                     'relationType' => false,
-                     'invisible' => false,
-                     'visibleGridView' => false,
-                     'visibleSearch' => false,
-                     'blockedVarsForExport' => 
-                    array (
-                    ),
-                     'defaultValue' => NULL,
-                     'integer' => false,
-                     'unsigned' => false,
-                     'minValue' => NULL,
-                     'maxValue' => NULL,
-                     'unique' => false,
-                     'decimalSize' => NULL,
-                     'decimalPrecision' => NULL,
-                     'width' => '',
-                     'defaultValueGenerator' => '',
-                  )),
-                  3 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
-                     'name' => 'pitch',
-                     'title' => 'Pitch',
-                     'tooltip' => 'Stupanie zavitu',
-                     'mandatory' => false,
-                     'noteditable' => false,
-                     'index' => false,
-                     'locked' => false,
-                     'style' => '',
-                     'permissions' => NULL,
-                     'fieldtype' => '',
-                     'relationType' => false,
-                     'invisible' => false,
-                     'visibleGridView' => false,
-                     'visibleSearch' => false,
-                     'blockedVarsForExport' => 
-                    array (
-                    ),
-                     'defaultValue' => NULL,
-                     'integer' => false,
-                     'unsigned' => false,
-                     'minValue' => NULL,
-                     'maxValue' => NULL,
-                     'unique' => false,
-                     'decimalSize' => NULL,
-                     'decimalPrecision' => NULL,
-                     'width' => '',
-                     'defaultValueGenerator' => '',
-                  )),
-                  4 => 
                   \Pimcore\Model\DataObject\ClassDefinition\Data\ImageGallery::__set_state(array(
-                     'name' => 'threadImages',
-                     'title' => 'Thread images',
+                     'name' => 'images',
+                     'title' => 'Images',
                      'tooltip' => '',
                      'mandatory' => false,
                      'noteditable' => false,
@@ -532,80 +345,422 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'labelWidth' => 100,
                  'labelAlign' => 'left',
               )),
-            ),
-             'locked' => false,
-             'blockedVarsForExport' => 
-            array (
-            ),
-             'fieldtype' => 'panel',
-             'layout' => NULL,
-             'border' => false,
-             'icon' => '',
-             'labelWidth' => 100,
-             'labelAlign' => 'left',
-          )),
-          2 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
-             'name' => 'Assets',
-             'type' => NULL,
-             'region' => NULL,
-             'title' => 'Assets',
-             'width' => '',
-             'height' => '',
-             'collapsible' => false,
-             'collapsed' => false,
-             'bodyStyle' => '',
-             'datatype' => 'layout',
-             'children' => 
-            array (
-              0 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\Image::__set_state(array(
-                 'name' => 'defaultImage',
-                 'title' => 'Default Image',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'fieldtype' => '',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-                 'blockedVarsForExport' => 
-                array (
-                ),
-                 'uploadPath' => '',
-                 'width' => '',
-                 'height' => '',
-              )),
               1 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\ImageGallery::__set_state(array(
-                 'name' => 'images',
-                 'title' => 'Images',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
+              \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+                 'name' => 'Dimensions',
+                 'type' => NULL,
+                 'region' => '',
+                 'title' => 'Dimensions',
+                 'width' => '',
+                 'height' => '',
+                 'collapsible' => false,
+                 'collapsed' => false,
+                 'bodyStyle' => '',
+                 'datatype' => 'layout',
+                 'children' => 
+                array (
+                  0 => 
+                  \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+                     'name' => 'Base',
+                     'type' => NULL,
+                     'region' => NULL,
+                     'title' => 'Base',
+                     'width' => '',
+                     'height' => '',
+                     'collapsible' => false,
+                     'collapsed' => false,
+                     'bodyStyle' => '',
+                     'datatype' => 'layout',
+                     'children' => 
+                    array (
+                      0 => 
+                      \Pimcore\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
+                         'name' => 'top',
+                         'title' => 'Top',
+                         'tooltip' => '',
+                         'mandatory' => false,
+                         'noteditable' => false,
+                         'index' => false,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'fieldtype' => '',
+                         'relationType' => false,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'options' => 
+                        array (
+                          0 => 
+                          array (
+                            'key' => 'Thread',
+                            'value' => 'thread',
+                          ),
+                          1 => 
+                          array (
+                            'key' => 'Hole',
+                            'value' => 'hole',
+                          ),
+                          2 => 
+                          array (
+                            'key' => 'Handle',
+                            'value' => 'handle',
+                          ),
+                        ),
+                         'defaultValue' => '',
+                         'columnLength' => 190,
+                         'dynamicOptions' => false,
+                         'defaultValueGenerator' => '',
+                         'width' => '',
+                         'optionsProviderType' => 'configure',
+                         'optionsProviderClass' => '',
+                         'optionsProviderData' => '',
+                      )),
+                      1 => 
+                      \Pimcore\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
+                         'name' => 'bottom',
+                         'title' => 'Bottom',
+                         'tooltip' => '',
+                         'mandatory' => false,
+                         'noteditable' => false,
+                         'index' => false,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'fieldtype' => '',
+                         'relationType' => false,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'options' => 
+                        array (
+                          0 => 
+                          array (
+                            'key' => 'Thread',
+                            'value' => 'thread',
+                          ),
+                          1 => 
+                          array (
+                            'key' => 'Hole',
+                            'value' => 'hole',
+                          ),
+                          2 => 
+                          array (
+                            'key' => 'Handle',
+                            'value' => 'handle',
+                          ),
+                        ),
+                         'defaultValue' => '',
+                         'columnLength' => 190,
+                         'dynamicOptions' => false,
+                         'defaultValueGenerator' => '',
+                         'width' => '',
+                         'optionsProviderType' => 'configure',
+                         'optionsProviderClass' => '',
+                         'optionsProviderData' => '',
+                      )),
+                      2 => 
+                      \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
+                         'name' => 'length',
+                         'title' => 'Length',
+                         'tooltip' => '',
+                         'mandatory' => false,
+                         'noteditable' => false,
+                         'index' => false,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'fieldtype' => '',
+                         'relationType' => false,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'defaultValue' => NULL,
+                         'integer' => true,
+                         'unsigned' => false,
+                         'minValue' => NULL,
+                         'maxValue' => NULL,
+                         'unique' => false,
+                         'decimalSize' => NULL,
+                         'decimalPrecision' => NULL,
+                         'width' => '',
+                         'defaultValueGenerator' => '',
+                      )),
+                      3 => 
+                      \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
+                         'name' => 'diameter',
+                         'title' => 'Diameter',
+                         'tooltip' => '',
+                         'mandatory' => false,
+                         'noteditable' => false,
+                         'index' => false,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'fieldtype' => '',
+                         'relationType' => false,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'defaultValue' => NULL,
+                         'integer' => true,
+                         'unsigned' => false,
+                         'minValue' => NULL,
+                         'maxValue' => NULL,
+                         'unique' => false,
+                         'decimalSize' => NULL,
+                         'decimalPrecision' => NULL,
+                         'width' => '',
+                         'defaultValueGenerator' => '',
+                      )),
+                      4 => 
+                      \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
+                         'name' => 'centerDiameter',
+                         'title' => 'Center diameter',
+                         'tooltip' => '',
+                         'mandatory' => false,
+                         'noteditable' => false,
+                         'index' => false,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'fieldtype' => '',
+                         'relationType' => false,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'defaultValue' => NULL,
+                         'integer' => true,
+                         'unsigned' => false,
+                         'minValue' => NULL,
+                         'maxValue' => NULL,
+                         'unique' => false,
+                         'decimalSize' => NULL,
+                         'decimalPrecision' => NULL,
+                         'width' => '',
+                         'defaultValueGenerator' => '',
+                      )),
+                    ),
+                     'locked' => false,
+                     'blockedVarsForExport' => 
+                    array (
+                    ),
+                     'fieldtype' => 'panel',
+                     'layout' => NULL,
+                     'border' => false,
+                     'icon' => '',
+                     'labelWidth' => 100,
+                     'labelAlign' => 'left',
+                  )),
+                  1 => 
+                  \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+                     'name' => 'Thread',
+                     'type' => NULL,
+                     'region' => NULL,
+                     'title' => 'Thread',
+                     'width' => '',
+                     'height' => '',
+                     'collapsible' => false,
+                     'collapsed' => false,
+                     'bodyStyle' => '',
+                     'datatype' => 'layout',
+                     'children' => 
+                    array (
+                      0 => 
+                      \Pimcore\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
+                         'name' => 'threadPosition',
+                         'title' => 'Thread Position',
+                         'tooltip' => '',
+                         'mandatory' => false,
+                         'noteditable' => false,
+                         'index' => false,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'fieldtype' => '',
+                         'relationType' => false,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'options' => 
+                        array (
+                          0 => 
+                          array (
+                            'key' => 'Outside',
+                            'value' => 'outside',
+                          ),
+                          1 => 
+                          array (
+                            'key' => 'Inside',
+                            'value' => 'inside',
+                          ),
+                        ),
+                         'defaultValue' => '',
+                         'columnLength' => 190,
+                         'dynamicOptions' => false,
+                         'defaultValueGenerator' => '',
+                         'width' => '',
+                         'optionsProviderType' => 'configure',
+                         'optionsProviderClass' => '',
+                         'optionsProviderData' => '',
+                      )),
+                      1 => 
+                      \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
+                         'name' => 'diameterWithThread',
+                         'title' => 'Diameter With Thread',
+                         'tooltip' => 'Priemer so zavitom',
+                         'mandatory' => false,
+                         'noteditable' => false,
+                         'index' => false,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'fieldtype' => '',
+                         'relationType' => false,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'defaultValue' => NULL,
+                         'integer' => false,
+                         'unsigned' => false,
+                         'minValue' => NULL,
+                         'maxValue' => NULL,
+                         'unique' => false,
+                         'decimalSize' => NULL,
+                         'decimalPrecision' => NULL,
+                         'width' => '',
+                         'defaultValueGenerator' => '',
+                      )),
+                      2 => 
+                      \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
+                         'name' => 'diameterWithoutThread',
+                         'title' => 'Diameter Without Thread',
+                         'tooltip' => 'Priemer bez zavitu',
+                         'mandatory' => false,
+                         'noteditable' => false,
+                         'index' => false,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'fieldtype' => '',
+                         'relationType' => false,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'defaultValue' => NULL,
+                         'integer' => false,
+                         'unsigned' => false,
+                         'minValue' => NULL,
+                         'maxValue' => NULL,
+                         'unique' => false,
+                         'decimalSize' => NULL,
+                         'decimalPrecision' => NULL,
+                         'width' => '',
+                         'defaultValueGenerator' => '',
+                      )),
+                      3 => 
+                      \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
+                         'name' => 'pitch',
+                         'title' => 'Pitch',
+                         'tooltip' => 'Stupanie zavitu',
+                         'mandatory' => false,
+                         'noteditable' => false,
+                         'index' => false,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'fieldtype' => '',
+                         'relationType' => false,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'defaultValue' => NULL,
+                         'integer' => false,
+                         'unsigned' => false,
+                         'minValue' => NULL,
+                         'maxValue' => NULL,
+                         'unique' => false,
+                         'decimalSize' => NULL,
+                         'decimalPrecision' => NULL,
+                         'width' => '',
+                         'defaultValueGenerator' => '',
+                      )),
+                      4 => 
+                      \Pimcore\Model\DataObject\ClassDefinition\Data\ImageGallery::__set_state(array(
+                         'name' => 'threadImages',
+                         'title' => 'Thread images',
+                         'tooltip' => '',
+                         'mandatory' => false,
+                         'noteditable' => false,
+                         'index' => false,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'fieldtype' => '',
+                         'relationType' => false,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'uploadPath' => '',
+                         'ratioX' => NULL,
+                         'ratioY' => NULL,
+                         'predefinedDataTemplates' => '',
+                         'height' => '',
+                         'width' => '',
+                      )),
+                    ),
+                     'locked' => false,
+                     'blockedVarsForExport' => 
+                    array (
+                    ),
+                     'fieldtype' => 'panel',
+                     'layout' => NULL,
+                     'border' => false,
+                     'icon' => '',
+                     'labelWidth' => 100,
+                     'labelAlign' => 'left',
+                  )),
+                ),
                  'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'fieldtype' => '',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
                  'blockedVarsForExport' => 
                 array (
                 ),
-                 'uploadPath' => '',
-                 'ratioX' => NULL,
-                 'ratioY' => NULL,
-                 'predefinedDataTemplates' => '',
-                 'height' => '',
-                 'width' => '',
+                 'fieldtype' => 'panel',
+                 'layout' => NULL,
+                 'border' => false,
+                 'icon' => '',
+                 'labelWidth' => 100,
+                 'labelAlign' => 'left',
               )),
             ),
              'locked' => false,
@@ -624,9 +779,8 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
          'blockedVarsForExport' => 
         array (
         ),
-         'fieldtype' => 'tabpanel',
-         'border' => false,
-         'tabPosition' => 'top',
+         'fieldtype' => 'region',
+         'icon' => '',
       )),
     ),
      'locked' => false,

@@ -8,7 +8,8 @@
  * - localizedfields [localizedfields]
  * -- title [input]
  * - length [numeric]
- * - diameter [numeric]
+ * - diameterFrom [numeric]
+ * - diameterTo [numeric]
  * - defaultImage [image]
  * - images [imageGallery]
  * - drawings [imageGallery]
@@ -21,7 +22,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1726934869,
+   'modificationDate' => 1726944453,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -180,8 +181,38 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
               )),
               2 => 
               \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
-                 'name' => 'diameter',
-                 'title' => 'Diameter',
+                 'name' => 'diameterFrom',
+                 'title' => 'Diameter from',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'fieldtype' => '',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+                 'blockedVarsForExport' => 
+                array (
+                ),
+                 'defaultValue' => NULL,
+                 'integer' => false,
+                 'unsigned' => false,
+                 'minValue' => NULL,
+                 'maxValue' => NULL,
+                 'unique' => false,
+                 'decimalSize' => NULL,
+                 'decimalPrecision' => NULL,
+                 'width' => '',
+                 'defaultValueGenerator' => '',
+              )),
+              3 => 
+              \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
+                 'name' => 'diameterTo',
+                 'title' => 'Diameter to',
                  'tooltip' => '',
                  'mandatory' => false,
                  'noteditable' => false,
@@ -374,6 +405,36 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'enableGridLocking' => false,
    'deletedDataComponents' => 
   array (
+    0 => 
+    \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
+       'name' => 'diameter',
+       'title' => 'Diameter',
+       'tooltip' => '',
+       'mandatory' => false,
+       'noteditable' => false,
+       'index' => false,
+       'locked' => false,
+       'style' => '',
+       'permissions' => NULL,
+       'fieldtype' => '',
+       'relationType' => false,
+       'invisible' => false,
+       'visibleGridView' => false,
+       'visibleSearch' => false,
+       'blockedVarsForExport' => 
+      array (
+      ),
+       'defaultValue' => NULL,
+       'integer' => false,
+       'unsigned' => false,
+       'minValue' => NULL,
+       'maxValue' => NULL,
+       'unique' => false,
+       'decimalSize' => NULL,
+       'decimalPrecision' => NULL,
+       'width' => '',
+       'defaultValueGenerator' => '',
+    )),
   ),
    'blockedVarsForExport' => 
   array (

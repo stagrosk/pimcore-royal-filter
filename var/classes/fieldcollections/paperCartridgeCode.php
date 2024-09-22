@@ -3,7 +3,7 @@
 /**
  * Fields Summary:
  * - company [manyToOneRelation]
- * - code [numeric]
+ * - code [input]
  */
 
 return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
@@ -46,7 +46,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'name' => 'company',
              'title' => 'Company',
              'tooltip' => '',
-             'mandatory' => false,
+             'mandatory' => true,
              'noteditable' => false,
              'index' => false,
              'locked' => false,
@@ -84,11 +84,11 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'width' => '',
           )),
           1 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
+          \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
              'name' => 'code',
              'title' => 'Code',
              'tooltip' => '',
-             'mandatory' => false,
+             'mandatory' => true,
              'noteditable' => false,
              'index' => false,
              'locked' => false,
@@ -103,13 +103,13 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
             array (
             ),
              'defaultValue' => NULL,
-             'integer' => false,
-             'unsigned' => false,
-             'minValue' => NULL,
-             'maxValue' => NULL,
+             'columnLength' => 190,
+             'regex' => '',
+             'regexFlags' => 
+            array (
+            ),
              'unique' => false,
-             'decimalSize' => NULL,
-             'decimalPrecision' => NULL,
+             'showCharCount' => false,
              'width' => '',
              'defaultValueGenerator' => '',
           )),

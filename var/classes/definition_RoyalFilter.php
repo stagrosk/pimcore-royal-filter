@@ -26,7 +26,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1726940831,
+   'modificationDate' => 1726994811,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -73,9 +73,9 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
           \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
              'name' => 'Layout',
              'type' => NULL,
-             'region' => NULL,
+             'region' => 'west',
              'title' => '',
-             'width' => '',
+             'width' => '40%',
              'height' => '',
              'collapsible' => false,
              'collapsed' => false,
@@ -272,7 +272,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'type' => NULL,
              'region' => 'east',
              'title' => 'Royal filter setup',
-             'width' => '50%',
+             'width' => '60%',
              'height' => '',
              'collapsible' => false,
              'collapsed' => false,
@@ -420,7 +420,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'documentTypes' => 
                     array (
                     ),
-                     'width' => '',
+                     'width' => '800px',
                   )),
                   1 => 
                   \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
@@ -462,7 +462,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'documentTypes' => 
                     array (
                     ),
-                     'width' => '',
+                     'width' => '800px',
                   )),
                 ),
                  'locked' => false,
@@ -530,7 +530,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'documentTypes' => 
                     array (
                     ),
-                     'width' => '',
+                     'width' => '800px',
                   )),
                   1 => 
                   \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
@@ -572,7 +572,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'documentTypes' => 
                     array (
                     ),
-                     'width' => '',
+                     'width' => '800px',
                   )),
                 ),
                  'locked' => false,
@@ -640,7 +640,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'documentTypes' => 
                     array (
                     ),
-                     'width' => '',
+                     'width' => '800px',
                   )),
                   1 => 
                   \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
@@ -682,7 +682,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'documentTypes' => 
                     array (
                     ),
-                     'width' => '',
+                     'width' => '800px',
                   )),
                 ),
                  'locked' => false,
