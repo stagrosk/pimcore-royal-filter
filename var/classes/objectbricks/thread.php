@@ -231,6 +231,9 @@ return \Pimcore\Model\DataObject\Objectbrick\Definition::__set_state(array(
    'blockedVarsForExport' => 
   array (
   ),
+   'activeDispatchingEvents' => 
+  array (
+  ),
    'classDefinitions' => 
   array (
   ),
