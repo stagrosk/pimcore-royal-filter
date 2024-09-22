@@ -13,6 +13,8 @@
  * - extraProperties [fieldcollections]
  * - royalFilterSetup [manyToOneRelation]
  * - royalFilterSetupOverview [calculatedValue]
+ * - equipBody1 [manyToOneRelation]
+ * - equipBody2 [manyToOneRelation]
  * - paperCartridges [manyToManyObjectRelation]
  * - defaultImage [image]
  * - images [imageGallery]
@@ -25,7 +27,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1727019603,
+   'modificationDate' => 1727022034,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -170,7 +172,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                          'showCharCount' => false,
                          'excludeFromSearchIndex' => false,
                          'height' => '',
-                         'width' => '',
+                         'width' => '600px',
                       )),
                     ),
                      'region' => NULL,
@@ -343,112 +345,274 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'children' => 
                 array (
                   0 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
-                     'name' => 'royalFilterSetup',
-                     'title' => 'Royal Filter setup',
-                     'tooltip' => '',
-                     'mandatory' => false,
-                     'noteditable' => false,
-                     'index' => false,
-                     'locked' => false,
-                     'style' => '',
-                     'permissions' => NULL,
-                     'fieldtype' => '',
-                     'relationType' => true,
-                     'invisible' => false,
-                     'visibleGridView' => false,
-                     'visibleSearch' => false,
-                     'blockedVarsForExport' => 
-                    array (
-                    ),
-                     'classes' => 
-                    array (
-                      0 => 
-                      array (
-                        'classes' => 'RoyalFilter',
-                      ),
-                    ),
-                     'displayMode' => 'grid',
-                     'pathFormatterClass' => '',
-                     'assetInlineDownloadAllowed' => false,
-                     'assetUploadPath' => '',
-                     'allowToClearRelation' => true,
-                     'objectsAllowed' => true,
-                     'assetsAllowed' => false,
-                     'assetTypes' => 
-                    array (
-                    ),
-                     'documentsAllowed' => false,
-                     'documentTypes' => 
-                    array (
-                    ),
-                     'width' => '600px',
-                  )),
-                  1 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\CalculatedValue::__set_state(array(
-                     'name' => 'royalFilterSetupOverview',
-                     'title' => 'Royal Filter Setup Overview',
-                     'tooltip' => '',
-                     'mandatory' => false,
-                     'noteditable' => false,
-                     'index' => false,
-                     'locked' => false,
-                     'style' => '',
-                     'permissions' => NULL,
-                     'fieldtype' => '',
-                     'relationType' => false,
-                     'invisible' => false,
-                     'visibleGridView' => false,
-                     'visibleSearch' => false,
-                     'blockedVarsForExport' => 
-                    array (
-                    ),
-                     'elementType' => 'html',
-                     'calculatorType' => 'class',
-                     'calculatorExpression' => '',
-                     'calculatorClass' => 'App\\Pimcore\\DataObject\\Calculator\\RoyalFilterOverviewCalculator',
-                     'columnLength' => 190,
-                     'width' => '600px',
-                  )),
-                  2 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToManyObjectRelation::__set_state(array(
-                     'name' => 'paperCartridges',
-                     'title' => 'Paper Cartridges',
-                     'tooltip' => '',
-                     'mandatory' => false,
-                     'noteditable' => false,
-                     'index' => false,
-                     'locked' => false,
-                     'style' => '',
-                     'permissions' => NULL,
-                     'fieldtype' => '',
-                     'relationType' => true,
-                     'invisible' => false,
-                     'visibleGridView' => false,
-                     'visibleSearch' => false,
-                     'blockedVarsForExport' => 
-                    array (
-                    ),
-                     'classes' => 
-                    array (
-                      0 => 
-                      array (
-                        'classes' => 'PaperCartridge',
-                      ),
-                    ),
-                     'displayMode' => 'grid',
-                     'pathFormatterClass' => '',
-                     'maxItems' => NULL,
-                     'visibleFields' => 'id,title,length,diameter,centerDiameter',
-                     'allowToCreateNewObject' => false,
-                     'allowToClearRelation' => true,
-                     'optimizedAdminLoading' => true,
-                     'enableTextSelection' => true,
-                     'visibleFieldDefinitions' => 
-                    array (
-                    ),
+                  \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+                     'name' => 'Royal filter',
+                     'type' => NULL,
+                     'region' => NULL,
+                     'title' => 'Royal filter',
                      'width' => '',
                      'height' => '',
+                     'collapsible' => false,
+                     'collapsed' => false,
+                     'bodyStyle' => '',
+                     'datatype' => 'layout',
+                     'children' => 
+                    array (
+                      0 => 
+                      \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
+                         'name' => 'royalFilterSetup',
+                         'title' => 'Royal Filter setup',
+                         'tooltip' => '',
+                         'mandatory' => false,
+                         'noteditable' => false,
+                         'index' => false,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'fieldtype' => '',
+                         'relationType' => true,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'classes' => 
+                        array (
+                          0 => 
+                          array (
+                            'classes' => 'RoyalFilter',
+                          ),
+                        ),
+                         'displayMode' => 'grid',
+                         'pathFormatterClass' => '',
+                         'assetInlineDownloadAllowed' => false,
+                         'assetUploadPath' => '',
+                         'allowToClearRelation' => true,
+                         'objectsAllowed' => true,
+                         'assetsAllowed' => false,
+                         'assetTypes' => 
+                        array (
+                        ),
+                         'documentsAllowed' => false,
+                         'documentTypes' => 
+                        array (
+                        ),
+                         'width' => '600px',
+                      )),
+                      1 => 
+                      \Pimcore\Model\DataObject\ClassDefinition\Data\CalculatedValue::__set_state(array(
+                         'name' => 'royalFilterSetupOverview',
+                         'title' => 'Royal Filter Setup Overview',
+                         'tooltip' => '',
+                         'mandatory' => false,
+                         'noteditable' => false,
+                         'index' => false,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'fieldtype' => '',
+                         'relationType' => false,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'elementType' => 'html',
+                         'calculatorType' => 'class',
+                         'calculatorExpression' => '',
+                         'calculatorClass' => 'App\\Pimcore\\DataObject\\Calculator\\RoyalFilterOverviewCalculator',
+                         'columnLength' => 190,
+                         'width' => '600px',
+                      )),
+                      2 => 
+                      \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+                         'name' => 'Equipment override',
+                         'type' => NULL,
+                         'region' => NULL,
+                         'title' => 'Equipment override',
+                         'width' => '',
+                         'height' => '',
+                         'collapsible' => false,
+                         'collapsed' => false,
+                         'bodyStyle' => '',
+                         'datatype' => 'layout',
+                         'children' => 
+                        array (
+                          0 => 
+                          \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
+                             'name' => 'equipBody1',
+                             'title' => 'Equip body1',
+                             'tooltip' => '',
+                             'mandatory' => false,
+                             'noteditable' => false,
+                             'index' => false,
+                             'locked' => false,
+                             'style' => '',
+                             'permissions' => NULL,
+                             'fieldtype' => '',
+                             'relationType' => true,
+                             'invisible' => false,
+                             'visibleGridView' => false,
+                             'visibleSearch' => false,
+                             'blockedVarsForExport' => 
+                            array (
+                            ),
+                             'classes' => 
+                            array (
+                              0 => 
+                              array (
+                                'classes' => 'Knob',
+                              ),
+                            ),
+                             'displayMode' => 'grid',
+                             'pathFormatterClass' => '',
+                             'assetInlineDownloadAllowed' => false,
+                             'assetUploadPath' => '',
+                             'allowToClearRelation' => true,
+                             'objectsAllowed' => true,
+                             'assetsAllowed' => false,
+                             'assetTypes' => 
+                            array (
+                            ),
+                             'documentsAllowed' => false,
+                             'documentTypes' => 
+                            array (
+                            ),
+                             'width' => '800px',
+                          )),
+                          1 => 
+                          \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
+                             'name' => 'equipBody2',
+                             'title' => 'Equip body2',
+                             'tooltip' => '',
+                             'mandatory' => false,
+                             'noteditable' => false,
+                             'index' => false,
+                             'locked' => false,
+                             'style' => '',
+                             'permissions' => NULL,
+                             'fieldtype' => '',
+                             'relationType' => true,
+                             'invisible' => false,
+                             'visibleGridView' => false,
+                             'visibleSearch' => false,
+                             'blockedVarsForExport' => 
+                            array (
+                            ),
+                             'classes' => 
+                            array (
+                              0 => 
+                              array (
+                                'classes' => 'Knob',
+                              ),
+                            ),
+                             'displayMode' => 'grid',
+                             'pathFormatterClass' => '',
+                             'assetInlineDownloadAllowed' => false,
+                             'assetUploadPath' => '',
+                             'allowToClearRelation' => true,
+                             'objectsAllowed' => true,
+                             'assetsAllowed' => false,
+                             'assetTypes' => 
+                            array (
+                            ),
+                             'documentsAllowed' => false,
+                             'documentTypes' => 
+                            array (
+                            ),
+                             'width' => '800px',
+                          )),
+                        ),
+                         'locked' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'fieldtype' => 'panel',
+                         'layout' => NULL,
+                         'border' => false,
+                         'icon' => '',
+                         'labelWidth' => 100,
+                         'labelAlign' => 'left',
+                      )),
+                    ),
+                     'locked' => false,
+                     'blockedVarsForExport' => 
+                    array (
+                    ),
+                     'fieldtype' => 'panel',
+                     'layout' => NULL,
+                     'border' => false,
+                     'icon' => '',
+                     'labelWidth' => 100,
+                     'labelAlign' => 'left',
+                  )),
+                  1 => 
+                  \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+                     'name' => 'Paper filter',
+                     'type' => NULL,
+                     'region' => '',
+                     'title' => 'Paper filter',
+                     'width' => '',
+                     'height' => '',
+                     'collapsible' => false,
+                     'collapsed' => false,
+                     'bodyStyle' => '',
+                     'datatype' => 'layout',
+                     'children' => 
+                    array (
+                      0 => 
+                      \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToManyObjectRelation::__set_state(array(
+                         'name' => 'paperCartridges',
+                         'title' => 'Paper Cartridges',
+                         'tooltip' => '',
+                         'mandatory' => false,
+                         'noteditable' => false,
+                         'index' => false,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'fieldtype' => '',
+                         'relationType' => true,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'classes' => 
+                        array (
+                          0 => 
+                          array (
+                            'classes' => 'PaperCartridge',
+                          ),
+                        ),
+                         'displayMode' => 'grid',
+                         'pathFormatterClass' => '',
+                         'maxItems' => NULL,
+                         'visibleFields' => 'id,title,length,diameter,centerDiameter',
+                         'allowToCreateNewObject' => false,
+                         'allowToClearRelation' => true,
+                         'optimizedAdminLoading' => true,
+                         'enableTextSelection' => true,
+                         'visibleFieldDefinitions' => 
+                        array (
+                        ),
+                         'width' => '',
+                         'height' => '',
+                      )),
+                    ),
+                     'locked' => false,
+                     'blockedVarsForExport' => 
+                    array (
+                    ),
+                     'fieldtype' => 'panel',
+                     'layout' => NULL,
+                     'border' => false,
+                     'icon' => '',
+                     'labelWidth' => 100,
+                     'labelAlign' => 'left',
                   )),
                 ),
                  'locked' => false,
