@@ -7,6 +7,7 @@
  * Fields Summary:
  * - localizedfields [localizedfields]
  * -- title [input]
+ * -- description [textarea]
  * - manufacturer [manyToOneRelation]
  * - url [link]
  * - codes [fieldcollections]
@@ -31,7 +32,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1727019701,
+   'modificationDate' => 1727019932,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -152,6 +153,31 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                          'showCharCount' => false,
                          'width' => '600px',
                          'defaultValueGenerator' => '',
+                      )),
+                      1 => 
+                      \Pimcore\Model\DataObject\ClassDefinition\Data\Textarea::__set_state(array(
+                         'name' => 'description',
+                         'title' => 'Description',
+                         'tooltip' => '',
+                         'mandatory' => false,
+                         'noteditable' => false,
+                         'index' => false,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'fieldtype' => '',
+                         'relationType' => false,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'maxLength' => NULL,
+                         'showCharCount' => false,
+                         'excludeFromSearchIndex' => false,
+                         'height' => '',
+                         'width' => '600px',
                       )),
                     ),
                      'region' => NULL,
@@ -870,6 +896,31 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'enableGridLocking' => false,
    'deletedDataComponents' => 
   array (
+    0 => 
+    \Pimcore\Model\DataObject\ClassDefinition\Data\Textarea::__set_state(array(
+       'name' => 'note',
+       'title' => 'Note',
+       'tooltip' => '',
+       'mandatory' => false,
+       'noteditable' => false,
+       'index' => false,
+       'locked' => false,
+       'style' => '',
+       'permissions' => NULL,
+       'fieldtype' => '',
+       'relationType' => false,
+       'invisible' => false,
+       'visibleGridView' => false,
+       'visibleSearch' => false,
+       'blockedVarsForExport' => 
+      array (
+      ),
+       'maxLength' => NULL,
+       'showCharCount' => false,
+       'excludeFromSearchIndex' => false,
+       'height' => '',
+       'width' => '600px',
+    )),
   ),
    'blockedVarsForExport' => 
   array (
