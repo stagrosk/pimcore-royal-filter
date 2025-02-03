@@ -17,7 +17,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1727018356,
+   'modificationDate' => 1727529008,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -87,7 +87,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
             ),
              'unique' => false,
              'showCharCount' => false,
-             'width' => '',
+             'width' => '500px',
              'defaultValueGenerator' => '',
           )),
           1 => 
@@ -113,7 +113,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'showCharCount' => false,
              'excludeFromSearchIndex' => false,
              'height' => '',
-             'width' => '',
+             'width' => '500px',
           )),
           2 => 
           \Pimcore\Model\DataObject\ClassDefinition\Data\Image::__set_state(array(

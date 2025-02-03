@@ -22,7 +22,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1727015942,
+   'modificationDate' => 1727528989,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -127,7 +127,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                     ),
                      'unique' => false,
                      'showCharCount' => false,
-                     'width' => '',
+                     'width' => '500px',
                      'defaultValueGenerator' => '',
                   )),
                 ),
@@ -405,36 +405,6 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'enableGridLocking' => false,
    'deletedDataComponents' => 
   array (
-    0 => 
-    \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
-       'name' => 'diameter',
-       'title' => 'Diameter',
-       'tooltip' => '',
-       'mandatory' => false,
-       'noteditable' => false,
-       'index' => false,
-       'locked' => false,
-       'style' => '',
-       'permissions' => NULL,
-       'fieldtype' => '',
-       'relationType' => false,
-       'invisible' => false,
-       'visibleGridView' => false,
-       'visibleSearch' => false,
-       'blockedVarsForExport' => 
-      array (
-      ),
-       'defaultValue' => NULL,
-       'integer' => false,
-       'unsigned' => false,
-       'minValue' => NULL,
-       'maxValue' => NULL,
-       'unique' => false,
-       'decimalSize' => NULL,
-       'decimalPrecision' => NULL,
-       'width' => '',
-       'defaultValueGenerator' => '',
-    )),
   ),
    'blockedVarsForExport' => 
   array (

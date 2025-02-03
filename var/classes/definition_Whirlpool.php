@@ -5,6 +5,7 @@
  * Variants: no
  *
  * Fields Summary:
+ * - deviceType [select]
  * - localizedfields [localizedfields]
  * -- title [input]
  * -- description [textarea]
@@ -27,7 +28,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1727022034,
+   'modificationDate' => 1729866040,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -99,6 +100,47 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'children' => 
                 array (
                   0 => 
+                  \Pimcore\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
+                     'name' => 'deviceType',
+                     'title' => 'Device Type',
+                     'tooltip' => '',
+                     'mandatory' => false,
+                     'noteditable' => false,
+                     'index' => false,
+                     'locked' => false,
+                     'style' => '',
+                     'permissions' => NULL,
+                     'fieldtype' => '',
+                     'relationType' => false,
+                     'invisible' => false,
+                     'visibleGridView' => false,
+                     'visibleSearch' => false,
+                     'blockedVarsForExport' => 
+                    array (
+                    ),
+                     'options' => 
+                    array (
+                      0 => 
+                      array (
+                        'key' => 'SwimSpa',
+                        'value' => 'swimspa',
+                      ),
+                      1 => 
+                      array (
+                        'key' => 'Whirlpool',
+                        'value' => 'whirlpool',
+                      ),
+                    ),
+                     'defaultValue' => 'whirlpool',
+                     'columnLength' => 190,
+                     'dynamicOptions' => false,
+                     'defaultValueGenerator' => '',
+                     'width' => '',
+                     'optionsProviderType' => 'configure',
+                     'optionsProviderClass' => '',
+                     'optionsProviderData' => '',
+                  )),
+                  1 => 
                   \Pimcore\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
                      'name' => 'localizedfields',
                      'title' => '',
@@ -124,9 +166,9 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                          'name' => 'title',
                          'title' => 'Title',
                          'tooltip' => '',
-                         'mandatory' => true,
+                         'mandatory' => false,
                          'noteditable' => false,
-                         'index' => false,
+                         'index' => true,
                          'locked' => false,
                          'style' => '',
                          'permissions' => NULL,
@@ -146,7 +188,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                         ),
                          'unique' => false,
                          'showCharCount' => false,
-                         'width' => '600px',
+                         'width' => '500px',
                          'defaultValueGenerator' => '',
                       )),
                       1 => 
@@ -172,7 +214,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                          'showCharCount' => false,
                          'excludeFromSearchIndex' => false,
                          'height' => '',
-                         'width' => '600px',
+                         'width' => '500px',
                       )),
                     ),
                      'region' => NULL,
@@ -193,7 +235,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'height' => '',
                      'fieldDefinitionsCache' => NULL,
                   )),
-                  1 => 
+                  2 => 
                   \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
                      'name' => 'manufacturer',
                      'title' => 'Manufacturer',
@@ -233,9 +275,9 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'documentTypes' => 
                     array (
                     ),
-                     'width' => '600px',
+                     'width' => '500px',
                   )),
-                  2 => 
+                  3 => 
                   \Pimcore\Model\DataObject\ClassDefinition\Data\Objectbricks::__set_state(array(
                      'name' => 'whirlpoolProperties',
                      'title' => 'Whirlpool properties',
@@ -261,7 +303,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'maxItems' => NULL,
                      'border' => false,
                   )),
-                  3 => 
+                  4 => 
                   \Pimcore\Model\DataObject\ClassDefinition\Data\Fieldcollections::__set_state(array(
                      'name' => 'extraProperties',
                      'title' => 'Extra properties',
@@ -398,7 +440,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                          'documentTypes' => 
                         array (
                         ),
-                         'width' => '600px',
+                         'width' => '500px',
                       )),
                       1 => 
                       \Pimcore\Model\DataObject\ClassDefinition\Data\CalculatedValue::__set_state(array(
@@ -424,7 +466,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                          'calculatorExpression' => '',
                          'calculatorClass' => 'App\\Pimcore\\DataObject\\Calculator\\RoyalFilterOverviewCalculator',
                          'columnLength' => 190,
-                         'width' => '600px',
+                         'width' => '500px',
                       )),
                       2 => 
                       \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
@@ -480,7 +522,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                              'documentTypes' => 
                             array (
                             ),
-                             'width' => '800px',
+                             'width' => '500px',
                           )),
                           1 => 
                           \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
@@ -522,7 +564,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                              'documentTypes' => 
                             array (
                             ),
-                             'width' => '800px',
+                             'width' => '500px',
                           )),
                         ),
                          'locked' => false,
@@ -599,7 +641,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                          'visibleFieldDefinitions' => 
                         array (
                         ),
-                         'width' => '',
+                         'width' => '500px',
                          'height' => '',
                       )),
                     ),

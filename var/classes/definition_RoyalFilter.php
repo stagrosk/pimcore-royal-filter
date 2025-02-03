@@ -26,7 +26,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1727015942,
+   'modificationDate' => 1727529047,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -145,7 +145,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                         ),
                          'unique' => false,
                          'showCharCount' => false,
-                         'width' => '',
+                         'width' => '500px',
                          'defaultValueGenerator' => '',
                       )),
                     ),
@@ -420,7 +420,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'documentTypes' => 
                     array (
                     ),
-                     'width' => '800px',
+                     'width' => '500px',
                   )),
                   1 => 
                   \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
@@ -462,7 +462,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'documentTypes' => 
                     array (
                     ),
-                     'width' => '800px',
+                     'width' => '500px',
                   )),
                 ),
                  'locked' => false,
@@ -530,7 +530,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'documentTypes' => 
                     array (
                     ),
-                     'width' => '800px',
+                     'width' => '500px',
                   )),
                   1 => 
                   \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
@@ -572,7 +572,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'documentTypes' => 
                     array (
                     ),
-                     'width' => '800px',
+                     'width' => '500px',
                   )),
                 ),
                  'locked' => false,
@@ -640,7 +640,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'documentTypes' => 
                     array (
                     ),
-                     'width' => '800px',
+                     'width' => '500px',
                   )),
                   1 => 
                   \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
@@ -682,7 +682,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'documentTypes' => 
                     array (
                     ),
-                     'width' => '800px',
+                     'width' => '500px',
                   )),
                 ),
                  'locked' => false,

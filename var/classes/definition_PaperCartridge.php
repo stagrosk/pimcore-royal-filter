@@ -17,7 +17,8 @@
  * - bottom [select]
  * - length [numeric]
  * - diameter [numeric]
- * - centerDiameter [numeric]
+ * - centerDiameterTop [numeric]
+ * - centerDiameterBottom [numeric]
  * - threadPosition [select]
  * - diameterWithThread [numeric]
  * - diameterWithoutThread [numeric]
@@ -32,9 +33,9 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1727019932,
+   'modificationDate' => 1735331403,
    'userOwner' => 2,
-   'userModification' => 2,
+   'userModification' => 3,
    'parentClass' => '',
    'implementsInterfaces' => '',
    'listingParentClass' => '',
@@ -151,7 +152,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                         ),
                          'unique' => false,
                          'showCharCount' => false,
-                         'width' => '600px',
+                         'width' => '500px',
                          'defaultValueGenerator' => '',
                       )),
                       1 => 
@@ -177,7 +178,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                          'showCharCount' => false,
                          'excludeFromSearchIndex' => false,
                          'height' => '',
-                         'width' => '600px',
+                         'width' => '500px',
                       )),
                     ),
                      'region' => NULL,
@@ -238,7 +239,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'documentTypes' => 
                     array (
                     ),
-                     'width' => '600px',
+                     'width' => '500px',
                   )),
                   2 => 
                   \Pimcore\Model\DataObject\ClassDefinition\Data\Link::__set_state(array(
@@ -478,6 +479,31 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                             'key' => 'Handle',
                             'value' => 'handle',
                           ),
+                          3 => 
+                          array (
+                            'key' => 'Closed',
+                            'value' => 'Closed',
+                          ),
+                          4 => 
+                          array (
+                            'key' => 'Castle',
+                            'value' => 'Castle',
+                          ),
+                          5 => 
+                          array (
+                            'key' => 'Male slip',
+                            'value' => 'Male slip',
+                          ),
+                          6 => 
+                          array (
+                            'key' => '4 x Y clips',
+                            'value' => '4 x Y clips',
+                          ),
+                          7 => 
+                          array (
+                            'key' => 'Push fit',
+                            'value' => 'Push fit',
+                          ),
                         ),
                          'defaultValue' => '',
                          'columnLength' => 190,
@@ -521,8 +547,18 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                           ),
                           2 => 
                           array (
-                            'key' => 'Handle',
-                            'value' => 'handle',
+                            'key' => 'Male slip',
+                            'value' => 'Male slip',
+                          ),
+                          3 => 
+                          array (
+                            'key' => 'Bajonet',
+                            'value' => 'Bajonet',
+                          ),
+                          4 => 
+                          array (
+                            'key' => 'Push fit',
+                            'value' => 'Push fit',
                           ),
                         ),
                          'defaultValue' => '',
@@ -596,8 +632,38 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                       )),
                       4 => 
                       \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
-                         'name' => 'centerDiameter',
-                         'title' => 'Center diameter',
+                         'name' => 'centerDiameterTop',
+                         'title' => 'Center diameter top',
+                         'tooltip' => '',
+                         'mandatory' => false,
+                         'noteditable' => false,
+                         'index' => false,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'fieldtype' => '',
+                         'relationType' => false,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'defaultValue' => NULL,
+                         'integer' => false,
+                         'unsigned' => false,
+                         'minValue' => NULL,
+                         'maxValue' => NULL,
+                         'unique' => false,
+                         'decimalSize' => NULL,
+                         'decimalPrecision' => NULL,
+                         'width' => '',
+                         'defaultValueGenerator' => '',
+                      )),
+                      5 => 
+                      \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
+                         'name' => 'centerDiameterBottom',
+                         'title' => 'Center diameter bottom',
                          'tooltip' => '',
                          'mandatory' => false,
                          'noteditable' => false,
@@ -896,31 +962,6 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'enableGridLocking' => false,
    'deletedDataComponents' => 
   array (
-    0 => 
-    \Pimcore\Model\DataObject\ClassDefinition\Data\Textarea::__set_state(array(
-       'name' => 'note',
-       'title' => 'Note',
-       'tooltip' => '',
-       'mandatory' => false,
-       'noteditable' => false,
-       'index' => false,
-       'locked' => false,
-       'style' => '',
-       'permissions' => NULL,
-       'fieldtype' => '',
-       'relationType' => false,
-       'invisible' => false,
-       'visibleGridView' => false,
-       'visibleSearch' => false,
-       'blockedVarsForExport' => 
-      array (
-      ),
-       'maxLength' => NULL,
-       'showCharCount' => false,
-       'excludeFromSearchIndex' => false,
-       'height' => '',
-       'width' => '600px',
-    )),
   ),
    'blockedVarsForExport' => 
   array (
