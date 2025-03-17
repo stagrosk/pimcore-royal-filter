@@ -3,7 +3,6 @@ imports:
 
 
 pimcore:
-
 # IMPORTANT Notice!
 # Following there are only some examples listed, for a full list of possible options, please run the following command:
 # ./bin/console debug:config pimcore
@@ -35,7 +34,8 @@ pimcore:
 
 
 #### CUSTOM DOCUMENT EDITABLES
-#    documents:
+    documents:
+        auto_save_interval: 0
 #        allow_trailing_slash: 'yes'
 #        generate_preview: false
 #        tags:
@@ -44,7 +44,8 @@ pimcore:
 
 
 #### CUSTOM OBJECT DATA TYPES
-#    objects:
+    objects:
+        auto_save_interval: 0
 #        class_definitions:
 #            data:
 #                map:

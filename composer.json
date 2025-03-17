@@ -14,6 +14,7 @@
   "require": {
     "php": ">=8.2",
     "doctrine/orm": "^2.19",
+    "phpclassic/php-shopify": "^1.2",
     "pimcore/admin-ui-classic-bundle": "^1.0",
     "pimcore/data-hub": "^1.8",
     "pimcore/pimcore": "^11.0.4",

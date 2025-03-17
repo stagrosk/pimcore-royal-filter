@@ -1,3 +1,7 @@
+imports:
+    - { resource: services/shopify.yaml }
+    - { resource: services/eventSubscriber.yaml }
+
 parameters:
     secret: XOwtGYfiW8T5d0nlwh8UqQ73yLCCWRMDJMMgvjKY20o=
 
@@ -49,7 +53,6 @@ services:
         public: true
         tags: [ 'controller.service_arguments' ]
 
-
     #
     # COMMANDS
     #
@@ -59,8 +62,6 @@ services:
         resource: '../src/Command/*'
         tags: [ 'console.command' ]
 
-
-
     # Example custom templating helper
     # App\Templating\Helper\Example:
     #     # templating helpers need to be public as they
@@ -68,8 +69,3 @@ services:
     #     public: true
     #     tags:
     #         - { name: templating.helper, alias: fooBar }
-
-    # Example event listener for objects
-    # App\EventListener\TestListener:
-    #     tags:
-    #         - { name: kernel.event_listener, event: pimcore.dataobject.preUpdate, method: onObjectPreUpdate }
