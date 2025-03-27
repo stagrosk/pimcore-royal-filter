@@ -1,3 +1,7 @@
+imports:
+    - { resource: services/shopify.yaml }
+    - { resource: services/eventSubscriber.yaml }
+
 parameters:
     secret: XOwtGYfiW8T5d0nlwh8UqQ73yLCCWRMDJMMgvjKY20o=
 
@@ -30,46 +34,28 @@ parameters:
     #pimcore_executable_dot: /usr/bin/dot
 
 services:
-    # default configuration for services in *this* file
     _defaults:
-        # automatically injects dependencies in your services
         autowire: true
-        # automatically registers your services as commands, event subscribers, etc.
         autoconfigure: true
-        # this means you cannot fetch services directly from the container via $container->get()
-        # if you need to do this, you can override this setting on individual services
         public: false
     #
     # CONTROLLERS
     #
-
-    # auto-register all controllers as services
     App\Controller\:
         resource: '../src/Controller'
         public: true
         tags: [ 'controller.service_arguments' ]
 
-
     #
     # COMMANDS
     #
-
-    # auto-register all commands as services
     App\Command\:
         resource: '../src/Command/*'
         tags: [ 'console.command' ]
 
-
-
-    # Example custom templating helper
-    # App\Templating\Helper\Example:
-    #     # templating helpers need to be public as they
-    #     # are fetched from the container on demand
-    #     public: true
-    #     tags:
-    #         - { name: templating.helper, alias: fooBar }
-
-    # Example event listener for objects
-    # App\EventListener\TestListener:
-    #     tags:
-    #         - { name: kernel.event_listener, event: pimcore.dataobject.preUpdate, method: onObjectPreUpdate }
+    #
+    # SERVICES
+    #
+    App\Service\:
+        resource: '../src/Service/*'
+        public: true

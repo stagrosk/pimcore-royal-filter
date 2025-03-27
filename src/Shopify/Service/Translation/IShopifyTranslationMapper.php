@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Shopify\Service\Translation;
+
+use App\Shopify\Model\Translation\ShopifyTranslation;
+use Pimcore\Model\DataObject\Concrete;
+use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
+
+#[AutoconfigureTag(name: self::MAPPER_TAG)]
+interface IShopifyTranslationMapper
+{
+    const MAPPER_TAG = 'shopify_translation_mapper';
+
+    public function getMapperServiceKey(): string;
+
+    public function getProductClassId(): string;
+
+    public function getShopifyChannelKey(): string;
+
+    public function getMappedTranslation(ShopifyTranslation $shopifyTranslationModel, Concrete $product): ShopifyTranslation;
+}

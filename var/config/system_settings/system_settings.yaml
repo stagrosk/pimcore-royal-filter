@@ -2,7 +2,6 @@ pimcore:
     general:
         domain: ''
         redirect_to_maindomain: false
-        language: en
         valid_languages:
             - en
             - de
@@ -13,6 +12,8 @@ pimcore:
             de: en
             sk: en
             cs: en
+        required_languages:
+            - en
         default_language: en
         debug_admin_translations: false
     documents:
@@ -24,6 +25,8 @@ pimcore:
             localized:
                 en: ''
                 de: ''
+                sk: ''
+                cs: ''
     objects:
         versions:
             days: null

@@ -10,15 +10,24 @@
       "symfony/runtime": true
     }
   },
+  "repositories": [
+    {
+      "type": "path",
+      "url": "lib/pimcore-headless-content-bundle"
+    }
+  ],
   "prefer-stable": true,
   "require": {
     "php": ">=8.2",
+    "doctrine/doctrine-migrations-bundle": "^3.4",
     "doctrine/orm": "^2.19",
+    "phpclassic/php-shopify": "^1.2",
     "pimcore/admin-ui-classic-bundle": "^1.0",
     "pimcore/data-hub": "^1.8",
-    "pimcore/pimcore": "^11.0.4",
-    "symfony/dotenv": "^6.2",
-    "symfony/runtime": "^6.2"
+    "pimcore/pimcore": "^11.0",
+    "stagro/pimcore-headless-content-bundle": "dev-master",
+    "symfony/dotenv": "^6.4",
+    "symfony/runtime": "^6.4"
   },
   "require-dev": {
     "codeception/codeception": "^5.0.3",

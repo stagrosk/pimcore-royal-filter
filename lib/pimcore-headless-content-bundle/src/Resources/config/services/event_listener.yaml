@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        autoconfigure: true
+        autowire: true
+        public: false
+
+    PimcoreHeadlessContentBundle\EventListener\GenerateSlugListener:
+        tags:
+            - { name: kernel.event_subscriber }

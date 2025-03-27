@@ -1,0 +1,19 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: true
+
+    App\Shopify\Service\:
+        resource: '../../src/Shopify/Service'
+        public: true
+
+    App\Shopify\Graphql\:
+        resource: '../../src/Shopify/Graphql'
+        public: true
+
+    App\Shopify\Graphql\GraphqlClient:
+        arguments:
+            - '%env(SHOPIFY_SHOP)%'
+            - '%env(SHOPIFY_TOKEN)%'
+

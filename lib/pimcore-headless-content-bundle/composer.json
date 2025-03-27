@@ -1,0 +1,26 @@
+{
+  "name": "stagro/pimcore-headless-content-bundle",
+  "description": "Pimcore headless content",
+  "type": "pimcore-bundle",
+  "authors": [
+    {
+      "name": "Stagro s.r.o",
+      "email": "martin@stagro.sk"
+    }
+  ],
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require": {
+    "php": ">=8.2",
+    "pimcore/pimcore": "^11.0",
+    "cocur/slugify": "^4.6"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^3.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "PimcoreHeadlessContentBundle\\": "src/"
+    }
+  }
+}
