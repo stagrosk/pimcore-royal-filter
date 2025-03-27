@@ -7,12 +7,14 @@
  * Fields Summary:
  * - localizedfields [localizedfields]
  * -- title [input]
+ * -- description [textarea]
  * - defaultImage [image]
  * - images [imageGallery]
  * - product [manyToOneRelation]
- * - disableAsProduct [checkbox]
- * - length [numeric]
- * - diameter [numeric]
+ * - generateAsProduct [checkbox]
+ * - Prices [fieldcollections]
+ * - parameters [classificationstore]
+ * - extraParameters [fieldcollections]
  * - body1 [manyToOneRelation]
  * - body2 [manyToOneRelation]
  * - centerBody1 [manyToOneRelation]
@@ -28,7 +30,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1741717267,
+   'modificationDate' => 1742933074,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -163,6 +165,31 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                              'showCharCount' => false,
                              'width' => '500px',
                              'defaultValueGenerator' => '',
+                          )),
+                          1 => 
+                          \Pimcore\Model\DataObject\ClassDefinition\Data\Textarea::__set_state(array(
+                             'name' => 'description',
+                             'title' => 'Description',
+                             'tooltip' => '',
+                             'mandatory' => false,
+                             'noteditable' => false,
+                             'index' => false,
+                             'locked' => false,
+                             'style' => '',
+                             'permissions' => NULL,
+                             'fieldtype' => '',
+                             'relationType' => false,
+                             'invisible' => false,
+                             'visibleGridView' => false,
+                             'visibleSearch' => false,
+                             'blockedVarsForExport' => 
+                            array (
+                            ),
+                             'maxLength' => NULL,
+                             'showCharCount' => false,
+                             'excludeFromSearchIndex' => false,
+                             'height' => '',
+                             'width' => '',
                           )),
                         ),
                          'region' => NULL,
@@ -328,9 +355,9 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                       )),
                       1 => 
                       \Pimcore\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
-                         'name' => 'disableAsProduct',
-                         'title' => 'Disable As Product',
-                         'tooltip' => '',
+                         'name' => 'generateAsProduct',
+                         'title' => 'Generate as product',
+                         'tooltip' => 'On save or with command will be automatically generated as shopify product and sent to shopify',
                          'mandatory' => false,
                          'noteditable' => false,
                          'index' => false,
@@ -356,7 +383,64 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'fieldtype' => 'panel',
                      'layout' => NULL,
                      'border' => false,
-                     'icon' => '',
+                     'icon' => '/bundles/pimcoreadmin/img/object-icons/05_amber.svg',
+                     'labelWidth' => 100,
+                     'labelAlign' => 'left',
+                  )),
+                  3 => 
+                  \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+                     'name' => 'Pricing',
+                     'type' => NULL,
+                     'region' => NULL,
+                     'title' => 'Pricing',
+                     'width' => '',
+                     'height' => '',
+                     'collapsible' => false,
+                     'collapsed' => false,
+                     'bodyStyle' => '',
+                     'datatype' => 'layout',
+                     'children' => 
+                    array (
+                      0 => 
+                      \Pimcore\Model\DataObject\ClassDefinition\Data\Fieldcollections::__set_state(array(
+                         'name' => 'Prices',
+                         'title' => 'Prices',
+                         'tooltip' => '',
+                         'mandatory' => false,
+                         'noteditable' => false,
+                         'index' => false,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'fieldtype' => '',
+                         'relationType' => false,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'allowedTypes' => 
+                        array (
+                          0 => 'price',
+                        ),
+                         'lazyLoading' => true,
+                         'maxItems' => NULL,
+                         'disallowAddRemove' => false,
+                         'disallowReorder' => false,
+                         'collapsed' => false,
+                         'collapsible' => false,
+                         'border' => false,
+                      )),
+                    ),
+                     'locked' => false,
+                     'blockedVarsForExport' => 
+                    array (
+                    ),
+                     'fieldtype' => 'panel',
+                     'layout' => NULL,
+                     'border' => false,
+                     'icon' => '/bundles/pimcoreadmin/img/flat-color-icons/currency_exchange.svg',
                      'labelWidth' => 100,
                      'labelAlign' => 'left',
                   )),
@@ -397,10 +481,10 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
             array (
               0 => 
               \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
-                 'name' => 'Base',
+                 'name' => 'Metadata',
                  'type' => NULL,
                  'region' => NULL,
-                 'title' => 'Base',
+                 'title' => 'Metadata',
                  'width' => '',
                  'height' => '',
                  'collapsible' => false,
@@ -410,9 +494,9 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'children' => 
                 array (
                   0 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
-                     'name' => 'length',
-                     'title' => 'Length',
+                  \Pimcore\Model\DataObject\ClassDefinition\Data\Classificationstore::__set_state(array(
+                     'name' => 'parameters',
+                     'title' => 'Parameters',
                      'tooltip' => '',
                      'mandatory' => false,
                      'noteditable' => false,
@@ -428,21 +512,32 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'blockedVarsForExport' => 
                     array (
                     ),
-                     'defaultValue' => NULL,
-                     'integer' => false,
-                     'unsigned' => false,
-                     'minValue' => NULL,
-                     'maxValue' => NULL,
-                     'unique' => false,
-                     'decimalSize' => NULL,
-                     'decimalPrecision' => NULL,
-                     'width' => '',
-                     'defaultValueGenerator' => '',
+                     'children' => 
+                    array (
+                    ),
+                     'labelWidth' => 0,
+                     'localized' => false,
+                     'storeId' => 1,
+                     'hideEmptyData' => false,
+                     'disallowAddRemove' => false,
+                     'referencedFields' => 
+                    array (
+                    ),
+                     'fieldDefinitionsCache' => NULL,
+                     'allowedGroupIds' => 
+                    array (
+                    ),
+                     'activeGroupDefinitions' => 
+                    array (
+                    ),
+                     'maxItems' => NULL,
+                     'height' => NULL,
+                     'width' => NULL,
                   )),
                   1 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
-                     'name' => 'diameter',
-                     'title' => 'Diameter',
+                  \Pimcore\Model\DataObject\ClassDefinition\Data\Fieldcollections::__set_state(array(
+                     'name' => 'extraParameters',
+                     'title' => 'Extra Parameters',
                      'tooltip' => '',
                      'mandatory' => false,
                      'noteditable' => false,
@@ -458,16 +553,17 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'blockedVarsForExport' => 
                     array (
                     ),
-                     'defaultValue' => NULL,
-                     'integer' => false,
-                     'unsigned' => false,
-                     'minValue' => NULL,
-                     'maxValue' => NULL,
-                     'unique' => false,
-                     'decimalSize' => NULL,
-                     'decimalPrecision' => NULL,
-                     'width' => '',
-                     'defaultValueGenerator' => '',
+                     'allowedTypes' => 
+                    array (
+                      0 => 'parameter',
+                    ),
+                     'lazyLoading' => true,
+                     'maxItems' => NULL,
+                     'disallowAddRemove' => false,
+                     'disallowReorder' => false,
+                     'collapsed' => false,
+                     'collapsible' => false,
+                     'border' => false,
                   )),
                 ),
                  'locked' => false,
@@ -477,7 +573,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'fieldtype' => 'panel',
                  'layout' => NULL,
                  'border' => false,
-                 'icon' => '',
+                 'icon' => '/bundles/pimcoreadmin/img/flat-color-icons/bricks.svg',
                  'labelWidth' => 100,
                  'labelAlign' => 'left',
               )),
@@ -738,7 +834,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                     array (
                       0 => 
                       array (
-                        'classes' => 'Knob',
+                        'classes' => 'Equipment',
                       ),
                     ),
                      'displayMode' => 'grid',
@@ -780,7 +876,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                     array (
                       0 => 
                       array (
-                        'classes' => 'Knob',
+                        'classes' => 'Equipment',
                       ),
                     ),
                      'displayMode' => 'grid',
@@ -876,6 +972,28 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'enableGridLocking' => false,
    'deletedDataComponents' => 
   array (
+    0 => 
+    \Pimcore\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
+       'name' => 'isFreeGift',
+       'title' => 'Is Free Gift',
+       'tooltip' => '',
+       'mandatory' => false,
+       'noteditable' => false,
+       'index' => false,
+       'locked' => false,
+       'style' => '',
+       'permissions' => NULL,
+       'fieldtype' => '',
+       'relationType' => false,
+       'invisible' => false,
+       'visibleGridView' => false,
+       'visibleSearch' => false,
+       'blockedVarsForExport' => 
+      array (
+      ),
+       'defaultValue' => NULL,
+       'defaultValueGenerator' => '',
+    )),
   ),
    'blockedVarsForExport' => 
   array (

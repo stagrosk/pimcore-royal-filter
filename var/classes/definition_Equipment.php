@@ -3,6 +3,7 @@
 /**
  * Inheritance: no
  * Variants: no
+ * Title: Equipment
  *
  * Fields Summary:
  * - localizedfields [localizedfields]
@@ -14,18 +15,18 @@
  * - pitch [numeric]
  * - height [numeric]
  * - sectionSize [numeric]
- * - threadImages [imageGallery]
+ * - images [imageGallery]
  * - drawingImages [imageGallery]
  */
 
 return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'dao' => NULL,
    'id' => 'knob',
-   'name' => 'Knob',
-   'title' => '',
+   'name' => 'Equipment',
+   'title' => 'Equipment',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1727529669,
+   'modificationDate' => 1742408693,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -401,8 +402,8 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
               )),
               6 => 
               \Pimcore\Model\DataObject\ClassDefinition\Data\ImageGallery::__set_state(array(
-                 'name' => 'threadImages',
-                 'title' => 'Thread images',
+                 'name' => 'images',
+                 'title' => 'Images',
                  'tooltip' => '',
                  'mandatory' => false,
                  'noteditable' => false,
@@ -516,6 +517,32 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'enableGridLocking' => false,
    'deletedDataComponents' => 
   array (
+    0 => 
+    \Pimcore\Model\DataObject\ClassDefinition\Data\ImageGallery::__set_state(array(
+       'name' => 'threadImages',
+       'title' => 'Thread images',
+       'tooltip' => '',
+       'mandatory' => false,
+       'noteditable' => false,
+       'index' => false,
+       'locked' => false,
+       'style' => '',
+       'permissions' => NULL,
+       'fieldtype' => '',
+       'relationType' => false,
+       'invisible' => false,
+       'visibleGridView' => false,
+       'visibleSearch' => false,
+       'blockedVarsForExport' => 
+      array (
+      ),
+       'uploadPath' => '',
+       'ratioX' => NULL,
+       'ratioY' => NULL,
+       'predefinedDataTemplates' => '',
+       'height' => '',
+       'width' => '',
+    )),
   ),
    'blockedVarsForExport' => 
   array (

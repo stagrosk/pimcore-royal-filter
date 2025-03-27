@@ -1,5 +1,6 @@
 <?php
 
+use Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle;
 use Pimcore\Bundle\DataHubBundle\PimcoreDataHubBundle;
 use Pimcore\Bundle\SimpleBackendSearchBundle\PimcoreSimpleBackendSearchBundle;
 use Pimcore\Bundle\StaticRoutesBundle\PimcoreStaticRoutesBundle;
@@ -12,4 +13,5 @@ return [
     PimcoreTinymceBundle::class => ['all' => true],
     PimcoreUuidBundle::class => ['all' => true],
     PimcoreDataHubBundle::class => ['all' => true],
+    DoctrineMigrationsBundle::class => ['all' => true],
 ];

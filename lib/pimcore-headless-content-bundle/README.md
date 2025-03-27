@@ -1,0 +1,1 @@
+# Pimcore Extension to act as a Headless CMS
