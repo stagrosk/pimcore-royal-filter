@@ -37,7 +37,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1742930814,
+   'modificationDate' => 1743106893,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -942,7 +942,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                 ),
                  'allowedTypes' => 
                 array (
-                  0 => 'price',
+                  0 => 'Price',
                 ),
                  'lazyLoading' => true,
                  'maxItems' => NULL,

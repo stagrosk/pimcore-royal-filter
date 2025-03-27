@@ -63,7 +63,7 @@ readonly class CategorySubscriber implements EventSubscriberInterface
                 throw new \Exception($response['userErrors']);
             } else {
                 $object->setApiId($data['collection']['id']);
-                $object->setUrlHandle($data['collection']['handle']);
+                $object->setSlug($data['collection']['handle']);
             }
         }
     }

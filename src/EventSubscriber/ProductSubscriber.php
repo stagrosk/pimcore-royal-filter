@@ -61,7 +61,7 @@ readonly class ProductSubscriber implements EventSubscriberInterface
                 throw new \Exception($response['userErrors']);
             } else {
                 $object->setApiId($data['product']['id']);
-                $object->setUrlHandle($data['product']['handle']);
+                $object->setSlug($data['product']['handle']);
             }
         }
     }
