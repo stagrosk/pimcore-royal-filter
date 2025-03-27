@@ -34,7 +34,7 @@ class ShopifyCollectionMapper implements IShopifyCollectionMapper
         $shopifyCollectionModel->setId($category->getApiId());
         $shopifyCollectionModel->setTitle($category->getTitle());
         $shopifyCollectionModel->setDescriptionHtml($category->getDescription());
-        $shopifyCollectionModel->setHandle($category->getUrlHandle());
+        $shopifyCollectionModel->setHandle($category->getSlug());   // TODO: lang? default only? do we need it in shopify?
 
         // TODO: finish
         //$shopifyCollectionModel->setMetafields();

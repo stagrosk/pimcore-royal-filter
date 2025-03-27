@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\EventSubscriber;
 
-use App\Shopify\Graphql\GraphqlClient;
 use App\Shopify\Graphql\Mutation\Collection\CollectionCreateMutation;
 use App\Shopify\Graphql\Mutation\Collection\CollectionUpdateMutation;
 use Pimcore\Event\DataObjectEvents;
 use Pimcore\Event\Model\DataObjectEvent;
+use Pimcore\Model\DataObject\Category;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 readonly class CategorySubscriber implements EventSubscriberInterface
@@ -43,6 +43,11 @@ readonly class CategorySubscriber implements EventSubscriberInterface
         /** @var \Pimcore\Model\DataObject\Category $object */
         $object = $event->getObject();
 
+        // check object type
+        if (!$object instanceof Category) {
+            return;
+        }
+
         if ($object->getApiId()) {
             $response = $this->collectionUpdateMutation->callAction($object);
             $data = $response['data']['collectionUpdate'];
@@ -58,6 +63,7 @@ readonly class CategorySubscriber implements EventSubscriberInterface
                 throw new \Exception($response['userErrors']);
             } else {
                 $object->setApiId($data['collection']['id']);
+                $object->setUrlHandle($data['collection']['handle']);
             }
         }
     }

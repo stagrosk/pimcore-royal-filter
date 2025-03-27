@@ -91,25 +91,20 @@ class SlugGenerator
     }
 
     /**
-     * @param \PimcoreHeadlessContentBundle\Model\SlugAwareInterface $object
+     * @param \PimcoreHeadlessContentBundle\Model\SlugAwareInterface $initialObject
      */
-    public function updateAbsolutePath(SlugAwareInterface $object): void
+    public function updateAbsolutePath(SlugAwareInterface $initialObject): void
     {
         foreach (Tool::getValidLanguages() as $language) {
-            $initialObject = $object;
-            $slugs = [];
-
-            if (!$initialObject instanceof SlugAwareInterface) {
-                return;
-            }
-
+            // check slug in language
             if (empty($initialObject->getSlug($language))) {
-                return;
+                continue;
             }
 
+            $slugs = [];
+            $object = $initialObject;
             while ($object instanceof SlugAwareInterface) {
                 $currentSlug = $object->getSlug($language);
-
                 if (!empty($currentSlug)) {
                     $slugs[] = $currentSlug;
                 }
@@ -117,11 +112,16 @@ class SlugGenerator
                 $object = $object->getParent();
             }
 
+            // skip if translation is empty
+            if (empty($slugs)) {
+                continue;
+            }
+
             $slugs = array_reverse($slugs);
 
             $absolutePath = '/' . implode('/', array_values($slugs));
 
-            if ($absolutePath != $initialObject->getAbsolutePath($language)) {
+            if ($absolutePath !== $initialObject->getAbsolutePath($language)) {
                 $initialObject->setAbsolutePath($absolutePath, $language);
             }
         }

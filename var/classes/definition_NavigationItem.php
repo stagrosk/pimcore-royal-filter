@@ -16,7 +16,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1743091473,
+   'modificationDate' => 1743096390,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '\\PimcoreHeadlessContentBundle\\Model\\Navigation',
@@ -150,6 +150,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                 ),
                  'allowedTypes' => 
                 array (
+                  0 => 'NavigationLinkItem',
                 ),
                  'lazyLoading' => true,
                  'maxItems' => NULL,

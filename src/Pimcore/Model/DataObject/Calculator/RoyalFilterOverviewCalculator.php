@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Pimcore\DataObject\Calculator;
+namespace App\Pimcore\Model\DataObject\Calculator;
 
 use Pimcore\Model\DataObject\ClassDefinition\CalculatorClassInterface;
 use Pimcore\Model\DataObject\Concrete;
