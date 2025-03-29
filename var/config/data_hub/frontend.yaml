@@ -8,11 +8,94 @@ pimcore_data_hub:
                 description: ''
                 group: ''
                 sqlObjectCondition: ''
-                modificationDate: 1727014486
+                modificationDate: 1743167733
                 path: null
                 createDate: 1727014466
             schema:
-                queryEntities: {  }
+                queryEntities:
+                    ContentPage:
+                        id: ContentPage
+                        name: ContentPage
+                        columnConfig:
+                            columns:
+                                -
+                                    attributes:
+                                        attribute: id
+                                        label: id
+                                        dataType: system
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: published
+                                        label: published
+                                        dataType: system
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: name
+                                        label: Name
+                                        dataType: input
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: slug
+                                        label: Slug
+                                        dataType: input
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: absolutePath
+                                        label: 'Absolute Path'
+                                        dataType: input
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: nameInNavigation
+                                        label: 'Name In Navigation'
+                                        dataType: input
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: elements
+                                        label: Elements
+                                        dataType: fieldcollections
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: headerTitle
+                                        label: 'Header Title'
+                                        dataType: input
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: headerImage
+                                        label: 'Header Image'
+                                        dataType: hotspotimage
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: headerTitleAccentColor
+                                        label: 'Header Title Color'
+                                        dataType: select
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: seoTitle
+                                        label: 'Seo Title'
+                                        dataType: input
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: seoDescription
+                                        label: 'Seo Description'
+                                        dataType: textarea
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: canonicals
+                                        label: Canonicals
+                                        dataType: manyToManyRelation
+                                    isOperator: false
                 mutationEntities: {  }
                 specialEntities:
                     document:

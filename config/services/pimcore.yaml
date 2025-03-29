@@ -1,0 +1,12 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: true
+
+    # auto-register all helpers
+    App\Pimcore\Helpers\:
+        resource: '../../src/Pimcore/Helpers/*'
+
+    App\Pimcore\ClassificationStore\:
+        resource: '../../src/Pimcore/ClassificationStore/*'

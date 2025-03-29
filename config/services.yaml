@@ -1,6 +1,7 @@
 imports:
     - { resource: services/shopify.yaml }
     - { resource: services/eventSubscriber.yaml }
+    - { resource: services/pimcore.yaml }
 
 parameters:
     secret: XOwtGYfiW8T5d0nlwh8UqQ73yLCCWRMDJMMgvjKY20o=

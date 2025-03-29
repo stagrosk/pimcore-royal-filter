@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\EventSubscriber;
 
 use App\Shopify\Graphql\Mutation\Collection\CollectionCreateMutation;
+use App\Shopify\Graphql\Mutation\Collection\CollectionDeleteMutation;
 use App\Shopify\Graphql\Mutation\Collection\CollectionUpdateMutation;
 use Pimcore\Event\DataObjectEvents;
 use Pimcore\Event\Model\DataObjectEvent;
@@ -16,10 +17,12 @@ readonly class CategorySubscriber implements EventSubscriberInterface
     /**
      * @param \App\Shopify\Graphql\Mutation\Collection\CollectionCreateMutation $collectionCreateMutation
      * @param \App\Shopify\Graphql\Mutation\Collection\CollectionUpdateMutation $collectionUpdateMutation
+     * @param \App\Shopify\Graphql\Mutation\Collection\CollectionDeleteMutation $collectionDeleteMutation
      */
     public function __construct(
         private CollectionCreateMutation $collectionCreateMutation,
         private CollectionUpdateMutation $collectionUpdateMutation,
+        private CollectionDeleteMutation $collectionDeleteMutation,
     ) {
     }
 
@@ -27,6 +30,7 @@ readonly class CategorySubscriber implements EventSubscriberInterface
     {
         return [
             DataObjectEvents::PRE_UPDATE => ['onPreUpdate'],
+            DataObjectEvents::PRE_DELETE => ['onPreDelete'],
         ];
     }
 
@@ -60,11 +64,35 @@ readonly class CategorySubscriber implements EventSubscriberInterface
             $data = $response['data']['collectionCreate'];
 
             if (!empty($data['userErrors'])) {
-                throw new \Exception($response['userErrors']);
+                throw new \Exception($data['userErrors'][0]['message']);
             } else {
                 $object->setApiId($data['collection']['id']);
                 $object->setSlug($data['collection']['handle']);
             }
+        }
+    }
+
+    /**
+     * @param \Pimcore\Event\Model\DataObjectEvent $event
+     *
+     * @throws \PHPShopify\Exception\ApiException
+     * @throws \PHPShopify\Exception\CurlException
+     * @throws \Exception
+     * @return void
+     */
+    public function onPreDelete(DataObjectEvent $event): void
+    {
+        /** @var \Pimcore\Model\DataObject\Category $object */
+        $object = $event->getObject();
+
+        // check object type
+        if (!$object instanceof Category) {
+            return;
+        }
+
+        $response = $this->collectionDeleteMutation->callAction($object);
+        if (!empty($data['userErrors'])) {
+            throw new \Exception($data['userErrors'][0]['message']);
         }
     }
 }

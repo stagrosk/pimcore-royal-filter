@@ -13,8 +13,6 @@
  * - product [manyToOneRelation]
  * - generateAsProduct [checkbox]
  * - Prices [fieldcollections]
- * - parameters [classificationstore]
- * - extraParameters [fieldcollections]
  * - body1 [manyToOneRelation]
  * - body2 [manyToOneRelation]
  * - centerBody1 [manyToOneRelation]
@@ -30,7 +28,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1743106901,
+   'modificationDate' => 1743273213,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -218,7 +216,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'fieldtype' => 'panel',
                      'layout' => NULL,
                      'border' => false,
-                     'icon' => '',
+                     'icon' => '/bundles/pimcoreadmin/img/flat-color-icons/database.svg',
                      'labelWidth' => 100,
                      'labelAlign' => 'left',
                   )),
@@ -293,7 +291,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'fieldtype' => 'panel',
                      'layout' => NULL,
                      'border' => false,
-                     'icon' => '',
+                     'icon' => '/bundles/pimcoreadmin/img/flat-color-icons/image.svg',
                      'labelWidth' => 100,
                      'labelAlign' => 'left',
                   )),
@@ -481,104 +479,6 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
             array (
               0 => 
               \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
-                 'name' => 'Metadata',
-                 'type' => NULL,
-                 'region' => NULL,
-                 'title' => 'Metadata',
-                 'width' => '',
-                 'height' => '',
-                 'collapsible' => false,
-                 'collapsed' => false,
-                 'bodyStyle' => '',
-                 'datatype' => 'layout',
-                 'children' => 
-                array (
-                  0 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Classificationstore::__set_state(array(
-                     'name' => 'parameters',
-                     'title' => 'Parameters',
-                     'tooltip' => '',
-                     'mandatory' => false,
-                     'noteditable' => false,
-                     'index' => false,
-                     'locked' => false,
-                     'style' => '',
-                     'permissions' => NULL,
-                     'fieldtype' => '',
-                     'relationType' => false,
-                     'invisible' => false,
-                     'visibleGridView' => false,
-                     'visibleSearch' => false,
-                     'blockedVarsForExport' => 
-                    array (
-                    ),
-                     'children' => 
-                    array (
-                    ),
-                     'labelWidth' => 0,
-                     'localized' => false,
-                     'storeId' => 1,
-                     'hideEmptyData' => false,
-                     'disallowAddRemove' => false,
-                     'referencedFields' => 
-                    array (
-                    ),
-                     'fieldDefinitionsCache' => NULL,
-                     'allowedGroupIds' => 
-                    array (
-                    ),
-                     'activeGroupDefinitions' => 
-                    array (
-                    ),
-                     'maxItems' => NULL,
-                     'height' => NULL,
-                     'width' => NULL,
-                  )),
-                  1 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Fieldcollections::__set_state(array(
-                     'name' => 'extraParameters',
-                     'title' => 'Extra Parameters',
-                     'tooltip' => '',
-                     'mandatory' => false,
-                     'noteditable' => false,
-                     'index' => false,
-                     'locked' => false,
-                     'style' => '',
-                     'permissions' => NULL,
-                     'fieldtype' => '',
-                     'relationType' => false,
-                     'invisible' => false,
-                     'visibleGridView' => false,
-                     'visibleSearch' => false,
-                     'blockedVarsForExport' => 
-                    array (
-                    ),
-                     'allowedTypes' => 
-                    array (
-                      0 => 'parameter',
-                    ),
-                     'lazyLoading' => true,
-                     'maxItems' => NULL,
-                     'disallowAddRemove' => false,
-                     'disallowReorder' => false,
-                     'collapsed' => false,
-                     'collapsible' => false,
-                     'border' => false,
-                  )),
-                ),
-                 'locked' => false,
-                 'blockedVarsForExport' => 
-                array (
-                ),
-                 'fieldtype' => 'panel',
-                 'layout' => NULL,
-                 'border' => false,
-                 'icon' => '/bundles/pimcoreadmin/img/flat-color-icons/bricks.svg',
-                 'labelWidth' => 100,
-                 'labelAlign' => 'left',
-              )),
-              1 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
                  'name' => 'Bodies',
                  'type' => NULL,
                  'region' => NULL,
@@ -687,7 +587,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'labelWidth' => 100,
                  'labelAlign' => 'left',
               )),
-              2 => 
+              1 => 
               \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
                  'name' => 'Centers',
                  'type' => NULL,
@@ -797,7 +697,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'labelWidth' => 100,
                  'labelAlign' => 'left',
               )),
-              3 => 
+              2 => 
               \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
                  'name' => 'Equipment',
                  'type' => NULL,

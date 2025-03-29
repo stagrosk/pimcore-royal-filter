@@ -7,12 +7,10 @@
  * Fields Summary:
  * - localizedfields [localizedfields]
  * -- title [input]
- * - length [numeric]
- * - diameterFrom [numeric]
- * - diameterTo [numeric]
+ * - metadata [classificationstore]
  * - defaultImage [image]
  * - images [imageGallery]
- * - drawings [imageGallery]
+ * - drawingImages [imageGallery]
  */
 
 return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
@@ -22,7 +20,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1727528989,
+   'modificationDate' => 1743273271,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -150,9 +148,9 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'fieldDefinitionsCache' => NULL,
               )),
               1 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
-                 'name' => 'length',
-                 'title' => 'Length',
+              \Pimcore\Model\DataObject\ClassDefinition\Data\Classificationstore::__set_state(array(
+                 'name' => 'metadata',
+                 'title' => 'Metadata',
                  'tooltip' => '',
                  'mandatory' => false,
                  'noteditable' => false,
@@ -168,76 +166,27 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'blockedVarsForExport' => 
                 array (
                 ),
-                 'defaultValue' => NULL,
-                 'integer' => false,
-                 'unsigned' => false,
-                 'minValue' => NULL,
-                 'maxValue' => NULL,
-                 'unique' => false,
-                 'decimalSize' => NULL,
-                 'decimalPrecision' => NULL,
-                 'width' => '',
-                 'defaultValueGenerator' => '',
-              )),
-              2 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
-                 'name' => 'diameterFrom',
-                 'title' => 'Diameter from',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'fieldtype' => '',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-                 'blockedVarsForExport' => 
+                 'children' => 
                 array (
                 ),
-                 'defaultValue' => NULL,
-                 'integer' => false,
-                 'unsigned' => false,
-                 'minValue' => NULL,
-                 'maxValue' => NULL,
-                 'unique' => false,
-                 'decimalSize' => NULL,
-                 'decimalPrecision' => NULL,
-                 'width' => '',
-                 'defaultValueGenerator' => '',
-              )),
-              3 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
-                 'name' => 'diameterTo',
-                 'title' => 'Diameter to',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'fieldtype' => '',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-                 'blockedVarsForExport' => 
+                 'labelWidth' => 0,
+                 'localized' => false,
+                 'storeId' => 1,
+                 'hideEmptyData' => false,
+                 'disallowAddRemove' => false,
+                 'referencedFields' => 
                 array (
                 ),
-                 'defaultValue' => NULL,
-                 'integer' => false,
-                 'unsigned' => false,
-                 'minValue' => NULL,
-                 'maxValue' => NULL,
-                 'unique' => false,
-                 'decimalSize' => NULL,
-                 'decimalPrecision' => NULL,
-                 'width' => '',
-                 'defaultValueGenerator' => '',
+                 'fieldDefinitionsCache' => NULL,
+                 'allowedGroupIds' => 
+                array (
+                ),
+                 'activeGroupDefinitions' => 
+                array (
+                ),
+                 'maxItems' => NULL,
+                 'height' => NULL,
+                 'width' => NULL,
               )),
             ),
              'locked' => false,
@@ -247,7 +196,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'fieldtype' => 'panel',
              'layout' => NULL,
              'border' => false,
-             'icon' => '',
+             'icon' => '/bundles/pimcoreadmin/img/flat-color-icons/database.svg',
              'labelWidth' => 100,
              'labelAlign' => 'left',
           )),
@@ -316,8 +265,8 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
               )),
               2 => 
               \Pimcore\Model\DataObject\ClassDefinition\Data\ImageGallery::__set_state(array(
-                 'name' => 'drawings',
-                 'title' => 'Drawings',
+                 'name' => 'drawingImages',
+                 'title' => 'Drawing images',
                  'tooltip' => '',
                  'mandatory' => false,
                  'noteditable' => false,
@@ -348,7 +297,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'fieldtype' => 'panel',
              'layout' => NULL,
              'border' => false,
-             'icon' => '',
+             'icon' => '/bundles/pimcoreadmin/img/flat-color-icons/image.svg',
              'labelWidth' => 100,
              'labelAlign' => 'left',
           )),

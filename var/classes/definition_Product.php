@@ -37,7 +37,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1743106893,
+   'modificationDate' => 1743273090,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -830,10 +830,10 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
           )),
           3 => 
           \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
-             'name' => 'Images',
+             'name' => 'Assets',
              'type' => NULL,
              'region' => NULL,
-             'title' => 'Images',
+             'title' => 'Assets',
              'width' => '',
              'height' => '',
              'collapsible' => false,
