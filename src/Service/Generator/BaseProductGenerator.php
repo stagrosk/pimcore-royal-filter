@@ -4,6 +4,7 @@ namespace App\Service\Generator;
 
 use App\Component\BatchProcessing\BatchListing;
 use App\Service\Generator\Exception\NothingToExportException;
+use Pimcore\Model\DataObject\AbstractObject;
 use Pimcore\Model\DataObject\Concrete;
 use Pimcore\Model\DataObject\Product;
 use Pimcore\Model\Document\Listing;
@@ -31,12 +32,12 @@ class BaseProductGenerator
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\Concrete $object
+     * @param \Pimcore\Model\DataObject\AbstractObject $object
      *
      * @throws \Exception
      * @return \Pimcore\Model\DataObject\Product
      */
-    public function generateProductForObject(Concrete $object): Product
+    public function generateProductForObject(AbstractObject $object): Product
     {
         throw new \Exception('Implement custom generator instead of base one');
     }
@@ -45,6 +46,7 @@ class BaseProductGenerator
      * @param \Pimcore\Model\DataObject\Listing|\Pimcore\Model\Document\Listing $list
      *
      * @throws \App\Service\Generator\Exception\NothingToExportException
+     * @throws \Exception
      * @return bool
      */
     public function processList(\Pimcore\Model\DataObject\Listing|Listing $list): bool

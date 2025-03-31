@@ -7,9 +7,11 @@
  * Fields Summary:
  * - localizedfields [localizedfields]
  * -- title [input]
+ * -- shortDescription [textarea]
  * -- description [textarea]
- * - defaultImage [image]
- * - images [imageGallery]
+ * - manufacturer [manyToOneRelation]
+ * - image [image]
+ * - imageGallery [imageGallery]
  * - product [manyToOneRelation]
  * - generateAsProduct [checkbox]
  * - Prices [fieldcollections]
@@ -28,7 +30,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1743273213,
+   'modificationDate' => 1743344440,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -166,6 +168,31 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                           )),
                           1 => 
                           \Pimcore\Model\DataObject\ClassDefinition\Data\Textarea::__set_state(array(
+                             'name' => 'shortDescription',
+                             'title' => 'Short Description',
+                             'tooltip' => '',
+                             'mandatory' => false,
+                             'noteditable' => false,
+                             'index' => false,
+                             'locked' => false,
+                             'style' => '',
+                             'permissions' => NULL,
+                             'fieldtype' => '',
+                             'relationType' => false,
+                             'invisible' => false,
+                             'visibleGridView' => false,
+                             'visibleSearch' => false,
+                             'blockedVarsForExport' => 
+                            array (
+                            ),
+                             'maxLength' => NULL,
+                             'showCharCount' => false,
+                             'excludeFromSearchIndex' => false,
+                             'height' => 100,
+                             'width' => 700,
+                          )),
+                          2 => 
+                          \Pimcore\Model\DataObject\ClassDefinition\Data\Textarea::__set_state(array(
                              'name' => 'description',
                              'title' => 'Description',
                              'tooltip' => '',
@@ -208,6 +235,48 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                          'height' => '',
                          'fieldDefinitionsCache' => NULL,
                       )),
+                      1 => 
+                      \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
+                         'name' => 'manufacturer',
+                         'title' => 'Manufacturer',
+                         'tooltip' => '',
+                         'mandatory' => false,
+                         'noteditable' => false,
+                         'index' => false,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'fieldtype' => '',
+                         'relationType' => true,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'classes' => 
+                        array (
+                          0 => 
+                          array (
+                            'classes' => 'Manufacturer',
+                          ),
+                        ),
+                         'displayMode' => 'grid',
+                         'pathFormatterClass' => '',
+                         'assetInlineDownloadAllowed' => false,
+                         'assetUploadPath' => '',
+                         'allowToClearRelation' => true,
+                         'objectsAllowed' => true,
+                         'assetsAllowed' => false,
+                         'assetTypes' => 
+                        array (
+                        ),
+                         'documentsAllowed' => false,
+                         'documentTypes' => 
+                        array (
+                        ),
+                         'width' => '500px',
+                      )),
                     ),
                      'locked' => false,
                      'blockedVarsForExport' => 
@@ -236,8 +305,8 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                     array (
                       0 => 
                       \Pimcore\Model\DataObject\ClassDefinition\Data\Image::__set_state(array(
-                         'name' => 'defaultImage',
-                         'title' => 'Default Image',
+                         'name' => 'image',
+                         'title' => 'Image',
                          'tooltip' => '',
                          'mandatory' => false,
                          'noteditable' => false,
@@ -259,8 +328,8 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                       )),
                       1 => 
                       \Pimcore\Model\DataObject\ClassDefinition\Data\ImageGallery::__set_state(array(
-                         'name' => 'images',
-                         'title' => 'Images',
+                         'name' => 'imageGallery',
+                         'title' => 'Image gallery',
                          'tooltip' => '',
                          'mandatory' => false,
                          'noteditable' => false,
@@ -872,6 +941,55 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'enableGridLocking' => false,
    'deletedDataComponents' => 
   array (
+    0 => 
+    \Pimcore\Model\DataObject\ClassDefinition\Data\Image::__set_state(array(
+       'name' => 'defaultImage',
+       'title' => 'Default Image',
+       'tooltip' => '',
+       'mandatory' => false,
+       'noteditable' => false,
+       'index' => false,
+       'locked' => false,
+       'style' => '',
+       'permissions' => NULL,
+       'fieldtype' => '',
+       'relationType' => false,
+       'invisible' => false,
+       'visibleGridView' => false,
+       'visibleSearch' => false,
+       'blockedVarsForExport' => 
+      array (
+      ),
+       'uploadPath' => '',
+       'width' => '',
+       'height' => '',
+    )),
+    1 => 
+    \Pimcore\Model\DataObject\ClassDefinition\Data\ImageGallery::__set_state(array(
+       'name' => 'images',
+       'title' => 'Images',
+       'tooltip' => '',
+       'mandatory' => false,
+       'noteditable' => false,
+       'index' => false,
+       'locked' => false,
+       'style' => '',
+       'permissions' => NULL,
+       'fieldtype' => '',
+       'relationType' => false,
+       'invisible' => false,
+       'visibleGridView' => false,
+       'visibleSearch' => false,
+       'blockedVarsForExport' => 
+      array (
+      ),
+       'uploadPath' => '',
+       'ratioX' => NULL,
+       'ratioY' => NULL,
+       'predefinedDataTemplates' => '',
+       'height' => '',
+       'width' => '',
+    )),
   ),
    'blockedVarsForExport' => 
   array (

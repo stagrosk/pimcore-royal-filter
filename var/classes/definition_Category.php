@@ -23,7 +23,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1743273275,
+   'modificationDate' => 1743340343,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -90,7 +90,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'height' => '',
                  'collapsible' => false,
                  'collapsed' => false,
-                 'bodyStyle' => 'padding-bottom: 35px;',
+                 'bodyStyle' => '',
                  'datatype' => 'layout',
                  'children' => 
                 array (
@@ -162,7 +162,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'height' => '',
                  'collapsible' => false,
                  'collapsed' => false,
-                 'bodyStyle' => 'padding-bottom: 35px;',
+                 'bodyStyle' => '',
                  'datatype' => 'layout',
                  'children' => 
                 array (
@@ -329,7 +329,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'fieldtype' => 'panel',
                  'layout' => NULL,
                  'border' => false,
-                 'icon' => '',
+                 'icon' => '/bundles/pimcoreadmin/img/flat-color-icons/database.svg',
                  'labelWidth' => 100,
                  'labelAlign' => 'left',
               )),
@@ -343,7 +343,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'height' => '',
                  'collapsible' => false,
                  'collapsed' => false,
-                 'bodyStyle' => 'padding-bottom: 35px;',
+                 'bodyStyle' => '',
                  'datatype' => 'layout',
                  'children' => 
                 array (
@@ -397,7 +397,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'fieldtype' => 'panel',
              'layout' => NULL,
              'border' => false,
-             'icon' => '/bundles/pimcoreadmin/img/flat-color-icons/database.svg',
+             'icon' => '',
              'labelWidth' => 100,
              'labelAlign' => 'left',
           )),

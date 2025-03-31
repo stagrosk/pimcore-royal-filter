@@ -170,6 +170,16 @@ class ClassificationStoreService
     }
 
     /**
+     * @param int $id
+     *
+     * @return \Pimcore\Model\DataObject\Classificationstore\KeyConfig|null
+     */
+    public function getKeyConfigById(int $id): ?KeyConfig
+    {
+        return KeyConfig::getById($id, true);
+    }
+
+    /**
      * Process key config - if is sent input will handle whole keyConfig structure and save it
      *
      * @param int $classificationStoreId
@@ -242,6 +252,16 @@ class ClassificationStoreService
         }
 
         return $keyConfig;
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return \Pimcore\Model\DataObject\Classificationstore\GroupConfig|null
+     */
+    public function getGroupConfigById(int $id): ?GroupConfig
+    {
+        return GroupConfig::getById($id, true);
     }
 
     /**

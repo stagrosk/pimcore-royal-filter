@@ -8,9 +8,9 @@
  * - localizedfields [localizedfields]
  * -- title [input]
  * - metadata [classificationstore]
- * - defaultImage [image]
- * - images [imageGallery]
- * - drawingImages [imageGallery]
+ * - image [image]
+ * - imageGallery [imageGallery]
+ * - drawingImageGallery [imageGallery]
  */
 
 return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
@@ -20,7 +20,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1743273279,
+   'modificationDate' => 1743344715,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -216,8 +216,8 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
             array (
               0 => 
               \Pimcore\Model\DataObject\ClassDefinition\Data\Image::__set_state(array(
-                 'name' => 'defaultImage',
-                 'title' => 'Default image',
+                 'name' => 'image',
+                 'title' => 'Image',
                  'tooltip' => '',
                  'mandatory' => false,
                  'noteditable' => false,
@@ -239,8 +239,8 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
               )),
               1 => 
               \Pimcore\Model\DataObject\ClassDefinition\Data\ImageGallery::__set_state(array(
-                 'name' => 'images',
-                 'title' => 'Images',
+                 'name' => 'imageGallery',
+                 'title' => 'Image gallery',
                  'tooltip' => '',
                  'mandatory' => false,
                  'noteditable' => false,
@@ -265,8 +265,8 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
               )),
               2 => 
               \Pimcore\Model\DataObject\ClassDefinition\Data\ImageGallery::__set_state(array(
-                 'name' => 'drawingImages',
-                 'title' => 'Drawing images',
+                 'name' => 'drawingImageGallery',
+                 'title' => 'Drawing image gallery',
                  'tooltip' => '',
                  'mandatory' => false,
                  'noteditable' => false,
@@ -354,6 +354,32 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'enableGridLocking' => false,
    'deletedDataComponents' => 
   array (
+    0 => 
+    \Pimcore\Model\DataObject\ClassDefinition\Data\ImageGallery::__set_state(array(
+       'name' => 'images',
+       'title' => 'Images',
+       'tooltip' => '',
+       'mandatory' => false,
+       'noteditable' => false,
+       'index' => false,
+       'locked' => false,
+       'style' => '',
+       'permissions' => NULL,
+       'fieldtype' => '',
+       'relationType' => false,
+       'invisible' => false,
+       'visibleGridView' => false,
+       'visibleSearch' => false,
+       'blockedVarsForExport' => 
+      array (
+      ),
+       'uploadPath' => '',
+       'ratioX' => NULL,
+       'ratioY' => NULL,
+       'predefinedDataTemplates' => '',
+       'height' => '',
+       'width' => '',
+    )),
   ),
    'blockedVarsForExport' => 
   array (

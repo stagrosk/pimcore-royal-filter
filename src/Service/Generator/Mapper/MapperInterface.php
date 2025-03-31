@@ -2,24 +2,25 @@
 
 namespace App\Service\Generator\Mapper;
 
-use Pimcore\Model\DataObject\Concrete;
+use Pimcore\Model\DataObject\AbstractObject;
 use Pimcore\Model\DataObject\Product;
 
 interface MapperInterface
 {
     /**
-     * @param \Pimcore\Model\DataObject\Concrete $object
+     * @param \Pimcore\Model\DataObject\AbstractObject $object
      * @param \Pimcore\Model\DataObject\Product $product
+     * @param bool $skipPreSave
      *
      * @return \Pimcore\Model\DataObject\Product
      */
-    public function mapObjectToProduct(Concrete $object, Product $product): Product;
+    public function mapObjectToProduct(AbstractObject $object, Product $product, bool $skipPreSave = false): Product;
 
     /**
-     * @param \Pimcore\Model\DataObject\Concrete $object
+     * @param \Pimcore\Model\DataObject\AbstractObject $object
      * @param string $language
      *
      * @return string
      */
-    public function prepareTitle(Concrete $object, string $language): string;
+    public function prepareTitle(AbstractObject $object, string $language): string;
 }

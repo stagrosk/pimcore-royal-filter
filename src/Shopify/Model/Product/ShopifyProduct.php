@@ -8,6 +8,9 @@ use stdClass;
 
 class ShopifyProduct extends AbstractShopifyProduct implements IShopifyModel
 {
+    public const STATUS_ACTIVE = 'ACTIVE';
+    public const STATUS_ARCHIVED = 'ARCHIVED';
+    public const STATUS_DRAFT = 'DRAFT';
 
     private ?string $title = null;
     private ?string $description = null;

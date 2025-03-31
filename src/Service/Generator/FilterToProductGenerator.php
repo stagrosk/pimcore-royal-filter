@@ -2,8 +2,10 @@
 
 namespace App\Service\Generator;
 
+use App\Pimcore\Helpers\VersionHelper;
 use App\Service\Generator\Mapper\FilterToProductMapper;
-use Pimcore\Model\DataObject\Concrete;
+use Pimcore\Logger;
+use Pimcore\Model\DataObject\AbstractObject;
 use Pimcore\Model\DataObject\Product;
 use Pimcore\Model\DataObject\RoyalFilter;
 use Pimcore\Model\Document\Listing;
@@ -20,14 +22,35 @@ class FilterToProductGenerator extends BaseProductGenerator
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\Concrete $object
+     * @param \Pimcore\Model\DataObject\RoyalFilter $object
      *
+     * @throws \Exception
      * @return \Pimcore\Model\DataObject\Product
      */
-    public function generateProductForObject(Concrete $object): Product
+    public function generateProductForObject(AbstractObject $object): Product
     {
-        $product =  new Product();
+        // get product
+        $product = $object->getProduct();
+
+        // if product was not already generated -> create new
+        if (!$product instanceof Product) {
+            $product =  new Product();
+        }
+
+        // map data
         $this->filterMapper->mapObjectToProduct($object, $product);
+
+        // save
+        Logger::notice(sprintf('[FilterToProductGenerator] - Save product: %s', $product->getKey()));
+        VersionHelper::useVersioning(function () use ($product) {
+            $product->save();
+        }, false);
+
+        // save product on whirlpool
+        $object->setProduct($product);
+        VersionHelper::useVersioning(function () use ($object) {
+            $object->save();
+        }, false);
 
         return $product;
     }

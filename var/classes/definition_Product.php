@@ -20,10 +20,10 @@
  * -- handle404 [input]
  * - manufacturer [manyToOneRelation]
  * - madeIn [country]
- * - category [manyToManyRelation]
- * - parameters [classificationstore]
+ * - categories [manyToManyRelation]
+ * - metadata [classificationstore]
  * - extraParameters [fieldcollections]
- * - images [fieldcollections]
+ * - imageGallery [imageGallery]
  * - isFreeGift [checkbox]
  * - Prices [fieldcollections]
  * - apiId [input]
@@ -37,7 +37,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1743273090,
+   'modificationDate' => 1743346965,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -68,10 +68,10 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
     array (
       0 => 
       \Pimcore\Model\DataObject\ClassDefinition\Layout\Tabpanel::__set_state(array(
-         'name' => 'product_data',
+         'name' => 'Product data',
          'type' => NULL,
          'region' => NULL,
-         'title' => 'Dati Prodotto',
+         'title' => 'Product data',
          'width' => '',
          'height' => '',
          'collapsible' => false,
@@ -318,7 +318,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                     ),
                      'unique' => false,
                      'showCharCount' => false,
-                     'width' => '',
+                     'width' => 500,
                      'defaultValueGenerator' => '',
                   )),
                   2 => 
@@ -605,7 +605,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
               0 => 
               \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
                  'name' => 'manufacturer',
-                 'title' => 'Vendor',
+                 'title' => 'Manufacturer',
                  'tooltip' => '',
                  'mandatory' => false,
                  'noteditable' => false,
@@ -675,8 +675,8 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
               )),
               2 => 
               \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToManyRelation::__set_state(array(
-                 'name' => 'category',
-                 'title' => 'Category',
+                 'name' => 'categories',
+                 'title' => 'Categories',
                  'tooltip' => '',
                  'mandatory' => false,
                  'noteditable' => false,
@@ -709,10 +709,18 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'assetsAllowed' => false,
                  'assetTypes' => 
                 array (
+                  0 => 
+                  array (
+                    'assetTypes' => '',
+                  ),
                 ),
                  'documentsAllowed' => false,
                  'documentTypes' => 
                 array (
+                  0 => 
+                  array (
+                    'documentTypes' => '',
+                  ),
                 ),
                  'enableTextSelection' => false,
                  'width' => '',
@@ -732,10 +740,10 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
           )),
           2 => 
           \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
-             'name' => 'Metadata',
+             'name' => 'Parameters',
              'type' => NULL,
              'region' => NULL,
-             'title' => 'Metadata',
+             'title' => 'Parameters',
              'width' => '',
              'height' => '',
              'collapsible' => false,
@@ -746,8 +754,8 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
             array (
               0 => 
               \Pimcore\Model\DataObject\ClassDefinition\Data\Classificationstore::__set_state(array(
-                 'name' => 'parameters',
-                 'title' => 'Parameters',
+                 'name' => 'metadata',
+                 'title' => 'Metadata',
                  'tooltip' => '',
                  'mandatory' => false,
                  'noteditable' => false,
@@ -843,9 +851,9 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'children' => 
             array (
               0 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\Fieldcollections::__set_state(array(
-                 'name' => 'images',
-                 'title' => 'Images',
+              \Pimcore\Model\DataObject\ClassDefinition\Data\ImageGallery::__set_state(array(
+                 'name' => 'imageGallery',
+                 'title' => 'Image gallery',
                  'tooltip' => '',
                  'mandatory' => false,
                  'noteditable' => false,
@@ -861,17 +869,12 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'blockedVarsForExport' => 
                 array (
                 ),
-                 'allowedTypes' => 
-                array (
-                  0 => 'ImageInfo',
-                ),
-                 'lazyLoading' => true,
-                 'maxItems' => NULL,
-                 'disallowAddRemove' => false,
-                 'disallowReorder' => false,
-                 'collapsed' => false,
-                 'collapsible' => false,
-                 'border' => false,
+                 'uploadPath' => '',
+                 'ratioX' => NULL,
+                 'ratioY' => NULL,
+                 'predefinedDataTemplates' => '',
+                 'height' => '',
+                 'width' => '',
               )),
             ),
              'locked' => false,
@@ -1222,6 +1225,51 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'enableGridLocking' => false,
    'deletedDataComponents' => 
   array (
+    0 => 
+    \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToManyRelation::__set_state(array(
+       'name' => 'category',
+       'title' => 'Category',
+       'tooltip' => '',
+       'mandatory' => false,
+       'noteditable' => false,
+       'index' => false,
+       'locked' => false,
+       'style' => '',
+       'permissions' => NULL,
+       'fieldtype' => '',
+       'relationType' => true,
+       'invisible' => false,
+       'visibleGridView' => false,
+       'visibleSearch' => false,
+       'blockedVarsForExport' => 
+      array (
+      ),
+       'classes' => 
+      array (
+        0 => 
+        array (
+          'classes' => 'Category',
+        ),
+      ),
+       'displayMode' => NULL,
+       'pathFormatterClass' => '',
+       'maxItems' => NULL,
+       'assetInlineDownloadAllowed' => false,
+       'assetUploadPath' => '',
+       'allowToClearRelation' => true,
+       'objectsAllowed' => true,
+       'assetsAllowed' => false,
+       'assetTypes' => 
+      array (
+      ),
+       'documentsAllowed' => false,
+       'documentTypes' => 
+      array (
+      ),
+       'enableTextSelection' => false,
+       'width' => '',
+       'height' => '',
+    )),
   ),
    'blockedVarsForExport' => 
   array (

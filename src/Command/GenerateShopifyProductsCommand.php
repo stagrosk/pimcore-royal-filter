@@ -2,7 +2,6 @@
 
 namespace App\Command;
 
-use App\Service\Generator\Exception\MapperNotFoundException;
 use App\Service\Generator\FilterToProductGenerator;
 use App\Service\Generator\WhirlpoolToProductGenerator;
 use Pimcore\Model\DataObject;
@@ -62,13 +61,13 @@ class GenerateShopifyProductsCommand extends Command
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      *
      * @throws \App\Service\Generator\Exception\NothingToExportException
+     * @throws \Pimcore\Model\Element\DuplicateFullPathException
+     * @throws \Exception
      * @return int
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $objectId = $input->getOption('object-id');
-        $class = $input->getOption('class');
-
         if ($objectId) {
             $object = DataObject::getById($objectId);
 
@@ -83,6 +82,7 @@ class GenerateShopifyProductsCommand extends Command
             }
 
         } else {
+            $class = $input->getOption('class');
             if (!in_array($class, array_keys(self::ALLOWED_CLASSES))) {
                 $this->logger->error('Class: ' . $class . ' is not allowed!');
 

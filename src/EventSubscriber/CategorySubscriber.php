@@ -57,7 +57,7 @@ readonly class CategorySubscriber implements EventSubscriberInterface
             $data = $response['data']['collectionUpdate'];
 
             if (!empty($data['userErrors'])) {
-                throw new \Exception($response['userErrors']);
+                throw new \Exception($data['userErrors'][0]['message']);
             }
         } else {
             $response = $this->collectionCreateMutation->callAction($object);
