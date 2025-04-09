@@ -18,13 +18,14 @@ use Pimcore\Translation\Translator;
 
 abstract class BaseMapper implements MapperInterface
 {
-    public const CLASSIFICATION_STORE_ID = 1;
     public const COUNTRY_CZECHIA = 'Czechia';
     public const COUNTRY_SLOVAKIA = 'Slovakia';
 
     public const CATEGORY_FILTERS = 'RoyalFilters';
 
     public const CATEGORY_FILTERS_BY_WHIRLPOOLS = 'RoyalFiltersByWhirlpools';
+
+    public const SHOPIFY_GOOGLE_CATEGORY_POOL_SPA_FILTERS = 'gid://shopify/TaxonomyCategory/hg-18-1-3';
 
     /**
      * @param \Pimcore\Translation\Translator $translator

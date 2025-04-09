@@ -2,8 +2,9 @@
 
 namespace App\Shopify\Service\Product;
 
-use App\Shopify\Model\Product\ShopifyProduct;
-use Pimcore\Model\DataObject\Concrete;
+use App\Shopify\Model\Product\ProductCreateInput;
+use App\Shopify\Model\Product\ProductUpdateInput;
+use Pimcore\Model\DataObject\AbstractObject;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 
 #[AutoconfigureTag(name: self::MAPPER_TAG)]
@@ -17,5 +18,5 @@ interface IShopifyProductMapper
 
     public function getShopifyChannelKey(): string;
 
-    public function getMappedProduct(ShopifyProduct $shopifyProductModel, Concrete $product): ShopifyProduct;
+    public function getMappedObject(ProductCreateInput|ProductUpdateInput $input, AbstractObject $object): ProductCreateInput|ProductUpdateInput;
 }

@@ -5,15 +5,14 @@
  * Variants: no
  *
  * Fields Summary:
- * - image [image]
- * - infoImage [image]
  * - localizedfields [localizedfields]
  * -- title [input]
  * -- description [textarea]
  * -- slug [input]
  * -- absolutePath [input]
  * - apiId [input]
- * - products [manyToManyRelation]
+ * - image [image]
+ * - infoImage [image]
  */
 
 return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
@@ -23,7 +22,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1743340343,
+   'modificationDate' => 1743442604,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -81,78 +80,6 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'children' => 
             array (
               0 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
-                 'name' => 'Assets',
-                 'type' => NULL,
-                 'region' => '',
-                 'title' => 'Assets',
-                 'width' => '',
-                 'height' => '',
-                 'collapsible' => false,
-                 'collapsed' => false,
-                 'bodyStyle' => '',
-                 'datatype' => 'layout',
-                 'children' => 
-                array (
-                  0 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Image::__set_state(array(
-                     'name' => 'image',
-                     'title' => 'Image',
-                     'tooltip' => '',
-                     'mandatory' => false,
-                     'noteditable' => false,
-                     'index' => false,
-                     'locked' => false,
-                     'style' => 'float: left; margin-right: 20px;',
-                     'permissions' => NULL,
-                     'fieldtype' => '',
-                     'relationType' => false,
-                     'invisible' => false,
-                     'visibleGridView' => false,
-                     'visibleSearch' => false,
-                     'blockedVarsForExport' => 
-                    array (
-                    ),
-                     'uploadPath' => '',
-                     'width' => 300,
-                     'height' => 123,
-                  )),
-                  1 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Image::__set_state(array(
-                     'name' => 'infoImage',
-                     'title' => 'Image (Detail / grid)',
-                     'tooltip' => '',
-                     'mandatory' => false,
-                     'noteditable' => false,
-                     'index' => false,
-                     'locked' => false,
-                     'style' => 'float: left; margin-right: 20px;',
-                     'permissions' => NULL,
-                     'fieldtype' => '',
-                     'relationType' => false,
-                     'invisible' => false,
-                     'visibleGridView' => false,
-                     'visibleSearch' => false,
-                     'blockedVarsForExport' => 
-                    array (
-                    ),
-                     'uploadPath' => '',
-                     'width' => 300,
-                     'height' => 123,
-                  )),
-                ),
-                 'locked' => false,
-                 'blockedVarsForExport' => 
-                array (
-                ),
-                 'fieldtype' => 'panel',
-                 'layout' => NULL,
-                 'border' => false,
-                 'icon' => '/bundles/pimcoreadmin/img/flat-color-icons/image.svg',
-                 'labelWidth' => 100,
-                 'labelAlign' => 'left',
-              )),
-              1 => 
               \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
                  'name' => 'Base',
                  'type' => NULL,
@@ -333,7 +260,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'labelWidth' => 100,
                  'labelAlign' => 'left',
               )),
-              2 => 
+              1 => 
               \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
                  'name' => 'Api',
                  'type' => NULL,
@@ -403,10 +330,10 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
           )),
           1 => 
           \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
-             'name' => 'Products',
+             'name' => 'Assets',
              'type' => NULL,
              'region' => 'east',
-             'title' => 'Products',
+             'title' => 'Assets',
              'width' => '50%',
              'height' => '',
              'collapsible' => false,
@@ -416,47 +343,48 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'children' => 
             array (
               0 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToManyRelation::__set_state(array(
-                 'name' => 'products',
-                 'title' => 'Products',
+              \Pimcore\Model\DataObject\ClassDefinition\Data\Image::__set_state(array(
+                 'name' => 'image',
+                 'title' => 'Image',
                  'tooltip' => '',
                  'mandatory' => false,
                  'noteditable' => false,
                  'index' => false,
                  'locked' => false,
-                 'style' => '',
+                 'style' => 'float: left; margin-right: 20px;',
                  'permissions' => NULL,
                  'fieldtype' => '',
-                 'relationType' => true,
+                 'relationType' => false,
                  'invisible' => false,
                  'visibleGridView' => false,
                  'visibleSearch' => false,
                  'blockedVarsForExport' => 
                 array (
                 ),
-                 'classes' => 
+                 'uploadPath' => '',
+                 'width' => '',
+                 'height' => '',
+              )),
+              1 => 
+              \Pimcore\Model\DataObject\ClassDefinition\Data\Image::__set_state(array(
+                 'name' => 'infoImage',
+                 'title' => 'Image (Detail / grid)',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => 'float: left; margin-right: 20px;',
+                 'permissions' => NULL,
+                 'fieldtype' => '',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+                 'blockedVarsForExport' => 
                 array (
-                  0 => 
-                  array (
-                    'classes' => 'Product',
-                  ),
                 ),
-                 'displayMode' => NULL,
-                 'pathFormatterClass' => '',
-                 'maxItems' => NULL,
-                 'assetInlineDownloadAllowed' => false,
-                 'assetUploadPath' => '',
-                 'allowToClearRelation' => true,
-                 'objectsAllowed' => true,
-                 'assetsAllowed' => false,
-                 'assetTypes' => 
-                array (
-                ),
-                 'documentsAllowed' => false,
-                 'documentTypes' => 
-                array (
-                ),
-                 'enableTextSelection' => false,
+                 'uploadPath' => '',
                  'width' => '',
                  'height' => '',
               )),
@@ -468,7 +396,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'fieldtype' => 'panel',
              'layout' => NULL,
              'border' => false,
-             'icon' => '',
+             'icon' => '/bundles/pimcoreadmin/img/flat-color-icons/image.svg',
              'labelWidth' => 100,
              'labelAlign' => 'left',
           )),

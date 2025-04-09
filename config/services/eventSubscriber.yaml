@@ -5,3 +5,9 @@ services:
         public: false
 
     App\EventSubscriber\CategorySubscriber:
+
+    App\EventSubscriber\ProductSubscriber:
+
+    App\EventSubscriber\RoyalFilterSubscriber:
+
+    App\EventSubscriber\WhirlpoolSubscriber:

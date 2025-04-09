@@ -2,7 +2,7 @@
 
 namespace App\Shopify\Graphql\Mutation;
 
-use Pimcore\Model\DataObject\Concrete;
+use Pimcore\Model\DataObject\AbstractObject;
 
 interface ShopifyGraphqlMutationInterface
 {
@@ -12,9 +12,9 @@ interface ShopifyGraphqlMutationInterface
     public function getMutation(): string;
 
     /**
-     * @param \Pimcore\Model\DataObject\Concrete $object
+     * @param \Pimcore\Model\DataObject\AbstractObject $object
      *
      * @return array
      */
-    public function getVariables(Concrete $object): array;
+    public function getVariables(AbstractObject $object): array;
 }

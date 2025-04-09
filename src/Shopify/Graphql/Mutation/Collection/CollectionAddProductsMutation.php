@@ -4,10 +4,10 @@ namespace App\Shopify\Graphql\Mutation\Collection;
 
 use App\Shopify\Graphql\GraphqlClient;
 use App\Shopify\Graphql\Mutation\BaseMutation;
-use App\Shopify\Model\Collection\ShopifyCollectionInput;
+use App\Shopify\Model\Collection\CollectionInput;
 use App\Shopify\Service\Collection\ShopifyCollectionMapper;
+use Pimcore\Model\DataObject\AbstractObject;
 use Pimcore\Model\DataObject\Category;
-use Pimcore\Model\DataObject\Concrete;
 
 class CollectionAddProductsMutation extends BaseMutation
 {
@@ -47,13 +47,13 @@ class CollectionAddProductsMutation extends BaseMutation
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\Category|\Pimcore\Model\DataObject\Concrete $object
+     * @param \Pimcore\Model\DataObject\Category|\Pimcore\Model\DataObject\AbstractObject $object
      *
      * @return array
      */
-    public function getVariables(Category|Concrete $object): array
+    public function getVariables(Category|AbstractObject $object): array
     {
-        $shopifyCollectionModel = $this->collectionMapper->getMappedCollection(new ShopifyCollectionInput(), $object);
+        $shopifyCollectionModel = $this->collectionMapper->getMappedObject(new CollectionInput(), $object);
 
         return [
             'input' => $shopifyCollectionModel->getAsArray()

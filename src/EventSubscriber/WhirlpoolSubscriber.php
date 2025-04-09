@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\EventSubscriber;
 
 use App\Service\Generator\BaseProductGenerator;
+use App\Service\Generator\WhirlpoolToProductGenerator;
 use Pimcore\Event\DataObjectEvents;
 use Pimcore\Event\Model\DataObjectEvent;
 use Pimcore\Model\DataObject\Whirlpool;
@@ -13,10 +14,10 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 readonly class WhirlpoolSubscriber implements EventSubscriberInterface
 {
     /**
-     * @param \App\Service\Generator\BaseProductGenerator $productGenerator
+     * @param \App\Service\Generator\WhirlpoolToProductGenerator $generator
      */
     public function __construct(
-        private BaseProductGenerator $productGenerator
+        private WhirlpoolToProductGenerator $generator
     ) {
     }
 
@@ -44,7 +45,7 @@ readonly class WhirlpoolSubscriber implements EventSubscriberInterface
         }
 
         if ($object->isPublished() && $object->getGenerateAsProduct() === true) {
-            $this->productGenerator->generateProductForObject($object);
+            $this->generator->generateProductForObject($object);
         }
     }
 }

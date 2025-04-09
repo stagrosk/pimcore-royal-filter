@@ -2,8 +2,8 @@
 
 namespace App\Shopify\Service\Collection;
 
-use App\Shopify\Model\Collection\ShopifyCollectionInput;
-use Pimcore\Model\DataObject\Concrete;
+use App\Shopify\Model\Collection\CollectionInput;
+use Pimcore\Model\DataObject\AbstractObject;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 
 #[AutoconfigureTag(name: self::MAPPER_TAG)]
@@ -17,5 +17,5 @@ interface IShopifyCollectionMapper
 
     public function getShopifyChannelKey(): string;
 
-    public function getMappedCollection(ShopifyCollectionInput $shopifyCollectionModel, Concrete $category): ShopifyCollectionInput;
+    public function getMappedObject(CollectionInput $shopifyCollectionModel, AbstractObject $object): CollectionInput;
 }

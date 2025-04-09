@@ -2,10 +2,10 @@
 
 namespace App\Shopify\Service\Collection;
 
-use App\Shopify\Model\Base\ShopifyImageInput;
-use App\Shopify\Model\Collection\ShopifyCollectionInput;
+use App\Shopify\Model\Collection\CollectionInput;
+use App\Shopify\Model\Media\CreateMediaInput;
 use Pimcore\Model\Asset;
-use Pimcore\Model\DataObject\Concrete;
+use Pimcore\Model\DataObject\AbstractObject;
 
 class ShopifyCollectionMapper implements IShopifyCollectionMapper
 {
@@ -28,13 +28,13 @@ class ShopifyCollectionMapper implements IShopifyCollectionMapper
         return self::SHOPIFY_CHANNEL_KEY;
     }
 
-    public function getMappedCollection(ShopifyCollectionInput $shopifyCollectionModel, Concrete $category): ShopifyCollectionInput
+    public function getMappedObject(CollectionInput $shopifyCollectionModel, AbstractObject $object): CollectionInput
     {
-        /** @var \Pimcore\Model\DataObject\Category $category */
-        $shopifyCollectionModel->setId($category->getApiId());
-        $shopifyCollectionModel->setTitle($category->getTitle());
-        $shopifyCollectionModel->setDescriptionHtml($category->getDescription());
-        $shopifyCollectionModel->setHandle($category->getSlug());   // TODO: lang? default only? do we need it in shopify?
+        /** @var \Pimcore\Model\DataObject\Category $object */
+        $shopifyCollectionModel->setId($object->getApiId());
+        $shopifyCollectionModel->setTitle($object->getTitle());
+        $shopifyCollectionModel->setDescriptionHtml($object->getDescription());
+        $shopifyCollectionModel->setHandle($object->getSlug());   // TODO: lang? default only? do we need it in shopify?
 
         // TODO: finish
         //$shopifyCollectionModel->setMetafields();
@@ -42,18 +42,18 @@ class ShopifyCollectionMapper implements IShopifyCollectionMapper
         //$shopifyCollectionModel->setRules();
 
         // image
-        $image = $category->getImage();
+        $image = $object->getImage();
         if ($image instanceof Asset) {
-            $shopifyMedia = new ShopifyImageInput($image->getFrontendPath(), $category->getTitle());
+            $shopifyMedia = new CreateMediaInput($image->getFrontendPath(), $object->getTitle());
             $shopifyCollectionModel->setImage($shopifyMedia);
         }
 
-        // products
-        $productIds = [];
-        foreach ($category->getProducts() as $product) {
-            $productIds[] = $product->getApiId();
-        }
-        $shopifyCollectionModel->setProducts($productIds);
+        // products TODO: load all dependencies as products and add here?
+//        $productIds = [];
+//        foreach ($object->getProducts() as $product) {
+//            $productIds[] = $product->getApiId();
+//        }
+//        $shopifyCollectionModel->setProducts($productIds);
 
         return $shopifyCollectionModel;
     }

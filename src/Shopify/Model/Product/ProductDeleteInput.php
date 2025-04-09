@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Shopify\Model\Collection;
+namespace App\Shopify\Model\Product;
 
 use App\Shopify\Model\IShopifyModel;
 
-class ShopifyCollectionDeleteInput implements IShopifyModel
+class ProductDeleteInput implements IShopifyModel
 {
     /**
      * @param string $id

@@ -105,7 +105,7 @@ class ShopifyProductService extends AbstractShopifyService
     private function getMappedProductArray(IShopifyProductMapper $mapperService, Concrete $product): array
     {
         $shopifyProductModel = new ShopifyProduct();
-        $shopifyProductModel = $mapperService->getMappedProduct($shopifyProductModel, $product);
+        $shopifyProductModel = $mapperService->getMappedObject($shopifyProductModel, $product);
         return $shopifyProductModel->getAsArray();
     }
 }

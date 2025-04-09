@@ -46,6 +46,7 @@ class WhirlpoolToProductMapper extends BaseMapper
 
         // base
         $product->setSku(sprintf('WRF-%s-%s', $object->getId(), $product->getSku()));
+        $product->setGeneratedFromObject($object);
 
         // category
         $categoryPath = sprintf('/Shopify/Categories/AllProducts/%s', self::CATEGORY_FILTERS_BY_WHIRLPOOLS);

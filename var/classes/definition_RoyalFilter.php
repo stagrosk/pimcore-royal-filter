@@ -30,7 +30,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1743344440,
+   'modificationDate' => 1743703443,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -450,7 +450,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'fieldtype' => 'panel',
                      'layout' => NULL,
                      'border' => false,
-                     'icon' => '/bundles/pimcoreadmin/img/object-icons/05_amber.svg',
+                     'icon' => '/bundles/pimcoreadmin/img/flat-color-icons/package.svg',
                      'labelWidth' => 100,
                      'labelAlign' => 'left',
                   )),
@@ -941,55 +941,6 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'enableGridLocking' => false,
    'deletedDataComponents' => 
   array (
-    0 => 
-    \Pimcore\Model\DataObject\ClassDefinition\Data\Image::__set_state(array(
-       'name' => 'defaultImage',
-       'title' => 'Default Image',
-       'tooltip' => '',
-       'mandatory' => false,
-       'noteditable' => false,
-       'index' => false,
-       'locked' => false,
-       'style' => '',
-       'permissions' => NULL,
-       'fieldtype' => '',
-       'relationType' => false,
-       'invisible' => false,
-       'visibleGridView' => false,
-       'visibleSearch' => false,
-       'blockedVarsForExport' => 
-      array (
-      ),
-       'uploadPath' => '',
-       'width' => '',
-       'height' => '',
-    )),
-    1 => 
-    \Pimcore\Model\DataObject\ClassDefinition\Data\ImageGallery::__set_state(array(
-       'name' => 'images',
-       'title' => 'Images',
-       'tooltip' => '',
-       'mandatory' => false,
-       'noteditable' => false,
-       'index' => false,
-       'locked' => false,
-       'style' => '',
-       'permissions' => NULL,
-       'fieldtype' => '',
-       'relationType' => false,
-       'invisible' => false,
-       'visibleGridView' => false,
-       'visibleSearch' => false,
-       'blockedVarsForExport' => 
-      array (
-      ),
-       'uploadPath' => '',
-       'ratioX' => NULL,
-       'ratioY' => NULL,
-       'predefinedDataTemplates' => '',
-       'height' => '',
-       'width' => '',
-    )),
   ),
    'blockedVarsForExport' => 
   array (

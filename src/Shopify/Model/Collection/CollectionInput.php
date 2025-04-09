@@ -2,12 +2,12 @@
 
 namespace App\Shopify\Model\Collection;
 
-use App\Shopify\Model\Base\ShopifyImageInput;
-use App\Shopify\Model\Base\ShopifyMetafieldInput;
-use App\Shopify\Model\Base\ShopifySeoInput;
 use App\Shopify\Model\IShopifyModel;
+use App\Shopify\Model\Media\CreateMediaInput;
+use App\Shopify\Model\Metafields\MetafieldInput;
+use App\Shopify\Model\Seo\SeoInput;
 
-class ShopifyCollectionInput implements IShopifyModel
+class CollectionInput implements IShopifyModel
 {
     /**
      * @param string|null $id
@@ -15,27 +15,27 @@ class ShopifyCollectionInput implements IShopifyModel
      * @param string|null $descriptionHtml
      * @param array|null $products
      * @param string|null $handle
-     * @param \App\Shopify\Model\Base\ShopifyImageInput|null $image
-     * @param \App\Shopify\Model\Base\ShopifyMetafieldInput|null $metafields
+     * @param \App\Shopify\Model\Media\CreateMediaInput|null $image
+     * @param \App\Shopify\Model\Metafields\MetafieldInput|null $metafields
      * @param bool $redirectNewHandle
-     * @param \App\Shopify\Model\Collection\ShopifyCollectionRuleSetInput|null $rules
-     * @param \App\Shopify\Model\Base\ShopifySeoInput|null $seo
-     * @param \App\Shopify\Model\Collection\ShopifyCollectionSortOrder|null $sortOrder
+     * @param \App\Shopify\Model\Collection\CollectionRuleSetInput|null $rules
+     * @param \App\Shopify\Model\Seo\SeoInput|null $seo
+     * @param \App\Shopify\Model\Collection\CollectionSortOrder|null $sortOrder
      */
     public function __construct(
-        private ?string                        $id = null,
-        private ?string                        $title = null,
-        private ?string                        $descriptionHtml = null,
-        private ?array                         $products = [],
-        private ?string                        $handle = null,
-        private ?ShopifyImageInput             $image = null,
-        private ?ShopifyMetafieldInput         $metafields = null,
-        private bool                           $redirectNewHandle = false,
-        private ?ShopifyCollectionRuleSetInput $rules = null,
-        private ?ShopifySeoInput               $seo = null,
-        private ?ShopifyCollectionSortOrder    $sortOrder = null,
+        private ?string                 $id = null,
+        private ?string                 $title = null,
+        private ?string                 $descriptionHtml = null,
+        private ?array                  $products = [],
+        private ?string                 $handle = null,
+        private ?CreateMediaInput       $image = null,
+        private ?MetafieldInput         $metafields = null,
+        private bool                    $redirectNewHandle = false,
+        private ?CollectionRuleSetInput $rules = null,
+        private ?SeoInput               $seo = null,
+        private ?CollectionSortOrder    $sortOrder = null,
     ) {
-        $this->sortOrder = new ShopifyCollectionSortOrder();
+        $this->sortOrder = new CollectionSortOrder();
     }
 
     public function getAsArray(): array
@@ -44,7 +44,7 @@ class ShopifyCollectionInput implements IShopifyModel
             'title' => $this->getTitle(),
             'descriptionHtml' => $this->getDescriptionHtml(),
             'handle' => $this->getHandle(),
-            'sortOrder' => $this->getSortOrder()->getSorting(),
+            'sortOrder' => $this->getSortOrder()?->getSorting(),
             'redirectNewHandle' => $this->isRedirectNewHandle(),
         ];
 
@@ -126,22 +126,22 @@ class ShopifyCollectionInput implements IShopifyModel
         $this->handle = $handle;
     }
 
-    public function getImage(): ?ShopifyImageInput
+    public function getImage(): ?CreateMediaInput
     {
         return $this->image;
     }
 
-    public function setImage(?ShopifyImageInput $image): void
+    public function setImage(?CreateMediaInput $image): void
     {
         $this->image = $image;
     }
 
-    public function getMetafields(): ?ShopifyMetafieldInput
+    public function getMetafields(): ?MetafieldInput
     {
         return $this->metafields;
     }
 
-    public function setMetafields(?ShopifyMetafieldInput $metafields): void
+    public function setMetafields(?MetafieldInput $metafields): void
     {
         $this->metafields = $metafields;
     }
@@ -163,32 +163,32 @@ class ShopifyCollectionInput implements IShopifyModel
         $this->redirectNewHandle = $redirectNewHandle;
     }
 
-    public function getRules(): ?ShopifyCollectionRuleSetInput
+    public function getRules(): ?CollectionRuleSetInput
     {
         return $this->rules;
     }
 
-    public function setRules(?ShopifyCollectionRuleSetInput $rules): void
+    public function setRules(?CollectionRuleSetInput $rules): void
     {
         $this->rules = $rules;
     }
 
-    public function getSeo(): ?ShopifySeoInput
+    public function getSeo(): ?SeoInput
     {
         return $this->seo;
     }
 
-    public function setSeo(?ShopifySeoInput $seo): void
+    public function setSeo(?SeoInput $seo): void
     {
         $this->seo = $seo;
     }
 
-    public function getSortOrder(): ?ShopifyCollectionSortOrder
+    public function getSortOrder(): ?CollectionSortOrder
     {
         return $this->sortOrder;
     }
 
-    public function setSortOrder(?ShopifyCollectionSortOrder $sortOrder): void
+    public function setSortOrder(?CollectionSortOrder $sortOrder): void
     {
         $this->sortOrder = $sortOrder;
     }

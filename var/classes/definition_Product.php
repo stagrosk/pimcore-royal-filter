@@ -1,10 +1,11 @@
 <?php
 
 /**
- * Inheritance: no
- * Variants: no
+ * Inheritance: yes
+ * Variants: yes
  *
  * Fields Summary:
+ * - generatedFromObject [manyToOneRelation]
  * - status [select]
  * - isVirtualProduct [checkbox]
  * - isGiftCard [checkbox]
@@ -21,6 +22,7 @@
  * - manufacturer [manyToOneRelation]
  * - madeIn [country]
  * - categories [manyToManyRelation]
+ * - taxonomyCategory [input]
  * - metadata [classificationstore]
  * - extraParameters [fieldcollections]
  * - imageGallery [imageGallery]
@@ -37,7 +39,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1743346965,
+   'modificationDate' => 1743705926,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -49,9 +51,9 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'encryptedTables' => 
   array (
   ),
-   'allowInherit' => false,
-   'allowVariants' => false,
-   'showVariants' => false,
+   'allowInherit' => true,
+   'allowVariants' => true,
+   'showVariants' => true,
    'layoutDefinitions' => 
   \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
      'name' => 'pimcore_root',
@@ -95,6 +97,52 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'children' => 
             array (
               0 => 
+              \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
+                 'name' => 'generatedFromObject',
+                 'title' => 'Generated From Object',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => true,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'fieldtype' => '',
+                 'relationType' => true,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+                 'blockedVarsForExport' => 
+                array (
+                ),
+                 'classes' => 
+                array (
+                  0 => 
+                  array (
+                    'classes' => 'Whirlpool',
+                  ),
+                  1 => 
+                  array (
+                    'classes' => 'RoyalFilter',
+                  ),
+                ),
+                 'displayMode' => 'grid',
+                 'pathFormatterClass' => '',
+                 'assetInlineDownloadAllowed' => false,
+                 'assetUploadPath' => '',
+                 'allowToClearRelation' => true,
+                 'objectsAllowed' => true,
+                 'assetsAllowed' => false,
+                 'assetTypes' => 
+                array (
+                ),
+                 'documentsAllowed' => false,
+                 'documentTypes' => 
+                array (
+                ),
+                 'width' => 500,
+              )),
+              1 => 
               \Pimcore\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
                  'name' => 'status',
                  'title' => 'Status',
@@ -140,7 +188,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'optionsProviderClass' => '',
                  'optionsProviderData' => '',
               )),
-              1 => 
+              2 => 
               \Pimcore\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
                  'name' => 'isVirtualProduct',
                  'title' => 'Is Virtual Product',
@@ -162,7 +210,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'defaultValue' => 0,
                  'defaultValueGenerator' => '',
               )),
-              2 => 
+              3 => 
               \Pimcore\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
                  'name' => 'isGiftCard',
                  'title' => 'Is Gift Card',
@@ -184,7 +232,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'defaultValue' => 0,
                  'defaultValueGenerator' => '',
               )),
-              3 => 
+              4 => 
               \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
                  'name' => 'ean',
                  'title' => 'EAN Code',
@@ -214,7 +262,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'width' => '',
                  'defaultValueGenerator' => '',
               )),
-              4 => 
+              5 => 
               \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
                  'name' => 'sku',
                  'title' => 'Sku',
@@ -244,7 +292,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'width' => 300,
                  'defaultValueGenerator' => '',
               )),
-              5 => 
+              6 => 
               \Pimcore\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
                  'name' => 'localizedfields',
                  'title' => 'Name and Description',
@@ -709,22 +757,45 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'assetsAllowed' => false,
                  'assetTypes' => 
                 array (
-                  0 => 
-                  array (
-                    'assetTypes' => '',
-                  ),
                 ),
                  'documentsAllowed' => false,
                  'documentTypes' => 
                 array (
-                  0 => 
-                  array (
-                    'documentTypes' => '',
-                  ),
                 ),
                  'enableTextSelection' => false,
                  'width' => '',
                  'height' => '',
+              )),
+              3 => 
+              \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+                 'name' => 'taxonomyCategory',
+                 'title' => 'Taxonomy Category',
+                 'tooltip' => 'Google taxonomy for categories 
+https://shopify.github.io/product-taxonomy/releases/unstable/',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'fieldtype' => '',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+                 'blockedVarsForExport' => 
+                array (
+                ),
+                 'defaultValue' => NULL,
+                 'columnLength' => 190,
+                 'regex' => '',
+                 'regexFlags' => 
+                array (
+                ),
+                 'unique' => false,
+                 'showCharCount' => false,
+                 'width' => '',
+                 'defaultValueGenerator' => '',
               )),
             ),
              'locked' => false,
@@ -1192,7 +1263,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
      'labelWidth' => 100,
      'labelAlign' => 'left',
   )),
-   'icon' => '',
+   'icon' => '/bundles/pimcoreadmin/img/flat-color-icons/package.svg',
    'group' => '',
    'showAppLoggerTab' => false,
    'linkGeneratorReference' => '',
@@ -1225,51 +1296,6 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'enableGridLocking' => false,
    'deletedDataComponents' => 
   array (
-    0 => 
-    \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToManyRelation::__set_state(array(
-       'name' => 'category',
-       'title' => 'Category',
-       'tooltip' => '',
-       'mandatory' => false,
-       'noteditable' => false,
-       'index' => false,
-       'locked' => false,
-       'style' => '',
-       'permissions' => NULL,
-       'fieldtype' => '',
-       'relationType' => true,
-       'invisible' => false,
-       'visibleGridView' => false,
-       'visibleSearch' => false,
-       'blockedVarsForExport' => 
-      array (
-      ),
-       'classes' => 
-      array (
-        0 => 
-        array (
-          'classes' => 'Category',
-        ),
-      ),
-       'displayMode' => NULL,
-       'pathFormatterClass' => '',
-       'maxItems' => NULL,
-       'assetInlineDownloadAllowed' => false,
-       'assetUploadPath' => '',
-       'allowToClearRelation' => true,
-       'objectsAllowed' => true,
-       'assetsAllowed' => false,
-       'assetTypes' => 
-      array (
-      ),
-       'documentsAllowed' => false,
-       'documentTypes' => 
-      array (
-      ),
-       'enableTextSelection' => false,
-       'width' => '',
-       'height' => '',
-    )),
   ),
    'blockedVarsForExport' => 
   array (

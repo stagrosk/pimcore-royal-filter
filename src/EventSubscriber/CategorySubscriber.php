@@ -6,6 +6,7 @@ namespace App\EventSubscriber;
 
 use App\Shopify\Graphql\Mutation\Collection\CollectionCreateMutation;
 use App\Shopify\Graphql\Mutation\Collection\CollectionDeleteMutation;
+use App\Shopify\Graphql\Mutation\Collection\CollectionPublishMutation;
 use App\Shopify\Graphql\Mutation\Collection\CollectionUpdateMutation;
 use Pimcore\Event\DataObjectEvents;
 use Pimcore\Event\Model\DataObjectEvent;
@@ -18,11 +19,13 @@ readonly class CategorySubscriber implements EventSubscriberInterface
      * @param \App\Shopify\Graphql\Mutation\Collection\CollectionCreateMutation $collectionCreateMutation
      * @param \App\Shopify\Graphql\Mutation\Collection\CollectionUpdateMutation $collectionUpdateMutation
      * @param \App\Shopify\Graphql\Mutation\Collection\CollectionDeleteMutation $collectionDeleteMutation
+     * @param \App\Shopify\Graphql\Mutation\Collection\CollectionPublishMutation $collectionPublishMutation
      */
     public function __construct(
         private CollectionCreateMutation $collectionCreateMutation,
         private CollectionUpdateMutation $collectionUpdateMutation,
         private CollectionDeleteMutation $collectionDeleteMutation,
+        private CollectionPublishMutation $collectionPublishMutation
     ) {
     }
 
@@ -70,6 +73,9 @@ readonly class CategorySubscriber implements EventSubscriberInterface
                 $object->setSlug($data['collection']['handle']);
             }
         }
+
+        // publish
+        $this->collectionPublishMutation->callAction($object);
     }
 
     /**
@@ -90,7 +96,7 @@ readonly class CategorySubscriber implements EventSubscriberInterface
             return;
         }
 
-        $response = $this->collectionDeleteMutation->callAction($object);
+        $data = $this->collectionDeleteMutation->callAction($object);
         if (!empty($data['userErrors'])) {
             throw new \Exception($data['userErrors'][0]['message']);
         }

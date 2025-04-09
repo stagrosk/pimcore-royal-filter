@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Shopify\Model\Base;
+namespace App\Shopify\Model\Metafields;
 
-class ShopifyMetafieldInput
+class MetafieldInput
 {
     public function __construct(
         private ?string $id = null,
@@ -11,17 +11,6 @@ class ShopifyMetafieldInput
         private ?string $type = null,
         private ?string $value = null,
     ) {
-    }
-
-    public function getAsArray(): array
-    {
-        return [
-            'id' => $this->id,
-            'key' => $this->key,
-            'namespace' => $this->namespace,
-            'type' => $this->type,
-            'value' => $this->value,
-        ];
     }
 
     public function getId(): ?string
@@ -72,5 +61,16 @@ class ShopifyMetafieldInput
     public function setValue(?string $value): void
     {
         $this->value = $value;
+    }
+
+    public function getAsArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'key' => $this->key,
+            'namespace' => $this->namespace,
+            'type' => $this->type,
+            'value' => $this->value,
+        ];
     }
 }

@@ -4,9 +4,9 @@ namespace App\Service\Generator\Mapper;
 
 use App\Pimcore\ClassificationStore\ClassificationStoreHelper;
 use App\Pimcore\ClassificationStore\ClassificationStoreService;
+use App\Shopify\Model\Product\ProductStatusEnum;
 use App\Shopify\Model\Product\ShopifyProduct;
 use Pimcore\Model\DataObject\AbstractObject;
-use Pimcore\Model\DataObject\Classificationstore;
 use Pimcore\Model\DataObject\Country;
 use Pimcore\Model\DataObject\Data\ImageGallery;
 use Pimcore\Model\DataObject\Product;
@@ -43,11 +43,12 @@ class FilterToProductMapper extends BaseMapper
         $product->setPublished(true);
         $product->setEan(''); // TODO: ???
         $product->setSku(sprintf('RF-%s', $object->getId()));
-        $product->setStatus(ShopifyProduct::STATUS_ACTIVE);
+        $product->setStatus(ProductStatusEnum::ACTIVE->value);
         $product->setIsVirtualProduct(false);
         $product->setIsGiftCard(false);
 
         $product->setManufacturer($object->getManufacturer());
+        $product->setGeneratedFromObject($object);
 
         $country = Country::getByName(self::COUNTRY_SLOVAKIA, 1);
         if ($country instanceof Country) {
@@ -58,6 +59,8 @@ class FilterToProductMapper extends BaseMapper
         $categoryPath = sprintf('/Shopify/Categories/AllProducts/%s', self::CATEGORY_FILTERS);
         $this->handleCategories($product, $categoryPath);
 
+        // google taxonomy category
+        $product->setTaxonomyCategory(self::SHOPIFY_GOOGLE_CATEGORY_POOL_SPA_FILTERS);
 
         // title / description / seo
         foreach (Tool::getValidLanguages() as $language) {

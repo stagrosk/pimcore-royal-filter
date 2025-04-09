@@ -2,7 +2,7 @@
 
 /**
  * Fields Summary:
- * - currency [select]
+ * - priceList [manyToOneRelation]
  * - price [numeric]
  * - compareAtPrice [numeric]
  * - wholesalePrice [numeric]
@@ -46,9 +46,9 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
          'children' => 
         array (
           0 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
-             'name' => 'currency',
-             'title' => 'Currency',
+          \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
+             'name' => 'priceList',
+             'title' => 'Price List',
              'tooltip' => '',
              'mandatory' => true,
              'noteditable' => false,
@@ -57,49 +57,35 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'style' => '',
              'permissions' => NULL,
              'fieldtype' => '',
-             'relationType' => false,
+             'relationType' => true,
              'invisible' => false,
              'visibleGridView' => false,
              'visibleSearch' => false,
              'blockedVarsForExport' => 
             array (
             ),
-             'options' => 
+             'classes' => 
             array (
               0 => 
               array (
-                'key' => 'CZK',
-                'value' => 'CZK',
-              ),
-              1 => 
-              array (
-                'key' => 'EUR',
-                'value' => 'EUR',
-              ),
-              2 => 
-              array (
-                'key' => 'PLN',
-                'value' => 'PLN',
-              ),
-              3 => 
-              array (
-                'key' => 'HUF',
-                'value' => 'HUF',
-              ),
-              4 => 
-              array (
-                'key' => 'SCH',
-                'value' => 'SCH',
+                'classes' => 'PriceList',
               ),
             ),
-             'defaultValue' => 'EUR',
-             'columnLength' => 190,
-             'dynamicOptions' => false,
-             'defaultValueGenerator' => '',
+             'displayMode' => 'combo',
+             'pathFormatterClass' => '',
+             'assetInlineDownloadAllowed' => false,
+             'assetUploadPath' => '',
+             'allowToClearRelation' => true,
+             'objectsAllowed' => true,
+             'assetsAllowed' => false,
+             'assetTypes' => 
+            array (
+            ),
+             'documentsAllowed' => false,
+             'documentTypes' => 
+            array (
+            ),
              'width' => '',
-             'optionsProviderType' => 'configure',
-             'optionsProviderClass' => '',
-             'optionsProviderData' => '',
           )),
           1 => 
           \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
@@ -174,7 +160,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'permissions' => NULL,
              'fieldtype' => '',
              'relationType' => false,
-             'invisible' => false,
+             'invisible' => true,
              'visibleGridView' => false,
              'visibleSearch' => false,
              'blockedVarsForExport' => 
@@ -204,7 +190,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'permissions' => NULL,
              'fieldtype' => '',
              'relationType' => false,
-             'invisible' => false,
+             'invisible' => true,
              'visibleGridView' => false,
              'visibleSearch' => false,
              'blockedVarsForExport' => 
@@ -234,7 +220,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'permissions' => NULL,
              'fieldtype' => '',
              'relationType' => false,
-             'invisible' => false,
+             'invisible' => true,
              'visibleGridView' => false,
              'visibleSearch' => false,
              'blockedVarsForExport' => 
