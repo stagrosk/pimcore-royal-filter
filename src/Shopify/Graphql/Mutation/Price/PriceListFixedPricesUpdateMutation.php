@@ -42,6 +42,7 @@ class PriceListFixedPricesUpdateMutation extends BaseMutation
     /**
      * @param \Pimcore\Model\DataObject\Product|\Pimcore\Model\DataObject\AbstractObject $object
      *
+     * @throws \Exception
      * @return array
      */
     public function getVariables(Product|AbstractObject $object): array

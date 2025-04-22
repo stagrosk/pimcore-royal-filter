@@ -10,6 +10,7 @@
  * - isVirtualProduct [checkbox]
  * - isGiftCard [checkbox]
  * - ean [input]
+ * - productType [input]
  * - sku [input]
  * - localizedfields [localizedfields]
  * -- title [input]
@@ -39,7 +40,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1743705926,
+   'modificationDate' => 1745250872,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -264,6 +265,36 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
               )),
               5 => 
               \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+                 'name' => 'productType',
+                 'title' => 'Product type',
+                 'tooltip' => '',
+                 'mandatory' => true,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'fieldtype' => '',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+                 'blockedVarsForExport' => 
+                array (
+                ),
+                 'defaultValue' => NULL,
+                 'columnLength' => 190,
+                 'regex' => '',
+                 'regexFlags' => 
+                array (
+                ),
+                 'unique' => false,
+                 'showCharCount' => false,
+                 'width' => '',
+                 'defaultValueGenerator' => '',
+              )),
+              6 => 
+              \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
                  'name' => 'sku',
                  'title' => 'Sku',
                  'tooltip' => '',
@@ -292,7 +323,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'width' => 300,
                  'defaultValueGenerator' => '',
               )),
-              6 => 
+              7 => 
               \Pimcore\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
                  'name' => 'localizedfields',
                  'title' => 'Name and Description',

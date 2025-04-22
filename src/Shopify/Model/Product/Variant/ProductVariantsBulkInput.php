@@ -19,7 +19,7 @@ class ProductVariantsBulkInput implements IShopifyModel
      * @param \App\Shopify\Model\Product\Inventory\ProductVariantInventoryPolicyEnum $inventoryPolicy
      * @param \App\Shopify\Model\Product\Inventory\InventoryLevelInput|null $inventoryQuantities
      * @param string|null $mediaId
-     * @param array|null $mediaSrc
+     * @param string|null $mediaSrc
      * @param \App\Shopify\Model\Metafields\MetafieldInputs|null $metafields
      * @param array|null $optionValues
      * @param float|null $price
@@ -35,7 +35,7 @@ class ProductVariantsBulkInput implements IShopifyModel
         private ProductVariantInventoryPolicyEnum $inventoryPolicy = ProductVariantInventoryPolicyEnum::DENY,
         private ?InventoryLevelInput              $inventoryQuantities = null,
         private ?string                           $mediaId = null,
-        private ?array                            $mediaSrc = null,
+        private ?string                           $mediaSrc = null,
         private ?MetafieldInputs                  $metafields = null,
         private ?array                            $optionValues = null,
         private ?float                            $price = null,
@@ -236,19 +236,19 @@ class ProductVariantsBulkInput implements IShopifyModel
     }
 
     /**
-     * @return array|null
+     * @return string|null
      */
-    public function getMediaSrc(): ?array
+    public function getMediaSrc(): ?string
     {
         return $this->mediaSrc;
     }
 
     /**
-     * @param array|null $mediaSrc
+     * @param string|null $mediaSrc
      *
      * @return void
      */
-    public function setMediaSrc(?array $mediaSrc): void
+    public function setMediaSrc(?string $mediaSrc): void
     {
         $this->mediaSrc = $mediaSrc;
     }

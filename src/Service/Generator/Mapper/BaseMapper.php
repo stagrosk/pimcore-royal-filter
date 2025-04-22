@@ -127,9 +127,7 @@ abstract class BaseMapper implements MapperInterface
 
         $mappedProperties = [];
         foreach ($mappedParameters as $objectName => $objectData) {
-            $classificationStoreItems = $objectData['classificationStoreItems'];
-
-            foreach ($classificationStoreItems as $groupKeyId => $keyConfigValues) {
+            foreach ($objectData['classificationStoreItems'] as $groupKeyId => $keyConfigValues) {
                 $groupConfig = $this->classificationStoreService->getGroupConfigById($groupKeyId);
 
                 foreach ($keyConfigValues as $keyConfigId => $keyConfigValue) {
@@ -145,7 +143,7 @@ abstract class BaseMapper implements MapperInterface
                         ];
                     } else {
                         // height as SUM
-                        if (in_array($objectName, ['body1', 'body2']) && $keyConfig->getName() === 'height') {
+                        if (in_array($objectName, ['body1', 'body2', 'center1', 'center2']) && $keyConfig->getName() === 'height') {
                             $mappedProperties[$ident]['value'] = (int)$mappedProperties[$ident]['value'] + (int)$keyConfigValue['default']->getValue();
                         }
                     }

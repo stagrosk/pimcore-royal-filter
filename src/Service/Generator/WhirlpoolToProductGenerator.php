@@ -2,6 +2,7 @@
 
 namespace App\Service\Generator;
 
+use App\Pimcore\Helpers\InheritanceHelper;
 use App\Pimcore\Helpers\VersionHelper;
 use App\Service\Generator\Mapper\WhirlpoolToProductMapper;
 use Pimcore\Logger;
@@ -38,20 +39,23 @@ class WhirlpoolToProductGenerator extends BaseProductGenerator
             $product =  new Product();
         }
 
-        // map data
-        $this->whirlpoolMapper->mapObjectToProduct($object, $product);
+        // use inheritance
+        InheritanceHelper::useInheritedValues(function () use ($object, $product) {
+            // map data
+            $this->whirlpoolMapper->mapObjectToProduct($object, $product);
 
-        // save
-        Logger::notice(sprintf('[WhirlpoolToProductGenerator] - Save product: %s', $product->getKey()));
-        VersionHelper::useVersioning(function () use ($product) {
-            $product->save();
-        }, false);
+            // save
+            Logger::notice(sprintf('[WhirlpoolToProductGenerator] - Save product: %s', $product->getKey()));
+            VersionHelper::useVersioning(function () use ($product) {
+                $product->save();
+            }, false);
 
-        // save product on whirlpool
-        $object->setProduct($product);
-        VersionHelper::useVersioning(function () use ($object) {
-            $object->save();
-        }, false);
+            // save product on whirlpool
+            $object->setProduct($product);
+            VersionHelper::useVersioning(function () use ($object) {
+                $object->save();
+            }, false);
+        });
 
         return $product;
     }

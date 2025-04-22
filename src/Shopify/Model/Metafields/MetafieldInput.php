@@ -2,8 +2,20 @@
 
 namespace App\Shopify\Model\Metafields;
 
-class MetafieldInput
+use App\Shopify\Model\IShopifyModel;
+
+/**
+ * Definition for product and variants directly
+ */
+class MetafieldInput implements IShopifyModel
 {
+    /**
+     * @param string|null $id
+     * @param string|null $key
+     * @param string|null $namespace
+     * @param string|null $type
+     * @param string|null $value
+     */
     public function __construct(
         private ?string $id = null,
         private ?string $key = null,
@@ -11,6 +23,17 @@ class MetafieldInput
         private ?string $type = null,
         private ?string $value = null,
     ) {
+    }
+
+    public function getAsArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'key' => $this->key,
+            'namespace' => $this->namespace,
+            'type' => $this->type,
+            'value' => $this->value,
+        ];
     }
 
     public function getId(): ?string
@@ -61,16 +84,5 @@ class MetafieldInput
     public function setValue(?string $value): void
     {
         $this->value = $value;
-    }
-
-    public function getAsArray(): array
-    {
-        return [
-            'id' => $this->id,
-            'key' => $this->key,
-            'namespace' => $this->namespace,
-            'type' => $this->type,
-            'value' => $this->value,
-        ];
     }
 }

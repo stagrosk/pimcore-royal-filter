@@ -46,8 +46,8 @@ readonly class RoyalFilterOverviewCalculator implements CalculatorClassInterface
             $diameter = $mappedBody1 ? $mappedBody1['diameter']['value'] : '-';
             $html .= '<tr><td>Diameter:</td><td>' . $diameter . '</td></tr>';
 
-            $centerDiameterFrom1 = $mappedCenter1 ? $mappedCenter1['diameterFrom']['value'] : '-';
-            $centerDiameterTo1 = $mappedCenter1 ? $mappedCenter1['diameterTo']['value'] : '-';
+            $centerDiameterFrom1 = $mappedCenter1 ? $mappedCenter1['centerDiameterFrom']['value'] : '-';
+            $centerDiameterTo1 = $mappedCenter1 ? $mappedCenter1['centerDiameterTo']['value'] : '-';
             $html .= '<tr><td>Center:</td><td>' . $centerDiameterFrom1 . ' -> '  . $centerDiameterTo1 . '</td></tr>';
 
             $equipBody1 = $royalFilterSetup->getEquipBody1();

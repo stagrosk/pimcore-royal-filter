@@ -31,30 +31,34 @@ class WhirlpoolToProductMapper extends BaseMapper
     /**
      * @param \Pimcore\Model\DataObject\Whirlpool $object
      * @param \Pimcore\Model\DataObject\Product $product
-     * @param bool $skipPreSave
      *
      * @throws \Exception
      * @return \Pimcore\Model\DataObject\Product
      */
-    public function mapObjectToProduct(AbstractObject $object, Product $product, bool $skipPreSave = false): Product
+    public function mapObjectToProduct(AbstractObject $object, Product $product): Product
     {
         // get filter setup
         $royalFilterSetup = $object->getRoyalFilterSetup();
 
         // map all from filter
-        $this->filterToProductMapper->mapObjectToProduct($royalFilterSetup, $product, true);
+        $this->filterToProductMapper->mapObjectToProduct($royalFilterSetup, $product);
 
         // base
         $product->setSku(sprintf('WRF-%s-%s', $object->getId(), $product->getSku()));
         $product->setGeneratedFromObject($object);
+        $product->setProductType('whirlpoolFilter');
 
         // category
         $categoryPath = sprintf('/Shopify/Categories/AllProducts/%s', self::CATEGORY_FILTERS_BY_WHIRLPOOLS);
         $this->handleCategories($product, $categoryPath);
 
-        // title / description / seo
+        // PRE-SAVE IN classification store helper! must be after key and parent assign
+        // remap parameters and set them as new classification store values for product
+        $this->copyMetadata($product, $object, true);
+
+        // title (must be after metadata - dimensions resolved from classification store)/ description / seo
         foreach (Tool::getValidLanguages() as $language) {
-            $product->setTitle($this->prepareTitle($object, $language), $language);
+            $product->setTitle($this->prepareTitle($object, $product, $language), $language);
             $product->setShortDescription($object->getShortDescription($language), $language);
             $product->setDescription($object->getDescription($language), $language);
 
@@ -70,10 +74,6 @@ class WhirlpoolToProductMapper extends BaseMapper
         $path = sprintf('Shopify/Products/%s', self::CATEGORY_FILTERS_BY_WHIRLPOOLS);
         $product->setParent(Service::createFolderByPath($path));
         $product->setKey(Service::getValidKey(sprintf('WRF-%s-%s', uniqid(), $product->getTitle()), 'object'));
-
-        // PRE-SAVE IN classification store helper! must be after key and parent assign
-        // remap parameters and set them as new classification store values for product
-        $this->copyMetadata($product, $object);
 
         return $product;
     }
@@ -96,12 +96,13 @@ class WhirlpoolToProductMapper extends BaseMapper
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\Whirlpool $object
+     * @param \Pimcore\Model\DataObject\AbstractObject $object
+     * @param \Pimcore\Model\DataObject\AbstractObject $product
      * @param string $language
      *
      * @return string
      */
-    public function prepareTitle(AbstractObject $object, string $language): string
+    public function prepareTitle(AbstractObject $object, AbstractObject $product, string $language): string
     {
         $codes = [];
         foreach ($object->getPaperCartridges() as $cartridge) {

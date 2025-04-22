@@ -5,7 +5,6 @@ namespace App\Service\Generator\Mapper;
 use App\Pimcore\ClassificationStore\ClassificationStoreHelper;
 use App\Pimcore\ClassificationStore\ClassificationStoreService;
 use App\Shopify\Model\Product\ProductStatusEnum;
-use App\Shopify\Model\Product\ShopifyProduct;
 use Pimcore\Model\DataObject\AbstractObject;
 use Pimcore\Model\DataObject\Country;
 use Pimcore\Model\DataObject\Data\ImageGallery;
@@ -32,12 +31,11 @@ class FilterToProductMapper extends BaseMapper
     /**
      * @param \Pimcore\Model\DataObject\RoyalFilter $object
      * @param \Pimcore\Model\DataObject\Product $product
-     * @param bool $skipPreSave
      *
      * @throws \Exception
      * @return \Pimcore\Model\DataObject\Product
      */
-    public function mapObjectToProduct(AbstractObject $object, Product $product, bool $skipPreSave = false): Product
+    public function mapObjectToProduct(AbstractObject $object, Product $product): Product
     {
         // base
         $product->setPublished(true);
@@ -46,6 +44,7 @@ class FilterToProductMapper extends BaseMapper
         $product->setStatus(ProductStatusEnum::ACTIVE->value);
         $product->setIsVirtualProduct(false);
         $product->setIsGiftCard(false);
+        $product->setProductType('filter');
 
         $product->setManufacturer($object->getManufacturer());
         $product->setGeneratedFromObject($object);
@@ -62,9 +61,13 @@ class FilterToProductMapper extends BaseMapper
         // google taxonomy category
         $product->setTaxonomyCategory(self::SHOPIFY_GOOGLE_CATEGORY_POOL_SPA_FILTERS);
 
-        // title / description / seo
+        // PRE-SAVE IN classification store helper! must be after key and parent assign
+        // remap parameters and set them as new classification store values for product
+        $this->copyMetadata($product, $object, true);
+
+        // title (must be after metadata - dimensions resolved from classification store)/ description / seo
         foreach (Tool::getValidLanguages() as $language) {
-            $product->setTitle($this->prepareTitle($object, $language), $language);
+            $product->setTitle($this->prepareTitle($object, $product, $language), $language);
             $product->setShortDescription($object->getShortDescription($language), $language);
             $product->setDescription($object->getDescription($language), $language);
 
@@ -83,10 +86,6 @@ class FilterToProductMapper extends BaseMapper
         $path = sprintf('Shopify/Products/%s', self::CATEGORY_FILTERS);
         $product->setParent(Service::createFolderByPath($path));
         $product->setKey(Service::getValidKey(sprintf('RF-%s-%s', uniqid(), $product->getTitle()), 'object'));
-
-        // PRE-SAVE IN classification store helper! must be after key and parent assign
-        // remap parameters and set them as new classification store values for product
-        $this->copyMetadata($product, $object, $skipPreSave);
 
         return $product;
     }
@@ -110,16 +109,17 @@ class FilterToProductMapper extends BaseMapper
 
     /**
      * @param \Pimcore\Model\DataObject\AbstractObject $object
+     * @param \Pimcore\Model\DataObject\AbstractObject $product
      * @param string $language
      *
      * @return string
      */
-    public function prepareTitle(AbstractObject $object, string $language): string
+    public function prepareTitle(AbstractObject $object, AbstractObject $product, string $language): string
     {
-        $params = $this->getMappedParameters($object);
+        $params = $this->getMappedParameters($product);
 
-        $codes = [];
         // TODO: nacitat vsetky dependencies kde je filter pouzity na virivke a z virivky nacitat kody
+//        $codes = [];
 //        foreach ($object->getPaperCartridges() as $cartridge) {
 //            foreach ($cartridge->getCodes() as $code) {
 //                if ($code->getShowInTitle() === true) {
@@ -131,30 +131,31 @@ class FilterToProductMapper extends BaseMapper
 //        $codes = array_unique($codes);
 
         $dimensions = '';
-        if (isset($params['body1']) ) {
-            // not set body2 -> get directly height
-            if (!isset($params['body2']) ) {
-                $dimensions .= $params['body1']['mappedValues']['height']['value'];
-            } else {
-                $heightParam1 = $params['body1']['mappedValues']['height'];
-                $value1 = (int)$heightParam1['rawValue'];
-                $value2 = (int)$params['body2']['mappedValues']['height']['rawValue'];
-
-                $unit = '';
-                if (!empty($heightParam1['unit'])) {
-                    $unit = $heightParam1['unit'];
-                }
-
-                $dimensions = sprintf('%s %s', $value1 + $value2, $unit);
-            }
+        if (!empty($params)) {
+            $params = reset($params)['mappedValues'];
 
             // add diameter
-            $dimensions = sprintf('%s x %s', $dimensions, $params['body1']['mappedValues']['diameter']['value']);
+            $dimensions = sprintf('%s x ⌀%s', $params['height']['value'], $params['diameter']['value']);
+        }
+
+        // extra parameters
+        $extraParams = [];
+        // -> added center dimension to title
+        if (isset($params['centerDiameterFrom']) ) {
+            $centerDimensions = sprintf('⌀%s', $params['centerDiameterFrom']['value']);
+
+            if (isset($params['centerDiameterTo'])) {
+                $centerDimensions .= sprintf('->⌀%s', $params['centerDiameterTo']['value']);
+            }
+
+            $extraParams[] = $this->translator->trans('product_title_filter_center', [
+                '%dimensions%' => $centerDimensions
+            ], 'messages', $language);
         }
 
         return $this->translator->trans('product_title_filter', [
             '%dimensions%' => $dimensions,
-            '%codes%' => implode(', ', $codes),
-        ]);
+            '%extraParams%' => implode(', ', $extraParams),
+        ], 'messages', $language);
     }
 }

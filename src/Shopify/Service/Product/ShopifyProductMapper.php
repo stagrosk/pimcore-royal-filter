@@ -59,6 +59,7 @@ class ShopifyProductMapper implements IShopifyProductMapper
         $input->setVendor($object->getManufacturer()?->getTitle());
         $input->setStatus($object->getStatus());
         $input->setCategory($object->getTaxonomyCategory());
+        $input->setProductType($object->getProductType());
 
         // seo
         $seo = new SeoInput($object->getSeoTitle(), $object->getSeoDescription());
