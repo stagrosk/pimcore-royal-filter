@@ -8,7 +8,7 @@ pimcore_data_hub:
                 description: ''
                 group: ''
                 sqlObjectCondition: ''
-                modificationDate: 1743167733
+                modificationDate: 1745324401
                 path: null
                 createDate: 1727014466
             schema:
@@ -145,9 +145,30 @@ pimcore_data_hub:
                 skipPermissionCheck: false
                 disableIntrospection: false
             workspaces:
-                asset: {  }
-                document: {  }
-                object: {  }
+                asset:
+                    -
+                        read: true
+                        cpath: /
+                        create: false
+                        update: false
+                        delete: false
+                        id: extModel15279-1
+                document:
+                    -
+                        read: true
+                        cpath: /
+                        create: false
+                        update: false
+                        delete: false
+                        id: extModel15253-1
+                object:
+                    -
+                        read: true
+                        cpath: /
+                        create: false
+                        update: false
+                        delete: false
+                        id: extModel15305-1
             permissions:
                 user: {  }
                 role: {  }
