@@ -11,3 +11,5 @@ services:
     App\EventSubscriber\RoyalFilterSubscriber:
 
     App\EventSubscriber\WhirlpoolSubscriber:
+
+    App\EventSubscriber\ShopifyMetafieldDefinitionSubscriber:

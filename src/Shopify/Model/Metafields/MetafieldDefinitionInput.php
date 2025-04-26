@@ -11,57 +11,65 @@ class MetafieldDefinitionInput implements IShopifyModel
      * @param string $key
      * @param string $type
      * @param string $namespace
-     * @param bool|null $pin
+     * @param bool $pin
      * @param string|null $description
-     * @param \App\Shopify\Model\Metafields\MetafieldAccessInput $access
-     * @param \App\Shopify\Model\Metafields\MetafieldOwnerTypeEnum $ownerType
-     * @param \App\Shopify\Model\Metafields\MetafieldCapabilityCreateInput $capabilities
-     * @param MetafieldDefinitionConstraintsInput[]|null $constraints
-     * @param MetafieldDefinitionValidationInput[]|null $validations
+     * @param \App\Shopify\Model\Metafields\MetafieldAccessInput|null $access
+     * @param \App\Shopify\Model\Metafields\MetafieldOwnerTypeEnum|null $ownerType
+     * @param \App\Shopify\Model\Metafields\MetafieldCapabilityCreateInput|null $capabilities
+     * @param array|null $constraints
+     * @param array|null $validations
      */
     public function __construct(
-        public string $name,
-        public string $key,
-        public string $type,
+        public string $name = '',
+        public string $key = '',
+        public string $type = '',
         public string $namespace = 'custom',
         public bool $pin = false,
         public ?string $description = null,
-        public MetafieldAccessInput $access,
-        public MetafieldOwnerTypeEnum $ownerType,
-        public MetafieldCapabilityCreateInput $capabilities,
+        public ?MetafieldAccessInput $access = null,
+        public ?MetafieldOwnerTypeEnum $ownerType = null,
+        public ?MetafieldCapabilityCreateInput $capabilities = null,
         public ?array $constraints = null,
         public ?array $validations = null,
     ) {
+        if (empty($capabilities)) {
+            $this->capabilities = new MetafieldCapabilityCreateInput();
+        }
     }
 
     /**
+     * @param bool $isUpdate
+     *
      * @return array
      */
-    public function getAsArray(): array
+    public function getAsArray(bool $isUpdate = false): array
     {
         $data = [
             'name' => $this->getName(),
             'key' => $this->getKey(),
-            'type' => $this->getType(),
             'namespace' => $this->getNamespace(),
             'pin' => $this->getPin(),
             'description' => $this->getDescription(),
             'access' => $this->getAccess()->getAsArray(),
-            'owner_type' => $this->getOwnerType()->value,
-            'capabilities' => $this->getCapabilities()->getAsArray()
+            'ownerType' => $this->getOwnerType()->value,
+//            'capabilities' => $this->getCapabilities()->getAsArray()
         ];
 
-        if (!empty($this->getConstraints())) {
-            foreach ($this->getConstraints() as $constraint) {
-                $data['constraints'][] = $constraint->getAsArray();
-            }
+        if (!$isUpdate) {
+            $data['type'] = $this->getType();
         }
 
-        if (!empty($this->getValidations())) {
-            foreach ($this->getValidations() as $validation) {
-                $data['validations'][] = $validation->getAsArray();
-            }
-        }
+//        if (!empty($this->getConstraints())) {
+//            foreach ($this->getConstraints() as $constraint) {
+//                $data['constraints'][] = $constraint->getAsArray();
+//            }
+//        }
+//
+//        if (!empty($this->getValidations())) {
+//            foreach ($this->getValidations() as $validation) {
+//                $data['validations'][] = $validation->getAsArray();
+//            }
+//        }
 
         return $data;
     }
@@ -86,12 +94,12 @@ class MetafieldDefinitionInput implements IShopifyModel
         $this->capabilities = $capabilities;
     }
 
-    public function getConstraints(): array
+    public function getConstraints(): ?array
     {
         return $this->constraints;
     }
 
-    public function setConstraints(array $constraints): void
+    public function setConstraints(?array $constraints): void
     {
         $this->constraints = $constraints;
     }

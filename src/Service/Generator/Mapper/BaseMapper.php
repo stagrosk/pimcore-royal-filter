@@ -69,44 +69,44 @@ abstract class BaseMapper implements MapperInterface
         if ($object instanceof RoyalFilter) {
             if ($object->getBody1() instanceof Body) {
                 $params['body1'] = [
-                    'classificationStoreItems' => $object->getBody1()->getMetadata()?->getItems(),
-                    'mappedValues' => $this->classificationStoreHelper->getClassificationStoreMapped($object->getBody1()->getMetadata()),
+                    'items' => $object->getBody1()->getMetadata()?->getItems(),
+                    'mapping' => $this->classificationStoreHelper->getClassificationStoreMapped($object->getBody1()->getMetadata()),
                 ];
             }
             if ($object->getBody2() instanceof Body) {
                 $params['body2'] = [
-                    'classificationStoreItems' => $object->getBody2()->getMetadata()?->getItems(),
-                    'mappedValues' => $this->classificationStoreHelper->getClassificationStoreMapped($object->getBody2()->getMetadata()),
+                    'items' => $object->getBody2()->getMetadata()?->getItems(),
+                    'mapping' => $this->classificationStoreHelper->getClassificationStoreMapped($object->getBody2()->getMetadata()),
                 ];
             }
             if ($object->getCenterBody1() instanceof Center) {
                 $params['center1'] = [
-                    'classificationStoreItems' => $object->getCenterBody1()->getMetadata()?->getItems(),
-                    'mappedValues' => $this->classificationStoreHelper->getClassificationStoreMapped($object->getCenterBody1()->getMetadata()),
+                    'items' => $object->getCenterBody1()->getMetadata()?->getItems(),
+                    'mapping' => $this->classificationStoreHelper->getClassificationStoreMapped($object->getCenterBody1()->getMetadata()),
                 ];
             }
             if ($object->getCenterBody2() instanceof Center) {
                 $params['center2'] = [
-                    'classificationStoreItems' => $object->getCenterBody2()->getMetadata()?->getItems(),
-                    'mappedValues' => $this->classificationStoreHelper->getClassificationStoreMapped($object->getCenterBody2()->getMetadata()),
+                    'items' => $object->getCenterBody2()->getMetadata()?->getItems(),
+                    'mapping' => $this->classificationStoreHelper->getClassificationStoreMapped($object->getCenterBody2()->getMetadata()),
                 ];
             }
             if ($object->getEquipBody1() instanceof Equipment) {
                 $params['equip1'] = [
-                    'classificationStoreItems' => $object->getEquipBody1()->getMetadata()?->getItems(),
-                    'mappedValues' => $this->classificationStoreHelper->getClassificationStoreMapped($object->getEquipBody1()->getMetadata()),
+                    'items' => $object->getEquipBody1()->getMetadata()?->getItems(),
+                    'mapping' => $this->classificationStoreHelper->getClassificationStoreMapped($object->getEquipBody1()->getMetadata()),
                 ];
             }
             if ($object->getEquipBody2() instanceof Equipment) {
                 $params['equip2'] = [
-                    'classificationStoreItems' => $object->getEquipBody2()->getMetadata()?->getItems(),
-                    'mappedValues' => $this->classificationStoreHelper->getClassificationStoreMapped($object->getEquipBody2()->getMetadata()),
+                    'items' => $object->getEquipBody2()->getMetadata()?->getItems(),
+                    'mapping' => $this->classificationStoreHelper->getClassificationStoreMapped($object->getEquipBody2()->getMetadata()),
                 ];
             }
         } elseif (method_exists($object, 'getMetadata') && $object->getMetadata() instanceof Classificationstore) {
             $params[uniqid()] = [
-                'classificationStoreItems' => $object->getMetadata()->getItems(),
-                'mappedValues' => $this->classificationStoreHelper->getClassificationStoreMapped($object->getMetadata())
+                'items' => $object->getMetadata()->getItems(),
+                'mapping' => $this->classificationStoreHelper->getClassificationStoreMapped($object->getMetadata())
             ];
         }
 
@@ -127,7 +127,7 @@ abstract class BaseMapper implements MapperInterface
 
         $mappedProperties = [];
         foreach ($mappedParameters as $objectName => $objectData) {
-            foreach ($objectData['classificationStoreItems'] as $groupKeyId => $keyConfigValues) {
+            foreach ($objectData['items'] as $groupKeyId => $keyConfigValues) {
                 $groupConfig = $this->classificationStoreService->getGroupConfigById($groupKeyId);
 
                 foreach ($keyConfigValues as $keyConfigId => $keyConfigValue) {

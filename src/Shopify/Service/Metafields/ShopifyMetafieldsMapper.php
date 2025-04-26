@@ -2,17 +2,28 @@
 
 namespace App\Shopify\Service\Metafields;
 
+use App\Shopify\Model\Metafields\MetafieldInput;
 use App\Shopify\Model\Metafields\MetafieldInputs;
 use Pimcore\Model\DataObject\AbstractObject;
+use Pimcore\Model\DataObject\Product;
+use Pimcore\Model\DataObject\ShopifyMetafieldDefinition;
 
-class ShopifyMetafieldsMapper implements IShopifyMetafieldsMapper
+class ShopifyMetafieldsMapper implements ShopifyMetafieldsMapperInterface
 {
     const CLASS_ID = 'ClassificationStore';
     const SHOPIFY_CHANNEL_KEY = 'shopify_1';
 
+    /**
+     * @param \App\Shopify\Service\Metafields\ShopifyMetafieldService $shopifyMetafieldService
+     */
+    public function __construct(
+        private readonly ShopifyMetafieldService $shopifyMetafieldService,
+    ) {
+    }
+
     public function getMapperServiceKey(): string
     {
-        return IShopifyMetafieldsMapper::MAPPER_TAG;
+        return ShopifyMetafieldsMapperInterface::MAPPER_TAG;
     }
 
     public function getObjectClassId(): string
@@ -26,13 +37,34 @@ class ShopifyMetafieldsMapper implements IShopifyMetafieldsMapper
     }
 
     /**
-     * @param \App\Shopify\Model\Metafields\MetafieldInputs $metafieldInputs
-     * @param \Pimcore\Model\DataObject\AbstractObject $object
+     * Map metafields from dataObject on object based on classification store values on object
      *
-     * @return MetafieldInputs
+     * @param \App\Shopify\Model\Metafields\MetafieldInputs $inputs
+     * @param \Pimcore\Model\DataObject\AbstractObject|\Pimcore\Model\DataObject\Product $object
+     *
+     * @throws \Exception
+     * @return \App\Shopify\Model\Metafields\MetafieldInputs
      */
-    public function getMappedObject(MetafieldInputs $metafieldInputs, AbstractObject $object): MetafieldInputs
+    public function getMappedObject(MetafieldInputs $inputs, Product|AbstractObject $object): MetafieldInputs
     {
-        return $metafieldInputs;
+        $metafieldDefinitions = $this->shopifyMetafieldService->getObjectMetafieldDefinitions($object);
+
+        // loop all definitions and add values to them to be sent on product
+        foreach ($metafieldDefinitions as $item) {
+            /** @var \App\Model\ClassificationStoreMappingItem $classificationStoreMappingItem */
+            $classificationStoreMappingItem = $item['classificationStoreMappingItem'];
+            /** @var \Pimcore\Model\DataObject\ShopifyMetafieldDefinition $metafieldDefinition */
+            $metafieldDefinition = $item['metafieldDefinition'];
+
+            $metafieldInput = new MetafieldInput();
+            $metafieldInput->setNamespace($metafieldDefinition->getNamespace());
+            $metafieldInput->setKey($metafieldDefinition->getMetaKey());
+            $metafieldInput->setType($metafieldDefinition->getMetaType());
+            $metafieldInput->setValue($this->shopifyMetafieldService->prepareValue($metafieldDefinition, $classificationStoreMappingItem));
+
+            $inputs->addMetaFieldInput($metafieldInput);
+        }
+
+        return $inputs;
     }
 }

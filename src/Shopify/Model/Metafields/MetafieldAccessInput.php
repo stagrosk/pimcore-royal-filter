@@ -24,12 +24,12 @@ class MetafieldAccessInput implements IShopifyModel
     public function getAsArray(): array
     {
         $data = [];
-        if ($this->getAdmin() !== null) {
-            $data['admin'] = $this->getAdmin()->value;
-        }
-        if ($this->getCustomerAccount() !== null) {
-            $data['customerAccount'] = $this->getCustomerAccount()->value;
-        }
+//        if ($this->getAdmin() !== null) {
+//            $data['admin'] = $this->getAdmin()->value;
+//        }
+//        if ($this->getCustomerAccount() !== null) {
+//            $data['customerAccount'] = $this->getCustomerAccount()->value;
+//        }
         if ($this->getStorefront() !== null) {
             $data['storefront'] = $this->getStorefront()->value;
         }

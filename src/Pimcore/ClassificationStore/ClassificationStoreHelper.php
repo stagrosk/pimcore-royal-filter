@@ -2,6 +2,8 @@
 
 namespace App\Pimcore\ClassificationStore;
 
+use App\Model\ClassificationStoreMapping;
+use App\Model\ClassificationStoreMappingItem;
 use App\Pimcore\Helpers\InheritanceHelper;
 use App\Pimcore\Helpers\VersionHelper;
 use Pimcore\Logger;
@@ -16,92 +18,136 @@ class ClassificationStoreHelper
     /**
      * @param \Pimcore\Model\DataObject\Classificationstore|null $classificationStore
      *
-     * @return array
+     * @return ClassificationStoreMapping
      */
-    public function getClassificationStoreMapped(?Classificationstore $classificationStore): array
+    public function getClassificationStoreMapped(?Classificationstore $classificationStore): ClassificationStoreMapping
     {
-        $mappedData = [];
+        $classificationStoreMapping = new ClassificationStoreMapping();
 
         if ($classificationStore instanceof Classificationstore) {
-            foreach ($classificationStore->getItems() as $groupKey => $group) {
-                $classificationGroup = GroupConfig::getById($groupKey);
-                if ($classificationGroup instanceof GroupConfig) {
-                    foreach ($classificationGroup->getRelations() as $keyGroupRelation) {
-                        $keyConfig = KeyConfig::getById($keyGroupRelation->getKeyId());
-                        $keyGroup = GroupConfig::getById($keyGroupRelation->getGroupId());
-                        $mappedData[$keyGroupRelation->getName()] = [
-                            'key' => $keyConfig->getName() ?? null,
-                            'group' => $keyGroup->getName() ?? null,
-                            'config' => $keyConfig,
-                            'label' => $keyConfig->getTitle() ?? null,
-                            'value' => null,
-                        ];
-                    }
+            foreach ($classificationStore->getItems() as $groupConfigId => $group) {
+                // get group config
+                $groupConfig = GroupConfig::getById($groupConfigId);
+                if ($groupConfig instanceof GroupConfig) {
+
+                    // TODO: check what is this
+//                    foreach ($groupConfig->getRelations() as $keyGroupRelation) {
+//                        $keyConfig = KeyConfig::getById($keyGroupRelation->getKeyId());
+//                        $groupConfig = GroupConfig::getById($keyGroupRelation->getGroupId());
+//                        $classificationStoreMapping[$keyGroupRelation->getName()] = [
+//                            'key' => $keyConfig->getName() ?? null,
+//                            'group' => $groupConfig->getName(),
+//                            'config' => $keyConfig,
+//                            'label' => $keyConfig->getTitle() ?? null,
+//                            'value' => null,
+//                        ];
+//                    }
 
                     foreach ($group as $key => $item) {
                         $keyConfig = KeyConfig::getById(strtolower($key));
+                        if (!$keyConfig instanceof KeyConfig) {
+                            continue;
+                        }
 
-                        if ($keyConfig instanceof KeyConfig && $keyConfig->getType() === 'select') {
-                            $definition = json_decode($keyConfig->getDefinition(), true);
-                            $defaultValue = array_key_exists('default', $item) ? $item['default'] : null;
+                        switch ($keyConfig->getType()) {
+                            case 'select':
+                                $definition = json_decode($keyConfig->getDefinition(), true);
+                                $defaultValue = array_key_exists('default', $item) ? $item['default'] : null;
 
-                            $mappedData[$keyConfig->getName()] = [
-                                'key' => $keyConfig->getName(),
-                                'group' => $classificationGroup->getName() ?? null,
-                                'config' => $keyConfig,
-                                'label' => $keyConfig->getTitle(),
-                                'value' => collect($definition['options'])->where('value', $defaultValue)->first()['key'] ?? null,
-                                'optionValue' => collect($definition['options'])->where('value', $defaultValue)->first()['value'] ?? null,
-                            ];
-                        } elseif ($keyConfig instanceof KeyConfig && $keyConfig->getType() === 'numeric') {
-                            $mappedData[$keyConfig->getName()] = [
-                                'key' => $keyConfig->getName(),
-                                'group' => $classificationGroup->getName() ?? null,
-                                'config' => $keyConfig,
-                                'label' => $keyConfig->getTitle(),
-                                'value' => $item['default'],
-                            ];
-                        } elseif ($keyConfig instanceof KeyConfig && $keyConfig->getType() === 'input') {
-                            $mappedData[$keyConfig->getName()] = [
-                                'key' => $keyConfig->getName(),
-                                'group' => $classificationGroup->getName() ?? null,
-                                'config' => $keyConfig,
-                                'label' => $keyConfig->getTitle(),
-                                'value' => $item['default'],
-                            ];
-                        } elseif ($keyConfig instanceof KeyConfig && $keyConfig->getType() === 'quantityValue') {
-                            if ($item['default']) {
+                                $classificationStoreMappingItem = new ClassificationStoreMappingItem(
+                                    $keyConfig,
+                                    $groupConfig,
+                                    $keyConfig->getTitle(),
+                                    collect($definition['options'])->where('value', $defaultValue)->first()['key'] ?? null,
+                                    null,
+                                    null,
+                                    null,
+                                    collect($definition['options'])->where('value', $defaultValue)->first()['value'] ?? null
+                                );
+                                $classificationStoreMapping->addItem($classificationStoreMappingItem);
+                                break;
+
+                            case 'numeric':
+                            case 'textarea':
+                            case 'input':
+                                $classificationStoreMappingItem = new ClassificationStoreMappingItem(
+                                    $keyConfig,
+                                    $groupConfig,
+                                    $keyConfig->getTitle(),
+                                    $item['default'],
+                                );
+                                $classificationStoreMapping->addItem($classificationStoreMappingItem);
+                                break;
+
+                            case 'quantityValue':
+//                            case 'quantityValueRange':
                                 $value = $item['default'];
-                                $mappedData[$keyConfig->getName()] = [
-                                    'key' => $keyConfig->getName(),
-                                    'group' => $classificationGroup->getName() ?? null,
-                                    'config' => $keyConfig,
-                                    'label' => $keyConfig->getTitle(),
-                                    'unit' => (!is_string($value) && $item['default']->getUnit()) ? $item['default']->getUnit()->getAbbreviation() : null,
-                                    'unitLongname' => ($item['default']->getUnit()) ? $item['default']->getUnit()->getLongName() : null,
-                                    'rawValue' => $item['default']->getValue(),
-                                    'value' => is_string($value) ? $value : sprintf(
-                                        '%s %s',
-                                        $item['default']->getValue(),
-                                        ($item['default']->getUnit()) ? $item['default']->getUnit()->getAbbreviation() : null
-                                    ),
-                                ];
-                            }
-                        } elseif ($keyConfig instanceof KeyConfig && $keyConfig->getType() === 'checkbox') {
-                            $mappedData[$keyConfig->getName()] = [
-                                'key' => $keyConfig->getName(),
-                                'group' => $classificationGroup->getName() ?? null,
-                                'config' => $keyConfig,
-                                'label' => $keyConfig->getTitle(),
-                                'value' => (bool)$item['default'],
-                            ];
+                                if ($value) {
+                                    $classificationStoreMappingItem = new ClassificationStoreMappingItem(
+                                        $keyConfig,
+                                        $groupConfig,
+                                        $keyConfig->getTitle(),
+                                        is_string($value) ? $value : sprintf(
+                                            '%s %s',
+                                            $value->getValue(),
+                                            ($value->getUnit()) ? $value->getUnit()->getAbbreviation() : null
+                                        ),
+                                        $value->getValue(),
+                                        (!is_string($value) && $value->getUnit()) ? $value->getUnit()->getAbbreviation() : null,
+                                        ($value->getUnit()) ? $value->getUnit()->getLongName() : null,
+                                    );
+                                    $classificationStoreMapping->addItem($classificationStoreMappingItem);
+                                }
+                                break;
+
+                            case 'checkbox':
+                                $classificationStoreMappingItem = new ClassificationStoreMappingItem(
+                                    $keyConfig,
+                                    $groupConfig,
+                                    $keyConfig->getTitle(),
+                                    (bool)$item['default'],
+                                );
+                                $classificationStoreMapping->addItem($classificationStoreMappingItem);
+                                break;
+
+                            case 'rgbaColor':
+                                /** @var \Pimcore\Model\DataObject\Data\RgbaColor $rgbaColor */
+                                $rgbaColor = $item['default'];
+                                $classificationStoreMappingItem = new ClassificationStoreMappingItem(
+                                    $keyConfig,
+                                    $groupConfig,
+                                    $keyConfig->getTitle(),
+                                    $rgbaColor->getHex(),
+                                );
+                                $classificationStoreMapping->addItem($classificationStoreMappingItem);
+                                break;
+
+                            case 'date':
+                                $classificationStoreMappingItem = new ClassificationStoreMappingItem(
+                                    $keyConfig,
+                                    $groupConfig,
+                                    $keyConfig->getTitle(),
+                                    $item['default']->format('Y-m-d'),
+                                );
+                                $classificationStoreMapping->addItem($classificationStoreMappingItem);
+                                break;
+
+                            case 'datetime':
+                                $classificationStoreMappingItem = new ClassificationStoreMappingItem(
+                                    $keyConfig,
+                                    $groupConfig,
+                                    $keyConfig->getTitle(),
+                                    $item['default']->format('Y-m-d\TH:i:s'),
+                                );
+                                $classificationStoreMapping->addItem($classificationStoreMappingItem);
+                                break;
                         }
                     }
                 }
             }
         }
 
-        return $mappedData;
+        return $classificationStoreMapping;
     }
 
     /**
@@ -110,6 +156,7 @@ class ClassificationStoreHelper
      * @param bool $skipPreSave
      *
      * @throws \Pimcore\Model\Element\DuplicateFullPathException
+     * @throws \Exception
      * @return void
      */
     public function fillObjectDataOnClassificationStore(

@@ -14,26 +14,43 @@ class MetafieldInput implements IShopifyModel
      * @param string|null $key
      * @param string|null $namespace
      * @param string|null $type
-     * @param string|null $value
+     * @param string|int|float|bool|array|null $value
      */
     public function __construct(
         private ?string $id = null,
         private ?string $key = null,
         private ?string $namespace = null,
         private ?string $type = null,
-        private ?string $value = null,
+        private string|int|float|bool|array|null $value = null,
     ) {
     }
 
+    /**
+     * @return array
+     */
     public function getAsArray(): array
     {
-        return [
-            'id' => $this->id,
-            'key' => $this->key,
-            'namespace' => $this->namespace,
-            'type' => $this->type,
-            'value' => $this->value,
-        ];
+        $data = [];
+
+        if ($this->getId() !== null) {
+            $data['id'] = $this->getId();
+        } else {
+            if ($this->getKey() !== null) {
+                $data['key'] = $this->getKey();
+            }
+
+            if ($this->getNamespace() !== null) {
+                $data['namespace'] = $this->getNamespace();
+            }
+
+            if ($this->getType() !== null) {
+                $data['type'] = strtolower($this->getType());
+            }
+        }
+
+        $data['value'] = $this->getValue();
+
+        return $data;
     }
 
     public function getId(): ?string
@@ -76,12 +93,12 @@ class MetafieldInput implements IShopifyModel
         $this->type = $type;
     }
 
-    public function getValue(): ?string
+    public function getValue(): string|int|float|bool|array|null
     {
         return $this->value;
     }
 
-    public function setValue(?string $value): void
+    public function setValue(string|int|float|bool|array|null $value): void
     {
         $this->value = $value;
     }

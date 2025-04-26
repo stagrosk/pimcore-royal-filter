@@ -2,6 +2,7 @@
 
 namespace App\Service\Generator\Mapper;
 
+use App\Model\ClassificationStoreMappingItem;
 use App\Pimcore\ClassificationStore\ClassificationStoreHelper;
 use App\Pimcore\ClassificationStore\ClassificationStoreService;
 use App\Shopify\Model\Product\ProductStatusEnum;
@@ -49,6 +50,7 @@ class FilterToProductMapper extends BaseMapper
         $product->setManufacturer($object->getManufacturer());
         $product->setGeneratedFromObject($object);
 
+        // made in country
         $country = Country::getByName(self::COUNTRY_SLOVAKIA, 1);
         if ($country instanceof Country) {
             $product->setMadeIn($country->getIsoAlphaCode2());
@@ -131,26 +133,32 @@ class FilterToProductMapper extends BaseMapper
 //        $codes = array_unique($codes);
 
         $dimensions = '';
+        $extraParams = [];
+
         if (!empty($params)) {
-            $params = reset($params)['mappedValues'];
+            // get first mapping
+            /** @var \App\Model\ClassificationStoreMapping $mapping */
+            $mapping = reset($params)['mapping'];
 
             // add diameter
-            $dimensions = sprintf('%s x ⌀%s', $params['height']['value'], $params['diameter']['value']);
-        }
+            $height = $mapping->findItemByKeyConfigName('height');
+            $diameter = $mapping->findItemByKeyConfigName('diameter');
+            $dimensions = sprintf('%s x ⌀%s', $height->getValue(), $diameter->getValue());
 
-        // extra parameters
-        $extraParams = [];
-        // -> added center dimension to title
-        if (isset($params['centerDiameterFrom']) ) {
-            $centerDimensions = sprintf('⌀%s', $params['centerDiameterFrom']['value']);
+            // -> added center dimension to title
+            $centerDiameterFrom = $mapping->findItemByKeyConfigName('centerDiameterFrom');
+            if ($centerDiameterFrom instanceof ClassificationStoreMappingItem) {
+                $centerDimensions = sprintf('⌀%s', $centerDiameterFrom->getValue());
 
-            if (isset($params['centerDiameterTo'])) {
-                $centerDimensions .= sprintf('->⌀%s', $params['centerDiameterTo']['value']);
+                $centerDiameterTo = $mapping->findItemByKeyConfigName('centerDiameterTo');
+                if ($centerDiameterTo instanceof ClassificationStoreMappingItem) {
+                    $centerDimensions .= sprintf('->⌀%s', $centerDiameterTo->getValue());
+                }
+
+                $extraParams[] = $this->translator->trans('product_title_filter_center', [
+                    '%dimensions%' => $centerDimensions
+                ], 'messages', $language);
             }
-
-            $extraParams[] = $this->translator->trans('product_title_filter_center', [
-                '%dimensions%' => $centerDimensions
-            ], 'messages', $language);
         }
 
         return $this->translator->trans('product_title_filter', [

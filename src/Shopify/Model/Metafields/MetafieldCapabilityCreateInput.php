@@ -16,6 +16,17 @@ class MetafieldCapabilityCreateInput implements IShopifyModel
         public ?MetafieldCapabilitySmartCollectionConditionInput $smartCollectionCondition = null,
         public ?MetafieldCapabilityUniqueValuesInput $uniqueValues = null,
     ) {
+        if (empty($adminFilterable)) {
+            $this->adminFilterable = new MetafieldCapabilityAdminFilterableInput();
+        }
+
+        if (empty($smartCollectionCondition)) {
+            $this->smartCollectionCondition = new MetafieldCapabilitySmartCollectionConditionInput();
+        }
+
+        if (empty($uniqueValues)) {
+            $this->uniqueValues = new MetafieldCapabilityUniqueValuesInput();
+        }
     }
 
     /**
@@ -24,9 +35,9 @@ class MetafieldCapabilityCreateInput implements IShopifyModel
     public function getAsArray(): array
     {
         return [
-            'admin_filterable' => $this->getAdminFilterable()->getAsArray(),
-            'smart_collection_condition' => $this->getSmartCollectionCondition()->getAsArray(),
-            'unique_values' => $this->getUniqueValues()->getAsArray(),
+            'adminFilterable' => $this->getAdminFilterable()->getAsArray(),
+            'smartCollectionCondition' => $this->getSmartCollectionCondition()->getAsArray(),
+            'uniqueValues' => $this->getUniqueValues()->getAsArray(),
         ];
     }
 

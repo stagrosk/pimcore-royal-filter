@@ -44,6 +44,7 @@ class ShopifyProductMapper implements IShopifyProductMapper
      * @param \App\Shopify\Model\Product\ProductCreateInput|\App\Shopify\Model\Product\ProductUpdateInput $input
      * @param \Pimcore\Model\DataObject\AbstractObject $object
      *
+     * @throws \Exception
      * @return \App\Shopify\Model\Product\ProductCreateInput|\App\Shopify\Model\Product\ProductUpdateInput
      */
     public function getMappedObject(ProductCreateInput|ProductUpdateInput $input, AbstractObject $object): ProductCreateInput|ProductUpdateInput
@@ -61,6 +62,10 @@ class ShopifyProductMapper implements IShopifyProductMapper
         $input->setCategory($object->getTaxonomyCategory());
         $input->setProductType($object->getProductType());
 
+        // TODO: finish
+//        $input->setTags(); // brand?
+//        $input->setSku($object->getSku()); // as custom field?
+
         // seo
         $seo = new SeoInput($object->getSeoTitle(), $object->getSeoDescription());
         $input->setSeo($seo);
@@ -72,14 +77,6 @@ class ShopifyProductMapper implements IShopifyProductMapper
         // metafields
         $metafieldInput = $this->metafieldsMapper->getMappedObject(new MetafieldInputs(), $object);
         $input->setMetafields($metafieldInput->getAsArray());
-
-        // prices
-//        $input->setPrice($object->getPrice_EUR());
-
-        // TODO: finish
-//        $input->setProductType();
-//        $input->setTags(); // brand?
-//        $input->setSku($object->getSku()); // as custom field?
 
         return $input;
     }

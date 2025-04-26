@@ -9,7 +9,7 @@ use App\Shopify\Service\Metafields\ShopifyShopifyMetafieldDefinitionMapper;
 use Pimcore\Model\DataObject\AbstractObject;
 use Pimcore\Model\DataObject\ShopifyMetafieldDefinition;
 
-class MetafieldDefinitionCreateMutation extends BaseMutation
+class MetafieldDefinitionUpdateMutation extends BaseMutation
 {
     /**
      * @param \App\Shopify\Graphql\GraphqlClient $client
@@ -28,14 +28,11 @@ class MetafieldDefinitionCreateMutation extends BaseMutation
     public function getMutation(): string
     {
         return <<<'GRAPHQL'
-            mutation metafieldDefinitionCreate($definition: MetafieldDefinitionInput!) {
-                metafieldDefinitionCreate(definition: $definition) {
-                    createdDefinition {
+            mutation metafieldDefinitionUpdate($definition: MetafieldDefinitionUpdateInput!) {
+                metafieldDefinitionUpdate(definition: $definition) {
+                    updatedDefinition {
                         id
                         name
-                        namespace
-                        key
-                        description
                     }
                     userErrors {
                       field
@@ -55,7 +52,7 @@ class MetafieldDefinitionCreateMutation extends BaseMutation
     public function getVariables(ShopifyMetafieldDefinition|AbstractObject $object): array
     {
         return [
-            'definition' => $this->metafieldDefinitionMapper->getMappedObject(new MetafieldDefinitionInput(), $object)->getAsArray(),
+            'definition' => $this->metafieldDefinitionMapper->getMappedObject(new MetafieldDefinitionInput(), $object)->getAsArray(true),
         ];
     }
 }

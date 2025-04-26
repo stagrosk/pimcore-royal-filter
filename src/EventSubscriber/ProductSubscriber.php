@@ -11,6 +11,7 @@ use App\Shopify\Graphql\Mutation\Product\ProductPublishMutation;
 use App\Shopify\Graphql\Mutation\Product\ProductUpdateMutation;
 use App\Shopify\Graphql\Mutation\Product\Variant\ProductVariantsBulkCreateMutation;
 use App\Shopify\Graphql\Mutation\Product\Variant\ProductVariantsBulkUpdateMutation;
+use Exception;
 use Pimcore\Event\DataObjectEvents;
 use Pimcore\Event\Model\DataObjectEvent;
 use Pimcore\Model\DataObject\AbstractObject;
@@ -76,7 +77,7 @@ readonly class ProductSubscriber implements EventSubscriberInterface
             $response = $this->productCreateMutation->callAction($object);
             $data = $response['data']['productCreate'];
             if (!empty($data['userErrors'])) {
-                throw new \Exception($data['userErrors'][0]['message']);
+                throw new Exception($data['userErrors'][0]['message']);
             } else {
                 $object->setApiId($data['product']['id']);
                 $object->setHandle($data['product']['handle']);
@@ -135,7 +136,7 @@ readonly class ProductSubscriber implements EventSubscriberInterface
             }
 
             if (!empty($data['userErrors'])) {
-                throw new \Exception($data['userErrors'][0]['message']);
+                throw new Exception($data['userErrors'][0]['message']);
             } else {
                 $object->setApiId($data['productVariants'][0]['id']);
             }
@@ -146,7 +147,7 @@ readonly class ProductSubscriber implements EventSubscriberInterface
         }
 
         if (!empty($data['userErrors'])) {
-            throw new \Exception($data['userErrors'][0]['message']);
+            throw new Exception($data['userErrors'][0]['message']);
         }
     }
 
@@ -174,7 +175,7 @@ readonly class ProductSubscriber implements EventSubscriberInterface
 
         $data = $this->productDeleteMutation->callAction($object);
         if (!empty($data['userErrors'])) {
-            throw new \Exception($data['userErrors'][0]['message']);
+            throw new Exception($data['userErrors'][0]['message']);
         }
     }
 }

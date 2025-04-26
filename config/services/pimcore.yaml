@@ -11,3 +11,6 @@ services:
     # auto-register all classification store classes
     App\Pimcore\ClassificationStore\:
         resource: '../../src/Pimcore/ClassificationStore/*'
+
+    App\Pimcore\Model\OptionProviders\:
+        resource: '../../src/Pimcore/Model/OptionProviders/*'

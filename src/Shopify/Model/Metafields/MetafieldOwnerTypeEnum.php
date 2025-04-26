@@ -8,7 +8,7 @@ enum MetafieldOwnerTypeEnum: string
     case ARTICLE = 'ARTICLE';
     case BLOG = 'BLOG';
     case CARTTRANSFORM = 'CARTTRANSFORM';
-    case COLLECTION = 'COLLECTION';
+    case CATEGORY = 'COLLECTION'; // collection / category
     case COMPANY = 'COMPANY';
     case COMPANY_LOCATION = 'COMPANY_LOCATION';
     case CUSTOMER = 'CUSTOMER';
@@ -28,5 +28,13 @@ enum MetafieldOwnerTypeEnum: string
     case SELLING_PLAN = 'SELLING_PLAN';
     case SHOP = 'SHOP';
     case VALIDATION = 'VALIDATION';
-    case MEDIA_IMAGE = 'MEDIA_IMAGE'; // Deprecated
+
+    public static function getValues(): array
+    {
+        $values = [];
+        foreach (self::cases() as $case) {
+            $values[] = $case->value;
+        }
+        return $values;
+    }
 }

@@ -40,14 +40,19 @@ readonly class RoyalFilterOverviewCalculator implements CalculatorClassInterface
 
             $html = '<table class="royal-filter-overview">';
 
-            $totalHeight = $mappedBody1 && $mappedBody2 ? ($mappedBody1['height']['rawValue'] + $mappedBody2['height']['rawValue'] . ' ' . $mappedBody1['height']['unit']) : '-';
+            $body1Height = $mappedBody1->findItemByKeyConfigName('height');
+            $body2Height = $mappedBody2->findItemByKeyConfigName('height');
+            $totalHeight = $body1Height && $body2Height ? ($body1Height->getRawValue() + $body1Height->getRawValue() . ' ' . $body1Height->getUnit()) : '-';
             $html .= '<tr><td>Total height:</td><td>' . $totalHeight . '</td></tr>';
 
-            $diameter = $mappedBody1 ? $mappedBody1['diameter']['value'] : '-';
+            $body1Diameter = $mappedBody1->findItemByKeyConfigName('diameter');
+            $diameter = $body1Diameter ? $body1Diameter->getValue() : '-';
             $html .= '<tr><td>Diameter:</td><td>' . $diameter . '</td></tr>';
 
-            $centerDiameterFrom1 = $mappedCenter1 ? $mappedCenter1['centerDiameterFrom']['value'] : '-';
-            $centerDiameterTo1 = $mappedCenter1 ? $mappedCenter1['centerDiameterTo']['value'] : '-';
+            $center1DiameterFrom = $mappedCenter1->findItemByKeyConfigName('centerDiameterFrom');
+            $center1DiameterTo = $mappedCenter1->findItemByKeyConfigName('centerDiameterTo');
+            $centerDiameterFrom1 = $center1DiameterFrom ? $center1DiameterFrom->getValue() : '-';
+            $centerDiameterTo1 = $center1DiameterTo ? $center1DiameterTo->getValue() : '-';
             $html .= '<tr><td>Center:</td><td>' . $centerDiameterFrom1 . ' -> '  . $centerDiameterTo1 . '</td></tr>';
 
             $equipBody1 = $royalFilterSetup->getEquipBody1();
