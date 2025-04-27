@@ -12,20 +12,20 @@ class ClassificationStoreMappingItem
      * @param \Pimcore\Model\DataObject\Classificationstore\GroupConfig $groupConfig
      * @param string $label
      * @param string|bool|null $value
-     * @param int|float|null $rawValue
+     * @param int|float|string|null $rawValue
      * @param string|null $unit
      * @param string|null $unitLongName
      * @param string|null $optionValue
      */
     public function __construct(
-        private KeyConfig        $keyConfig,
-        private GroupConfig      $groupConfig,
-        private string           $label,
-        private string|bool|null $value,
-        private int|float|null   $rawValue = null,
-        private ?string          $unit = null,
-        private ?string          $unitLongName = null,
-        private ?string          $optionValue = null,
+        private KeyConfig             $keyConfig,
+        private GroupConfig           $groupConfig,
+        private string                $label,
+        private string|bool|null      $value,
+        private int|float|string|null $rawValue = null,
+        private ?string               $unit = null,
+        private ?string               $unitLongName = null,
+        private ?string               $optionValue = null,
     ) {
     }
 
@@ -69,12 +69,12 @@ class ClassificationStoreMappingItem
         $this->value = $value;
     }
 
-    public function getRawValue(): int|float
+    public function getRawValue(): int|float|string
     {
         return $this->rawValue ?? 0;
     }
 
-    public function setRawValue(int|float|null $rawValue): void
+    public function setRawValue(int|float|string|null $rawValue): void
     {
         $this->rawValue = $rawValue;
     }
