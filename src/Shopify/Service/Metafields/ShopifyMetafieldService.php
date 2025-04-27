@@ -5,6 +5,8 @@ namespace App\Shopify\Service\Metafields;
 use App\Model\ClassificationStoreMappingItem;
 use App\Pimcore\ClassificationStore\ClassificationStoreHelper;
 use App\Pimcore\Helpers\VersionHelper;
+use App\Pimcore\Model\DataObject\Category;
+use App\Shopify\Graphql\Query\Product\ProductMetafieldsQuery;
 use App\Shopify\Model\Metafields\MetafieldMetaTypeEnum;
 use App\Shopify\Model\Metafields\MetafieldOwnerTypeEnum;
 use Pimcore\Model\DataObject\AbstractObject;
@@ -20,7 +22,7 @@ readonly class ShopifyMetafieldService
      * @param \App\Pimcore\ClassificationStore\ClassificationStoreHelper $classificationStoreHelper
      */
     public function __construct(
-        private ClassificationStoreHelper $classificationStoreHelper
+        private ClassificationStoreHelper $classificationStoreHelper,
     ) {
     }
 
@@ -33,6 +35,7 @@ readonly class ShopifyMetafieldService
     public function getObjectMetafieldDefinitions(AbstractObject|Product $object): array
     {
         $metafieldDefinitions = [];
+        $processedMetafieldDefinitionIds = [];
 
         // get metadata from object - classificationStore
         $metadata = $object->getMetadata();
@@ -40,13 +43,15 @@ readonly class ShopifyMetafieldService
         // get mapped metadata
         $classificationStoreMapping = $this->classificationStoreHelper->getClassificationStoreMapped($metadata);
 
+        $className = $object->getClassName();
+        $ownerType = MetafieldOwnerTypeEnum::from(strtoupper($className)); //Product/Collection
+
         // loop all items in product metadata
         foreach ($classificationStoreMapping->getClassificationStoreMappingItems() as $classificationStoreMappingItem) {
 
             $keyConfig = $classificationStoreMappingItem->getKeyConfig();
             $groupConfig = $classificationStoreMappingItem->getGroupConfig();
-            $className = $object->getClassName();
-            $ident = sprintf('Class-%s/GroupConfig-%s/KeyConfig-%s', $className, $groupConfig->getId(), $keyConfig->getId());
+            $ident = sprintf('class-%s/groupConfigId-%s/keyConfigId-%s', $className, $groupConfig->getId(), $keyConfig->getId());
 
             // get by classificationStoreIdent - it is combination of object class and classification store keyConfig id
             $metafieldDefinition = ShopifyMetafieldDefinition::getByClassificationStoreIdent($ident, 1);
@@ -64,8 +69,6 @@ readonly class ShopifyMetafieldService
                 $metafieldDefinition->setMetaKey(strtolower(sprintf('%s_%s_%s', $metafieldDefinition->getNamespace(), $groupConfig->getName(), $keyConfig->getName())));
                 $metafieldDefinition->setMetaType($this->resolveType($keyConfig));
                 $metafieldDefinition->setDescription($keyConfig->getDescription());
-
-                $ownerType = MetafieldOwnerTypeEnum::from(strtoupper($className)); //Product/Collection
                 $metafieldDefinition->setOwnerType($ownerType->value);
 
                 // through listener -> push to shopify so it will save API ID on definition
@@ -74,9 +77,47 @@ readonly class ShopifyMetafieldService
                 }, false);
             }
 
-            $metafieldDefinitions[] = [
+            $metafieldDefinitions['addMetafields'][$metafieldDefinition->getId()] = [
                 'classificationStoreMappingItem' => $classificationStoreMappingItem,
                 'metafieldDefinition' => $metafieldDefinition,
+            ];
+
+            // add id to array
+            $processedMetafieldDefinitionIds[] = $metafieldDefinition->getId();
+        }
+
+        // add all missing items to set them on product as empty value
+        return $this->addMetafieldsToBeDeleted($processedMetafieldDefinitionIds, $metafieldDefinitions, $ownerType);
+    }
+
+    /**
+     * @param array $processedMetafieldDefinitionIds
+     * @param array $metafieldDefinitions
+     * @param \App\Shopify\Model\Metafields\MetafieldOwnerTypeEnum $ownerType
+     *
+     * @throws \Exception
+     * @return array
+     */
+    private function addMetafieldsToBeDeleted(
+        array                  $processedMetafieldDefinitionIds,
+        array                  $metafieldDefinitions,
+        MetafieldOwnerTypeEnum $ownerType
+    ): array {
+        $list = ShopifyMetafieldDefinition::getList();
+        $list->setUnpublished(true); // get even it is unpublished, because we want to clear value on product
+        if (!empty($processedMetafieldDefinitionIds)) {
+            $condition = [];
+            foreach ($processedMetafieldDefinitionIds as $metafieldDefinitionId) {
+                $condition[] = 'id != ' . $metafieldDefinitionId;
+            }
+            $list->addConditionParam(implode(' AND ', $condition));
+        }
+        $list->addConditionParam('ownerType = ?', $ownerType->value);
+
+        foreach ($list->getObjects() as $metafieldDefinition) {
+            $metafieldDefinitions['deleteMetafields'][] = [
+                'key' => $metafieldDefinition->getMetaKey(),
+                'namespace' => $metafieldDefinition->getNamespace(),
             ];
         }
 
@@ -161,7 +202,7 @@ readonly class ShopifyMetafieldService
      * @return string|array
      */
     public function prepareValue(
-        ShopifyMetafieldDefinition $metafieldDefinition,
+        ShopifyMetafieldDefinition     $metafieldDefinition,
         ClassificationStoreMappingItem $classificationStoreMappingItem
     ): string|array {
         $metaType = $metafieldDefinition->getMetaType();
@@ -205,6 +246,29 @@ readonly class ShopifyMetafieldService
                 $value = $classificationStoreMappingItem->getValue();
         }
 
-        return is_array($value) ? json_encode($value) : $value;
+        return is_array($value) ? json_encode($value) : $value ?? '';
+    }
+
+    /**
+     * @param \App\Pimcore\Model\DataObject\Category|\Pimcore\Model\DataObject\Product|\Pimcore\Model\DataObject\AbstractObject $object
+     *
+     * @throws \PHPShopify\Exception\ApiException
+     * @throws \PHPShopify\Exception\CurlException
+     * @throws \Exception
+     * @return array
+     */
+    public function getMetafieldsToBeDeleted(Category|Product|AbstractObject $object): array
+    {
+        $metafieldIds = [];
+
+        if ($object instanceof Product) {
+            // get mapped product
+            $metafieldDefinitions = $this->getObjectMetafieldDefinitions($object);
+            $metafieldIds = $metafieldDefinitions['deleteMetafields'] ?? [];
+        } elseif ($object instanceof Category) {
+            // implement if necessary
+        }
+
+        return $metafieldIds;
     }
 }

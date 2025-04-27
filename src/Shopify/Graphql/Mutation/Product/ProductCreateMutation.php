@@ -72,6 +72,7 @@ class ProductCreateMutation extends BaseMutation
     /**
      * @param \Pimcore\Model\DataObject\Category|\Pimcore\Model\DataObject\AbstractObject $object
      *
+     * @throws \Exception
      * @return array
      */
     public function getVariables(Category|AbstractObject $object): array

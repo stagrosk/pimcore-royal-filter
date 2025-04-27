@@ -50,7 +50,7 @@ class ShopifyMetafieldsMapper implements ShopifyMetafieldsMapperInterface
         $metafieldDefinitions = $this->shopifyMetafieldService->getObjectMetafieldDefinitions($object);
 
         // loop all definitions and add values to them to be sent on product
-        foreach ($metafieldDefinitions as $item) {
+        foreach ($metafieldDefinitions['addMetafields'] as $item) {
             /** @var \App\Model\ClassificationStoreMappingItem $classificationStoreMappingItem */
             $classificationStoreMappingItem = $item['classificationStoreMappingItem'];
             /** @var \Pimcore\Model\DataObject\ShopifyMetafieldDefinition $metafieldDefinition */

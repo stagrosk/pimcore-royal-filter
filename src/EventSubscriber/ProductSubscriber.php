@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\EventSubscriber;
 
 use App\Pimcore\Helpers\VersionHelper;
+use App\Shopify\Graphql\Mutation\Metafield\DeleteMetafieldsMutation;
 use App\Shopify\Graphql\Mutation\Product\ProductCreateMutation;
 use App\Shopify\Graphql\Mutation\Product\ProductDeleteMutation;
 use App\Shopify\Graphql\Mutation\Product\ProductPublishMutation;
@@ -28,6 +29,7 @@ readonly class ProductSubscriber implements EventSubscriberInterface
      * @param \App\Shopify\Graphql\Mutation\Product\ProductPublishMutation $productPublishMutation
      * @param \App\Shopify\Graphql\Mutation\Product\Variant\ProductVariantsBulkCreateMutation $productVariantsBulkCreateMutation
      * @param \App\Shopify\Graphql\Mutation\Product\Variant\ProductVariantsBulkUpdateMutation $productVariantsBulkUpdateMutation
+     * @param \App\Shopify\Graphql\Mutation\Metafield\DeleteMetafieldsMutation $deleteMetafieldsMutation
      */
     public function __construct(
         private ProductCreateMutation             $productCreateMutation,
@@ -36,6 +38,7 @@ readonly class ProductSubscriber implements EventSubscriberInterface
         private ProductPublishMutation            $productPublishMutation,
         private ProductVariantsBulkCreateMutation $productVariantsBulkCreateMutation,
         private ProductVariantsBulkUpdateMutation $productVariantsBulkUpdateMutation,
+        private DeleteMetafieldsMutation          $deleteMetafieldsMutation
     ) {
     }
 
@@ -119,10 +122,12 @@ readonly class ProductSubscriber implements EventSubscriberInterface
         /** @var \Pimcore\Model\DataObject\Product $object */
         $object = $event->getObject();
 
-        // check object type and is not variant
-        if (!$object instanceof Product || !$object->getApiId()) {
+        // check object type
+        if (!$object instanceof Product) {
             return;
         }
+
+        $errors = [];
 
         // pimcore type is variant OR shopify type is variant
         if ($object->getType() === AbstractObject::OBJECT_TYPE_VARIANT || str_contains($object->getApiId(), 'ProductVariant')) {
@@ -136,18 +141,27 @@ readonly class ProductSubscriber implements EventSubscriberInterface
             }
 
             if (!empty($data['userErrors'])) {
-                throw new Exception($data['userErrors'][0]['message']);
+                $errors[] = $data['userErrors'][0]['message'];
             } else {
+                // set api id on new added product variant
                 $object->setApiId($data['productVariants'][0]['id']);
             }
         } else {
             // product update
             $response = $this->productUpdateMutation->callAction($object);
-            $data = $response['data']['productUpdate'];
+            if (!empty($response['data']['productUpdate']['userErrors'])) {
+                $errors[] = $response['data']['productUpdate']['userErrors'][0]['message'];
+            }
+
+            // check and delete metadata
+            $response = $this->deleteMetafieldsMutation->callAction($object);
+            if (!empty($response['data']['metafieldsDelete']['userErrors'])) {
+                $errors[] = $response['data']['metafieldsDelete']['userErrors'][0]['message'];
+            }
         }
 
-        if (!empty($data['userErrors'])) {
-            throw new Exception($data['userErrors'][0]['message']);
+        if (!empty($errors)) {
+            throw new Exception(implode("\n", $errors));
         }
     }
 

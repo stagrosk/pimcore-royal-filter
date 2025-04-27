@@ -17,4 +17,11 @@ interface ShopifyGraphqlMutationInterface
      * @return array
      */
     public function getVariables(AbstractObject $object): array;
+
+    /**
+     * @param \Pimcore\Model\DataObject\AbstractObject $object
+     *
+     * @return array
+     */
+    public function callAction(AbstractObject $object): array;
 }

@@ -21,7 +21,7 @@ class MetafieldInput implements IShopifyModel
         private ?string $key = null,
         private ?string $namespace = null,
         private ?string $type = null,
-        private string|int|float|bool|array|null $value = null,
+        private string|int|float|bool|array $value = '',
     ) {
     }
 
@@ -93,12 +93,12 @@ class MetafieldInput implements IShopifyModel
         $this->type = $type;
     }
 
-    public function getValue(): string|int|float|bool|array|null
+    public function getValue(): string|int|float|bool|array
     {
         return $this->value;
     }
 
-    public function setValue(string|int|float|bool|array|null $value): void
+    public function setValue(string|int|float|bool|array $value): void
     {
         $this->value = $value;
     }
