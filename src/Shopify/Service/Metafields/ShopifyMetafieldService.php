@@ -163,7 +163,7 @@ readonly class ShopifyMetafieldService
                 } elseif (in_array($unit->getAbbreviation(), ['ml', 'cl', 'l', 'm3', 'us_fl_oz', 'us_pt', 'us_qt', 'us_gal', 'imp_fl_oz', 'imp_pt', 'imp_qt', 'imp_gal'], true)) {
                     $metaType = MetafieldMetaTypeEnum::from('VOLUME');
                 } else {
-                    throw new \Exception('[ShopifyMetafieldService -> resolveType] Cannot resolve unit abbreviation for quantity value, Check it!');
+                    throw new \Exception(sprintf('[ShopifyMetafieldService -> resolveType] Cannot resolve unit abbreviation: %s for quantity value: %s, Check it!', $unit->getAbbreviation(), $keyConfig->getName());
                 }
                 // weight
                 break;
