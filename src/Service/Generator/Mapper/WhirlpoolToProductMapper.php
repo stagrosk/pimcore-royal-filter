@@ -94,7 +94,11 @@ class WhirlpoolToProductMapper extends BaseMapper
         }
 
         // merge default image and image gallery
-        $images = array_merge($images, $object->getImages()?->getItems());
+        $images = array_merge(
+            $images,
+            $object->getImages()?->getItems(),
+            $product->getImageGallery()?->getItems()
+        );
 
         return new ImageGallery($images);
     }

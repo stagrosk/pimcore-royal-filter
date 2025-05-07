@@ -110,12 +110,12 @@ class FilterToProductMapper extends BaseMapper
         $images = array_merge(
             $images,
             $object->getImageGallery()?->getItems(),
-            $object->getBody1()?->getImageGallery()?->getItems(),
-            $object->getBody2()?->getImageGallery()?->getItems(),
-            $object->getCenterBody1()?->getImageGallery()?->getItems(),
-            $object->getCenterBody2()?->getImageGallery()?->getItems(),
-            $object->getEquipBody2()?->getImageGallery()?->getItems(),
-            $object->getEquipBody2()?->getImageGallery()?->getItems(),
+            $object->getBody1()?->getImageGallery()?->getItems() ?? [],
+            $object->getBody2()?->getImageGallery()?->getItems() ?? [],
+            $object->getCenterBody1()?->getImageGallery()?->getItems() ?? [],
+            $object->getCenterBody2()?->getImageGallery()?->getItems() ?? [],
+            $object->getEquipBody1()?->getImageGallery()?->getItems() ?? [],
+            $object->getEquipBody2()?->getImageGallery()?->getItems() ?? [],
         );
 
         return new ImageGallery($images);
