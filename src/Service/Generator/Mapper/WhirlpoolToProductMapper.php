@@ -4,6 +4,7 @@ namespace App\Service\Generator\Mapper;
 
 use App\Pimcore\ClassificationStore\ClassificationStoreHelper;
 use App\Pimcore\ClassificationStore\ClassificationStoreService;
+use Pimcore\Model\Asset;
 use Pimcore\Model\DataObject\AbstractObject;
 use Pimcore\Model\DataObject\Data\ImageGallery;
 use Pimcore\Model\DataObject\Product;
@@ -86,11 +87,8 @@ class WhirlpoolToProductMapper extends BaseMapper
      */
     private function prepareImages(AbstractObject $object, Product $product): ImageGallery
     {
-        // images
-        $images = array_merge(
-            $object->getImages()?->getItems() ?? [],
-            $product->getImageGallery()?->getItems() ?? [],
-        );
+        // merge default image and image gallery
+        $images = array_merge($object->getDefaultImage() instanceof Asset ? [$object->getDefaultImage()] : [], $object->getImages()?->getItems() ?? [],);
 
         return new ImageGallery($images);
     }

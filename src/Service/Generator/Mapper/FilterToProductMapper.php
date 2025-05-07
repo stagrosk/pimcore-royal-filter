@@ -6,6 +6,7 @@ use App\Model\ClassificationStoreMappingItem;
 use App\Pimcore\ClassificationStore\ClassificationStoreHelper;
 use App\Pimcore\ClassificationStore\ClassificationStoreService;
 use App\Shopify\Model\Product\ProductStatusEnum;
+use Pimcore\Model\Asset;
 use Pimcore\Model\DataObject\AbstractObject;
 use Pimcore\Model\DataObject\Country;
 use Pimcore\Model\DataObject\Data\ImageGallery;
@@ -101,9 +102,14 @@ class FilterToProductMapper extends BaseMapper
     {
         // images
         $images = array_merge(
+            $object->getImage() instanceof Asset ? [$object->getImage()]: [],
             $object->getImageGallery()?->getItems() ?? [],
-            $object->getEquipBody1()?->getImageGallery()?->getItems() ?? [],
-            $object->getEquipBody2()?->getImageGallery()?->getItems() ?? []
+            $object->getBody1()?->getImageGallery()?->getItems() ?? [],
+            $object->getBody2()?->getImageGallery()?->getItems() ?? [],
+            $object->getCenterBody1()?->getImageGallery()?->getItems() ?? [],
+            $object->getCenterBody2()?->getImageGallery()?->getItems() ?? [],
+            $object->getEquipBody2()?->getImageGallery()?->getItems() ?? [],
+            $object->getEquipBody2()?->getImageGallery()?->getItems() ?? [],
         );
 
         return new ImageGallery($images);
