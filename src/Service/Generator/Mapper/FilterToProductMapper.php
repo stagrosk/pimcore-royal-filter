@@ -9,6 +9,7 @@ use App\Shopify\Model\Product\ProductStatusEnum;
 use Pimcore\Model\Asset;
 use Pimcore\Model\DataObject\AbstractObject;
 use Pimcore\Model\DataObject\Country;
+use Pimcore\Model\DataObject\Data\Hotspotimage;
 use Pimcore\Model\DataObject\Data\ImageGallery;
 use Pimcore\Model\DataObject\Product;
 use Pimcore\Model\DataObject\Service;
@@ -100,16 +101,21 @@ class FilterToProductMapper extends BaseMapper
      */
     private function prepareImages(AbstractObject $object): ImageGallery
     {
+        $images = [];
+        if ($object->getImage() instanceof Asset) {
+            $images[] = new Hotspotimage($object->getImage());
+        }
+
         // images
         $images = array_merge(
-            $object->getImage() instanceof Asset ? [$object->getImage()]: [],
-            $object->getImageGallery()?->getItems() ?? [],
-            $object->getBody1()?->getImageGallery()?->getItems() ?? [],
-            $object->getBody2()?->getImageGallery()?->getItems() ?? [],
-            $object->getCenterBody1()?->getImageGallery()?->getItems() ?? [],
-            $object->getCenterBody2()?->getImageGallery()?->getItems() ?? [],
-            $object->getEquipBody2()?->getImageGallery()?->getItems() ?? [],
-            $object->getEquipBody2()?->getImageGallery()?->getItems() ?? [],
+            $images,
+            $object->getImageGallery()?->getItems(),
+            $object->getBody1()?->getImageGallery()?->getItems(),
+            $object->getBody2()?->getImageGallery()?->getItems(),
+            $object->getCenterBody1()?->getImageGallery()?->getItems(),
+            $object->getCenterBody2()?->getImageGallery()?->getItems(),
+            $object->getEquipBody2()?->getImageGallery()?->getItems(),
+            $object->getEquipBody2()?->getImageGallery()?->getItems(),
         );
 
         return new ImageGallery($images);

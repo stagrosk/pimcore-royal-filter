@@ -6,6 +6,7 @@ use App\Pimcore\ClassificationStore\ClassificationStoreHelper;
 use App\Pimcore\ClassificationStore\ClassificationStoreService;
 use Pimcore\Model\Asset;
 use Pimcore\Model\DataObject\AbstractObject;
+use Pimcore\Model\DataObject\Data\Hotspotimage;
 use Pimcore\Model\DataObject\Data\ImageGallery;
 use Pimcore\Model\DataObject\Product;
 use Pimcore\Model\DataObject\Service;
@@ -87,8 +88,13 @@ class WhirlpoolToProductMapper extends BaseMapper
      */
     private function prepareImages(AbstractObject $object, Product $product): ImageGallery
     {
+        $images = [];
+        if ($object->getDefaultImage() instanceof Asset) {
+            $images[] = new Hotspotimage($object->getDefaultImage());
+        }
+
         // merge default image and image gallery
-        $images = array_merge($object->getDefaultImage() instanceof Asset ? [$object->getDefaultImage()] : [], $object->getImages()?->getItems() ?? [],);
+        $images = array_merge($images, $object->getImages()?->getItems());
 
         return new ImageGallery($images);
     }
