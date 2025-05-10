@@ -46,7 +46,7 @@ readonly class ShopifyMediaService
 
                 // found image
                 if ($image instanceof Image) {
-                    $shopifyImagePath = $this->getShopifyImagePath($image, $object);
+                    $shopifyImagePath = $this->getShopifyImageFullPath($image, $object);
                     $shopifyMedia = ShopifyMedia::getByPath($shopifyImagePath, ['force' => true]);
                     if (!$shopifyMedia instanceof ShopifyMedia) {
                         $shopifyMedia = ShopifyMedia::getByApiId($node['id'], 1);
@@ -157,7 +157,7 @@ readonly class ShopifyMediaService
         }
 
         $shopifyMedia->setPublished(true);
-        $shopifyMedia->setKey(Service::getValidKey($this->getShopifyImagePath($image, $product), 'object'));
+        $shopifyMedia->setKey(Service::getValidKey($this->getShopifyImageKey($image, $product), 'object'));
         $shopifyMedia->setParent(Service::createFolderByPath(sprintf('%s/%s', $product->getFullPath(), self::MEDIA_FOLDER)));
         $shopifyMedia->setApiId($apiId);
         $shopifyMedia->setImage($image);
@@ -171,7 +171,20 @@ readonly class ShopifyMediaService
      *
      * @return string
      */
-    private function getShopifyImagePath(Image $image, AbstractObject $object): string
+    private function getShopifyImageFullPath(Image $image, AbstractObject $object): string
+    {
+        $folder = sprintf('%s/%s', $object->getFullPath(), self::MEDIA_FOLDER);
+
+        return sprintf('%s/%s', $folder, $this->getShopifyImageKey($image, $object));
+    }
+
+    /**
+     * @param \Pimcore\Model\Asset\Image $image
+     * @param \Pimcore\Model\DataObject\AbstractObject $object
+     *
+     * @return string
+     */
+    private function getShopifyImageKey(Image $image, AbstractObject $object): string
     {
         return sprintf('%s-%s-%s', 'image', $object->getId(), $image->getId());
     }
