@@ -3,8 +3,11 @@
 namespace App\Shopify\Graphql\Mutation;
 
 use App\Shopify\Graphql\GraphqlClient;
+use PHPShopify\Exception\ApiException;
+use PHPShopify\Exception\CurlException;
 use Pimcore\Model\DataObject\AbstractObject;
 use Pimcore\Model\DataObject\Concrete;
+use Psr\Log\LoggerInterface;
 
 abstract class BaseMutation implements ShopifyGraphqlMutationInterface
 {
@@ -25,38 +28,44 @@ abstract class BaseMutation implements ShopifyGraphqlMutationInterface
 
     /**
      * @param \App\Shopify\Graphql\GraphqlClient $client
+     * @param \Psr\Log\LoggerInterface $logger
      */
     public function __construct(
-        private readonly GraphqlClient $client
+        private readonly GraphqlClient $client,
+        private readonly LoggerInterface $logger
     ) {
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\AbstractObject $object
+     * @param \Pimcore\Model\DataObject\AbstractObject|array $object
      *
-     * @throws \PHPShopify\Exception\ApiException
-     * @throws \PHPShopify\Exception\CurlException
      * @return array
      */
-    public function callAction(AbstractObject $object): array
+    public function callAction(AbstractObject|array $object): array
     {
-        $client = $this->client->getClient();
+        try {
+            $client = $this->client->getClient();
 
-        $variables = $this->getVariables($object);
-        if (isset($variables['multiCall'])) {
-            $results = [
-                'multiCall' => [],
-            ];
-            foreach ($variables['inputs'] as $input) {
-                $results['multiCall'][] = [
-                    'input' => $input,
-                    'response' => $client->GraphQL()->post($this->getMutation(), null, null, $input)
+            $variables = $this->getVariables($object);
+            if (isset($variables['multiCall'])) {
+                $results = [
+                    'multiCall' => [],
                 ];
+                foreach ($variables['inputs'] as $input) {
+                    $results['multiCall'][] = [
+                        'input' => $input,
+                        'response' => $client->GraphQL()->post($this->getMutation(), null, null, $input)
+                    ];
+                }
+
+                return $results;
             }
 
-            return $results;
+            return $client->GraphQL()->post($this->getMutation(), null, null, $this->getVariables($object));
+        } catch (ApiException|CurlException $e) {
+            $this->logger->error('[Query] Error: ' . $e->getMessage());
         }
 
-        return $client->GraphQL()->post($this->getMutation(), null, null, $this->getVariables($object));
+        return [];
     }
 }

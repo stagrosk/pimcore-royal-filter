@@ -10,18 +10,21 @@ use App\Shopify\Model\Metafields\MetafieldIdentifierInputs;
 use App\Shopify\Service\Metafields\ShopifyMetafieldService;
 use Pimcore\Model\DataObject\AbstractObject;
 use Pimcore\Model\DataObject\Product;
+use Psr\Log\LoggerInterface;
 
 class DeleteMetafieldsMutation extends BaseMutation
 {
     /**
      * @param \App\Shopify\Service\Metafields\ShopifyMetafieldService $shopifyMetafieldService
      * @param \App\Shopify\Graphql\GraphqlClient $client
+     * @param \Psr\Log\LoggerInterface $logger
      */
     public function __construct(
         private readonly ShopifyMetafieldService $shopifyMetafieldService,
-        GraphqlClient                            $client
+        GraphqlClient                            $client,
+        LoggerInterface                          $logger
     ) {
-        parent::__construct($client);
+        parent::__construct($client, $logger);
     }
 
     /**
@@ -47,13 +50,13 @@ class DeleteMetafieldsMutation extends BaseMutation
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\AbstractObject|\Pimcore\Model\DataObject\Product|\App\Pimcore\Model\DataObject\Category $object
+     * @param \Pimcore\Model\DataObject\AbstractObject|\Pimcore\Model\DataObject\Product|\App\Pimcore\Model\DataObject\Category|array $object
      *
      * @throws \PHPShopify\Exception\ApiException
      * @throws \PHPShopify\Exception\CurlException
      * @return array
      */
-    public function getVariables(AbstractObject|Product|Category $object): array
+    public function getVariables(AbstractObject|Product|Category|array $object): array
     {
         $metafieldIdentifierInputs = new MetafieldIdentifierInputs();
 

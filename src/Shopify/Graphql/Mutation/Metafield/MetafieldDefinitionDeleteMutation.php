@@ -6,24 +6,15 @@ use App\Shopify\Graphql\GraphqlClient;
 use App\Shopify\Graphql\Mutation\BaseMutation;
 use Pimcore\Model\DataObject\AbstractObject;
 use Pimcore\Model\DataObject\ShopifyMetafieldDefinition;
+use Psr\Log\LoggerInterface;
 
 class MetafieldDefinitionDeleteMutation extends BaseMutation
 {
-    /**
-     * @param \App\Shopify\Graphql\GraphqlClient $client
-     */
-    public function __construct(
-        GraphQLClient $client
-    ) {
-        parent::__construct($client);
-    }
-
     /**
      * @return string
      */
     public function getMutation(): string
     {
-
         return <<<'GRAPHQL'
             mutation DeleteMetafieldDefinition($id: ID!, $deleteAllAssociatedMetafields: Boolean!) {
               metafieldDefinitionDelete(id: $id, deleteAllAssociatedMetafields: $deleteAllAssociatedMetafields) {
@@ -39,11 +30,11 @@ class MetafieldDefinitionDeleteMutation extends BaseMutation
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\ShopifyMetafieldDefinition|\Pimcore\Model\DataObject\AbstractObject $object
+     * @param \Pimcore\Model\DataObject\ShopifyMetafieldDefinition|\Pimcore\Model\DataObject\AbstractObject|array $object
      *
      * @return array
      */
-    public function getVariables(ShopifyMetafieldDefinition|AbstractObject $object): array
+    public function getVariables(ShopifyMetafieldDefinition|AbstractObject|array $object): array
     {
         return [
             'id' => $object->getApiId(),

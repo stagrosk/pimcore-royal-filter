@@ -7,25 +7,33 @@ use App\Shopify\Graphql\Mutation\BaseMutation;
 use App\Shopify\Model\Media\CreateMediaInputs;
 use App\Shopify\Model\Product\ProductUpdateInput;
 use App\Shopify\Service\Media\ShopifyMediaMapper;
+use App\Shopify\Service\Media\ShopifyMediaService;
 use App\Shopify\Service\Product\ShopifyProductMapper;
 use Pimcore\Model\DataObject\AbstractObject;
-use Pimcore\Model\DataObject\Category;
+use Psr\Log\LoggerInterface;
 
 class ProductUpdateMutation extends BaseMutation
 {
     /**
      * @param \App\Shopify\Graphql\GraphqlClient $client
+     * @param \Psr\Log\LoggerInterface $logger
      * @param \App\Shopify\Service\Product\ShopifyProductMapper $productMapper
      * @param \App\Shopify\Service\Media\ShopifyMediaMapper $mediaMapper
+     * @param \App\Shopify\Service\Media\ShopifyMediaService $shopifyMediaService
      */
     public function __construct(
         GraphQLClient                         $client,
+        LoggerInterface                       $logger,
         private readonly ShopifyProductMapper $productMapper,
-        private readonly ShopifyMediaMapper   $mediaMapper
+        private readonly ShopifyMediaMapper   $mediaMapper,
+        private readonly ShopifyMediaService  $shopifyMediaService,
     ) {
-        parent::__construct($client);
+        parent::__construct($client, $logger);
     }
 
+    /**
+     * @return string
+     */
     public function getMutation(): string
     {
         return <<<'GRAPHQL'
@@ -34,23 +42,6 @@ class ProductUpdateMutation extends BaseMutation
                 product {
                   id
                   handle
-                  media(first: 10) {
-                    nodes {
-                      alt
-                      mediaContentType
-                      preview {
-                        status
-                      }
-                    }
-                  }
-                  metafields(first: 10) {
-                    nodes {
-                      id
-                      namespace
-                      key
-                      value
-                    }
-                  }
                 }
                 userErrors {
                   field
@@ -62,15 +53,18 @@ class ProductUpdateMutation extends BaseMutation
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\Category|\Pimcore\Model\DataObject\AbstractObject $object
+     * @param \Pimcore\Model\DataObject\AbstractObject|array $object
      *
      * @throws \Exception
      * @return array
      */
-    public function getVariables(Category|AbstractObject $object): array
+    public function getVariables(AbstractObject|array $object): array
     {
         $productUpdateInput = $this->productMapper->getMappedObject(new ProductUpdateInput(), $object);
-        $createMediaInput = $this->mediaMapper->getMappedObject(new CreateMediaInputs(), $object);
+
+        // this is just an array of new added media files
+        $newImages = $this->shopifyMediaService->getUnprocessedImages($object);
+        $createMediaInput = $this->mediaMapper->getMappedImages(new CreateMediaInputs(), $newImages);
 
         return [
             'product' => $productUpdateInput->getAsArray(),

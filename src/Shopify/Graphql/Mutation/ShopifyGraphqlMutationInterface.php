@@ -12,16 +12,16 @@ interface ShopifyGraphqlMutationInterface
     public function getMutation(): string;
 
     /**
-     * @param \Pimcore\Model\DataObject\AbstractObject $object
+     * @param \Pimcore\Model\DataObject\AbstractObject|array $object
      *
      * @return array
      */
-    public function getVariables(AbstractObject $object): array;
+    public function getVariables(AbstractObject|array $object): array;
 
     /**
-     * @param \Pimcore\Model\DataObject\AbstractObject $object
+     * @param \Pimcore\Model\DataObject\AbstractObject|array $object
      *
      * @return array
      */
-    public function callAction(AbstractObject $object): array;
+    public function callAction(AbstractObject|array $object): array;
 }

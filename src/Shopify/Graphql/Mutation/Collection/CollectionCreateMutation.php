@@ -8,18 +8,21 @@ use App\Shopify\Model\Collection\CollectionInput;
 use App\Shopify\Service\Collection\ShopifyCollectionMapper;
 use Pimcore\Model\DataObject\AbstractObject;
 use Pimcore\Model\DataObject\Category;
+use Psr\Log\LoggerInterface;
 
 class CollectionCreateMutation extends BaseMutation
 {
     /**
      * @param \App\Shopify\Graphql\GraphqlClient $client
      * @param \App\Shopify\Service\Collection\ShopifyCollectionMapper $collectionMapper
+     * @param \Psr\Log\LoggerInterface $logger
      */
     public function __construct(
-        GraphQLClient $client,
+        GraphQLClient                            $client,
         private readonly ShopifyCollectionMapper $collectionMapper,
+        LoggerInterface                          $logger
     ) {
-        parent::__construct($client);
+        parent::__construct($client, $logger);
     }
 
     public function getMutation(): string
@@ -61,16 +64,16 @@ class CollectionCreateMutation extends BaseMutation
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\Category|\Pimcore\Model\DataObject\AbstractObject $object
+     * @param \Pimcore\Model\DataObject\Category|\Pimcore\Model\DataObject\AbstractObject|array $object
      *
      * @return array
      */
-    public function getVariables(Category|AbstractObject $object): array
+    public function getVariables(Category|AbstractObject|array $object): array
     {
         $shopifyCollectionModel = $this->collectionMapper->getMappedObject(new CollectionInput(), $object);
 
         return [
-            'input' => $shopifyCollectionModel->getAsArray()
+            'input' => $shopifyCollectionModel->getAsArray(),
         ];
     }
 }

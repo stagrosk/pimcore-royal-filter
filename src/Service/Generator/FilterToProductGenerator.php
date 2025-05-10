@@ -33,7 +33,7 @@ class FilterToProductGenerator extends BaseProductGenerator
         // get product
         $product = $object->getProduct();
 
-        // if product was not already generated -> create new
+        // if the product was not already generated -> create new
         if (!$product instanceof Product) {
             $product =  new Product();
         }

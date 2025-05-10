@@ -9,20 +9,26 @@ use App\Shopify\Model\Product\Variant\ProductVariantsBulkInputs;
 use App\Shopify\Service\Product\Variant\ShopifyVariantMapper;
 use Pimcore\Model\DataObject\AbstractObject;
 use Pimcore\Model\DataObject\Product;
+use Psr\Log\LoggerInterface;
 
 class ProductVariantsBulkUpdateMutation extends BaseMutation
 {
     /**
      * @param \App\Shopify\Graphql\GraphqlClient $client
      * @param \App\Shopify\Service\Product\Variant\ShopifyVariantMapper $shopifyVariantMapper
+     * @param \Psr\Log\LoggerInterface $logger
      */
     public function __construct(
         GraphQLClient                         $client,
         private readonly ShopifyVariantMapper $shopifyVariantMapper,
+        LoggerInterface                       $logger
     ) {
-        parent::__construct($client);
+        parent::__construct($client, $logger);
     }
 
+    /**
+     * @return string
+     */
     public function getMutation(): string
     {
         return <<<'GRAPHQL'
@@ -44,12 +50,12 @@ class ProductVariantsBulkUpdateMutation extends BaseMutation
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\Product|\Pimcore\Model\DataObject\AbstractObject $object
+     * @param \Pimcore\Model\DataObject\Product|\Pimcore\Model\DataObject\AbstractObject|array $object
      *
      * @throws \Exception
      * @return array
      */
-    public function getVariables(Product|AbstractObject $object): array
+    public function getVariables(Product|AbstractObject|array $object): array
     {
         $productVariantsBulkInputs = new ProductVariantsBulkInputs();
         if ($object->getType() === AbstractObject::OBJECT_TYPE_VARIANT) {

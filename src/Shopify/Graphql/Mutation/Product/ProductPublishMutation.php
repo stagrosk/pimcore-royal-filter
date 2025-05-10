@@ -2,7 +2,6 @@
 
 namespace App\Shopify\Graphql\Mutation\Product;
 
-use App\Shopify\Graphql\GraphqlClient;
 use App\Shopify\Graphql\Mutation\BaseMutation;
 use App\Shopify\Model\Product\ProductPublicationInput;
 use App\Shopify\Model\Product\ProductPublishInput;
@@ -12,14 +11,8 @@ use Pimcore\Model\DataObject\Category;
 class ProductPublishMutation extends BaseMutation
 {
     /**
-     * @param \App\Shopify\Graphql\GraphqlClient $client
+     * @return string
      */
-    public function __construct(
-        GraphQLClient $client,
-    ) {
-        parent::__construct($client);
-    }
-
     public function getMutation(): string
     {
         return <<<'GRAPHQL'
@@ -38,17 +31,17 @@ class ProductPublishMutation extends BaseMutation
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\Category|\Pimcore\Model\DataObject\AbstractObject $object
+     * @param \Pimcore\Model\DataObject\Category|\Pimcore\Model\DataObject\AbstractObject|array $object
      *
      * @return array
      */
-    public function getVariables(Category|AbstractObject $object): array
+    public function getVariables(Category|AbstractObject|array $object): array
     {
         $shopifyProductPublicationInput = new ProductPublicationInput(self::PUBLICATIONS['store']['id']);
         $shopifyProductPublishInput = new ProductPublishInput($object->getApiId(), $shopifyProductPublicationInput);
 
         return [
-            'input' => $shopifyProductPublishInput->getAsArray()
+            'input' => $shopifyProductPublishInput->getAsArray(),
         ];
     }
 }

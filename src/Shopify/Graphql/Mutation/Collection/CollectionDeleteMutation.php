@@ -7,18 +7,13 @@ use App\Shopify\Graphql\Mutation\BaseMutation;
 use App\Shopify\Model\Collection\CollectionDeleteInput;
 use Pimcore\Model\DataObject\AbstractObject;
 use Pimcore\Model\DataObject\Category;
+use Psr\Log\LoggerInterface;
 
 class CollectionDeleteMutation extends BaseMutation
 {
     /**
-     * @param \App\Shopify\Graphql\GraphqlClient $client
+     * @return string
      */
-    public function __construct(
-        GraphQLClient $client,
-    ) {
-        parent::__construct($client);
-    }
-
     public function getMutation(): string
     {
         return <<<'GRAPHQL'
@@ -39,16 +34,16 @@ class CollectionDeleteMutation extends BaseMutation
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\Category|\Pimcore\Model\DataObject\AbstractObject $object
+     * @param \Pimcore\Model\DataObject\Category|\Pimcore\Model\DataObject\AbstractObject|array $object
      *
      * @return array
      */
-    public function getVariables(Category|AbstractObject $object): array
+    public function getVariables(Category|AbstractObject|array $object): array
     {
         $shopifyCollectionDeleteInput = new CollectionDeleteInput($object->getApiId());
 
         return [
-            'input' => $shopifyCollectionDeleteInput->getAsArray()
+            'input' => $shopifyCollectionDeleteInput->getAsArray(),
         ];
     }
 }

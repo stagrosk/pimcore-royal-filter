@@ -12,6 +12,7 @@ use App\Shopify\Graphql\Mutation\Product\ProductPublishMutation;
 use App\Shopify\Graphql\Mutation\Product\ProductUpdateMutation;
 use App\Shopify\Graphql\Mutation\Product\Variant\ProductVariantsBulkCreateMutation;
 use App\Shopify\Graphql\Mutation\Product\Variant\ProductVariantsBulkUpdateMutation;
+use App\Shopify\Service\Media\ShopifyMediaService;
 use Exception;
 use Pimcore\Event\DataObjectEvents;
 use Pimcore\Event\Model\DataObjectEvent;
@@ -38,7 +39,8 @@ readonly class ProductSubscriber implements EventSubscriberInterface
         private ProductPublishMutation            $productPublishMutation,
         private ProductVariantsBulkCreateMutation $productVariantsBulkCreateMutation,
         private ProductVariantsBulkUpdateMutation $productVariantsBulkUpdateMutation,
-        private DeleteMetafieldsMutation          $deleteMetafieldsMutation
+        private DeleteMetafieldsMutation          $deleteMetafieldsMutation,
+        private ShopifyMediaService               $shopifyMediaService
     ) {
     }
 
@@ -64,12 +66,12 @@ readonly class ProductSubscriber implements EventSubscriberInterface
         /** @var \Pimcore\Model\DataObject\Product $object */
         $object = $event->getObject();
 
-        // check object type and is not variant
+        // check an object type and is not variant
         if (!$object instanceof Product) {
             return;
         }
 
-        // call product update with variants configuration
+        // call product update with variant configuration
         if ($object->getType() === AbstractObject::OBJECT_TYPE_VARIANT) {
             // call resave to trigger update of variant
             VersionHelper::useVersioning(function () use ($object) {
@@ -93,6 +95,9 @@ readonly class ProductSubscriber implements EventSubscriberInterface
 
             // publish
             $this->productPublishMutation->callAction($object);
+
+            // process shopify media
+            $this->shopifyMediaService->processMedia($object);
 
             // automatic creation of variant for product with first ID generated form shopify
             $variant = new Product();
@@ -122,7 +127,7 @@ readonly class ProductSubscriber implements EventSubscriberInterface
         /** @var \Pimcore\Model\DataObject\Product $object */
         $object = $event->getObject();
 
-        // check object type
+        // check an object type
         if (!$object instanceof Product) {
             return;
         }
@@ -158,6 +163,9 @@ readonly class ProductSubscriber implements EventSubscriberInterface
             if (!empty($response['data']['metafieldsDelete']['userErrors'])) {
                 $errors[] = $response['data']['metafieldsDelete']['userErrors'][0]['message'];
             }
+
+            // process shopify media
+            $this->shopifyMediaService->processMedia($object);
         }
 
         if (!empty($errors)) {
@@ -178,7 +186,7 @@ readonly class ProductSubscriber implements EventSubscriberInterface
         /** @var \Pimcore\Model\DataObject\Product $object */
         $object = $event->getObject();
 
-        // check object type
+        // check an object type
         if (!$object instanceof Product
             || empty($object->getApiId())
             || $object->getType() === AbstractObject::OBJECT_TYPE_VARIANT   // pimcore type is variant

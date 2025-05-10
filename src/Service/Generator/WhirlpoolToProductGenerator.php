@@ -36,7 +36,7 @@ class WhirlpoolToProductGenerator extends BaseProductGenerator
 
         // if the product was not already generated -> create new
         if (!$product instanceof Product) {
-            $product =  new Product();
+            $product = new Product();
         }
 
         // use inheritance

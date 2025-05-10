@@ -10,6 +10,7 @@ use App\Shopify\Service\Media\ShopifyMediaMapper;
 use App\Shopify\Service\Product\ShopifyProductMapper;
 use Pimcore\Model\DataObject\AbstractObject;
 use Pimcore\Model\DataObject\Category;
+use Psr\Log\LoggerInterface;
 
 class ProductCreateMutation extends BaseMutation
 {
@@ -17,15 +18,20 @@ class ProductCreateMutation extends BaseMutation
      * @param \App\Shopify\Graphql\GraphqlClient $client
      * @param \App\Shopify\Service\Product\ShopifyProductMapper $productMapper
      * @param \App\Shopify\Service\Media\ShopifyMediaMapper $mediaMapper
+     * @param \Psr\Log\LoggerInterface $logger
      */
     public function __construct(
         GraphQLClient                         $client,
         private readonly ShopifyProductMapper $productMapper,
-        private readonly ShopifyMediaMapper   $mediaMapper
+        private readonly ShopifyMediaMapper   $mediaMapper,
+        LoggerInterface                       $logger
     ) {
-        parent::__construct($client);
+        parent::__construct($client, $logger);
     }
 
+    /**
+     * @return string
+     */
     public function getMutation(): string
     {
         return <<<'GRAPHQL'
@@ -33,32 +39,7 @@ class ProductCreateMutation extends BaseMutation
                 productCreate(product: $product, media: $media) {
                     product {
                         id
-                        title
                         handle
-                        metafields(first: 10) {
-                            nodes {
-                                id
-                                namespace
-                                key
-                                value
-                            }
-                        }
-                        media(first: 10) {
-                            nodes {
-                                alt
-                                mediaContentType
-                                preview {
-                                    status
-                                }
-                            }
-                        }
-                        variants(first: 1) {
-                            edges {
-                                node {
-                                    id
-                                }
-                            }
-                        }
                     }
                     userErrors {
                         field
@@ -70,12 +51,12 @@ class ProductCreateMutation extends BaseMutation
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\Category|\Pimcore\Model\DataObject\AbstractObject $object
+     * @param \Pimcore\Model\DataObject\Category|\Pimcore\Model\DataObject\AbstractObject|array $object
      *
      * @throws \Exception
      * @return array
      */
-    public function getVariables(Category|AbstractObject $object): array
+    public function getVariables(Category|AbstractObject|array $object): array
     {
         $productCreateInput = $this->productMapper->getMappedObject(new ProductCreateInput(), $object);
         $createMediaInputs = $this->mediaMapper->getMappedObject(new CreateMediaInputs(), $object);

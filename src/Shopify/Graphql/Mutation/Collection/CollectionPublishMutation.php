@@ -8,18 +8,13 @@ use App\Shopify\Model\Collection\CollectionPublicationInput;
 use App\Shopify\Model\Collection\CollectionPublishInput;
 use Pimcore\Model\DataObject\AbstractObject;
 use Pimcore\Model\DataObject\Category;
+use Psr\Log\LoggerInterface;
 
 class CollectionPublishMutation extends BaseMutation
 {
     /**
-     * @param \App\Shopify\Graphql\GraphqlClient $client
+     * @return string
      */
-    public function __construct(
-        GraphQLClient $client,
-    ) {
-        parent::__construct($client);
-    }
-
     public function getMutation(): string
     {
         return <<<'GRAPHQL'
@@ -38,17 +33,17 @@ class CollectionPublishMutation extends BaseMutation
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\Category|\Pimcore\Model\DataObject\AbstractObject $object
+     * @param \Pimcore\Model\DataObject\Category|\Pimcore\Model\DataObject\AbstractObject|array $object
      *
      * @return array
      */
-    public function getVariables(Category|AbstractObject $object): array
+    public function getVariables(Category|AbstractObject|array $object): array
     {
         $collectionPublicationInput = new CollectionPublicationInput(self::PUBLICATIONS['store']['id']);
         $collectionPublishInput = new CollectionPublishInput($object->getApiId(), $collectionPublicationInput);
 
         return [
-            'input' => $collectionPublishInput->getAsArray()
+            'input' => $collectionPublishInput->getAsArray(),
         ];
     }
 }

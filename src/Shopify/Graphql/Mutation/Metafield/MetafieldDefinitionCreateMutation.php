@@ -8,18 +8,21 @@ use App\Shopify\Model\Metafields\MetafieldDefinitionInput;
 use App\Shopify\Service\Metafields\ShopifyShopifyMetafieldDefinitionMapper;
 use Pimcore\Model\DataObject\AbstractObject;
 use Pimcore\Model\DataObject\ShopifyMetafieldDefinition;
+use Psr\Log\LoggerInterface;
 
 class MetafieldDefinitionCreateMutation extends BaseMutation
 {
     /**
      * @param \App\Shopify\Graphql\GraphqlClient $client
      * @param \App\Shopify\Service\Metafields\ShopifyShopifyMetafieldDefinitionMapper $metafieldDefinitionMapper
+     * @param \Psr\Log\LoggerInterface $logger
      */
     public function __construct(
         GraphQLClient                                            $client,
         private readonly ShopifyShopifyMetafieldDefinitionMapper $metafieldDefinitionMapper,
+        LoggerInterface                                          $logger
     ) {
-        parent::__construct($client);
+        parent::__construct($client, $logger);
     }
 
     /**
@@ -48,11 +51,11 @@ class MetafieldDefinitionCreateMutation extends BaseMutation
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\ShopifyMetafieldDefinition|\Pimcore\Model\DataObject\AbstractObject $object
+     * @param \Pimcore\Model\DataObject\ShopifyMetafieldDefinition|\Pimcore\Model\DataObject\AbstractObject|array $object
      *
      * @return array
      */
-    public function getVariables(ShopifyMetafieldDefinition|AbstractObject $object): array
+    public function getVariables(ShopifyMetafieldDefinition|AbstractObject|array $object): array
     {
         return [
             'definition' => $this->metafieldDefinitionMapper->getMappedObject(new MetafieldDefinitionInput(), $object)->getAsArray(),

@@ -8,18 +8,21 @@ use App\Shopify\Model\Price\PriceListUpdateInputs;
 use App\Shopify\Service\Price\ShopifyPriceMapper;
 use Pimcore\Model\DataObject\AbstractObject;
 use Pimcore\Model\DataObject\Product;
+use Psr\Log\LoggerInterface;
 
 class PriceListFixedPricesUpdateMutation extends BaseMutation
 {
     /**
      * @param \App\Shopify\Graphql\GraphqlClient $client
      * @param \App\Shopify\Service\Price\ShopifyPriceMapper $priceMapper
+     * @param \Psr\Log\LoggerInterface $logger
      */
     public function __construct(
-        GraphQLClient $client,
+        GraphQLClient                       $client,
         private readonly ShopifyPriceMapper $priceMapper,
+        LoggerInterface                     $logger
     ) {
-        parent::__construct($client);
+        parent::__construct($client, $logger);
     }
 
     /**
@@ -40,12 +43,12 @@ class PriceListFixedPricesUpdateMutation extends BaseMutation
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\Product|\Pimcore\Model\DataObject\AbstractObject $object
+     * @param \Pimcore\Model\DataObject\Product|\Pimcore\Model\DataObject\AbstractObject|array $object
      *
      * @throws \Exception
      * @return array
      */
-    public function getVariables(Product|AbstractObject $object): array
+    public function getVariables(Product|AbstractObject|array $object): array
     {
         return [
             'multiCall' => true,

@@ -6,7 +6,6 @@ use App\Model\ClassificationStoreMappingItem;
 use App\Pimcore\ClassificationStore\ClassificationStoreHelper;
 use App\Pimcore\Helpers\VersionHelper;
 use App\Pimcore\Model\DataObject\Category;
-use App\Shopify\Graphql\Query\Product\ProductMetafieldsQuery;
 use App\Shopify\Model\Metafields\MetafieldMetaTypeEnum;
 use App\Shopify\Model\Metafields\MetafieldOwnerTypeEnum;
 use Pimcore\Model\DataObject\AbstractObject;
@@ -27,6 +26,8 @@ readonly class ShopifyMetafieldService
     }
 
     /**
+     * possible to implement metafields on: variants, collections, customers, orders, draft orders, locations, pages, blogs, blog posts, markets
+     *
      * @param \Pimcore\Model\DataObject\AbstractObject|\Pimcore\Model\DataObject\Product $object
      *
      * @throws \Exception
@@ -99,12 +100,12 @@ readonly class ShopifyMetafieldService
      * @return array
      */
     private function addMetafieldsToBeDeleted(
-        array                  $processedMetafieldDefinitionIds,
-        array                  $metafieldDefinitions,
+        array $processedMetafieldDefinitionIds,
+        array $metafieldDefinitions,
         MetafieldOwnerTypeEnum $ownerType
     ): array {
         $list = ShopifyMetafieldDefinition::getList();
-        $list->setUnpublished(true); // get even it is unpublished, because we want to clear value on product
+        $list->setUnpublished(true); // get even it is unpublished because we want to clear value on the product
         if (!empty($processedMetafieldDefinitionIds)) {
             $condition = [];
             foreach ($processedMetafieldDefinitionIds as $metafieldDefinitionId) {
@@ -163,10 +164,10 @@ readonly class ShopifyMetafieldService
                 } elseif (in_array($unit->getAbbreviation(), ['ml', 'cl', 'l', 'm3', 'us_fl_oz', 'us_pt', 'us_qt', 'us_gal', 'imp_fl_oz', 'imp_pt', 'imp_qt', 'imp_gal'], true)) {
                     $metaType = MetafieldMetaTypeEnum::from('VOLUME');
                 } else {
+                    // unsupported W, kwh...
                     $metaType = MetafieldMetaTypeEnum::from('NUMBER_DECIMAL');
 //                    throw new \Exception(sprintf('[ShopifyMetafieldService -> resolveType] Cannot resolve unit abbreviation: %s for quantity value: %s, Check it!', $unit->getAbbreviation(), $keyConfig->getName()));
                 }
-                // weight
                 break;
 
             case 'checkbox':
@@ -262,12 +263,11 @@ readonly class ShopifyMetafieldService
     {
         $metafieldIds = [];
 
+        // possible to implement: variants, collections, customers, orders, draft orders, locations, pages, blogs, blog posts, markets
         if ($object instanceof Product) {
             // get mapped product
             $metafieldDefinitions = $this->getObjectMetafieldDefinitions($object);
             $metafieldIds = $metafieldDefinitions['deleteMetafields'] ?? [];
-        } elseif ($object instanceof Category) {
-            // implement if necessary
         }
 
         return $metafieldIds;
