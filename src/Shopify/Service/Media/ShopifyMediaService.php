@@ -59,18 +59,24 @@ readonly class ShopifyMediaService
                 } else {
                     // not found image -> delete from shopify
                     $shopifyMediaToBeDeleted[] = $node['id'];
-
-                    // try to get by apiId ... if found -> delete
-                    $shopifyMedia = ShopifyMedia::getByApiId($node['id'], 1);
-                    if ($shopifyMedia instanceof ShopifyMedia) {
-                        $shopifyMedia->delete();
-                    }
                 }
             }
         }
 
         if (!empty($shopifyMediaToBeDeleted)) {
-            $this->fileDeleteMutation->callAction($shopifyMediaToBeDeleted);
+            $response = $this->fileDeleteMutation->callAction($shopifyMediaToBeDeleted);
+            $data = $response['data']['fileDelete'];
+            if (!empty($data['userErrors'])) {
+                throw new \Exception($data['userErrors'][0]['message']);
+            }
+
+            foreach ($shopifyMediaToBeDeleted as $shopifyMediaId) {
+                // try to get by apiId ... if found -> delete
+                $shopifyMedia = ShopifyMedia::getByApiId($shopifyMediaId, 1);
+                if ($shopifyMedia instanceof ShopifyMedia) {
+                    $shopifyMedia->delete();
+                }
+            }
         }
     }
 
