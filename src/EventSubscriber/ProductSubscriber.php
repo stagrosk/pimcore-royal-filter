@@ -31,6 +31,7 @@ readonly class ProductSubscriber implements EventSubscriberInterface
      * @param \App\Shopify\Graphql\Mutation\Product\Variant\ProductVariantsBulkCreateMutation $productVariantsBulkCreateMutation
      * @param \App\Shopify\Graphql\Mutation\Product\Variant\ProductVariantsBulkUpdateMutation $productVariantsBulkUpdateMutation
      * @param \App\Shopify\Graphql\Mutation\Metafield\DeleteMetafieldsMutation $deleteMetafieldsMutation
+     * @param \App\Shopify\Service\Media\ShopifyMediaService $shopifyMediaService
      */
     public function __construct(
         private ProductCreateMutation             $productCreateMutation,

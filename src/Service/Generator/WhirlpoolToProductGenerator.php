@@ -36,6 +36,11 @@ class WhirlpoolToProductGenerator extends BaseProductGenerator
 
         // if the product was not already generated -> create new
         if (!$product instanceof Product) {
+            // try to get filter by relation -> generatedFromObject
+            $product = Product::getByGeneratedFromObject($object, 1);
+            $product?->delete();
+
+            // create new
             $product = new Product();
         }
 

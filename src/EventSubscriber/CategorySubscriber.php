@@ -50,7 +50,7 @@ readonly class CategorySubscriber implements EventSubscriberInterface
         /** @var \Pimcore\Model\DataObject\Category $object */
         $object = $event->getObject();
 
-        // check object type
+        // check an object type
         if (!$object instanceof Category) {
             return;
         }
@@ -91,12 +91,14 @@ readonly class CategorySubscriber implements EventSubscriberInterface
         /** @var \Pimcore\Model\DataObject\Category $object */
         $object = $event->getObject();
 
-        // check object type
+        // check an object type
         if (!$object instanceof Category) {
             return;
         }
 
-        $data = $this->collectionDeleteMutation->callAction($object);
+        $response = $this->collectionDeleteMutation->callAction($object);
+        $data = $response['data']['collectionDelete'];
+
         if (!empty($data['userErrors'])) {
             throw new \Exception($data['userErrors'][0]['message']);
         }

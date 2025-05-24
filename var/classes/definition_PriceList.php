@@ -5,9 +5,13 @@
  * Variants: no
  *
  * Fields Summary:
- * - currency [input]
- * - apiId [input]
+ * - name [input]
+ * - currency [select]
  * - basePricelist [checkbox]
+ * - compareAtMode [select]
+ * - adjustmentType [select]
+ * - percentage [numeric]
+ * - apiId [input]
  */
 
 return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
@@ -17,7 +21,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1744212858,
+   'modificationDate' => 1748106808,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -62,8 +66,8 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
         array (
           0 => 
           \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
-             'name' => 'currency',
-             'title' => 'Currency',
+             'name' => 'name',
+             'title' => 'Name',
              'tooltip' => '',
              'mandatory' => false,
              'noteditable' => false,
@@ -91,12 +95,210 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'defaultValueGenerator' => '',
           )),
           1 => 
+          \Pimcore\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
+             'name' => 'currency',
+             'title' => 'Currency',
+             'tooltip' => '',
+             'mandatory' => true,
+             'noteditable' => false,
+             'index' => false,
+             'locked' => false,
+             'style' => '',
+             'permissions' => NULL,
+             'fieldtype' => '',
+             'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => false,
+             'visibleSearch' => false,
+             'blockedVarsForExport' => 
+            array (
+            ),
+             'options' => 
+            array (
+              0 => 
+              array (
+                'key' => 'EUR',
+                'value' => 'EUR',
+              ),
+              1 => 
+              array (
+                'key' => 'CZK',
+                'value' => 'CZK',
+              ),
+              2 => 
+              array (
+                'key' => 'USD',
+                'value' => 'USD',
+              ),
+              3 => 
+              array (
+                'key' => 'HUF',
+                'value' => 'HUF',
+              ),
+              4 => 
+              array (
+                'key' => 'PLN',
+                'value' => 'PLN',
+              ),
+            ),
+             'defaultValue' => '',
+             'columnLength' => 190,
+             'dynamicOptions' => false,
+             'defaultValueGenerator' => '',
+             'width' => '',
+             'optionsProviderType' => 'configure',
+             'optionsProviderClass' => '',
+             'optionsProviderData' => '',
+          )),
+          2 => 
+          \Pimcore\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
+             'name' => 'basePricelist',
+             'title' => 'Base Pricelist',
+             'tooltip' => '! Warning ! this price is set as main price on product / variants',
+             'mandatory' => false,
+             'noteditable' => false,
+             'index' => false,
+             'locked' => false,
+             'style' => '',
+             'permissions' => NULL,
+             'fieldtype' => '',
+             'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => false,
+             'visibleSearch' => false,
+             'blockedVarsForExport' => 
+            array (
+            ),
+             'defaultValue' => NULL,
+             'defaultValueGenerator' => '',
+          )),
+          3 => 
+          \Pimcore\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
+             'name' => 'compareAtMode',
+             'title' => 'Compare At Mode',
+             'tooltip' => 'ADJUSTED
+The compare at price is adjusted based on percentage specified in price list.
+
+Anchor to NULLIFY
+The compare at prices are set to null unless explicitly defined by a fixed price value.',
+             'mandatory' => true,
+             'noteditable' => false,
+             'index' => false,
+             'locked' => false,
+             'style' => '',
+             'permissions' => NULL,
+             'fieldtype' => '',
+             'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => true,
+             'visibleSearch' => false,
+             'blockedVarsForExport' => 
+            array (
+            ),
+             'options' => 
+            array (
+              0 => 
+              array (
+                'key' => 'ADJUSTED',
+                'value' => 'ADJUSTED',
+              ),
+              1 => 
+              array (
+                'key' => 'NULLIFY',
+                'value' => 'NULLIFY',
+              ),
+            ),
+             'defaultValue' => 'ADJUSTED',
+             'columnLength' => 190,
+             'dynamicOptions' => false,
+             'defaultValueGenerator' => '',
+             'width' => '',
+             'optionsProviderType' => 'configure',
+             'optionsProviderClass' => '',
+             'optionsProviderData' => '',
+          )),
+          4 => 
+          \Pimcore\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
+             'name' => 'adjustmentType',
+             'title' => 'Adjustment Type',
+             'tooltip' => 'PERCENTAGE_DECREASE
+Percentage decrease type. Prices will have a lower value.
+
+Anchor to PERCENTAGE_INCREASE
+Percentage increase type. Prices will have a higher value.',
+             'mandatory' => true,
+             'noteditable' => false,
+             'index' => false,
+             'locked' => false,
+             'style' => '',
+             'permissions' => NULL,
+             'fieldtype' => '',
+             'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => false,
+             'visibleSearch' => false,
+             'blockedVarsForExport' => 
+            array (
+            ),
+             'options' => 
+            array (
+              0 => 
+              array (
+                'key' => 'PERCENTAGE_DECREASE',
+                'value' => 'PERCENTAGE_DECREASE',
+              ),
+              1 => 
+              array (
+                'key' => 'PERCENTAGE_INCREASE',
+                'value' => 'PERCENTAGE_INCREASE',
+              ),
+            ),
+             'defaultValue' => 'PERCENTAGE_INCREASE',
+             'columnLength' => 190,
+             'dynamicOptions' => false,
+             'defaultValueGenerator' => '',
+             'width' => '',
+             'optionsProviderType' => 'configure',
+             'optionsProviderClass' => '',
+             'optionsProviderData' => '',
+          )),
+          5 => 
+          \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
+             'name' => 'percentage',
+             'title' => 'Percentage',
+             'tooltip' => '',
+             'mandatory' => false,
+             'noteditable' => false,
+             'index' => false,
+             'locked' => false,
+             'style' => '',
+             'permissions' => NULL,
+             'fieldtype' => '',
+             'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => false,
+             'visibleSearch' => false,
+             'blockedVarsForExport' => 
+            array (
+            ),
+             'defaultValue' => 0,
+             'integer' => false,
+             'unsigned' => false,
+             'minValue' => 0.0,
+             'maxValue' => 100.0,
+             'unique' => false,
+             'decimalSize' => NULL,
+             'decimalPrecision' => NULL,
+             'width' => '',
+             'defaultValueGenerator' => '',
+          )),
+          6 => 
           \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
              'name' => 'apiId',
              'title' => 'Api Id',
              'tooltip' => '',
              'mandatory' => false,
-             'noteditable' => false,
+             'noteditable' => true,
              'index' => false,
              'locked' => false,
              'style' => '',
@@ -118,28 +320,6 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'unique' => false,
              'showCharCount' => false,
              'width' => '',
-             'defaultValueGenerator' => '',
-          )),
-          2 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
-             'name' => 'basePricelist',
-             'title' => 'Base Pricelist',
-             'tooltip' => '',
-             'mandatory' => false,
-             'noteditable' => false,
-             'index' => false,
-             'locked' => false,
-             'style' => '',
-             'permissions' => NULL,
-             'fieldtype' => '',
-             'relationType' => false,
-             'invisible' => false,
-             'visibleGridView' => false,
-             'visibleSearch' => false,
-             'blockedVarsForExport' => 
-            array (
-            ),
-             'defaultValue' => NULL,
              'defaultValueGenerator' => '',
           )),
         ),

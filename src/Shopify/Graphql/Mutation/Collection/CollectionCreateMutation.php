@@ -70,10 +70,10 @@ class CollectionCreateMutation extends BaseMutation
      */
     public function getVariables(Category|AbstractObject|array $object): array
     {
-        $shopifyCollectionModel = $this->collectionMapper->getMappedObject(new CollectionInput(), $object);
+        $shopifyCollectionInput = $this->collectionMapper->getMappedObject(new CollectionInput(), $object);
 
         return [
-            'input' => $shopifyCollectionModel->getAsArray(),
+            'input' => $shopifyCollectionInput->getAsArray(),
         ];
     }
 }

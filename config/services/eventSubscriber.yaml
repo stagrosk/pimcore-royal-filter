@@ -13,3 +13,5 @@ services:
     App\EventSubscriber\WhirlpoolSubscriber:
 
     App\EventSubscriber\ShopifyMetafieldDefinitionSubscriber:
+
+    App\EventSubscriber\PriceListSubscriber:

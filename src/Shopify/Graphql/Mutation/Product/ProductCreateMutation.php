@@ -39,7 +39,15 @@ class ProductCreateMutation extends BaseMutation
                 productCreate(product: $product, media: $media) {
                     product {
                         id
+                        title
                         handle
+                        variants(first: 1) {
+                            edges {
+                                node {
+                                    id
+                                }
+                            }
+                        }
                     }
                     userErrors {
                         field
