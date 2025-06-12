@@ -73,6 +73,12 @@ abstract class BaseMapper implements MapperInterface
                     'mapping' => $this->classificationStoreHelper->getClassificationStoreMapped($object->getBody1()->getMetadata()),
                 ];
             }
+            if ($object->getBodyMiddle() instanceof Body) {
+                $params['bodyMiddle'] = [
+                    'items' => $object->getBodyMiddle()->getMetadata()?->getItems(),
+                    'mapping' => $this->classificationStoreHelper->getClassificationStoreMapped($object->getBodyMiddle()->getMetadata()),
+                ];
+            }
             if ($object->getBody2() instanceof Body) {
                 $params['body2'] = [
                     'items' => $object->getBody2()->getMetadata()?->getItems(),
@@ -83,6 +89,12 @@ abstract class BaseMapper implements MapperInterface
                 $params['center1'] = [
                     'items' => $object->getCenterBody1()->getMetadata()?->getItems(),
                     'mapping' => $this->classificationStoreHelper->getClassificationStoreMapped($object->getCenterBody1()->getMetadata()),
+                ];
+            }
+            if ($object->getCenterBodyMiddle() instanceof Center) {
+                $params['centerMiddle'] = [
+                    'items' => $object->getCenterBodyMiddle()->getMetadata()?->getItems(),
+                    'mapping' => $this->classificationStoreHelper->getClassificationStoreMapped($object->getCenterBodyMiddle()->getMetadata()),
                 ];
             }
             if ($object->getCenterBody2() instanceof Center) {
@@ -143,7 +155,7 @@ abstract class BaseMapper implements MapperInterface
                         ];
                     } else {
                         // height as SUM
-                        if (in_array($objectName, ['body1', 'body2', 'center1', 'center2']) && $keyConfig->getName() === 'height') {
+                        if (in_array($objectName, ['body1', 'bodyMiddle', 'body2', 'center1', 'centerMiddle', 'center2']) && $keyConfig->getName() === 'height') {
                             $mappedProperties[$ident]['value'] = (int)$mappedProperties[$ident]['value'] + (int)$keyConfigValue['default']->getValue();
                         }
                     }

@@ -32,6 +32,7 @@ readonly class RoyalFilterOverviewCalculator implements CalculatorClassInterface
         $royalFilterSetup = $object->getRoyalFilterSetup();
         if ($royalFilterSetup instanceof RoyalFilter) {
             $mappedBody1 = $classificationStoreHelper->getClassificationStoreMapped($royalFilterSetup->getBody1()?->getMetadata());
+            $mappedBodyMiddle = $classificationStoreHelper->getClassificationStoreMapped($royalFilterSetup->getBodyMiddle()?->getMetadata());
             $mappedBody2 = $classificationStoreHelper->getClassificationStoreMapped($royalFilterSetup->getBody2()?->getMetadata());
             $mappedCenter1 = $classificationStoreHelper->getClassificationStoreMapped($royalFilterSetup->getCenterBody1()?->getMetadata());
 //            $mappedCenter2 = $classificationStoreHelper->getClassificationStoreMapped($royalFilterSetup->getCenterBody2()?->getMetadata());
@@ -41,9 +42,10 @@ readonly class RoyalFilterOverviewCalculator implements CalculatorClassInterface
             $html = '<table class="royal-filter-overview">';
 
             $body1Height = $mappedBody1->findItemByKeyConfigName('height');
+            $bodyMiddleHeight = $mappedBodyMiddle->findItemByKeyConfigName('height');
             $body2Height = $mappedBody2->findItemByKeyConfigName('height');
-            $totalHeight = $body1Height && $body2Height ? ($body1Height->getRawValue() + $body1Height->getRawValue() . ' ' . $body1Height->getUnit()) : '-';
-            $html .= '<tr><td>Total height:</td><td>' . $totalHeight . '</td></tr>';
+            $totalHeight = $body1Height?->getRawValue() + $bodyMiddleHeight?->getRawValue() + $body2Height?->getRawValue();
+            $html .= '<tr><td>Total height:</td><td>' . ($totalHeight ? $totalHeight . ' ' . $body1Height->getUnit() : '-') . '</td></tr>';
 
             $body1Diameter = $mappedBody1->findItemByKeyConfigName('diameter');
             $diameter = $body1Diameter ? $body1Diameter->getValue() : '-';
