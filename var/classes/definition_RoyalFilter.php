@@ -8,7 +8,7 @@
  * - localizedfields [localizedfields]
  * -- title [input]
  * -- shortDescription [textarea]
- * -- description [textarea]
+ * -- description [wysiwyg]
  * - manufacturer [manyToOneRelation]
  * - image [image]
  * - imageGallery [imageGallery]
@@ -16,8 +16,10 @@
  * - generateAsProduct [checkbox]
  * - Prices [fieldcollections]
  * - body1 [manyToOneRelation]
+ * - bodyMiddle [manyToOneRelation]
  * - body2 [manyToOneRelation]
  * - centerBody1 [manyToOneRelation]
+ * - centerBodyMiddle [manyToOneRelation]
  * - centerBody2 [manyToOneRelation]
  * - equipBody1 [manyToOneRelation]
  * - equipBody2 [manyToOneRelation]
@@ -30,7 +32,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1743703443,
+   'modificationDate' => 1749739137,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -60,10 +62,10 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
      'children' => 
     array (
       0 => 
-      \Pimcore\Model\DataObject\ClassDefinition\Layout\Region::__set_state(array(
+      \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
          'name' => 'Layout',
          'type' => NULL,
-         'region' => NULL,
+         'region' => '',
          'title' => '',
          'width' => '',
          'height' => '',
@@ -74,12 +76,12 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
          'children' => 
         array (
           0 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+          \Pimcore\Model\DataObject\ClassDefinition\Layout\Tabpanel::__set_state(array(
              'name' => 'Layout',
              'type' => NULL,
-             'region' => 'west',
+             'region' => NULL,
              'title' => '',
-             'width' => '40%',
+             'width' => '',
              'height' => '',
              'collapsible' => false,
              'collapsed' => false,
@@ -88,11 +90,421 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'children' => 
             array (
               0 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Layout\Tabpanel::__set_state(array(
-                 'name' => 'Layout',
+              \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+                 'name' => 'Base',
+                 'type' => NULL,
+                 'region' => '',
+                 'title' => 'Base',
+                 'width' => '',
+                 'height' => '',
+                 'collapsible' => false,
+                 'collapsed' => false,
+                 'bodyStyle' => '',
+                 'datatype' => 'layout',
+                 'children' => 
+                array (
+                  0 => 
+                  \Pimcore\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
+                     'name' => 'localizedfields',
+                     'title' => '',
+                     'tooltip' => NULL,
+                     'mandatory' => false,
+                     'noteditable' => false,
+                     'index' => false,
+                     'locked' => false,
+                     'style' => NULL,
+                     'permissions' => NULL,
+                     'fieldtype' => '',
+                     'relationType' => false,
+                     'invisible' => false,
+                     'visibleGridView' => true,
+                     'visibleSearch' => true,
+                     'blockedVarsForExport' => 
+                    array (
+                    ),
+                     'children' => 
+                    array (
+                      0 => 
+                      \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+                         'name' => 'title',
+                         'title' => 'Title',
+                         'tooltip' => '',
+                         'mandatory' => false,
+                         'noteditable' => false,
+                         'index' => false,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'fieldtype' => '',
+                         'relationType' => false,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'defaultValue' => NULL,
+                         'columnLength' => 500,
+                         'regex' => '',
+                         'regexFlags' => 
+                        array (
+                        ),
+                         'unique' => false,
+                         'showCharCount' => false,
+                         'width' => 500,
+                         'defaultValueGenerator' => '',
+                      )),
+                      1 => 
+                      \Pimcore\Model\DataObject\ClassDefinition\Data\Textarea::__set_state(array(
+                         'name' => 'shortDescription',
+                         'title' => 'Short Description',
+                         'tooltip' => '',
+                         'mandatory' => false,
+                         'noteditable' => false,
+                         'index' => false,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'fieldtype' => '',
+                         'relationType' => false,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'maxLength' => NULL,
+                         'showCharCount' => false,
+                         'excludeFromSearchIndex' => false,
+                         'height' => 350,
+                         'width' => 800,
+                      )),
+                      2 => 
+                      \Pimcore\Model\DataObject\ClassDefinition\Data\Wysiwyg::__set_state(array(
+                         'name' => 'description',
+                         'title' => 'Description',
+                         'tooltip' => '',
+                         'mandatory' => false,
+                         'noteditable' => false,
+                         'index' => false,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'fieldtype' => '',
+                         'relationType' => false,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'toolbarConfig' => '',
+                         'excludeFromSearchIndex' => false,
+                         'maxCharacters' => '',
+                         'height' => 600,
+                         'width' => 800,
+                      )),
+                    ),
+                     'region' => NULL,
+                     'layout' => NULL,
+                     'maxTabs' => NULL,
+                     'border' => false,
+                     'provideSplitView' => false,
+                     'tabPosition' => 'top',
+                     'hideLabelsWhenTabsReached' => NULL,
+                     'referencedFields' => 
+                    array (
+                    ),
+                     'permissionView' => NULL,
+                     'permissionEdit' => NULL,
+                     'labelWidth' => 100,
+                     'labelAlign' => 'left',
+                     'width' => '',
+                     'height' => '',
+                     'fieldDefinitionsCache' => NULL,
+                  )),
+                  1 => 
+                  \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
+                     'name' => 'manufacturer',
+                     'title' => 'Manufacturer',
+                     'tooltip' => '',
+                     'mandatory' => false,
+                     'noteditable' => false,
+                     'index' => false,
+                     'locked' => false,
+                     'style' => '',
+                     'permissions' => NULL,
+                     'fieldtype' => '',
+                     'relationType' => true,
+                     'invisible' => false,
+                     'visibleGridView' => false,
+                     'visibleSearch' => false,
+                     'blockedVarsForExport' => 
+                    array (
+                    ),
+                     'classes' => 
+                    array (
+                      0 => 
+                      array (
+                        'classes' => 'Manufacturer',
+                      ),
+                    ),
+                     'displayMode' => 'grid',
+                     'pathFormatterClass' => '',
+                     'assetInlineDownloadAllowed' => false,
+                     'assetUploadPath' => '',
+                     'allowToClearRelation' => true,
+                     'objectsAllowed' => true,
+                     'assetsAllowed' => false,
+                     'assetTypes' => 
+                    array (
+                    ),
+                     'documentsAllowed' => false,
+                     'documentTypes' => 
+                    array (
+                    ),
+                     'width' => '500px',
+                  )),
+                ),
+                 'locked' => false,
+                 'blockedVarsForExport' => 
+                array (
+                ),
+                 'fieldtype' => 'panel',
+                 'layout' => NULL,
+                 'border' => false,
+                 'icon' => '/bundles/pimcoreadmin/img/flat-color-icons/database.svg',
+                 'labelWidth' => 100,
+                 'labelAlign' => 'left',
+              )),
+              1 => 
+              \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+                 'name' => 'Assets',
+                 'type' => NULL,
+                 'region' => '',
+                 'title' => 'Assets',
+                 'width' => '',
+                 'height' => '',
+                 'collapsible' => false,
+                 'collapsed' => false,
+                 'bodyStyle' => '',
+                 'datatype' => 'layout',
+                 'children' => 
+                array (
+                  0 => 
+                  \Pimcore\Model\DataObject\ClassDefinition\Data\Image::__set_state(array(
+                     'name' => 'image',
+                     'title' => 'Image',
+                     'tooltip' => '',
+                     'mandatory' => false,
+                     'noteditable' => false,
+                     'index' => false,
+                     'locked' => false,
+                     'style' => '',
+                     'permissions' => NULL,
+                     'fieldtype' => '',
+                     'relationType' => false,
+                     'invisible' => false,
+                     'visibleGridView' => false,
+                     'visibleSearch' => false,
+                     'blockedVarsForExport' => 
+                    array (
+                    ),
+                     'uploadPath' => '',
+                     'width' => '',
+                     'height' => '',
+                  )),
+                  1 => 
+                  \Pimcore\Model\DataObject\ClassDefinition\Data\ImageGallery::__set_state(array(
+                     'name' => 'imageGallery',
+                     'title' => 'Image gallery',
+                     'tooltip' => '',
+                     'mandatory' => false,
+                     'noteditable' => false,
+                     'index' => false,
+                     'locked' => false,
+                     'style' => '',
+                     'permissions' => NULL,
+                     'fieldtype' => '',
+                     'relationType' => false,
+                     'invisible' => false,
+                     'visibleGridView' => false,
+                     'visibleSearch' => false,
+                     'blockedVarsForExport' => 
+                    array (
+                    ),
+                     'uploadPath' => '',
+                     'ratioX' => NULL,
+                     'ratioY' => NULL,
+                     'predefinedDataTemplates' => '',
+                     'height' => '',
+                     'width' => '',
+                  )),
+                ),
+                 'locked' => false,
+                 'blockedVarsForExport' => 
+                array (
+                ),
+                 'fieldtype' => 'panel',
+                 'layout' => NULL,
+                 'border' => false,
+                 'icon' => '/bundles/pimcoreadmin/img/flat-color-icons/image.svg',
+                 'labelWidth' => 100,
+                 'labelAlign' => 'left',
+              )),
+              2 => 
+              \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+                 'name' => 'Product',
                  'type' => NULL,
                  'region' => NULL,
-                 'title' => '',
+                 'title' => 'Product',
+                 'width' => '',
+                 'height' => '',
+                 'collapsible' => false,
+                 'collapsed' => false,
+                 'bodyStyle' => '',
+                 'datatype' => 'layout',
+                 'children' => 
+                array (
+                  0 => 
+                  \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
+                     'name' => 'product',
+                     'title' => 'Product',
+                     'tooltip' => '',
+                     'mandatory' => false,
+                     'noteditable' => false,
+                     'index' => false,
+                     'locked' => false,
+                     'style' => '',
+                     'permissions' => NULL,
+                     'fieldtype' => '',
+                     'relationType' => true,
+                     'invisible' => false,
+                     'visibleGridView' => false,
+                     'visibleSearch' => false,
+                     'blockedVarsForExport' => 
+                    array (
+                    ),
+                     'classes' => 
+                    array (
+                      0 => 
+                      array (
+                        'classes' => 'Product',
+                      ),
+                    ),
+                     'displayMode' => 'grid',
+                     'pathFormatterClass' => '',
+                     'assetInlineDownloadAllowed' => false,
+                     'assetUploadPath' => '',
+                     'allowToClearRelation' => true,
+                     'objectsAllowed' => true,
+                     'assetsAllowed' => false,
+                     'assetTypes' => 
+                    array (
+                    ),
+                     'documentsAllowed' => false,
+                     'documentTypes' => 
+                    array (
+                    ),
+                     'width' => '500px',
+                  )),
+                  1 => 
+                  \Pimcore\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
+                     'name' => 'generateAsProduct',
+                     'title' => 'Generate as product',
+                     'tooltip' => 'On save or with command will be automatically generated as shopify product and sent to shopify',
+                     'mandatory' => false,
+                     'noteditable' => false,
+                     'index' => false,
+                     'locked' => false,
+                     'style' => '',
+                     'permissions' => NULL,
+                     'fieldtype' => '',
+                     'relationType' => false,
+                     'invisible' => false,
+                     'visibleGridView' => false,
+                     'visibleSearch' => false,
+                     'blockedVarsForExport' => 
+                    array (
+                    ),
+                     'defaultValue' => 0,
+                     'defaultValueGenerator' => '',
+                  )),
+                ),
+                 'locked' => false,
+                 'blockedVarsForExport' => 
+                array (
+                ),
+                 'fieldtype' => 'panel',
+                 'layout' => NULL,
+                 'border' => false,
+                 'icon' => '/bundles/pimcoreadmin/img/flat-color-icons/package.svg',
+                 'labelWidth' => 100,
+                 'labelAlign' => 'left',
+              )),
+              3 => 
+              \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+                 'name' => 'Pricing',
+                 'type' => NULL,
+                 'region' => '',
+                 'title' => 'Pricing',
+                 'width' => '',
+                 'height' => '',
+                 'collapsible' => false,
+                 'collapsed' => false,
+                 'bodyStyle' => '',
+                 'datatype' => 'layout',
+                 'children' => 
+                array (
+                  0 => 
+                  \Pimcore\Model\DataObject\ClassDefinition\Data\Fieldcollections::__set_state(array(
+                     'name' => 'Prices',
+                     'title' => 'Prices',
+                     'tooltip' => '',
+                     'mandatory' => false,
+                     'noteditable' => false,
+                     'index' => false,
+                     'locked' => false,
+                     'style' => '',
+                     'permissions' => NULL,
+                     'fieldtype' => '',
+                     'relationType' => false,
+                     'invisible' => false,
+                     'visibleGridView' => false,
+                     'visibleSearch' => false,
+                     'blockedVarsForExport' => 
+                    array (
+                    ),
+                     'allowedTypes' => 
+                    array (
+                      0 => 'Price',
+                    ),
+                     'lazyLoading' => true,
+                     'maxItems' => NULL,
+                     'disallowAddRemove' => false,
+                     'disallowReorder' => false,
+                     'collapsed' => false,
+                     'collapsible' => false,
+                     'border' => false,
+                  )),
+                ),
+                 'locked' => false,
+                 'blockedVarsForExport' => 
+                array (
+                ),
+                 'fieldtype' => 'panel',
+                 'layout' => NULL,
+                 'border' => false,
+                 'icon' => '/bundles/pimcoreadmin/img/flat-color-icons/currency_exchange.svg',
+                 'labelWidth' => 100,
+                 'labelAlign' => 'left',
+              )),
+              4 => 
+              \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+                 'name' => 'Setup',
+                 'type' => NULL,
+                 'region' => '',
+                 'title' => 'Setup',
                  'width' => '',
                  'height' => '',
                  'collapsible' => false,
@@ -103,10 +515,10 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                 array (
                   0 => 
                   \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
-                     'name' => 'Base',
+                     'name' => 'Bodies',
                      'type' => NULL,
                      'region' => NULL,
-                     'title' => 'Base',
+                     'title' => 'Bodies',
                      'width' => '',
                      'height' => '',
                      'collapsible' => false,
@@ -116,129 +528,9 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'children' => 
                     array (
                       0 => 
-                      \Pimcore\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
-                         'name' => 'localizedfields',
-                         'title' => '',
-                         'tooltip' => NULL,
-                         'mandatory' => false,
-                         'noteditable' => false,
-                         'index' => false,
-                         'locked' => false,
-                         'style' => NULL,
-                         'permissions' => NULL,
-                         'fieldtype' => '',
-                         'relationType' => false,
-                         'invisible' => false,
-                         'visibleGridView' => true,
-                         'visibleSearch' => true,
-                         'blockedVarsForExport' => 
-                        array (
-                        ),
-                         'children' => 
-                        array (
-                          0 => 
-                          \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
-                             'name' => 'title',
-                             'title' => 'Title',
-                             'tooltip' => '',
-                             'mandatory' => false,
-                             'noteditable' => false,
-                             'index' => false,
-                             'locked' => false,
-                             'style' => '',
-                             'permissions' => NULL,
-                             'fieldtype' => '',
-                             'relationType' => false,
-                             'invisible' => false,
-                             'visibleGridView' => false,
-                             'visibleSearch' => false,
-                             'blockedVarsForExport' => 
-                            array (
-                            ),
-                             'defaultValue' => NULL,
-                             'columnLength' => 190,
-                             'regex' => '',
-                             'regexFlags' => 
-                            array (
-                            ),
-                             'unique' => false,
-                             'showCharCount' => false,
-                             'width' => '500px',
-                             'defaultValueGenerator' => '',
-                          )),
-                          1 => 
-                          \Pimcore\Model\DataObject\ClassDefinition\Data\Textarea::__set_state(array(
-                             'name' => 'shortDescription',
-                             'title' => 'Short Description',
-                             'tooltip' => '',
-                             'mandatory' => false,
-                             'noteditable' => false,
-                             'index' => false,
-                             'locked' => false,
-                             'style' => '',
-                             'permissions' => NULL,
-                             'fieldtype' => '',
-                             'relationType' => false,
-                             'invisible' => false,
-                             'visibleGridView' => false,
-                             'visibleSearch' => false,
-                             'blockedVarsForExport' => 
-                            array (
-                            ),
-                             'maxLength' => NULL,
-                             'showCharCount' => false,
-                             'excludeFromSearchIndex' => false,
-                             'height' => 100,
-                             'width' => 700,
-                          )),
-                          2 => 
-                          \Pimcore\Model\DataObject\ClassDefinition\Data\Textarea::__set_state(array(
-                             'name' => 'description',
-                             'title' => 'Description',
-                             'tooltip' => '',
-                             'mandatory' => false,
-                             'noteditable' => false,
-                             'index' => false,
-                             'locked' => false,
-                             'style' => '',
-                             'permissions' => NULL,
-                             'fieldtype' => '',
-                             'relationType' => false,
-                             'invisible' => false,
-                             'visibleGridView' => false,
-                             'visibleSearch' => false,
-                             'blockedVarsForExport' => 
-                            array (
-                            ),
-                             'maxLength' => NULL,
-                             'showCharCount' => false,
-                             'excludeFromSearchIndex' => false,
-                             'height' => '',
-                             'width' => '',
-                          )),
-                        ),
-                         'region' => NULL,
-                         'layout' => NULL,
-                         'maxTabs' => NULL,
-                         'border' => false,
-                         'provideSplitView' => false,
-                         'tabPosition' => 'top',
-                         'hideLabelsWhenTabsReached' => NULL,
-                         'referencedFields' => 
-                        array (
-                        ),
-                         'permissionView' => NULL,
-                         'permissionEdit' => NULL,
-                         'labelWidth' => 100,
-                         'labelAlign' => 'left',
-                         'width' => '',
-                         'height' => '',
-                         'fieldDefinitionsCache' => NULL,
-                      )),
-                      1 => 
                       \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
-                         'name' => 'manufacturer',
-                         'title' => 'Manufacturer',
+                         'name' => 'body1',
+                         'title' => 'Body1',
                          'tooltip' => '',
                          'mandatory' => false,
                          'noteditable' => false,
@@ -258,7 +550,91 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                         array (
                           0 => 
                           array (
-                            'classes' => 'Manufacturer',
+                            'classes' => 'Body',
+                          ),
+                        ),
+                         'displayMode' => 'grid',
+                         'pathFormatterClass' => '',
+                         'assetInlineDownloadAllowed' => false,
+                         'assetUploadPath' => '',
+                         'allowToClearRelation' => true,
+                         'objectsAllowed' => true,
+                         'assetsAllowed' => false,
+                         'assetTypes' => 
+                        array (
+                        ),
+                         'documentsAllowed' => false,
+                         'documentTypes' => 
+                        array (
+                        ),
+                         'width' => '500px',
+                      )),
+                      1 => 
+                      \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
+                         'name' => 'bodyMiddle',
+                         'title' => 'Body middle',
+                         'tooltip' => '',
+                         'mandatory' => false,
+                         'noteditable' => false,
+                         'index' => false,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'fieldtype' => '',
+                         'relationType' => true,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'classes' => 
+                        array (
+                          0 => 
+                          array (
+                            'classes' => 'Body',
+                          ),
+                        ),
+                         'displayMode' => 'grid',
+                         'pathFormatterClass' => '',
+                         'assetInlineDownloadAllowed' => false,
+                         'assetUploadPath' => '',
+                         'allowToClearRelation' => true,
+                         'objectsAllowed' => true,
+                         'assetsAllowed' => false,
+                         'assetTypes' => 
+                        array (
+                        ),
+                         'documentsAllowed' => false,
+                         'documentTypes' => 
+                        array (
+                        ),
+                         'width' => '500px',
+                      )),
+                      2 => 
+                      \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
+                         'name' => 'body2',
+                         'title' => 'Body2',
+                         'tooltip' => '',
+                         'mandatory' => false,
+                         'noteditable' => false,
+                         'index' => false,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'fieldtype' => '',
+                         'relationType' => true,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'classes' => 
+                        array (
+                          0 => 
+                          array (
+                            'classes' => 'Body',
                           ),
                         ),
                          'displayMode' => 'grid',
@@ -285,91 +661,16 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'fieldtype' => 'panel',
                      'layout' => NULL,
                      'border' => false,
-                     'icon' => '/bundles/pimcoreadmin/img/flat-color-icons/database.svg',
+                     'icon' => '',
                      'labelWidth' => 100,
                      'labelAlign' => 'left',
                   )),
                   1 => 
                   \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
-                     'name' => 'Assets',
+                     'name' => 'Centers',
                      'type' => NULL,
                      'region' => NULL,
-                     'title' => 'Assets',
-                     'width' => '',
-                     'height' => '',
-                     'collapsible' => false,
-                     'collapsed' => false,
-                     'bodyStyle' => '',
-                     'datatype' => 'layout',
-                     'children' => 
-                    array (
-                      0 => 
-                      \Pimcore\Model\DataObject\ClassDefinition\Data\Image::__set_state(array(
-                         'name' => 'image',
-                         'title' => 'Image',
-                         'tooltip' => '',
-                         'mandatory' => false,
-                         'noteditable' => false,
-                         'index' => false,
-                         'locked' => false,
-                         'style' => '',
-                         'permissions' => NULL,
-                         'fieldtype' => '',
-                         'relationType' => false,
-                         'invisible' => false,
-                         'visibleGridView' => false,
-                         'visibleSearch' => false,
-                         'blockedVarsForExport' => 
-                        array (
-                        ),
-                         'uploadPath' => '',
-                         'width' => '',
-                         'height' => '',
-                      )),
-                      1 => 
-                      \Pimcore\Model\DataObject\ClassDefinition\Data\ImageGallery::__set_state(array(
-                         'name' => 'imageGallery',
-                         'title' => 'Image gallery',
-                         'tooltip' => '',
-                         'mandatory' => false,
-                         'noteditable' => false,
-                         'index' => false,
-                         'locked' => false,
-                         'style' => '',
-                         'permissions' => NULL,
-                         'fieldtype' => '',
-                         'relationType' => false,
-                         'invisible' => false,
-                         'visibleGridView' => false,
-                         'visibleSearch' => false,
-                         'blockedVarsForExport' => 
-                        array (
-                        ),
-                         'uploadPath' => '',
-                         'ratioX' => NULL,
-                         'ratioY' => NULL,
-                         'predefinedDataTemplates' => '',
-                         'height' => '',
-                         'width' => '',
-                      )),
-                    ),
-                     'locked' => false,
-                     'blockedVarsForExport' => 
-                    array (
-                    ),
-                     'fieldtype' => 'panel',
-                     'layout' => NULL,
-                     'border' => false,
-                     'icon' => '/bundles/pimcoreadmin/img/flat-color-icons/image.svg',
-                     'labelWidth' => 100,
-                     'labelAlign' => 'left',
-                  )),
-                  2 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
-                     'name' => 'Product',
-                     'type' => NULL,
-                     'region' => NULL,
-                     'title' => 'Product',
+                     'title' => 'Centers',
                      'width' => '',
                      'height' => '',
                      'collapsible' => false,
@@ -380,8 +681,8 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                     array (
                       0 => 
                       \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
-                         'name' => 'product',
-                         'title' => 'Product',
+                         'name' => 'centerBody1',
+                         'title' => 'Center body1',
                          'tooltip' => '',
                          'mandatory' => false,
                          'noteditable' => false,
@@ -401,7 +702,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                         array (
                           0 => 
                           array (
-                            'classes' => 'Product',
+                            'classes' => 'Center',
                           ),
                         ),
                          'displayMode' => 'grid',
@@ -418,13 +719,13 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                          'documentTypes' => 
                         array (
                         ),
-                         'width' => '',
+                         'width' => '500px',
                       )),
                       1 => 
-                      \Pimcore\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
-                         'name' => 'generateAsProduct',
-                         'title' => 'Generate as product',
-                         'tooltip' => 'On save or with command will be automatically generated as shopify product and sent to shopify',
+                      \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
+                         'name' => 'centerBodyMiddle',
+                         'title' => 'Center body middle',
+                         'tooltip' => '',
                          'mandatory' => false,
                          'noteditable' => false,
                          'index' => false,
@@ -432,15 +733,77 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                          'style' => '',
                          'permissions' => NULL,
                          'fieldtype' => '',
-                         'relationType' => false,
+                         'relationType' => true,
                          'invisible' => false,
                          'visibleGridView' => false,
                          'visibleSearch' => false,
                          'blockedVarsForExport' => 
                         array (
                         ),
-                         'defaultValue' => 0,
-                         'defaultValueGenerator' => '',
+                         'classes' => 
+                        array (
+                          0 => 
+                          array (
+                            'classes' => 'Center',
+                          ),
+                        ),
+                         'displayMode' => 'grid',
+                         'pathFormatterClass' => '',
+                         'assetInlineDownloadAllowed' => false,
+                         'assetUploadPath' => '',
+                         'allowToClearRelation' => true,
+                         'objectsAllowed' => true,
+                         'assetsAllowed' => false,
+                         'assetTypes' => 
+                        array (
+                        ),
+                         'documentsAllowed' => false,
+                         'documentTypes' => 
+                        array (
+                        ),
+                         'width' => '500px',
+                      )),
+                      2 => 
+                      \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
+                         'name' => 'centerBody2',
+                         'title' => 'Center body2',
+                         'tooltip' => '',
+                         'mandatory' => false,
+                         'noteditable' => false,
+                         'index' => false,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'fieldtype' => '',
+                         'relationType' => true,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'classes' => 
+                        array (
+                          0 => 
+                          array (
+                            'classes' => 'Center',
+                          ),
+                        ),
+                         'displayMode' => 'grid',
+                         'pathFormatterClass' => '',
+                         'assetInlineDownloadAllowed' => false,
+                         'assetUploadPath' => '',
+                         'allowToClearRelation' => true,
+                         'objectsAllowed' => true,
+                         'assetsAllowed' => false,
+                         'assetTypes' => 
+                        array (
+                        ),
+                         'documentsAllowed' => false,
+                         'documentTypes' => 
+                        array (
+                        ),
+                         'width' => '500px',
                       )),
                     ),
                      'locked' => false,
@@ -450,16 +813,16 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'fieldtype' => 'panel',
                      'layout' => NULL,
                      'border' => false,
-                     'icon' => '/bundles/pimcoreadmin/img/flat-color-icons/package.svg',
+                     'icon' => '',
                      'labelWidth' => 100,
                      'labelAlign' => 'left',
                   )),
-                  3 => 
+                  2 => 
                   \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
-                     'name' => 'Pricing',
+                     'name' => 'Equipment',
                      'type' => NULL,
                      'region' => NULL,
-                     'title' => 'Pricing',
+                     'title' => 'Equipment',
                      'width' => '',
                      'height' => '',
                      'collapsible' => false,
@@ -469,9 +832,9 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'children' => 
                     array (
                       0 => 
-                      \Pimcore\Model\DataObject\ClassDefinition\Data\Fieldcollections::__set_state(array(
-                         'name' => 'Prices',
-                         'title' => 'Prices',
+                      \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
+                         'name' => 'equipBody1',
+                         'title' => 'Equip body1',
                          'tooltip' => '',
                          'mandatory' => false,
                          'noteditable' => false,
@@ -480,24 +843,77 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                          'style' => '',
                          'permissions' => NULL,
                          'fieldtype' => '',
-                         'relationType' => false,
+                         'relationType' => true,
                          'invisible' => false,
                          'visibleGridView' => false,
                          'visibleSearch' => false,
                          'blockedVarsForExport' => 
                         array (
                         ),
-                         'allowedTypes' => 
+                         'classes' => 
                         array (
-                          0 => 'Price',
+                          0 => 
+                          array (
+                            'classes' => 'Equipment',
+                          ),
                         ),
-                         'lazyLoading' => true,
-                         'maxItems' => NULL,
-                         'disallowAddRemove' => false,
-                         'disallowReorder' => false,
-                         'collapsed' => false,
-                         'collapsible' => false,
-                         'border' => false,
+                         'displayMode' => 'grid',
+                         'pathFormatterClass' => '',
+                         'assetInlineDownloadAllowed' => false,
+                         'assetUploadPath' => '',
+                         'allowToClearRelation' => true,
+                         'objectsAllowed' => true,
+                         'assetsAllowed' => false,
+                         'assetTypes' => 
+                        array (
+                        ),
+                         'documentsAllowed' => false,
+                         'documentTypes' => 
+                        array (
+                        ),
+                         'width' => '500px',
+                      )),
+                      1 => 
+                      \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
+                         'name' => 'equipBody2',
+                         'title' => 'Equip body2',
+                         'tooltip' => '',
+                         'mandatory' => false,
+                         'noteditable' => false,
+                         'index' => false,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'fieldtype' => '',
+                         'relationType' => true,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'classes' => 
+                        array (
+                          0 => 
+                          array (
+                            'classes' => 'Equipment',
+                          ),
+                        ),
+                         'displayMode' => 'grid',
+                         'pathFormatterClass' => '',
+                         'assetInlineDownloadAllowed' => false,
+                         'assetUploadPath' => '',
+                         'allowToClearRelation' => true,
+                         'objectsAllowed' => true,
+                         'assetsAllowed' => false,
+                         'assetTypes' => 
+                        array (
+                        ),
+                         'documentsAllowed' => false,
+                         'documentTypes' => 
+                        array (
+                        ),
+                         'width' => '500px',
                       )),
                     ),
                      'locked' => false,
@@ -507,7 +923,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'fieldtype' => 'panel',
                      'layout' => NULL,
                      'border' => false,
-                     'icon' => '/bundles/pimcoreadmin/img/flat-color-icons/currency_exchange.svg',
+                     'icon' => '',
                      'labelWidth' => 100,
                      'labelAlign' => 'left',
                   )),
@@ -516,363 +932,10 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'blockedVarsForExport' => 
                 array (
                 ),
-                 'fieldtype' => 'tabpanel',
-                 'border' => false,
-                 'tabPosition' => 'top',
-              )),
-            ),
-             'locked' => false,
-             'blockedVarsForExport' => 
-            array (
-            ),
-             'fieldtype' => 'panel',
-             'layout' => NULL,
-             'border' => false,
-             'icon' => '',
-             'labelWidth' => 100,
-             'labelAlign' => 'left',
-          )),
-          1 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
-             'name' => 'Royal filter setup',
-             'type' => NULL,
-             'region' => 'east',
-             'title' => 'Royal filter setup',
-             'width' => '60%',
-             'height' => '',
-             'collapsible' => false,
-             'collapsed' => false,
-             'bodyStyle' => '',
-             'datatype' => 'layout',
-             'children' => 
-            array (
-              0 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
-                 'name' => 'Bodies',
-                 'type' => NULL,
-                 'region' => NULL,
-                 'title' => 'Bodies',
-                 'width' => '',
-                 'height' => '',
-                 'collapsible' => false,
-                 'collapsed' => false,
-                 'bodyStyle' => '',
-                 'datatype' => 'layout',
-                 'children' => 
-                array (
-                  0 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
-                     'name' => 'body1',
-                     'title' => 'Body1',
-                     'tooltip' => '',
-                     'mandatory' => false,
-                     'noteditable' => false,
-                     'index' => false,
-                     'locked' => false,
-                     'style' => '',
-                     'permissions' => NULL,
-                     'fieldtype' => '',
-                     'relationType' => true,
-                     'invisible' => false,
-                     'visibleGridView' => false,
-                     'visibleSearch' => false,
-                     'blockedVarsForExport' => 
-                    array (
-                    ),
-                     'classes' => 
-                    array (
-                      0 => 
-                      array (
-                        'classes' => 'Body',
-                      ),
-                    ),
-                     'displayMode' => 'grid',
-                     'pathFormatterClass' => '',
-                     'assetInlineDownloadAllowed' => false,
-                     'assetUploadPath' => '',
-                     'allowToClearRelation' => true,
-                     'objectsAllowed' => true,
-                     'assetsAllowed' => false,
-                     'assetTypes' => 
-                    array (
-                    ),
-                     'documentsAllowed' => false,
-                     'documentTypes' => 
-                    array (
-                    ),
-                     'width' => '500px',
-                  )),
-                  1 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
-                     'name' => 'body2',
-                     'title' => 'Body2',
-                     'tooltip' => '',
-                     'mandatory' => false,
-                     'noteditable' => false,
-                     'index' => false,
-                     'locked' => false,
-                     'style' => '',
-                     'permissions' => NULL,
-                     'fieldtype' => '',
-                     'relationType' => true,
-                     'invisible' => false,
-                     'visibleGridView' => false,
-                     'visibleSearch' => false,
-                     'blockedVarsForExport' => 
-                    array (
-                    ),
-                     'classes' => 
-                    array (
-                      0 => 
-                      array (
-                        'classes' => 'Body',
-                      ),
-                    ),
-                     'displayMode' => 'grid',
-                     'pathFormatterClass' => '',
-                     'assetInlineDownloadAllowed' => false,
-                     'assetUploadPath' => '',
-                     'allowToClearRelation' => true,
-                     'objectsAllowed' => true,
-                     'assetsAllowed' => false,
-                     'assetTypes' => 
-                    array (
-                    ),
-                     'documentsAllowed' => false,
-                     'documentTypes' => 
-                    array (
-                    ),
-                     'width' => '500px',
-                  )),
-                ),
-                 'locked' => false,
-                 'blockedVarsForExport' => 
-                array (
-                ),
                  'fieldtype' => 'panel',
                  'layout' => NULL,
                  'border' => false,
-                 'icon' => '',
-                 'labelWidth' => 100,
-                 'labelAlign' => 'left',
-              )),
-              1 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
-                 'name' => 'Centers',
-                 'type' => NULL,
-                 'region' => NULL,
-                 'title' => 'Centers',
-                 'width' => '',
-                 'height' => '',
-                 'collapsible' => false,
-                 'collapsed' => false,
-                 'bodyStyle' => '',
-                 'datatype' => 'layout',
-                 'children' => 
-                array (
-                  0 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
-                     'name' => 'centerBody1',
-                     'title' => 'Center body1',
-                     'tooltip' => '',
-                     'mandatory' => false,
-                     'noteditable' => false,
-                     'index' => false,
-                     'locked' => false,
-                     'style' => '',
-                     'permissions' => NULL,
-                     'fieldtype' => '',
-                     'relationType' => true,
-                     'invisible' => false,
-                     'visibleGridView' => false,
-                     'visibleSearch' => false,
-                     'blockedVarsForExport' => 
-                    array (
-                    ),
-                     'classes' => 
-                    array (
-                      0 => 
-                      array (
-                        'classes' => 'Center',
-                      ),
-                    ),
-                     'displayMode' => 'grid',
-                     'pathFormatterClass' => '',
-                     'assetInlineDownloadAllowed' => false,
-                     'assetUploadPath' => '',
-                     'allowToClearRelation' => true,
-                     'objectsAllowed' => true,
-                     'assetsAllowed' => false,
-                     'assetTypes' => 
-                    array (
-                    ),
-                     'documentsAllowed' => false,
-                     'documentTypes' => 
-                    array (
-                    ),
-                     'width' => '500px',
-                  )),
-                  1 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
-                     'name' => 'centerBody2',
-                     'title' => 'Center body2',
-                     'tooltip' => '',
-                     'mandatory' => false,
-                     'noteditable' => false,
-                     'index' => false,
-                     'locked' => false,
-                     'style' => '',
-                     'permissions' => NULL,
-                     'fieldtype' => '',
-                     'relationType' => true,
-                     'invisible' => false,
-                     'visibleGridView' => false,
-                     'visibleSearch' => false,
-                     'blockedVarsForExport' => 
-                    array (
-                    ),
-                     'classes' => 
-                    array (
-                      0 => 
-                      array (
-                        'classes' => 'Center',
-                      ),
-                    ),
-                     'displayMode' => 'grid',
-                     'pathFormatterClass' => '',
-                     'assetInlineDownloadAllowed' => false,
-                     'assetUploadPath' => '',
-                     'allowToClearRelation' => true,
-                     'objectsAllowed' => true,
-                     'assetsAllowed' => false,
-                     'assetTypes' => 
-                    array (
-                    ),
-                     'documentsAllowed' => false,
-                     'documentTypes' => 
-                    array (
-                    ),
-                     'width' => '500px',
-                  )),
-                ),
-                 'locked' => false,
-                 'blockedVarsForExport' => 
-                array (
-                ),
-                 'fieldtype' => 'panel',
-                 'layout' => NULL,
-                 'border' => false,
-                 'icon' => '',
-                 'labelWidth' => 100,
-                 'labelAlign' => 'left',
-              )),
-              2 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
-                 'name' => 'Equipment',
-                 'type' => NULL,
-                 'region' => NULL,
-                 'title' => 'Equipment',
-                 'width' => '',
-                 'height' => '',
-                 'collapsible' => false,
-                 'collapsed' => false,
-                 'bodyStyle' => '',
-                 'datatype' => 'layout',
-                 'children' => 
-                array (
-                  0 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
-                     'name' => 'equipBody1',
-                     'title' => 'Equip body1',
-                     'tooltip' => '',
-                     'mandatory' => false,
-                     'noteditable' => false,
-                     'index' => false,
-                     'locked' => false,
-                     'style' => '',
-                     'permissions' => NULL,
-                     'fieldtype' => '',
-                     'relationType' => true,
-                     'invisible' => false,
-                     'visibleGridView' => false,
-                     'visibleSearch' => false,
-                     'blockedVarsForExport' => 
-                    array (
-                    ),
-                     'classes' => 
-                    array (
-                      0 => 
-                      array (
-                        'classes' => 'Equipment',
-                      ),
-                    ),
-                     'displayMode' => 'grid',
-                     'pathFormatterClass' => '',
-                     'assetInlineDownloadAllowed' => false,
-                     'assetUploadPath' => '',
-                     'allowToClearRelation' => true,
-                     'objectsAllowed' => true,
-                     'assetsAllowed' => false,
-                     'assetTypes' => 
-                    array (
-                    ),
-                     'documentsAllowed' => false,
-                     'documentTypes' => 
-                    array (
-                    ),
-                     'width' => '500px',
-                  )),
-                  1 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
-                     'name' => 'equipBody2',
-                     'title' => 'Equip body2',
-                     'tooltip' => '',
-                     'mandatory' => false,
-                     'noteditable' => false,
-                     'index' => false,
-                     'locked' => false,
-                     'style' => '',
-                     'permissions' => NULL,
-                     'fieldtype' => '',
-                     'relationType' => true,
-                     'invisible' => false,
-                     'visibleGridView' => false,
-                     'visibleSearch' => false,
-                     'blockedVarsForExport' => 
-                    array (
-                    ),
-                     'classes' => 
-                    array (
-                      0 => 
-                      array (
-                        'classes' => 'Equipment',
-                      ),
-                    ),
-                     'displayMode' => 'grid',
-                     'pathFormatterClass' => '',
-                     'assetInlineDownloadAllowed' => false,
-                     'assetUploadPath' => '',
-                     'allowToClearRelation' => true,
-                     'objectsAllowed' => true,
-                     'assetsAllowed' => false,
-                     'assetTypes' => 
-                    array (
-                    ),
-                     'documentsAllowed' => false,
-                     'documentTypes' => 
-                    array (
-                    ),
-                     'width' => '500px',
-                  )),
-                ),
-                 'locked' => false,
-                 'blockedVarsForExport' => 
-                array (
-                ),
-                 'fieldtype' => 'panel',
-                 'layout' => NULL,
-                 'border' => false,
-                 'icon' => '',
+                 'icon' => '/bundles/pimcoreadmin/img/flat-color-icons/puzzle.svg',
                  'labelWidth' => 100,
                  'labelAlign' => 'left',
               )),
@@ -881,20 +944,21 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'blockedVarsForExport' => 
             array (
             ),
-             'fieldtype' => 'panel',
-             'layout' => NULL,
+             'fieldtype' => 'tabpanel',
              'border' => false,
-             'icon' => '',
-             'labelWidth' => 100,
-             'labelAlign' => 'left',
+             'tabPosition' => 'top',
           )),
         ),
          'locked' => false,
          'blockedVarsForExport' => 
         array (
         ),
-         'fieldtype' => 'region',
+         'fieldtype' => 'panel',
+         'layout' => NULL,
+         'border' => false,
          'icon' => '',
+         'labelWidth' => 100,
+         'labelAlign' => 'left',
       )),
     ),
      'locked' => false,

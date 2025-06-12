@@ -1,5 +1,7 @@
 <?php
 
+use Agorate\PimcoreDeeplBundle\PimcoreDeeplBundle;
+use DivanteTranslationBundle\DivanteTranslationBundle;
 use Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle;
 use Pimcore\Bundle\DataHubBundle\PimcoreDataHubBundle;
 use Pimcore\Bundle\SimpleBackendSearchBundle\PimcoreSimpleBackendSearchBundle;
@@ -16,4 +18,6 @@ return [
     PimcoreDataHubBundle::class => ['all' => true],
     DoctrineMigrationsBundle::class => ['all' => true],
     PimcoreHeadlessContentBundle::class => ['all' => true],
+    PimcoreDeeplBundle::class => ['all' => true],
+    DivanteTranslationBundle::class => ['all' => true],
 ];

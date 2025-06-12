@@ -31,7 +31,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1743703421,
+   'modificationDate' => 1749739386,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -230,8 +230,8 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                              'maxLength' => NULL,
                              'showCharCount' => false,
                              'excludeFromSearchIndex' => false,
-                             'height' => 100,
-                             'width' => 700,
+                             'height' => 250,
+                             'width' => 550,
                           )),
                           2 => 
                           \Pimcore\Model\DataObject\ClassDefinition\Data\Wysiwyg::__set_state(array(
@@ -255,8 +255,8 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                              'toolbarConfig' => '',
                              'excludeFromSearchIndex' => false,
                              'maxCharacters' => '',
-                             'height' => '',
-                             'width' => '500px',
+                             'height' => 600,
+                             'width' => 650,
                           )),
                         ),
                          'region' => NULL,
@@ -317,7 +317,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                          'documentTypes' => 
                         array (
                         ),
-                         'width' => '500px',
+                         'width' => 400,
                       )),
                     ),
                      'locked' => false,
@@ -792,7 +792,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                          'documentTypes' => 
                         array (
                         ),
-                         'width' => '500px',
+                         'width' => 400,
                       )),
                       1 => 
                       \Pimcore\Model\DataObject\ClassDefinition\Data\CalculatedValue::__set_state(array(
