@@ -20,7 +20,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1743344715,
+   'modificationDate' => 1749741950,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -125,7 +125,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                     ),
                      'unique' => false,
                      'showCharCount' => false,
-                     'width' => '500px',
+                     'width' => 500,
                      'defaultValueGenerator' => '',
                   )),
                 ),
@@ -354,32 +354,6 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'enableGridLocking' => false,
    'deletedDataComponents' => 
   array (
-    0 => 
-    \Pimcore\Model\DataObject\ClassDefinition\Data\ImageGallery::__set_state(array(
-       'name' => 'images',
-       'title' => 'Images',
-       'tooltip' => '',
-       'mandatory' => false,
-       'noteditable' => false,
-       'index' => false,
-       'locked' => false,
-       'style' => '',
-       'permissions' => NULL,
-       'fieldtype' => '',
-       'relationType' => false,
-       'invisible' => false,
-       'visibleGridView' => false,
-       'visibleSearch' => false,
-       'blockedVarsForExport' => 
-      array (
-      ),
-       'uploadPath' => '',
-       'ratioX' => NULL,
-       'ratioY' => NULL,
-       'predefinedDataTemplates' => '',
-       'height' => '',
-       'width' => '',
-    )),
   ),
    'blockedVarsForExport' => 
   array (

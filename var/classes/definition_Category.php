@@ -7,7 +7,7 @@
  * Fields Summary:
  * - localizedfields [localizedfields]
  * -- title [input]
- * -- description [textarea]
+ * -- description [wysiwyg]
  * -- slug [input]
  * -- absolutePath [input]
  * - apiId [input]
@@ -22,7 +22,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1743442604,
+   'modificationDate' => 1749742001,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -141,11 +141,11 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                         ),
                          'unique' => false,
                          'showCharCount' => false,
-                         'width' => '',
+                         'width' => 500,
                          'defaultValueGenerator' => '',
                       )),
                       1 => 
-                      \Pimcore\Model\DataObject\ClassDefinition\Data\Textarea::__set_state(array(
+                      \Pimcore\Model\DataObject\ClassDefinition\Data\Wysiwyg::__set_state(array(
                          'name' => 'description',
                          'title' => 'Description',
                          'tooltip' => '',
@@ -163,11 +163,11 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                          'blockedVarsForExport' => 
                         array (
                         ),
-                         'maxLength' => NULL,
-                         'showCharCount' => false,
+                         'toolbarConfig' => '',
                          'excludeFromSearchIndex' => false,
-                         'height' => '',
-                         'width' => '',
+                         'maxCharacters' => '',
+                         'height' => 500,
+                         'width' => 500,
                       )),
                       2 => 
                       \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(

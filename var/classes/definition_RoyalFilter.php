@@ -32,7 +32,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1749739137,
+   'modificationDate' => 1749741914,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -177,7 +177,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                          'showCharCount' => false,
                          'excludeFromSearchIndex' => false,
                          'height' => 350,
-                         'width' => 800,
+                         'width' => 600,
                       )),
                       2 => 
                       \Pimcore\Model\DataObject\ClassDefinition\Data\Wysiwyg::__set_state(array(
@@ -202,7 +202,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                          'excludeFromSearchIndex' => false,
                          'maxCharacters' => '',
                          'height' => 600,
-                         'width' => 800,
+                         'width' => 700,
                       )),
                     ),
                      'region' => NULL,
