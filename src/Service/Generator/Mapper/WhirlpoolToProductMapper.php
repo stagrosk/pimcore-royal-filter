@@ -73,7 +73,7 @@ class WhirlpoolToProductMapper extends BaseMapper
         // pimcore base
         $path = sprintf('Shopify/Products/%s', $object->getCategory()->getKey());
         $product->setParent(Service::createFolderByPath($path));
-        $product->setKey(Service::getValidKey(sprintf('WRF-%s-%s', uniqid(), str_replace(' ', '-', $product->getTitle())), 'object'));
+        $product->setKey(Service::getValidKey(sprintf('WRF-%s', str_replace(' ', '-', $product->getTitle())), 'object'));
 
         return $product;
     }

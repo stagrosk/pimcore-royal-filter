@@ -89,7 +89,7 @@ class FilterToProductMapper extends BaseMapper
         if (!$fromWhirlpool) {
             $path = sprintf('Shopify/Products/%s', $object->getCategory()->getKey());
             $product->setParent(Service::createFolderByPath($path));
-            $product->setKey(Service::getValidKey(sprintf('RF-%s-%s', uniqid(), str_replace(' ', '-', $product->getTitle())), 'object'));
+            $product->setKey(Service::getValidKey(sprintf('RF-%s', str_replace(' ', '-', $product->getTitle())), 'object'));
         }
 
         return $product;
@@ -173,6 +173,7 @@ class FilterToProductMapper extends BaseMapper
         }
 
         return $this->translator->trans('product_title_filter', [
+            '%title%' => $object->getTitle(),
             '%dimensions%' => $dimensions,
             '%extraParams%' => implode(', ', $extraParams),
         ], 'messages', $language);
