@@ -18,6 +18,7 @@
  * - product [manyToOneRelation]
  * - defaultImage [image]
  * - images [imageGallery]
+ * - customerImages [imageGallery]
  * - downloads [manyToManyRelation]
  * - royalFilterSetup [manyToOneRelation]
  * - royalFilterSetupOverview [calculatedValue]
@@ -31,7 +32,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1749746170,
+   'modificationDate' => 1749820821,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -595,6 +596,32 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'width' => '',
                   )),
                   2 => 
+                  \Pimcore\Model\DataObject\ClassDefinition\Data\ImageGallery::__set_state(array(
+                     'name' => 'customerImages',
+                     'title' => 'Customer images',
+                     'tooltip' => '',
+                     'mandatory' => false,
+                     'noteditable' => false,
+                     'index' => false,
+                     'locked' => false,
+                     'style' => '',
+                     'permissions' => NULL,
+                     'fieldtype' => '',
+                     'relationType' => false,
+                     'invisible' => false,
+                     'visibleGridView' => false,
+                     'visibleSearch' => false,
+                     'blockedVarsForExport' => 
+                    array (
+                    ),
+                     'uploadPath' => '',
+                     'ratioX' => NULL,
+                     'ratioY' => NULL,
+                     'predefinedDataTemplates' => '',
+                     'height' => '',
+                     'width' => '',
+                  )),
+                  3 => 
                   \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToManyRelation::__set_state(array(
                      'name' => 'downloads',
                      'title' => 'Downloads',
