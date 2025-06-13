@@ -159,7 +159,9 @@ class FilterToProductMapper extends BaseMapper
                 $centerDimensions = sprintf('⌀%s', $centerDiameterFrom->getValue());
 
                 $centerDiameterTo = $mapping->findItemByKeyConfigName('centerDiameterTo');
-                if ($centerDiameterTo instanceof ClassificationStoreMappingItem) {
+                if ($centerDiameterTo instanceof ClassificationStoreMappingItem
+                    && $centerDiameterFrom->getValue() !== $centerDiameterTo->getValue()
+                ) {
                     $centerDimensions .= sprintf('->⌀%s', $centerDiameterTo->getValue());
                 }
 
