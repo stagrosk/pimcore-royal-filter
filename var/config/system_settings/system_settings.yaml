@@ -1,6 +1,6 @@
 pimcore:
     general:
-        domain: ''
+        domain: pimcore.royal-filter.com
         redirect_to_maindomain: false
         valid_languages:
             - en
