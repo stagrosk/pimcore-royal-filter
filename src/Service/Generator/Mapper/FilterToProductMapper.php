@@ -173,7 +173,7 @@ class FilterToProductMapper extends BaseMapper
         }
 
         return $this->translator->trans('product_title_filter', [
-            '%title%' => $object->getTitle(),
+            '%title%' => $object->getTitle($language),
             '%dimensions%' => $dimensions,
             '%extraParams%' => implode(', ', $extraParams),
         ], 'messages', $language);
