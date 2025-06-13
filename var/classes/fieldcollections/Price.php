@@ -92,7 +92,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'name' => 'price',
              'title' => 'Price',
              'tooltip' => '',
-             'mandatory' => false,
+             'mandatory' => true,
              'noteditable' => false,
              'index' => false,
              'locked' => false,
@@ -160,7 +160,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'permissions' => NULL,
              'fieldtype' => '',
              'relationType' => false,
-             'invisible' => true,
+             'invisible' => false,
              'visibleGridView' => false,
              'visibleSearch' => false,
              'blockedVarsForExport' => 
@@ -190,7 +190,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'permissions' => NULL,
              'fieldtype' => '',
              'relationType' => false,
-             'invisible' => true,
+             'invisible' => false,
              'visibleGridView' => false,
              'visibleSearch' => false,
              'blockedVarsForExport' => 
@@ -220,7 +220,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'permissions' => NULL,
              'fieldtype' => '',
              'relationType' => false,
-             'invisible' => true,
+             'invisible' => false,
              'visibleGridView' => false,
              'visibleSearch' => false,
              'blockedVarsForExport' => 

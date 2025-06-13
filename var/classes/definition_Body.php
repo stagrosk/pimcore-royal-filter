@@ -19,7 +19,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1749820832,
+   'modificationDate' => 1749825373,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -330,29 +330,6 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'enableGridLocking' => false,
    'deletedDataComponents' => 
   array (
-    0 => 
-    \Pimcore\Model\DataObject\ClassDefinition\Data\Image::__set_state(array(
-       'name' => 'image',
-       'title' => 'Image',
-       'tooltip' => '',
-       'mandatory' => false,
-       'noteditable' => false,
-       'index' => false,
-       'locked' => false,
-       'style' => '',
-       'permissions' => NULL,
-       'fieldtype' => '',
-       'relationType' => false,
-       'invisible' => false,
-       'visibleGridView' => false,
-       'visibleSearch' => false,
-       'blockedVarsForExport' => 
-      array (
-      ),
-       'uploadPath' => '',
-       'width' => '',
-       'height' => '',
-    )),
   ),
    'blockedVarsForExport' => 
   array (
