@@ -1,0 +1,26 @@
+pimcore:
+    assets:
+        image:
+            thumbnails:
+                definitions:
+                    1200xauto:
+                        items:
+                            -
+                                method: scaleByWidth
+                                arguments:
+                                    width: 1200
+                                    forceResize: true
+                        medias: {  }
+                        name: 1200xauto
+                        description: ''
+                        group: ''
+                        format: SOURCE
+                        quality: 85
+                        highResolution: null
+                        preserveColor: false
+                        preserveMetaData: false
+                        rasterizeSVG: false
+                        downloadable: false
+                        modificationDate: 1749828138
+                        creationDate: 1749828109
+                        preserveAnimation: false

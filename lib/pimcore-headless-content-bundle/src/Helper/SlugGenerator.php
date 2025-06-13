@@ -2,6 +2,7 @@
 
 namespace PimcoreHeadlessContentBundle\Helper;
 
+use App\Service\Utils;
 use Cocur\Slugify\Slugify;
 use Pimcore\Model\DataObject;
 use Pimcore\Tool;
@@ -15,8 +16,9 @@ class SlugGenerator
      */
     private Slugify $slugify;
 
-    public function __construct()
-    {
+    public function __construct(
+        private readonly Utils $utils
+    ) {
         $this->slugify = new Slugify([
             'rulesets' => [
                 'german'
@@ -83,7 +85,7 @@ class SlugGenerator
                 $slug = $this->slugify->slugify($name);
                 $slug = $this->checkIfSlugIsUnique($slugAware, $slug, $language);
 
-                $slugAware->setSlug($slug, $language);
+                $slugAware->setSlug($this->utils->removeDiacritics($slug), $language);
             }
         }
 
@@ -122,7 +124,7 @@ class SlugGenerator
             $absolutePath = '/' . implode('/', array_values($slugs));
 
             if ($absolutePath !== $initialObject->getAbsolutePath($language)) {
-                $initialObject->setAbsolutePath($absolutePath, $language);
+                $initialObject->setAbsolutePath($this->utils->removeDiacritics($absolutePath), $language);
             }
         }
     }
