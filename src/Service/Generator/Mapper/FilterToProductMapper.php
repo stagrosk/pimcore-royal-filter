@@ -101,14 +101,8 @@ class FilterToProductMapper extends BaseMapper
      */
     private function prepareImages(AbstractObject $object): ImageGallery
     {
-        $images = [];
-        if ($object->getImage() instanceof Asset) {
-            $images[] = new Hotspotimage($object->getImage());
-        }
-
         // images
         $images = array_merge(
-            $images,
             $object->getImageGallery()?->getItems(),
             $object->getBody1()?->getImageGallery()?->getItems() ?? [],
             $object->getBodyMiddle()?->getImageGallery()?->getItems() ?? [],
