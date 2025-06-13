@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Inheritance: yes
+ * Inheritance: no
  * Variants: no
  *
  * Fields Summary:
@@ -22,7 +22,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1749838869,
+   'modificationDate' => 1749843185,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -34,7 +34,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'encryptedTables' => 
   array (
   ),
-   'allowInherit' => true,
+   'allowInherit' => false,
    'allowVariants' => false,
    'showVariants' => false,
    'layoutDefinitions' => 
