@@ -54,7 +54,7 @@ class FilterToProductGenerator extends BaseProductGenerator
                 $product->save();
             }, false);
 
-            // save product on whirlpool
+            // save product on object
             $object->setProduct($product);
             VersionHelper::useVersioning(function () use ($object) {
                 $object->save();

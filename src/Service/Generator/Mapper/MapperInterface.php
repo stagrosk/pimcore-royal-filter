@@ -10,10 +10,11 @@ interface MapperInterface
     /**
      * @param \Pimcore\Model\DataObject\AbstractObject $object
      * @param \Pimcore\Model\DataObject\Product $product
+     * @param bool $fromWhirlpool
      *
      * @return \Pimcore\Model\DataObject\Product
      */
-    public function mapObjectToProduct(AbstractObject $object, Product $product): Product;
+    public function mapObjectToProduct(AbstractObject $object, Product $product, bool $fromWhirlpool = false): Product;
 
     /**
      * @param \Pimcore\Model\DataObject\AbstractObject $object

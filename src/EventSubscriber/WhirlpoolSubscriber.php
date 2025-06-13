@@ -8,6 +8,7 @@ use App\Service\Generator\BaseProductGenerator;
 use App\Service\Generator\WhirlpoolToProductGenerator;
 use Pimcore\Event\DataObjectEvents;
 use Pimcore\Event\Model\DataObjectEvent;
+use Pimcore\Model\DataObject\Product;
 use Pimcore\Model\DataObject\Whirlpool;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -46,6 +47,11 @@ readonly class WhirlpoolSubscriber implements EventSubscriberInterface
 
         if ($object->isPublished() && $object->getGenerateAsProduct() === true) {
             $this->generator->generateProductForObject($object);
+        }
+
+        // if is not generated as product and product exists -> remove product
+        if (!$object->getGenerateAsProduct() && $object->getProduct() instanceof Product) {
+            $object->getProduct()->delete();
         }
     }
 }

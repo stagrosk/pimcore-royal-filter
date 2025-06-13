@@ -11,6 +11,7 @@ use Pimcore\Model\DataObject\AbstractObject;
 use Pimcore\Model\DataObject\Country;
 use Pimcore\Model\DataObject\Data\Hotspotimage;
 use Pimcore\Model\DataObject\Data\ImageGallery;
+use Pimcore\Model\DataObject\Folder;
 use Pimcore\Model\DataObject\Product;
 use Pimcore\Model\DataObject\Service;
 use Pimcore\Tool;
@@ -32,13 +33,14 @@ class FilterToProductMapper extends BaseMapper
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\RoyalFilter $object
+     * @param \Pimcore\Model\DataObject\AbstractObject $object
      * @param \Pimcore\Model\DataObject\Product $product
+     * @param bool $fromWhirlpool
      *
      * @throws \Exception
      * @return \Pimcore\Model\DataObject\Product
      */
-    public function mapObjectToProduct(AbstractObject $object, Product $product): Product
+    public function mapObjectToProduct(AbstractObject $object, Product $product, bool $fromWhirlpool = false): Product
     {
         // base
         $product->setPublished(true);
@@ -59,8 +61,7 @@ class FilterToProductMapper extends BaseMapper
         }
 
         // category
-        $categoryPath = sprintf('/Shopify/Categories/AllProducts/%s', self::CATEGORY_FILTERS);
-        $this->handleCategories($product, $categoryPath);
+        $this->handleCategories($object, $product);
 
         // google taxonomy category
         $product->setTaxonomyCategory(self::SHOPIFY_GOOGLE_CATEGORY_POOL_SPA_FILTERS);
@@ -74,10 +75,8 @@ class FilterToProductMapper extends BaseMapper
             $product->setTitle($this->prepareTitle($object, $product, $language), $language);
             $product->setShortDescription($object->getShortDescription($language), $language);
             $product->setDescription($object->getDescription($language), $language);
-
-            // TODO: finish
-//            $product->setSeoTitle($object->getSeoTitle($language), $language);
-//            $product->setSeoDescription($object->getSeoDescription($language), $language);
+//            $product->setSeoTitle($product->getTitle($language), $language);
+//            $product->setSeoDescription($product->getDescription($language), $language);
         }
 
         // images
@@ -87,9 +86,11 @@ class FilterToProductMapper extends BaseMapper
         $product->setPrices($object->getPrices());
 
         // pimcore base
-        $path = sprintf('Shopify/Products/%s', self::CATEGORY_FILTERS);
-        $product->setParent(Service::createFolderByPath($path));
-        $product->setKey(Service::getValidKey(sprintf('RF-%s-%s', uniqid(), $product->getTitle()), 'object'));
+        if (!$fromWhirlpool) {
+            $path = sprintf('Shopify/Products/%s', $object->getCategory()->getKey());
+            $product->setParent(Service::createFolderByPath($path));
+            $product->setKey(Service::getValidKey(sprintf('RF-%s-%s', uniqid(), str_replace(' ', '-', $product->getTitle())), 'object'));
+        }
 
         return $product;
     }

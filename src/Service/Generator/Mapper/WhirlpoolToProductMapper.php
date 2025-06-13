@@ -31,19 +31,20 @@ class WhirlpoolToProductMapper extends BaseMapper
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\Whirlpool $object
+     * @param \Pimcore\Model\DataObject\AbstractObject $object
      * @param \Pimcore\Model\DataObject\Product $product
+     * @param bool $fromWhirlpool
      *
      * @throws \Exception
      * @return \Pimcore\Model\DataObject\Product
      */
-    public function mapObjectToProduct(AbstractObject $object, Product $product): Product
+    public function mapObjectToProduct(AbstractObject $object, Product $product, bool $fromWhirlpool = false): Product
     {
         // get filter setup
         $royalFilterSetup = $object->getRoyalFilterSetup();
 
         // map all from filter
-        $this->filterToProductMapper->mapObjectToProduct($royalFilterSetup, $product);
+        $this->filterToProductMapper->mapObjectToProduct($royalFilterSetup, $product, true);
 
         // base
         $product->setSku(sprintf('WRF-%s-%s', $object->getId(), $product->getSku()));
@@ -51,8 +52,7 @@ class WhirlpoolToProductMapper extends BaseMapper
         $product->setProductType('whirlpoolFilter');
 
         // category
-        $categoryPath = sprintf('/Shopify/Categories/AllProducts/%s', self::CATEGORY_FILTERS_BY_WHIRLPOOLS);
-        $this->handleCategories($product, $categoryPath);
+        $this->handleCategories($object, $product);
 
         // PRE-SAVE IN classification store helper! must be after key and parent assign
         // remap parameters and set them as new classification store values for product
@@ -63,19 +63,17 @@ class WhirlpoolToProductMapper extends BaseMapper
             $product->setTitle($this->prepareTitle($object, $product, $language), $language);
             $product->setShortDescription($object->getShortDescription($language), $language);
             $product->setDescription($object->getDescription($language), $language);
-
-            // TODO: finish
-//            $product->setSeoTitle($object->getSeoTitle($language), $language);
-//            $product->setSeoDescription($object->getSeoDescription($language), $language);
+//            $product->setSeoTitle($product->getTitle($language), $language);
+//            $product->setSeoDescription($product->getDescription($language), $language);
         }
 
         // images
         $product->setImageGallery($this->prepareImages($object, $product));
 
         // pimcore base
-        $path = sprintf('Shopify/Products/%s', self::CATEGORY_FILTERS_BY_WHIRLPOOLS);
+        $path = sprintf('Shopify/Products/%s', $object->getCategory()->getKey());
         $product->setParent(Service::createFolderByPath($path));
-        $product->setKey(Service::getValidKey(sprintf('WRF-%s-%s', uniqid(), $product->getTitle()), 'object'));
+        $product->setKey(Service::getValidKey(sprintf('WRF-%s-%s', uniqid(), str_replace(' ', '-', $product->getTitle())), 'object'));
 
         return $product;
     }

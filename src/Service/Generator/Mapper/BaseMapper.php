@@ -21,10 +21,6 @@ abstract class BaseMapper implements MapperInterface
     public const COUNTRY_CZECHIA = 'Czechia';
     public const COUNTRY_SLOVAKIA = 'Slovakia';
 
-    public const CATEGORY_FILTERS = 'RoyalFilters';
-
-    public const CATEGORY_FILTERS_BY_WHIRLPOOLS = 'RoyalFiltersByWhirlpools';
-
     public const SHOPIFY_GOOGLE_CATEGORY_POOL_SPA_FILTERS = 'gid://shopify/TaxonomyCategory/hg-18-1-3';
 
     /**
@@ -40,14 +36,14 @@ abstract class BaseMapper implements MapperInterface
     }
 
     /**
+     * @param \Pimcore\Model\DataObject\AbstractObject $object
      * @param \Pimcore\Model\DataObject\Product $product
-     * @param string $categoryPath
      *
      * @return void
      */
-    public function handleCategories(Product $product, string $categoryPath): void
+    public function handleCategories(AbstractObject $object, Product $product): void
     {
-        $category = Category::getByPath($categoryPath, ['force' => true]);
+        $category = $object->getCategory();
         $categories = [];
         while ($category instanceof Category) {
             $categories[] = $category;

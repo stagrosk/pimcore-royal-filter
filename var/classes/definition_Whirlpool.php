@@ -14,8 +14,9 @@
  * - metadata [classificationstore]
  * - whirlpoolProperties [objectbricks]
  * - extraParameters [fieldcollections]
- * - generateAsProduct [checkbox]
+ * - category [manyToOneRelation]
  * - product [manyToOneRelation]
+ * - generateAsProduct [checkbox]
  * - defaultImage [image]
  * - images [imageGallery]
  * - customerImages [imageGallery]
@@ -32,7 +33,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1749820821,
+   'modificationDate' => 1749838484,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -457,10 +458,10 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'children' => 
                 array (
                   0 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
-                     'name' => 'generateAsProduct',
-                     'title' => 'Generate as product',
-                     'tooltip' => 'On save or with command will be automatically generated as shopify product and sent to shopify',
+                  \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
+                     'name' => 'category',
+                     'title' => 'Category',
+                     'tooltip' => '',
                      'mandatory' => false,
                      'noteditable' => false,
                      'index' => false,
@@ -468,15 +469,35 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'style' => '',
                      'permissions' => NULL,
                      'fieldtype' => '',
-                     'relationType' => false,
+                     'relationType' => true,
                      'invisible' => false,
                      'visibleGridView' => false,
                      'visibleSearch' => false,
                      'blockedVarsForExport' => 
                     array (
                     ),
-                     'defaultValue' => 0,
-                     'defaultValueGenerator' => '',
+                     'classes' => 
+                    array (
+                      0 => 
+                      array (
+                        'classes' => 'Category',
+                      ),
+                    ),
+                     'displayMode' => 'grid',
+                     'pathFormatterClass' => '',
+                     'assetInlineDownloadAllowed' => false,
+                     'assetUploadPath' => '',
+                     'allowToClearRelation' => true,
+                     'objectsAllowed' => true,
+                     'assetsAllowed' => false,
+                     'assetTypes' => 
+                    array (
+                    ),
+                     'documentsAllowed' => false,
+                     'documentTypes' => 
+                    array (
+                    ),
+                     'width' => '500px',
                   )),
                   1 => 
                   \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
@@ -484,7 +505,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'title' => 'Product',
                      'tooltip' => '',
                      'mandatory' => false,
-                     'noteditable' => false,
+                     'noteditable' => true,
                      'index' => false,
                      'locked' => false,
                      'style' => '',
@@ -519,6 +540,28 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                     array (
                     ),
                      'width' => '',
+                  )),
+                  2 => 
+                  \Pimcore\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
+                     'name' => 'generateAsProduct',
+                     'title' => 'Generate as product',
+                     'tooltip' => 'On save or with command will be automatically generated as shopify product and sent to shopify',
+                     'mandatory' => false,
+                     'noteditable' => false,
+                     'index' => false,
+                     'locked' => false,
+                     'style' => '',
+                     'permissions' => NULL,
+                     'fieldtype' => '',
+                     'relationType' => false,
+                     'invisible' => false,
+                     'visibleGridView' => false,
+                     'visibleSearch' => false,
+                     'blockedVarsForExport' => 
+                    array (
+                    ),
+                     'defaultValue' => 0,
+                     'defaultValueGenerator' => '',
                   )),
                 ),
                  'locked' => false,
