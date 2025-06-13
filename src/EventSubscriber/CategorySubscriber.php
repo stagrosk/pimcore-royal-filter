@@ -51,7 +51,7 @@ readonly class CategorySubscriber implements EventSubscriberInterface
         $object = $event->getObject();
 
         // check an object type
-        if (!$object instanceof Category) {
+        if (!$object instanceof Category || !$object->isPublished()) {
             return;
         }
 
