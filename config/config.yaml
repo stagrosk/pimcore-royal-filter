@@ -32,6 +32,7 @@ pimcore:
     models:
         class_overrides:
             'Pimcore\Model\DataObject\Category': 'App\Pimcore\Model\DataObject\Category'
+            'Pimcore\Model\DataObject\RoyalFilter': 'App\Pimcore\Model\DataObject\RoyalFilter'
 
 #### CUSTOM DOCUMENT EDITABLES
     documents:

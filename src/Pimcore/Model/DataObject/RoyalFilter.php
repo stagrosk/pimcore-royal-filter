@@ -1,0 +1,33 @@
+<?php
+
+namespace App\Pimcore\Model\DataObject;
+
+use Pimcore\Model\DataObject;
+use Pimcore\Model\DataObject\Exception\InheritanceParentNotFoundException;
+use Pimcore\Model\DataObject\Fieldcollection;
+use Pimcore\Model\DataObject\Service;
+
+class RoyalFilter extends DataObject\RoyalFilter
+{
+    /**
+     * @throws \Exception
+     * @return \Pimcore\Model\DataObject\Fieldcollection|null
+     */
+    public function getPrices(): ?Fieldcollection
+    {
+        $data = parent::getPrices();
+
+        $inheritedData = Service::useInheritedValues(true, function() use ($data) {
+            if (DataObject::doGetInheritedValues($this) && $this->getClass()->getFieldDefinition("Prices")->isEmpty($data)) {
+                try {
+                    return $this->getValueFromParent("Prices");
+                } catch (InheritanceParentNotFoundException $e) {
+                    return null;
+                }
+            }
+            return null;
+        });
+
+        return $inheritedData ?? $data;
+    }
+}
