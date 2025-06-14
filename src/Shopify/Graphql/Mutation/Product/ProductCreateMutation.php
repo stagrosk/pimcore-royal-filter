@@ -9,7 +9,7 @@ use App\Shopify\Model\Product\ProductCreateInput;
 use App\Shopify\Service\Media\ShopifyMediaMapper;
 use App\Shopify\Service\Product\ShopifyProductMapper;
 use Pimcore\Model\DataObject\AbstractObject;
-use Pimcore\Model\DataObject\Category;
+use Pimcore\Model\DataObject\Collection;
 use Psr\Log\LoggerInterface;
 
 class ProductCreateMutation extends BaseMutation
@@ -59,12 +59,12 @@ class ProductCreateMutation extends BaseMutation
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\Category|\Pimcore\Model\DataObject\AbstractObject|array $object
+     * @param \Pimcore\Model\DataObject\Collection|\Pimcore\Model\DataObject\AbstractObject|array $object
      *
      * @throws \Exception
      * @return array
      */
-    public function getVariables(Category|AbstractObject|array $object): array
+    public function getVariables(Collection|AbstractObject|array $object): array
     {
         $productCreateInput = $this->productMapper->getMappedObject(new ProductCreateInput(), $object);
         $createMediaInputs = $this->mediaMapper->getMappedObject(new CreateMediaInputs(), $object);

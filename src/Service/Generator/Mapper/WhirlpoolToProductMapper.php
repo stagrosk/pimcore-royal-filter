@@ -51,8 +51,8 @@ class WhirlpoolToProductMapper extends BaseMapper
         $product->setGeneratedFromObject($object);
         $product->setProductType('whirlpoolFilter');
 
-        // category
-        $this->handleCategories($object, $product);
+        // collections
+        $this->handleCollections($object, $product);
 
         // PRE-SAVE IN classification store helper! must be after key and parent assign
         // remap parameters and set them as new classification store values for product
@@ -71,7 +71,7 @@ class WhirlpoolToProductMapper extends BaseMapper
         $product->setImageGallery($this->prepareImages($object, $product));
 
         // pimcore base
-        $path = sprintf('Shopify/Products/%s', $object->getCategory()->getKey());
+        $path = sprintf('Shopify/Products/%s', $object->getCollection()->getKey());
         $product->setParent(Service::createFolderByPath($path));
         $product->setKey(Service::getValidKey(sprintf('WRF-%s', str_replace(' ', '-', $product->getTitle())), 'object'));
 

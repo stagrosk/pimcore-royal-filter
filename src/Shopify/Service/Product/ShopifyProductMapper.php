@@ -2,13 +2,13 @@
 
 namespace App\Shopify\Service\Product;
 
-use App\Pimcore\Model\DataObject\Category;
 use App\Shopify\Model\Metafields\MetafieldInputs;
 use App\Shopify\Model\Product\ProductCreateInput;
 use App\Shopify\Model\Product\ProductUpdateInput;
 use App\Shopify\Model\Seo\SeoInput;
 use App\Shopify\Service\Metafields\ShopifyMetafieldsMapper;
 use Pimcore\Model\DataObject\AbstractObject;
+use Pimcore\Model\DataObject\Collection;
 use Pimcore\Model\DataObject\Product;
 
 class ShopifyProductMapper implements IShopifyProductMapper
@@ -71,7 +71,7 @@ class ShopifyProductMapper implements IShopifyProductMapper
         $input->setSeo($seo);
 
         // collections
-        $collectionsToJoin = collect($object->getCategories())->map(fn(Category $category) => $category->getApiId())->toArray();
+        $collectionsToJoin = collect($object->getCollections())->map(fn(Collection $collection) => $collection->getApiId())->toArray();
         $input->setCollectionsToJoin($collectionsToJoin);
 
         // metafields

@@ -4,16 +4,14 @@ namespace App\Service\Generator\Mapper;
 
 use App\Pimcore\ClassificationStore\ClassificationStoreHelper;
 use App\Pimcore\ClassificationStore\ClassificationStoreService;
-use App\Pimcore\Model\DataObject\Category;
 use Pimcore\Model\DataObject\AbstractObject;
 use Pimcore\Model\DataObject\Body;
 use Pimcore\Model\DataObject\Center;
 use Pimcore\Model\DataObject\Classificationstore;
-use Pimcore\Model\DataObject\Concrete;
+use Pimcore\Model\DataObject\Collection;
 use Pimcore\Model\DataObject\Equipment;
 use Pimcore\Model\DataObject\Product;
 use Pimcore\Model\DataObject\RoyalFilter;
-use Pimcore\Tool;
 use Pimcore\Translation\Translator;
 
 abstract class BaseMapper implements MapperInterface
@@ -41,16 +39,16 @@ abstract class BaseMapper implements MapperInterface
      *
      * @return void
      */
-    public function handleCategories(AbstractObject $object, Product $product): void
+    public function handleCollections(AbstractObject $object, Product $product): void
     {
-        $category = $object->getCategory();
-        $categories = [];
-        while ($category instanceof Category) {
-            $categories[] = $category;
-            $category = $category->getParent();
+        $collection = $object->getCollection();
+        $collections = [];
+        while ($collection instanceof Collection) {
+            $collections[] = $collection;
+            $collection = $collection->getParent();
         }
 
-        $product->setCategories($categories);
+        $product->setCollections($collections);
     }
 
     /**

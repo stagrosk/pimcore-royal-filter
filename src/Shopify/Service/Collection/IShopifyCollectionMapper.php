@@ -17,5 +17,5 @@ interface IShopifyCollectionMapper
 
     public function getShopifyChannelKey(): string;
 
-    public function getMappedObject(CollectionInput $shopifyCollectionModel, AbstractObject $object): CollectionInput;
+    public function getMappedObject(CollectionInput $input, AbstractObject $object): CollectionInput;
 }

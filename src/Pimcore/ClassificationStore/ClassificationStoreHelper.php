@@ -70,6 +70,7 @@ class ClassificationStoreHelper
                             case 'numeric':
                             case 'textarea':
                             case 'input':
+                            case 'booleanSelect':
                                 $classificationStoreMappingItem = new ClassificationStoreMappingItem(
                                     $keyConfig,
                                     $groupConfig,

@@ -4,7 +4,7 @@ namespace App\Pimcore\Model\DataObject;
 
 use PimcoreHeadlessContentBundle\Model\SlugAwareInterface;
 
-class Category extends \Pimcore\Model\DataObject\Category implements SlugAwareInterface
+class Collection extends \Pimcore\Model\DataObject\Collection implements SlugAwareInterface
 {
     /**
      * @param string|null $language
