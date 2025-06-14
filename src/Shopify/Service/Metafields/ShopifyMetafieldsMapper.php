@@ -2,11 +2,11 @@
 
 namespace App\Shopify\Service\Metafields;
 
+use App\Pimcore\Model\DataObject\Collection;
 use App\Shopify\Model\Metafields\MetafieldInput;
 use App\Shopify\Model\Metafields\MetafieldInputs;
 use Pimcore\Model\DataObject\AbstractObject;
 use Pimcore\Model\DataObject\Product;
-use Pimcore\Model\DataObject\ShopifyMetafieldDefinition;
 
 class ShopifyMetafieldsMapper implements ShopifyMetafieldsMapperInterface
 {
@@ -40,12 +40,12 @@ class ShopifyMetafieldsMapper implements ShopifyMetafieldsMapperInterface
      * Map metafields from dataObject on object based on classification store values on object
      *
      * @param \App\Shopify\Model\Metafields\MetafieldInputs $inputs
-     * @param \Pimcore\Model\DataObject\AbstractObject|\Pimcore\Model\DataObject\Product $object
+     * @param \Pimcore\Model\DataObject\Product|\App\Pimcore\Model\DataObject\Collection|\Pimcore\Model\DataObject\AbstractObject $object
      *
      * @throws \Exception
      * @return \App\Shopify\Model\Metafields\MetafieldInputs
      */
-    public function getMappedObject(MetafieldInputs $inputs, Product|AbstractObject $object): MetafieldInputs
+    public function getMappedObject(MetafieldInputs $inputs, Product|Collection|AbstractObject $object): MetafieldInputs
     {
         $metafieldDefinitions = $this->shopifyMetafieldService->getObjectMetafieldDefinitions($object);
 

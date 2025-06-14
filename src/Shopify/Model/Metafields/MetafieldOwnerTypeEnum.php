@@ -8,7 +8,7 @@ enum MetafieldOwnerTypeEnum: string
     case ARTICLE = 'ARTICLE';
     case BLOG = 'BLOG';
     case CARTTRANSFORM = 'CARTTRANSFORM';
-    case CATEGORY = 'COLLECTION'; // collection / category
+    case COLLECTION = 'COLLECTION';
     case COMPANY = 'COMPANY';
     case COMPANY_LOCATION = 'COMPANY_LOCATION';
     case CUSTOMER = 'CUSTOMER';

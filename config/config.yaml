@@ -31,7 +31,7 @@ pimcore:
 #### CLASS OVERRIDES EXAMPLES
     models:
         class_overrides:
-            'Pimcore\Model\DataObject\Category': 'App\Pimcore\Model\DataObject\Category'
+            'Pimcore\Model\DataObject\Collection': 'App\Pimcore\Model\DataObject\Collection'
             'Pimcore\Model\DataObject\RoyalFilter': 'App\Pimcore\Model\DataObject\RoyalFilter'
 
 #### CUSTOM DOCUMENT EDITABLES

@@ -60,8 +60,8 @@ class FilterToProductMapper extends BaseMapper
             $product->setMadeIn($country->getIsoAlphaCode2());
         }
 
-        // category
-        $this->handleCategories($object, $product);
+        // collections
+        $this->handleCollections($object, $product);
 
         // google taxonomy category
         $product->setTaxonomyCategory(self::SHOPIFY_GOOGLE_CATEGORY_POOL_SPA_FILTERS);
@@ -87,7 +87,7 @@ class FilterToProductMapper extends BaseMapper
 
         // pimcore base
         if (!$fromWhirlpool) {
-            $path = sprintf('Shopify/Products/%s', $object->getCategory()->getKey());
+            $path = sprintf('Shopify/Products/%s', $object->getCollection()->getKey());
             $product->setParent(Service::createFolderByPath($path));
             $product->setKey(Service::getValidKey(sprintf('RF-%s', str_replace(' ', '-', $product->getTitle())), 'object'));
         }

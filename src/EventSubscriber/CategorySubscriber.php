@@ -10,10 +10,10 @@ use App\Shopify\Graphql\Mutation\Collection\CollectionPublishMutation;
 use App\Shopify\Graphql\Mutation\Collection\CollectionUpdateMutation;
 use Pimcore\Event\DataObjectEvents;
 use Pimcore\Event\Model\DataObjectEvent;
-use Pimcore\Model\DataObject\Category;
+use Pimcore\Model\DataObject\Collection;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-readonly class CategorySubscriber implements EventSubscriberInterface
+readonly class CollectionSubscriber implements EventSubscriberInterface
 {
     /**
      * @param \App\Shopify\Graphql\Mutation\Collection\CollectionCreateMutation $collectionCreateMutation
@@ -47,11 +47,11 @@ readonly class CategorySubscriber implements EventSubscriberInterface
      */
     public function onPreUpdate(DataObjectEvent $event): void
     {
-        /** @var \Pimcore\Model\DataObject\Category $object */
+        /** @var \Pimcore\Model\DataObject\Collection $object */
         $object = $event->getObject();
 
         // check an object type
-        if (!$object instanceof Category || !$object->isPublished()) {
+        if (!$object instanceof Collection || !$object->isPublished()) {
             return;
         }
 
@@ -88,11 +88,11 @@ readonly class CategorySubscriber implements EventSubscriberInterface
      */
     public function onPreDelete(DataObjectEvent $event): void
     {
-        /** @var \Pimcore\Model\DataObject\Category $object */
+        /** @var \Pimcore\Model\DataObject\Collection $object */
         $object = $event->getObject();
 
         // check an object type
-        if (!$object instanceof Category) {
+        if (!$object instanceof Collection) {
             return;
         }
 

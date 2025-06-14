@@ -5,7 +5,7 @@ namespace App\Shopify\Service\Metafields;
 use App\Model\ClassificationStoreMappingItem;
 use App\Pimcore\ClassificationStore\ClassificationStoreHelper;
 use App\Pimcore\Helpers\VersionHelper;
-use App\Pimcore\Model\DataObject\Category;
+use App\Pimcore\Model\DataObject\Collection;
 use App\Shopify\Model\Metafields\MetafieldMetaTypeEnum;
 use App\Shopify\Model\Metafields\MetafieldOwnerTypeEnum;
 use Pimcore\Model\DataObject\AbstractObject;
@@ -45,7 +45,7 @@ readonly class ShopifyMetafieldService
         $classificationStoreMapping = $this->classificationStoreHelper->getClassificationStoreMapped($metadata);
 
         $className = $object->getClassName();
-        $ownerType = MetafieldOwnerTypeEnum::from(strtoupper($className)); //Product/Collection
+        $ownerType = MetafieldOwnerTypeEnum::from(strtoupper($className)); // Product, Collection ...
 
         // loop all items in product metadata
         foreach ($classificationStoreMapping->getClassificationStoreMappingItems() as $classificationStoreMappingItem) {
@@ -252,14 +252,14 @@ readonly class ShopifyMetafieldService
     }
 
     /**
-     * @param \App\Pimcore\Model\DataObject\Category|\Pimcore\Model\DataObject\Product|\Pimcore\Model\DataObject\AbstractObject $object
+     * @param \App\Pimcore\Model\DataObject\Collection|\Pimcore\Model\DataObject\Product|\Pimcore\Model\DataObject\AbstractObject $object
      *
      * @throws \PHPShopify\Exception\ApiException
      * @throws \PHPShopify\Exception\CurlException
      * @throws \Exception
      * @return array
      */
-    public function getMetafieldsToBeDeleted(Category|Product|AbstractObject $object): array
+    public function getMetafieldsToBeDeleted(Collection|Product|AbstractObject $object): array
     {
         $metafieldIds = [];
 
