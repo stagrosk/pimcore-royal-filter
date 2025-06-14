@@ -16,7 +16,7 @@ class CollectionInput implements IShopifyModel
      * @param array|null $products
      * @param string|null $handle
      * @param \App\Shopify\Model\Media\CreateMediaInput|null $image
-     * @param array|null $metafields
+     * @param \App\Shopify\Model\Metafields\MetafieldInput|null $metafields
      * @param bool $redirectNewHandle
      * @param \App\Shopify\Model\Collection\CollectionRuleSetInput|null $rules
      * @param \App\Shopify\Model\Seo\SeoInput|null $seo
@@ -29,7 +29,7 @@ class CollectionInput implements IShopifyModel
         private ?array                  $products = [],
         private ?string                 $handle = null,
         private ?CreateMediaInput       $image = null,
-        private ?array                  $metafields = null,
+        private ?MetafieldInput         $metafields = null,
         private bool                    $redirectNewHandle = false,
         private ?CollectionRuleSetInput $rules = null,
         private ?SeoInput               $seo = null,
@@ -57,7 +57,7 @@ class CollectionInput implements IShopifyModel
         }
 
         if (!empty($this->getMetafields())) {
-            $data['metafields'] = $this->getMetafields();
+            $data['metafields'] = $this->getMetafields()->getAsArray();
         }
 
         //  only for collectionCreate and without rules
@@ -136,12 +136,12 @@ class CollectionInput implements IShopifyModel
         $this->image = $image;
     }
 
-    public function getMetafields(): ?array
+    public function getMetafields(): ?MetafieldInput
     {
         return $this->metafields;
     }
 
-    public function setMetafields(?array $metafields): void
+    public function setMetafields(?MetafieldInput $metafields): void
     {
         $this->metafields = $metafields;
     }

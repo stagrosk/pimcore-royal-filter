@@ -2,7 +2,7 @@
 
 namespace App\Shopify\Graphql\Mutation\Metafield;
 
-use App\Pimcore\Model\DataObject\Collection;
+use App\Pimcore\Model\DataObject\Category;
 use App\Shopify\Graphql\GraphqlClient;
 use App\Shopify\Graphql\Mutation\BaseMutation;
 use App\Shopify\Model\Metafields\MetafieldIdentifierInput;
@@ -50,13 +50,13 @@ class DeleteMetafieldsMutation extends BaseMutation
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\AbstractObject|\Pimcore\Model\DataObject\Product|\App\Pimcore\Model\DataObject\Collection|array $object
+     * @param \Pimcore\Model\DataObject\AbstractObject|\Pimcore\Model\DataObject\Product|\App\Pimcore\Model\DataObject\Category|array $object
      *
      * @throws \PHPShopify\Exception\ApiException
      * @throws \PHPShopify\Exception\CurlException
      * @return array
      */
-    public function getVariables(AbstractObject|Product|Collection|array $object): array
+    public function getVariables(AbstractObject|Product|Category|array $object): array
     {
         $metafieldIdentifierInputs = new MetafieldIdentifierInputs();
 

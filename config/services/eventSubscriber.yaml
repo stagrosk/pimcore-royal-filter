@@ -4,7 +4,7 @@ services:
         autoconfigure: true
         public: false
 
-    App\EventSubscriber\CollectionSubscriber:
+    App\EventSubscriber\CategorySubscriber:
 
     App\EventSubscriber\ProductSubscriber:
 

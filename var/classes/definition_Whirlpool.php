@@ -14,7 +14,7 @@
  * - metadata [classificationstore]
  * - whirlpoolProperties [objectbricks]
  * - extraParameters [fieldcollections]
- * - collection [manyToOneRelation]
+ * - category [manyToOneRelation]
  * - product [manyToOneRelation]
  * - generateAsProduct [checkbox]
  * - defaultImage [image]
@@ -33,7 +33,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1749934957,
+   'modificationDate' => 1749840940,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -459,8 +459,8 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                 array (
                   0 => 
                   \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
-                     'name' => 'collection',
-                     'title' => 'Collection',
+                     'name' => 'category',
+                     'title' => 'Category',
                      'tooltip' => '',
                      'mandatory' => true,
                      'noteditable' => false,
@@ -480,7 +480,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                     array (
                       0 => 
                       array (
-                        'classes' => 'Collection',
+                        'classes' => 'Category',
                       ),
                     ),
                      'displayMode' => 'grid',
@@ -997,48 +997,6 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'enableGridLocking' => false,
    'deletedDataComponents' => 
   array (
-    0 => 
-    \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
-       'name' => 'category',
-       'title' => 'Category',
-       'tooltip' => '',
-       'mandatory' => true,
-       'noteditable' => false,
-       'index' => false,
-       'locked' => false,
-       'style' => '',
-       'permissions' => NULL,
-       'fieldtype' => '',
-       'relationType' => true,
-       'invisible' => false,
-       'visibleGridView' => false,
-       'visibleSearch' => false,
-       'blockedVarsForExport' => 
-      array (
-      ),
-       'classes' => 
-      array (
-        0 => 
-        array (
-          'classes' => 'Collection',
-        ),
-      ),
-       'displayMode' => 'grid',
-       'pathFormatterClass' => '',
-       'assetInlineDownloadAllowed' => false,
-       'assetUploadPath' => '',
-       'allowToClearRelation' => true,
-       'objectsAllowed' => true,
-       'assetsAllowed' => false,
-       'assetTypes' => 
-      array (
-      ),
-       'documentsAllowed' => false,
-       'documentTypes' => 
-      array (
-      ),
-       'width' => '500px',
-    )),
   ),
    'blockedVarsForExport' => 
   array (

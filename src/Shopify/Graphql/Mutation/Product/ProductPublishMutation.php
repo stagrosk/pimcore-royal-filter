@@ -6,7 +6,7 @@ use App\Shopify\Graphql\Mutation\BaseMutation;
 use App\Shopify\Model\Product\ProductPublicationInput;
 use App\Shopify\Model\Product\ProductPublishInput;
 use Pimcore\Model\DataObject\AbstractObject;
-use Pimcore\Model\DataObject\Collection;
+use Pimcore\Model\DataObject\Category;
 
 class ProductPublishMutation extends BaseMutation
 {
@@ -31,11 +31,11 @@ class ProductPublishMutation extends BaseMutation
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\Collection|\Pimcore\Model\DataObject\AbstractObject|array $object
+     * @param \Pimcore\Model\DataObject\Category|\Pimcore\Model\DataObject\AbstractObject|array $object
      *
      * @return array
      */
-    public function getVariables(Collection|AbstractObject|array $object): array
+    public function getVariables(Category|AbstractObject|array $object): array
     {
         $shopifyProductPublicationInput = new ProductPublicationInput(self::PUBLICATIONS['store']['id']);
         $shopifyProductPublishInput = new ProductPublishInput($object->getApiId(), $shopifyProductPublicationInput);
