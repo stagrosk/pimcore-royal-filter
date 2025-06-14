@@ -150,16 +150,16 @@ class FilterToProductMapper extends BaseMapper
             $mapping = reset($params)['mapping'];
 
             // add diameter
-            $height = $mapping->findItemByKeyConfigName('height');
-            $diameter = $mapping->findItemByKeyConfigName('diameter');
+            $height = $mapping->findItemByKeyConfigName('body', 'height');
+            $diameter = $mapping->findItemByKeyConfigName('body', 'diameter');
             $dimensions = sprintf('%s x ⌀%s', $height->getValue(), $diameter->getValue());
 
             // -> added center dimension to title
-            $centerDiameterFrom = $mapping->findItemByKeyConfigName('centerDiameterFrom');
+            $centerDiameterFrom = $mapping->findItemByKeyConfigName('center', 'centerDiameterFrom');
             if ($centerDiameterFrom instanceof ClassificationStoreMappingItem) {
                 $centerDimensions = sprintf('⌀%s', $centerDiameterFrom->getValue());
 
-                $centerDiameterTo = $mapping->findItemByKeyConfigName('centerDiameterTo');
+                $centerDiameterTo = $mapping->findItemByKeyConfigName('center', 'centerDiameterTo');
                 if ($centerDiameterTo instanceof ClassificationStoreMappingItem
                     && $centerDiameterFrom->getValue() !== $centerDiameterTo->getValue()
                 ) {

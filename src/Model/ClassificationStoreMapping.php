@@ -41,14 +41,16 @@ class ClassificationStoreMapping
     }
 
     /**
+     * @param string $groupConfigName
      * @param string $keyConfigName
      *
      * @return \App\Model\ClassificationStoreMappingItem|null
      */
-    public function findItemByKeyConfigName(string $keyConfigName): ?ClassificationStoreMappingItem
+    public function findItemByKeyConfigName(string $groupConfigName, string $keyConfigName): ?ClassificationStoreMappingItem
     {
         foreach ($this->classificationStoreMappingItems as $classificationStoreMappingItem) {
-            if ($classificationStoreMappingItem->getKeyConfig()->getName() === $keyConfigName) {
+            if ($classificationStoreMappingItem->getGroupConfig()->getName() === $groupConfigName
+                && $classificationStoreMappingItem->getKeyConfig()->getName() === $keyConfigName) {
                 return $classificationStoreMappingItem;
             }
         }

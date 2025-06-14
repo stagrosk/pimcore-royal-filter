@@ -34,25 +34,26 @@ readonly class RoyalFilterOverviewCalculator implements CalculatorClassInterface
             $mappedBody1 = $classificationStoreHelper->getClassificationStoreMapped($royalFilterSetup->getBody1()?->getMetadata());
             $mappedBodyMiddle = $classificationStoreHelper->getClassificationStoreMapped($royalFilterSetup->getBodyMiddle()?->getMetadata());
             $mappedBody2 = $classificationStoreHelper->getClassificationStoreMapped($royalFilterSetup->getBody2()?->getMetadata());
-            $mappedCenter1 = $classificationStoreHelper->getClassificationStoreMapped($royalFilterSetup->getCenterBody1()?->getMetadata());
-//            $mappedCenter2 = $classificationStoreHelper->getClassificationStoreMapped($royalFilterSetup->getCenterBody2()?->getMetadata());
+            $mappedCenterBody1 = $classificationStoreHelper->getClassificationStoreMapped($royalFilterSetup->getCenterBody1()?->getMetadata());
+//            $mappedCenterBodyMiddle = $classificationStoreHelper->getClassificationStoreMapped($royalFilterSetup->getCenterBodyMiddle()?->getMetadata());
+//            $mappedCenterBody2 = $classificationStoreHelper->getClassificationStoreMapped($royalFilterSetup->getCenterBody2()?->getMetadata());
 //            $mappedEquip1 = $classificationStoreHelper->getClassificationStoreMapped($royalFilterSetup->getEquipBody1()?->getMetadata());
 //            $mappedEquip2 = $classificationStoreHelper->getClassificationStoreMapped($royalFilterSetup->getEquipBody2()?->getMetadata());
 
             $html = '<table class="royal-filter-overview">';
 
-            $body1Height = $mappedBody1->findItemByKeyConfigName('height');
-            $bodyMiddleHeight = $mappedBodyMiddle->findItemByKeyConfigName('height');
-            $body2Height = $mappedBody2->findItemByKeyConfigName('height');
+            $body1Height = $mappedBody1->findItemByKeyConfigName('body', 'height');
+            $bodyMiddleHeight = $mappedBodyMiddle->findItemByKeyConfigName('body', 'height');
+            $body2Height = $mappedBody2->findItemByKeyConfigName('body', 'height');
             $totalHeight = $body1Height?->getRawValue() + $bodyMiddleHeight?->getRawValue() + $body2Height?->getRawValue();
             $html .= '<tr><td>Total height:</td><td>' . ($totalHeight ? $totalHeight . ' ' . $body1Height->getUnit() : '-') . '</td></tr>';
 
-            $body1Diameter = $mappedBody1->findItemByKeyConfigName('diameter');
+            $body1Diameter = $mappedBody1->findItemByKeyConfigName('body', 'diameter');
             $diameter = $body1Diameter ? $body1Diameter->getValue() : '-';
             $html .= '<tr><td>Diameter:</td><td>' . $diameter . '</td></tr>';
 
-            $center1DiameterFrom = $mappedCenter1->findItemByKeyConfigName('centerDiameterFrom');
-            $center1DiameterTo = $mappedCenter1->findItemByKeyConfigName('centerDiameterTo');
+            $center1DiameterFrom = $mappedCenterBody1->findItemByKeyConfigName('center', 'centerDiameterFrom');
+            $center1DiameterTo = $mappedCenterBody1->findItemByKeyConfigName('center', 'centerDiameterTo');
             $centerDiameterFrom1 = $center1DiameterFrom ? $center1DiameterFrom->getValue() : '-';
             $centerDiameterTo1 = $center1DiameterTo ? $center1DiameterTo->getValue() : '-';
             $html .= '<tr><td>Center:</td><td>' . $centerDiameterFrom1 . ' -> '  . $centerDiameterTo1 . '</td></tr>';
