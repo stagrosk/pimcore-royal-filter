@@ -64,6 +64,7 @@ readonly class ShopifyMetafieldService
                 $metafieldDefinition->setKey(Service::getValidKey(sprintf('%s-%s', $groupConfig->getName(), $keyConfig->getName()), 'object'));
                 $metafieldDefinition->setParent(Service::createFolderByPath($folderPath));
                 $metafieldDefinition->setClassificationStoreIdent($ident);
+                $metafieldDefinition->setIsPinned(false);
                 $metafieldDefinition->setName(ucfirst(sprintf('%s - %s', $groupConfig->getName(), $keyConfig->getTitle())));
                 $metafieldDefinition->setNamespace(strtolower($className));
                 $metafieldDefinition->setMetaKey(strtolower(sprintf('%s_%s_%s', $metafieldDefinition->getNamespace(), $groupConfig->getName(), $keyConfig->getName())));
