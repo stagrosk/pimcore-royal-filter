@@ -26,7 +26,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1745669169,
+   'modificationDate' => 1749897397,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -292,7 +292,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'blockedVarsForExport' => 
             array (
             ),
-             'defaultValue' => 1,
+             'defaultValue' => 0,
              'defaultValueGenerator' => '',
           )),
           8 => 
