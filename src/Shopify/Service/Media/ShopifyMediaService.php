@@ -129,13 +129,10 @@ readonly class ShopifyMediaService
 
         // loop all medias from shopify and check if exists on the product
         $data = $response['data']['product'];
-        if (!empty($data['userErrors'])) {
-            throw new \Exception($data['userErrors'][0]['message']);
-        } else {
-            // loop all medias from shopify
-            foreach ($data['media']['edges'] as $edge) {
-                $shopifyMediaIndexed[] = $edge['node'];
-            }
+
+        // loop all medias from shopify
+        foreach ($data['media']['edges'] as $edge) {
+            $shopifyMediaIndexed[] = $edge['node'];
         }
 
         return $shopifyMediaIndexed;

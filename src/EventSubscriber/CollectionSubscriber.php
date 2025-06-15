@@ -9,6 +9,7 @@ use App\Shopify\Graphql\Mutation\Collection\CollectionDeleteMutation;
 use App\Shopify\Graphql\Mutation\Collection\CollectionPublishMutation;
 use App\Shopify\Graphql\Mutation\Collection\CollectionUpdateMutation;
 use App\Shopify\Graphql\Mutation\Translation\TranslationsRegisterMutation;
+use App\Shopify\Service\Media\ShopifyMediaService;
 use Pimcore\Event\DataObjectEvents;
 use Pimcore\Event\Model\DataObjectEvent;
 use Pimcore\Model\DataObject\Collection;

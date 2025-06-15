@@ -3,11 +3,13 @@
 namespace App\Shopify\Service\Collection;
 
 use App\Shopify\Model\Collection\CollectionInput;
-use App\Shopify\Model\Media\CreateMediaInput;
+use App\Shopify\Model\Media\ImageInput;
+use App\Shopify\Model\Media\MediaContentType;
 use App\Shopify\Model\Metafields\MetafieldInputs;
 use App\Shopify\Service\Metafields\ShopifyMetafieldsMapper;
 use Pimcore\Model\Asset;
 use Pimcore\Model\DataObject\AbstractObject;
+use Pimcore\Tool;
 
 class ShopifyCollectionMapper implements IShopifyCollectionMapper
 {
@@ -64,7 +66,7 @@ class ShopifyCollectionMapper implements IShopifyCollectionMapper
         // image
         $image = $object->getImage();
         if ($image instanceof Asset) {
-            $shopifyMedia = new CreateMediaInput($image->getFrontendPath(), $object->getTitle());
+            $shopifyMedia = new ImageInput(Tool::getHostUrl() . $image->getFrontendFullPath(), $image->getFilename());
             $input->setImage($shopifyMedia);
         }
 

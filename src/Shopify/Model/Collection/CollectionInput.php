@@ -4,6 +4,7 @@ namespace App\Shopify\Model\Collection;
 
 use App\Shopify\Model\IShopifyModel;
 use App\Shopify\Model\Media\CreateMediaInput;
+use App\Shopify\Model\Media\ImageInput;
 use App\Shopify\Model\Metafields\MetafieldInput;
 use App\Shopify\Model\Seo\SeoInput;
 
@@ -15,7 +16,7 @@ class CollectionInput implements IShopifyModel
      * @param string|null $descriptionHtml
      * @param array|null $products
      * @param string|null $handle
-     * @param \App\Shopify\Model\Media\CreateMediaInput|null $image
+     * @param \App\Shopify\Model\Media\ImageInput|null $image
      * @param array|null $metafields
      * @param bool $redirectNewHandle
      * @param \App\Shopify\Model\Collection\CollectionRuleSetInput|null $rules
@@ -28,7 +29,7 @@ class CollectionInput implements IShopifyModel
         private ?string                 $descriptionHtml = null,
         private ?array                  $products = [],
         private ?string                 $handle = null,
-        private ?CreateMediaInput       $image = null,
+        private ?ImageInput             $image = null,
         private ?array                  $metafields = null,
         private bool                    $redirectNewHandle = false,
         private ?CollectionRuleSetInput $rules = null,
@@ -126,12 +127,12 @@ class CollectionInput implements IShopifyModel
         $this->handle = $handle;
     }
 
-    public function getImage(): ?CreateMediaInput
+    public function getImage(): ?ImageInput
     {
         return $this->image;
     }
 
-    public function setImage(?CreateMediaInput $image): void
+    public function setImage(?ImageInput $image): void
     {
         $this->image = $image;
     }

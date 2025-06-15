@@ -33,6 +33,7 @@ readonly class ProductSubscriber implements EventSubscriberInterface
      * @param \App\Shopify\Graphql\Mutation\Product\Variant\ProductVariantsBulkUpdateMutation $productVariantsBulkUpdateMutation
      * @param \App\Shopify\Graphql\Mutation\Metafield\DeleteMetafieldsMutation $deleteMetafieldsMutation
      * @param \App\Shopify\Service\Media\ShopifyMediaService $shopifyMediaService
+     * @param \App\Shopify\Graphql\Mutation\Translation\TranslationsRegisterMutation $translationsRegisterMutation
      */
     public function __construct(
         private ProductCreateMutation             $productCreateMutation,
@@ -164,7 +165,7 @@ readonly class ProductSubscriber implements EventSubscriberInterface
         $object = $event->getObject();
 
         // check an object type
-        if (!$object instanceof Product) {
+        if (!$object instanceof Product || !$object->getApiId()) {
             return;
         }
 
