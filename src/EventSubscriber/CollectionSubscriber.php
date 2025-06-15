@@ -59,10 +59,7 @@ readonly class CollectionSubscriber implements EventSubscriberInterface
             return;
         }
 
-        if ($object->getApiId()) {
-            $response = $this->collectionUpdateMutation->callAction($object);
-            $data = $response['data']['collectionUpdate'];
-        } else {
+        if (!$object->getApiId()) {
             $response = $this->collectionCreateMutation->callAction($object);
             $data = $response['data']['collectionCreate'];
 
@@ -83,9 +80,12 @@ readonly class CollectionSubscriber implements EventSubscriberInterface
         $object = $event->getObject();
 
         // check an object type
-        if (!$object instanceof Collection || !$object->isPublished()) {
+        if (!$object instanceof Collection || !$object->isPublished() || !$object->getApiId()) {
             return;
         }
+
+        // update
+        $this->collectionUpdateMutation->callAction($object);
 
         // publish
         $this->collectionPublishMutation->callAction($object);
