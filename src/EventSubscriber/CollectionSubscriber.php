@@ -8,6 +8,7 @@ use App\Shopify\Graphql\Mutation\Collection\CollectionCreateMutation;
 use App\Shopify\Graphql\Mutation\Collection\CollectionDeleteMutation;
 use App\Shopify\Graphql\Mutation\Collection\CollectionPublishMutation;
 use App\Shopify\Graphql\Mutation\Collection\CollectionUpdateMutation;
+use App\Shopify\Graphql\Mutation\Translation\TranslationsRegisterMutation;
 use Pimcore\Event\DataObjectEvents;
 use Pimcore\Event\Model\DataObjectEvent;
 use Pimcore\Model\DataObject\Collection;
@@ -20,12 +21,14 @@ readonly class CollectionSubscriber implements EventSubscriberInterface
      * @param \App\Shopify\Graphql\Mutation\Collection\CollectionUpdateMutation $collectionUpdateMutation
      * @param \App\Shopify\Graphql\Mutation\Collection\CollectionDeleteMutation $collectionDeleteMutation
      * @param \App\Shopify\Graphql\Mutation\Collection\CollectionPublishMutation $collectionPublishMutation
+     * @param \App\Shopify\Graphql\Mutation\Translation\TranslationsRegisterMutation $translationsRegisterMutation
      */
     public function __construct(
-        private CollectionCreateMutation $collectionCreateMutation,
-        private CollectionUpdateMutation $collectionUpdateMutation,
-        private CollectionDeleteMutation $collectionDeleteMutation,
-        private CollectionPublishMutation $collectionPublishMutation
+        private CollectionCreateMutation     $collectionCreateMutation,
+        private CollectionUpdateMutation     $collectionUpdateMutation,
+        private CollectionDeleteMutation     $collectionDeleteMutation,
+        private CollectionPublishMutation    $collectionPublishMutation,
+        private TranslationsRegisterMutation $translationsRegisterMutation
     ) {
     }
 
@@ -33,6 +36,7 @@ readonly class CollectionSubscriber implements EventSubscriberInterface
     {
         return [
             DataObjectEvents::PRE_UPDATE => ['onPreUpdate'],
+            DataObjectEvents::POST_UPDATE => ['onPostUpdate'],
             DataObjectEvents::PRE_DELETE => ['onPreDelete'],
         ];
     }
@@ -58,24 +62,36 @@ readonly class CollectionSubscriber implements EventSubscriberInterface
         if ($object->getApiId()) {
             $response = $this->collectionUpdateMutation->callAction($object);
             $data = $response['data']['collectionUpdate'];
-
-            if (!empty($data['userErrors'])) {
-                throw new \Exception($data['userErrors'][0]['message']);
-            }
         } else {
             $response = $this->collectionCreateMutation->callAction($object);
             $data = $response['data']['collectionCreate'];
 
-            if (!empty($data['userErrors'])) {
-                throw new \Exception($data['userErrors'][0]['message']);
-            } else {
-                $object->setApiId($data['collection']['id']);
-                $object->setSlug($data['collection']['handle']);
-            }
+            $object->setApiId($data['collection']['id']);
+            $object->setHandle($data['collection']['handle']);
+        }
+    }
+
+    /**
+     * @param \Pimcore\Event\Model\DataObjectEvent $event
+     *
+     * @throws \Exception
+     * @return void
+     */
+    public function onPostUpdate(DataObjectEvent $event): void
+    {
+        /** @var \Pimcore\Model\DataObject\Collection $object */
+        $object = $event->getObject();
+
+        // check an object type
+        if (!$object instanceof Collection || !$object->isPublished()) {
+            return;
         }
 
         // publish
         $this->collectionPublishMutation->callAction($object);
+
+        // process translations
+        $this->translationsRegisterMutation->callAction($object);
     }
 
     /**
@@ -93,6 +109,11 @@ readonly class CollectionSubscriber implements EventSubscriberInterface
 
         // check an object type
         if (!$object instanceof Collection) {
+            return;
+        }
+
+        // check api id
+        if (!$object->getApiId()) {
             return;
         }
 

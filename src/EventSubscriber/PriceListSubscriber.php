@@ -55,19 +55,10 @@ readonly class PriceListSubscriber implements EventSubscriberInterface
         if ($object->getApiId()) {
             $response = $this->priceListUpdateMutation->callAction($object);
             $data = $response['data']['priceListUpdate'];
-
-            if (!empty($data['userErrors'])) {
-                throw new \Exception($data['userErrors'][0]['message']);
-            }
         } else {
             $response = $this->priceListCreateMutation->callAction($object);
             $data = $response['data']['priceListCreate'];
-
-            if (!empty($data['userErrors'])) {
-                throw new \Exception($data['userErrors'][0]['message']);
-            } else {
-                $object->setApiId($data['priceList']['id']);
-            }
+            $object->setApiId($data['priceList']['id']);
         }
     }
 
@@ -89,9 +80,6 @@ readonly class PriceListSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $data = $this->priceListDeleteMutation->callAction($object);
-        if (!empty($data['userErrors'])) {
-            throw new \Exception($data['userErrors'][0]['message']);
-        }
+        $this->priceListDeleteMutation->callAction($object);
     }
 }

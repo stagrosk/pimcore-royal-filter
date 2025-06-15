@@ -8,7 +8,7 @@
  * - localizedfields [localizedfields]
  * -- name [input]
  * -- slug [input]
- * -- absolutePath [input]
+ * -- handle [input]
  * -- nameInNavigation [input]
  * -- headerTitle [input]
  * -- seoTitle [input]
@@ -26,7 +26,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1746896424,
+   'modificationDate' => 1750015449,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '\\PimcoreHeadlessContentBundle\\Model\\ContentPage',
@@ -166,8 +166,8 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                   )),
                   2 => 
                   \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
-                     'name' => 'absolutePath',
-                     'title' => 'Absolute Path',
+                     'name' => 'handle',
+                     'title' => 'Handle',
                      'tooltip' => '',
                      'mandatory' => false,
                      'noteditable' => true,

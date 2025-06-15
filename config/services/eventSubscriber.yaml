@@ -4,6 +4,8 @@ services:
         autoconfigure: true
         public: false
 
+    App\EventSubscriber\AdminInterfaceListener:
+
     App\EventSubscriber\CollectionSubscriber:
 
     App\EventSubscriber\ProductSubscriber:

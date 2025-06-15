@@ -34,7 +34,7 @@ class ContentPage extends AbstractPimcoreModel implements ContentPageInterface
     /**
      * @inheritDoc
      */
-    public function getAbsolutePath(?string $language = null): ?string
+    public function getHandle(?string $language = null): ?string
     {
         throw new ImplementedByPimcoreException(__CLASS__, __METHOD__);
     }
@@ -42,7 +42,7 @@ class ContentPage extends AbstractPimcoreModel implements ContentPageInterface
     /**
      * @inheritDoc
      */
-    public function setAbsolutePath(?string $absolutePath, ?string $language = null): static
+    public function setHandle(?string $handle, ?string $language = null): static
     {
         throw new ImplementedByPimcoreException(__CLASS__, __METHOD__);
     }

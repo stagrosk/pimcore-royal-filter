@@ -12,6 +12,7 @@ use App\Shopify\Graphql\Mutation\Product\ProductPublishMutation;
 use App\Shopify\Graphql\Mutation\Product\ProductUpdateMutation;
 use App\Shopify\Graphql\Mutation\Product\Variant\ProductVariantsBulkCreateMutation;
 use App\Shopify\Graphql\Mutation\Product\Variant\ProductVariantsBulkUpdateMutation;
+use App\Shopify\Graphql\Mutation\Translation\TranslationsRegisterMutation;
 use App\Shopify\Service\Media\ShopifyMediaService;
 use Exception;
 use Pimcore\Event\DataObjectEvents;
@@ -41,7 +42,8 @@ readonly class ProductSubscriber implements EventSubscriberInterface
         private ProductVariantsBulkCreateMutation $productVariantsBulkCreateMutation,
         private ProductVariantsBulkUpdateMutation $productVariantsBulkUpdateMutation,
         private DeleteMetafieldsMutation          $deleteMetafieldsMutation,
-        private ShopifyMediaService               $shopifyMediaService
+        private ShopifyMediaService               $shopifyMediaService,
+        private TranslationsRegisterMutation      $translationsRegisterMutation
     ) {
     }
 
@@ -50,6 +52,7 @@ readonly class ProductSubscriber implements EventSubscriberInterface
         return [
             DataObjectEvents::POST_ADD => ['onPostAdd'],
             DataObjectEvents::PRE_UPDATE => ['onPreUpdate'],
+            DataObjectEvents::POST_UPDATE => ['onPostUpdate'],
             DataObjectEvents::PRE_DELETE => ['onPreDelete'],
         ];
     }
@@ -133,8 +136,6 @@ readonly class ProductSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $errors = [];
-
         // pimcore type is variant OR shopify type is variant
         if ($object->getType() === AbstractObject::OBJECT_TYPE_VARIANT || str_contains($object->getApiId(), 'ProductVariant')) {
             // update variant
@@ -146,31 +147,39 @@ readonly class ProductSubscriber implements EventSubscriberInterface
                 $data = $response['data']['productVariantsBulkUpdate'];
             }
 
-            if (!empty($data['userErrors'])) {
-                $errors[] = $data['userErrors'][0]['message'];
-            } else {
-                // set api id on new added product variant
-                $object->setApiId($data['productVariants'][0]['id']);
-            }
-        } else {
+            // set api id on new added product variant
+            $object->setApiId($data['productVariants'][0]['id']);
+        }
+    }
+
+    /**
+     * @param \Pimcore\Event\Model\DataObjectEvent $event
+     *
+     * @throws \Exception
+     * @return void
+     */
+    public function onPostUpdate(DataObjectEvent $event): void
+    {
+        /** @var \Pimcore\Model\DataObject\Product $object */
+        $object = $event->getObject();
+
+        // check an object type
+        if (!$object instanceof Product) {
+            return;
+        }
+
+        if ($object->getType() !== AbstractObject::OBJECT_TYPE_VARIANT && !str_contains($object->getApiId(), 'ProductVariant')) {
             // product update
-            $response = $this->productUpdateMutation->callAction($object);
-            if (!empty($response['data']['productUpdate']['userErrors'])) {
-                $errors[] = $response['data']['productUpdate']['userErrors'][0]['message'];
-            }
+            $this->productUpdateMutation->callAction($object);
 
             // check and delete metadata
-            $response = $this->deleteMetafieldsMutation->callAction($object);
-            if (!empty($response['data']['metafieldsDelete']['userErrors'])) {
-                $errors[] = $response['data']['metafieldsDelete']['userErrors'][0]['message'];
-            }
+            $this->deleteMetafieldsMutation->callAction($object);
 
             // process shopify media
             $this->shopifyMediaService->processMedia($object);
-        }
 
-        if (!empty($errors)) {
-            throw new Exception(implode("\n", $errors));
+            // process translations
+            $this->translationsRegisterMutation->callAction($object);
         }
     }
 

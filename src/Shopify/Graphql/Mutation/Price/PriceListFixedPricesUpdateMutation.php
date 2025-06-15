@@ -8,21 +8,27 @@ use App\Shopify\Model\Price\PriceListUpdateInputs;
 use App\Shopify\Service\Price\ShopifyPriceMapper;
 use Pimcore\Model\DataObject\AbstractObject;
 use Pimcore\Model\DataObject\Product;
+use Pimcore\Model\Notification\Service\NotificationService;
+use Pimcore\Security\User\TokenStorageUserResolver;
 use Psr\Log\LoggerInterface;
 
 class PriceListFixedPricesUpdateMutation extends BaseMutation
 {
     /**
-     * @param \App\Shopify\Graphql\GraphqlClient $client
      * @param \App\Shopify\Service\Price\ShopifyPriceMapper $priceMapper
+     * @param \App\Shopify\Graphql\GraphqlClient $client
      * @param \Psr\Log\LoggerInterface $logger
+     * @param \Pimcore\Model\Notification\Service\NotificationService $notificationService
+     * @param \Pimcore\Security\User\TokenStorageUserResolver $tokenStorageUserResolver
      */
     public function __construct(
-        GraphQLClient                       $client,
         private readonly ShopifyPriceMapper $priceMapper,
-        LoggerInterface                     $logger
+        GraphQLClient                       $client,
+        LoggerInterface                     $logger,
+        NotificationService                 $notificationService,
+        TokenStorageUserResolver            $tokenStorageUserResolver
     ) {
-        parent::__construct($client, $logger);
+        parent::__construct($client, $logger, $notificationService, $tokenStorageUserResolver);
     }
 
     /**

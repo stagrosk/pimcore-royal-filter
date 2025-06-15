@@ -8,21 +8,27 @@ use App\Shopify\Model\Collection\CollectionInput;
 use App\Shopify\Service\Collection\ShopifyCollectionMapper;
 use Pimcore\Model\DataObject\AbstractObject;
 use Pimcore\Model\DataObject\Collection;
+use Pimcore\Model\Notification\Service\NotificationService;
+use Pimcore\Security\User\TokenStorageUserResolver;
 use Psr\Log\LoggerInterface;
 
 class CollectionUpdateMutation extends BaseMutation
 {
     /**
-     * @param \App\Shopify\Graphql\GraphqlClient $client
      * @param \App\Shopify\Service\Collection\ShopifyCollectionMapper $collectionMapper
+     * @param \App\Shopify\Graphql\GraphqlClient $client
      * @param \Psr\Log\LoggerInterface $logger
+     * @param \Pimcore\Model\Notification\Service\NotificationService $notificationService
+     * @param \Pimcore\Security\User\TokenStorageUserResolver $tokenStorageUserResolver
      */
     public function __construct(
-        GraphQLClient                            $client,
         private readonly ShopifyCollectionMapper $collectionMapper,
-        LoggerInterface                          $logger
+        GraphQLClient                            $client,
+        LoggerInterface                          $logger,
+        NotificationService                      $notificationService,
+        TokenStorageUserResolver                 $tokenStorageUserResolver
     ) {
-        parent::__construct($client, $logger);
+        parent::__construct($client, $logger, $notificationService, $tokenStorageUserResolver);
     }
 
     /**
@@ -51,6 +57,7 @@ class CollectionUpdateMutation extends BaseMutation
     /**
      * @param \Pimcore\Model\DataObject\Collection|\Pimcore\Model\DataObject\AbstractObject|array $object
      *
+     * @throws \Exception
      * @return array
      */
     public function getVariables(Collection|AbstractObject|array $object): array

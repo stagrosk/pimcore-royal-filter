@@ -8,21 +8,27 @@ use App\Shopify\Model\Metafields\MetafieldDefinitionInput;
 use App\Shopify\Service\Metafields\ShopifyShopifyMetafieldDefinitionMapper;
 use Pimcore\Model\DataObject\AbstractObject;
 use Pimcore\Model\DataObject\ShopifyMetafieldDefinition;
+use Pimcore\Model\Notification\Service\NotificationService;
+use Pimcore\Security\User\TokenStorageUserResolver;
 use Psr\Log\LoggerInterface;
 
 class MetafieldDefinitionCreateMutation extends BaseMutation
 {
     /**
-     * @param \App\Shopify\Graphql\GraphqlClient $client
      * @param \App\Shopify\Service\Metafields\ShopifyShopifyMetafieldDefinitionMapper $metafieldDefinitionMapper
+     * @param \App\Shopify\Graphql\GraphqlClient $client
      * @param \Psr\Log\LoggerInterface $logger
+     * @param \Pimcore\Model\Notification\Service\NotificationService $notificationService
+     * @param \Pimcore\Security\User\TokenStorageUserResolver $tokenStorageUserResolver
      */
     public function __construct(
-        GraphQLClient                                            $client,
         private readonly ShopifyShopifyMetafieldDefinitionMapper $metafieldDefinitionMapper,
-        LoggerInterface                                          $logger
+        GraphQLClient                                            $client,
+        LoggerInterface                                          $logger,
+        NotificationService                                      $notificationService,
+        TokenStorageUserResolver                                 $tokenStorageUserResolver
     ) {
-        parent::__construct($client, $logger);
+        parent::__construct($client, $logger, $notificationService, $tokenStorageUserResolver);
     }
 
     /**

@@ -33,6 +33,7 @@ pimcore:
         class_overrides:
             'Pimcore\Model\DataObject\Collection': 'App\Pimcore\Model\DataObject\Collection'
             'Pimcore\Model\DataObject\RoyalFilter': 'App\Pimcore\Model\DataObject\RoyalFilter'
+            'Pimcore\Model\DataObject\Product': 'App\Pimcore\Model\DataObject\Product'
 
 #### CUSTOM DOCUMENT EDITABLES
     documents:

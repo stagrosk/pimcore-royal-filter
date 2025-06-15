@@ -80,10 +80,6 @@ readonly class ShopifyMetafieldDefinitionSubscriber implements EventSubscriberIn
         } else {
             $response = $this->metafieldDefinitionUpdateMutation->callAction($object);
             $data = $response['data']['metafieldDefinitionUpdate'];
-
-            if (!empty($data['userErrors'])) {
-                throw new Exception($data['userErrors'][0]['message']);
-            }
         }
     }
 
@@ -101,10 +97,7 @@ readonly class ShopifyMetafieldDefinitionSubscriber implements EventSubscriberIn
             return;
         }
 
-        $data = $this->metafieldDefinitionDeleteMutation->callAction($object);
-        if (!empty($data['userErrors'])) {
-            throw new Exception($data['userErrors'][0]['message']);
-        }
+        $this->metafieldDefinitionDeleteMutation->callAction($object);
     }
 
     /**
@@ -119,11 +112,6 @@ readonly class ShopifyMetafieldDefinitionSubscriber implements EventSubscriberIn
     {
         $response = $this->metafieldDefinitionCreateMutation->callAction($object);
         $data = $response['data']['metafieldDefinitionCreate'];
-
-        if (!empty($data['userErrors'])) {
-            throw new Exception($data['userErrors'][0]['message']);
-        } else {
-            $object->setApiId($data['createdDefinition']['id']);
-        }
+        $object->setApiId($data['createdDefinition']['id']);
     }
 }

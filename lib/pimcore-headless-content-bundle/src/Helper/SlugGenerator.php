@@ -24,6 +24,7 @@ class SlugGenerator
 
     /**
      * @param \PimcoreHeadlessContentBundle\Model\SlugAwareInterface $slugAware
+     *
      * @return void
      */
     public function updateSlug(SlugAwareInterface $slugAware): void
@@ -36,7 +37,7 @@ class SlugGenerator
         foreach (Tool::getValidLanguages() as $language) {
             if ($slugAware instanceof ContentPageInterface && !$slugAware->getParent() instanceof ContentPageInterface) {
                 // this is the front page
-                $slugAware->setAbsolutePath('/', $language);
+                $slugAware->setHandle('/', $language);
                 $slugAware->setSlug(null, $language);
 
                 continue;
@@ -91,7 +92,7 @@ class SlugGenerator
     /**
      * @param \PimcoreHeadlessContentBundle\Model\SlugAwareInterface $initialObject
      */
-    public function updateAbsolutePath(SlugAwareInterface $initialObject): void
+    public function updateHandle(SlugAwareInterface $initialObject): void
     {
         foreach (Tool::getValidLanguages() as $language) {
             // check slug in language
@@ -117,10 +118,9 @@ class SlugGenerator
 
             $slugs = array_reverse($slugs);
 
-            $absolutePath = '/' . implode('/', array_values($slugs));
-
-            if ($absolutePath !== $initialObject->getAbsolutePath($language)) {
-                $initialObject->setAbsolutePath($absolutePath, $language);
+            $handle = '/' . implode('/', array_values($slugs));
+            if ($handle !== $initialObject->getHandle($language)) {
+                $initialObject->setHandle($handle, $language);
             }
         }
     }
@@ -129,6 +129,7 @@ class SlugGenerator
      * @param \PimcoreHeadlessContentBundle\Model\SlugAwareInterface $object
      * @param string $slug
      * @param string $language
+     *
      * @return string
      */
     private function checkIfSlugIsUnique(SlugAwareInterface $object, string $slug, string $language): string
@@ -176,6 +177,7 @@ class SlugGenerator
     /**
      * @param \PimcoreHeadlessContentBundle\Model\SlugAwareInterface $object
      * @param string $slug
+     *
      * @return string
      */
     private function addIdToSlug(SlugAwareInterface $object, string $slug): string

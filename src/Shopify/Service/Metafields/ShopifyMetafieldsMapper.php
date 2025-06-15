@@ -48,21 +48,22 @@ class ShopifyMetafieldsMapper implements ShopifyMetafieldsMapperInterface
     public function getMappedObject(MetafieldInputs $inputs, Product|AbstractObject $object): MetafieldInputs
     {
         $metafieldDefinitions = $this->shopifyMetafieldService->getObjectMetafieldDefinitions($object);
+        if (!empty($metafieldDefinitions)) {
+            // loop all definitions and add values to them to be sent on product
+            foreach ($metafieldDefinitions['addMetafields'] as $item) {
+                /** @var \App\Model\ClassificationStoreMappingItem $classificationStoreMappingItem */
+                $classificationStoreMappingItem = $item['classificationStoreMappingItem'];
+                /** @var \Pimcore\Model\DataObject\ShopifyMetafieldDefinition $metafieldDefinition */
+                $metafieldDefinition = $item['metafieldDefinition'];
 
-        // loop all definitions and add values to them to be sent on product
-        foreach ($metafieldDefinitions['addMetafields'] as $item) {
-            /** @var \App\Model\ClassificationStoreMappingItem $classificationStoreMappingItem */
-            $classificationStoreMappingItem = $item['classificationStoreMappingItem'];
-            /** @var \Pimcore\Model\DataObject\ShopifyMetafieldDefinition $metafieldDefinition */
-            $metafieldDefinition = $item['metafieldDefinition'];
+                $metafieldInput = new MetafieldInput();
+                $metafieldInput->setNamespace($metafieldDefinition->getNamespace());
+                $metafieldInput->setKey($metafieldDefinition->getMetaKey());
+                $metafieldInput->setType($metafieldDefinition->getMetaType());
+                $metafieldInput->setValue($this->shopifyMetafieldService->prepareValue($metafieldDefinition, $classificationStoreMappingItem));
 
-            $metafieldInput = new MetafieldInput();
-            $metafieldInput->setNamespace($metafieldDefinition->getNamespace());
-            $metafieldInput->setKey($metafieldDefinition->getMetaKey());
-            $metafieldInput->setType($metafieldDefinition->getMetaType());
-            $metafieldInput->setValue($this->shopifyMetafieldService->prepareValue($metafieldDefinition, $classificationStoreMappingItem));
-
-            $inputs->addMetaFieldInput($metafieldInput);
+                $inputs->addMetaFieldInput($metafieldInput);
+            }
         }
 
         return $inputs;

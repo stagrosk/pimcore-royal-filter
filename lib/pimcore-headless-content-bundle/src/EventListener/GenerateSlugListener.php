@@ -45,6 +45,6 @@ class GenerateSlugListener implements EventSubscriberInterface
         }
 
         $this->slugGenerator->updateSlug($object);
-        $this->slugGenerator->updateAbsolutePath($object);
+        $this->slugGenerator->updateHandle($object);
     }
 }

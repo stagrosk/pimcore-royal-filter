@@ -33,13 +33,13 @@ interface SlugAwareInterface extends PimcoreModelInterface
      *
      * @return string|null
      */
-    public function getAbsolutePath(?string $language = null): ?string;
+    public function getHandle(?string $language = null): ?string;
 
     /**
-     * @param string|null $absolutePath
+     * @param string|null $handle
      * @param string|null $language
      *
      * @return $this
      */
-    public function setAbsolutePath(?string $absolutePath, ?string $language = null): static;
+    public function setHandle(?string $handle, ?string $language = null): static;
 }

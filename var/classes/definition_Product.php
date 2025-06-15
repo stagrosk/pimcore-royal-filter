@@ -18,6 +18,7 @@
  * -- description [wysiwyg]
  * -- seoTitle [input]
  * -- seoDescription [input]
+ * -- slug [input]
  * -- handle [input]
  * -- handle404 [input]
  * - manufacturer [manyToOneRelation]
@@ -40,7 +41,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1749938491,
+   'modificationDate' => 1750016229,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -569,12 +570,12 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                     array (
                       0 => 
                       \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
-                         'name' => 'handle',
-                         'title' => 'Handle',
+                         'name' => 'slug',
+                         'title' => 'Slug',
                          'tooltip' => '',
                          'mandatory' => false,
-                         'noteditable' => false,
-                         'index' => true,
+                         'noteditable' => true,
+                         'index' => false,
                          'locked' => false,
                          'style' => '',
                          'permissions' => NULL,
@@ -598,6 +599,36 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                          'defaultValueGenerator' => '',
                       )),
                       1 => 
+                      \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+                         'name' => 'handle',
+                         'title' => 'Handle',
+                         'tooltip' => '',
+                         'mandatory' => false,
+                         'noteditable' => true,
+                         'index' => true,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'fieldtype' => '',
+                         'relationType' => false,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'defaultValue' => NULL,
+                         'columnLength' => 190,
+                         'regex' => '',
+                         'regexFlags' => 
+                        array (
+                        ),
+                         'unique' => false,
+                         'showCharCount' => false,
+                         'width' => 400,
+                         'defaultValueGenerator' => '',
+                      )),
+                      2 => 
                       \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
                          'name' => 'handle404',
                          'title' => '404 Handle',
@@ -788,18 +819,10 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'assetsAllowed' => false,
                  'assetTypes' => 
                 array (
-                  0 => 
-                  array (
-                    'assetTypes' => '',
-                  ),
                 ),
                  'documentsAllowed' => false,
                  'documentTypes' => 
                 array (
-                  0 => 
-                  array (
-                    'documentTypes' => '',
-                  ),
                 ),
                  'enableTextSelection' => false,
                  'width' => '',
@@ -1192,12 +1215,12 @@ https://shopify.github.io/product-taxonomy/releases/unstable/',
                 array (
                   0 => 
                   \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
-                     'name' => 'handle',
-                     'title' => 'Handle',
+                     'name' => 'slug',
+                     'title' => 'Slug',
                      'tooltip' => '',
                      'mandatory' => false,
-                     'noteditable' => false,
-                     'index' => true,
+                     'noteditable' => true,
+                     'index' => false,
                      'locked' => false,
                      'style' => '',
                      'permissions' => NULL,
@@ -1221,6 +1244,36 @@ https://shopify.github.io/product-taxonomy/releases/unstable/',
                      'defaultValueGenerator' => '',
                   )),
                   1 => 
+                  \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+                     'name' => 'handle',
+                     'title' => 'Handle',
+                     'tooltip' => '',
+                     'mandatory' => false,
+                     'noteditable' => true,
+                     'index' => true,
+                     'locked' => false,
+                     'style' => '',
+                     'permissions' => NULL,
+                     'fieldtype' => '',
+                     'relationType' => false,
+                     'invisible' => false,
+                     'visibleGridView' => false,
+                     'visibleSearch' => false,
+                     'blockedVarsForExport' => 
+                    array (
+                    ),
+                     'defaultValue' => NULL,
+                     'columnLength' => 190,
+                     'regex' => '',
+                     'regexFlags' => 
+                    array (
+                    ),
+                     'unique' => false,
+                     'showCharCount' => false,
+                     'width' => 400,
+                     'defaultValueGenerator' => '',
+                  )),
+                  2 => 
                   \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
                      'name' => 'handle404',
                      'title' => '404 Handle',
@@ -1335,51 +1388,6 @@ https://shopify.github.io/product-taxonomy/releases/unstable/',
    'enableGridLocking' => false,
    'deletedDataComponents' => 
   array (
-    0 => 
-    \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToManyRelation::__set_state(array(
-       'name' => 'categories',
-       'title' => 'Categories',
-       'tooltip' => '',
-       'mandatory' => false,
-       'noteditable' => false,
-       'index' => false,
-       'locked' => false,
-       'style' => '',
-       'permissions' => NULL,
-       'fieldtype' => '',
-       'relationType' => true,
-       'invisible' => false,
-       'visibleGridView' => false,
-       'visibleSearch' => false,
-       'blockedVarsForExport' => 
-      array (
-      ),
-       'classes' => 
-      array (
-        0 => 
-        array (
-          'classes' => 'Category',
-        ),
-      ),
-       'displayMode' => NULL,
-       'pathFormatterClass' => '',
-       'maxItems' => NULL,
-       'assetInlineDownloadAllowed' => false,
-       'assetUploadPath' => '',
-       'allowToClearRelation' => true,
-       'objectsAllowed' => true,
-       'assetsAllowed' => false,
-       'assetTypes' => 
-      array (
-      ),
-       'documentsAllowed' => false,
-       'documentTypes' => 
-      array (
-      ),
-       'enableTextSelection' => false,
-       'width' => '',
-       'height' => '',
-    )),
   ),
    'blockedVarsForExport' => 
   array (

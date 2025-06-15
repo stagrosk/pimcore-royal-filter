@@ -133,7 +133,7 @@ readonly class ShopifyMediaService
             throw new \Exception($data['userErrors'][0]['message']);
         } else {
             // loop all medias from shopify
-            foreach ($response['data']['product']['media']['edges'] as $edge) {
+            foreach ($data['media']['edges'] as $edge) {
                 $shopifyMediaIndexed[] = $edge['node'];
             }
         }

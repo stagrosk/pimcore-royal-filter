@@ -8,21 +8,27 @@ use App\Shopify\Model\Collection\CollectionInput;
 use App\Shopify\Service\Collection\ShopifyCollectionMapper;
 use Pimcore\Model\DataObject\AbstractObject;
 use Pimcore\Model\DataObject\Collection;
+use Pimcore\Model\Notification\Service\NotificationService;
+use Pimcore\Security\User\TokenStorageUserResolver;
 use Psr\Log\LoggerInterface;
 
 class CollectionAddProductsMutation extends BaseMutation
 {
     /**
-     * @param \App\Shopify\Graphql\GraphqlClient $client
      * @param \App\Shopify\Service\Collection\ShopifyCollectionMapper $collectionMapper
+     * @param \App\Shopify\Graphql\GraphqlClient $client
      * @param \Psr\Log\LoggerInterface $logger
+     * @param \Pimcore\Model\Notification\Service\NotificationService $notificationService
+     * @param \Pimcore\Security\User\TokenStorageUserResolver $tokenStorageUserResolver
      */
     public function __construct(
-        GraphqlClient                            $client,
         private readonly ShopifyCollectionMapper $collectionMapper,
-        LoggerInterface                          $logger
+        GraphqlClient                            $client,
+        LoggerInterface                          $logger,
+        NotificationService                      $notificationService,
+        TokenStorageUserResolver                 $tokenStorageUserResolver
     ) {
-        parent::__construct($client, $logger);
+        parent::__construct($client, $logger, $notificationService, $tokenStorageUserResolver);
     }
 
     /**

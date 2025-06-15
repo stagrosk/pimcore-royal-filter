@@ -10,7 +10,7 @@
  * -- title [input]
  * -- description [wysiwyg]
  * -- slug [input]
- * -- absolutePath [input]
+ * -- handle [input]
  * - metadata [classificationstore]
  * - image [image]
  * - infoImage [image]
@@ -23,7 +23,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1749939502,
+   'modificationDate' => 1750015581,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -164,7 +164,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                              'name' => 'title',
                              'title' => 'Title',
                              'tooltip' => '',
-                             'mandatory' => false,
+                             'mandatory' => true,
                              'noteditable' => false,
                              'index' => false,
                              'locked' => false,
@@ -246,8 +246,8 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                           )),
                           3 => 
                           \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
-                             'name' => 'absolutePath',
-                             'title' => 'Absolute path',
+                             'name' => 'handle',
+                             'title' => 'Handle',
                              'tooltip' => '',
                              'mandatory' => false,
                              'noteditable' => true,
