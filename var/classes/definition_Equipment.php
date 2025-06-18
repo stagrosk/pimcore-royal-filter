@@ -3,7 +3,6 @@
 /**
  * Inheritance: no
  * Variants: no
- * Title: Equipment
  *
  * Fields Summary:
  * - localizedfields [localizedfields]
@@ -16,12 +15,12 @@
 
 return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'dao' => NULL,
-   'id' => 'knob',
+   'id' => 'equipment',
    'name' => 'Equipment',
-   'title' => 'Equipment',
+   'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1749825395,
+   'modificationDate' => 1750278359,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
