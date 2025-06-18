@@ -8,7 +8,7 @@ pimcore_data_hub:
                 description: ''
                 group: ''
                 sqlObjectCondition: ''
-                modificationDate: 1745324485
+                modificationDate: 1750282244
                 path: null
                 createDate: 1727014466
             schema:
@@ -96,15 +96,62 @@ pimcore_data_hub:
                                         label: Canonicals
                                         dataType: manyToManyRelation
                                     isOperator: false
+                    Collection:
+                        id: Collection
+                        name: Collection
+                        columnConfig:
+                            columns:
+                                -
+                                    attributes:
+                                        attribute: apiId
+                                        label: 'Api Id'
+                                        dataType: input
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: title
+                                        label: Title
+                                        dataType: input
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: description
+                                        label: Description
+                                        dataType: wysiwyg
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: slug
+                                        label: Slug
+                                        dataType: input
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: handle
+                                        label: Handle
+                                        dataType: input
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: metadata
+                                        label: Metadata
+                                        dataType: classificationstore
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: image
+                                        label: Image
+                                        dataType: image
+                                    isOperator: false
                 mutationEntities: {  }
                 specialEntities:
                     document:
-                        read: true
+                        read: false
                         create: false
                         update: false
                         delete: false
                     document_folder:
-                        read: true
+                        read: false
                         create: false
                         update: false
                         delete: false
@@ -119,7 +166,7 @@ pimcore_data_hub:
                         update: false
                         delete: false
                     asset_listing:
-                        read: true
+                        read: false
                         create: false
                         update: false
                         delete: false
@@ -142,7 +189,7 @@ pimcore_data_hub:
                 method: datahub_apikey
                 apikey:
                     - 607991922abbc1fd2827d25355fb7479
-                skipPermissionCheck: false
+                skipPermissionCheck: true
                 disableIntrospection: false
             workspaces:
                 asset:
@@ -153,14 +200,7 @@ pimcore_data_hub:
                         update: false
                         delete: false
                         id: extModel15279-1
-                document:
-                    -
-                        read: true
-                        cpath: /
-                        create: false
-                        update: false
-                        delete: false
-                        id: extModel15253-1
+                document: {  }
                 object:
                     -
                         read: true

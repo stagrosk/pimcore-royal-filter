@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        public: false
+        autowire: true
+        autoconfigure: true
+
+    ### register globally all arguments
+    App\GraphQL\Type\Arguments\:
+        resource: '../../../src/GraphQL/Type/Arguments'

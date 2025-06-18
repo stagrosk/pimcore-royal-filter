@@ -3,8 +3,21 @@ imports:
     - { resource: services/eventSubscriber.yaml }
     - { resource: services/pimcore.yaml }
 
+    # GRAPHQL
+    - { resource: services/graphql/helper.yaml }
+    - { resource: services/graphql/mutation.yaml }
+    - { resource: services/graphql/query.yaml }
+    - { resource: services/graphql/resolver.yaml }
+    - { resource: services/graphql/type_response.yaml }
+    - { resource: services/graphql/type_argument.yaml }
+
 parameters:
     secret: XOwtGYfiW8T5d0nlwh8UqQ73yLCCWRMDJMMgvjKY20o=
+    navigation_allowed_pimcore_class_names:
+        - Collection
+        - ContentPage
+    data_hub_enabled_client_names:
+        - frontend
 
     # customize the full path to external executables
     # normally they are auto-detected by `which program` or auto-discovered in the configured path in

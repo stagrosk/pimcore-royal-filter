@@ -1,0 +1,14 @@
+services:
+    _defaults:
+        public: false
+        autowire: true
+        autoconfigure: true
+
+    App\GraphQL\Resolver\:
+        resource: '../../../src/GraphQL/Resolver'
+
+    ### Layout
+    App\GraphQL\Resolver\Layout\NavigationByIdentifierResolver:
+        arguments:
+            - '@Pimcore\Bundle\DataHubBundle\GraphQL\Service'
+            - '%navigation_allowed_pimcore_class_names%'
