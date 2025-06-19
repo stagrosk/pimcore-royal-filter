@@ -48,7 +48,7 @@ class ShopifyMetafieldsMapper implements ShopifyMetafieldsMapperInterface
     public function getMappedObject(MetafieldInputs $inputs, Product|AbstractObject $object): MetafieldInputs
     {
         $metafieldDefinitions = $this->shopifyMetafieldService->getObjectMetafieldDefinitions($object);
-        if (!empty($metafieldDefinitions)) {
+        if (!empty($metafieldDefinitions) && isset($metafieldDefinitions['addMetafields'])) {
             // loop all definitions and add values to them to be sent on product
             foreach ($metafieldDefinitions['addMetafields'] as $item) {
                 /** @var \App\Model\ClassificationStoreMappingItem $classificationStoreMappingItem */
