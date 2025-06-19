@@ -8,7 +8,7 @@ pimcore_data_hub:
                 description: ''
                 group: ''
                 sqlObjectCondition: ''
-                modificationDate: 1750282244
+                modificationDate: 1750327387
                 path: null
                 createDate: 1727014466
             schema:
@@ -21,13 +21,13 @@ pimcore_data_hub:
                                 -
                                     attributes:
                                         attribute: id
-                                        label: id
+                                        label: ID
                                         dataType: system
                                     isOperator: false
                                 -
                                     attributes:
                                         attribute: published
-                                        label: published
+                                        label: Published
                                         dataType: system
                                     isOperator: false
                                 -
@@ -40,6 +40,12 @@ pimcore_data_hub:
                                     attributes:
                                         attribute: slug
                                         label: Slug
+                                        dataType: input
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: handle
+                                        label: Handle
                                         dataType: input
                                     isOperator: false
                                 -
