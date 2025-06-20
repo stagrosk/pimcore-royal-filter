@@ -8,7 +8,7 @@ pimcore_data_hub:
                 description: ''
                 group: ''
                 sqlObjectCondition: ''
-                modificationDate: 1750327387
+                modificationDate: 1750455623
                 path: null
                 createDate: 1727014466
             schema:
@@ -148,6 +148,41 @@ pimcore_data_hub:
                                         attribute: image
                                         label: Image
                                         dataType: image
+                                    isOperator: false
+                    WebsiteConfiguration:
+                        id: WebsiteConfiguration
+                        name: WebsiteConfiguration
+                        columnConfig:
+                            columns:
+                                -
+                                    attributes:
+                                        attribute: contact
+                                        label: Contact
+                                        dataType: wysiwyg
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: headline
+                                        label: Headline
+                                        dataType: input
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: links
+                                        label: Links
+                                        dataType: manyToManyRelation
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: newsletter
+                                        label: Newsletter
+                                        dataType: wysiwyg
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: socialMedia
+                                        label: 'Social Media'
+                                        dataType: block
                                     isOperator: false
                 mutationEntities: {  }
                 specialEntities:

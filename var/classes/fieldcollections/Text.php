@@ -14,11 +14,8 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
    'implementsInterfaces' => '',
    'title' => '',
    'group' => 'Content',
-   'layoutDefinitions' =>
+   'layoutDefinitions' => 
   \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
-     'fieldtype' => 'panel',
-     'layout' => NULL,
-     'border' => false,
      'name' => NULL,
      'type' => NULL,
      'region' => NULL,
@@ -29,14 +26,10 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
      'collapsed' => false,
      'bodyStyle' => NULL,
      'datatype' => 'layout',
-     'permissions' => NULL,
-     'children' =>
+     'children' => 
     array (
-      0 =>
+      0 => 
       \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
-         'fieldtype' => 'panel',
-         'layout' => NULL,
-         'border' => false,
          'name' => 'Layout',
          'type' => NULL,
          'region' => NULL,
@@ -47,22 +40,31 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
          'collapsed' => false,
          'bodyStyle' => '',
          'datatype' => 'layout',
-         'permissions' => NULL,
-         'children' =>
+         'children' => 
         array (
-          0 =>
+          0 => 
           \Pimcore\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
-             'fieldtype' => 'localizedfields',
-             'children' =>
+             'name' => 'localizedfields',
+             'title' => '',
+             'tooltip' => '',
+             'mandatory' => false,
+             'noteditable' => false,
+             'index' => false,
+             'locked' => false,
+             'style' => '',
+             'permissions' => NULL,
+             'fieldtype' => '',
+             'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => true,
+             'visibleSearch' => true,
+             'blockedVarsForExport' => 
             array (
-              0 =>
+            ),
+             'children' => 
+            array (
+              0 => 
               \Pimcore\Model\DataObject\ClassDefinition\Data\Wysiwyg::__set_state(array(
-                 'fieldtype' => 'wysiwyg',
-                 'width' => '',
-                 'height' => '',
-                 'toolbarConfig' => '',
-                 'excludeFromSearchIndex' => false,
-                 'maxCharacters' => '',
                  'name' => 'text',
                  'title' => 'Text',
                  'tooltip' => '',
@@ -72,57 +74,43 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                  'locked' => false,
                  'style' => '',
                  'permissions' => NULL,
-                 'datatype' => 'data',
+                 'fieldtype' => '',
                  'relationType' => false,
                  'invisible' => false,
                  'visibleGridView' => false,
                  'visibleSearch' => false,
-                 'blockedVarsForExport' =>
+                 'blockedVarsForExport' => 
                 array (
                 ),
+                 'toolbarConfig' => '',
+                 'excludeFromSearchIndex' => false,
+                 'maxCharacters' => '',
+                 'height' => '',
+                 'width' => '',
               )),
             ),
-             'name' => 'localizedfields',
              'region' => NULL,
              'layout' => NULL,
-             'title' => '',
-             'width' => '',
-             'height' => '',
              'maxTabs' => NULL,
              'border' => false,
              'provideSplitView' => false,
-             'tabPosition' => NULL,
+             'tabPosition' => 'top',
              'hideLabelsWhenTabsReached' => NULL,
-             'referencedFields' =>
+             'referencedFields' => 
             array (
             ),
-             'fieldDefinitionsCache' => NULL,
              'permissionView' => NULL,
              'permissionEdit' => NULL,
-             'tooltip' => '',
-             'mandatory' => false,
-             'noteditable' => false,
-             'index' => NULL,
-             'locked' => false,
-             'style' => '',
-             'permissions' => NULL,
-             'datatype' => 'data',
-             'relationType' => false,
-             'invisible' => false,
-             'visibleGridView' => true,
-             'visibleSearch' => true,
-             'blockedVarsForExport' =>
-            array (
-            ),
              'labelWidth' => 0,
              'labelAlign' => 'left',
+             'width' => '',
+             'height' => '',
+             'fieldDefinitionsCache' => NULL,
           )),
-          1 =>
+          1 => 
           \Pimcore\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
-             'fieldtype' => 'checkbox',
-             'defaultValue' => NULL,
              'name' => 'textBoxed',
-             'title' => 'Text nicht über ganze Breite',
+             'title' => 'Text boxed',
              'tooltip' => '',
              'mandatory' => false,
              'noteditable' => false,
@@ -130,36 +118,46 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'locked' => false,
              'style' => '',
              'permissions' => NULL,
-             'datatype' => 'data',
+             'fieldtype' => '',
              'relationType' => false,
              'invisible' => false,
              'visibleGridView' => false,
              'visibleSearch' => false,
-             'blockedVarsForExport' =>
+             'blockedVarsForExport' => 
             array (
             ),
+             'defaultValue' => NULL,
              'defaultValueGenerator' => '',
           )),
         ),
          'locked' => false,
-         'blockedVarsForExport' =>
+         'blockedVarsForExport' => 
         array (
         ),
+         'fieldtype' => 'panel',
+         'layout' => NULL,
+         'border' => false,
          'icon' => '',
          'labelWidth' => 0,
          'labelAlign' => 'left',
       )),
     ),
      'locked' => false,
-     'blockedVarsForExport' =>
+     'blockedVarsForExport' => 
     array (
     ),
+     'fieldtype' => 'panel',
+     'layout' => NULL,
+     'border' => false,
      'icon' => NULL,
      'labelWidth' => 100,
      'labelAlign' => 'left',
   )),
-   'generateTypeDeclarations' => true,
-   'blockedVarsForExport' =>
+   'fieldDefinitionsCache' => NULL,
+   'blockedVarsForExport' => 
+  array (
+  ),
+   'activeDispatchingEvents' => 
   array (
   ),
 ));
