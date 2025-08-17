@@ -8,7 +8,7 @@ pimcore_data_hub:
                 description: ''
                 group: ''
                 sqlObjectCondition: ''
-                modificationDate: 1750455623
+                modificationDate: 1755455979
                 path: null
                 createDate: 1727014466
             schema:
@@ -156,8 +156,20 @@ pimcore_data_hub:
                             columns:
                                 -
                                     attributes:
+                                        attribute: openingHours
+                                        label: 'Opening Hours'
+                                        dataType: fieldcollections
+                                    isOperator: false
+                                -
+                                    attributes:
                                         attribute: contact
                                         label: Contact
+                                        dataType: wysiwyg
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: company
+                                        label: Company
                                         dataType: wysiwyg
                                     isOperator: false
                                 -
