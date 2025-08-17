@@ -5,6 +5,8 @@ namespace App\Service\Generator\Mapper;
 use App\Model\ClassificationStoreMappingItem;
 use App\Pimcore\ClassificationStore\ClassificationStoreHelper;
 use App\Pimcore\ClassificationStore\ClassificationStoreService;
+use App\Pimcore\Model\DataObject\RoyalFilter;
+use App\Service\ProductMetadataService;
 use App\Shopify\Model\Product\ProductStatusEnum;
 use Pimcore\Model\Asset;
 use Pimcore\Model\DataObject\AbstractObject;
@@ -23,36 +25,42 @@ class FilterToProductMapper extends BaseMapper
      * @param \Pimcore\Translation\Translator $translator
      * @param \App\Pimcore\ClassificationStore\ClassificationStoreHelper $classificationStoreHelper
      * @param \App\Pimcore\ClassificationStore\ClassificationStoreService $classificationStoreService
+     * @param \App\Service\ProductMetadataService $productMetadataService
      */
     public function __construct(
         Translator $translator,
         ClassificationStoreHelper $classificationStoreHelper,
-        ClassificationStoreService $classificationStoreService
+        ClassificationStoreService $classificationStoreService,
+        ProductMetadataService $productMetadataService
     ) {
-        parent::__construct($translator, $classificationStoreHelper, $classificationStoreService);
+        parent::__construct(
+            $translator,
+            $classificationStoreHelper,
+            $classificationStoreService,
+            $productMetadataService
+        );
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\AbstractObject $object
      * @param \Pimcore\Model\DataObject\Product $product
-     * @param bool $fromWhirlpool
+     * @param \Pimcore\Model\DataObject\AbstractObject|\App\Pimcore\Model\DataObject\RoyalFilter $fromObject
+     * @param array $extraData
      *
-     * @throws \Exception
+     * @throws \Pimcore\Model\Element\DuplicateFullPathException
      * @return \Pimcore\Model\DataObject\Product
      */
-    public function mapObjectToProduct(AbstractObject $object, Product $product, bool $fromWhirlpool = false): Product
+    public function mapObjectToProduct(Product $product, AbstractObject|RoyalFilter $fromObject, array $extraData = []): Product
     {
         // base
         $product->setPublished(true);
         $product->setEan(''); // TODO: ???
-        $product->setSku(sprintf('RF-%s', $object->getId()));
+        $product->setSku(sprintf('RF-%s', $fromObject->getId()));
         $product->setStatus(ProductStatusEnum::ACTIVE->value);
         $product->setIsVirtualProduct(false);
         $product->setIsGiftCard(false);
         $product->setProductType('filter');
-
-        $product->setManufacturer($object->getManufacturer());
-        $product->setGeneratedFromObject($object);
+        $product->setManufacturer($fromObject->getManufacturer());
+        $product->setGeneratedFromObject($fromObject);
 
         // made in country
         $country = Country::getByName(self::COUNTRY_SLOVAKIA, 1);
@@ -61,46 +69,44 @@ class FilterToProductMapper extends BaseMapper
         }
 
         // collections
-        $this->handleCollections($object, $product);
+        $this->handleCollections($fromObject, $product);
 
         // google taxonomy category
         $product->setTaxonomyCategory(self::SHOPIFY_GOOGLE_CATEGORY_POOL_SPA_FILTERS);
 
         // PRE-SAVE IN classification store helper! must be after key and parent assign
         // remap parameters and set them as new classification store values for product
-        $this->copyMetadata($product, $object, true);
+        $this->productMetadataService->copyMetadata($product, $fromObject, $extraData['partOverrides'] ?? [], true);
 
         // title (must be after metadata - dimensions resolved from classification store)/ description / seo
         foreach (Tool::getValidLanguages() as $language) {
-            $product->setTitle($this->prepareTitle($object, $product, $language), $language);
-            $product->setShortDescription($object->getShortDescription($language), $language);
-            $product->setDescription($object->getDescription($language), $language);
+            $product->setTitle($this->prepareTitle($product, $fromObject, $language), $language);
+            $product->setShortDescription($fromObject->getShortDescription($language), $language);
+            $product->setDescription($fromObject->getDescription($language), $language);
 //            $product->setSeoTitle($product->getTitle($language), $language);
 //            $product->setSeoDescription($product->getDescription($language), $language);
         }
 
         // images
-        $product->setImageGallery($this->prepareImages($object));
+        $product->setImageGallery($this->prepareImages($fromObject));
 
         // prices
-        $product->setPrices($object->getPrices());
+        $product->setPrices($fromObject->getPrices());
 
         // pimcore base
-        if (!$fromWhirlpool) {
-            $path = sprintf('Shopify/Products/%s', $object->getCollection()->getKey());
-            $product->setParent(Service::createFolderByPath($path));
-            $product->setKey(Service::getValidKey(sprintf('RF-%s', str_replace(' ', '-', $product->getTitle())), 'object'));
-        }
+        $path = sprintf('Shopify/Products/%s', $fromObject->getCollection()->getKey());
+        $product->setParent(Service::createFolderByPath($path));
+        $product->setKey(Service::getValidKey(sprintf('RF-%s', str_replace(' ', '-', $product->getTitle())), 'object'));
 
         return $product;
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\RoyalFilter $object
+     * @param \Pimcore\Model\DataObject\AbstractObject|\App\Pimcore\Model\DataObject\RoyalFilter $object
      *
      * @return \Pimcore\Model\DataObject\Data\ImageGallery
      */
-    private function prepareImages(AbstractObject $object): ImageGallery
+    private function prepareImages(AbstractObject|RoyalFilter $object): ImageGallery
     {
         // images
         $images = array_merge(
@@ -111,6 +117,7 @@ class FilterToProductMapper extends BaseMapper
             $object->getCenterBody1()?->getImageGallery()?->getItems() ?? [],
             $object->getCenterBodyMiddle()?->getImageGallery()?->getItems() ?? [],
             $object->getCenterBody2()?->getImageGallery()?->getItems() ?? [],
+            $object->getAdapter()?->getImageGallery()?->getItems() ?? [],
             $object->getEquipBody1()?->getImageGallery()?->getItems() ?? [],
             $object->getEquipBody2()?->getImageGallery()?->getItems() ?? [],
         );
@@ -119,15 +126,15 @@ class FilterToProductMapper extends BaseMapper
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\AbstractObject $object
      * @param \Pimcore\Model\DataObject\AbstractObject $product
+     * @param \Pimcore\Model\DataObject\AbstractObject $fromObject
      * @param string $language
      *
      * @return string
      */
-    public function prepareTitle(AbstractObject $object, AbstractObject $product, string $language): string
+    public function prepareTitle(AbstractObject $product, AbstractObject $fromObject, string $language): string
     {
-        $params = $this->getMappedParameters($product);
+        $params = $this->productMetadataService->getMappedParametersOfParts($product);
 
         // TODO: nacitat vsetky dependencies kde je filter pouzity na virivke a z virivky nacitat kody
 //        $codes = [];
@@ -173,7 +180,7 @@ class FilterToProductMapper extends BaseMapper
         }
 
         return $this->translator->trans('product_title_filter', [
-            '%title%' => $object->getTitle($language),
+            '%title%' => $fromObject->getTitle($language),
             '%dimensions%' => $dimensions,
             '%extraParams%' => implode(', ', $extraParams),
         ], 'messages', $language);

@@ -25,7 +25,7 @@ readonly class WhirlpoolSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            DataObjectEvents::PRE_UPDATE => ['onPreUpdate'],
+            DataObjectEvents::POST_UPDATE => ['onPostUpdate'],
         ];
     }
 
@@ -35,7 +35,7 @@ readonly class WhirlpoolSubscriber implements EventSubscriberInterface
      * @throws \Exception
      * @return void
      */
-    public function onPreUpdate(DataObjectEvent $event): void
+    public function onPostUpdate(DataObjectEvent $event): void
     {
         /** @var \Pimcore\Model\DataObject\Whirlpool $object */
         $object = $event->getObject();

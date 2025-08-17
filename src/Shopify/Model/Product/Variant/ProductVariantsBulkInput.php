@@ -21,7 +21,7 @@ class ProductVariantsBulkInput implements IShopifyModel
      * @param string|null $mediaId
      * @param string|null $mediaSrc
      * @param \App\Shopify\Model\Metafields\MetafieldInputs|null $metafields
-     * @param array|null $optionValues
+     * @param VariantOptionValueInput[]|null $optionValues
      * @param float|null $price
      * @param bool $requiresComponents
      * @param bool|null $taxable
@@ -87,7 +87,15 @@ class ProductVariantsBulkInput implements IShopifyModel
         }
 
         if ($this->getOptionValues() !== null) {
-            $data['optionValues'] = $this->getOptionValues();
+            $optionValues = [];
+            foreach ($this->getOptionValues() as $optionValue) {
+                $optionValues[] = [
+                    'name' => $optionValue->getName(),
+                    'optionName' => $optionValue->getValue(),
+                ];
+            }
+
+            $data['optionValues'] = $optionValues;
         }
 
         if ($this->getPrice() !== null) {

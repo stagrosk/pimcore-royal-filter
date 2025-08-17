@@ -57,4 +57,20 @@ class ClassificationStoreMapping
 
         return null;
     }
+
+    /**
+     * @return array
+     */
+    public function getMappedParametersIndexedByGroupAndKey(): array
+    {
+        $data = [];
+        foreach ($this->classificationStoreMappingItems as $classificationStoreMappingItem) {
+            $groupConfig = $classificationStoreMappingItem->getGroupConfig();
+            $keyConfig = $classificationStoreMappingItem->getKeyConfig();
+
+            $data[$groupConfig->getName()][$keyConfig->getName()] = $classificationStoreMappingItem->getValue();
+        }
+
+        return $data;
+    }
 }

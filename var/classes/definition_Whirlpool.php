@@ -21,11 +21,7 @@
  * - images [imageGallery]
  * - customerImages [imageGallery]
  * - downloads [manyToManyRelation]
- * - royalFilterSetup [manyToOneRelation]
- * - royalFilterSetupOverview [calculatedValue]
- * - adapter [manyToOneRelation]
- * - equipBody1 [manyToOneRelation]
- * - equipBody2 [manyToOneRelation]
+ * - royalFilterSetups [fieldcollections]
  * - paperCartridges [manyToManyObjectRelation]
  */
 
@@ -36,7 +32,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1750277499,
+   'modificationDate' => 1750613676,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -763,250 +759,35 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'children' => 
                 array (
                   0 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
-                     'name' => 'Royal filter',
-                     'type' => NULL,
-                     'region' => NULL,
-                     'title' => 'Royal filter',
-                     'width' => '',
-                     'height' => '',
-                     'collapsible' => false,
-                     'collapsed' => false,
-                     'bodyStyle' => '',
-                     'datatype' => 'layout',
-                     'children' => 
-                    array (
-                      0 => 
-                      \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
-                         'name' => 'royalFilterSetup',
-                         'title' => 'Royal Filter setup',
-                         'tooltip' => '',
-                         'mandatory' => false,
-                         'noteditable' => false,
-                         'index' => false,
-                         'locked' => false,
-                         'style' => '',
-                         'permissions' => NULL,
-                         'fieldtype' => '',
-                         'relationType' => true,
-                         'invisible' => false,
-                         'visibleGridView' => false,
-                         'visibleSearch' => false,
-                         'blockedVarsForExport' => 
-                        array (
-                        ),
-                         'classes' => 
-                        array (
-                          0 => 
-                          array (
-                            'classes' => 'RoyalFilter',
-                          ),
-                        ),
-                         'displayMode' => 'grid',
-                         'pathFormatterClass' => '',
-                         'assetInlineDownloadAllowed' => false,
-                         'assetUploadPath' => '',
-                         'allowToClearRelation' => true,
-                         'objectsAllowed' => true,
-                         'assetsAllowed' => false,
-                         'assetTypes' => 
-                        array (
-                        ),
-                         'documentsAllowed' => false,
-                         'documentTypes' => 
-                        array (
-                        ),
-                         'width' => 400,
-                      )),
-                      1 => 
-                      \Pimcore\Model\DataObject\ClassDefinition\Data\CalculatedValue::__set_state(array(
-                         'name' => 'royalFilterSetupOverview',
-                         'title' => 'Royal Filter Setup Overview',
-                         'tooltip' => '',
-                         'mandatory' => false,
-                         'noteditable' => false,
-                         'index' => false,
-                         'locked' => false,
-                         'style' => '',
-                         'permissions' => NULL,
-                         'fieldtype' => '',
-                         'relationType' => false,
-                         'invisible' => false,
-                         'visibleGridView' => false,
-                         'visibleSearch' => false,
-                         'blockedVarsForExport' => 
-                        array (
-                        ),
-                         'elementType' => 'html',
-                         'calculatorType' => 'class',
-                         'calculatorExpression' => '',
-                         'calculatorClass' => 'App\\Pimcore\\Model\\DataObject\\Calculator\\RoyalFilterOverviewCalculator',
-                         'columnLength' => 190,
-                         'width' => '500px',
-                      )),
-                      2 => 
-                      \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
-                         'name' => 'Equipment',
-                         'type' => NULL,
-                         'region' => NULL,
-                         'title' => 'Equipment',
-                         'width' => '',
-                         'height' => '',
-                         'collapsible' => false,
-                         'collapsed' => false,
-                         'bodyStyle' => '',
-                         'datatype' => 'layout',
-                         'children' => 
-                        array (
-                          0 => 
-                          \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
-                             'name' => 'adapter',
-                             'title' => 'Adapter',
-                             'tooltip' => '',
-                             'mandatory' => false,
-                             'noteditable' => false,
-                             'index' => false,
-                             'locked' => false,
-                             'style' => '',
-                             'permissions' => NULL,
-                             'fieldtype' => '',
-                             'relationType' => true,
-                             'invisible' => false,
-                             'visibleGridView' => false,
-                             'visibleSearch' => false,
-                             'blockedVarsForExport' => 
-                            array (
-                            ),
-                             'classes' => 
-                            array (
-                              0 => 
-                              array (
-                                'classes' => 'Adapter',
-                              ),
-                            ),
-                             'displayMode' => 'grid',
-                             'pathFormatterClass' => '',
-                             'assetInlineDownloadAllowed' => false,
-                             'assetUploadPath' => '',
-                             'allowToClearRelation' => true,
-                             'objectsAllowed' => true,
-                             'assetsAllowed' => false,
-                             'assetTypes' => 
-                            array (
-                            ),
-                             'documentsAllowed' => false,
-                             'documentTypes' => 
-                            array (
-                            ),
-                             'width' => 750,
-                          )),
-                          1 => 
-                          \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
-                             'name' => 'equipBody1',
-                             'title' => 'Equip body1',
-                             'tooltip' => '',
-                             'mandatory' => false,
-                             'noteditable' => false,
-                             'index' => false,
-                             'locked' => false,
-                             'style' => '',
-                             'permissions' => NULL,
-                             'fieldtype' => '',
-                             'relationType' => true,
-                             'invisible' => false,
-                             'visibleGridView' => false,
-                             'visibleSearch' => false,
-                             'blockedVarsForExport' => 
-                            array (
-                            ),
-                             'classes' => 
-                            array (
-                              0 => 
-                              array (
-                                'classes' => 'Equipment',
-                              ),
-                            ),
-                             'displayMode' => 'grid',
-                             'pathFormatterClass' => '',
-                             'assetInlineDownloadAllowed' => false,
-                             'assetUploadPath' => '',
-                             'allowToClearRelation' => true,
-                             'objectsAllowed' => true,
-                             'assetsAllowed' => false,
-                             'assetTypes' => 
-                            array (
-                            ),
-                             'documentsAllowed' => false,
-                             'documentTypes' => 
-                            array (
-                            ),
-                             'width' => 750,
-                          )),
-                          2 => 
-                          \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
-                             'name' => 'equipBody2',
-                             'title' => 'Equip body2',
-                             'tooltip' => '',
-                             'mandatory' => false,
-                             'noteditable' => false,
-                             'index' => false,
-                             'locked' => false,
-                             'style' => '',
-                             'permissions' => NULL,
-                             'fieldtype' => '',
-                             'relationType' => true,
-                             'invisible' => false,
-                             'visibleGridView' => false,
-                             'visibleSearch' => false,
-                             'blockedVarsForExport' => 
-                            array (
-                            ),
-                             'classes' => 
-                            array (
-                              0 => 
-                              array (
-                                'classes' => 'Equipment',
-                              ),
-                            ),
-                             'displayMode' => 'grid',
-                             'pathFormatterClass' => '',
-                             'assetInlineDownloadAllowed' => false,
-                             'assetUploadPath' => '',
-                             'allowToClearRelation' => true,
-                             'objectsAllowed' => true,
-                             'assetsAllowed' => false,
-                             'assetTypes' => 
-                            array (
-                            ),
-                             'documentsAllowed' => false,
-                             'documentTypes' => 
-                            array (
-                            ),
-                             'width' => 750,
-                          )),
-                        ),
-                         'locked' => false,
-                         'blockedVarsForExport' => 
-                        array (
-                        ),
-                         'fieldtype' => 'panel',
-                         'layout' => NULL,
-                         'border' => false,
-                         'icon' => '',
-                         'labelWidth' => 100,
-                         'labelAlign' => 'left',
-                      )),
-                    ),
+                  \Pimcore\Model\DataObject\ClassDefinition\Data\Fieldcollections::__set_state(array(
+                     'name' => 'royalFilterSetups',
+                     'title' => 'Royal filter setups',
+                     'tooltip' => '',
+                     'mandatory' => false,
+                     'noteditable' => false,
+                     'index' => false,
                      'locked' => false,
+                     'style' => '',
+                     'permissions' => NULL,
+                     'fieldtype' => '',
+                     'relationType' => false,
+                     'invisible' => false,
+                     'visibleGridView' => false,
+                     'visibleSearch' => false,
                      'blockedVarsForExport' => 
                     array (
                     ),
-                     'fieldtype' => 'panel',
-                     'layout' => NULL,
+                     'allowedTypes' => 
+                    array (
+                      0 => 'royalFilterSetup',
+                    ),
+                     'lazyLoading' => true,
+                     'maxItems' => NULL,
+                     'disallowAddRemove' => false,
+                     'disallowReorder' => false,
+                     'collapsed' => false,
+                     'collapsible' => false,
                      'border' => false,
-                     'icon' => '',
-                     'labelWidth' => 100,
-                     'labelAlign' => 'left',
                   )),
                   1 => 
                   \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
@@ -1059,7 +840,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                          'visibleFieldDefinitions' => 
                         array (
                         ),
-                         'width' => '500px',
+                         'width' => 600,
                          'height' => '',
                       )),
                     ),

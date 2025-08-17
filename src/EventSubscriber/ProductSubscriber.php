@@ -14,12 +14,12 @@ use App\Shopify\Graphql\Mutation\Product\Variant\ProductVariantsBulkCreateMutati
 use App\Shopify\Graphql\Mutation\Product\Variant\ProductVariantsBulkUpdateMutation;
 use App\Shopify\Graphql\Mutation\Translation\TranslationsRegisterMutation;
 use App\Shopify\Service\Media\ShopifyMediaService;
+use App\Shopify\Service\Product\Variant\ProductVariantService;
 use Exception;
 use Pimcore\Event\DataObjectEvents;
 use Pimcore\Event\Model\DataObjectEvent;
 use Pimcore\Model\DataObject\AbstractObject;
 use Pimcore\Model\DataObject\Product;
-use Pimcore\Model\DataObject\Service;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 readonly class ProductSubscriber implements EventSubscriberInterface
@@ -34,6 +34,7 @@ readonly class ProductSubscriber implements EventSubscriberInterface
      * @param \App\Shopify\Graphql\Mutation\Metafield\DeleteMetafieldsMutation $deleteMetafieldsMutation
      * @param \App\Shopify\Service\Media\ShopifyMediaService $shopifyMediaService
      * @param \App\Shopify\Graphql\Mutation\Translation\TranslationsRegisterMutation $translationsRegisterMutation
+     * @param \App\Shopify\Service\Product\Variant\ProductVariantService $productVariantService
      */
     public function __construct(
         private ProductCreateMutation             $productCreateMutation,
@@ -44,7 +45,8 @@ readonly class ProductSubscriber implements EventSubscriberInterface
         private ProductVariantsBulkUpdateMutation $productVariantsBulkUpdateMutation,
         private DeleteMetafieldsMutation          $deleteMetafieldsMutation,
         private ShopifyMediaService               $shopifyMediaService,
-        private TranslationsRegisterMutation      $translationsRegisterMutation
+        private TranslationsRegisterMutation      $translationsRegisterMutation,
+        private ProductVariantService             $productVariantService
     ) {
     }
 
@@ -76,47 +78,19 @@ readonly class ProductSubscriber implements EventSubscriberInterface
             return;
         }
 
-        // call product update with variant configuration
-        if ($object->getType() === AbstractObject::OBJECT_TYPE_VARIANT) {
-            // call resave to trigger update of variant
-            VersionHelper::useVersioning(function () use ($object) {
-                $object->save();
-            }, false);
-        } else {
+        if ($object->getType() !== AbstractObject::OBJECT_TYPE_VARIANT) {
             // handle product
             $response = $this->productCreateMutation->callAction($object);
             $data = $response['data']['productCreate'];
-            if (!empty($data['userErrors'])) {
-                throw new Exception($data['userErrors'][0]['message']);
-            } else {
-                $object->setApiId($data['product']['id']);
-                $object->setHandle($data['product']['handle']);
-            }
 
-            // save product to persist data
-            VersionHelper::useVersioning(function () use ($object) {
-                $object->save();
-            }, false);
-
-            // publish
-            $this->productPublishMutation->callAction($object);
-
-            // process shopify media
-            $this->shopifyMediaService->processMedia($object);
-
-            // automatic creation of variant for product with first ID generated form shopify
-            $variant = new Product();
-            $variant->setApiId($data['product']['variants']['edges'][0]['node']['id']);
-            $variant->setParent($object);
-            $variant->setKey(Service::getValidKey(sprintf('V-%s', uniqid()), 'object'));
-            $variant->setType(AbstractObject::OBJECT_TYPE_VARIANT);
-            $variant->setPrices($object->getPrices());
-            $variant->setPublished(true);
-
-            VersionHelper::useVersioning(function () use ($variant) {
-                $variant->save();
-            }, false);
+            // set api id on product
+            $object->setApiId($data['product']['id']);
         }
+
+        // save product to persist data
+        VersionHelper::useVersioning(function () use ($object) {
+            $object->save();
+        }, false);
     }
 
     /**
@@ -171,7 +145,11 @@ readonly class ProductSubscriber implements EventSubscriberInterface
 
         if ($object->getType() !== AbstractObject::OBJECT_TYPE_VARIANT && !str_contains($object->getApiId(), 'ProductVariant')) {
             // product update
-            $this->productUpdateMutation->callAction($object);
+            $response = $this->productUpdateMutation->callAction($object);
+            $data = $response['data']['productUpdate'];
+
+            // publish
+            $this->productPublishMutation->callAction($object);
 
             // check and delete metadata
             $this->deleteMetafieldsMutation->callAction($object);
@@ -181,6 +159,9 @@ readonly class ProductSubscriber implements EventSubscriberInterface
 
             // process translations
             $this->translationsRegisterMutation->callAction($object);
+
+            // handle variants
+            $this->productVariantService->processVariants($object, $data['product']['variants']['edges']);
         }
     }
 

@@ -5,8 +5,10 @@
  * Variants: no
  *
  * Fields Summary:
+ * - openingHours [fieldcollections]
  * - localizedfields [localizedfields]
  * -- contact [wysiwyg]
+ * -- company [wysiwyg]
  * -- links [block]
  * --- headline [input]
  * --- links [manyToManyRelation]
@@ -23,7 +25,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1750455520,
+   'modificationDate' => 1755455752,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -68,7 +70,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
         array (
           0 => 
           \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
-             'name' => 'Contact',
+             'name' => 'Informations',
              'type' => NULL,
              'region' => NULL,
              'title' => 'Kontakt',
@@ -81,6 +83,37 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'children' => 
             array (
               0 => 
+              \Pimcore\Model\DataObject\ClassDefinition\Data\Fieldcollections::__set_state(array(
+                 'name' => 'openingHours',
+                 'title' => 'Opening Hours',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'fieldtype' => '',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+                 'blockedVarsForExport' => 
+                array (
+                ),
+                 'allowedTypes' => 
+                array (
+                  0 => 'openingHours',
+                ),
+                 'lazyLoading' => true,
+                 'maxItems' => NULL,
+                 'disallowAddRemove' => false,
+                 'disallowReorder' => false,
+                 'collapsed' => false,
+                 'collapsible' => false,
+                 'border' => false,
+              )),
+              1 => 
               \Pimcore\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
                  'name' => 'localizedfields',
                  'title' => '',
@@ -123,7 +156,32 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'toolbarConfig' => '',
                      'excludeFromSearchIndex' => false,
                      'maxCharacters' => '',
-                     'height' => 600,
+                     'height' => '',
+                     'width' => 700,
+                  )),
+                  1 => 
+                  \Pimcore\Model\DataObject\ClassDefinition\Data\Wysiwyg::__set_state(array(
+                     'name' => 'company',
+                     'title' => 'Company',
+                     'tooltip' => '',
+                     'mandatory' => false,
+                     'noteditable' => false,
+                     'index' => false,
+                     'locked' => false,
+                     'style' => '',
+                     'permissions' => NULL,
+                     'fieldtype' => '',
+                     'relationType' => false,
+                     'invisible' => false,
+                     'visibleGridView' => false,
+                     'visibleSearch' => false,
+                     'blockedVarsForExport' => 
+                    array (
+                    ),
+                     'toolbarConfig' => '',
+                     'excludeFromSearchIndex' => false,
+                     'maxCharacters' => '',
+                     'height' => '',
                      'width' => 700,
                   )),
                 ),

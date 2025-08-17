@@ -29,20 +29,6 @@ class ClassificationStoreHelper
                 // get group config
                 $groupConfig = GroupConfig::getById($groupConfigId);
                 if ($groupConfig instanceof GroupConfig) {
-
-                    // TODO: check what is this
-//                    foreach ($groupConfig->getRelations() as $keyGroupRelation) {
-//                        $keyConfig = KeyConfig::getById($keyGroupRelation->getKeyId());
-//                        $groupConfig = GroupConfig::getById($keyGroupRelation->getGroupId());
-//                        $classificationStoreMapping[$keyGroupRelation->getName()] = [
-//                            'key' => $keyConfig->getName() ?? null,
-//                            'group' => $groupConfig->getName(),
-//                            'config' => $keyConfig,
-//                            'label' => $keyConfig->getTitle() ?? null,
-//                            'value' => null,
-//                        ];
-//                    }
-
                     foreach ($group as $key => $item) {
                         $keyConfig = KeyConfig::getById(strtolower($key));
                         if (!$keyConfig instanceof KeyConfig) {

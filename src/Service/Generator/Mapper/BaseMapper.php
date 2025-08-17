@@ -4,14 +4,10 @@ namespace App\Service\Generator\Mapper;
 
 use App\Pimcore\ClassificationStore\ClassificationStoreHelper;
 use App\Pimcore\ClassificationStore\ClassificationStoreService;
+use App\Service\ProductMetadataService;
 use Pimcore\Model\DataObject\AbstractObject;
-use Pimcore\Model\DataObject\Body;
-use Pimcore\Model\DataObject\Center;
-use Pimcore\Model\DataObject\Classificationstore;
 use Pimcore\Model\DataObject\Collection;
-use Pimcore\Model\DataObject\Equipment;
 use Pimcore\Model\DataObject\Product;
-use Pimcore\Model\DataObject\RoyalFilter;
 use Pimcore\Translation\Translator;
 
 abstract class BaseMapper implements MapperInterface
@@ -25,11 +21,13 @@ abstract class BaseMapper implements MapperInterface
      * @param \Pimcore\Translation\Translator $translator
      * @param \App\Pimcore\ClassificationStore\ClassificationStoreHelper $classificationStoreHelper
      * @param \App\Pimcore\ClassificationStore\ClassificationStoreService $classificationStoreService
+     * @param \App\Service\ProductMetadataService $productMetadataService
      */
     public function __construct(
         protected readonly Translator $translator,
         protected readonly ClassificationStoreHelper $classificationStoreHelper,
-        protected readonly ClassificationStoreService $classificationStoreService
+        protected readonly ClassificationStoreService $classificationStoreService,
+        protected readonly ProductMetadataService $productMetadataService
     ) {
     }
 
@@ -49,114 +47,5 @@ abstract class BaseMapper implements MapperInterface
         }
 
         $product->setCollections($collections);
-    }
-
-    /**
-     * @param \Pimcore\Model\DataObject\AbstractObject $object
-     *
-     * @return array
-     */
-    public function getMappedParameters(AbstractObject $object): array
-    {
-        $params = [];
-
-        if ($object instanceof RoyalFilter) {
-            if ($object->getBody1() instanceof Body) {
-                $params['body1'] = [
-                    'items' => $object->getBody1()->getMetadata()?->getItems(),
-                    'mapping' => $this->classificationStoreHelper->getClassificationStoreMapped($object->getBody1()->getMetadata()),
-                ];
-            }
-            if ($object->getBodyMiddle() instanceof Body) {
-                $params['bodyMiddle'] = [
-                    'items' => $object->getBodyMiddle()->getMetadata()?->getItems(),
-                    'mapping' => $this->classificationStoreHelper->getClassificationStoreMapped($object->getBodyMiddle()->getMetadata()),
-                ];
-            }
-            if ($object->getBody2() instanceof Body) {
-                $params['body2'] = [
-                    'items' => $object->getBody2()->getMetadata()?->getItems(),
-                    'mapping' => $this->classificationStoreHelper->getClassificationStoreMapped($object->getBody2()->getMetadata()),
-                ];
-            }
-            if ($object->getCenterBody1() instanceof Center) {
-                $params['center1'] = [
-                    'items' => $object->getCenterBody1()->getMetadata()?->getItems(),
-                    'mapping' => $this->classificationStoreHelper->getClassificationStoreMapped($object->getCenterBody1()->getMetadata()),
-                ];
-            }
-            if ($object->getCenterBodyMiddle() instanceof Center) {
-                $params['centerMiddle'] = [
-                    'items' => $object->getCenterBodyMiddle()->getMetadata()?->getItems(),
-                    'mapping' => $this->classificationStoreHelper->getClassificationStoreMapped($object->getCenterBodyMiddle()->getMetadata()),
-                ];
-            }
-            if ($object->getCenterBody2() instanceof Center) {
-                $params['center2'] = [
-                    'items' => $object->getCenterBody2()->getMetadata()?->getItems(),
-                    'mapping' => $this->classificationStoreHelper->getClassificationStoreMapped($object->getCenterBody2()->getMetadata()),
-                ];
-            }
-            if ($object->getEquipBody1() instanceof Equipment) {
-                $params['equip1'] = [
-                    'items' => $object->getEquipBody1()->getMetadata()?->getItems(),
-                    'mapping' => $this->classificationStoreHelper->getClassificationStoreMapped($object->getEquipBody1()->getMetadata()),
-                ];
-            }
-            if ($object->getEquipBody2() instanceof Equipment) {
-                $params['equip2'] = [
-                    'items' => $object->getEquipBody2()->getMetadata()?->getItems(),
-                    'mapping' => $this->classificationStoreHelper->getClassificationStoreMapped($object->getEquipBody2()->getMetadata()),
-                ];
-            }
-        } elseif (method_exists($object, 'getMetadata') && $object->getMetadata() instanceof Classificationstore) {
-            $params[uniqid()] = [
-                'items' => $object->getMetadata()->getItems(),
-                'mapping' => $this->classificationStoreHelper->getClassificationStoreMapped($object->getMetadata())
-            ];
-        }
-
-        return $params;
-    }
-
-    /**
-     * @param \Pimcore\Model\DataObject\AbstractObject $product
-     * @param \Pimcore\Model\DataObject\AbstractObject $object
-     * @param bool $skipPreSave
-     *
-     * @throws \Exception
-     * @return void
-     */
-    public function copyMetadata(AbstractObject $product, AbstractObject $object, bool $skipPreSave = false): void
-    {
-        $mappedParameters = $this->getMappedParameters($object);
-
-        $mappedProperties = [];
-        foreach ($mappedParameters as $objectName => $objectData) {
-            foreach ($objectData['items'] as $groupKeyId => $keyConfigValues) {
-                $groupConfig = $this->classificationStoreService->getGroupConfigById($groupKeyId);
-
-                foreach ($keyConfigValues as $keyConfigId => $keyConfigValue) {
-                    $keyConfig = $this->classificationStoreService->getKeyConfigById($keyConfigId);
-
-                    $ident = $groupConfig->getId() .'-'. $keyConfig->getId();
-                    if (!array_key_exists($ident, $mappedProperties)) {
-                        $mappedProperties[$ident] = [
-                            'value' => is_object($keyConfigValue['default']) ? $keyConfigValue['default']->getValue() : $keyConfigValue['default'],
-                            'groupConfig' => $groupConfig,
-                            'keyConfig' => $keyConfig,
-                            'language' => 'default'
-                        ];
-                    } else {
-                        // height as SUM
-                        if (in_array($objectName, ['body1', 'bodyMiddle', 'body2', 'center1', 'centerMiddle', 'center2']) && $keyConfig->getName() === 'height') {
-                            $mappedProperties[$ident]['value'] = (int)$mappedProperties[$ident]['value'] + (int)$keyConfigValue['default']->getValue();
-                        }
-                    }
-                }
-            }
-        }
-
-        $this->classificationStoreHelper->fillObjectDataOnClassificationStore($product, $mappedProperties, $skipPreSave);
     }
 }

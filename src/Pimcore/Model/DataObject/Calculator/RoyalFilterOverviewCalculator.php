@@ -2,16 +2,16 @@
 
 namespace App\Pimcore\Model\DataObject\Calculator;
 
-use App\Pimcore\ClassificationStore\ClassificationStoreHelper;
+use App\Pimcore\Model\DataObject\RoyalFilter;
+use App\Service\ProductMetadataService;
 use Pimcore\Model\DataObject\ClassDefinition\CalculatorClassInterface;
 use Pimcore\Model\DataObject\Concrete;
 use Pimcore\Model\DataObject\Data\CalculatedValue;
-use Pimcore\Model\DataObject\RoyalFilter;
+use Pimcore\Model\DataObject\Fieldcollection\Data\RoyalFilterSetup;
 use Pimcore\Model\DataObject\Whirlpool;
 
 readonly class RoyalFilterOverviewCalculator implements CalculatorClassInterface
 {
-
     /**
      * @param \Pimcore\Model\DataObject\Concrete $object
      * @param \Pimcore\Model\DataObject\Data\CalculatedValue $context
@@ -20,43 +20,37 @@ readonly class RoyalFilterOverviewCalculator implements CalculatorClassInterface
      */
     public function compute(Concrete $object, CalculatedValue $context): string
     {
-        $classificationStoreHelper = \Pimcore::getContainer()->get(ClassificationStoreHelper::class);
-
+        $html = '';
         if (!$object instanceof Whirlpool) {
-            return '';
+            return $html;
         }
 
-        $html = '';
+
         $locale = $context->getPosition();
 
-        $royalFilterSetup = $object->getRoyalFilterSetup();
-        if ($royalFilterSetup instanceof RoyalFilter) {
-            $mappedBody1 = $classificationStoreHelper->getClassificationStoreMapped($royalFilterSetup->getBody1()?->getMetadata());
-            $mappedBodyMiddle = $classificationStoreHelper->getClassificationStoreMapped($royalFilterSetup->getBodyMiddle()?->getMetadata());
-            $mappedBody2 = $classificationStoreHelper->getClassificationStoreMapped($royalFilterSetup->getBody2()?->getMetadata());
-            $mappedCenterBody1 = $classificationStoreHelper->getClassificationStoreMapped($royalFilterSetup->getCenterBody1()?->getMetadata());
-//            $mappedCenterBodyMiddle = $classificationStoreHelper->getClassificationStoreMapped($royalFilterSetup->getCenterBodyMiddle()?->getMetadata());
-//            $mappedCenterBody2 = $classificationStoreHelper->getClassificationStoreMapped($royalFilterSetup->getCenterBody2()?->getMetadata());
-//            $mappedEquip1 = $classificationStoreHelper->getClassificationStoreMapped($royalFilterSetup->getEquipBody1()?->getMetadata());
-//            $mappedEquip2 = $classificationStoreHelper->getClassificationStoreMapped($royalFilterSetup->getEquipBody2()?->getMetadata());
+        $royalFilterSetups = $object->getRoyalFilterSetups()?->getItems();
+        /** @var \Pimcore\Model\DataObject\Fieldcollection\Data\RoyalFilterSetup|null $royalFilterSetupFieldcollection */
+        $royalFilterSetupFieldcollection = $royalFilterSetups[$context->getIndex()] ?? null;
+        if ($royalFilterSetupFieldcollection instanceof RoyalFilterSetup) {
+            $royalFilterSetup = $royalFilterSetupFieldcollection->getRoyalFilterSetup();
+
+            $overrides = [
+                'adapter' => $royalFilterSetupFieldcollection->getAdapter(),
+                'equipBody1' => $royalFilterSetupFieldcollection->getEquipBody1(),
+                'equipBody2' => $royalFilterSetupFieldcollection->getEquipBody2(),
+            ];
+
+            $dimensions = $this->calculateFinalDimensions($royalFilterSetup, $overrides);
 
             $html = '<table class="royal-filter-overview">';
+            $html .= '<tr><td>Total height:</td><td>' . ($dimensions['body']['height'] ? $dimensions['body']['height'] . ' ' . $dimensions['body']['unit'] : '-') . '</td></tr>';
+            $html .= '<tr><td>Diameter:</td><td>' . $dimensions['body']['diameter'] . ' ' . $dimensions['body']['diameterUnit'] . '</td></tr>';
 
-            $body1Height = $mappedBody1->findItemByKeyConfigName('body', 'height');
-            $bodyMiddleHeight = $mappedBodyMiddle->findItemByKeyConfigName('body', 'height');
-            $body2Height = $mappedBody2->findItemByKeyConfigName('body', 'height');
-            $totalHeight = $body1Height?->getRawValue() + $bodyMiddleHeight?->getRawValue() + $body2Height?->getRawValue();
-            $html .= '<tr><td>Total height:</td><td>' . ($totalHeight ? $totalHeight . ' ' . $body1Height->getUnit() : '-') . '</td></tr>';
-
-            $body1Diameter = $mappedBody1->findItemByKeyConfigName('body', 'diameter');
-            $diameter = $body1Diameter ? $body1Diameter->getValue() : '-';
-            $html .= '<tr><td>Diameter:</td><td>' . $diameter . '</td></tr>';
-
-            $center1DiameterFrom = $mappedCenterBody1->findItemByKeyConfigName('center', 'centerDiameterFrom');
-            $center1DiameterTo = $mappedCenterBody1->findItemByKeyConfigName('center', 'centerDiameterTo');
-            $centerDiameterFrom1 = $center1DiameterFrom ? $center1DiameterFrom->getValue() : '-';
-            $centerDiameterTo1 = $center1DiameterTo ? $center1DiameterTo->getValue() : '-';
-            $html .= '<tr><td>Center:</td><td>' . $centerDiameterFrom1 . ' -> '  . $centerDiameterTo1 . '</td></tr>';
+            if ($dimensions['center']['diameterFrom1'] !== $dimensions['center']['diameterTo1']) {
+                $html .= '<tr><td>Center:</td><td>' . $dimensions['center']['diameterFrom1'] . $dimensions['center']['diameterFrom1Unit'] . ' -> '  . $dimensions['center']['diameterTo1'] . $dimensions['center']['diameterTo1Unit']. '</td></tr>';
+            } else {
+                $html .= '<tr><td>Center:</td><td>' . $dimensions['center']['diameterFrom1'] . $dimensions['center']['diameterFrom1Unit'] . '</td></tr>';
+            }
 
             $equipBody1 = $royalFilterSetup->getEquipBody1();
             $equipBody2 = $royalFilterSetup->getEquipBody2();
@@ -78,5 +72,38 @@ readonly class RoyalFilterOverviewCalculator implements CalculatorClassInterface
     public function getCalculatedValueForEditMode(Concrete $object, CalculatedValue $context): string
     {
         return $this->compute($object, $context);
+    }
+
+    /**
+     * @param \App\Pimcore\Model\DataObject\RoyalFilter $royalFilterSetup
+     * @param array $overrides
+     *
+     * @return array
+     */
+    private function calculateFinalDimensions(RoyalFilter $royalFilterSetup, array $overrides = []): array
+    {
+        $dimensions = [];
+
+        $productMetadataService = \Pimcore::getContainer()->get(ProductMetadataService::class);
+        $mappedParameters = $productMetadataService->getMappedParametersOfParts($royalFilterSetup, $overrides);
+
+        $body1Height = isset($mappedParameters['body1']) ? $mappedParameters['body1']['mapping']?->findItemByKeyConfigName('body', 'height') : null;
+        $body2Height = isset($mappedParameters['body2']) ? $mappedParameters['body2']['mapping']?->findItemByKeyConfigName('body', 'height') : null;
+        $bodyMiddleHeight = isset($mappedParameters['bodyMiddle']) ? $mappedParameters['bodyMiddle']['mapping']?->findItemByKeyConfigName('body', 'height') : null;
+        $dimensions['body']['height'] = $body1Height?->getRawValue() + $bodyMiddleHeight?->getRawValue() + $body2Height?->getRawValue();
+        $dimensions['body']['unit'] = $body1Height->getUnit();
+
+        $body1Diameter = isset($mappedParameters['body1']) ? $mappedParameters['body1']['mapping']?->findItemByKeyConfigName('body', 'diameter') : null;
+        $dimensions['body']['diameter'] = $body1Diameter?->getRawValue();
+        $dimensions['body']['diameterUnit'] = $body1Diameter?->getUnit();
+
+        $center1DiameterFrom = isset($mappedParameters['center1']) ? $mappedParameters['center1']['mapping']?->findItemByKeyConfigName('center', 'centerDiameterFrom') : null;
+        $center1DiameterTo = isset($mappedParameters['center1']) ? $mappedParameters['center1']['mapping']?->findItemByKeyConfigName('center', 'centerDiameterTo') : null;
+        $dimensions['center']['diameterFrom1'] = $center1DiameterFrom?->getRawValue();
+        $dimensions['center']['diameterFrom1Unit'] = $center1DiameterFrom?->getUnit();
+        $dimensions['center']['diameterTo1'] = $center1DiameterTo?->getRawValue();
+        $dimensions['center']['diameterTo1Unit'] = $center1DiameterTo?->getUnit();
+
+        return $dimensions;
     }
 }

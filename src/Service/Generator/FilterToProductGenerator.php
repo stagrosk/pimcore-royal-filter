@@ -46,7 +46,7 @@ class FilterToProductGenerator extends BaseProductGenerator
         // use inheritance
         InheritanceHelper::useInheritedValues(function () use ($object, $product) {
             // map data
-            $this->filterMapper->mapObjectToProduct($object, $product);
+            $this->filterMapper->mapObjectToProduct($product, $object);
 
             // save
             Logger::notice(sprintf('[FilterToProductGenerator] - Save product: %s', $product->getKey()));

@@ -6,6 +6,7 @@ use App\Shopify\Model\Media\CreateMediaInputs;
 use App\Shopify\Model\Metafields\MetafieldInputs;
 use App\Shopify\Model\Price\VariantPriceInput;
 use App\Shopify\Model\Product\Variant\ProductVariantsBulkInput;
+use App\Shopify\Model\Product\Variant\VariantOptionValueInput;
 use App\Shopify\Service\Media\ShopifyMediaMapper;
 use App\Shopify\Service\Metafields\ShopifyMetafieldsMapper;
 use App\Shopify\Service\Price\ShopifyPriceMapper;
@@ -79,7 +80,12 @@ class ShopifyVariantMapper implements IShopifyVariantMapper
             $input->setMetafields($metaFieldInputs);
         }
 
-//        $input->setOptionValues();
+        $optionValues = [];
+        /** @var \Pimcore\Model\DataObject\Fieldcollection\Data\VariantOption $variantOption */
+        foreach ($object->getVariantOptions()?->getItems() ?? [] as $variantOption) {
+            $optionValues[] = new VariantOptionValueInput($variantOption->getShopifyMetafieldDefinition()->getDescription(), $variantOption->getOptionValue());
+        }
+        $input->setOptionValues($optionValues);
 
         // price
         $basePriceList = PriceList::getByBasePricelist(true, 1);

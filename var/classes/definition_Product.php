@@ -25,6 +25,7 @@
  * - madeIn [country]
  * - collections [manyToManyRelation]
  * - taxonomyCategory [input]
+ * - variantOptions [fieldcollections]
  * - metadata [classificationstore]
  * - extraParameters [fieldcollections]
  * - imageGallery [imageGallery]
@@ -41,7 +42,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1750016229,
+   'modificationDate' => 1750795510,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -886,6 +887,37 @@ https://shopify.github.io/product-taxonomy/releases/unstable/',
              'children' => 
             array (
               0 => 
+              \Pimcore\Model\DataObject\ClassDefinition\Data\Fieldcollections::__set_state(array(
+                 'name' => 'variantOptions',
+                 'title' => 'Variant Options',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'fieldtype' => '',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+                 'blockedVarsForExport' => 
+                array (
+                ),
+                 'allowedTypes' => 
+                array (
+                  0 => 'variantOption',
+                ),
+                 'lazyLoading' => true,
+                 'maxItems' => NULL,
+                 'disallowAddRemove' => false,
+                 'disallowReorder' => false,
+                 'collapsed' => false,
+                 'collapsible' => false,
+                 'border' => true,
+              )),
+              1 => 
               \Pimcore\Model\DataObject\ClassDefinition\Data\Classificationstore::__set_state(array(
                  'name' => 'metadata',
                  'title' => 'Metadata',
@@ -926,7 +958,7 @@ https://shopify.github.io/product-taxonomy/releases/unstable/',
                  'height' => NULL,
                  'width' => NULL,
               )),
-              1 => 
+              2 => 
               \Pimcore\Model\DataObject\ClassDefinition\Data\Fieldcollections::__set_state(array(
                  'name' => 'extraParameters',
                  'title' => 'Extra Parameters',

@@ -47,7 +47,7 @@ class WhirlpoolToProductGenerator extends BaseProductGenerator
         // use inheritance
         InheritanceHelper::useInheritedValues(function () use ($object, $product) {
             // map data
-            $this->whirlpoolMapper->mapObjectToProduct($object, $product);
+            $this->whirlpoolMapper->mapObjectToProduct($product, $object);
 
             // save
             Logger::notice(sprintf('[WhirlpoolToProductGenerator] - Save product: %s', $product->getKey()));

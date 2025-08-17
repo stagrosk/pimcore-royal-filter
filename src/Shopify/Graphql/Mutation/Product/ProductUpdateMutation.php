@@ -47,7 +47,13 @@ class ProductUpdateMutation extends BaseMutation
               productUpdate(product: $product, media: $media) {
                 product {
                   id
-                  handle
+                  variants(first: 10) {
+                    edges {
+                      node {
+                        id
+                      }
+                    }
+                  }
                 }
                 userErrors {
                   field
