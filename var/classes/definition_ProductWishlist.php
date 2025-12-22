@@ -1,22 +1,40 @@
 <?php
 
 /**
+ * Inheritance: no
+ * Variants: no
+ *
  * Fields Summary:
- * - isPartner [checkbox]
- * - relatedObject [manyToOneRelation]
- * - subNavigation [manyToOneRelation]
+ * - dateTime [datetime]
+ * - custimerApiId [input]
+ * - product [manyToOneRelation]
  */
 
-return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
+return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'dao' => NULL,
-   'key' => 'NavigationLinkItem',
+   'id' => 'product_wishlist',
+   'name' => 'ProductWishlist',
+   'title' => '',
+   'description' => '',
+   'creationDate' => NULL,
+   'modificationDate' => 1766260639,
+   'userOwner' => 2,
+   'userModification' => 2,
    'parentClass' => '',
    'implementsInterfaces' => '',
-   'title' => '',
-   'group' => 'Navigation',
+   'listingParentClass' => '',
+   'useTraits' => '',
+   'listingUseTraits' => '',
+   'encryption' => false,
+   'encryptedTables' => 
+  array (
+  ),
+   'allowInherit' => false,
+   'allowVariants' => false,
+   'showVariants' => false,
    'layoutDefinitions' => 
   \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
-     'name' => NULL,
+     'name' => 'pimcore_root',
      'type' => NULL,
      'region' => NULL,
      'title' => NULL,
@@ -43,9 +61,9 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
          'children' => 
         array (
           0 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
-             'name' => 'isPartner',
-             'title' => 'Is Partner',
+          \Pimcore\Model\DataObject\ClassDefinition\Data\Datetime::__set_state(array(
+             'name' => 'dateTime',
+             'title' => 'Date Time',
              'tooltip' => '',
              'mandatory' => false,
              'noteditable' => false,
@@ -61,13 +79,16 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'blockedVarsForExport' => 
             array (
             ),
-             'defaultValue' => 0,
+             'defaultValue' => NULL,
+             'useCurrentDate' => false,
+             'respectTimezone' => false,
+             'columnType' => 'datetime',
              'defaultValueGenerator' => '',
           )),
           1 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
-             'name' => 'relatedObject',
-             'title' => 'Related Object',
+          \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+             'name' => 'custimerApiId',
+             'title' => 'Custimer Api Id',
              'tooltip' => '',
              'mandatory' => false,
              'noteditable' => false,
@@ -76,44 +97,28 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'style' => '',
              'permissions' => NULL,
              'fieldtype' => '',
-             'relationType' => true,
+             'relationType' => false,
              'invisible' => false,
              'visibleGridView' => false,
              'visibleSearch' => false,
              'blockedVarsForExport' => 
             array (
             ),
-             'classes' => 
-            array (
-              0 => 
-              array (
-                'classes' => 'ContentPage',
-              ),
-              1 => 
-              array (
-                'classes' => 'Collection',
-              ),
-            ),
-             'displayMode' => 'grid',
-             'pathFormatterClass' => '',
-             'assetInlineDownloadAllowed' => false,
-             'assetUploadPath' => '',
-             'allowToClearRelation' => true,
-             'objectsAllowed' => true,
-             'assetsAllowed' => false,
-             'assetTypes' => 
+             'defaultValue' => NULL,
+             'columnLength' => 190,
+             'regex' => '',
+             'regexFlags' => 
             array (
             ),
-             'documentsAllowed' => false,
-             'documentTypes' => 
-            array (
-            ),
-             'width' => 500,
+             'unique' => false,
+             'showCharCount' => false,
+             'width' => '',
+             'defaultValueGenerator' => '',
           )),
           2 => 
           \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
-             'name' => 'subNavigation',
-             'title' => 'Sub Navigation',
+             'name' => 'product',
+             'title' => 'Product',
              'tooltip' => '',
              'mandatory' => false,
              'noteditable' => false,
@@ -133,7 +138,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
             array (
               0 => 
               array (
-                'classes' => 'NavigationItem',
+                'classes' => 'Product',
               ),
             ),
              'displayMode' => 'grid',
@@ -150,7 +155,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'documentTypes' => 
             array (
             ),
-             'width' => 500,
+             'width' => '',
           )),
         ),
          'locked' => false,
@@ -161,7 +166,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
          'layout' => NULL,
          'border' => false,
          'icon' => '',
-         'labelWidth' => 0,
+         'labelWidth' => 100,
          'labelAlign' => 'left',
       )),
     ),
@@ -176,8 +181,44 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
      'labelWidth' => 100,
      'labelAlign' => 'left',
   )),
-   'fieldDefinitionsCache' => NULL,
+   'icon' => '',
+   'group' => 'Shopify',
+   'showAppLoggerTab' => false,
+   'linkGeneratorReference' => '',
+   'previewGeneratorReference' => '',
+   'compositeIndices' => 
+  array (
+  ),
+   'showFieldLookup' => false,
+   'propertyVisibility' => 
+  array (
+    'grid' => 
+    array (
+      'id' => true,
+      'key' => false,
+      'path' => true,
+      'published' => true,
+      'modificationDate' => true,
+      'creationDate' => true,
+    ),
+    'search' => 
+    array (
+      'id' => true,
+      'key' => false,
+      'path' => true,
+      'published' => true,
+      'modificationDate' => true,
+      'creationDate' => true,
+    ),
+  ),
+   'enableGridLocking' => false,
+   'deletedDataComponents' => 
+  array (
+  ),
    'blockedVarsForExport' => 
+  array (
+  ),
+   'fieldDefinitionsCache' => 
   array (
   ),
    'activeDispatchingEvents' => 

@@ -1,0 +1,26 @@
+pimcore:
+    assets:
+        image:
+            thumbnails:
+                definitions:
+                    category-menu:
+                        items:
+                            -
+                                method: scaleByHeight
+                                arguments:
+                                    height: 250
+                                    forceResize: false
+                        medias: {  }
+                        name: category-menu
+                        description: ''
+                        group: ''
+                        format: SOURCE
+                        quality: 85
+                        highResolution: null
+                        preserveColor: false
+                        preserveMetaData: false
+                        rasterizeSVG: false
+                        downloadable: false
+                        modificationDate: 1766412905
+                        creationDate: 1766412879
+                        preserveAnimation: false

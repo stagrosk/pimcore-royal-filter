@@ -26,4 +26,14 @@ interface NavigationLinkItemInterface extends ResourceInterface
      * @param \Pimcore\Model\Element\AbstractElement $subNavigation
      */
     public function setSubNavigation(AbstractElement $subNavigation);
+
+    /**
+     * @return bool|null
+     */
+    public function getIsPartner(): ?bool;
+
+    /**
+     * @param bool|null $isPartner
+     */
+    public function setIsPartner(?bool $isPartner);
 }

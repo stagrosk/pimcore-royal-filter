@@ -9,10 +9,11 @@ use GraphQL\Type\Definition\ResolveInfo;
 use JetBrains\PhpStorm\ArrayShape;
 use Pimcore\Model\DataObject\ContentPage;
 use Pimcore\Tool;
+use PimcoreHeadlessContentBundle\Model\SlugAwareInterface;
 
 class ContentPageResolver extends AbstractResolver
 {
-    #[ArrayShape(['id' => 'mixed', 'defaultLanguage' => 'mixed', 'language' => 'mixed'])]
+    #[ArrayShape(['id' => 'mixed', 'defaultLanguage' => 'mixed', 'language' => 'mixed', 'canonicals' => 'array'])]
     /**
      * @param mixed $source
      * @param mixed $args
@@ -65,6 +66,37 @@ class ContentPageResolver extends AbstractResolver
             'id' => $contentPage->getId(),
             'defaultLanguage' => $args['language'],
             'language' => $args['language'],
+            'canonicals' => $this->getCanonicals($contentPage),
         ];
+    }
+
+    /**
+     * Get canonicals with handles for all language mutations
+     *
+     * @param \Pimcore\Model\DataObject\ContentPage $contentPage
+     *
+     * @return array
+     */
+    private function getCanonicals(ContentPage $contentPage): array
+    {
+        $canonicals = [];
+        $validLanguages = Tool::getValidLanguages();
+
+        foreach ($validLanguages as $lang) {
+            if ($contentPage instanceof SlugAwareInterface) {
+                $handle = $contentPage->getHandle($lang);
+                $slug = $contentPage->getSlug($lang);
+
+                if (!empty($handle) || !empty($slug)) {
+                    $canonicals[] = [
+                        'language' => $lang,
+                        'handle' => $handle,
+                        'slug' => $slug,
+                    ];
+                }
+            }
+        }
+
+        return $canonicals;
     }
 }

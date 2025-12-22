@@ -48,4 +48,20 @@ class NavigationLinkItem extends AbstractPimcoreFieldcollection implements Navig
     {
         throw new ImplementedByPimcoreException(__CLASS__, __METHOD__);
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getIsPartner(): ?bool
+    {
+        throw new ImplementedByPimcoreException(__CLASS__, __METHOD__);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setIsPartner(?bool $isPartner)
+    {
+        throw new ImplementedByPimcoreException(__CLASS__, __METHOD__);
+    }
 }

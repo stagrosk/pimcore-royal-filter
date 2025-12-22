@@ -10,6 +10,8 @@ class NavigationResponse extends AbstractResponse
 {
     protected static int $level = 0;
 
+    private static ?ObjectType $canonicalType = null;
+
     public function __construct()
     {
         parent::__construct([
@@ -17,6 +19,10 @@ class NavigationResponse extends AbstractResponse
             'fields' => [
                 'identifier' => [
                     'type' => Type::nonNull(Type::string()),
+                ],
+                'isPartner' => [
+                    'type' => Type::nonNull(Type::boolean()),
+                    'description' => 'Indicates if this navigation is for partner',
                 ],
                 'linkItems' => [
                     'type' => Type::listOf(self::linkItemFirstLevel()),
@@ -49,7 +55,57 @@ class NavigationResponse extends AbstractResponse
             'nameInNavigation' => [
                 'type' => Type::string(),
             ],
+            'apiId' => [
+                'type' => Type::string(),
+                'description' => 'API ID for the related object (e.g. Shopify collection ID)',
+            ],
+            'canonicals' => [
+                'type' => Type::listOf(self::getCanonicalType()),
+                'description' => 'Language handles for all available languages',
+            ],
+            'isPartner' => [
+                'type' => Type::nonNull(Type::boolean()),
+                'description' => 'Indicates if this link item is for partners',
+            ],
+            'image' => [
+                'type' => Type::string(),
+                'description' => 'Image URL for the category',
+            ],
+            'description' => [
+                'type' => Type::string(),
+                'description' => 'Description of the category',
+            ],
         ];
+    }
+
+    /**
+     * Get canonical link type definition (singleton)
+     *
+     * @return \GraphQL\Type\Definition\ObjectType
+     */
+    private static function getCanonicalType(): ObjectType
+    {
+        if (self::$canonicalType === null) {
+            self::$canonicalType = new ObjectType([
+                'name' => 'NavigationCanonicalLink',
+                'fields' => [
+                    'language' => [
+                        'type' => Type::nonNull(Type::string()),
+                        'description' => 'Language code (e.g. en, de, sk, cs)',
+                    ],
+                    'handle' => [
+                        'type' => Type::string(),
+                        'description' => 'Handle for this language',
+                    ],
+                    'slug' => [
+                        'type' => Type::string(),
+                        'description' => 'Slug for this language',
+                    ],
+                ],
+            ]);
+        }
+
+        return self::$canonicalType;
     }
 
     /**

@@ -6,6 +6,7 @@
  *
  * Fields Summary:
  * - identifier [input]
+ * - isPartner [checkbox]
  * - links [fieldcollections]
  */
 
@@ -16,7 +17,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1743096390,
+   'modificationDate' => 1766316434,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '\\PimcoreHeadlessContentBundle\\Model\\Navigation',
@@ -101,6 +102,28 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'unique' => true,
                  'showCharCount' => false,
                  'width' => '',
+                 'defaultValueGenerator' => '',
+              )),
+              1 => 
+              \Pimcore\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
+                 'name' => 'isPartner',
+                 'title' => 'Is Partner',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'fieldtype' => '',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+                 'blockedVarsForExport' => 
+                array (
+                ),
+                 'defaultValue' => 0,
                  'defaultValueGenerator' => '',
               )),
             ),
@@ -226,6 +249,28 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'enableGridLocking' => false,
    'deletedDataComponents' => 
   array (
+    0 => 
+    \Pimcore\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
+       'name' => 'isPartners',
+       'title' => 'Is Partners',
+       'tooltip' => '',
+       'mandatory' => false,
+       'noteditable' => false,
+       'index' => false,
+       'locked' => false,
+       'style' => '',
+       'permissions' => NULL,
+       'fieldtype' => '',
+       'relationType' => false,
+       'invisible' => false,
+       'visibleGridView' => false,
+       'visibleSearch' => false,
+       'blockedVarsForExport' => 
+      array (
+      ),
+       'defaultValue' => 0,
+       'defaultValueGenerator' => '',
+    )),
   ),
    'blockedVarsForExport' => 
   array (

@@ -61,11 +61,12 @@ class NavigationByIdentifierResolver extends AbstractResolver
         $cacheKey = NavigationHelper::getCacheKey($navigation, $language);
         $dataFromCache = Cache::load($cacheKey);
         if ($dataFromCache) {
-            return $dataFromCache;
+//            return $dataFromCache;
         }
 
         $data = [
             'identifier' => $navigation->getIdentifier(),
+            'isPartner' => $navigation->getIsPartner() ?? false,
             'linkItems' => $this->getItemsForNavigation($navigation, $language),
         ];
 
@@ -77,10 +78,11 @@ class NavigationByIdentifierResolver extends AbstractResolver
     /**
      * @param \PimcoreHeadlessContentBundle\Model\NavigationInterface $navigation
      * @param string $language
+     * @param int|null $parentObjectId
      *
      * @return array
      */
-    private function getItemsForNavigation(NavigationInterface $navigation, string $language): array
+    private function getItemsForNavigation(NavigationInterface $navigation, string $language, ?int $parentObjectId = null): array
     {
         $items = [];
 
@@ -96,10 +98,22 @@ class NavigationByIdentifierResolver extends AbstractResolver
                 continue;
             }
 
+            // Skip if this object is the same as parent (avoid duplicates)
+            if ($parentObjectId !== null && $object->getId() === $parentObjectId) {
+                continue;
+            }
+
             $item = [
                 'title' => $object->getNavigationTitle($language),
                 'additionalData' => json_encode($object->getNavigationAdditionalData($language)),
-                'className' => $object->getClassName()
+                'className' => $object->getClassName(),
+                'handle' => null,
+                'slug' => null,
+                'canonicals' => [],
+                'apiId' => method_exists($object, 'getApiId') ? $object->getApiId() : null,
+                'isPartner' => $linkItem->getIsPartner() ?? false,
+                'image' => $this->getImageUrl($object),
+                'description' => method_exists($object, 'getDescription') ? $object->getDescription($language) : null,
             ];
 
             if ($object instanceof ContentPage) {
@@ -107,17 +121,15 @@ class NavigationByIdentifierResolver extends AbstractResolver
             }
 
             if ($object instanceof SlugAwareInterface) {
-                $item = array_merge($item, [
-                    'handle' => $object->getHandle($language),
-                    'slug' => $object->getSlug($language),
-                ]);
+                $item['handle'] = $object->getHandle($language);
+                $item['slug'] = $object->getSlug($language);
+                $item['canonicals'] = $this->getCanonicals($object);
             }
 
             $subNavigation = $linkItem->getSubNavigation();
-
             if ($subNavigation instanceof NavigationInterface) {
                 $item = array_merge($item, [
-                    'linkItems' => $this->getItemsForNavigation($subNavigation, $language),
+                    'linkItems' => $this->getItemsForNavigation($subNavigation, $language, $object->getId()),
                 ]);
             }
 
@@ -125,5 +137,55 @@ class NavigationByIdentifierResolver extends AbstractResolver
         }
 
         return $items;
+    }
+
+    /**
+     * Get image URL from object if available (using thumbnail)
+     *
+     * @param object $object
+     *
+     * @return string|null
+     */
+    private function getImageUrl(object $object): ?string
+    {
+        if (!method_exists($object, 'getImage')) {
+            return null;
+        }
+
+        $image = $object->getImage();
+
+        if ($image === null) {
+            return null;
+        }
+
+        return $image->getThumbnail('category-menu')->getPath();
+    }
+
+    /**
+     * Get canonicals with handles for all language mutations
+     *
+     * @param \PimcoreHeadlessContentBundle\Model\SlugAwareInterface $object
+     *
+     * @return array
+     */
+    private function getCanonicals(SlugAwareInterface $object): array
+    {
+        $canonicals = [];
+        $validLanguages = Tool::getValidLanguages();
+
+        foreach ($validLanguages as $lang) {
+            $handle = $object->getHandle($lang);
+            $slug = $object->getSlug($lang);
+
+            if (!empty($handle) || !empty($slug)) {
+                $canonicals[] = [
+                    'language' => $lang,
+                    'handle' => $handle,
+                    'slug' => $slug,
+                ];
+            }
+        }
+
+        return $canonicals;
     }
 }
