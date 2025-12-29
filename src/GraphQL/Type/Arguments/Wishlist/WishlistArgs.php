@@ -16,6 +16,10 @@ class WishlistArgs
                 'type' => Type::nonNull(Type::string()),
                 'description' => 'Shopify customer API ID (gid://shopify/Customer/...)',
             ],
+            'productApiId' => [
+                'type' => Type::string(),
+                'description' => 'Optional: check if specific product is in wishlist',
+            ],
         ];
     }
 }

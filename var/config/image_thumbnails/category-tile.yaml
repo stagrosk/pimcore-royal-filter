@@ -3,17 +3,19 @@ pimcore:
         image:
             thumbnails:
                 definitions:
-                    category-menu:
+                    category-tile:
                         items:
                             -
-                                method: scaleByHeight
+                                method: cover
                                 arguments:
-                                    height: 250
-                                    forceResize: false
+                                    width: 150
+                                    height: 150
+                                    positioning: center
+                                    forceResize: true
                         medias: {  }
-                        name: category-menu
-                        description: ''
-                        group: ''
+                        name: category-tile
+                        description: 'Category tile image 240x240 (1:1)'
+                        group: category
                         format: SOURCE
                         quality: 85
                         highResolution: null
@@ -21,6 +23,6 @@ pimcore:
                         preserveMetaData: false
                         rasterizeSVG: false
                         downloadable: false
-                        modificationDate: 1766412905
-                        creationDate: 1766412879
+                        modificationDate: 1766425369
+                        creationDate: 1734883200
                         preserveAnimation: false

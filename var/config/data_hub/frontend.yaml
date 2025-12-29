@@ -8,7 +8,7 @@ pimcore_data_hub:
                 description: ''
                 group: ''
                 sqlObjectCondition: ''
-                modificationDate: 1763918835
+                modificationDate: 1766432136
                 path: null
                 createDate: 1727014466
             schema:
@@ -219,6 +219,12 @@ pimcore_data_hub:
                                         attribute: socialMediaIcon
                                         label: 'Social media icon'
                                         dataType: image
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: welcomeMessage
+                                        label: 'Welcome Message'
+                                        dataType: input
                                     isOperator: false
                 mutationEntities: {  }
                 specialEntities:

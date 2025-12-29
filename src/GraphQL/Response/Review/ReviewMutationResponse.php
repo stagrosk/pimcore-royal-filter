@@ -1,24 +1,24 @@
 <?php
 
-namespace App\GraphQL\Response\ProductReview;
+namespace App\GraphQL\Response\Review;
 
 use App\GraphQL\Response\AbstractResponse;
 use GraphQL\Type\Definition\Type;
 
-class ProductReviewMutationResponse extends AbstractResponse
+class ReviewMutationResponse extends AbstractResponse
 {
     public function __construct()
     {
         parent::__construct([
-            'name' => 'ProductReviewMutationResponse',
+            'name' => 'ReviewMutationResponse',
             'fields' => [
                 'success' => [
                     'type' => Type::nonNull(Type::boolean()),
                     'description' => 'Whether the operation was successful',
                 ],
                 'message' => [
-                    'type' => Type::string(),
-                    'description' => 'Response message',
+                    'type' => Type::nonNull(Type::string()),
+                    'description' => 'Result message',
                 ],
                 'reviewId' => [
                     'type' => Type::int(),
@@ -26,11 +26,11 @@ class ProductReviewMutationResponse extends AbstractResponse
                 ],
                 'productApiId' => [
                     'type' => Type::string(),
-                    'description' => 'The product API ID',
+                    'description' => 'Product API ID',
                 ],
                 'customerApiId' => [
                     'type' => Type::string(),
-                    'description' => 'The customer API ID',
+                    'description' => 'Customer API ID',
                 ],
             ],
         ]);

@@ -112,7 +112,8 @@ class NavigationByIdentifierResolver extends AbstractResolver
                 'canonicals' => [],
                 'apiId' => method_exists($object, 'getApiId') ? $object->getApiId() : null,
                 'isPartner' => $linkItem->getIsPartner() ?? false,
-                'image' => $this->getImageUrl($object),
+                'imageTile' => $this->getImageUrl($object, 'category-tile'),
+                'imagePreview' => $this->getImageUrl($object, 'category-preview'),
                 'description' => method_exists($object, 'getDescription') ? $object->getDescription($language) : null,
             ];
 
@@ -143,10 +144,11 @@ class NavigationByIdentifierResolver extends AbstractResolver
      * Get image URL from object if available (using thumbnail)
      *
      * @param object $object
+     * @param string $thumbnailName
      *
      * @return string|null
      */
-    private function getImageUrl(object $object): ?string
+    private function getImageUrl(object $object, string $thumbnailName): ?string
     {
         if (!method_exists($object, 'getImage')) {
             return null;
@@ -158,7 +160,7 @@ class NavigationByIdentifierResolver extends AbstractResolver
             return null;
         }
 
-        return $image->getThumbnail('category-menu')->getPath();
+        return $image->getThumbnail($thumbnailName)->getPath();
     }
 
     /**

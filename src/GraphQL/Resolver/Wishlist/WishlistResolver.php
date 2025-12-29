@@ -3,15 +3,13 @@
 namespace App\GraphQL\Resolver\Wishlist;
 
 use App\GraphQL\Resolver\AbstractResolver;
-use Carbon\Carbon;
 use GraphQL\Type\Definition\ResolveInfo;
-use Pimcore\Model\DataObject\Product;
-use Pimcore\Model\DataObject\ProductWishlist;
+use Pimcore\Model\DataObject\ShopifyCustomerWishlist;
 
 class WishlistResolver extends AbstractResolver
 {
     /**
-     * Get wishlist products for a customer
+     * Get wishlist for customer
      *
      * @param mixed $source
      * @param mixed $args
@@ -23,67 +21,48 @@ class WishlistResolver extends AbstractResolver
     public function resolve($source, $args, $context, ResolveInfo $info): array
     {
         $customerApiId = $args['customerApiId'];
+        $productApiId = $args['productApiId'] ?? null;
 
-        $wishlist = $this->getOrCreateWishlist($customerApiId);
+        $wishlist = $this->getWishlist($customerApiId);
 
-        $products = $this->getProductsInWishlist($wishlist);
+        if (!$wishlist) {
+            return [
+                'customerApiId' => $customerApiId,
+                'productApiIds' => [],
+                'count' => 0,
+                'hasProduct' => false,
+            ];
+        }
+
+        $products = $wishlist->getProducts() ?? [];
+        $productApiIds = array_map(fn($product) => $product->getApiId(), $products);
+        $productApiIds = array_filter($productApiIds); // Remove nulls
+
+        // Check if specific product is in wishlist
+        $hasProduct = false;
+        if ($productApiId) {
+            $hasProduct = in_array($productApiId, $productApiIds, true);
+        }
 
         return [
             'customerApiId' => $customerApiId,
-            'products' => $products,
-            'count' => count($products),
+            'productApiIds' => array_values($productApiIds),
+            'count' => count($productApiIds),
+            'hasProduct' => $hasProduct,
         ];
     }
 
     /**
-     * Get or create wishlist for customer
+     * Get wishlist for customer
      *
      * @param string $customerApiId
      *
-     * @return \Pimcore\Model\DataObject\ProductWishlist
+     * @return \Pimcore\Model\DataObject\ShopifyCustomerWishlist|null
      */
-    private function getOrCreateWishlist(string $customerApiId): ProductWishlist
+    private function getWishlist(string $customerApiId): ?ShopifyCustomerWishlist
     {
-        $wishlist = ProductWishlist::getByCustimerApiId($customerApiId, 1);
+        $wishlist = ShopifyCustomerWishlist::getByCustimerApiId($customerApiId, 1);
 
-        if (!$wishlist instanceof ProductWishlist) {
-            $wishlist = new ProductWishlist();
-            $wishlist->setKey('wishlist_' . md5($customerApiId));
-            $wishlist->setParent(\Pimcore\Model\DataObject\Service::createFolderByPath('/wishlists'));
-            $wishlist->setCustimerApiId($customerApiId);
-            $wishlist->setDateTime(Carbon::now());
-            $wishlist->setPublished(true);
-            $wishlist->save();
-        }
-
-        return $wishlist;
-    }
-
-    /**
-     * Get all products that have this wishlist in their wishlists relation
-     *
-     * @param \Pimcore\Model\DataObject\ProductWishlist $wishlist
-     *
-     * @return array
-     */
-    private function getProductsInWishlist(ProductWishlist $wishlist): array
-    {
-        $products = [];
-
-        $productList = Product::getList();
-        $productList->addConditionParam(
-            'o_id IN (SELECT src_id FROM object_relations_product WHERE dest_id = ? AND fieldname = ?)',
-            [$wishlist->getId(), 'wishlists']
-        );
-
-        foreach ($productList as $product) {
-            $products[] = [
-                'id' => $product->getId(),
-                'apiId' => $product->getApiId(),
-                'name' => $product->getName(),
-            ];
-        }
-
-        return $products;
+        return $wishlist instanceof ShopifyCustomerWishlist ? $wishlist : null;
     }
 }

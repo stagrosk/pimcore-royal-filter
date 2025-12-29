@@ -67,9 +67,13 @@ class NavigationResponse extends AbstractResponse
                 'type' => Type::nonNull(Type::boolean()),
                 'description' => 'Indicates if this link item is for partners',
             ],
-            'image' => [
+            'imageTile' => [
                 'type' => Type::string(),
-                'description' => 'Image URL for the category',
+                'description' => 'Tile image URL 240x240 (1:1)',
+            ],
+            'imagePreview' => [
+                'type' => Type::string(),
+                'description' => 'Preview image URL 800x500 (16:10)',
             ],
             'description' => [
                 'type' => Type::string(),

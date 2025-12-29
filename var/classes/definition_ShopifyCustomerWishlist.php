@@ -5,20 +5,18 @@
  * Variants: no
  *
  * Fields Summary:
- * - rating [slider]
  * - custimerApiId [input]
- * - product [manyToOneRelation]
- * - content [input]
+ * - products [manyToManyRelation]
  */
 
 return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'dao' => NULL,
-   'id' => 'product_review',
-   'name' => 'ProductReview',
+   'id' => 'shopify_customer_wishlist',
+   'name' => 'ShopifyCustomerWishlist',
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1766260667,
+   'modificationDate' => 1766582547,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -62,33 +60,6 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
          'children' => 
         array (
           0 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Slider::__set_state(array(
-             'name' => 'rating',
-             'title' => 'Rating',
-             'tooltip' => '',
-             'mandatory' => false,
-             'noteditable' => false,
-             'index' => false,
-             'locked' => false,
-             'style' => '',
-             'permissions' => NULL,
-             'fieldtype' => '',
-             'relationType' => false,
-             'invisible' => false,
-             'visibleGridView' => false,
-             'visibleSearch' => false,
-             'blockedVarsForExport' => 
-            array (
-            ),
-             'minValue' => 1.0,
-             'maxValue' => 5.0,
-             'vertical' => false,
-             'increment' => 1.0,
-             'decimalPrecision' => NULL,
-             'height' => '',
-             'width' => '',
-          )),
-          1 => 
           \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
              'name' => 'custimerApiId',
              'title' => 'Custimer Api Id',
@@ -118,10 +89,10 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'width' => '',
              'defaultValueGenerator' => '',
           )),
-          2 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
-             'name' => 'product',
-             'title' => 'Product',
+          1 => 
+          \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToManyRelation::__set_state(array(
+             'name' => 'products',
+             'title' => 'Products',
              'tooltip' => '',
              'mandatory' => false,
              'noteditable' => false,
@@ -144,8 +115,9 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                 'classes' => 'Product',
               ),
             ),
-             'displayMode' => 'grid',
+             'displayMode' => NULL,
              'pathFormatterClass' => '',
+             'maxItems' => NULL,
              'assetInlineDownloadAllowed' => false,
              'assetUploadPath' => '',
              'allowToClearRelation' => true,
@@ -153,42 +125,22 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'assetsAllowed' => false,
              'assetTypes' => 
             array (
+              0 => 
+              array (
+                'assetTypes' => '',
+              ),
             ),
              'documentsAllowed' => false,
              'documentTypes' => 
             array (
+              0 => 
+              array (
+                'documentTypes' => '',
+              ),
             ),
+             'enableTextSelection' => false,
              'width' => '',
-          )),
-          3 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
-             'name' => 'content',
-             'title' => 'Content',
-             'tooltip' => '',
-             'mandatory' => false,
-             'noteditable' => false,
-             'index' => false,
-             'locked' => false,
-             'style' => '',
-             'permissions' => NULL,
-             'fieldtype' => '',
-             'relationType' => false,
-             'invisible' => false,
-             'visibleGridView' => false,
-             'visibleSearch' => false,
-             'blockedVarsForExport' => 
-            array (
-            ),
-             'defaultValue' => NULL,
-             'columnLength' => 190,
-             'regex' => '',
-             'regexFlags' => 
-            array (
-            ),
-             'unique' => false,
-             'showCharCount' => false,
-             'width' => '',
-             'defaultValueGenerator' => '',
+             'height' => '',
           )),
         ),
          'locked' => false,
@@ -215,7 +167,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
      'labelAlign' => 'left',
   )),
    'icon' => '',
-   'group' => 'Shopify',
+   'group' => '',
    'showAppLoggerTab' => false,
    'linkGeneratorReference' => '',
    'previewGeneratorReference' => '',

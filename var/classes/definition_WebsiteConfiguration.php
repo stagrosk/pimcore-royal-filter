@@ -9,6 +9,7 @@
  * - localizedfields [localizedfields]
  * -- contact [wysiwyg]
  * -- company [wysiwyg]
+ * -- welcomeMessage [input]
  * -- email [input]
  * -- phone [input]
  * -- links [block]
@@ -27,7 +28,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1755522019,
+   'modificationDate' => 1766432037,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -188,6 +189,36 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                   )),
                   2 => 
                   \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+                     'name' => 'welcomeMessage',
+                     'title' => 'Welcome Message',
+                     'tooltip' => '',
+                     'mandatory' => false,
+                     'noteditable' => false,
+                     'index' => false,
+                     'locked' => false,
+                     'style' => '',
+                     'permissions' => NULL,
+                     'fieldtype' => '',
+                     'relationType' => false,
+                     'invisible' => false,
+                     'visibleGridView' => false,
+                     'visibleSearch' => false,
+                     'blockedVarsForExport' => 
+                    array (
+                    ),
+                     'defaultValue' => NULL,
+                     'columnLength' => 190,
+                     'regex' => '',
+                     'regexFlags' => 
+                    array (
+                    ),
+                     'unique' => false,
+                     'showCharCount' => false,
+                     'width' => '',
+                     'defaultValueGenerator' => '',
+                  )),
+                  3 => 
+                  \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
                      'name' => 'email',
                      'title' => 'Email',
                      'tooltip' => '',
@@ -216,7 +247,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'width' => '',
                      'defaultValueGenerator' => '',
                   )),
-                  3 => 
+                  4 => 
                   \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
                      'name' => 'phone',
                      'title' => 'Phone',

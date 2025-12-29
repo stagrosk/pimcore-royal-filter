@@ -1,12 +1,14 @@
 <?php
 
-namespace App\GraphQL\Type\Arguments\ProductReview;
+namespace App\GraphQL\Type\Arguments\Review;
 
 use GraphQL\Type\Definition\Type;
 
-class DeleteProductReviewArgs
+class DeleteReviewArgs
 {
     /**
+     * Get arguments for deleting a review
+     *
      * @return array
      */
     public static function args(): array
@@ -18,7 +20,7 @@ class DeleteProductReviewArgs
             ],
             'customerApiId' => [
                 'type' => Type::nonNull(Type::string()),
-                'description' => 'Shopify customer API ID (for authorization)',
+                'description' => 'Customer API ID (for authorization)',
             ],
         ];
     }

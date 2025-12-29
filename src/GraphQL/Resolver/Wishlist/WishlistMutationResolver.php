@@ -2,10 +2,10 @@
 
 namespace App\GraphQL\Resolver\Wishlist;
 
-use Carbon\Carbon;
 use GraphQL\Type\Definition\ResolveInfo;
 use Pimcore\Model\DataObject\Product;
-use Pimcore\Model\DataObject\ProductWishlist;
+use Pimcore\Model\DataObject\Service;
+use Pimcore\Model\DataObject\ShopifyCustomerWishlist;
 
 class WishlistMutationResolver
 {
@@ -25,9 +25,7 @@ class WishlistMutationResolver
         $productApiId = $args['productApiId'];
 
         try {
-            $wishlist = $this->getOrCreateWishlist($customerApiId);
             $product = $this->getProductByApiId($productApiId);
-
             if (!$product) {
                 return [
                     'success' => false,
@@ -37,23 +35,24 @@ class WishlistMutationResolver
                 ];
             }
 
-            // Check if wishlist is already in product's wishlists
-            $currentWishlists = $product->getWishlists() ?? [];
-            $wishlistIds = array_map(fn($w) => $w->getId(), $currentWishlists);
+            $wishlist = $this->getOrCreateWishlist($customerApiId);
+            $currentProducts = $wishlist->getProducts() ?? [];
+            $productIds = array_map(fn($p) => $p->getId(), $currentProducts);
 
-            if (in_array($wishlist->getId(), $wishlistIds, true)) {
+            // Check if product is already in wishlist
+            if (in_array($product->getId(), $productIds, true)) {
                 return [
-                    'success' => true,
+                    'success' => false,
                     'message' => 'Product already in wishlist',
                     'productApiId' => $productApiId,
                     'customerApiId' => $customerApiId,
                 ];
             }
 
-            // Add wishlist to product
-            $currentWishlists[] = $wishlist;
-            $product->setWishlists($currentWishlists);
-            $product->save();
+            // Add product to wishlist
+            $currentProducts[] = $product;
+            $wishlist->setProducts($currentProducts);
+            $wishlist->save();
 
             return [
                 'success' => true,
@@ -87,19 +86,7 @@ class WishlistMutationResolver
         $productApiId = $args['productApiId'];
 
         try {
-            $wishlist = $this->getWishlist($customerApiId);
-
-            if (!$wishlist) {
-                return [
-                    'success' => false,
-                    'message' => 'Wishlist not found',
-                    'productApiId' => $productApiId,
-                    'customerApiId' => $customerApiId,
-                ];
-            }
-
             $product = $this->getProductByApiId($productApiId);
-
             if (!$product) {
                 return [
                     'success' => false,
@@ -109,24 +96,33 @@ class WishlistMutationResolver
                 ];
             }
 
-            // Remove wishlist from product's wishlists
-            $currentWishlists = $product->getWishlists() ?? [];
-            $filteredWishlists = array_filter(
-                $currentWishlists,
-                fn($w) => $w->getId() !== $wishlist->getId()
+            $wishlist = $this->getWishlist($customerApiId);
+            if (!$wishlist) {
+                return [
+                    'success' => false,
+                    'message' => 'Wishlist not found',
+                    'productApiId' => $productApiId,
+                    'customerApiId' => $customerApiId,
+                ];
+            }
+
+            $currentProducts = $wishlist->getProducts() ?? [];
+            $filteredProducts = array_filter(
+                $currentProducts,
+                fn($p) => $p->getId() !== $product->getId()
             );
 
-            if (count($filteredWishlists) === count($currentWishlists)) {
+            if (count($filteredProducts) === count($currentProducts)) {
                 return [
-                    'success' => true,
+                    'success' => false,
                     'message' => 'Product was not in wishlist',
                     'productApiId' => $productApiId,
                     'customerApiId' => $customerApiId,
                 ];
             }
 
-            $product->setWishlists(array_values($filteredWishlists));
-            $product->save();
+            $wishlist->setProducts(array_values($filteredProducts));
+            $wishlist->save();
 
             return [
                 'success' => true,
@@ -149,18 +145,21 @@ class WishlistMutationResolver
      *
      * @param string $customerApiId
      *
-     * @return \Pimcore\Model\DataObject\ProductWishlist
+     * @throws \Exception
+     * @return \Pimcore\Model\DataObject\ShopifyCustomerWishlist
      */
-    private function getOrCreateWishlist(string $customerApiId): ProductWishlist
+    private function getOrCreateWishlist(string $customerApiId): ShopifyCustomerWishlist
     {
         $wishlist = $this->getWishlist($customerApiId);
 
         if (!$wishlist) {
-            $wishlist = new ProductWishlist();
-            $wishlist->setKey('wishlist_' . md5($customerApiId));
-            $wishlist->setParent(\Pimcore\Model\DataObject\Service::createFolderByPath('/wishlists'));
+            $wishlist = new ShopifyCustomerWishlist();
+
+            $customerApiKeyFormatted = Service::getValidKey($customerApiId, 'object');
+            $folder = Service::createFolderByPath('Shopify/Customer/Wishlists');
+            $wishlist->setParent($folder);
+            $wishlist->setKey($customerApiKeyFormatted);
             $wishlist->setCustimerApiId($customerApiId);
-            $wishlist->setDateTime(Carbon::now());
             $wishlist->setPublished(true);
             $wishlist->save();
         }
@@ -173,13 +172,13 @@ class WishlistMutationResolver
      *
      * @param string $customerApiId
      *
-     * @return \Pimcore\Model\DataObject\ProductWishlist|null
+     * @return \Pimcore\Model\DataObject\ShopifyCustomerWishlist|null
      */
-    private function getWishlist(string $customerApiId): ?ProductWishlist
+    private function getWishlist(string $customerApiId): ?ShopifyCustomerWishlist
     {
-        $wishlist = ProductWishlist::getByCustimerApiId($customerApiId, 1);
+        $wishlist = ShopifyCustomerWishlist::getByCustimerApiId($customerApiId, 1);
 
-        return $wishlist instanceof ProductWishlist ? $wishlist : null;
+        return $wishlist instanceof ShopifyCustomerWishlist ? $wishlist : null;
     }
 
     /**

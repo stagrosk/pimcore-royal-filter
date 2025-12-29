@@ -1,0 +1,28 @@
+pimcore:
+    assets:
+        image:
+            thumbnails:
+                definitions:
+                    product-tile:
+                        items:
+                            -
+                                method: cover
+                                arguments:
+                                    width: 240
+                                    height: 240
+                                    positioning: center
+                                    forceResize: true
+                        medias: {  }
+                        name: product-tile
+                        description: 'Product tile for grid 240x240 (1:1)'
+                        group: product
+                        format: SOURCE
+                        quality: 85
+                        highResolution: null
+                        preserveColor: false
+                        preserveMetaData: false
+                        rasterizeSVG: false
+                        downloadable: false
+                        modificationDate: 1734883200
+                        creationDate: 1734883200
+                        preserveAnimation: false

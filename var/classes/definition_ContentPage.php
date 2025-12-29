@@ -26,7 +26,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1763920095,
+   'modificationDate' => 1766925907,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '\\PimcoreHeadlessContentBundle\\Model\\ContentPage',
@@ -463,6 +463,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                   5 => 'Text',
                   6 => 'TextWithImage',
                   7 => 'HeroSwiper',
+                  8 => 'Widget',
                 ),
                  'lazyLoading' => true,
                  'maxItems' => NULL,
@@ -571,7 +572,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
               1 => 
               \Pimcore\Model\DataObject\ClassDefinition\Data\Hotspotimage::__set_state(array(
                  'name' => 'headerImage',
-                 'title' => 'Header Image',
+                 'title' => 'Header image',
                  'tooltip' => '',
                  'mandatory' => false,
                  'noteditable' => false,
@@ -865,6 +866,30 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'enableGridLocking' => false,
    'deletedDataComponents' => 
   array (
+    0 => 
+    \Pimcore\Model\DataObject\ClassDefinition\Data\Hotspotimage::__set_state(array(
+       'name' => 'image',
+       'title' => 'Image',
+       'tooltip' => '',
+       'mandatory' => false,
+       'noteditable' => false,
+       'index' => false,
+       'locked' => false,
+       'style' => '',
+       'permissions' => NULL,
+       'fieldtype' => '',
+       'relationType' => false,
+       'invisible' => false,
+       'visibleGridView' => false,
+       'visibleSearch' => false,
+       'blockedVarsForExport' => 
+      array (
+      ),
+       'predefinedDataTemplates' => '',
+       'uploadPath' => '',
+       'width' => '',
+       'height' => '',
+    )),
   ),
    'blockedVarsForExport' => 
   array (
