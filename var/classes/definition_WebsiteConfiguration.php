@@ -19,6 +19,8 @@
  * - socialMedia [block]
  * -- socialMediaUrl [input]
  * -- socialMediaIcon [image]
+ * - termsAndConditions [manyToOneRelation]
+ * - personalDataProtection [manyToOneRelation]
  */
 
 return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
@@ -28,7 +30,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1766432037,
+   'modificationDate' => 1768136950,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -481,7 +483,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                          'excludeFromSearchIndex' => false,
                          'maxCharacters' => '',
                          'height' => '',
-                         'width' => '',
+                         'width' => 700,
                       )),
                     ),
                      'region' => NULL,
@@ -701,97 +703,6 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
           )),
           2 => 
           \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
-             'name' => 'Newsletter',
-             'type' => NULL,
-             'region' => NULL,
-             'title' => 'Newsletter',
-             'width' => '',
-             'height' => '',
-             'collapsible' => false,
-             'collapsed' => false,
-             'bodyStyle' => '',
-             'datatype' => 'layout',
-             'children' => 
-            array (
-              0 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
-                 'name' => 'localizedfields',
-                 'title' => '',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'fieldtype' => '',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => true,
-                 'visibleSearch' => true,
-                 'blockedVarsForExport' => 
-                array (
-                ),
-                 'children' => 
-                array (
-                  0 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Wysiwyg::__set_state(array(
-                     'name' => 'newsletter',
-                     'title' => 'Newsletter',
-                     'tooltip' => '',
-                     'mandatory' => false,
-                     'noteditable' => false,
-                     'index' => false,
-                     'locked' => false,
-                     'style' => '',
-                     'permissions' => NULL,
-                     'fieldtype' => '',
-                     'relationType' => false,
-                     'invisible' => false,
-                     'visibleGridView' => false,
-                     'visibleSearch' => false,
-                     'blockedVarsForExport' => 
-                    array (
-                    ),
-                     'toolbarConfig' => '',
-                     'excludeFromSearchIndex' => false,
-                     'maxCharacters' => '',
-                     'height' => '',
-                     'width' => '',
-                  )),
-                ),
-                 'region' => NULL,
-                 'layout' => NULL,
-                 'maxTabs' => NULL,
-                 'border' => false,
-                 'provideSplitView' => false,
-                 'tabPosition' => 'top',
-                 'hideLabelsWhenTabsReached' => NULL,
-                 'referencedFields' => 
-                array (
-                ),
-                 'permissionView' => NULL,
-                 'permissionEdit' => NULL,
-                 'labelWidth' => 0,
-                 'labelAlign' => 'left',
-                 'width' => '',
-                 'height' => '',
-                 'fieldDefinitionsCache' => NULL,
-              )),
-            ),
-             'locked' => false,
-             'blockedVarsForExport' => 
-            array (
-            ),
-             'fieldtype' => 'panel',
-             'layout' => NULL,
-             'border' => false,
-             'icon' => '',
-             'labelWidth' => 0,
-             'labelAlign' => 'left',
-          )),
-          3 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
              'name' => 'Social Media',
              'type' => NULL,
              'region' => NULL,
@@ -902,6 +813,207 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'border' => false,
              'icon' => '',
              'labelWidth' => 0,
+             'labelAlign' => 'left',
+          )),
+          3 => 
+          \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+             'name' => 'Newsletter',
+             'type' => NULL,
+             'region' => NULL,
+             'title' => 'Newsletter',
+             'width' => '',
+             'height' => '',
+             'collapsible' => false,
+             'collapsed' => false,
+             'bodyStyle' => '',
+             'datatype' => 'layout',
+             'children' => 
+            array (
+              0 => 
+              \Pimcore\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
+                 'name' => 'localizedfields',
+                 'title' => '',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'fieldtype' => '',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => true,
+                 'visibleSearch' => true,
+                 'blockedVarsForExport' => 
+                array (
+                ),
+                 'children' => 
+                array (
+                  0 => 
+                  \Pimcore\Model\DataObject\ClassDefinition\Data\Wysiwyg::__set_state(array(
+                     'name' => 'newsletter',
+                     'title' => 'Newsletter',
+                     'tooltip' => '',
+                     'mandatory' => false,
+                     'noteditable' => false,
+                     'index' => false,
+                     'locked' => false,
+                     'style' => '',
+                     'permissions' => NULL,
+                     'fieldtype' => '',
+                     'relationType' => false,
+                     'invisible' => false,
+                     'visibleGridView' => false,
+                     'visibleSearch' => false,
+                     'blockedVarsForExport' => 
+                    array (
+                    ),
+                     'toolbarConfig' => '',
+                     'excludeFromSearchIndex' => false,
+                     'maxCharacters' => '',
+                     'height' => '',
+                     'width' => 700,
+                  )),
+                ),
+                 'region' => NULL,
+                 'layout' => NULL,
+                 'maxTabs' => NULL,
+                 'border' => false,
+                 'provideSplitView' => false,
+                 'tabPosition' => 'top',
+                 'hideLabelsWhenTabsReached' => NULL,
+                 'referencedFields' => 
+                array (
+                ),
+                 'permissionView' => NULL,
+                 'permissionEdit' => NULL,
+                 'labelWidth' => 0,
+                 'labelAlign' => 'left',
+                 'width' => '',
+                 'height' => '',
+                 'fieldDefinitionsCache' => NULL,
+              )),
+            ),
+             'locked' => false,
+             'blockedVarsForExport' => 
+            array (
+            ),
+             'fieldtype' => 'panel',
+             'layout' => NULL,
+             'border' => false,
+             'icon' => '',
+             'labelWidth' => 0,
+             'labelAlign' => 'left',
+          )),
+          4 => 
+          \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+             'name' => 'ContentPages',
+             'type' => NULL,
+             'region' => NULL,
+             'title' => 'ContentPages',
+             'width' => '',
+             'height' => '',
+             'collapsible' => false,
+             'collapsed' => false,
+             'bodyStyle' => '',
+             'datatype' => 'layout',
+             'children' => 
+            array (
+              0 => 
+              \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
+                 'name' => 'termsAndConditions',
+                 'title' => 'Terms and conditions',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'fieldtype' => '',
+                 'relationType' => true,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+                 'blockedVarsForExport' => 
+                array (
+                ),
+                 'classes' => 
+                array (
+                  0 => 
+                  array (
+                    'classes' => 'ContentPage',
+                  ),
+                ),
+                 'displayMode' => 'grid',
+                 'pathFormatterClass' => '',
+                 'assetInlineDownloadAllowed' => false,
+                 'assetUploadPath' => '',
+                 'allowToClearRelation' => true,
+                 'objectsAllowed' => true,
+                 'assetsAllowed' => false,
+                 'assetTypes' => 
+                array (
+                ),
+                 'documentsAllowed' => false,
+                 'documentTypes' => 
+                array (
+                ),
+                 'width' => '',
+              )),
+              1 => 
+              \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
+                 'name' => 'personalDataProtection',
+                 'title' => 'Personal data protection',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'fieldtype' => '',
+                 'relationType' => true,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+                 'blockedVarsForExport' => 
+                array (
+                ),
+                 'classes' => 
+                array (
+                  0 => 
+                  array (
+                    'classes' => 'ContentPage',
+                  ),
+                ),
+                 'displayMode' => 'grid',
+                 'pathFormatterClass' => '',
+                 'assetInlineDownloadAllowed' => false,
+                 'assetUploadPath' => '',
+                 'allowToClearRelation' => true,
+                 'objectsAllowed' => true,
+                 'assetsAllowed' => false,
+                 'assetTypes' => 
+                array (
+                ),
+                 'documentsAllowed' => false,
+                 'documentTypes' => 
+                array (
+                ),
+                 'width' => '',
+              )),
+            ),
+             'locked' => false,
+             'blockedVarsForExport' => 
+            array (
+            ),
+             'fieldtype' => 'panel',
+             'layout' => NULL,
+             'border' => false,
+             'icon' => '',
+             'labelWidth' => 100,
              'labelAlign' => 'left',
           )),
         ),

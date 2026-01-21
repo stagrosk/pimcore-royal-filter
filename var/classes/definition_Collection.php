@@ -5,7 +5,6 @@
  * Variants: no
  *
  * Fields Summary:
- * - apiId [input]
  * - localizedfields [localizedfields]
  * -- title [input]
  * -- description [wysiwyg]
@@ -22,7 +21,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1750018305,
+   'modificationDate' => 1768041046,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -108,36 +107,6 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'children' => 
                     array (
                       0 => 
-                      \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
-                         'name' => 'apiId',
-                         'title' => 'Api Id',
-                         'tooltip' => '',
-                         'mandatory' => false,
-                         'noteditable' => true,
-                         'index' => false,
-                         'locked' => false,
-                         'style' => '',
-                         'permissions' => NULL,
-                         'fieldtype' => '',
-                         'relationType' => false,
-                         'invisible' => false,
-                         'visibleGridView' => false,
-                         'visibleSearch' => false,
-                         'blockedVarsForExport' => 
-                        array (
-                        ),
-                         'defaultValue' => NULL,
-                         'columnLength' => 190,
-                         'regex' => '',
-                         'regexFlags' => 
-                        array (
-                        ),
-                         'unique' => false,
-                         'showCharCount' => false,
-                         'width' => '',
-                         'defaultValueGenerator' => '',
-                      )),
-                      1 => 
                       \Pimcore\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
                          'name' => 'localizedfields',
                          'title' => '',
@@ -462,7 +431,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
      'labelAlign' => 'left',
   )),
    'icon' => '',
-   'group' => 'Shopify',
+   'group' => 'Ecommerce',
    'showAppLoggerTab' => false,
    'linkGeneratorReference' => '',
    'previewGeneratorReference' => '',
@@ -495,15 +464,15 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'deletedDataComponents' => 
   array (
     0 => 
-    \Pimcore\Model\DataObject\ClassDefinition\Data\Image::__set_state(array(
-       'name' => 'infoImage',
-       'title' => 'Image (Detail / grid)',
+    \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+       'name' => 'apiId',
+       'title' => 'Api Id',
        'tooltip' => '',
        'mandatory' => false,
-       'noteditable' => false,
+       'noteditable' => true,
        'index' => false,
        'locked' => false,
-       'style' => 'float: left; margin-right: 20px;',
+       'style' => '',
        'permissions' => NULL,
        'fieldtype' => '',
        'relationType' => false,
@@ -513,9 +482,16 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
        'blockedVarsForExport' => 
       array (
       ),
-       'uploadPath' => '',
+       'defaultValue' => NULL,
+       'columnLength' => 190,
+       'regex' => '',
+       'regexFlags' => 
+      array (
+      ),
+       'unique' => false,
+       'showCharCount' => false,
        'width' => '',
-       'height' => '',
+       'defaultValueGenerator' => '',
     )),
   ),
    'blockedVarsForExport' => 

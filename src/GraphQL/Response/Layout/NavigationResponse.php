@@ -57,7 +57,7 @@ class NavigationResponse extends AbstractResponse
             ],
             'apiId' => [
                 'type' => Type::string(),
-                'description' => 'API ID for the related object (e.g. Shopify collection ID)',
+                'description' => 'API ID for the related object (e.g. collection ID)',
             ],
             'canonicals' => [
                 'type' => Type::listOf(self::getCanonicalType()),

@@ -8,7 +8,7 @@ pimcore_data_hub:
                 description: ''
                 group: ''
                 sqlObjectCondition: ''
-                modificationDate: 1766432136
+                modificationDate: 1768137006
                 path: null
                 createDate: 1727014466
             schema:
@@ -225,6 +225,18 @@ pimcore_data_hub:
                                         attribute: welcomeMessage
                                         label: 'Welcome Message'
                                         dataType: input
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: termsAndConditions
+                                        label: 'Terms and conditions'
+                                        dataType: manyToOneRelation
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: personalDataProtection
+                                        label: 'Personal data protection'
+                                        dataType: manyToOneRelation
                                     isOperator: false
                 mutationEntities: {  }
                 specialEntities:

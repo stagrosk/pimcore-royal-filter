@@ -1,0 +1,12 @@
+services:
+    _defaults:
+        autoconfigure: true
+        autowire: true
+        public: false
+
+    PimcoreVendureBridgeBundle\Service\AmqpService:
+        arguments:
+            - '%env(AMQP_HOST)%'
+            - '%env(AMQP_PORT)%'
+            - '%env(AMQP_USER)%'
+            - '%env(AMQP_PASSWORD)%'

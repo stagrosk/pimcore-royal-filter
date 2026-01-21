@@ -331,7 +331,7 @@ class ReviewMutationResolver
     }
 
     /**
-     * Get product by Shopify API ID
+     * Get product by API ID
      *
      * @param string $apiId
      *

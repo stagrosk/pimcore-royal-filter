@@ -2,8 +2,8 @@
 
 namespace App\Pimcore\ClassificationStore;
 
-use App\Model\ClassificationStoreMapping;
-use App\Model\ClassificationStoreMappingItem;
+use App\Pimcore\Model\ClassificationStore\ClassificationStoreMapping;
+use App\Pimcore\Model\ClassificationStore\ClassificationStoreMappingItem;
 use App\Pimcore\Helpers\InheritanceHelper;
 use App\Pimcore\Helpers\VersionHelper;
 use Pimcore\Logger;

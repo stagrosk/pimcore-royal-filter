@@ -14,11 +14,11 @@ class WishlistResponse extends AbstractResponse
             'fields' => [
                 'customerApiId' => [
                     'type' => Type::nonNull(Type::string()),
-                    'description' => 'Shopify customer API ID',
+                    'description' => 'Customer API ID',
                 ],
                 'productApiIds' => [
                     'type' => Type::nonNull(Type::listOf(Type::nonNull(Type::string()))),
-                    'description' => 'List of Shopify product API IDs in wishlist',
+                    'description' => 'List of product API IDs in wishlist',
                 ],
                 'count' => [
                     'type' => Type::nonNull(Type::int()),

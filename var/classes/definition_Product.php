@@ -5,8 +5,8 @@
  * Variants: yes
  *
  * Fields Summary:
- * - generatedFromObject [manyToOneRelation]
  * - status [select]
+ * - generatedFromObject [manyToOneRelation]
  * - isVirtualProduct [checkbox]
  * - isGiftCard [checkbox]
  * - ean [input]
@@ -21,11 +21,11 @@
  * -- slug [input]
  * -- handle [input]
  * -- handle404 [input]
+ * - parametersConfig [calculatedValue]
  * - manufacturer [manyToOneRelation]
  * - madeIn [country]
  * - collections [manyToManyRelation]
- * - taxonomyCategory [input]
- * - variantOptions [fieldcollections]
+ * - productOptions [fieldcollections]
  * - metadata [classificationstore]
  * - extraParameters [fieldcollections]
  * - imageGallery [imageGallery]
@@ -34,7 +34,6 @@
  * - wishlists [manyToManyRelation]
  * - reviews [manyToManyRelation]
  * - apiId [input]
- * - shopifyChannels [multiselect]
  */
 
 return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
@@ -44,7 +43,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1766260702,
+   'modificationDate' => 1768933114,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -102,6 +101,52 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'children' => 
             array (
               0 => 
+              \Pimcore\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
+                 'name' => 'status',
+                 'title' => 'Status',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'fieldtype' => '',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+                 'blockedVarsForExport' => 
+                array (
+                ),
+                 'options' => 
+                array (
+                  0 => 
+                  array (
+                    'key' => 'Active',
+                    'value' => 'active',
+                  ),
+                  1 => 
+                  array (
+                    'key' => 'Archived',
+                    'value' => 'archived',
+                  ),
+                  2 => 
+                  array (
+                    'key' => 'Draft',
+                    'value' => 'draft',
+                  ),
+                ),
+                 'defaultValue' => 'DRAFT',
+                 'columnLength' => 190,
+                 'dynamicOptions' => false,
+                 'defaultValueGenerator' => '',
+                 'width' => '',
+                 'optionsProviderType' => 'configure',
+                 'optionsProviderClass' => '',
+                 'optionsProviderData' => '',
+              )),
+              1 => 
               \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
                  'name' => 'generatedFromObject',
                  'title' => 'Generated From Object',
@@ -146,52 +191,6 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                 array (
                 ),
                  'width' => 500,
-              )),
-              1 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
-                 'name' => 'status',
-                 'title' => 'Status',
-                 'tooltip' => '',
-                 'mandatory' => true,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'fieldtype' => '',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-                 'blockedVarsForExport' => 
-                array (
-                ),
-                 'options' => 
-                array (
-                  0 => 
-                  array (
-                    'key' => 'ACTIVE',
-                    'value' => 'ACTIVE',
-                  ),
-                  1 => 
-                  array (
-                    'key' => 'ARCHIVED',
-                    'value' => 'ARCHIVED',
-                  ),
-                  2 => 
-                  array (
-                    'key' => 'DRAFT',
-                    'value' => 'DRAFT',
-                  ),
-                ),
-                 'defaultValue' => 'DRAFT',
-                 'columnLength' => 190,
-                 'dynamicOptions' => false,
-                 'defaultValueGenerator' => '',
-                 'width' => '',
-                 'optionsProviderType' => 'configure',
-                 'optionsProviderClass' => '',
-                 'optionsProviderData' => '',
               )),
               2 => 
               \Pimcore\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
@@ -689,6 +688,32 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'height' => '',
                  'fieldDefinitionsCache' => NULL,
               )),
+              8 => 
+              \Pimcore\Model\DataObject\ClassDefinition\Data\CalculatedValue::__set_state(array(
+                 'name' => 'parametersConfig',
+                 'title' => 'Parameters',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'fieldtype' => '',
+                 'relationType' => false,
+                 'invisible' => true,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+                 'blockedVarsForExport' => 
+                array (
+                ),
+                 'elementType' => 'input',
+                 'calculatorType' => 'class',
+                 'calculatorExpression' => '',
+                 'calculatorClass' => 'App\\Pimcore\\DataObject\\Calculator\\ParametersConfigCalculator',
+                 'columnLength' => 190,
+                 'width' => '',
+              )),
             ),
              'locked' => false,
              'blockedVarsForExport' => 
@@ -831,37 +856,6 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'width' => '',
                  'height' => '',
               )),
-              3 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
-                 'name' => 'taxonomyCategory',
-                 'title' => 'Taxonomy Category',
-                 'tooltip' => 'Google taxonomy for categories 
-https://shopify.github.io/product-taxonomy/releases/unstable/',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'fieldtype' => '',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-                 'blockedVarsForExport' => 
-                array (
-                ),
-                 'defaultValue' => NULL,
-                 'columnLength' => 190,
-                 'regex' => '',
-                 'regexFlags' => 
-                array (
-                ),
-                 'unique' => false,
-                 'showCharCount' => false,
-                 'width' => 400,
-                 'defaultValueGenerator' => '',
-              )),
             ),
              'locked' => false,
              'blockedVarsForExport' => 
@@ -890,8 +884,8 @@ https://shopify.github.io/product-taxonomy/releases/unstable/',
             array (
               0 => 
               \Pimcore\Model\DataObject\ClassDefinition\Data\Fieldcollections::__set_state(array(
-                 'name' => 'variantOptions',
-                 'title' => 'Variant Options',
+                 'name' => 'productOptions',
+                 'title' => 'Product Options',
                  'tooltip' => '',
                  'mandatory' => false,
                  'noteditable' => false,
@@ -909,7 +903,7 @@ https://shopify.github.io/product-taxonomy/releases/unstable/',
                 ),
                  'allowedTypes' => 
                 array (
-                  0 => 'variantOption',
+                  0 => 'ProductOption',
                 ),
                  'lazyLoading' => true,
                  'maxItems' => NULL,
@@ -989,7 +983,7 @@ https://shopify.github.io/product-taxonomy/releases/unstable/',
                  'disallowReorder' => false,
                  'collapsed' => false,
                  'collapsible' => false,
-                 'border' => false,
+                 'border' => true,
               )),
             ),
              'locked' => false,
@@ -1229,18 +1223,10 @@ https://shopify.github.io/product-taxonomy/releases/unstable/',
                  'assetsAllowed' => false,
                  'assetTypes' => 
                 array (
-                  0 => 
-                  array (
-                    'assetTypes' => '',
-                  ),
                 ),
                  'documentsAllowed' => false,
                  'documentTypes' => 
                 array (
-                  0 => 
-                  array (
-                    'documentTypes' => '',
-                  ),
                 ),
                  'enableTextSelection' => false,
                  'width' => '',
@@ -1303,54 +1289,6 @@ https://shopify.github.io/product-taxonomy/releases/unstable/',
                  'defaultValueGenerator' => '',
               )),
               1 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\Multiselect::__set_state(array(
-                 'name' => 'shopifyChannels',
-                 'title' => 'Shopify Channels',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'fieldtype' => '',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-                 'blockedVarsForExport' => 
-                array (
-                ),
-                 'options' => 
-                array (
-                  0 => 
-                  array (
-                    'key' => 'Shopify 1',
-                    'value' => 'shopify_1',
-                  ),
-                  1 => 
-                  array (
-                    'key' => 'Shopify 2',
-                    'value' => 'shopify_2',
-                  ),
-                  2 => 
-                  array (
-                    'key' => 'Shopify 3',
-                    'value' => 'shopify_3',
-                  ),
-                ),
-                 'maxItems' => NULL,
-                 'renderType' => 'tags',
-                 'dynamicOptions' => false,
-                 'defaultValue' => NULL,
-                 'height' => '',
-                 'width' => '',
-                 'defaultValueGenerator' => '',
-                 'optionsProviderType' => 'configure',
-                 'optionsProviderClass' => '',
-                 'optionsProviderData' => '',
-              )),
-              2 => 
               \Pimcore\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
                  'name' => 'localizedfields',
                  'title' => 'Handle',
@@ -1514,7 +1452,7 @@ https://shopify.github.io/product-taxonomy/releases/unstable/',
      'labelAlign' => 'left',
   )),
    'icon' => '/bundles/pimcoreadmin/img/flat-color-icons/package.svg',
-   'group' => 'Shopify',
+   'group' => 'Ecommerce',
    'showAppLoggerTab' => false,
    'linkGeneratorReference' => '',
    'previewGeneratorReference' => '',

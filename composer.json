@@ -16,6 +16,10 @@
       "url": "lib/pimcore-headless-content-bundle"
     },
     {
+      "type": "path",
+      "url": "lib/pimcore-vendure-bridge-bundle"
+    },
+    {
       "type": "vcs",
       "url": "git@github.com:elevantiq/pimcore-deepl.git"
     },
@@ -29,8 +33,9 @@
     "php": ">=8.2",
     "doctrine/doctrine-migrations-bundle": "^3.4",
     "doctrine/orm": "^2.19",
+    "guzzlehttp/guzzle": "^7.0",
     "illuminate/collections": "*",
-    "phpclassic/php-shopify": "^1.2",
+    "elevantiq/pimcore-vendure-bridge-bundle": "dev-main",
     "pimcore/admin-ui-classic-bundle": "^1.0",
     "pimcore/data-hub": "^1.8",
     "pimcore/pimcore": "^11.0",
@@ -70,7 +75,7 @@
     ],
     "pimcore-scripts": [
       "Pimcore\\Composer::clearCache",
-      "Pimcore\\Composer::installAssets"
+      "bin/console assets:install public --symlink --relative"
     ]
   }
 }

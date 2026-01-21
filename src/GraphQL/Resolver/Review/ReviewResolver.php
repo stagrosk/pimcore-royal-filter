@@ -164,7 +164,7 @@ class ReviewResolver extends AbstractResolver
     }
 
     /**
-     * Get product by Shopify API ID
+     * Get product by API ID
      *
      * @param string $apiId
      *

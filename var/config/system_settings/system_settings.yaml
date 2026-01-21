@@ -7,11 +7,15 @@ pimcore:
             - de
             - sk
             - cs
+            - pl
+            - hu
         fallback_languages:
             en: ''
             de: en
             sk: en
             cs: en
+            pl: en
+            hu: en
         required_languages:
             - en
         default_language: en

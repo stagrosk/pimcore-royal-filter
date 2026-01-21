@@ -6,14 +6,8 @@ services:
 
     App\EventSubscriber\AdminInterfaceListener:
 
-    App\EventSubscriber\CollectionSubscriber:
-
     App\EventSubscriber\ProductSubscriber:
 
     App\EventSubscriber\RoyalFilterSubscriber:
 
     App\EventSubscriber\WhirlpoolSubscriber:
-
-    App\EventSubscriber\ShopifyMetafieldDefinitionSubscriber:
-
-    App\EventSubscriber\PriceListSubscriber:

@@ -1,0 +1,13 @@
+services:
+    _defaults:
+        public: false
+        autowire: true
+        autoconfigure: true
+
+    PimcoreVendureBridgeBundle\:
+        resource: '../../../*'
+        exclude: '../../../{DependencyInjection}'
+
+    PimcoreVendureBridgeBundle\Security\CheckConsumerPermissionsService:
+        arguments:
+            - '%env(VENDURE_API_KEY)%'

@@ -4,192 +4,193 @@ declare(strict_types=1);
 
 namespace App\EventSubscriber;
 
-use App\Pimcore\Helpers\VersionHelper;
-use App\Shopify\Graphql\Mutation\Metafield\DeleteMetafieldsMutation;
-use App\Shopify\Graphql\Mutation\Product\ProductCreateMutation;
-use App\Shopify\Graphql\Mutation\Product\ProductDeleteMutation;
-use App\Shopify\Graphql\Mutation\Product\ProductPublishMutation;
-use App\Shopify\Graphql\Mutation\Product\ProductUpdateMutation;
-use App\Shopify\Graphql\Mutation\Product\Variant\ProductVariantsBulkCreateMutation;
-use App\Shopify\Graphql\Mutation\Product\Variant\ProductVariantsBulkUpdateMutation;
-use App\Shopify\Graphql\Mutation\Translation\TranslationsRegisterMutation;
-use App\Shopify\Service\Media\ShopifyMediaService;
-use App\Shopify\Service\Product\Variant\ProductVariantService;
-use Exception;
+use App\Vendure\WebhookClient;
 use Pimcore\Event\DataObjectEvents;
 use Pimcore\Event\Model\DataObjectEvent;
+use Pimcore\Logger;
 use Pimcore\Model\DataObject\AbstractObject;
 use Pimcore\Model\DataObject\Product;
+use Pimcore\Tool;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-readonly class ProductSubscriber implements EventSubscriberInterface
+class ProductSubscriber implements EventSubscriberInterface
 {
-    /**
-     * @param \App\Shopify\Graphql\Mutation\Product\ProductCreateMutation $productCreateMutation
-     * @param \App\Shopify\Graphql\Mutation\Product\ProductUpdateMutation $productUpdateMutation
-     * @param \App\Shopify\Graphql\Mutation\Product\ProductDeleteMutation $productDeleteMutation
-     * @param \App\Shopify\Graphql\Mutation\Product\ProductPublishMutation $productPublishMutation
-     * @param \App\Shopify\Graphql\Mutation\Product\Variant\ProductVariantsBulkCreateMutation $productVariantsBulkCreateMutation
-     * @param \App\Shopify\Graphql\Mutation\Product\Variant\ProductVariantsBulkUpdateMutation $productVariantsBulkUpdateMutation
-     * @param \App\Shopify\Graphql\Mutation\Metafield\DeleteMetafieldsMutation $deleteMetafieldsMutation
-     * @param \App\Shopify\Service\Media\ShopifyMediaService $shopifyMediaService
-     * @param \App\Shopify\Graphql\Mutation\Translation\TranslationsRegisterMutation $translationsRegisterMutation
-     * @param \App\Shopify\Service\Product\Variant\ProductVariantService $productVariantService
-     */
+    public const ACTION_UPDATE = 'update';
+    public const ACTION_DELETE = 'delete';
+
+    private bool $skipPushToQueue = false;
+
     public function __construct(
-        private ProductCreateMutation             $productCreateMutation,
-        private ProductUpdateMutation             $productUpdateMutation,
-        private ProductDeleteMutation             $productDeleteMutation,
-        private ProductPublishMutation            $productPublishMutation,
-        private ProductVariantsBulkCreateMutation $productVariantsBulkCreateMutation,
-        private ProductVariantsBulkUpdateMutation $productVariantsBulkUpdateMutation,
-        private DeleteMetafieldsMutation          $deleteMetafieldsMutation,
-        private ShopifyMediaService               $shopifyMediaService,
-        private TranslationsRegisterMutation      $translationsRegisterMutation,
-        private ProductVariantService             $productVariantService
+        private readonly WebhookClient $webhookClient
     ) {
     }
 
     public static function getSubscribedEvents(): array
     {
         return [
-            DataObjectEvents::POST_ADD => ['onPostAdd'],
-            DataObjectEvents::PRE_UPDATE => ['onPreUpdate'],
             DataObjectEvents::POST_UPDATE => ['onPostUpdate'],
-            DataObjectEvents::PRE_DELETE => ['onPreDelete'],
+            DataObjectEvents::POST_DELETE => ['onPostDelete'],
         ];
     }
 
     /**
-     * @param \Pimcore\Event\Model\DataObjectEvent $event
+     * @param DataObjectEvent $event
      *
-     * @throws \PHPShopify\Exception\ApiException
-     * @throws \PHPShopify\Exception\CurlException
-     * @throws \Exception
-     * @return void
-     */
-    public function onPostAdd(DataObjectEvent $event): void
-    {
-        /** @var \Pimcore\Model\DataObject\Product $object */
-        $object = $event->getObject();
-
-        // check an object type and is not variant
-        if (!$object instanceof Product) {
-            return;
-        }
-
-        if ($object->getType() !== AbstractObject::OBJECT_TYPE_VARIANT) {
-            // handle product
-            $response = $this->productCreateMutation->callAction($object);
-            $data = $response['data']['productCreate'];
-
-            // set api id on product
-            $object->setApiId($data['product']['id']);
-        }
-
-        // save product to persist data
-        VersionHelper::useVersioning(function () use ($object) {
-            $object->save();
-        }, false);
-    }
-
-    /**
-     * @param \Pimcore\Event\Model\DataObjectEvent $event
-     *
-     * @throws \PHPShopify\Exception\ApiException
-     * @throws \PHPShopify\Exception\CurlException
-     * @throws \Exception
-     * @return void
-     */
-    public function onPreUpdate(DataObjectEvent $event): void
-    {
-        /** @var \Pimcore\Model\DataObject\Product $object */
-        $object = $event->getObject();
-
-        // check an object type
-        if (!$object instanceof Product) {
-            return;
-        }
-
-        // pimcore type is variant OR shopify type is variant
-        if ($object->getType() === AbstractObject::OBJECT_TYPE_VARIANT || str_contains($object->getApiId(), 'ProductVariant')) {
-            // update variant
-            if (empty($object->getApiId())) {
-                $response = $this->productVariantsBulkCreateMutation->callAction($object);  // send only variant
-                $data = $response['data']['productVariantsBulkCreate'];
-            } else {
-                $response = $this->productVariantsBulkUpdateMutation->callAction($object);  // send only variant
-                $data = $response['data']['productVariantsBulkUpdate'];
-            }
-
-            // set api id on new added product variant
-            $object->setApiId($data['productVariants'][0]['id']);
-        }
-    }
-
-    /**
-     * @param \Pimcore\Event\Model\DataObjectEvent $event
-     *
-     * @throws \Exception
      * @return void
      */
     public function onPostUpdate(DataObjectEvent $event): void
     {
-        /** @var \Pimcore\Model\DataObject\Product $object */
-        $object = $event->getObject();
-
-        // check an object type
-        if (!$object instanceof Product || !$object->getApiId()) {
+        if ($this->skipPushToQueue) {
             return;
         }
 
-        if ($object->getType() !== AbstractObject::OBJECT_TYPE_VARIANT && !str_contains($object->getApiId(), 'ProductVariant')) {
-            // product update
-            $response = $this->productUpdateMutation->callAction($object);
-            $data = $response['data']['productUpdate'];
+        // Enable inheritance for getter
+        $backup = AbstractObject::getGetInheritedValues();
+        AbstractObject::setGetInheritedValues(true);
 
-            // publish
-            $this->productPublishMutation->callAction($object);
+        /** @var Product $object */
+        $object = $event->getObject();
 
-            // check and delete metadata
-            $this->deleteMetafieldsMutation->callAction($object);
-
-            // process shopify media
-            $this->shopifyMediaService->processMedia($object);
-
-            // process translations
-            $this->translationsRegisterMutation->callAction($object);
-
-            // handle variants
-            $this->productVariantService->processVariants($object, $data['product']['variants']['edges']);
+        if (!$object instanceof Product) {
+            return;
         }
+
+        // Process object
+        $this->processObject($object);
+
+        // Process all children of object
+        foreach ($object->getChildren([AbstractObject::OBJECT_TYPE_OBJECT, AbstractObject::OBJECT_TYPE_VARIANT]) as $child) {
+            if (!$child instanceof Product) {
+                continue;
+            }
+
+            $this->processObject($child);
+        }
+
+        // If is variant -> process parent if is product
+        if ($object->getParent() instanceof Product) {
+            $this->processObject($object->getParent());
+        }
+
+        AbstractObject::setGetInheritedValues($backup);
     }
 
     /**
-     * @param \Pimcore\Event\Model\DataObjectEvent $event
+     * @param DataObjectEvent $event
      *
-     * @throws \PHPShopify\Exception\ApiException
-     * @throws \PHPShopify\Exception\CurlException
-     * @throws \Exception
      * @return void
      */
-    public function onPreDelete(DataObjectEvent $event): void
+    public function onPostDelete(DataObjectEvent $event): void
     {
-        /** @var \Pimcore\Model\DataObject\Product $object */
+        /** @var Product $object */
         $object = $event->getObject();
 
-        // check an object type
-        if (!$object instanceof Product
-            || empty($object->getApiId())
-            || $object->getType() === AbstractObject::OBJECT_TYPE_VARIANT   // pimcore type is variant
-            || str_contains($object->getApiId(), 'ProductVariant')          // shopify type is variant
-        ) {
+        if (!$object instanceof Product || $this->skipPushToQueue) {
             return;
         }
 
-        $data = $this->productDeleteMutation->callAction($object);
-        if (!empty($data['userErrors'])) {
-            throw new Exception($data['userErrors'][0]['message']);
+        $this->sendWebhookDelete($object);
+    }
+
+    /**
+     * Process a single object - determine if update or delete webhook should be sent
+     *
+     * @param Product $object
+     *
+     * @return void
+     */
+    private function processObject(Product $object): void
+    {
+        $adminUser = Tool\Admin::getCurrentUser();
+
+        // If not published or status is not active -> send delete
+        if ($object->isPublished() === false
+            || ($object->getParent() instanceof Product && $object->getParent()->isPublished() === false)
+        ) {
+            Logger::notice(sprintf(
+                '[ProductSubscriber] DELETE event - objectId: %d Path: %s is not published! ... DELETE webhook',
+                $object->getId(),
+                $object->getFullPath()
+            ));
+            $this->sendWebhookDelete($object);
+
+            return;
         }
+
+        // Skip if saved via CLI
+        if (PHP_SAPI === 'cli' && $adminUser === null) {
+            Logger::notice(sprintf(
+                '[ProductSubscriber] ObjectId: %d Path: %s saved via CLI ... SKIPPING',
+                $object->getId(),
+                $object->getFullPath()
+            ));
+            return;
+        }
+
+        $this->sendWebhookUpdate($object);
+    }
+
+    /**
+     * Send update webhook to Vendure
+     *
+     * @param Product $object
+     *
+     * @return void
+     */
+    private function sendWebhookUpdate(Product $object): void
+    {
+        Logger::info(sprintf(
+            '[ProductSubscriber] UPDATE event - objectId: %d Path: %s',
+            $object->getId(),
+            $object->getFullPath()
+        ));
+
+        $this->webhookClient->sendToVendureWebhook([
+            'class' => get_class($object),
+            'type' => $object->getType(),
+            'id' => $object->getId(),
+            'action' => self::ACTION_UPDATE
+        ]);
+    }
+
+    /**
+     * Send delete webhook to Vendure
+     *
+     * @param Product $object
+     *
+     * @return void
+     */
+    private function sendWebhookDelete(Product $object): void
+    {
+        Logger::info(sprintf(
+            '[ProductSubscriber] DELETE event - objectId: %d Path: %s',
+            $object->getId(),
+            $object->getFullPath()
+        ));
+
+        $this->webhookClient->sendToVendureWebhook([
+            'class' => get_class($object),
+            'type' => $object->getType(),
+            'id' => $object->getId(),
+            'action' => self::ACTION_DELETE
+        ]);
+    }
+
+    /**
+     * @param bool $skip
+     *
+     * @return void
+     */
+    public function setSkipPushToQueue(bool $skip): void
+    {
+        $this->skipPushToQueue = $skip;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSkipPushToQueue(): bool
+    {
+        return $this->skipPushToQueue;
     }
 }

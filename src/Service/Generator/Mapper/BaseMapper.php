@@ -15,8 +15,6 @@ abstract class BaseMapper implements MapperInterface
     public const COUNTRY_CZECHIA = 'Czechia';
     public const COUNTRY_SLOVAKIA = 'Slovakia';
 
-    public const SHOPIFY_GOOGLE_CATEGORY_POOL_SPA_FILTERS = 'gid://shopify/TaxonomyCategory/hg-18-1-3';
-
     /**
      * @param \Pimcore\Translation\Translator $translator
      * @param \App\Pimcore\ClassificationStore\ClassificationStoreHelper $classificationStoreHelper

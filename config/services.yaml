@@ -1,5 +1,5 @@
 imports:
-    - { resource: services/shopify.yaml }
+    - { resource: services/vendure.yaml }
     - { resource: services/eventSubscriber.yaml }
     - { resource: services/pimcore.yaml }
 

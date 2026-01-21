@@ -14,11 +14,11 @@ class WishlistMutationArgs
         return [
             'customerApiId' => [
                 'type' => Type::nonNull(Type::string()),
-                'description' => 'Shopify customer API ID (gid://shopify/Customer/...)',
+                'description' => 'Customer API ID',
             ],
             'productApiId' => [
                 'type' => Type::nonNull(Type::string()),
-                'description' => 'Shopify product API ID (gid://shopify/Product/...)',
+                'description' => 'Product API ID',
             ],
         ];
     }

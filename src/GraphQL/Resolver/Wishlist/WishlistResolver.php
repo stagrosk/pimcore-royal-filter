@@ -4,7 +4,7 @@ namespace App\GraphQL\Resolver\Wishlist;
 
 use App\GraphQL\Resolver\AbstractResolver;
 use GraphQL\Type\Definition\ResolveInfo;
-use Pimcore\Model\DataObject\ShopifyCustomerWishlist;
+use Pimcore\Model\DataObject\CustomerWishlist;
 
 class WishlistResolver extends AbstractResolver
 {
@@ -57,12 +57,12 @@ class WishlistResolver extends AbstractResolver
      *
      * @param string $customerApiId
      *
-     * @return \Pimcore\Model\DataObject\ShopifyCustomerWishlist|null
+     * @return \Pimcore\Model\DataObject\CustomerWishlist|null
      */
-    private function getWishlist(string $customerApiId): ?ShopifyCustomerWishlist
+    private function getWishlist(string $customerApiId): ?CustomerWishlist
     {
-        $wishlist = ShopifyCustomerWishlist::getByCustimerApiId($customerApiId, 1);
+        $wishlist = CustomerWishlist::getByCustimerApiId($customerApiId, 1);
 
-        return $wishlist instanceof ShopifyCustomerWishlist ? $wishlist : null;
+        return $wishlist instanceof CustomerWishlist ? $wishlist : null;
     }
 }

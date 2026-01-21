@@ -5,7 +5,8 @@ namespace App\GraphQL\Resolver\Wishlist;
 use GraphQL\Type\Definition\ResolveInfo;
 use Pimcore\Model\DataObject\Product;
 use Pimcore\Model\DataObject\Service;
-use Pimcore\Model\DataObject\ShopifyCustomerWishlist;
+use Pimcore\Model\DataObject\CustomerWishlist;
+
 
 class WishlistMutationResolver
 {
@@ -146,17 +147,17 @@ class WishlistMutationResolver
      * @param string $customerApiId
      *
      * @throws \Exception
-     * @return \Pimcore\Model\DataObject\ShopifyCustomerWishlist
+     * @return \Pimcore\Model\DataObject\CustomerWishlist
      */
-    private function getOrCreateWishlist(string $customerApiId): ShopifyCustomerWishlist
+    private function getOrCreateWishlist(string $customerApiId): CustomerWishlist
     {
         $wishlist = $this->getWishlist($customerApiId);
 
         if (!$wishlist) {
-            $wishlist = new ShopifyCustomerWishlist();
+            $wishlist = new CustomerWishlist();
 
             $customerApiKeyFormatted = Service::getValidKey($customerApiId, 'object');
-            $folder = Service::createFolderByPath('Shopify/Customer/Wishlists');
+            $folder = Service::createFolderByPath('Customer/Wishlists');
             $wishlist->setParent($folder);
             $wishlist->setKey($customerApiKeyFormatted);
             $wishlist->setCustimerApiId($customerApiId);
@@ -172,17 +173,17 @@ class WishlistMutationResolver
      *
      * @param string $customerApiId
      *
-     * @return \Pimcore\Model\DataObject\ShopifyCustomerWishlist|null
+     * @return \Pimcore\Model\DataObject\CustomerWishlist|null
      */
-    private function getWishlist(string $customerApiId): ?ShopifyCustomerWishlist
+    private function getWishlist(string $customerApiId): ?CustomerWishlist
     {
-        $wishlist = ShopifyCustomerWishlist::getByCustimerApiId($customerApiId, 1);
+        $wishlist = CustomerWishlist::getByCustimerApiId($customerApiId, 1);
 
-        return $wishlist instanceof ShopifyCustomerWishlist ? $wishlist : null;
+        return $wishlist instanceof CustomerWishlist ? $wishlist : null;
     }
 
     /**
-     * Get product by Shopify API ID
+     * Get product by API ID
      *
      * @param string $apiId
      *

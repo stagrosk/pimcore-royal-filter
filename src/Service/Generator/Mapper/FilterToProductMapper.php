@@ -2,12 +2,12 @@
 
 namespace App\Service\Generator\Mapper;
 
-use App\Model\ClassificationStoreMappingItem;
+use App\Pimcore\Model\ClassificationStore\ClassificationStoreMappingItem;
 use App\Pimcore\ClassificationStore\ClassificationStoreHelper;
 use App\Pimcore\ClassificationStore\ClassificationStoreService;
 use App\Pimcore\Model\DataObject\RoyalFilter;
 use App\Service\ProductMetadataService;
-use App\Shopify\Model\Product\ProductStatusEnum;
+use App\Enum\ProductStatusEnum;
 use Pimcore\Model\Asset;
 use Pimcore\Model\DataObject\AbstractObject;
 use Pimcore\Model\DataObject\Country;
@@ -52,6 +52,7 @@ class FilterToProductMapper extends BaseMapper
     public function mapObjectToProduct(Product $product, AbstractObject|RoyalFilter $fromObject, array $extraData = []): Product
     {
         // base
+        $product->setStatus(ProductStatusEnum::DRAFT->value);
         $product->setPublished(true);
         $product->setEan(''); // TODO: ???
         $product->setSku(sprintf('RF-%s', $fromObject->getId()));
@@ -70,9 +71,6 @@ class FilterToProductMapper extends BaseMapper
 
         // collections
         $this->handleCollections($fromObject, $product);
-
-        // google taxonomy category
-        $product->setTaxonomyCategory(self::SHOPIFY_GOOGLE_CATEGORY_POOL_SPA_FILTERS);
 
         // PRE-SAVE IN classification store helper! must be after key and parent assign
         // remap parameters and set them as new classification store values for product
@@ -94,7 +92,7 @@ class FilterToProductMapper extends BaseMapper
         $product->setPrices($fromObject->getPrices());
 
         // pimcore base
-        $path = sprintf('Shopify/Products/%s', $fromObject->getCollection()->getKey());
+        $path = sprintf('Products/%s', $fromObject->getCollection()->getKey());
         $product->setParent(Service::createFolderByPath($path));
         $product->setKey(Service::getValidKey(sprintf('RF-%s', str_replace(' ', '-', $product->getTitle())), 'object'));
 
@@ -153,7 +151,7 @@ class FilterToProductMapper extends BaseMapper
 
         if (!empty($params)) {
             // get first mapping
-            /** @var \App\Model\ClassificationStoreMapping $mapping */
+            /** @var \App\Pimcore\Model\ClassificationStore\ClassificationStoreMapping $mapping */
             $mapping = reset($params)['mapping'];
 
             // add diameter

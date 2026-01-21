@@ -14,7 +14,7 @@ class WishlistArgs
         return [
             'customerApiId' => [
                 'type' => Type::nonNull(Type::string()),
-                'description' => 'Shopify customer API ID (gid://shopify/Customer/...)',
+                'description' => 'Customer API ID',
             ],
             'productApiId' => [
                 'type' => Type::string(),

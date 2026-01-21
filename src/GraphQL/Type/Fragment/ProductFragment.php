@@ -29,7 +29,7 @@ class ProductFragment
                     // Basic fields
                     'apiId' => [
                         'type' => Type::string(),
-                        'description' => 'Shopify product API ID',
+                        'description' => 'Product API ID',
                     ],
                     'title' => [
                         'type' => Type::string(),
@@ -213,7 +213,7 @@ class ProductFragment
                 'fields' => [
                     'apiId' => [
                         'type' => Type::string(),
-                        'description' => 'Shopify collection API ID',
+                        'description' => 'Collection API ID',
                     ],
                     'title' => [
                         'type' => Type::string(),

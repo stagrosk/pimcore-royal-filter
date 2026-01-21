@@ -5,6 +5,7 @@ namespace App\Service\Generator;
 use App\Pimcore\Helpers\InheritanceHelper;
 use App\Pimcore\Helpers\VersionHelper;
 use App\Service\Generator\Mapper\WhirlpoolToProductMapper;
+use App\Service\VariantGeneratorService;
 use Pimcore\Logger;
 use Pimcore\Model\DataObject\AbstractObject;
 use Pimcore\Model\DataObject\Product;
@@ -15,9 +16,11 @@ class WhirlpoolToProductGenerator extends BaseProductGenerator
 {
     /**
      * @param \App\Service\Generator\Mapper\WhirlpoolToProductMapper $whirlpoolMapper
+     * @param \App\Service\VariantGeneratorService $variantGeneratorService
      */
     public function __construct(
         private readonly WhirlpoolToProductMapper $whirlpoolMapper,
+        private readonly VariantGeneratorService $variantGeneratorService,
     ) {
         $this->setClassName(Whirlpool::class);
     }
@@ -49,11 +52,15 @@ class WhirlpoolToProductGenerator extends BaseProductGenerator
             // map data
             $this->whirlpoolMapper->mapObjectToProduct($product, $object);
 
-            // save
+            // save master product
             Logger::notice(sprintf('[WhirlpoolToProductGenerator] - Save product: %s', $product->getKey()));
             VersionHelper::useVersioning(function () use ($product) {
                 $product->save();
             }, false);
+
+            // generate variants from RoyalFilterSetups
+            Logger::notice(sprintf('[WhirlpoolToProductGenerator] - Processing variants for product: %s', $product->getKey()));
+            $this->variantGeneratorService->processVariants($product);
 
             // save product on whirlpool
             $object->setProduct($product);

@@ -5,7 +5,7 @@ namespace App\Service\Generator\Mapper;
 use App\Pimcore\ClassificationStore\ClassificationStoreHelper;
 use App\Pimcore\ClassificationStore\ClassificationStoreService;
 use App\Service\ProductMetadataService;
-use App\Shopify\Model\Product\ProductStatusEnum;
+use App\Enum\ProductStatusEnum;
 use Pimcore\Model\Asset;
 use Pimcore\Model\DataObject\AbstractObject;
 use Pimcore\Model\DataObject\Country;
@@ -50,6 +50,7 @@ class WhirlpoolToProductMapper extends BaseMapper
     public function mapObjectToProduct(Product $product, AbstractObject|Whirlpool $fromObject, array $extraData = []): Product
     {
         // base
+        $product->setStatus(ProductStatusEnum::DRAFT->value);
         $product->setPublished(true);
         $product->setEan(''); // TODO: ???
         $product->setSku(sprintf('WRF-%s-%s', $fromObject->getId(), $product->getSku()));
@@ -69,9 +70,6 @@ class WhirlpoolToProductMapper extends BaseMapper
         // collections
         $this->handleCollections($fromObject, $product);
 
-        // google taxonomy category
-        $product->setTaxonomyCategory(self::SHOPIFY_GOOGLE_CATEGORY_POOL_SPA_FILTERS);
-
         // PRE-SAVE IN classification store helper! must be after key and parent assign
         // remap parameters and set them as new classification store values for product
         $this->productMetadataService->copyMetadata($product, $fromObject, $extraData['partOverrides'] ?? [], true);
@@ -90,7 +88,7 @@ class WhirlpoolToProductMapper extends BaseMapper
         $product->setImageGallery($this->prepareImages($product, $fromObject));
 
         // pimcore base
-        $path = sprintf('Shopify/Products/%s', $fromObject->getCollection()->getKey());
+        $path = sprintf('Products/%s', $fromObject->getCollection()->getKey());
         $product->setParent(Service::createFolderByPath($path));
         $product->setKey(Service::getValidKey(sprintf('WRF-%s', str_replace(' ', '-', $product->getTitle())), 'object'));
 

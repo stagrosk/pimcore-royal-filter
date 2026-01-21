@@ -117,7 +117,7 @@ class ProductMetadataService
 
         // this is not royalFilterSetup mapping
         if (count($mappedParameters) === 1) {
-            /** @var \App\Model\ClassificationStoreMapping $classificationStoreMapping */
+            /** @var \App\Pimcore\Model\ClassificationStore\ClassificationStoreMapping $classificationStoreMapping */
             $classificationStoreMapping = reset($mappedParameters)['mapping'];
 
             return $classificationStoreMapping->getMappedParametersIndexedByGroupAndKey();
