@@ -8,6 +8,10 @@ services:
 
     App\EventSubscriber\ProductSubscriber:
 
+    App\EventSubscriber\CollectionSubscriber:
+
     App\EventSubscriber\RoyalFilterSubscriber:
 
     App\EventSubscriber\WhirlpoolSubscriber:
+
+    App\EventSubscriber\PriceListSubscriber:

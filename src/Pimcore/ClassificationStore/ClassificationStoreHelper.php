@@ -56,12 +56,23 @@ class ClassificationStoreHelper
                             case 'numeric':
                             case 'textarea':
                             case 'input':
-                            case 'booleanSelect':
                                 $classificationStoreMappingItem = new ClassificationStoreMappingItem(
                                     $keyConfig,
                                     $groupConfig,
                                     $keyConfig->getTitle(),
                                     $item['default'],
+                                );
+                                $classificationStoreMapping->addItem($classificationStoreMappingItem);
+                                break;
+
+                            case 'booleanSelect':
+                                $boolValue = $item['default'];
+                                $classificationStoreMappingItem = new ClassificationStoreMappingItem(
+                                    $keyConfig,
+                                    $groupConfig,
+                                    $keyConfig->getTitle(),
+                                    $boolValue,
+                                    $boolValue ? 1 : 0,
                                 );
                                 $classificationStoreMapping->addItem($classificationStoreMappingItem);
                                 break;
@@ -88,11 +99,13 @@ class ClassificationStoreHelper
                                 break;
 
                             case 'checkbox':
+                                $checkboxValue = (bool)$item['default'];
                                 $classificationStoreMappingItem = new ClassificationStoreMappingItem(
                                     $keyConfig,
                                     $groupConfig,
                                     $keyConfig->getTitle(),
-                                    (bool)$item['default'],
+                                    $checkboxValue,
+                                    $checkboxValue ? 1 : 0,
                                 );
                                 $classificationStoreMapping->addItem($classificationStoreMappingItem);
                                 break;

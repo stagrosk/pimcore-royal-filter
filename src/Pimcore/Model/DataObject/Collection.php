@@ -4,12 +4,28 @@ namespace App\Pimcore\Model\DataObject;
 
 use App\Pimcore\ClassificationStore\ClassificationStoreHelper;
 use App\Pimcore\Model\ClassificationStore\ClassificationStoreMappingItem;
+use App\Service\ClassificationStoreTranslationService;
+use Pimcore\Model\DataObject\AbstractObject;
 use Pimcore\Tool;
 use PimcoreHeadlessContentBundle\Model\NavigationAwareInterface;
 use PimcoreHeadlessContentBundle\Model\SlugAwareInterface;
 
 class Collection extends \Pimcore\Model\DataObject\Collection implements SlugAwareInterface, NavigationAwareInterface
 {
+    private ?ClassificationStoreTranslationService $translationService = null;
+
+    /**
+     * @return ClassificationStoreTranslationService
+     */
+    private function getTranslationService(): ClassificationStoreTranslationService
+    {
+        if ($this->translationService === null) {
+            $this->translationService = \Pimcore::getContainer()->get(ClassificationStoreTranslationService::class);
+        }
+
+        return $this->translationService;
+    }
+
     /**
      * @param string|null $language
      *
@@ -111,12 +127,27 @@ class Collection extends \Pimcore\Model\DataObject\Collection implements SlugAwa
     {
         $keyConfig = $item->getKeyConfig();
         $groupConfig = $item->getGroupConfig();
+        $translationService = $this->getTranslationService();
+
+        // Get translations from Pimcore shared translations (auto-creates if missing)
+        // Note: GroupConfig doesn't have getTitle(), use getDescription() instead
+        $groupTranslations = $translationService->getGroupTranslations(
+            $groupConfig->getName(),
+            $groupConfig->getDescription() ?: $groupConfig->getName()
+        );
+
+        $keyTranslations = $translationService->getKeyTranslations(
+            $keyConfig->getName(),
+            $keyConfig->getTitle() ?: $keyConfig->getName()
+        );
 
         return [
             'group' => $groupConfig->getName(),
             'groupId' => $groupConfig->getId(),
+            'groupTranslations' => $groupTranslations,
             'key' => $keyConfig->getName(),
             'keyId' => $keyConfig->getId(),
+            'keyTranslations' => $keyTranslations,
             'label' => $item->getLabel(),
             'type' => $keyConfig->getType(),
             'value' => $item->getValue(),
@@ -125,5 +156,36 @@ class Collection extends \Pimcore\Model\DataObject\Collection implements SlugAwa
             'unitLongName' => $item->getUnitLongName(),
             'optionValue' => $item->getOptionValue(),
         ];
+    }
+
+    /**
+     * Get parent Collection ID (only if parent is Collection)
+     */
+    public function getParentCollectionId(): ?int
+    {
+        $parent = $this->getParent();
+
+        if ($parent instanceof self) {
+            return $parent->getId();
+        }
+
+        return null;
+    }
+
+    /**
+     * Get children Collection IDs
+     */
+    public function getChildrenIds(): array
+    {
+        $childrenIds = [];
+        $children = $this->getChildren([AbstractObject::OBJECT_TYPE_OBJECT]);
+
+        foreach ($children as $child) {
+            if ($child instanceof self && $child->isPublished()) {
+                $childrenIds[] = $child->getId();
+            }
+        }
+
+        return $childrenIds;
     }
 }

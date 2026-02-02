@@ -58,14 +58,15 @@ class Product extends \Pimcore\Model\DataObject\Product implements SlugAwareInte
 
         if ($pricesCollection instanceof Fieldcollection) {
             foreach ($pricesCollection as $priceItem) {
+                $priceList = method_exists($priceItem, 'getPriceList') ? $priceItem->getPriceList() : null;
+
                 $prices[] = [
-                    'type' => $priceItem->getType(),
-                    'priceListId' => method_exists($priceItem, 'getPriceList') ? $priceItem->getPriceList()?->getId() : null,
-                    'priceListName' => method_exists($priceItem, 'getPriceList') ? $priceItem->getPriceList()?->getName() : null,
+                    'priceListId' => $priceList?->getId(),
                     'price' => method_exists($priceItem, 'getPrice') ? $priceItem->getPrice() : null,
                     'compareAtPrice' => method_exists($priceItem, 'getCompareAtPrice') ? $priceItem->getCompareAtPrice() : null,
-                    'currency' => method_exists($priceItem, 'getCurrency') ? $priceItem->getCurrency() : null,
-                    'countryCode' => method_exists($priceItem, 'getCountryCode') ? $priceItem->getCountryCode() : null,
+                    'wholesalePrice' => method_exists($priceItem, 'getWholesalePrice') ? $priceItem->getWholesalePrice() : null,
+                    'wholesaleSupplierPrice' => method_exists($priceItem, 'getWholesaleSupplierPrice') ? $priceItem->getWholesaleSupplierPrice() : null,
+                    'unitPrice' => method_exists($priceItem, 'getUnitPrice') ? $priceItem->getUnitPrice() : null,
                 ];
             }
         }

@@ -17,3 +17,11 @@ App\Pimcore\Model\DataObject\Collection:
             exp: object.getParametersConfigData()
             serialized_name: parameters
             groups: [api]
+        getParentCollectionId:
+            exp: object.getParentCollectionId()
+            serialized_name: parentId
+            groups: [api]
+        getChildrenIds:
+            exp: object.getChildrenIds()
+            serialized_name: children
+            groups: [api]

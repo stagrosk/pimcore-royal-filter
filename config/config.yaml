@@ -34,6 +34,7 @@ pimcore:
             'Pimcore\Model\DataObject\Collection': 'App\Pimcore\Model\DataObject\Collection'
             'Pimcore\Model\DataObject\RoyalFilter': 'App\Pimcore\Model\DataObject\RoyalFilter'
             'Pimcore\Model\DataObject\Product': 'App\Pimcore\Model\DataObject\Product'
+            'Pimcore\Model\DataObject\PriceList': 'App\Pimcore\Model\DataObject\PriceList'
 
 #### CUSTOM DOCUMENT EDITABLES
     documents:

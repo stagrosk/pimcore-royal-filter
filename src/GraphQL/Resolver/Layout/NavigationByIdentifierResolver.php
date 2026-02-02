@@ -111,6 +111,7 @@ class NavigationByIdentifierResolver extends AbstractResolver
                 'slug' => null,
                 'canonicals' => [],
                 'apiId' => method_exists($object, 'getApiId') ? $object->getApiId() : null,
+                'pimcoreId' => $object->getId(),
                 'isPartner' => $linkItem->getIsPartner() ?? false,
                 'imageTile' => $this->getImageUrl($object, 'category-tile'),
                 'imagePreview' => $this->getImageUrl($object, 'category-preview'),

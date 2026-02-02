@@ -11,6 +11,7 @@
  * - compareAtMode [select]
  * - adjustmentType [select]
  * - percentage [numeric]
+ * - roundingDecimals [numeric]
  */
 
 return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
@@ -20,7 +21,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1768041038,
+   'modificationDate' => 1769537312,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -291,6 +292,36 @@ Percentage increase type. Prices will have a higher value.',
              'width' => '',
              'defaultValueGenerator' => '',
           )),
+          6 => 
+          \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
+             'name' => 'roundingDecimals',
+             'title' => 'Rounding Decimals',
+             'tooltip' => '',
+             'mandatory' => false,
+             'noteditable' => false,
+             'index' => false,
+             'locked' => false,
+             'style' => '',
+             'permissions' => NULL,
+             'fieldtype' => '',
+             'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => false,
+             'visibleSearch' => false,
+             'blockedVarsForExport' => 
+            array (
+            ),
+             'defaultValue' => 2,
+             'integer' => true,
+             'unsigned' => false,
+             'minValue' => 0.0,
+             'maxValue' => 4.0,
+             'unique' => false,
+             'decimalSize' => NULL,
+             'decimalPrecision' => NULL,
+             'width' => '',
+             'defaultValueGenerator' => '',
+          )),
         ),
          'locked' => false,
          'blockedVarsForExport' => 
@@ -348,36 +379,6 @@ Percentage increase type. Prices will have a higher value.',
    'enableGridLocking' => false,
    'deletedDataComponents' => 
   array (
-    0 => 
-    \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
-       'name' => 'apiId',
-       'title' => 'Api Id',
-       'tooltip' => '',
-       'mandatory' => false,
-       'noteditable' => true,
-       'index' => false,
-       'locked' => false,
-       'style' => '',
-       'permissions' => NULL,
-       'fieldtype' => '',
-       'relationType' => false,
-       'invisible' => false,
-       'visibleGridView' => false,
-       'visibleSearch' => false,
-       'blockedVarsForExport' => 
-      array (
-      ),
-       'defaultValue' => NULL,
-       'columnLength' => 190,
-       'regex' => '',
-       'regexFlags' => 
-      array (
-      ),
-       'unique' => false,
-       'showCharCount' => false,
-       'width' => '',
-       'defaultValueGenerator' => '',
-    )),
   ),
    'blockedVarsForExport' => 
   array (

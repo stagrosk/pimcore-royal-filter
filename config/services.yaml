@@ -87,3 +87,8 @@ services:
             - '%env(DEEPL_AUTH_KEY)%'
             - '%env(DEEPL_GLOSSARY_KEY)%'
             - '%env(DEEPL_ENDPOINT)%'
+
+    App\Command\TranslateClassificationStoreCommand:
+        arguments:
+            $deeplApiKey: '%env(DEEPL_AUTH_KEY)%'
+            $sourceLanguage: 'en'

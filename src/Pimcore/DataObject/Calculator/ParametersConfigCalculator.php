@@ -6,6 +6,7 @@ namespace App\Pimcore\DataObject\Calculator;
 
 use App\Pimcore\ClassificationStore\ClassificationStoreHelper;
 use App\Pimcore\Model\ClassificationStore\ClassificationStoreMappingItem;
+use App\Service\ClassificationStoreTranslationService;
 use Pimcore\Model\DataObject\ClassDefinition\CalculatorClassInterface;
 use Pimcore\Model\DataObject\Concrete;
 use Pimcore\Model\DataObject\Data\CalculatedValue;
@@ -13,6 +14,20 @@ use Pimcore\Model\DataObject\Product;
 
 class ParametersConfigCalculator implements CalculatorClassInterface
 {
+    private ?ClassificationStoreTranslationService $translationService = null;
+
+    /**
+     * @return ClassificationStoreTranslationService
+     */
+    private function getTranslationService(): ClassificationStoreTranslationService
+    {
+        if ($this->translationService === null) {
+            $this->translationService = \Pimcore::getContainer()->get(ClassificationStoreTranslationService::class);
+        }
+
+        return $this->translationService;
+    }
+
     /**
      * @param Concrete $object
      * @param CalculatedValue $context
@@ -72,12 +87,27 @@ class ParametersConfigCalculator implements CalculatorClassInterface
     {
         $keyConfig = $item->getKeyConfig();
         $groupConfig = $item->getGroupConfig();
+        $translationService = $this->getTranslationService();
+
+        // Get translations from Pimcore shared translations (auto-creates if missing)
+        // Note: GroupConfig doesn't have getTitle(), use getDescription() instead
+        $groupTranslations = $translationService->getGroupTranslations(
+            $groupConfig->getName(),
+            $groupConfig->getDescription() ?: $groupConfig->getName()
+        );
+
+        $keyTranslations = $translationService->getKeyTranslations(
+            $keyConfig->getName(),
+            $keyConfig->getTitle() ?: $keyConfig->getName()
+        );
 
         return [
             'group' => $groupConfig->getName(),
             'groupId' => $groupConfig->getId(),
+            'groupTranslations' => $groupTranslations,
             'key' => $keyConfig->getName(),
             'keyId' => $keyConfig->getId(),
+            'keyTranslations' => $keyTranslations,
             'label' => $item->getLabel(),
             'type' => $keyConfig->getType(),
             'value' => $item->getValue(),

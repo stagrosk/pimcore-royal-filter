@@ -9,13 +9,11 @@ use Pimcore\Event\DataObjectEvents;
 use Pimcore\Event\Model\DataObjectEvent;
 use Pimcore\Logger;
 use Pimcore\Model\DataObject\AbstractObject;
-use Pimcore\Model\DataObject\Fieldcollection;
-use Pimcore\Model\DataObject\PriceList;
-use Pimcore\Model\DataObject\Product;
+use Pimcore\Model\DataObject\Collection;
 use Pimcore\Tool;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class ProductSubscriber implements EventSubscriberInterface
+class CollectionSubscriber implements EventSubscriberInterface
 {
     public const ACTION_UPDATE = 'update';
     public const ACTION_DELETE = 'delete';
@@ -30,65 +28,9 @@ class ProductSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            DataObjectEvents::PRE_UPDATE => ['onPreUpdate'],
             DataObjectEvents::POST_UPDATE => ['onPostUpdate'],
             DataObjectEvents::POST_DELETE => ['onPostDelete'],
         ];
-    }
-
-    public function onPreUpdate(DataObjectEvent $event): void
-    {
-        $object = $event->getObject();
-
-        if (!$object instanceof Product) {
-            return;
-        }
-
-        $this->validateBasePriceList($object);
-    }
-
-    private function validateBasePriceList(Product $object): void
-    {
-        $basePriceList = $this->getBasePriceList();
-        if (!$basePriceList) {
-            return;
-        }
-
-        $prices = $object->getPrices();
-        if (!$prices instanceof Fieldcollection) {
-            throw new \RuntimeException(sprintf(
-                'Product "%s" musí mať priradený základný cenník "%s"',
-                $object->getKey(),
-                $basePriceList->getName()
-            ));
-        }
-
-        $hasBasePriceList = false;
-        foreach ($prices as $priceItem) {
-            $priceList = method_exists($priceItem, 'getPriceList') ? $priceItem->getPriceList() : null;
-            if ($priceList && $priceList->getId() === $basePriceList->getId()) {
-                $hasBasePriceList = true;
-                break;
-            }
-        }
-
-        if (!$hasBasePriceList) {
-            throw new \RuntimeException(sprintf(
-                'Product "%s" musí mať priradený základný cenník "%s"',
-                $object->getKey(),
-                $basePriceList->getName()
-            ));
-        }
-    }
-
-    private function getBasePriceList(): ?PriceList
-    {
-        $listing = PriceList::getList();
-        $listing->setCondition('basePricelist = 1');
-        $listing->setLimit(1);
-        $priceLists = $listing->load();
-
-        return $priceLists[0] ?? null;
     }
 
     /**
@@ -102,14 +44,10 @@ class ProductSubscriber implements EventSubscriberInterface
             return;
         }
 
-        // Enable inheritance for getter
-        $backup = AbstractObject::getGetInheritedValues();
-        AbstractObject::setGetInheritedValues(true);
-
-        /** @var Product $object */
+        /** @var Collection $object */
         $object = $event->getObject();
 
-        if (!$object instanceof Product) {
+        if (!$object instanceof Collection) {
             return;
         }
 
@@ -117,20 +55,18 @@ class ProductSubscriber implements EventSubscriberInterface
         $this->processObject($object);
 
         // Process all children of object
-        foreach ($object->getChildren([AbstractObject::OBJECT_TYPE_OBJECT, AbstractObject::OBJECT_TYPE_VARIANT]) as $child) {
-            if (!$child instanceof Product) {
+        foreach ($object->getChildren([AbstractObject::OBJECT_TYPE_OBJECT]) as $child) {
+            if (!$child instanceof Collection) {
                 continue;
             }
 
             $this->processObject($child);
         }
 
-        // If is variant -> process parent if is product
-        if ($object->getParent() instanceof Product) {
+        // If has parent collection -> process parent
+        if ($object->getParent() instanceof Collection) {
             $this->processObject($object->getParent());
         }
-
-        AbstractObject::setGetInheritedValues($backup);
     }
 
     /**
@@ -140,10 +76,10 @@ class ProductSubscriber implements EventSubscriberInterface
      */
     public function onPostDelete(DataObjectEvent $event): void
     {
-        /** @var Product $object */
+        /** @var Collection $object */
         $object = $event->getObject();
 
-        if (!$object instanceof Product || $this->skipPushToQueue) {
+        if (!$object instanceof Collection || $this->skipPushToQueue) {
             return;
         }
 
@@ -153,20 +89,20 @@ class ProductSubscriber implements EventSubscriberInterface
     /**
      * Process a single object - determine if update or delete webhook should be sent
      *
-     * @param Product $object
+     * @param Collection $object
      *
      * @return void
      */
-    private function processObject(Product $object): void
+    private function processObject(Collection $object): void
     {
         $adminUser = Tool\Admin::getCurrentUser();
 
-        // If not published or status is not active -> send delete
+        // If not published or parent is not published -> send delete
         if ($object->isPublished() === false
-            || ($object->getParent() instanceof Product && $object->getParent()->isPublished() === false)
+            || ($object->getParent() instanceof Collection && $object->getParent()->isPublished() === false)
         ) {
             Logger::notice(sprintf(
-                '[ProductSubscriber] DELETE event - objectId: %d Path: %s is not published! ... DELETE webhook',
+                '[CollectionSubscriber] DELETE event - objectId: %d Path: %s is not published! ... DELETE webhook',
                 $object->getId(),
                 $object->getFullPath()
             ));
@@ -178,7 +114,7 @@ class ProductSubscriber implements EventSubscriberInterface
         // Skip if saved via CLI
         if (PHP_SAPI === 'cli' && $adminUser === null) {
             Logger::notice(sprintf(
-                '[ProductSubscriber] ObjectId: %d Path: %s saved via CLI ... SKIPPING',
+                '[CollectionSubscriber] ObjectId: %d Path: %s saved via CLI ... SKIPPING',
                 $object->getId(),
                 $object->getFullPath()
             ));
@@ -191,14 +127,14 @@ class ProductSubscriber implements EventSubscriberInterface
     /**
      * Send update webhook to Vendure
      *
-     * @param Product $object
+     * @param Collection $object
      *
      * @return void
      */
-    private function sendWebhookUpdate(Product $object): void
+    private function sendWebhookUpdate(Collection $object): void
     {
         Logger::info(sprintf(
-            '[ProductSubscriber] UPDATE event - objectId: %d Path: %s',
+            '[CollectionSubscriber] UPDATE event - objectId: %d Path: %s',
             $object->getId(),
             $object->getFullPath()
         ));
@@ -214,14 +150,14 @@ class ProductSubscriber implements EventSubscriberInterface
     /**
      * Send delete webhook to Vendure
      *
-     * @param Product $object
+     * @param Collection $object
      *
      * @return void
      */
-    private function sendWebhookDelete(Product $object): void
+    private function sendWebhookDelete(Collection $object): void
     {
         Logger::info(sprintf(
-            '[ProductSubscriber] DELETE event - objectId: %d Path: %s',
+            '[CollectionSubscriber] DELETE event - objectId: %d Path: %s',
             $object->getId(),
             $object->getFullPath()
         ));

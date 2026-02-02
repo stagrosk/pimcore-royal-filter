@@ -59,6 +59,10 @@ class NavigationResponse extends AbstractResponse
                 'type' => Type::string(),
                 'description' => 'API ID for the related object (e.g. collection ID)',
             ],
+            'pimcoreId' => [
+                'type' => Type::int(),
+                'description' => 'Pimcore object ID',
+            ],
             'canonicals' => [
                 'type' => Type::listOf(self::getCanonicalType()),
                 'description' => 'Language handles for all available languages',
