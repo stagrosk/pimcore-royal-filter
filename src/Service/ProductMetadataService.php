@@ -15,6 +15,7 @@ use Pimcore\Model\DataObject\RoyalFilter;
 class ProductMetadataService
 {
     public const ALLOWED_SUM_PARAMETERS = ['body1', 'bodyMiddle', 'body2', 'center1', 'centerMiddle', 'center2'];
+    public const WEIGHT_SUM_PARAMETERS = ['body1', 'bodyMiddle', 'body2', 'center1', 'centerMiddle', 'center2', 'adapter', 'equipBody1', 'equipBody2'];
 
     /**
      * @param \App\Pimcore\ClassificationStore\ClassificationStoreHelper $classificationStoreHelper
@@ -156,9 +157,14 @@ class ProductMetadataService
                             'language' => 'default'
                         ];
                     } else {
-                        // height as SUM
+                        // height as SUM (bodies and centers only)
                         if (in_array($objectName, self::ALLOWED_SUM_PARAMETERS, true) && $keyConfig->getName() === 'height') {
                             $mappedProperties[$ident]['value'] = (int)$mappedProperties[$ident]['value'] + (int)$keyConfigValue['default']->getValue();
+                        }
+                        // weight as SUM (all components)
+                        if (in_array($objectName, self::WEIGHT_SUM_PARAMETERS, true) && $keyConfig->getName() === 'weight') {
+                            $currentValue = is_object($keyConfigValue['default']) ? $keyConfigValue['default']->getValue() : $keyConfigValue['default'];
+                            $mappedProperties[$ident]['value'] = (float)$mappedProperties[$ident]['value'] + (float)$currentValue;
                         }
                     }
                 }
