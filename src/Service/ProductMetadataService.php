@@ -11,6 +11,7 @@ use Pimcore\Model\DataObject\Center;
 use Pimcore\Model\DataObject\Classificationstore;
 use Pimcore\Model\DataObject\Data\QuantityValue;
 use Pimcore\Model\DataObject\Equipment;
+use Pimcore\Model\DataObject\QuantityValue\Unit;
 use Pimcore\Model\DataObject\RoyalFilter;
 
 class ProductMetadataService
@@ -156,8 +157,9 @@ class ProductMetadataService
                         if ($keyConfig->getName() === 'weight' && $value instanceof QuantityValue) {
                             $definition = json_decode($keyConfig->getDefinition());
                             $targetUnitId = $definition->defaultUnit ?? null;
-                            if ($targetUnitId && $value->getUnitId() !== $targetUnitId) {
-                                $value = $value->convertTo($targetUnitId);
+                            $targetUnit = $targetUnitId ? Unit::getById($targetUnitId) : null;
+                            if ($targetUnit && $value->getUnitId() !== $targetUnitId) {
+                                $value = $value->convertTo($targetUnit);
                             }
                             $value = $value->getValue();
                         } elseif (is_object($value)) {
@@ -180,8 +182,9 @@ class ProductMetadataService
                             if ($weightValue instanceof QuantityValue) {
                                 $definition = json_decode($keyConfig->getDefinition());
                                 $targetUnitId = $definition->defaultUnit ?? null;
-                                if ($targetUnitId && $weightValue->getUnitId() !== $targetUnitId) {
-                                    $weightValue = $weightValue->convertTo($targetUnitId);
+                                $targetUnit = $targetUnitId ? Unit::getById($targetUnitId) : null;
+                                if ($targetUnit && $weightValue->getUnitId() !== $targetUnitId) {
+                                    $weightValue = $weightValue->convertTo($targetUnit);
                                 }
                                 $mappedProperties[$ident]['value'] = (float)$mappedProperties[$ident]['value'] + (float)$weightValue->getValue();
                             } elseif (is_numeric($weightValue)) {
