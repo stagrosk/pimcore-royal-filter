@@ -9,6 +9,7 @@ use Pimcore\Model\DataObject\Adapter;
 use Pimcore\Model\DataObject\Body;
 use Pimcore\Model\DataObject\Center;
 use Pimcore\Model\DataObject\Classificationstore;
+use Pimcore\Model\DataObject\Data\QuantityValue;
 use Pimcore\Model\DataObject\Equipment;
 use Pimcore\Model\DataObject\RoyalFilter;
 
@@ -150,8 +151,20 @@ class ProductMetadataService
 
                     $ident = $groupConfig->getId() .'-'. $keyConfig->getId();
                     if (!array_key_exists($ident, $mappedProperties)) {
+                        $value = $keyConfigValue['default'];
+                        // convert weight to target unit on first occurrence
+                        if ($keyConfig->getName() === 'weight' && $value instanceof QuantityValue) {
+                            $definition = json_decode($keyConfig->getDefinition());
+                            $targetUnitId = $definition->defaultUnit ?? null;
+                            if ($targetUnitId && $value->getUnitId() !== $targetUnitId) {
+                                $value = $value->convertTo($targetUnitId);
+                            }
+                            $value = $value->getValue();
+                        } elseif (is_object($value)) {
+                            $value = $value->getValue();
+                        }
                         $mappedProperties[$ident] = [
-                            'value' => is_object($keyConfigValue['default']) ? $keyConfigValue['default']->getValue() : $keyConfigValue['default'],
+                            'value' => $value,
                             'groupConfig' => $groupConfig,
                             'keyConfig' => $keyConfig,
                             'language' => 'default'
@@ -161,10 +174,19 @@ class ProductMetadataService
                         if (in_array($objectName, self::ALLOWED_SUM_PARAMETERS, true) && $keyConfig->getName() === 'height') {
                             $mappedProperties[$ident]['value'] = (int)$mappedProperties[$ident]['value'] + (int)$keyConfigValue['default']->getValue();
                         }
-                        // weight as SUM (all components)
+                        // weight as SUM (all components) with unit conversion
                         if (in_array($objectName, self::WEIGHT_SUM_PARAMETERS, true) && $keyConfig->getName() === 'weight') {
-                            $currentValue = is_object($keyConfigValue['default']) ? $keyConfigValue['default']->getValue() : $keyConfigValue['default'];
-                            $mappedProperties[$ident]['value'] = (float)$mappedProperties[$ident]['value'] + (float)$currentValue;
+                            $weightValue = $keyConfigValue['default'];
+                            if ($weightValue instanceof QuantityValue) {
+                                $definition = json_decode($keyConfig->getDefinition());
+                                $targetUnitId = $definition->defaultUnit ?? null;
+                                if ($targetUnitId && $weightValue->getUnitId() !== $targetUnitId) {
+                                    $weightValue = $weightValue->convertTo($targetUnitId);
+                                }
+                                $mappedProperties[$ident]['value'] = (float)$mappedProperties[$ident]['value'] + (float)$weightValue->getValue();
+                            } elseif (is_numeric($weightValue)) {
+                                $mappedProperties[$ident]['value'] = (float)$mappedProperties[$ident]['value'] + (float)$weightValue;
+                            }
                         }
                     }
                 }
