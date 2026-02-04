@@ -164,6 +164,10 @@ class TranslateClassificationStoreCommand extends Command
     {
         $io->info('Scanning classification store for groups and keys...');
 
+        // Load existing translation keys from database
+        $existingKeys = $this->getExistingTranslationKeys();
+        $io->info(sprintf('Found %d existing translation entries in database', count($existingKeys)));
+
         $created = 0;
         $skipped = 0;
 
@@ -171,38 +175,48 @@ class TranslateClassificationStoreCommand extends Command
         $groupListing = new GroupConfig\Listing();
         $groups = $groupListing->load();
 
-        $io->info(sprintf('Found %d groups', count($groups)));
+        $io->info(sprintf('Found %d groups in classification store', count($groups)));
 
         foreach ($groups as $group) {
             $groupName = $group->getName();
             $groupTitle = $group->getDescription() ?: $groupName;
+            $translationKey = ClassificationStoreTranslationService::PREFIX_GROUP . $groupName;
+
+            if (in_array($translationKey, $existingKeys, true)) {
+                $skipped++;
+                continue;
+            }
 
             if ($dryRun) {
-                $io->writeln(sprintf('  [GROUP] %s -> %s', $groupName, $groupTitle));
-                $created++;
+                $io->writeln(sprintf('  <info>[NEW GROUP]</info> %s -> %s', $groupName, $groupTitle));
             } else {
                 $this->translationService->getGroupTranslations($groupName, $groupTitle);
-                $created++;
             }
+            $created++;
         }
 
         // Get all keys
         $keyListing = new KeyConfig\Listing();
         $keys = $keyListing->load();
 
-        $io->info(sprintf('Found %d keys', count($keys)));
+        $io->info(sprintf('Found %d keys in classification store', count($keys)));
 
         foreach ($keys as $key) {
             $keyName = $key->getName();
             $keyTitle = $key->getTitle() ?: $keyName;
+            $translationKey = ClassificationStoreTranslationService::PREFIX_KEY . $keyName;
+
+            if (in_array($translationKey, $existingKeys, true)) {
+                $skipped++;
+                continue;
+            }
 
             if ($dryRun) {
-                $io->writeln(sprintf('  [KEY] %s -> %s', $keyName, $keyTitle));
-                $created++;
+                $io->writeln(sprintf('  <info>[NEW KEY]</info> %s -> %s', $keyName, $keyTitle));
             } else {
                 $this->translationService->getKeyTranslations($keyName, $keyTitle);
-                $created++;
             }
+            $created++;
         }
 
         $io->newLine(2);
@@ -211,12 +225,41 @@ class TranslateClassificationStoreCommand extends Command
             $io->note('DRY RUN - No changes were made');
         }
 
-        $io->success(sprintf(
-            'Generation complete: %d translation entries created/updated',
-            $created
-        ));
+        if ($created === 0) {
+            $io->success('All translation entries already exist. Nothing to add.');
+        } else {
+            $io->success(sprintf(
+                'Generation complete: %d new entries %s, %d already existed',
+                $created,
+                $dryRun ? 'would be created' : 'created',
+                $skipped
+            ));
+        }
 
         return Command::SUCCESS;
+    }
+
+    /**
+     * Get all existing classification store translation keys from database
+     */
+    private function getExistingTranslationKeys(): array
+    {
+        $listing = new Translation\Listing();
+        $listing->setDomain(ClassificationStoreTranslationService::TRANSLATION_DOMAIN);
+        $listing->addConditionParam(
+            '`key` LIKE ? OR `key` LIKE ?',
+            [
+                ClassificationStoreTranslationService::PREFIX_GROUP . '%',
+                ClassificationStoreTranslationService::PREFIX_KEY . '%'
+            ]
+        );
+
+        $keys = [];
+        foreach ($listing->load() as $translation) {
+            $keys[] = $translation->getKey();
+        }
+
+        return $keys;
     }
 
     /**
