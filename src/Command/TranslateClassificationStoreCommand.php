@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Command;
 
 use App\Service\ClassificationStoreTranslationService;
+use Pimcore\Model\DataObject\Classificationstore\GroupConfig;
+use Pimcore\Model\DataObject\Classificationstore\KeyConfig;
 use Pimcore\Model\Translation;
 use Pimcore\Tool;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -22,7 +24,7 @@ class TranslateClassificationStoreCommand extends Command
 {
     public function __construct(
         private readonly ClassificationStoreTranslationService $translationService,
-        private readonly string $deeplApiKey,
+        private readonly string $deeplApiKey = '',
         private readonly string $sourceLanguage = 'en'
     ) {
         parent::__construct();
@@ -32,7 +34,8 @@ class TranslateClassificationStoreCommand extends Command
     {
         $this
             ->addOption('dry-run', null, InputOption::VALUE_NONE, 'Show what would be translated without actually translating')
-            ->addOption('language', 'l', InputOption::VALUE_OPTIONAL, 'Translate only to specific language');
+            ->addOption('language', 'l', InputOption::VALUE_OPTIONAL, 'Translate only to specific language')
+            ->addOption('generate-only', 'g', InputOption::VALUE_NONE, 'Only generate translation entries without DeepL translation');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -40,11 +43,17 @@ class TranslateClassificationStoreCommand extends Command
         $io = new SymfonyStyle($input, $output);
         $dryRun = $input->getOption('dry-run');
         $targetLanguage = $input->getOption('language');
+        $generateOnly = $input->getOption('generate-only');
 
         $io->title('Classification Store Translation');
 
+        // Generate-only mode: scan classification store and create translation entries
+        if ($generateOnly) {
+            return $this->executeGenerateOnly($io, $dryRun);
+        }
+
         if (empty($this->deeplApiKey)) {
-            $io->error('DeepL API key is not configured. Set DEEPL_API_KEY in your environment.');
+            $io->error('DeepL API key is not configured. Set DEEPL_API_KEY in your environment or use --generate-only.');
             return Command::FAILURE;
         }
 
@@ -70,7 +79,7 @@ class TranslateClassificationStoreCommand extends Command
         $totalTranslations = count($translations);
 
         if ($totalTranslations === 0) {
-            $io->warning('No classification store translations found. Run the API first to generate translation entries.');
+            $io->warning('No classification store translations found. Run with --generate-only first.');
             return Command::SUCCESS;
         }
 
@@ -143,6 +152,68 @@ class TranslateClassificationStoreCommand extends Command
             $translated,
             $skipped,
             $errors
+        ));
+
+        return Command::SUCCESS;
+    }
+
+    /**
+     * Generate translation entries for all classification store groups and keys
+     */
+    private function executeGenerateOnly(SymfonyStyle $io, bool $dryRun): int
+    {
+        $io->info('Scanning classification store for groups and keys...');
+
+        $created = 0;
+        $skipped = 0;
+
+        // Get all groups
+        $groupListing = new GroupConfig\Listing();
+        $groups = $groupListing->load();
+
+        $io->info(sprintf('Found %d groups', count($groups)));
+
+        foreach ($groups as $group) {
+            $groupName = $group->getName();
+            $groupTitle = $group->getDescription() ?: $groupName;
+
+            if ($dryRun) {
+                $io->writeln(sprintf('  [GROUP] %s -> %s', $groupName, $groupTitle));
+                $created++;
+            } else {
+                $this->translationService->getGroupTranslations($groupName, $groupTitle);
+                $created++;
+            }
+        }
+
+        // Get all keys
+        $keyListing = new KeyConfig\Listing();
+        $keys = $keyListing->load();
+
+        $io->info(sprintf('Found %d keys', count($keys)));
+
+        foreach ($keys as $key) {
+            $keyName = $key->getName();
+            $keyTitle = $key->getTitle() ?: $keyName;
+
+            if ($dryRun) {
+                $io->writeln(sprintf('  [KEY] %s -> %s', $keyName, $keyTitle));
+                $created++;
+            } else {
+                $this->translationService->getKeyTranslations($keyName, $keyTitle);
+                $created++;
+            }
+        }
+
+        $io->newLine(2);
+
+        if ($dryRun) {
+            $io->note('DRY RUN - No changes were made');
+        }
+
+        $io->success(sprintf(
+            'Generation complete: %d translation entries created/updated',
+            $created
         ));
 
         return Command::SUCCESS;
