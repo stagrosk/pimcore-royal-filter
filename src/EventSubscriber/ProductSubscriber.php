@@ -113,22 +113,8 @@ class ProductSubscriber implements EventSubscriberInterface
             return;
         }
 
-        // Process object
+        // Process only the updated object - Vendure handles parent/children sync automatically
         $this->processObject($object);
-
-        // Process all children of object
-        foreach ($object->getChildren([AbstractObject::OBJECT_TYPE_OBJECT, AbstractObject::OBJECT_TYPE_VARIANT]) as $child) {
-            if (!$child instanceof Product) {
-                continue;
-            }
-
-            $this->processObject($child);
-        }
-
-        // If is variant -> process parent if is product
-        if ($object->getParent() instanceof Product) {
-            $this->processObject($object->getParent());
-        }
 
         AbstractObject::setGetInheritedValues($backup);
     }
