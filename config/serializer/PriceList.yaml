@@ -29,10 +29,6 @@ App\Pimcore\Model\DataObject\PriceList:
             exp: object.getPercentage()
             serialized_name: percentage
             groups: [api]
-        getRoundingDecimals:
-            exp: object.getRoundingDecimals()
-            serialized_name: roundingDecimals
-            groups: [ api ]
         getParentPriceListId:
             exp: object.getParentPriceListId()
             serialized_name: parentId
