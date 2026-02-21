@@ -1,2 +1,16 @@
 imports:
     - { resource: ../../config.yaml }
+
+framework:
+    profiler:
+        collect_parameter: null
+        collect: true
+        only_exceptions: false
+        only_main_requests: false
+        dsn: 'file:%kernel.cache_dir%/profiler'
+        collect_serializer_data: true
+
+web_profiler:
+    toolbar: true
+    intercept_redirects: false
+    excluded_ajax_paths: '^/pimcore-graphql-webservices/'
