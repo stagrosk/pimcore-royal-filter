@@ -10,7 +10,7 @@
  * - isVirtualProduct [checkbox]
  * - isGiftCard [checkbox]
  * - ean [input]
- * - productType [input]
+ * - productType [select]
  * - sku [input]
  * - localizedfields [localizedfields]
  * -- title [input]
@@ -41,7 +41,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1770059217,
+   'modificationDate' => 1773070199,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -265,7 +265,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'defaultValueGenerator' => '',
               )),
               5 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+              \Pimcore\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
                  'name' => 'productType',
                  'title' => 'Product type',
                  'tooltip' => '',
@@ -283,16 +283,32 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'blockedVarsForExport' => 
                 array (
                 ),
-                 'defaultValue' => NULL,
-                 'columnLength' => 190,
-                 'regex' => '',
-                 'regexFlags' => 
+                 'options' => 
                 array (
+                  0 => 
+                  array (
+                    'key' => 'Product',
+                    'value' => 'product',
+                  ),
+                  1 => 
+                  array (
+                    'key' => 'Filter',
+                    'value' => 'filter',
+                  ),
+                  2 => 
+                  array (
+                    'key' => 'Whirlpool filter',
+                    'value' => 'whirlpoolFilter',
+                  ),
                 ),
-                 'unique' => false,
-                 'showCharCount' => false,
-                 'width' => '',
+                 'defaultValue' => '',
+                 'columnLength' => 190,
+                 'dynamicOptions' => false,
                  'defaultValueGenerator' => '',
+                 'width' => '',
+                 'optionsProviderType' => 'configure',
+                 'optionsProviderClass' => '',
+                 'optionsProviderData' => '',
               )),
               6 => 
               \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
@@ -1366,51 +1382,6 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'enableGridLocking' => false,
    'deletedDataComponents' => 
   array (
-    0 => 
-    \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToManyRelation::__set_state(array(
-       'name' => 'reviews',
-       'title' => 'Reviews',
-       'tooltip' => '',
-       'mandatory' => false,
-       'noteditable' => false,
-       'index' => false,
-       'locked' => false,
-       'style' => '',
-       'permissions' => NULL,
-       'fieldtype' => '',
-       'relationType' => true,
-       'invisible' => false,
-       'visibleGridView' => false,
-       'visibleSearch' => false,
-       'blockedVarsForExport' => 
-      array (
-      ),
-       'classes' => 
-      array (
-        0 => 
-        array (
-          'classes' => 'ProductReview',
-        ),
-      ),
-       'displayMode' => NULL,
-       'pathFormatterClass' => '',
-       'maxItems' => NULL,
-       'assetInlineDownloadAllowed' => false,
-       'assetUploadPath' => '',
-       'allowToClearRelation' => true,
-       'objectsAllowed' => true,
-       'assetsAllowed' => false,
-       'assetTypes' => 
-      array (
-      ),
-       'documentsAllowed' => false,
-       'documentTypes' => 
-      array (
-      ),
-       'enableTextSelection' => false,
-       'width' => '',
-       'height' => '',
-    )),
   ),
    'blockedVarsForExport' => 
   array (
