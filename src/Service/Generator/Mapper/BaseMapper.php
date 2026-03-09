@@ -7,6 +7,7 @@ use App\Pimcore\ClassificationStore\ClassificationStoreService;
 use App\Service\ProductMetadataService;
 use Pimcore\Model\DataObject\AbstractObject;
 use Pimcore\Model\DataObject\Collection;
+use Pimcore\Model\DataObject\Data\Hotspotimage;
 use Pimcore\Model\DataObject\Product;
 use Pimcore\Translation\Translator;
 
@@ -45,5 +46,22 @@ abstract class BaseMapper implements MapperInterface
         }
 
         $product->setCollections($collections);
+    }
+
+    protected function deduplicateImages(array $hotspotImages): array
+    {
+        $seen = [];
+        $images = [];
+        foreach ($hotspotImages as $hotspotImage) {
+            if (!$hotspotImage instanceof Hotspotimage || !$hotspotImage->getImage()) {
+                continue;
+            }
+            $assetId = $hotspotImage->getImage()->getId();
+            if (!isset($seen[$assetId])) {
+                $seen[$assetId] = true;
+                $images[] = $hotspotImage;
+            }
+        }
+        return $images;
     }
 }

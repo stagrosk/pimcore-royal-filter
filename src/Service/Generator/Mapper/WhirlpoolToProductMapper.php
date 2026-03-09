@@ -84,7 +84,6 @@ class WhirlpoolToProductMapper extends BaseMapper
         }
 
         // images
-        // todo: collect all images from all setups and merge them together, prevent duplicities
         $product->setImageGallery($this->prepareImages($product, $fromObject));
 
         // pimcore base
@@ -103,19 +102,18 @@ class WhirlpoolToProductMapper extends BaseMapper
      */
     private function prepareImages(Product $product, AbstractObject $object): ImageGallery
     {
-        $images = [];
+        $allImages = [];
         if ($object->getDefaultImage() instanceof Asset) {
-            $images[] = new Hotspotimage($object->getDefaultImage());
+            $allImages[] = new Hotspotimage($object->getDefaultImage());
         }
 
-        // merge default image and image gallery
-        $images = array_merge(
-            $images,
+        $allImages = array_merge(
+            $allImages,
             $object->getImages()?->getItems() ?? [],
             $product->getImageGallery()?->getItems() ?? []
         );
 
-        return new ImageGallery($images);
+        return new ImageGallery($this->deduplicateImages($allImages));
     }
 
     /**

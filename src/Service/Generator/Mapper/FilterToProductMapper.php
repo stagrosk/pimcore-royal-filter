@@ -8,10 +8,8 @@ use App\Pimcore\ClassificationStore\ClassificationStoreService;
 use App\Pimcore\Model\DataObject\RoyalFilter;
 use App\Service\ProductMetadataService;
 use App\Enum\ProductStatusEnum;
-use Pimcore\Model\Asset;
 use Pimcore\Model\DataObject\AbstractObject;
 use Pimcore\Model\DataObject\Country;
-use Pimcore\Model\DataObject\Data\Hotspotimage;
 use Pimcore\Model\DataObject\Data\ImageGallery;
 use Pimcore\Model\DataObject\Folder;
 use Pimcore\Model\DataObject\Product;
@@ -106,9 +104,8 @@ class FilterToProductMapper extends BaseMapper
      */
     private function prepareImages(AbstractObject|RoyalFilter $object): ImageGallery
     {
-        // images
-        $images = array_merge(
-            $object->getImageGallery()?->getItems(),
+        $allImages = array_merge(
+            $object->getImageGallery()?->getItems() ?? [],
             $object->getBody1()?->getImageGallery()?->getItems() ?? [],
             $object->getBodyMiddle()?->getImageGallery()?->getItems() ?? [],
             $object->getBody2()?->getImageGallery()?->getItems() ?? [],
@@ -120,7 +117,7 @@ class FilterToProductMapper extends BaseMapper
             $object->getEquipBody2()?->getImageGallery()?->getItems() ?? [],
         );
 
-        return new ImageGallery($images);
+        return new ImageGallery($this->deduplicateImages($allImages));
     }
 
     /**
