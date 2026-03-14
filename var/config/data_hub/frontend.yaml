@@ -109,12 +109,6 @@ pimcore_data_hub:
                             columns:
                                 -
                                     attributes:
-                                        attribute: apiId
-                                        label: 'Api Id'
-                                        dataType: input
-                                    isOperator: false
-                                -
-                                    attributes:
                                         attribute: title
                                         label: Title
                                         dataType: input
@@ -136,6 +130,12 @@ pimcore_data_hub:
                                         attribute: handle
                                         label: Handle
                                         dataType: input
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: filterConfig
+                                        label: 'Filter Configuration'
+                                        dataType: fieldcollections
                                     isOperator: false
                                 -
                                     attributes:

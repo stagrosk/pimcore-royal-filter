@@ -10,6 +10,7 @@
  * -- description [wysiwyg]
  * -- slug [input]
  * -- handle [input]
+ * - filterConfig [fieldcollections]
  * - metadata [classificationstore]
  * - image [image]
  */
@@ -273,7 +274,64 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'labelWidth' => 100,
                      'labelAlign' => 'left',
                   )),
-                  1 => 
+                  1 =>
+                  \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+                     'name' => 'Filter Settings',
+                     'type' => NULL,
+                     'region' => NULL,
+                     'title' => 'Filter Settings',
+                     'width' => '',
+                     'height' => '',
+                     'collapsible' => false,
+                     'collapsed' => false,
+                     'bodyStyle' => '',
+                     'datatype' => 'layout',
+                     'children' =>
+                    array (
+                      0 =>
+                      \Pimcore\Model\DataObject\ClassDefinition\Data\Fieldcollections::__set_state(array(
+                         'name' => 'filterConfig',
+                         'title' => 'Filter Configuration',
+                         'tooltip' => 'Configure which parameters appear as filters on the category page',
+                         'mandatory' => false,
+                         'noteditable' => false,
+                         'index' => false,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'fieldtype' => '',
+                         'relationType' => false,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' =>
+                        array (
+                        ),
+                         'allowedTypes' =>
+                        array (
+                          0 => 'FilterConfigItem',
+                        ),
+                         'lazyLoading' => true,
+                         'maxItems' => NULL,
+                         'disallowAddRemove' => false,
+                         'disallowReorder' => false,
+                         'collapsed' => false,
+                         'collapsible' => false,
+                         'border' => true,
+                      )),
+                    ),
+                     'locked' => false,
+                     'blockedVarsForExport' =>
+                    array (
+                    ),
+                     'fieldtype' => 'panel',
+                     'layout' => NULL,
+                     'border' => false,
+                     'icon' => '/bundles/pimcoreadmin/img/flat-color-icons/settings.svg',
+                     'labelWidth' => 100,
+                     'labelAlign' => 'left',
+                  )),
+                  2 =>
                   \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
                      'name' => 'Parameters',
                      'type' => NULL,

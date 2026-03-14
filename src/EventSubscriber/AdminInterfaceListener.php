@@ -3,9 +3,19 @@
 namespace App\EventSubscriber;
 
 use Pimcore\Event\BundleManager\PathsEvent;
+use Pimcore\Event\BundleManagerEvents;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class AdminInterfaceListener
+class AdminInterfaceListener implements EventSubscriberInterface
 {
+    public static function getSubscribedEvents(): array
+    {
+        return [
+            BundleManagerEvents::CSS_PATHS => 'addCssFiles',
+            BundleManagerEvents::JS_PATHS => 'addJsFiles',
+        ];
+    }
+
     /**
      * @param \Pimcore\Event\BundleManager\PathsEvent $event
      */
@@ -30,6 +40,7 @@ class AdminInterfaceListener
                 $event->getPaths(),
                 [
                     '/admin-static/js/notification-override.js',
+                    '/admin-static/js/filter-config-dependent-select.js',
                 ]
             )
         );
