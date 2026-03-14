@@ -89,8 +89,11 @@ class FilterToProductMapper extends BaseMapper
         // prices
         $product->setPrices($fromObject->getPrices());
 
-        // pimcore base
-        $path = sprintf('Products/%s', $fromObject->getCollection()->getKey());
+        // pimcore base - preserve collection hierarchy without root folder
+        $collectionPath = $fromObject->getCollection()->getFullPath();
+        $pathParts = explode('/', trim($collectionPath, '/'));
+        array_shift($pathParts); // remove root folder (e.g. "Collections")
+        $path = implode('/', $pathParts);
         $product->setParent(Service::createFolderByPath($path));
         $product->setKey(Service::getValidKey(sprintf('RF-%s', str_replace(' ', '-', $product->getTitle())), 'object'));
 
@@ -174,10 +177,13 @@ class FilterToProductMapper extends BaseMapper
             }
         }
 
-        return $this->translator->trans('product_title_filter', [
-            '%title%' => $fromObject->getTitle($language),
-            '%dimensions%' => $dimensions,
-            '%extraParams%' => implode(', ', $extraParams),
-        ], 'messages', $language);
+        $title = $fromObject->getTitle($language);
+
+        $params = array_filter([$dimensions, ...array_values($extraParams)]);
+        if (!empty($params)) {
+            $title .= ' (' . implode(', ', $params) . ')';
+        }
+
+        return $title;
     }
 }

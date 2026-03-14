@@ -86,8 +86,11 @@ class WhirlpoolToProductMapper extends BaseMapper
         // images
         $product->setImageGallery($this->prepareImages($product, $fromObject));
 
-        // pimcore base
-        $path = sprintf('Products/%s', $fromObject->getCollection()->getKey());
+        // pimcore base - preserve collection hierarchy without root folder
+        $collectionPath = $fromObject->getCollection()->getFullPath();
+        $pathParts = explode('/', trim($collectionPath, '/'));
+        array_shift($pathParts); // remove root folder (e.g. "Collections")
+        $path = implode('/', $pathParts);
         $product->setParent(Service::createFolderByPath($path));
         $product->setKey(Service::getValidKey(sprintf('WRF-%s', str_replace(' ', '-', $product->getTitle())), 'object'));
 
