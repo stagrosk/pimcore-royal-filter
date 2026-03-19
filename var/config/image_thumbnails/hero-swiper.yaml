@@ -1,0 +1,27 @@
+pimcore:
+    assets:
+        image:
+            thumbnails:
+                definitions:
+                    hero-swiper:
+                        items:
+                            -
+                                method: scaleByWidth
+                                arguments:
+                                    width: 1920
+                                    forceResize: false
+                        medias: {  }
+                        name: hero-swiper
+                        description: ''
+                        group: content
+                        format: SOURCE
+                        quality: 85
+                        highResolution: null
+                        preserveColor: false
+                        forceProcessICCProfiles: false
+                        preserveMetaData: false
+                        rasterizeSVG: false
+                        downloadable: false
+                        modificationDate: 1773777131
+                        creationDate: 1773777102
+                        preserveAnimation: false

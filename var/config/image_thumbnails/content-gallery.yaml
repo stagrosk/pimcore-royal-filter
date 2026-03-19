@@ -1,0 +1,27 @@
+pimcore:
+    assets:
+        image:
+            thumbnails:
+                definitions:
+                    content-gallery:
+                        items:
+                            -
+                                method: scaleByWidth
+                                arguments:
+                                    width: 800
+                                    forceResize: false
+                        medias: {  }
+                        name: content-gallery
+                        description: ''
+                        group: content
+                        format: SOURCE
+                        quality: 85
+                        highResolution: null
+                        preserveColor: false
+                        forceProcessICCProfiles: false
+                        preserveMetaData: false
+                        rasterizeSVG: false
+                        downloadable: false
+                        modificationDate: 1773777137
+                        creationDate: 1773777094
+                        preserveAnimation: false
