@@ -12,12 +12,14 @@ use Pimcore\Model\DataObject\Data\Video;
 use Pimcore\Model\DataObject\Fieldcollection\Data\Button;
 use Pimcore\Model\DataObject\Fieldcollection\Data\Headline;
 use Pimcore\Model\DataObject\Fieldcollection\Data\HeroSwiper;
+use Pimcore\Model\DataObject\Fieldcollection\Data\ProductGrid;
 use Pimcore\Model\DataObject\Fieldcollection\Data\Image;
 use Pimcore\Model\DataObject\Fieldcollection\Data\ImageContent;
 use Pimcore\Model\DataObject\Fieldcollection\Data\ParalaxContent;
 use Pimcore\Model\DataObject\Fieldcollection\Data\Script;
 use Pimcore\Model\DataObject\Fieldcollection\Data\Text;
 use Pimcore\Model\DataObject\Fieldcollection\Data\TextWithImage;
+use Pimcore\Model\DataObject\Fieldcollection\Data\CategoryGrid;
 use Pimcore\Model\DataObject\Fieldcollection\Data\Widget;
 
 class ContentElementHelper
@@ -27,7 +29,7 @@ class ContentElementHelper
     private const THUMBNAIL_HERO = 'hero-swiper';
     private const THUMBNAIL_PARALAX = 'paralax-content';
 
-    public static function getElements(ContentPage $contentPage, string $language): array
+    public function getElements(ContentPage $contentPage, string $language): array
     {
         $elements = $contentPage->getElements();
         if ($elements === null) {
@@ -37,16 +39,18 @@ class ContentElementHelper
         $result = [];
         foreach ($elements->getItems() as $item) {
             $serialized = match (true) {
-                $item instanceof Headline => self::serializeHeadline($item, $language),
-                $item instanceof Button => self::serializeButton($item, $language),
-                $item instanceof Text => self::serializeText($item, $language),
-                $item instanceof Image => self::serializeImage($item, $language),
-                $item instanceof TextWithImage => self::serializeTextWithImage($item, $language),
-                $item instanceof ImageContent => self::serializeImageContent($item, $language),
-                $item instanceof Script => self::serializeScript($item),
-                $item instanceof Widget => self::serializeWidget($item),
-                $item instanceof HeroSwiper => self::serializeHeroSwiper($item, $language),
-                $item instanceof ParalaxContent => self::serializeParalaxContent($item, $language),
+                $item instanceof Headline => $this->serializeHeadline($item, $language),
+                $item instanceof Button => $this->serializeButton($item, $language),
+                $item instanceof Text => $this->serializeText($item, $language),
+                $item instanceof Image => $this->serializeImage($item, $language),
+                $item instanceof TextWithImage => $this->serializeTextWithImage($item, $language),
+                $item instanceof ImageContent => $this->serializeImageContent($item, $language),
+                $item instanceof Script => $this->serializeScript($item),
+                $item instanceof Widget => $this->serializeWidget($item),
+                $item instanceof HeroSwiper => $this->serializeHeroSwiper($item, $language),
+                $item instanceof ParalaxContent => $this->serializeParalaxContent($item, $language),
+                $item instanceof ProductGrid => $this->serializeProductGrid($item, $language),
+                $item instanceof CategoryGrid => $this->serializeCategoryGrid($item),
                 default => null,
             };
 
@@ -58,65 +62,75 @@ class ContentElementHelper
         return $result;
     }
 
-    private static function serializeHeadline(Headline $item, string $language): array
+    private function serializeHeadline(Headline $item, string $language): array
     {
         return [
             'componentType' => 'Headline',
-            'headline' => $item->getHeadline($language),
-            'headlineType' => $item->getHeadlineType(),
-            'textBoxed' => $item->getTextBoxed(),
+            'headline' => [
+                'headline' => $item->getHeadline($language),
+                'headlineType' => $item->getHeadlineType(),
+                'textBoxed' => $item->getTextBoxed(),
+            ],
         ];
     }
 
-    private static function serializeButton(Button $item, string $language): array
+    private function serializeButton(Button $item, string $language): array
     {
         $link = $item->getLink($language);
         $color = $item->getColor();
 
         return [
             'componentType' => 'Button',
-            'link' => self::serializeLinkField($link),
-            'color' => $color instanceof RgbaColor ? self::rgbaToHex($color) : null,
-            'isExternal' => $item->getIsExternal(),
-            'position' => $item->getPosition(),
-            'fullWidth' => $item->getFullWidth(),
+            'button' => [
+                'link' => $this->serializeLinkField($link),
+                'color' => $color instanceof RgbaColor ? $this->rgbaToHex($color) : null,
+                'isExternal' => $item->getIsExternal(),
+                'position' => $item->getPosition(),
+                'fullWidth' => $item->getFullWidth(),
+            ],
         ];
     }
 
-    private static function serializeText(Text $item, string $language): array
+    private function serializeText(Text $item, string $language): array
     {
         return [
             'componentType' => 'Text',
-            'text' => $item->getText($language),
-            'textBoxed' => $item->getTextBoxed(),
+            'text' => [
+                'text' => $item->getText($language),
+                'textBoxed' => $item->getTextBoxed(),
+            ],
         ];
     }
 
-    private static function serializeImage(Image $item, string $language): array
+    private function serializeImage(Image $item, string $language): array
     {
         $image = $item->getImage($language);
 
         return [
             'componentType' => 'Image',
-            'image' => $image instanceof Asset\Image ? $image->getFullPath() : null,
-            'imageThumbnail' => $image instanceof Asset\Image ? $image->getThumbnail(self::THUMBNAIL_CONTENT)?->getPath() : null,
+            'image' => [
+                'image' => $image instanceof Asset\Image ? $image->getFullPath() : null,
+                'imageThumbnail' => $image instanceof Asset\Image ? $image->getThumbnail(self::THUMBNAIL_CONTENT)?->getPath() : null,
+            ],
         ];
     }
 
-    private static function serializeTextWithImage(TextWithImage $item, string $language): array
+    private function serializeTextWithImage(TextWithImage $item, string $language): array
     {
         $image = $item->getImage($language);
 
         return [
             'componentType' => 'TextWithImage',
-            'text' => $item->getText($language),
-            'image' => $image instanceof Asset\Image ? $image->getFullPath() : null,
-            'imageThumbnail' => $image instanceof Asset\Image ? $image->getThumbnail(self::THUMBNAIL_CONTENT)?->getPath() : null,
-            'imagePosition' => $item->getImagePosition(),
+            'textWithImage' => [
+                'text' => $item->getText($language),
+                'image' => $image instanceof Asset\Image ? $image->getFullPath() : null,
+                'imageThumbnail' => $image instanceof Asset\Image ? $image->getThumbnail(self::THUMBNAIL_CONTENT)?->getPath() : null,
+                'imagePosition' => $item->getImagePosition(),
+            ],
         ];
     }
 
-    private static function serializeImageContent(ImageContent $item, string $language): array
+    private function serializeImageContent(ImageContent $item, string $language): array
     {
         $gallery = $item->getImageGallery($language);
         $images = [];
@@ -135,48 +149,73 @@ class ContentElementHelper
 
         return [
             'componentType' => 'ImageContent',
-            'images' => $images,
+            'imageContent' => [
+                'images' => $images,
+            ],
         ];
     }
 
-    private static function serializeScript(Script $item): array
+    private function serializeScript(Script $item): array
     {
         return [
             'componentType' => 'Script',
-            'scriptSrc' => $item->getScriptSrc(),
-            'bodyContent' => $item->getBodyContent(),
+            'script' => [
+                'scriptSrc' => $item->getScriptSrc(),
+                'bodyContent' => $item->getBodyContent(),
+            ],
         ];
     }
 
-    private static function serializeWidget(Widget $item): array
+    private function serializeWidget(Widget $item): array
     {
         return [
             'componentType' => 'Widget',
-            'ident' => $item->getIdent(),
+            'widget' => [
+                'ident' => $item->getIdent(),
+            ],
         ];
     }
 
-    private static function serializeHeroSwiper(HeroSwiper $item, string $language): array
+    private function serializeCategoryGrid(CategoryGrid $item): array
+    {
+        $categories = $item->getCategories();
+        $ids = [];
+
+        foreach ($categories as $category) {
+            $ids[] = $category->getId();
+        }
+
+        return [
+            'componentType' => 'CategoryGrid',
+            'categoryGrid' => [
+                'categoryIds' => $ids,
+            ],
+        ];
+    }
+
+    private function serializeHeroSwiper(HeroSwiper $item, string $language): array
     {
         $blockData = $item->getSlides($language);
         $slides = [];
 
         foreach ($blockData ?? [] as $slideBlock) {
-            $slides[] = self::serializeHeroSlide($slideBlock, $language);
+            $slides[] = $this->serializeHeroSlide($slideBlock, $language);
         }
 
         return [
             'componentType' => 'HeroSwiper',
-            'heroSlides' => $slides,
+            'heroSwiper' => [
+                'slides' => $slides,
+            ],
         ];
     }
 
     /**
      * @param BlockElement[] $slideBlock
      */
-    private static function serializeHeroSlide(array $slideBlock, string $language): array
+    private function serializeHeroSlide(array $slideBlock, string $language): array
     {
-        $asset = self::getBlockValue($slideBlock, 'asset');
+        $asset = $this->getBlockValue($slideBlock, 'asset');
         $serializedAsset = null;
 
         if ($asset instanceof Asset\Image) {
@@ -193,25 +232,25 @@ class ContentElementHelper
             ];
         }
 
-        $primaryLink = self::getBlockValue($slideBlock, 'primaryButtonLink');
-        $primaryRelation = self::getBlockValue($slideBlock, 'primaryButtonRelation');
-        $secondaryLink = self::getBlockValue($slideBlock, 'secondaryButtonLink');
-        $secondaryRelation = self::getBlockValue($slideBlock, 'secondaryButtonRelation');
+        $primaryLink = $this->getBlockValue($slideBlock, 'primaryButtonLink');
+        $primaryRelation = $this->getBlockValue($slideBlock, 'primaryButtonRelation');
+        $secondaryLink = $this->getBlockValue($slideBlock, 'secondaryButtonLink');
+        $secondaryRelation = $this->getBlockValue($slideBlock, 'secondaryButtonRelation');
 
         return [
-            'title' => self::getBlockValue($slideBlock, 'title'),
-            'subtitle' => self::getBlockValue($slideBlock, 'subtitle'),
-            'text' => self::getBlockValue($slideBlock, 'text'),
+            'title' => $this->getBlockValue($slideBlock, 'title'),
+            'subtitle' => $this->getBlockValue($slideBlock, 'subtitle'),
+            'text' => $this->getBlockValue($slideBlock, 'text'),
             'asset' => $serializedAsset,
-            'assetText' => self::getBlockValue($slideBlock, 'assetText'),
+            'assetText' => $this->getBlockValue($slideBlock, 'assetText'),
             'primaryButton' => ButtonHelper::serialize(
-                self::getBlockValue($slideBlock, 'primaryButtonText'),
+                $this->getBlockValue($slideBlock, 'primaryButtonText'),
                 $primaryLink instanceof Link ? $primaryLink : null,
                 $primaryRelation,
                 $language,
             ),
             'secondaryButton' => ButtonHelper::serialize(
-                self::getBlockValue($slideBlock, 'secondaryButtonText'),
+                $this->getBlockValue($slideBlock, 'secondaryButtonText'),
                 $secondaryLink instanceof Link ? $secondaryLink : null,
                 $secondaryRelation,
                 $language,
@@ -219,29 +258,44 @@ class ContentElementHelper
         ];
     }
 
-    private static function serializeParalaxContent(ParalaxContent $item, string $language): array
+    private function serializeParalaxContent(ParalaxContent $item, string $language): array
     {
         $image = $item->getImage();
         $video = $item->getVideo();
 
         return [
             'componentType' => 'ParalaxContent',
-            'title' => $item->getTitle($language),
-            'text' => $item->getText($language),
-            'button' => ButtonHelper::serialize(
-                $item->getButtonText($language),
-                $item->getButtonLink($language),
-                $item->getButtonRelation($language),
-                $language,
-            ),
-            'image' => $image instanceof Asset\Image ? $image->getFullPath() : null,
-            'imageThumbnail' => $image instanceof Asset\Image ? $image->getThumbnail(self::THUMBNAIL_PARALAX)?->getPath() : null,
-            'video' => self::serializeVideoField($video),
-            'overlay' => $item->getOverlay(),
+            'paralaxContent' => [
+                'title' => $item->getTitle($language),
+                'text' => $item->getText($language),
+                'button' => ButtonHelper::serialize(
+                    $item->getButtonText($language),
+                    $item->getButtonLink($language),
+                    $item->getButtonRelation($language),
+                    $language,
+                ),
+                'image' => $image instanceof Asset\Image ? $image->getFullPath() : null,
+                'imageThumbnail' => $image instanceof Asset\Image ? $image->getThumbnail(self::THUMBNAIL_PARALAX)?->getPath() : null,
+                'video' => $this->serializeVideoField($video),
+                'overlay' => $item->getOverlay(),
+            ],
         ];
     }
 
-    private static function serializeVideoField(?Video $video): ?array
+    private function serializeProductGrid(ProductGrid $item, string $language): array
+    {
+        $products = $item->getResolvedProducts();
+
+        return [
+            'componentType' => 'ProductGrid',
+            'productGrid' => [
+                'tabTitle' => $item->getTabTitle($language),
+                'products' => ProductFragmentHelper::transformList($products, $language),
+            ],
+        ];
+    }
+
+    private function serializeVideoField(?Video $video): ?array
     {
         if (!$video instanceof Video) {
             return null;
@@ -268,7 +322,7 @@ class ContentElementHelper
         ];
     }
 
-    private static function serializeLinkField(?Link $link): ?array
+    private function serializeLinkField(?Link $link): ?array
     {
         $resolved = ButtonHelper::resolveLink($link);
         if ($resolved === null) {
@@ -280,7 +334,7 @@ class ContentElementHelper
         ]);
     }
 
-    private static function rgbaToHex(RgbaColor $color): string
+    private function rgbaToHex(RgbaColor $color): string
     {
         return sprintf(
             '#%02x%02x%02x%02x',
@@ -291,7 +345,7 @@ class ContentElementHelper
         );
     }
 
-    private static function getBlockValue(array $slideBlock, string $fieldName): mixed
+    private function getBlockValue(array $slideBlock, string $fieldName): mixed
     {
         if (!isset($slideBlock[$fieldName])) {
             return null;

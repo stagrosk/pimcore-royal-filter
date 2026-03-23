@@ -2,8 +2,11 @@
 
 namespace App\GraphQL\Helper;
 
+use Pimcore\Model\DataObject\Data\RgbaColor;
 use Pimcore\Model\DataObject\Fieldcollection\Data\Price;
 use Pimcore\Model\DataObject\Product;
+use Pimcore\Model\DataObject\CustomerRole;
+use Pimcore\Model\DataObject\ProductFlag;
 use Pimcore\Tool;
 
 class ProductFragmentHelper
@@ -47,6 +50,12 @@ class ProductFragmentHelper
 
             // Prices
             'prices' => self::getPrices($product),
+
+            // Flags
+            'flags' => self::getFlags($product, $language),
+
+            // Customer Roles
+            'customerRoles' => self::getCustomerRoles($product, $language),
 
             // Collections
             'collections' => self::getCollections($product, $language),
@@ -147,7 +156,7 @@ class ProductFragmentHelper
 
             $prices[] = [
                 'priceListId' => $priceList?->getKey(),
-                'priceListName' => $priceList?->getTitle(),
+                'priceListName' => $priceList?->getName(),
                 'price' => $priceItem->getPrice(),
                 'compareAtPrice' => $priceItem->getCompareAtPrice(),
                 'wholesalePrice' => $priceItem->getWholesalePrice(),
@@ -177,7 +186,7 @@ class ProductFragmentHelper
         $result = [];
         foreach ($collections as $collection) {
             $result[] = [
-                'apiId' => $collection->getApiId(),
+                'apiId' => $collection->getKey(),
                 'title' => $collection->getTitle($language),
                 'handle' => $collection->getHandle($language),
                 'slug' => $collection->getSlug($language),
@@ -215,6 +224,60 @@ class ProductFragmentHelper
      *
      * @return array
      */
+    private static function getFlags(Product $product, string $language): array
+    {
+        $flags = $product->getFlags();
+
+        if (empty($flags)) {
+            return [];
+        }
+
+        $result = [];
+        foreach ($flags as $flag) {
+            if (!$flag instanceof ProductFlag) {
+                continue;
+            }
+
+            $color = $flag->getColor();
+
+            $result[] = [
+                'code' => $flag->getCode(),
+                'title' => $flag->getTitle($language),
+                'color' => $color instanceof RgbaColor ? self::rgbaToHex($color) : null,
+            ];
+        }
+
+        return $result;
+    }
+
+    private static function getCustomerRoles(Product $product, string $language): array
+    {
+        $roles = $product->getCustomerRoles();
+
+        if (empty($roles)) {
+            return [];
+        }
+
+        $result = [];
+        foreach ($roles as $role) {
+            if (!$role instanceof CustomerRole) {
+                continue;
+            }
+
+            $result[] = [
+                'code' => $role->getCode(),
+                'title' => $role->getTitle($language),
+            ];
+        }
+
+        return $result;
+    }
+
+    private static function rgbaToHex(RgbaColor $color): string
+    {
+        return sprintf('#%02x%02x%02x', $color->getR(), $color->getG(), $color->getB());
+    }
+
     private static function getCanonicals(Product $product): array
     {
         $canonicals = [];

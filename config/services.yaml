@@ -57,6 +57,7 @@ services:
     #
     App\Controller\:
         resource: '../src/Controller'
+        exclude: '../src/Controller/Api/WebhookController.php'
         public: true
         tags: [ 'controller.service_arguments' ]
 

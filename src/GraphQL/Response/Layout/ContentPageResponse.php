@@ -20,12 +20,14 @@ class ContentPageResponse extends AbstractResponse
     /**
      * @param \Pimcore\Bundle\DataHubBundle\GraphQL\Service $graphQlService
      * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
+     * @param \App\GraphQL\Helper\ContentElementHelper $contentElementHelper
      *
      * @throws \Exception
      */
     public function __construct(
         Service $graphQlService,
-        EventDispatcherInterface $eventDispatcher
+        EventDispatcherInterface $eventDispatcher,
+        private readonly ContentElementHelper $contentElementHelper
     ) {
         $class = ClassDefinition::getByName('ContentPage');
         $resolver = new QueryType($eventDispatcher, $class, null);
@@ -53,7 +55,7 @@ class ContentPageResponse extends AbstractResponse
                             return [];
                         }
                         $language = $source['language'] ?? $source['defaultLanguage'];
-                        return ContentElementHelper::getElements($contentPage, $language);
+                        return $this->contentElementHelper->getElements($contentPage, $language);
                     },
                 ],
                 'canonicals' => [

@@ -13,7 +13,8 @@ services:
             $vendureHost: '%env(VENDURE_HOST)%'
             $vendureWebhookSecret: '%env(VENDURE_WEBHOOK_SECRET)%'
 
-    App\Controller\Api\:
-        resource: '../../src/Controller/Api'
+    App\Controller\Api\WebhookController:
+        arguments:
+            $vendureWebhookSecret: '%env(VENDURE_WEBHOOK_SECRET)%'
         public: true
         tags: ['controller.service_arguments']

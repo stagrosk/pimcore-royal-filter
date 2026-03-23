@@ -13,6 +13,8 @@ class ProductFragment
     private static ?ObjectType $collectionType = null;
     private static ?ObjectType $manufacturerType = null;
     private static ?ObjectType $canonicalType = null;
+    private static ?ObjectType $flagType = null;
+    private static ?ObjectType $customerRoleType = null;
 
     /**
      * Get the singleton ProductFragment type
@@ -114,6 +116,18 @@ class ProductFragment
                     'manufacturer' => [
                         'type' => self::getManufacturerType(),
                         'description' => 'Product manufacturer',
+                    ],
+
+                    // Flags
+                    'flags' => [
+                        'type' => Type::listOf(self::getFlagType()),
+                        'description' => 'Product flags (e.g. novinka, akcia)',
+                    ],
+
+                    // Customer Roles
+                    'customerRoles' => [
+                        'type' => Type::listOf(self::getCustomerRoleType()),
+                        'description' => 'Customer roles assigned to this product',
                     ],
 
                     // Canonicals for language mutations
@@ -265,6 +279,52 @@ class ProductFragment
      *
      * @return \GraphQL\Type\Definition\ObjectType
      */
+    private static function getFlagType(): ObjectType
+    {
+        if (self::$flagType === null) {
+            self::$flagType = new ObjectType([
+                'name' => 'ProductFlag',
+                'fields' => [
+                    'code' => [
+                        'type' => Type::string(),
+                        'description' => 'Flag code identifier',
+                    ],
+                    'title' => [
+                        'type' => Type::string(),
+                        'description' => 'Flag title (localized)',
+                    ],
+                    'color' => [
+                        'type' => Type::string(),
+                        'description' => 'Flag color as hex string',
+                    ],
+                ],
+            ]);
+        }
+
+        return self::$flagType;
+    }
+
+    private static function getCustomerRoleType(): ObjectType
+    {
+        if (self::$customerRoleType === null) {
+            self::$customerRoleType = new ObjectType([
+                'name' => 'ProductCustomerRole',
+                'fields' => [
+                    'code' => [
+                        'type' => Type::string(),
+                        'description' => 'Role code identifier',
+                    ],
+                    'title' => [
+                        'type' => Type::string(),
+                        'description' => 'Role title (localized)',
+                    ],
+                ],
+            ]);
+        }
+
+        return self::$customerRoleType;
+    }
+
     private static function getCanonicalType(): ObjectType
     {
         if (self::$canonicalType === null) {
