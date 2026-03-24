@@ -16,9 +16,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class WebhookController extends AbstractController
 {
     public function __construct(
-        private readonly WebhookHandler $webhookHandler,
+        private readonly WebhookHandler  $webhookHandler,
         private readonly LoggerInterface $logger,
-        private readonly string $vendureWebhookSecret
+        private readonly string          $vendureWebhookSecret
     ) {
     }
 
@@ -27,6 +27,7 @@ class WebhookController extends AbstractController
     {
         if (!$this->isValidRequest($request)) {
             $this->logger->warning('[VendureWebhook] Unauthorized webhook request');
+
             return new JsonResponse(['error' => 'Unauthorized'], Response::HTTP_UNAUTHORIZED);
         }
 
@@ -34,6 +35,7 @@ class WebhookController extends AbstractController
             $payload = json_decode($request->getContent(), true, 512, JSON_THROW_ON_ERROR);
         } catch (\JsonException $e) {
             $this->logger->error('[VendureWebhook] Invalid JSON payload', ['error' => $e->getMessage()]);
+
             return new JsonResponse(['error' => 'Invalid JSON payload'], Response::HTTP_BAD_REQUEST);
         }
 
@@ -50,14 +52,16 @@ class WebhookController extends AbstractController
 
         try {
             $result = $this->webhookHandler->handle($payload);
+
             return new JsonResponse($result);
         } catch (\Exception $e) {
             $this->logger->error('[VendureWebhook] Error processing webhook', [
                 'error' => $e->getMessage(),
                 'entity' => $payload['entity'] ?? null,
-            'action' => $payload['action'] ?? null,
-            'pimcoreId' => $payload['pimcoreId'] ?? null,
+                'action' => $payload['action'] ?? null,
+                'pimcoreId' => $payload['pimcoreId'] ?? null,
             ]);
+
             return new JsonResponse(['error' => 'Processing failed'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
