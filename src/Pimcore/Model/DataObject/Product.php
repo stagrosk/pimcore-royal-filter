@@ -222,6 +222,24 @@ class Product extends \Pimcore\Model\DataObject\Product implements SlugAwareInte
      *
      * @return array
      */
+    public function getFlagsData(): array
+    {
+        $flags = $this->getFlags();
+
+        if (empty($flags)) {
+            return [];
+        }
+
+        $ids = [];
+        foreach ($flags as $flag) {
+            if ($flag instanceof \Pimcore\Model\DataObject\ProductFlag && $flag->isPublished()) {
+                $ids[] = $flag->getId();
+            }
+        }
+
+        return $ids;
+    }
+
     public function getProductOptionsData(): array
     {
         $options = [];

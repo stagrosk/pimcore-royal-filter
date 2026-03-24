@@ -4,27 +4,26 @@ declare(strict_types=1);
 
 namespace App\EventSubscriber;
 
-use App\Vendure\WebhookClient;
 use Pimcore\Event\DataObjectEvents;
 use Pimcore\Event\Model\DataObjectEvent;
-use Pimcore\Logger;
 use Pimcore\Model\DataObject\AbstractObject;
+use Pimcore\Model\DataObject\Concrete;
 use Pimcore\Model\DataObject\Fieldcollection;
 use Pimcore\Model\DataObject\PriceList;
 use Pimcore\Model\DataObject\Product;
-use Pimcore\Tool;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class ProductSubscriber implements EventSubscriberInterface
+class ProductSubscriber extends AbstractWebhookSubscriber
 {
-    public const ACTION_UPDATE = 'update';
-    public const ACTION_DELETE = 'delete';
+    private bool $inheritanceBackup = false;
 
-    private bool $skipPushToQueue = false;
+    protected function getObjectClass(): string
+    {
+        return Product::class;
+    }
 
-    public function __construct(
-        private readonly WebhookClient $webhookClient
-    ) {
+    protected function getLogPrefix(): string
+    {
+        return 'ProductSubscriber';
     }
 
     public static function getSubscribedEvents(): array
@@ -45,6 +44,17 @@ class ProductSubscriber implements EventSubscriberInterface
         }
 
         $this->validateBasePriceList($object);
+    }
+
+    protected function onBeforeProcess(Concrete $object): void
+    {
+        $this->inheritanceBackup = AbstractObject::getGetInheritedValues();
+        AbstractObject::setGetInheritedValues(true);
+    }
+
+    protected function onAfterProcess(Concrete $object): void
+    {
+        AbstractObject::setGetInheritedValues($this->inheritanceBackup);
     }
 
     private function validateBasePriceList(Product $object): void
@@ -89,152 +99,5 @@ class ProductSubscriber implements EventSubscriberInterface
         $priceLists = $listing->load();
 
         return $priceLists[0] ?? null;
-    }
-
-    /**
-     * @param DataObjectEvent $event
-     *
-     * @return void
-     */
-    public function onPostUpdate(DataObjectEvent $event): void
-    {
-        if ($this->skipPushToQueue) {
-            return;
-        }
-
-        // Enable inheritance for getter
-        $backup = AbstractObject::getGetInheritedValues();
-        AbstractObject::setGetInheritedValues(true);
-
-        /** @var Product $object */
-        $object = $event->getObject();
-
-        if (!$object instanceof Product) {
-            return;
-        }
-
-        // Process only the updated object - Vendure handles parent/children sync automatically
-        $this->processObject($object);
-
-        AbstractObject::setGetInheritedValues($backup);
-    }
-
-    /**
-     * @param DataObjectEvent $event
-     *
-     * @return void
-     */
-    public function onPostDelete(DataObjectEvent $event): void
-    {
-        /** @var Product $object */
-        $object = $event->getObject();
-
-        if (!$object instanceof Product || $this->skipPushToQueue) {
-            return;
-        }
-
-        $this->sendWebhookDelete($object);
-    }
-
-    /**
-     * Process a single object - determine if update or delete webhook should be sent
-     *
-     * @param Product $object
-     *
-     * @return void
-     */
-    private function processObject(Product $object): void
-    {
-        $adminUser = Tool\Admin::getCurrentUser();
-
-        // If not published or status is not active -> send delete
-        if ($object->isPublished() === false
-            || ($object->getParent() instanceof Product && $object->getParent()->isPublished() === false)
-        ) {
-            Logger::notice(sprintf(
-                '[ProductSubscriber] DELETE event - objectId: %d Path: %s is not published! ... DELETE webhook',
-                $object->getId(),
-                $object->getFullPath()
-            ));
-            $this->sendWebhookDelete($object);
-
-            return;
-        }
-
-        // Skip if saved via CLI
-        if (PHP_SAPI === 'cli' && $adminUser === null) {
-            Logger::notice(sprintf(
-                '[ProductSubscriber] ObjectId: %d Path: %s saved via CLI ... SKIPPING',
-                $object->getId(),
-                $object->getFullPath()
-            ));
-            return;
-        }
-
-        $this->sendWebhookUpdate($object);
-    }
-
-    /**
-     * Send update webhook to Vendure
-     *
-     * @param Product $object
-     *
-     * @return void
-     */
-    private function sendWebhookUpdate(Product $object): void
-    {
-        Logger::info(sprintf(
-            '[ProductSubscriber] UPDATE event - objectId: %d Path: %s',
-            $object->getId(),
-            $object->getFullPath()
-        ));
-
-        $this->webhookClient->sendToVendureWebhook([
-            'class' => get_class($object),
-            'type' => $object->getType(),
-            'id' => $object->getId(),
-            'action' => self::ACTION_UPDATE
-        ]);
-    }
-
-    /**
-     * Send delete webhook to Vendure
-     *
-     * @param Product $object
-     *
-     * @return void
-     */
-    private function sendWebhookDelete(Product $object): void
-    {
-        Logger::info(sprintf(
-            '[ProductSubscriber] DELETE event - objectId: %d Path: %s',
-            $object->getId(),
-            $object->getFullPath()
-        ));
-
-        $this->webhookClient->sendToVendureWebhook([
-            'class' => get_class($object),
-            'type' => $object->getType(),
-            'id' => $object->getId(),
-            'action' => self::ACTION_DELETE
-        ]);
-    }
-
-    /**
-     * @param bool $skip
-     *
-     * @return void
-     */
-    public function setSkipPushToQueue(bool $skip): void
-    {
-        $this->skipPushToQueue = $skip;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isSkipPushToQueue(): bool
-    {
-        return $this->skipPushToQueue;
     }
 }

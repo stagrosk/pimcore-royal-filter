@@ -24,7 +24,7 @@ class ProductController extends RestController
     public function showAction(int $id, Request $request): JsonResponse|Response
     {
         if (!$this->checkConsumerPermissionsService->performSecurityCheck($request)) {
-            return $this->handleException('Permission denied, apikey not valid', Response::HTTP_UNAUTHORIZED);
+            return $this->handleException('Permission denied, apikey not valid', Response::HTTP_FORBIDDEN);
         }
 
         $product = Product::getById($id);
