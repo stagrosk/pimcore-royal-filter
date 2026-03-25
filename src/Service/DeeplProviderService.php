@@ -7,7 +7,6 @@ namespace App\Service;
 use DivanteTranslationBundle\Exception\TranslationException;
 use DivanteTranslationBundle\Provider\AbstractProvider;
 use DivanteTranslationBundle\Provider\FormalityProviderInterface;
-use Pimcore\Tool;
 
 class DeeplProviderService extends AbstractProvider implements FormalityProviderInterface
 {
@@ -26,7 +25,6 @@ class DeeplProviderService extends AbstractProvider implements FormalityProvider
 
             $params = [
                 'text' => [$data],
-                'source_lang' => strtoupper(substr(Tool::getDefaultLanguage(), 0, 2)),
                 'target_lang' => $targetLang,
                 'formality' => 'default',
             ];

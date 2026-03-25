@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Service;
 
 use GuzzleHttp\Client;
-use Pimcore\Tool;
 
 readonly class DeeplService
 {
@@ -27,7 +26,6 @@ readonly class DeeplService
 
         $params = [
             'text' => [$text],
-            'source_lang' => strtoupper(substr(Tool::getDefaultLanguage(), 0, 2)),
             'target_lang' => $targetLang,
             'formality' => 'default',
         ];
