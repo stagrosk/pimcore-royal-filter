@@ -90,8 +90,8 @@ readonly class RoyalFilterOverviewCalculator implements CalculatorClassInterface
         $body1Height = isset($mappedParameters['body1']) ? $mappedParameters['body1']['mapping']?->findItemByKeyConfigName('body', 'height') : null;
         $body2Height = isset($mappedParameters['body2']) ? $mappedParameters['body2']['mapping']?->findItemByKeyConfigName('body', 'height') : null;
         $bodyMiddleHeight = isset($mappedParameters['bodyMiddle']) ? $mappedParameters['bodyMiddle']['mapping']?->findItemByKeyConfigName('body', 'height') : null;
-        $dimensions['body']['height'] = $body1Height?->getRawValue() + $bodyMiddleHeight?->getRawValue() + $body2Height?->getRawValue();
-        $dimensions['body']['unit'] = $body1Height->getUnit();
+        $dimensions['body']['height'] = ($body1Height?->getRawValue() ?? 0) + ($bodyMiddleHeight?->getRawValue() ?? 0) + ($body2Height?->getRawValue() ?? 0);
+        $dimensions['body']['unit'] = $body1Height?->getUnit();
 
         $body1Diameter = isset($mappedParameters['body1']) ? $mappedParameters['body1']['mapping']?->findItemByKeyConfigName('body', 'diameter') : null;
         $dimensions['body']['diameter'] = $body1Diameter?->getRawValue();

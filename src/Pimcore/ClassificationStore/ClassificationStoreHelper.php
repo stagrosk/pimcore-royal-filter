@@ -45,7 +45,7 @@ class ClassificationStoreHelper
                                     $groupConfig,
                                     $keyConfig->getTitle(),
                                     collect($definition['options'])->where('value', $defaultValue)->first()['key'] ?? null,
-                                    null,
+                                    $defaultValue,
                                     null,
                                     null,
                                     collect($definition['options'])->where('value', $defaultValue)->first()['value'] ?? null
@@ -56,11 +56,13 @@ class ClassificationStoreHelper
                             case 'numeric':
                             case 'textarea':
                             case 'input':
+                                $defaultValue = array_key_exists('default', $item) ? $item['default'] : null;
                                 $classificationStoreMappingItem = new ClassificationStoreMappingItem(
                                     $keyConfig,
                                     $groupConfig,
                                     $keyConfig->getTitle(),
-                                    $item['default'],
+                                    $defaultValue,
+                                    $defaultValue,
                                 );
                                 $classificationStoreMapping->addItem($classificationStoreMappingItem);
                                 break;

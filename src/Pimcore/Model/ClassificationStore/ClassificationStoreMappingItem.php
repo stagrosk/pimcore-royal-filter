@@ -69,9 +69,9 @@ class ClassificationStoreMappingItem
         $this->value = $value;
     }
 
-    public function getRawValue(): int|float|string
+    public function getRawValue(): int|float|string|null
     {
-        return $this->rawValue ?? 0;
+        return $this->rawValue;
     }
 
     public function setRawValue(int|float|string|null $rawValue): void
