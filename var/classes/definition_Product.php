@@ -43,7 +43,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1774028964,
+   'modificationDate' => 1774514102,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -137,7 +137,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                     'value' => 'draft',
                   ),
                 ),
-                 'defaultValue' => 'DRAFT',
+                 'defaultValue' => 'draft',
                  'columnLength' => 190,
                  'dynamicOptions' => false,
                  'defaultValueGenerator' => '',
@@ -302,8 +302,18 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                     'key' => 'Whirlpool filter',
                     'value' => 'whirlpoolFilter',
                   ),
+                  3 => 
+                  array (
+                    'key' => 'Chemistry',
+                    'value' => 'chemistry',
+                  ),
+                  4 => 
+                  array (
+                    'key' => 'Products set',
+                    'value' => 'productsSet',
+                  ),
                 ),
-                 'defaultValue' => '',
+                 'defaultValue' => 'product',
                  'columnLength' => 190,
                  'dynamicOptions' => false,
                  'defaultValueGenerator' => '',
@@ -908,24 +918,16 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'assetsAllowed' => false,
                  'assetTypes' => 
                 array (
-                  0 => 
-                  array (
-                    'assetTypes' => '',
-                  ),
                 ),
                  'documentsAllowed' => false,
                  'documentTypes' => 
                 array (
-                  0 => 
-                  array (
-                    'documentTypes' => '',
-                  ),
                 ),
                  'enableTextSelection' => false,
                  'width' => '',
                  'height' => '',
               )),
-              4 =>
+              4 => 
               \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToManyRelation::__set_state(array(
                  'name' => 'customerRoles',
                  'title' => 'Customer Roles',
@@ -941,12 +943,12 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'invisible' => false,
                  'visibleGridView' => false,
                  'visibleSearch' => false,
-                 'blockedVarsForExport' =>
+                 'blockedVarsForExport' => 
                 array (
                 ),
-                 'classes' =>
+                 'classes' => 
                 array (
-                  0 =>
+                  0 => 
                   array (
                     'classes' => 'CustomerRole',
                   ),
@@ -959,11 +961,11 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'allowToClearRelation' => true,
                  'objectsAllowed' => true,
                  'assetsAllowed' => false,
-                 'assetTypes' =>
+                 'assetTypes' => 
                 array (
                 ),
                  'documentsAllowed' => false,
-                 'documentTypes' =>
+                 'documentTypes' => 
                 array (
                 ),
                  'enableTextSelection' => false,
@@ -972,7 +974,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
               )),
             ),
              'locked' => false,
-             'blockedVarsForExport' =>
+             'blockedVarsForExport' => 
             array (
             ),
              'fieldtype' => 'panel',

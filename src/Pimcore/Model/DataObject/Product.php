@@ -67,6 +67,7 @@ class Product extends \Pimcore\Model\DataObject\Product implements SlugAwareInte
                     'wholesalePrice' => method_exists($priceItem, 'getWholesalePrice') ? $priceItem->getWholesalePrice() : null,
                     'wholesaleSupplierPrice' => method_exists($priceItem, 'getWholesaleSupplierPrice') ? $priceItem->getWholesaleSupplierPrice() : null,
                     'unitPrice' => method_exists($priceItem, 'getUnitPrice') ? $priceItem->getUnitPrice() : null,
+                    'priceWithTax' => method_exists($priceItem, 'getPricesWithVat') ? (bool) $priceItem->getPricesWithVat() : false,
                 ];
             }
         }

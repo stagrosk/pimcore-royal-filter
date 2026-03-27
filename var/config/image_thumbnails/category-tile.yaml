@@ -6,23 +6,32 @@ pimcore:
                     category-tile:
                         items:
                             -
-                                method: cover
+                                method: contain
                                 arguments:
-                                    width: 150
-                                    height: 150
-                                    positioning: center
+                                    width: 300
+                                    height: 300
                                     forceResize: true
+                            -
+                                method: frame
+                                arguments:
+                                    width: 300
+                                    height: 300
+                                    forceResize: true
+                            -
+                                method: setBackgroundColor
+                                arguments:
+                                    color: '#f5f5f5'
                         medias: {  }
                         name: category-tile
-                        description: 'Category tile image 240x240 (1:1)'
+                        description: 'Category tile 300x300 (2x retina, contain with padding)'
                         group: category
-                        format: SOURCE
-                        quality: 85
+                        format: PNG
+                        quality: 90
                         highResolution: null
                         preserveColor: false
                         preserveMetaData: false
                         rasterizeSVG: false
                         downloadable: false
-                        modificationDate: 1766425369
+                        modificationDate: 1711497600
                         creationDate: 1734883200
                         preserveAnimation: false

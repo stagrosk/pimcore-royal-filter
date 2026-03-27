@@ -6,23 +6,32 @@ pimcore:
                     category-preview:
                         items:
                             -
-                                method: cover
+                                method: contain
                                 arguments:
                                     width: 800
-                                    height: 500
-                                    positioning: center
+                                    height: 600
                                     forceResize: true
+                            -
+                                method: frame
+                                arguments:
+                                    width: 800
+                                    height: 600
+                                    forceResize: true
+                            -
+                                method: setBackgroundColor
+                                arguments:
+                                    color: '#f5f5f5'
                         medias: {  }
                         name: category-preview
-                        description: 'Category preview image 800x500 (16:10)'
+                        description: 'Category preview 800x600 (contain with padding)'
                         group: category
-                        format: SOURCE
-                        quality: 85
+                        format: PNG
+                        quality: 90
                         highResolution: null
                         preserveColor: false
                         preserveMetaData: false
                         rasterizeSVG: false
                         downloadable: false
-                        modificationDate: 1734883200
+                        modificationDate: 1711497600
                         creationDate: 1734883200
                         preserveAnimation: false

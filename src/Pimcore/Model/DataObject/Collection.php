@@ -96,6 +96,11 @@ class Collection extends \Pimcore\Model\DataObject\Collection implements SlugAwa
             'filename' => $image->getFilename(),
             'path' => $image->getFullPath(),
             'mimeType' => $image->getMimeType(),
+            'thumbnails' => [
+                'icon' => $image->getThumbnail('category-icon')?->getPath(),
+                'tile' => $image->getThumbnail('category-tile')?->getPath(),
+                'preview' => $image->getThumbnail('category-preview')?->getPath(),
+            ],
         ];
     }
 

@@ -64,6 +64,11 @@ class ProductSubscriber extends AbstractWebhookSubscriber
             return;
         }
 
+        // Master products with variants don't need their own price list
+        if ($this->hasVariants($object)) {
+            return;
+        }
+
         $prices = $object->getPrices();
         if (!$prices instanceof Fieldcollection) {
             throw new \RuntimeException(sprintf(
@@ -89,6 +94,22 @@ class ProductSubscriber extends AbstractWebhookSubscriber
                 $basePriceList->getName()
             ));
         }
+    }
+
+    private function hasVariants(Product $object): bool
+    {
+        $children = $object->getChildren(
+            [AbstractObject::OBJECT_TYPE_VARIANT, AbstractObject::OBJECT_TYPE_OBJECT],
+            false
+        );
+
+        foreach ($children as $child) {
+            if ($child instanceof Product) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private function getBasePriceList(): ?PriceList

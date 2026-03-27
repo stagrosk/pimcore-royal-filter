@@ -1,3 +1,17 @@
+// Fetch source language config on startup
+(function () {
+    Ext.Ajax.request({
+        url: "/admin/object/translate-config",
+        method: "GET",
+        success: function (response) {
+            var res = Ext.decode(response.responseText);
+            if (res.sourceLang) {
+                pimcore.globalmanager.add('translationBundle_sourceLang', res.sourceLang);
+            }
+        }
+    });
+})();
+
 // Override translation request to send current input text instead of reading from DB
 function handleTranslationRequest(id, fieldName, component, type, lang, formality) {
     var text = '';
@@ -20,12 +34,18 @@ function handleTranslationRequest(id, fieldName, component, type, lang, formalit
         return;
     }
 
+    var sourceLang = '';
+    try {
+        sourceLang = pimcore.globalmanager.get('translationBundle_sourceLang') || '';
+    } catch (e) {}
+
     Ext.Ajax.request({
         url: "/admin/object/translate-text",
         method: "POST",
         params: {
             text: text,
             lang: lang,
+            sourceLang: sourceLang,
             formality: formality
         },
         success: function (response) {

@@ -8,6 +8,7 @@
  * - wholesalePrice [numeric]
  * - wholesaleSupplierPrice [numeric]
  * - unitPrice [numeric]
+ * - pricesWithVat [checkbox]
  */
 
 return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
@@ -235,6 +236,28 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'decimalSize' => NULL,
              'decimalPrecision' => NULL,
              'width' => '',
+             'defaultValueGenerator' => '',
+          )),
+          6 => 
+          \Pimcore\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
+             'name' => 'pricesWithVat',
+             'title' => 'Prices With Vat',
+             'tooltip' => '',
+             'mandatory' => false,
+             'noteditable' => false,
+             'index' => false,
+             'locked' => false,
+             'style' => '',
+             'permissions' => NULL,
+             'fieldtype' => '',
+             'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => false,
+             'visibleSearch' => false,
+             'blockedVarsForExport' => 
+            array (
+            ),
+             'defaultValue' => 1,
              'defaultValueGenerator' => '',
           )),
         ),

@@ -18,7 +18,7 @@ class DeeplProviderService extends AbstractProvider implements FormalityProvider
     ) {
     }
 
-    public function translate(string $data, string $targetLanguage): string
+    public function translate(string $data, string $targetLanguage, ?string $sourceLanguage = null): string
     {
         try {
             $targetLang = DeeplLanguageMap::resolve($targetLanguage);
@@ -28,6 +28,10 @@ class DeeplProviderService extends AbstractProvider implements FormalityProvider
                 'target_lang' => $targetLang,
                 'formality' => 'default',
             ];
+
+            if ($sourceLanguage) {
+                $params['source_lang'] = DeeplLanguageMap::resolveSource($sourceLanguage);
+            }
 
             if (!empty($this->glossaryKey)) {
                 $params['glossary_id'] = $this->glossaryKey;

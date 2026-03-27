@@ -15,4 +15,10 @@ final class DeeplLanguageMap
     {
         return self::MAP[$locale] ?? strtoupper(substr($locale, 0, 2));
     }
+
+    // source_lang only accepts 2-char codes (no region variant)
+    public static function resolveSource(string $locale): string
+    {
+        return strtoupper(substr($locale, 0, 2));
+    }
 }
