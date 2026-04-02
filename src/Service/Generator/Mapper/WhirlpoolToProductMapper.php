@@ -50,9 +50,8 @@ class WhirlpoolToProductMapper extends BaseMapper
     public function mapObjectToProduct(Product $product, AbstractObject|Whirlpool $fromObject, array $extraData = []): Product
     {
         // base
-        $product->setStatus(ProductStatusEnum::DRAFT->value);
         $product->setPublished(true);
-        $product->setEan(''); // TODO: ???
+        $product->setEan('');
         $product->setSku(sprintf('WRF-%s-%s', $fromObject->getId(), $product->getSku()));
         $product->setStatus(ProductStatusEnum::ACTIVE->value);
         $product->setIsVirtualProduct(false);
@@ -82,6 +81,12 @@ class WhirlpoolToProductMapper extends BaseMapper
 //            $product->setSeoTitle($product->getTitle($language), $language);
 //            $product->setSeoDescription($product->getDescription($language), $language);
         }
+
+        // paper cartridges
+        $product->setPaperCartridges($fromObject->getPaperCartridges());
+
+        // benefit set
+        $this->assignBenefitSetForFilters($product);
 
         // images
         $product->setImageGallery($this->prepareImages($product, $fromObject));

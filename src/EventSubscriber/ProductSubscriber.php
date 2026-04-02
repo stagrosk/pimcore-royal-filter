@@ -98,18 +98,11 @@ class ProductSubscriber extends AbstractWebhookSubscriber
 
     private function hasVariants(Product $object): bool
     {
-        $children = $object->getChildren(
-            [AbstractObject::OBJECT_TYPE_VARIANT, AbstractObject::OBJECT_TYPE_OBJECT],
-            false
-        );
+        $listing = Product::getList();
+        $listing->setCondition('o_parentId = ?', [$object->getId()]);
+        $listing->setLimit(1);
 
-        foreach ($children as $child) {
-            if ($child instanceof Product) {
-                return true;
-            }
-        }
-
-        return false;
+        return $listing->getTotalCount() > 0;
     }
 
     private function getBasePriceList(): ?PriceList

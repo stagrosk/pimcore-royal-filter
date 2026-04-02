@@ -50,9 +50,8 @@ class FilterToProductMapper extends BaseMapper
     public function mapObjectToProduct(Product $product, AbstractObject|RoyalFilter $fromObject, array $extraData = []): Product
     {
         // base
-        $product->setStatus(ProductStatusEnum::DRAFT->value);
         $product->setPublished(true);
-        $product->setEan(''); // TODO: ???
+        $product->setEan('');
         $product->setSku(sprintf('RF-%s', $fromObject->getId()));
         $product->setStatus(ProductStatusEnum::ACTIVE->value);
         $product->setIsVirtualProduct(false);
@@ -82,6 +81,9 @@ class FilterToProductMapper extends BaseMapper
 //            $product->setSeoTitle($product->getTitle($language), $language);
 //            $product->setSeoDescription($product->getDescription($language), $language);
         }
+
+        // benefit set
+        $this->assignBenefitSetForFilters($product);
 
         // images
         $product->setImageGallery($this->prepareImages($fromObject));

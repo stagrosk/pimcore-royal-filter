@@ -73,6 +73,14 @@ App\Pimcore\Model\DataObject\Product:
             exp: object.getFlagsData()
             serialized_name: flags
             groups: [api]
+        getBenefitSetId:
+            exp: object.getBenefitSetId()
+            serialized_name: benefitSetId
+            groups: [api]
+        getPaperCartridgesData:
+            exp: object.getPaperCartridgesData()
+            serialized_name: paperCartridges
+            groups: [api]
         getProductOptionsData:
             exp: object.getProductOptionsData()
             serialized_name: productOptions

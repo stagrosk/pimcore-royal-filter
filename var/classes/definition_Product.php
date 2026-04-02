@@ -27,10 +27,14 @@
  * - collections [manyToManyRelation]
  * - flags [manyToManyRelation]
  * - customerRoles [manyToManyRelation]
+ * - paperCartridges [manyToManyObjectRelation]
+ * - benefictSet [manyToOneRelation]
  * - productOptions [fieldcollections]
  * - metadata [classificationstore]
  * - extraParameters [fieldcollections]
  * - imageGallery [imageGallery]
+ * - downloads [manyToManyRelation]
+ * - manuals [manyToManyRelation]
  * - isFreeGift [checkbox]
  * - Prices [fieldcollections]
  * - apiId [input]
@@ -43,7 +47,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1774514102,
+   'modificationDate' => 1775150241,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -972,6 +976,88 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'width' => '',
                  'height' => '',
               )),
+              5 => 
+              \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToManyObjectRelation::__set_state(array(
+                 'name' => 'paperCartridges',
+                 'title' => 'Paper Cartridges',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'fieldtype' => '',
+                 'relationType' => true,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+                 'blockedVarsForExport' => 
+                array (
+                ),
+                 'classes' => 
+                array (
+                  0 => 
+                  array (
+                    'classes' => 'PaperCartridge',
+                  ),
+                ),
+                 'displayMode' => 'grid',
+                 'pathFormatterClass' => '',
+                 'maxItems' => NULL,
+                 'visibleFields' => 'id,title,length,diameter',
+                 'allowToCreateNewObject' => false,
+                 'allowToClearRelation' => true,
+                 'optimizedAdminLoading' => false,
+                 'enableTextSelection' => false,
+                 'visibleFieldDefinitions' => 
+                array (
+                ),
+                 'width' => '',
+                 'height' => '',
+              )),
+              6 => 
+              \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
+                 'name' => 'benefictSet',
+                 'title' => 'Benefict Set',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'fieldtype' => '',
+                 'relationType' => true,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+                 'blockedVarsForExport' => 
+                array (
+                ),
+                 'classes' => 
+                array (
+                  0 => 
+                  array (
+                    'classes' => 'ProductBenefitSet',
+                  ),
+                ),
+                 'displayMode' => 'grid',
+                 'pathFormatterClass' => '',
+                 'assetInlineDownloadAllowed' => false,
+                 'assetUploadPath' => '',
+                 'allowToClearRelation' => true,
+                 'objectsAllowed' => true,
+                 'assetsAllowed' => false,
+                 'assetTypes' => 
+                array (
+                ),
+                 'documentsAllowed' => false,
+                 'documentTypes' => 
+                array (
+                ),
+                 'width' => '',
+              )),
             ),
              'locked' => false,
              'blockedVarsForExport' => 
@@ -1152,6 +1238,156 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'predefinedDataTemplates' => '',
                  'height' => '',
                  'width' => '',
+              )),
+              1 => 
+              \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToManyRelation::__set_state(array(
+                 'name' => 'downloads',
+                 'title' => 'Downloads',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'fieldtype' => '',
+                 'relationType' => true,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+                 'blockedVarsForExport' => 
+                array (
+                ),
+                 'classes' => 
+                array (
+                  0 => 
+                  array (
+                    'classes' => '',
+                  ),
+                ),
+                 'displayMode' => NULL,
+                 'pathFormatterClass' => '',
+                 'maxItems' => NULL,
+                 'assetInlineDownloadAllowed' => false,
+                 'assetUploadPath' => '',
+                 'allowToClearRelation' => true,
+                 'objectsAllowed' => false,
+                 'assetsAllowed' => true,
+                 'assetTypes' => 
+                array (
+                  0 => 
+                  array (
+                    'assetTypes' => 'video',
+                  ),
+                  1 => 
+                  array (
+                    'assetTypes' => 'document',
+                  ),
+                  2 => 
+                  array (
+                    'assetTypes' => 'audio',
+                  ),
+                  3 => 
+                  array (
+                    'assetTypes' => 'archive',
+                  ),
+                  4 => 
+                  array (
+                    'assetTypes' => 'image',
+                  ),
+                  5 => 
+                  array (
+                    'assetTypes' => 'unknown',
+                  ),
+                ),
+                 'documentsAllowed' => false,
+                 'documentTypes' => 
+                array (
+                  0 => 
+                  array (
+                    'documentTypes' => '',
+                  ),
+                ),
+                 'enableTextSelection' => false,
+                 'width' => '',
+                 'height' => '',
+              )),
+              2 => 
+              \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToManyRelation::__set_state(array(
+                 'name' => 'manuals',
+                 'title' => 'Manuals',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'fieldtype' => '',
+                 'relationType' => true,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+                 'blockedVarsForExport' => 
+                array (
+                ),
+                 'classes' => 
+                array (
+                  0 => 
+                  array (
+                    'classes' => '',
+                  ),
+                ),
+                 'displayMode' => NULL,
+                 'pathFormatterClass' => '',
+                 'maxItems' => NULL,
+                 'assetInlineDownloadAllowed' => false,
+                 'assetUploadPath' => '',
+                 'allowToClearRelation' => true,
+                 'objectsAllowed' => false,
+                 'assetsAllowed' => true,
+                 'assetTypes' => 
+                array (
+                  0 => 
+                  array (
+                    'assetTypes' => 'video',
+                  ),
+                  1 => 
+                  array (
+                    'assetTypes' => 'text',
+                  ),
+                  2 => 
+                  array (
+                    'assetTypes' => 'document',
+                  ),
+                  3 => 
+                  array (
+                    'assetTypes' => 'audio',
+                  ),
+                  4 => 
+                  array (
+                    'assetTypes' => 'archive',
+                  ),
+                  5 => 
+                  array (
+                    'assetTypes' => 'image',
+                  ),
+                  6 => 
+                  array (
+                    'assetTypes' => 'unknown',
+                  ),
+                ),
+                 'documentsAllowed' => false,
+                 'documentTypes' => 
+                array (
+                  0 => 
+                  array (
+                    'documentTypes' => '',
+                  ),
+                ),
+                 'enableTextSelection' => false,
+                 'width' => '',
+                 'height' => '',
               )),
             ),
              'locked' => false,
@@ -1484,6 +1720,48 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'enableGridLocking' => false,
    'deletedDataComponents' => 
   array (
+    0 => 
+    \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
+       'name' => 'productBenefictSet',
+       'title' => 'Product Benefict Set',
+       'tooltip' => '',
+       'mandatory' => false,
+       'noteditable' => false,
+       'index' => false,
+       'locked' => false,
+       'style' => '',
+       'permissions' => NULL,
+       'fieldtype' => '',
+       'relationType' => true,
+       'invisible' => false,
+       'visibleGridView' => false,
+       'visibleSearch' => false,
+       'blockedVarsForExport' => 
+      array (
+      ),
+       'classes' => 
+      array (
+        0 => 
+        array (
+          'classes' => 'ProductBenefitSet',
+        ),
+      ),
+       'displayMode' => 'grid',
+       'pathFormatterClass' => '',
+       'assetInlineDownloadAllowed' => false,
+       'assetUploadPath' => '',
+       'allowToClearRelation' => true,
+       'objectsAllowed' => true,
+       'assetsAllowed' => false,
+       'assetTypes' => 
+      array (
+      ),
+       'documentsAllowed' => false,
+       'documentTypes' => 
+      array (
+      ),
+       'width' => '',
+    )),
   ),
    'blockedVarsForExport' => 
   array (

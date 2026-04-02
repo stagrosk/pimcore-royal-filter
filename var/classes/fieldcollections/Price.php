@@ -8,7 +8,6 @@
  * - wholesalePrice [numeric]
  * - wholesaleSupplierPrice [numeric]
  * - unitPrice [numeric]
- * - pricesWithVat [checkbox]
  */
 
 return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
@@ -47,6 +46,31 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
          'children' => 
         array (
           0 => 
+          \Pimcore\Model\DataObject\ClassDefinition\Layout\Text::__set_state(array(
+             'name' => 'Layout',
+             'type' => NULL,
+             'region' => NULL,
+             'title' => '',
+             'width' => '',
+             'height' => '',
+             'collapsible' => false,
+             'collapsed' => false,
+             'bodyStyle' => '',
+             'datatype' => 'layout',
+             'children' => 
+            array (
+            ),
+             'locked' => false,
+             'blockedVarsForExport' => 
+            array (
+            ),
+             'fieldtype' => 'text',
+             'html' => '<div class="alert alert-warning">Je potrebne zadavat ceny s dph alebo bez dph na zaklade nastavenia kanalu! Aktualne su vsetky kanale nastavene, ze davame ceny S DPH!</div>',
+             'renderingClass' => '',
+             'renderingData' => '',
+             'border' => false,
+          )),
+          1 => 
           \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
              'name' => 'priceList',
              'title' => 'Price List',
@@ -88,7 +112,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
             ),
              'width' => '',
           )),
-          1 => 
+          2 => 
           \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
              'name' => 'price',
              'title' => 'Price',
@@ -118,7 +142,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'width' => '',
              'defaultValueGenerator' => '',
           )),
-          2 => 
+          3 => 
           \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
              'name' => 'compareAtPrice',
              'title' => 'Compare At Price',
@@ -148,7 +172,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'width' => '',
              'defaultValueGenerator' => '',
           )),
-          3 => 
+          4 => 
           \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
              'name' => 'wholesalePrice',
              'title' => 'Wholesale Price',
@@ -178,7 +202,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'width' => '',
              'defaultValueGenerator' => '',
           )),
-          4 => 
+          5 => 
           \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
              'name' => 'wholesaleSupplierPrice',
              'title' => 'Wholesale Supplier Price',
@@ -208,7 +232,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'width' => '',
              'defaultValueGenerator' => '',
           )),
-          5 => 
+          6 => 
           \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
              'name' => 'unitPrice',
              'title' => 'Unit Price',
@@ -236,28 +260,6 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'decimalSize' => NULL,
              'decimalPrecision' => NULL,
              'width' => '',
-             'defaultValueGenerator' => '',
-          )),
-          6 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
-             'name' => 'pricesWithVat',
-             'title' => 'Prices With Vat',
-             'tooltip' => '',
-             'mandatory' => false,
-             'noteditable' => false,
-             'index' => false,
-             'locked' => false,
-             'style' => '',
-             'permissions' => NULL,
-             'fieldtype' => '',
-             'relationType' => false,
-             'invisible' => false,
-             'visibleGridView' => false,
-             'visibleSearch' => false,
-             'blockedVarsForExport' => 
-            array (
-            ),
-             'defaultValue' => 1,
              'defaultValueGenerator' => '',
           )),
         ),

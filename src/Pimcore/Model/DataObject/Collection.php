@@ -6,6 +6,7 @@ use App\Pimcore\ClassificationStore\ClassificationStoreHelper;
 use App\Pimcore\Model\ClassificationStore\ClassificationStoreMappingItem;
 use App\Service\ClassificationStoreTranslationService;
 use Pimcore\Model\DataObject\AbstractObject;
+use Pimcore\Model\DataObject\Data\RgbaColor;
 use Pimcore\Tool;
 use PimcoreHeadlessContentBundle\Model\NavigationAwareInterface;
 use PimcoreHeadlessContentBundle\Model\SlugAwareInterface;
@@ -163,9 +164,24 @@ class Collection extends \Pimcore\Model\DataObject\Collection implements SlugAwa
         ];
     }
 
-    /**
-     * Get parent Collection ID (only if parent is Collection)
-     */
+    public function getTextColorHex(): ?string
+    {
+        $color = $this->getTextColor();
+
+        return $color instanceof RgbaColor
+            ? sprintf('#%02x%02x%02x', $color->getR(), $color->getG(), $color->getB())
+            : null;
+    }
+
+    public function getBackgroundColorHex(): ?string
+    {
+        $color = $this->getBackgroundColor();
+
+        return $color instanceof RgbaColor
+            ? sprintf('#%02x%02x%02x', $color->getR(), $color->getG(), $color->getB())
+            : null;
+    }
+
     public function getParentCollectionId(): ?int
     {
         $parent = $this->getParent();

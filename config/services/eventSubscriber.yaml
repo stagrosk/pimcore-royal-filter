@@ -17,3 +17,5 @@ services:
     App\EventSubscriber\PriceListSubscriber:
 
     App\EventSubscriber\ProductFlagSubscriber:
+
+    App\EventSubscriber\ProductBenefitSetSubscriber:

@@ -6,12 +6,6 @@ pimcore:
                     category-tile:
                         items:
                             -
-                                method: contain
-                                arguments:
-                                    width: 300
-                                    height: 300
-                                    forceResize: true
-                            -
                                 method: frame
                                 arguments:
                                     width: 300
@@ -25,7 +19,7 @@ pimcore:
                         name: category-tile
                         description: 'Category tile 300x300 (2x retina, contain with padding)'
                         group: category
-                        format: PNG
+                        format: JPEG
                         quality: 90
                         highResolution: null
                         preserveColor: false

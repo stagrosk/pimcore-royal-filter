@@ -17,6 +17,18 @@ App\Pimcore\Model\DataObject\Collection:
             exp: object.getParametersConfigData()
             serialized_name: parameters
             groups: [api]
+        getTextColorHex:
+            exp: object.getTextColorHex()
+            serialized_name: textColor
+            groups: [api]
+        getBackgroundColorHex:
+            exp: object.getBackgroundColorHex()
+            serialized_name: backgroundColor
+            groups: [api]
+        getIcon:
+            exp: object.getIcon()
+            serialized_name: icon
+            groups: [api]
         getParentCollectionId:
             exp: object.getParentCollectionId()
             serialized_name: parentId

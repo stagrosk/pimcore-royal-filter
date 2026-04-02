@@ -6,12 +6,6 @@ pimcore:
                     category-preview:
                         items:
                             -
-                                method: contain
-                                arguments:
-                                    width: 800
-                                    height: 600
-                                    forceResize: true
-                            -
                                 method: frame
                                 arguments:
                                     width: 800
@@ -25,7 +19,7 @@ pimcore:
                         name: category-preview
                         description: 'Category preview 800x600 (contain with padding)'
                         group: category
-                        format: PNG
+                        format: JPEG
                         quality: 90
                         highResolution: null
                         preserveColor: false

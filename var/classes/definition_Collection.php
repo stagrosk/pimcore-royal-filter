@@ -10,6 +10,9 @@
  * -- description [wysiwyg]
  * -- slug [input]
  * -- handle [input]
+ * - textColor [rgbaColor]
+ * - backgroundColor [rgbaColor]
+ * - icon [select]
  * - filterConfig [fieldcollections]
  * - metadata [classificationstore]
  * - image [image]
@@ -22,7 +25,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1768041046,
+   'modificationDate' => 1775148650,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -262,6 +265,76 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                          'height' => '',
                          'fieldDefinitionsCache' => NULL,
                       )),
+                      1 => 
+                      \Pimcore\Model\DataObject\ClassDefinition\Data\RgbaColor::__set_state(array(
+                         'name' => 'textColor',
+                         'title' => 'textColor',
+                         'tooltip' => '',
+                         'mandatory' => false,
+                         'noteditable' => false,
+                         'index' => false,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'fieldtype' => '',
+                         'relationType' => false,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'width' => '',
+                      )),
+                      2 => 
+                      \Pimcore\Model\DataObject\ClassDefinition\Data\RgbaColor::__set_state(array(
+                         'name' => 'backgroundColor',
+                         'title' => 'Background Color',
+                         'tooltip' => '',
+                         'mandatory' => false,
+                         'noteditable' => false,
+                         'index' => false,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'fieldtype' => '',
+                         'relationType' => false,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'width' => '',
+                      )),
+                      3 => 
+                      \Pimcore\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
+                         'name' => 'icon',
+                         'title' => 'Icon',
+                         'tooltip' => '',
+                         'mandatory' => false,
+                         'noteditable' => false,
+                         'index' => false,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'fieldtype' => '',
+                         'relationType' => false,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'defaultValue' => NULL,
+                         'columnLength' => 190,
+                         'dynamicOptions' => false,
+                         'defaultValueGenerator' => '',
+                         'width' => '',
+                         'optionsProviderType' => 'class',
+                         'optionsProviderClass' => 'App\\Pimcore\\Model\\OptionProviders\\IconOptionsProvider',
+                         'optionsProviderData' => '',
+                      )),
                     ),
                      'locked' => false,
                      'blockedVarsForExport' => 
@@ -274,7 +347,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'labelWidth' => 100,
                      'labelAlign' => 'left',
                   )),
-                  1 =>
+                  1 => 
                   \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
                      'name' => 'Filter Settings',
                      'type' => NULL,
@@ -286,9 +359,9 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'collapsed' => false,
                      'bodyStyle' => '',
                      'datatype' => 'layout',
-                     'children' =>
+                     'children' => 
                     array (
-                      0 =>
+                      0 => 
                       \Pimcore\Model\DataObject\ClassDefinition\Data\Fieldcollections::__set_state(array(
                          'name' => 'filterConfig',
                          'title' => 'Filter Configuration',
@@ -304,10 +377,10 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                          'invisible' => false,
                          'visibleGridView' => false,
                          'visibleSearch' => false,
-                         'blockedVarsForExport' =>
+                         'blockedVarsForExport' => 
                         array (
                         ),
-                         'allowedTypes' =>
+                         'allowedTypes' => 
                         array (
                           0 => 'FilterConfigItem',
                         ),
@@ -321,7 +394,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                       )),
                     ),
                      'locked' => false,
-                     'blockedVarsForExport' =>
+                     'blockedVarsForExport' => 
                     array (
                     ),
                      'fieldtype' => 'panel',
@@ -331,7 +404,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'labelWidth' => 100,
                      'labelAlign' => 'left',
                   )),
-                  2 =>
+                  2 => 
                   \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
                      'name' => 'Parameters',
                      'type' => NULL,
@@ -521,36 +594,6 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'enableGridLocking' => false,
    'deletedDataComponents' => 
   array (
-    0 => 
-    \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
-       'name' => 'apiId',
-       'title' => 'Api Id',
-       'tooltip' => '',
-       'mandatory' => false,
-       'noteditable' => true,
-       'index' => false,
-       'locked' => false,
-       'style' => '',
-       'permissions' => NULL,
-       'fieldtype' => '',
-       'relationType' => false,
-       'invisible' => false,
-       'visibleGridView' => false,
-       'visibleSearch' => false,
-       'blockedVarsForExport' => 
-      array (
-      ),
-       'defaultValue' => NULL,
-       'columnLength' => 190,
-       'regex' => '',
-       'regexFlags' => 
-      array (
-      ),
-       'unique' => false,
-       'showCharCount' => false,
-       'width' => '',
-       'defaultValueGenerator' => '',
-    )),
   ),
    'blockedVarsForExport' => 
   array (

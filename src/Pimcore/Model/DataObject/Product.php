@@ -67,7 +67,6 @@ class Product extends \Pimcore\Model\DataObject\Product implements SlugAwareInte
                     'wholesalePrice' => method_exists($priceItem, 'getWholesalePrice') ? $priceItem->getWholesalePrice() : null,
                     'wholesaleSupplierPrice' => method_exists($priceItem, 'getWholesaleSupplierPrice') ? $priceItem->getWholesaleSupplierPrice() : null,
                     'unitPrice' => method_exists($priceItem, 'getUnitPrice') ? $priceItem->getUnitPrice() : null,
-                    'priceWithTax' => method_exists($priceItem, 'getPricesWithVat') ? (bool) $priceItem->getPricesWithVat() : false,
                 ];
             }
         }
@@ -235,6 +234,31 @@ class Product extends \Pimcore\Model\DataObject\Product implements SlugAwareInte
         foreach ($flags as $flag) {
             if ($flag instanceof \Pimcore\Model\DataObject\ProductFlag && $flag->isPublished()) {
                 $ids[] = $flag->getId();
+            }
+        }
+
+        return $ids;
+    }
+
+    public function getBenefitSetId(): ?int
+    {
+        $set = $this->getBenefictSet();
+
+        return $set?->getId();
+    }
+
+    public function getPaperCartridgesData(): array
+    {
+        $cartridges = $this->getPaperCartridges();
+
+        if (empty($cartridges)) {
+            return [];
+        }
+
+        $ids = [];
+        foreach ($cartridges as $cartridge) {
+            if ($cartridge->isPublished()) {
+                $ids[] = $cartridge->getId();
             }
         }
 

@@ -9,12 +9,14 @@ use Pimcore\Model\DataObject\AbstractObject;
 use Pimcore\Model\DataObject\Collection;
 use Pimcore\Model\DataObject\Data\Hotspotimage;
 use Pimcore\Model\DataObject\Product;
+use Pimcore\Model\DataObject\ProductBenefitSet;
 use Pimcore\Translation\Translator;
 
 abstract class BaseMapper implements MapperInterface
 {
     public const COUNTRY_CZECHIA = 'Czechia';
     public const COUNTRY_SLOVAKIA = 'Slovakia';
+    public const BENEFIT_SET_FILTERS_PATH = '/ProductBenefitSets/ProsAndConsFilters';
 
     /**
      * @param \Pimcore\Translation\Translator $translator
@@ -46,6 +48,19 @@ abstract class BaseMapper implements MapperInterface
         }
 
         $product->setCollections($collections);
+    }
+
+    protected function assignBenefitSetForFilters(Product $product): void
+    {
+        $type = $product->getProductType();
+        if ($type !== 'filter' && $type !== 'whirlpoolFilter') {
+            return;
+        }
+
+        $benefitSet = ProductBenefitSet::getByPath(self::BENEFIT_SET_FILTERS_PATH);
+        if ($benefitSet instanceof ProductBenefitSet) {
+            $product->setBenefictSet($benefitSet);
+        }
     }
 
     protected function deduplicateImages(array $hotspotImages): array
