@@ -81,6 +81,14 @@ App\Pimcore\Model\DataObject\Product:
             exp: object.getPaperCartridgesData()
             serialized_name: paperCartridges
             groups: [api]
+        getCrossSellingProductsData:
+            exp: object.getCrossSellingProductsData()
+            serialized_name: crossSellingProducts
+            groups: [api]
+        getSimularProductsData:
+            exp: object.getSimularProductsData()
+            serialized_name: similarProducts
+            groups: [api]
         getProductOptionsData:
             exp: object.getProductOptionsData()
             serialized_name: productOptions

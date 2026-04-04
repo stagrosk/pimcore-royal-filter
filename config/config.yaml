@@ -37,6 +37,8 @@ pimcore:
             'Pimcore\Model\DataObject\PriceList': 'App\Pimcore\Model\DataObject\PriceList'
             'Pimcore\Model\DataObject\ProductFlag': 'App\Pimcore\Model\DataObject\ProductFlag'
             'Pimcore\Model\DataObject\ProductBenefitSet': 'App\Pimcore\Model\DataObject\ProductBenefitSet'
+            'Pimcore\Model\DataObject\BlogPost': 'App\Pimcore\Model\DataObject\BlogPost'
+            'Pimcore\Model\DataObject\BlogCategory': 'App\Pimcore\Model\DataObject\BlogCategory'
 
 #### CUSTOM DOCUMENT EDITABLES
     documents:

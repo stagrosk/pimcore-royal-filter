@@ -99,7 +99,7 @@ class ProductSubscriber extends AbstractWebhookSubscriber
     private function hasVariants(Product $object): bool
     {
         $listing = Product::getList();
-        $listing->setCondition('o_parentId = ?', [$object->getId()]);
+        $listing->setCondition('parentId = ?', [$object->getId()]);
         $listing->setLimit(1);
 
         return $listing->getTotalCount() > 0;

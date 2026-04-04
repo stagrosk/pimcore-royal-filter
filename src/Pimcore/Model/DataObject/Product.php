@@ -240,6 +240,30 @@ class Product extends \Pimcore\Model\DataObject\Product implements SlugAwareInte
         return $ids;
     }
 
+    public function getCrossSellingProductsData(): array
+    {
+        $ids = [];
+        foreach ($this->getCrossSellingProducts() as $product) {
+            if ($product instanceof \Pimcore\Model\DataObject\Product && $product->isPublished()) {
+                $ids[] = $product->getId();
+            }
+        }
+
+        return $ids;
+    }
+
+    public function getSimularProductsData(): array
+    {
+        $ids = [];
+        foreach ($this->getSimularProducts() as $product) {
+            if ($product instanceof \Pimcore\Model\DataObject\Product && $product->isPublished()) {
+                $ids[] = $product->getId();
+            }
+        }
+
+        return $ids;
+    }
+
     public function getBenefitSetId(): ?int
     {
         $set = $this->getBenefictSet();
