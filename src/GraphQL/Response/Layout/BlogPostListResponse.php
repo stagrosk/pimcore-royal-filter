@@ -9,6 +9,8 @@ use Pimcore\Model\DataObject\BlogPost;
 
 class BlogPostListResponse extends AbstractResponse
 {
+    private const THUMBNAIL_CARD = self::THUMBNAIL_CARD;
+
     public function __construct()
     {
         parent::__construct([
@@ -44,7 +46,10 @@ class BlogPostListResponse extends AbstractResponse
                                 'author' => $post->getAuthor(),
                                 'publishDate' => $post->getPublishDate()?->format('c'),
                                 'isFeatured' => $post->getIsFeatured(),
-                                'featuredImage' => $featuredImage ? $featuredImage->getFullPath() : null,
+                                'featuredImage' => $featuredImage ? [
+                                    'path' => $featuredImage->getFullPath(),
+                                    'card' => $featuredImage->getThumbnail(self::THUMBNAIL_CARD)?->getPath(),
+                                ] : null,
                                 'categories' => $categories,
                             ];
                         }
@@ -72,7 +77,13 @@ class BlogPostListResponse extends AbstractResponse
                 'author' => ['type' => Type::string()],
                 'publishDate' => ['type' => Type::string()],
                 'isFeatured' => ['type' => Type::boolean()],
-                'featuredImage' => ['type' => Type::string()],
+                'featuredImage' => ['type' => new ObjectType([
+                    'name' => 'BlogPostCardImage',
+                    'fields' => [
+                        'path' => ['type' => Type::string()],
+                        'card' => ['type' => Type::string()],
+                    ],
+                ])],
                 'categories' => ['type' => Type::listOf(new ObjectType([
                     'name' => 'BlogPostCardCategory',
                     'fields' => [

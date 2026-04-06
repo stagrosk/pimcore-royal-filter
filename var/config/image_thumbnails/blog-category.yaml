@@ -1,0 +1,28 @@
+pimcore:
+    assets:
+        image:
+            thumbnails:
+                definitions:
+                    blog-category:
+                        items:
+                            -
+                                method: cover
+                                arguments:
+                                    width: 400
+                                    height: 300
+                                    positioning: center
+                                    forceResize: true
+                        medias: {  }
+                        name: blog-category
+                        description: 'Blog category image 400x300 (4:3)'
+                        group: blog
+                        format: JPEG
+                        quality: 85
+                        highResolution: null
+                        preserveColor: false
+                        preserveMetaData: false
+                        rasterizeSVG: false
+                        downloadable: false
+                        modificationDate: 1711497600
+                        creationDate: 1711497600
+                        preserveAnimation: false

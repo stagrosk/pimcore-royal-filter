@@ -3,16 +3,16 @@
 namespace App\GraphQL\Query\Layout;
 
 use App\GraphQL\Query\AbstractQuery;
-use App\GraphQL\Resolver\Layout\BlogPostResolver;
-use App\GraphQL\Response\Layout\BlogPostResponse;
-use App\GraphQL\Type\Arguments\Layout\BlogPostArgs;
+use App\GraphQL\Resolver\Layout\BlogCategoryListResolver;
+use App\GraphQL\Response\Layout\BlogCategoryListResponse;
+use App\GraphQL\Type\Arguments\Layout\BlogCategoryListArgs;
 use Pimcore\Bundle\DataHubBundle\Event\GraphQL\Model\QueryTypeEvent;
 
-class BlogPostQuery extends AbstractQuery
+class BlogCategoryListQuery extends AbstractQuery
 {
     public function __construct(
-        private readonly BlogPostResponse $response,
-        private readonly BlogPostResolver $resolver
+        private readonly BlogCategoryListResponse $response,
+        private readonly BlogCategoryListResolver $resolver
     ) {
     }
 
@@ -20,13 +20,13 @@ class BlogPostQuery extends AbstractQuery
     {
         return [
             'type' => $this->response,
-            'args' => BlogPostArgs::args(),
+            'args' => BlogCategoryListArgs::args(),
             'resolve' => [$this->resolver, 'resolve'],
         ];
     }
 
     public function getOperationName(): string
     {
-        return 'getBlogPostBySlugOrHandle';
+        return 'getBlogCategories';
     }
 }

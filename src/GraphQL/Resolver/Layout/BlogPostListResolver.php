@@ -26,16 +26,18 @@ class BlogPostListResolver extends AbstractResolver
         $list->setOffset($offset);
 
         if (!empty($categorySlug)) {
-            $category = BlogCategory::getList();
-            $category->setLocale($language);
-            $category->addConditionParam('slug = ?', $categorySlug);
-            $category->setLimit(1);
-            $categories = $category->getObjects();
+            $categoryList = BlogCategory::getList();
+            $categoryList->setLocale($language);
+            $categoryList->addConditionParam('slug = ?', $categorySlug);
+            $categoryList->setLimit(1);
+            $categoryResults = $categoryList->getObjects();
 
-            if (!empty($categories)) {
-                $cat = reset($categories);
-                $list->addConditionParam('blogCategories LIKE ?', '%,' . $cat->getId() . ',%');
+            if (empty($categoryResults)) {
+                return ['items' => [], 'totalCount' => 0, 'language' => $language];
             }
+
+            $cat = reset($categoryResults);
+            $list->addConditionParam('blogCategories LIKE ?', '%,' . $cat->getId() . ',%');
         }
 
         $posts = $list->getObjects();

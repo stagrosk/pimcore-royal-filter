@@ -13,18 +13,27 @@ class BlogPostResolver extends AbstractResolver
 {
     public function resolve($source, $args, $context, ResolveInfo $info): array
     {
+        $handle = $args['handle'] ?? '';
         $slug = $args['slug'] ?? '';
 
-        if (empty($slug)) {
-            throw new \Exception('Slug argument is required');
+        if (empty($handle) && empty($slug)) {
+            throw new \Exception('One of argument (handle or slug) must be filled in!');
         }
 
         $language = $args['language'] ?: Tool::getDefaultLanguage();
 
         $list = BlogPost::getList();
         $list->setLocale($language);
-        $list->addConditionParam('slug = ?', $slug);
         $list->addConditionParam('status = ?', 'published');
+
+        if (!empty($handle)) {
+            $list->addConditionParam('handle = ?', $handle);
+        }
+
+        if (!empty($slug)) {
+            $list->addConditionParam('slug = ?', $slug);
+        }
+
         $list->setLimit(1);
 
         $data = $list->getObjects();
@@ -32,7 +41,7 @@ class BlogPostResolver extends AbstractResolver
 
         if (!$blogPost instanceof BlogPost) {
             throw new TranslatableException(
-                sprintf('Blog post with slug [%s] could not be found', $slug),
+                sprintf('Blog post with handle [%s] / slug [%s] could not be found', $handle, $slug),
                 'frontend-error-blog-post-not-found',
                 'BLOG_POST_NOT_FOUND'
             );
@@ -52,10 +61,11 @@ class BlogPostResolver extends AbstractResolver
 
         foreach (Tool::getValidLanguages() as $lang) {
             $slug = $blogPost->getSlug($lang);
-            if (!empty($slug)) {
+            $handle = $blogPost->getHandle($lang);
+            if (!empty($handle) || !empty($slug)) {
                 $canonicals[] = [
                     'language' => $lang,
-                    'handle' => null,
+                    'handle' => $handle,
                     'slug' => $slug,
                 ];
             }

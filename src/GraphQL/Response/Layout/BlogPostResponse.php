@@ -18,6 +18,9 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class BlogPostResponse extends AbstractResponse
 {
+    private const THUMBNAIL_CARD = self::THUMBNAIL_CARD;
+    private const THUMBNAIL_DETAIL = self::THUMBNAIL_DETAIL;
+
     public function __construct(
         Service $graphQlService,
         EventDispatcherInterface $eventDispatcher,
@@ -32,7 +35,7 @@ class BlogPostResponse extends AbstractResponse
         }
 
         parent::__construct([
-            'name' => 'getBlogPostBySlug',
+            'name' => 'getBlogPostBySlugOrHandle',
             'fields' => [
                 'content' => [
                     'type' => ClassTypeDefinitions::get($class),
@@ -93,17 +96,28 @@ class BlogPostResponse extends AbstractResponse
                     'title' => $related->getTitle($language),
                     'slug' => $related->getSlug($language),
                     'excerpt' => $related->getExcerpt($language),
-                    'featuredImage' => $relatedImage ? $relatedImage->getFullPath() : null,
+                    'featuredImage' => $relatedImage ? [
+                        'path' => $relatedImage->getFullPath(),
+                        'card' => $relatedImage->getThumbnail(self::THUMBNAIL_CARD)?->getPath(),
+                    ] : null,
                     'publishDate' => $related->getPublishDate()?->format('c'),
                 ];
             }
         }
 
         return [
+            'title' => $post->getTitle($language),
+            'excerpt' => $post->getExcerpt($language),
+            'seoTitle' => $post->getSeoTitle($language),
+            'seoDescription' => $post->getSeoDescription($language),
             'author' => $post->getAuthor(),
             'publishDate' => $post->getPublishDate()?->format('c'),
             'isFeatured' => $post->getIsFeatured(),
-            'featuredImage' => $featuredImage ? $featuredImage->getFullPath() : null,
+            'featuredImage' => $featuredImage ? [
+                'path' => $featuredImage->getFullPath(),
+                'detail' => $featuredImage->getThumbnail(self::THUMBNAIL_DETAIL)?->getPath(),
+                'card' => $featuredImage->getThumbnail(self::THUMBNAIL_CARD)?->getPath(),
+            ] : null,
             'categories' => $categories,
             'relatedPosts' => $relatedPosts,
         ];
@@ -114,10 +128,14 @@ class BlogPostResponse extends AbstractResponse
         return new ObjectType([
             'name' => 'BlogPostMeta',
             'fields' => [
+                'title' => ['type' => Type::string()],
+                'excerpt' => ['type' => Type::string()],
+                'seoTitle' => ['type' => Type::string()],
+                'seoDescription' => ['type' => Type::string()],
                 'author' => ['type' => Type::string()],
                 'publishDate' => ['type' => Type::string()],
                 'isFeatured' => ['type' => Type::boolean()],
-                'featuredImage' => ['type' => Type::string()],
+                'featuredImage' => ['type' => $this->getImageType('BlogPostFeaturedImage', true)],
                 'categories' => ['type' => Type::listOf(new ObjectType([
                     'name' => 'BlogPostCategory',
                     'fields' => [
@@ -133,11 +151,28 @@ class BlogPostResponse extends AbstractResponse
                         'title' => ['type' => Type::string()],
                         'slug' => ['type' => Type::string()],
                         'excerpt' => ['type' => Type::string()],
-                        'featuredImage' => ['type' => Type::string()],
+                        'featuredImage' => ['type' => $this->getImageType('BlogRelatedPostImage', false)],
                         'publishDate' => ['type' => Type::string()],
                     ],
                 ]))],
             ],
+        ]);
+    }
+
+    private function getImageType(string $name, bool $includeDetail): ObjectType
+    {
+        $fields = [
+            'path' => ['type' => Type::string()],
+            'card' => ['type' => Type::string()],
+        ];
+
+        if ($includeDetail) {
+            $fields['detail'] = ['type' => Type::string()];
+        }
+
+        return new ObjectType([
+            'name' => $name,
+            'fields' => $fields,
         ]);
     }
 
@@ -147,6 +182,7 @@ class BlogPostResponse extends AbstractResponse
             'name' => 'BlogCanonicalLink',
             'fields' => [
                 'language' => ['type' => Type::nonNull(Type::string())],
+                'handle' => ['type' => Type::string()],
                 'slug' => ['type' => Type::string()],
             ],
         ]);

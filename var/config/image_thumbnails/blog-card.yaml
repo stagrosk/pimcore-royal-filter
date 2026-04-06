@@ -1,0 +1,28 @@
+pimcore:
+    assets:
+        image:
+            thumbnails:
+                definitions:
+                    blog-card:
+                        items:
+                            -
+                                method: cover
+                                arguments:
+                                    width: 600
+                                    height: 400
+                                    positioning: center
+                                    forceResize: true
+                        medias: {  }
+                        name: blog-card
+                        description: 'Blog card image 600x400 (3:2)'
+                        group: blog
+                        format: JPEG
+                        quality: 85
+                        highResolution: null
+                        preserveColor: false
+                        preserveMetaData: false
+                        rasterizeSVG: false
+                        downloadable: false
+                        modificationDate: 1711497600
+                        creationDate: 1711497600
+                        preserveAnimation: false
