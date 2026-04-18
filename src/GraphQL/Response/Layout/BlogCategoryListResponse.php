@@ -9,7 +9,7 @@ use Pimcore\Model\DataObject\BlogCategory;
 
 class BlogCategoryListResponse extends AbstractResponse
 {
-    private const THUMBNAIL_CATEGORY = self::THUMBNAIL_CATEGORY;
+    private const THUMBNAIL_CATEGORY = 'blog-category';
 
     public function __construct()
     {

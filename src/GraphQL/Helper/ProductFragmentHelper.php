@@ -5,7 +5,7 @@ namespace App\GraphQL\Helper;
 use Pimcore\Model\DataObject\Data\RgbaColor;
 use Pimcore\Model\DataObject\Fieldcollection\Data\Price;
 use Pimcore\Model\DataObject\Product;
-use Pimcore\Model\DataObject\CustomerRole;
+use Pimcore\Model\DataObject\CustomerGroup;
 use Pimcore\Model\DataObject\ProductFlag;
 use Pimcore\Tool;
 
@@ -39,10 +39,6 @@ class ProductFragmentHelper
             'productType' => $product->getProductType(),
             'ean' => $product->getEan(),
             'madeIn' => $product->getMadeIn(),
-            'isFreeGift' => $product->getIsFreeGift() ?? false,
-            'isGiftCard' => $product->getIsGiftCard() ?? false,
-            'isVirtualProduct' => $product->getIsVirtualProduct() ?? false,
-
             // Images
             'imageTile' => self::getFirstImageUrl($product, self::THUMBNAIL_TILE),
             'imagePreview' => self::getFirstImageUrl($product, self::THUMBNAIL_PREVIEW),
@@ -54,8 +50,8 @@ class ProductFragmentHelper
             // Flags
             'flags' => self::getFlags($product, $language),
 
-            // Customer Roles
-            'customerRoles' => self::getCustomerRoles($product, $language),
+            // Customer Groups
+            'customerGroups' => self::getCustomerGroups($product, $language),
 
             // Collections
             'collections' => self::getCollections($product, $language),
@@ -250,23 +246,23 @@ class ProductFragmentHelper
         return $result;
     }
 
-    private static function getCustomerRoles(Product $product, string $language): array
+    private static function getCustomerGroups(Product $product, string $language): array
     {
-        $roles = $product->getCustomerRoles();
+        $groups = $product->getCustomerGroups();
 
-        if (empty($roles)) {
+        if (empty($groups)) {
             return [];
         }
 
         $result = [];
-        foreach ($roles as $role) {
-            if (!$role instanceof CustomerRole) {
+        foreach ($groups as $group) {
+            if (!$group instanceof CustomerGroup) {
                 continue;
             }
 
             $result[] = [
-                'code' => $role->getCode(),
-                'title' => $role->getTitle($language),
+                'code' => $group->getCode(),
+                'title' => $group->getTitle($language),
             ];
         }
 

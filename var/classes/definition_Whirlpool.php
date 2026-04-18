@@ -32,7 +32,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1750613676,
+   'modificationDate' => 1776427580,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -789,72 +789,6 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'collapsible' => false,
                      'border' => false,
                   )),
-                  1 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
-                     'name' => 'Paper filter',
-                     'type' => NULL,
-                     'region' => '',
-                     'title' => 'Paper filter',
-                     'width' => '',
-                     'height' => '',
-                     'collapsible' => false,
-                     'collapsed' => false,
-                     'bodyStyle' => '',
-                     'datatype' => 'layout',
-                     'children' => 
-                    array (
-                      0 => 
-                      \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToManyObjectRelation::__set_state(array(
-                         'name' => 'paperCartridges',
-                         'title' => 'Paper Cartridges',
-                         'tooltip' => '',
-                         'mandatory' => false,
-                         'noteditable' => false,
-                         'index' => false,
-                         'locked' => false,
-                         'style' => '',
-                         'permissions' => NULL,
-                         'fieldtype' => '',
-                         'relationType' => true,
-                         'invisible' => false,
-                         'visibleGridView' => false,
-                         'visibleSearch' => false,
-                         'blockedVarsForExport' => 
-                        array (
-                        ),
-                         'classes' => 
-                        array (
-                          0 => 
-                          array (
-                            'classes' => 'PaperCartridge',
-                          ),
-                        ),
-                         'displayMode' => 'grid',
-                         'pathFormatterClass' => '',
-                         'maxItems' => NULL,
-                         'visibleFields' => 'id,title,length,diameter,centerDiameter',
-                         'allowToCreateNewObject' => false,
-                         'allowToClearRelation' => true,
-                         'optimizedAdminLoading' => true,
-                         'enableTextSelection' => true,
-                         'visibleFieldDefinitions' => 
-                        array (
-                        ),
-                         'width' => 600,
-                         'height' => '',
-                      )),
-                    ),
-                     'locked' => false,
-                     'blockedVarsForExport' => 
-                    array (
-                    ),
-                     'fieldtype' => 'panel',
-                     'layout' => NULL,
-                     'border' => false,
-                     'icon' => '',
-                     'labelWidth' => 100,
-                     'labelAlign' => 'left',
-                  )),
                 ),
                  'locked' => false,
                  'blockedVarsForExport' => 
@@ -864,6 +798,72 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'layout' => NULL,
                  'border' => false,
                  'icon' => '/bundles/pimcoreadmin/img/flat-color-icons/puzzle.svg',
+                 'labelWidth' => 100,
+                 'labelAlign' => 'left',
+              )),
+              5 => 
+              \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+                 'name' => 'Paper filter',
+                 'type' => NULL,
+                 'region' => '',
+                 'title' => 'Paper filter',
+                 'width' => '',
+                 'height' => '',
+                 'collapsible' => false,
+                 'collapsed' => false,
+                 'bodyStyle' => '',
+                 'datatype' => 'layout',
+                 'children' => 
+                array (
+                  0 => 
+                  \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToManyObjectRelation::__set_state(array(
+                     'name' => 'paperCartridges',
+                     'title' => 'Paper Cartridges',
+                     'tooltip' => '',
+                     'mandatory' => false,
+                     'noteditable' => false,
+                     'index' => false,
+                     'locked' => false,
+                     'style' => '',
+                     'permissions' => NULL,
+                     'fieldtype' => '',
+                     'relationType' => true,
+                     'invisible' => false,
+                     'visibleGridView' => false,
+                     'visibleSearch' => false,
+                     'blockedVarsForExport' => 
+                    array (
+                    ),
+                     'classes' => 
+                    array (
+                      0 => 
+                      array (
+                        'classes' => 'PaperCartridge',
+                      ),
+                    ),
+                     'displayMode' => 'grid',
+                     'pathFormatterClass' => '',
+                     'maxItems' => NULL,
+                     'visibleFields' => 'id,title,length,diameter,centerDiameter',
+                     'allowToCreateNewObject' => false,
+                     'allowToClearRelation' => true,
+                     'optimizedAdminLoading' => true,
+                     'enableTextSelection' => true,
+                     'visibleFieldDefinitions' => 
+                    array (
+                    ),
+                     'width' => 600,
+                     'height' => '',
+                  )),
+                ),
+                 'locked' => false,
+                 'blockedVarsForExport' => 
+                array (
+                ),
+                 'fieldtype' => 'panel',
+                 'layout' => NULL,
+                 'border' => false,
+                 'icon' => '',
                  'labelWidth' => 100,
                  'labelAlign' => 'left',
               )),

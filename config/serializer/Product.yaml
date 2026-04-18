@@ -29,18 +29,6 @@ App\Pimcore\Model\DataObject\Product:
             exp: object.getProductType()
             serialized_name: productType
             groups: [api]
-        getIsVirtualProduct:
-            exp: object.getIsVirtualProduct()
-            serialized_name: isVirtualProduct
-            groups: [api]
-        getIsGiftCard:
-            exp: object.getIsGiftCard()
-            serialized_name: isGiftCard
-            groups: [api]
-        getIsFreeGift:
-            exp: object.getIsFreeGift()
-            serialized_name: isFreeGift
-            groups: [api]
         getMadeIn:
             exp: object.getMadeIn()
             serialized_name: madeIn
@@ -92,4 +80,8 @@ App\Pimcore\Model\DataObject\Product:
         getProductOptionsData:
             exp: object.getProductOptionsData()
             serialized_name: productOptions
+            groups: [api]
+        getCustomerGroupsData:
+            exp: object.getCustomerGroupsData()
+            serialized_name: customerGroups
             groups: [api]

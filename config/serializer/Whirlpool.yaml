@@ -1,0 +1,51 @@
+App\Pimcore\Model\DataObject\Whirlpool:
+    exclusion_policy: ALL
+    virtual_properties:
+        getId:
+            exp: object.getId()
+            serialized_name: id
+            groups: [api]
+        getDeviceType:
+            exp: object.getDeviceType()
+            serialized_name: deviceType
+            groups: [api]
+        getTranslations:
+            exp: object.getTranslations()
+            serialized_name: translations
+            groups: [api]
+        getManufacturerData:
+            exp: object.getManufacturerData()
+            serialized_name: manufacturer
+            groups: [api]
+        getDefaultImageData:
+            exp: object.getDefaultImageData()
+            serialized_name: defaultImage
+            groups: [api]
+        getImagesData:
+            exp: object.getImagesData()
+            serialized_name: images
+            groups: [api]
+        getCustomerImagesData:
+            exp: object.getCustomerImagesData()
+            serialized_name: customerImages
+            groups: [api]
+        getProductApiId:
+            exp: object.getProductApiId()
+            serialized_name: productApiId
+            groups: [api]
+        getGenerateAsProduct:
+            exp: object.getGenerateAsProduct()
+            serialized_name: generateAsProduct
+            groups: [api]
+        getCollectionId:
+            exp: object.getCollectionId()
+            serialized_name: collectionId
+            groups: [api]
+        getPaperCartridgesData:
+            exp: object.getPaperCartridgesData()
+            serialized_name: paperCartridges
+            groups: [api]
+        getParametersConfigData:
+            exp: object.getParametersConfigData()
+            serialized_name: parameters
+            groups: [api]

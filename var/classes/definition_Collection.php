@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Inheritance: no
+ * Inheritance: yes
  * Variants: no
  *
  * Fields Summary:
@@ -15,6 +15,7 @@
  * - icon [select]
  * - filterConfig [fieldcollections]
  * - metadata [classificationstore]
+ * - customerGroups [manyToManyRelation]
  * - image [image]
  */
 
@@ -25,7 +26,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1775148650,
+   'modificationDate' => 1776428452,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -37,7 +38,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'encryptedTables' => 
   array (
   ),
-   'allowInherit' => false,
+   'allowInherit' => true,
    'allowVariants' => false,
    'showVariants' => false,
    'layoutDefinitions' => 
@@ -458,6 +459,85 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                          'maxItems' => NULL,
                          'height' => NULL,
                          'width' => NULL,
+                      )),
+                    ),
+                     'locked' => false,
+                     'blockedVarsForExport' => 
+                    array (
+                    ),
+                     'fieldtype' => 'panel',
+                     'layout' => NULL,
+                     'border' => false,
+                     'icon' => '/bundles/pimcoreadmin/img/flat-color-icons/bricks.svg',
+                     'labelWidth' => 100,
+                     'labelAlign' => 'left',
+                  )),
+                  3 => 
+                  \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+                     'name' => 'Relations',
+                     'type' => NULL,
+                     'region' => NULL,
+                     'title' => 'Relations',
+                     'width' => '',
+                     'height' => '',
+                     'collapsible' => false,
+                     'collapsed' => false,
+                     'bodyStyle' => '',
+                     'datatype' => 'layout',
+                     'children' => 
+                    array (
+                      0 => 
+                      \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToManyRelation::__set_state(array(
+                         'name' => 'customerGroups',
+                         'title' => 'Customer Groups',
+                         'tooltip' => '',
+                         'mandatory' => false,
+                         'noteditable' => false,
+                         'index' => false,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'fieldtype' => '',
+                         'relationType' => true,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'classes' => 
+                        array (
+                          0 => 
+                          array (
+                            'classes' => 'CustomerGroup',
+                          ),
+                        ),
+                         'displayMode' => NULL,
+                         'pathFormatterClass' => '',
+                         'maxItems' => NULL,
+                         'assetInlineDownloadAllowed' => false,
+                         'assetUploadPath' => '',
+                         'allowToClearRelation' => true,
+                         'objectsAllowed' => true,
+                         'assetsAllowed' => false,
+                         'assetTypes' => 
+                        array (
+                          0 => 
+                          array (
+                            'assetTypes' => '',
+                          ),
+                        ),
+                         'documentsAllowed' => false,
+                         'documentTypes' => 
+                        array (
+                          0 => 
+                          array (
+                            'documentTypes' => '',
+                          ),
+                        ),
+                         'enableTextSelection' => false,
+                         'width' => '',
+                         'height' => '',
                       )),
                     ),
                      'locked' => false,

@@ -19,3 +19,5 @@ services:
     App\EventSubscriber\ProductFlagSubscriber:
 
     App\EventSubscriber\ProductBenefitSetSubscriber:
+
+    App\EventSubscriber\CustomerGroupSubscriber:

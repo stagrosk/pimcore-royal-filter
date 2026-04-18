@@ -18,8 +18,8 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class BlogPostResponse extends AbstractResponse
 {
-    private const THUMBNAIL_CARD = self::THUMBNAIL_CARD;
-    private const THUMBNAIL_DETAIL = self::THUMBNAIL_DETAIL;
+    private const THUMBNAIL_CARD = 'blog-card';
+    private const THUMBNAIL_DETAIL = 'blog-detail';
 
     public function __construct(
         Service $graphQlService,

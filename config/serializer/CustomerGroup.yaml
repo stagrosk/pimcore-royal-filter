@@ -1,0 +1,19 @@
+App\Pimcore\Model\DataObject\CustomerGroup:
+    exclusion_policy: ALL
+    virtual_properties:
+        getId:
+            exp: object.getId()
+            serialized_name: id
+            groups: [api]
+        getCode:
+            exp: object.getCode()
+            serialized_name: code
+            groups: [api]
+        getAddAutomaticallyOnProduct:
+            exp: object.getAddAutomaticallyOnProduct()
+            serialized_name: addAutomaticallyOnProduct
+            groups: [api]
+        getTranslations:
+            exp: object.getTranslations()
+            serialized_name: translations
+            groups: [api]

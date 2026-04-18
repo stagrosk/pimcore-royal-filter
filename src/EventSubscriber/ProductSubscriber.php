@@ -8,6 +8,7 @@ use Pimcore\Event\DataObjectEvents;
 use Pimcore\Event\Model\DataObjectEvent;
 use Pimcore\Model\DataObject\AbstractObject;
 use Pimcore\Model\DataObject\Concrete;
+use Pimcore\Model\DataObject\CustomerGroup;
 use Pimcore\Model\DataObject\Fieldcollection;
 use Pimcore\Model\DataObject\PriceList;
 use Pimcore\Model\DataObject\Product;
@@ -29,10 +30,30 @@ class ProductSubscriber extends AbstractWebhookSubscriber
     public static function getSubscribedEvents(): array
     {
         return [
+            DataObjectEvents::PRE_ADD => ['onPreAdd'],
             DataObjectEvents::PRE_UPDATE => ['onPreUpdate'],
             DataObjectEvents::POST_UPDATE => ['onPostUpdate'],
             DataObjectEvents::POST_DELETE => ['onPostDelete'],
         ];
+    }
+
+    public function onPreAdd(DataObjectEvent $event): void
+    {
+        $object = $event->getObject();
+
+        if (!$object instanceof Product) {
+            return;
+        }
+
+        $existingGroups = $object->getCustomerGroups();
+        if (!empty($existingGroups)) {
+            return;
+        }
+
+        $autoGroups = $this->getAutoAssignGroups();
+        if (!empty($autoGroups)) {
+            $object->setCustomerGroups($autoGroups);
+        }
     }
 
     public function onPreUpdate(DataObjectEvent $event): void
@@ -113,5 +134,16 @@ class ProductSubscriber extends AbstractWebhookSubscriber
         $priceLists = $listing->load();
 
         return $priceLists[0] ?? null;
+    }
+
+    /**
+     * @return CustomerGroup[]
+     */
+    private function getAutoAssignGroups(): array
+    {
+        $listing = CustomerGroup::getList();
+        $listing->setCondition('addAutomaticallyOnProduct = 1');
+
+        return $listing->load();
     }
 }

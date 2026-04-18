@@ -264,6 +264,11 @@ class Product extends \Pimcore\Model\DataObject\Product implements SlugAwareInte
         return $ids;
     }
 
+    public function getCustomerGroupsData(): array
+    {
+        return \App\Pimcore\Helpers\CustomerGroupHelper::getPublishedIds($this->getCustomerGroups());
+    }
+
     public function getBenefitSetId(): ?int
     {
         $set = $this->getBenefictSet();

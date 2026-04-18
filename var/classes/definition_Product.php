@@ -7,8 +7,6 @@
  * Fields Summary:
  * - status [select]
  * - generatedFromObject [manyToOneRelation]
- * - isVirtualProduct [checkbox]
- * - isGiftCard [checkbox]
  * - ean [input]
  * - productType [select]
  * - sku [input]
@@ -26,7 +24,7 @@
  * - madeIn [country]
  * - collections [manyToManyRelation]
  * - flags [manyToManyRelation]
- * - customerRoles [manyToManyRelation]
+ * - customerGroups [manyToManyRelation]
  * - paperCartridges [manyToManyObjectRelation]
  * - benefictSet [manyToOneRelation]
  * - crossSellingProducts [manyToManyRelation]
@@ -49,7 +47,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1775153742,
+   'modificationDate' => 1776429900,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -199,50 +197,6 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'width' => 500,
               )),
               2 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
-                 'name' => 'isVirtualProduct',
-                 'title' => 'Is Virtual Product',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'fieldtype' => '',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-                 'blockedVarsForExport' => 
-                array (
-                ),
-                 'defaultValue' => 0,
-                 'defaultValueGenerator' => '',
-              )),
-              3 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
-                 'name' => 'isGiftCard',
-                 'title' => 'Is Gift Card',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'fieldtype' => '',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-                 'blockedVarsForExport' => 
-                array (
-                ),
-                 'defaultValue' => 0,
-                 'defaultValueGenerator' => '',
-              )),
-              4 => 
               \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
                  'name' => 'ean',
                  'title' => 'EAN Code',
@@ -272,7 +226,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'width' => '',
                  'defaultValueGenerator' => '',
               )),
-              5 => 
+              3 => 
               \Pimcore\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
                  'name' => 'productType',
                  'title' => 'Product type',
@@ -328,7 +282,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'optionsProviderClass' => '',
                  'optionsProviderData' => '',
               )),
-              6 => 
+              4 => 
               \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
                  'name' => 'sku',
                  'title' => 'Sku',
@@ -358,7 +312,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'width' => 300,
                  'defaultValueGenerator' => '',
               )),
-              7 => 
+              5 => 
               \Pimcore\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
                  'name' => 'localizedfields',
                  'title' => 'Name and Description',
@@ -720,7 +674,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'height' => '',
                  'fieldDefinitionsCache' => NULL,
               )),
-              8 => 
+              6 => 
               \Pimcore\Model\DataObject\ClassDefinition\Data\CalculatedValue::__set_state(array(
                  'name' => 'parametersConfig',
                  'title' => 'Parameters',
@@ -935,8 +889,8 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
               )),
               4 => 
               \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToManyRelation::__set_state(array(
-                 'name' => 'customerRoles',
-                 'title' => 'Customer Roles',
+                 'name' => 'customerGroups',
+                 'title' => 'Customer Groups',
                  'tooltip' => '',
                  'mandatory' => false,
                  'noteditable' => false,
@@ -956,7 +910,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                 array (
                   0 => 
                   array (
-                    'classes' => 'CustomerRole',
+                    'classes' => 'CustomerGroup',
                   ),
                 ),
                  'displayMode' => NULL,
@@ -1096,18 +1050,10 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'assetsAllowed' => false,
                  'assetTypes' => 
                 array (
-                  0 => 
-                  array (
-                    'assetTypes' => '',
-                  ),
                 ),
                  'documentsAllowed' => false,
                  'documentTypes' => 
                 array (
-                  0 => 
-                  array (
-                    'documentTypes' => '',
-                  ),
                 ),
                  'enableTextSelection' => false,
                  'width' => '',
@@ -1149,18 +1095,10 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'assetsAllowed' => false,
                  'assetTypes' => 
                 array (
-                  0 => 
-                  array (
-                    'assetTypes' => '',
-                  ),
                 ),
                  'documentsAllowed' => false,
                  'documentTypes' => 
                 array (
-                  0 => 
-                  array (
-                    'documentTypes' => '',
-                  ),
                 ),
                  'enableTextSelection' => false,
                  'width' => '',
@@ -1812,6 +1750,50 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'enableGridLocking' => false,
    'deletedDataComponents' => 
   array (
+    0 => 
+    \Pimcore\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
+       'name' => 'isVirtualProduct',
+       'title' => 'Is Virtual Product',
+       'tooltip' => '',
+       'mandatory' => false,
+       'noteditable' => false,
+       'index' => false,
+       'locked' => false,
+       'style' => '',
+       'permissions' => NULL,
+       'fieldtype' => '',
+       'relationType' => false,
+       'invisible' => false,
+       'visibleGridView' => false,
+       'visibleSearch' => false,
+       'blockedVarsForExport' => 
+      array (
+      ),
+       'defaultValue' => 0,
+       'defaultValueGenerator' => '',
+    )),
+    1 => 
+    \Pimcore\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
+       'name' => 'isGiftCard',
+       'title' => 'Is Gift Card',
+       'tooltip' => '',
+       'mandatory' => false,
+       'noteditable' => false,
+       'index' => false,
+       'locked' => false,
+       'style' => '',
+       'permissions' => NULL,
+       'fieldtype' => '',
+       'relationType' => false,
+       'invisible' => false,
+       'visibleGridView' => false,
+       'visibleSearch' => false,
+       'blockedVarsForExport' => 
+      array (
+      ),
+       'defaultValue' => 0,
+       'defaultValueGenerator' => '',
+    )),
   ),
    'blockedVarsForExport' => 
   array (
