@@ -40,6 +40,7 @@ pimcore:
             'Pimcore\Model\DataObject\BlogPost': 'App\Pimcore\Model\DataObject\BlogPost'
             'Pimcore\Model\DataObject\BlogCategory': 'App\Pimcore\Model\DataObject\BlogCategory'
             'Pimcore\Model\DataObject\Whirlpool': 'App\Pimcore\Model\DataObject\Whirlpool'
+            'Pimcore\Model\DataObject\CustomerGroup': 'App\Pimcore\Model\DataObject\CustomerGroup'
 
 #### CUSTOM DOCUMENT EDITABLES
     documents:

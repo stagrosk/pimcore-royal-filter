@@ -14,7 +14,7 @@ class ProductFragment
     private static ?ObjectType $manufacturerType = null;
     private static ?ObjectType $canonicalType = null;
     private static ?ObjectType $flagType = null;
-    private static ?ObjectType $customerRoleType = null;
+    private static ?ObjectType $customerGroupType = null;
 
     /**
      * Get the singleton ProductFragment type
@@ -73,19 +73,6 @@ class ProductFragment
                         'type' => Type::string(),
                         'description' => 'Country of origin (ISO code)',
                     ],
-                    'isFreeGift' => [
-                        'type' => Type::boolean(),
-                        'description' => 'Whether product is a free gift',
-                    ],
-                    'isGiftCard' => [
-                        'type' => Type::boolean(),
-                        'description' => 'Whether product is a gift card',
-                    ],
-                    'isVirtualProduct' => [
-                        'type' => Type::boolean(),
-                        'description' => 'Whether product is virtual (no shipping)',
-                    ],
-
                     // Images
                     'imageTile' => [
                         'type' => Type::string(),
@@ -124,10 +111,10 @@ class ProductFragment
                         'description' => 'Product flags (e.g. novinka, akcia)',
                     ],
 
-                    // Customer Roles
-                    'customerRoles' => [
-                        'type' => Type::listOf(self::getCustomerRoleType()),
-                        'description' => 'Customer roles assigned to this product',
+                    // Customer Groups
+                    'customerGroups' => [
+                        'type' => Type::listOf(self::getCustomerGroupType()),
+                        'description' => 'Customer groups assigned to this product',
                     ],
 
                     // Canonicals for language mutations
@@ -304,25 +291,25 @@ class ProductFragment
         return self::$flagType;
     }
 
-    private static function getCustomerRoleType(): ObjectType
+    private static function getCustomerGroupType(): ObjectType
     {
-        if (self::$customerRoleType === null) {
-            self::$customerRoleType = new ObjectType([
-                'name' => 'ProductCustomerRole',
+        if (self::$customerGroupType === null) {
+            self::$customerGroupType = new ObjectType([
+                'name' => 'ProductCustomerGroup',
                 'fields' => [
                     'code' => [
                         'type' => Type::string(),
-                        'description' => 'Role code identifier',
+                        'description' => 'Group code identifier',
                     ],
                     'title' => [
                         'type' => Type::string(),
-                        'description' => 'Role title (localized)',
+                        'description' => 'Group title (localized)',
                     ],
                 ],
             ]);
         }
 
-        return self::$customerRoleType;
+        return self::$customerGroupType;
     }
 
     private static function getCanonicalType(): ObjectType

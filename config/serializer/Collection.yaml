@@ -37,3 +37,7 @@ App\Pimcore\Model\DataObject\Collection:
             exp: object.getChildrenIds()
             serialized_name: children
             groups: [api]
+        getCustomerGroupsData:
+            exp: object.getCustomerGroupsData()
+            serialized_name: customerGroups
+            groups: [api]

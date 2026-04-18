@@ -9,7 +9,7 @@ use Pimcore\Model\DataObject\BlogPost;
 
 class BlogPostListResponse extends AbstractResponse
 {
-    private const THUMBNAIL_CARD = self::THUMBNAIL_CARD;
+    private const THUMBNAIL_CARD = 'blog-card';
 
     public function __construct()
     {

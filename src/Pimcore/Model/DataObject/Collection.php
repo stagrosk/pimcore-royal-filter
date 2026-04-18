@@ -182,6 +182,11 @@ class Collection extends \Pimcore\Model\DataObject\Collection implements SlugAwa
             : null;
     }
 
+    public function getCustomerGroupsData(): array
+    {
+        return \App\Pimcore\Helpers\CustomerGroupHelper::getPublishedIds($this->getCustomerGroups());
+    }
+
     public function getParentCollectionId(): ?int
     {
         $parent = $this->getParent();
