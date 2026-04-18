@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\EventSubscriber;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use Pimcore\Event\DataObjectEvents;
 use Pimcore\Event\Model\DataObjectEvent;
 use Pimcore\Event\Model\TranslationEvent;
@@ -12,19 +14,23 @@ use Pimcore\Model\DataObject\NavigationItem;
 use Pimcore\Model\DataObject\WebsiteConfiguration;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class StorefrontCacheInvalidator implements EventSubscriberInterface
 {
     private const NAVIGATION_IDENTIFIERS = ['root', 'navigationTopbar', 'navigationFooter'];
     private const ESHOP_TRANSLATION_PREFIX = 'eshop-';
 
+    private Client $httpClient;
+
     public function __construct(
-        private readonly HttpClientInterface $httpClient,
         private readonly LoggerInterface $logger,
         private readonly string $storefrontUrl,
         private readonly string $secret,
     ) {
+        $this->httpClient = new Client([
+            'timeout' => 5,
+            'connect_timeout' => 3,
+        ]);
     }
 
     public static function getSubscribedEvents(): array
@@ -76,17 +82,16 @@ class StorefrontCacheInvalidator implements EventSubscriberInterface
         }
 
         try {
-            $response = $this->httpClient->request('POST', rtrim($this->storefrontUrl, '/') . '/api/cache-invalidate', [
+            $response = $this->httpClient->post(rtrim($this->storefrontUrl, '/') . '/api/cache-invalidate', [
                 'headers' => [
                     'x-cache-secret' => $this->secret,
+                    'Content-Type' => 'application/json',
                 ],
                 'json' => ['scope' => $scope],
-                'timeout' => 5,
             ]);
 
-            $status = $response->getStatusCode();
-            $this->logger->info("[StorefrontCache] Invalidated '{$scope}' (HTTP {$status})");
-        } catch (\Throwable $e) {
+            $this->logger->info("[StorefrontCache] Invalidated '{$scope}' (HTTP {$response->getStatusCode()})");
+        } catch (GuzzleException $e) {
             $this->logger->warning("[StorefrontCache] Failed for '{$scope}': " . $e->getMessage());
         }
     }
