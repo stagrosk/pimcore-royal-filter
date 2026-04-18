@@ -18,7 +18,9 @@ class WebhookClient
         private readonly LoggerInterface $logger
     ) {
         $this->httpClient = new Client([
-            'base_uri' => $vendureHost
+            'base_uri' => $vendureHost,
+            'timeout' => 10,
+            'connect_timeout' => 5,
         ]);
     }
 
