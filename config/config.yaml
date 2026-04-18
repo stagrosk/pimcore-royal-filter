@@ -5,7 +5,7 @@ pimcore_deepl:
     deepl_auth_key: '%env(DEEPL_AUTH_KEY)%'
 
 divante_translation:
-    api_key: '%env(DIVANTE_API_KEY)%'
+    api_key: '%env(DEEPL_AUTH_KEY)%'
     source_lang: de
     provider:  deepl #or deepl_free
     formality: "default"

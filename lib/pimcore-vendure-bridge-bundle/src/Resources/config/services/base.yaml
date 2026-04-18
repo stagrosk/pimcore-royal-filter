@@ -10,4 +10,4 @@ services:
 
     PimcoreVendureBridgeBundle\Security\CheckConsumerPermissionsService:
         arguments:
-            - '%env(VENDURE_API_KEY)%'
+            - '%env(PIMCORE_API_KEY)%'

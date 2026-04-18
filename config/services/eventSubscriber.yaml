@@ -21,3 +21,8 @@ services:
     App\EventSubscriber\ProductBenefitSetSubscriber:
 
     App\EventSubscriber\CustomerGroupSubscriber:
+
+    App\EventSubscriber\StorefrontCacheInvalidator:
+        arguments:
+            $storefrontUrl: '%env(STOREFRONT_URL)%'
+            $secret: '%env(CACHE_INVALIDATE_SECRET)%'

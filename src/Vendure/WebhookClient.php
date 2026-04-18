@@ -24,30 +24,20 @@ class WebhookClient
         ]);
     }
 
-    /**
-     * Send webhook to Vendure to trigger product sync
-     *
-     * @param array $payload
-     *
-     * @return void
-     */
     public function sendToVendureWebhook(array $payload): void
     {
         $url = '/pimcore/trigger-sync';
 
         $this->logger->info('[VendureWebhook] Sending webhook request', [
-            'url' => $this->httpClient->getConfig('base_uri') . $url,
-            'secret' => substr($this->vendureWebhookSecret, 0, 5) . '***',
-            'secret_length' => strlen($this->vendureWebhookSecret),
             'payload' => $payload,
         ]);
 
         try {
             $response = $this->httpClient->post($url, [
                 'json' => $payload,
-                'query' => [
-                    'secret' => $this->vendureWebhookSecret
-                ]
+                'headers' => [
+                    'X-Webhook-Secret' => $this->vendureWebhookSecret,
+                ],
             ]);
 
             $this->logger->info('[VendureWebhook] Webhook sent successfully', [

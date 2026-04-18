@@ -11,10 +11,10 @@ services:
     App\Vendure\WebhookClient:
         arguments:
             $vendureHost: '%env(VENDURE_HOST)%'
-            $vendureWebhookSecret: '%env(VENDURE_WEBHOOK_SECRET)%'
+            $vendureWebhookSecret: '%env(PIMCORE_BRIDGE_WEBHOOK_SECRET)%'
 
     App\Controller\Api\WebhookController:
         arguments:
-            $vendureWebhookSecret: '%env(VENDURE_WEBHOOK_SECRET)%'
+            $vendureWebhookSecret: '%env(PIMCORE_BRIDGE_WEBHOOK_SECRET)%'
         public: true
         tags: ['controller.service_arguments']
