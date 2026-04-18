@@ -8,11 +8,242 @@ pimcore_data_hub:
                 description: ''
                 group: ''
                 sqlObjectCondition: ''
-                modificationDate: 1727014486
+                modificationDate: 1776366032
                 path: null
                 createDate: 1727014466
             schema:
-                queryEntities: {  }
+                queryEntities:
+                    ContentPage:
+                        id: ContentPage
+                        name: ContentPage
+                        columnConfig:
+                            columns:
+                                -
+                                    attributes:
+                                        attribute: id
+                                        label: ID
+                                        dataType: system
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: published
+                                        label: Published
+                                        dataType: system
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: name
+                                        label: Name
+                                        dataType: input
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: slug
+                                        label: Slug
+                                        dataType: input
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: handle
+                                        label: Handle
+                                        dataType: input
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: absolutePath
+                                        label: 'Absolute Path'
+                                        dataType: input
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: nameInNavigation
+                                        label: 'Name In Navigation'
+                                        dataType: input
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: elements
+                                        label: Elements
+                                        dataType: fieldcollections
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: headerTitle
+                                        label: 'Header Title'
+                                        dataType: input
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: headerImage
+                                        label: 'Header Image'
+                                        dataType: hotspotimage
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: headerTitleAccentColor
+                                        label: 'Header Title Color'
+                                        dataType: select
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: seoTitle
+                                        label: 'Seo Title'
+                                        dataType: input
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: seoDescription
+                                        label: 'Seo Description'
+                                        dataType: textarea
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: canonicals
+                                        label: Canonicals
+                                        dataType: manyToManyRelation
+                                    isOperator: false
+                    Collection:
+                        id: Collection
+                        name: Collection
+                        columnConfig:
+                            columns:
+                                -
+                                    attributes:
+                                        attribute: title
+                                        label: Title
+                                        dataType: input
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: description
+                                        label: Description
+                                        dataType: wysiwyg
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: slug
+                                        label: Slug
+                                        dataType: input
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: handle
+                                        label: Handle
+                                        dataType: input
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: filterConfig
+                                        label: 'Filter Configuration'
+                                        dataType: fieldcollections
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: metadata
+                                        label: Metadata
+                                        dataType: classificationstore
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: image
+                                        label: Image
+                                        dataType: image
+                                    isOperator: false
+                    WebsiteConfiguration:
+                        id: WebsiteConfiguration
+                        name: WebsiteConfiguration
+                        columnConfig:
+                            columns:
+                                -
+                                    attributes:
+                                        attribute: openingHours
+                                        label: 'Opening Hours'
+                                        dataType: fieldcollections
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: contact
+                                        label: Contact
+                                        dataType: wysiwyg
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: company
+                                        label: Company
+                                        dataType: wysiwyg
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: headline
+                                        label: Headline
+                                        dataType: input
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: links
+                                        label: Links
+                                        dataType: manyToManyRelation
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: newsletter
+                                        label: Newsletter
+                                        dataType: wysiwyg
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: socialMedia
+                                        label: 'Social Media'
+                                        dataType: block
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: email
+                                        label: Email
+                                        dataType: input
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: phone
+                                        label: Phone
+                                        dataType: input
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: socialMediaUrl
+                                        label: 'Social media url'
+                                        dataType: input
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: socialMediaIcon
+                                        label: 'Social media icon'
+                                        dataType: image
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: welcomeMessage
+                                        label: 'Welcome Message'
+                                        dataType: input
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: termsAndConditions
+                                        label: 'Terms and conditions'
+                                        dataType: manyToOneRelation
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: personalDataProtection
+                                        label: 'Personal data protection'
+                                        dataType: manyToOneRelation
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: filterBenefitSet
+                                        label: 'Filter benefit set'
+                                        dataType: manyToOneRelation
+                                    isOperator: false
                 mutationEntities: {  }
                 specialEntities:
                     document:
@@ -26,12 +257,12 @@ pimcore_data_hub:
                         update: false
                         delete: false
                     asset:
-                        read: false
+                        read: true
                         create: false
                         update: false
                         delete: false
                     asset_folder:
-                        read: false
+                        read: true
                         create: false
                         update: false
                         delete: false
@@ -41,17 +272,17 @@ pimcore_data_hub:
                         update: false
                         delete: false
                     object_folder:
-                        read: false
+                        read: true
                         create: false
                         update: false
                         delete: false
                     translation:
-                        read: false
+                        read: true
                         create: false
                         update: false
                         delete: false
                     translation_listing:
-                        read: false
+                        read: true
                         create: false
                         update: false
                         delete: false
@@ -59,12 +290,26 @@ pimcore_data_hub:
                 method: datahub_apikey
                 apikey:
                     - 607991922abbc1fd2827d25355fb7479
-                skipPermissionCheck: false
+                skipPermissionCheck: true
                 disableIntrospection: false
             workspaces:
-                asset: {  }
+                asset:
+                    -
+                        read: true
+                        cpath: /
+                        create: false
+                        update: false
+                        delete: false
+                        id: extModel15279-1
                 document: {  }
-                object: {  }
+                object:
+                    -
+                        read: true
+                        cpath: /
+                        create: false
+                        update: false
+                        delete: false
+                        id: extModel15305-1
             permissions:
                 user: {  }
                 role: {  }

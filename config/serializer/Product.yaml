@@ -1,0 +1,87 @@
+App\Pimcore\Model\DataObject\Product:
+    exclusion_policy: ALL
+    virtual_properties:
+        getId:
+            exp: object.getId()
+            serialized_name: id
+            groups: [api]
+        getMasterId:
+            exp: object.getMasterId()
+            serialized_name: masterId
+            groups: [ api ]
+        getVariantsData:
+            exp: object.getVariantsData()
+            serialized_name: variants
+            groups: [ api ]
+        getSku:
+            exp: object.getSku()
+            serialized_name: sku
+            groups: [api]
+        getEan:
+            exp: object.getEan()
+            serialized_name: ean
+            groups: [api]
+        getStatus:
+            exp: object.getStatus()
+            serialized_name: status
+            groups: [api]
+        getProductType:
+            exp: object.getProductType()
+            serialized_name: productType
+            groups: [api]
+        getMadeIn:
+            exp: object.getMadeIn()
+            serialized_name: madeIn
+            groups: [api]
+        getTranslations:
+            exp: object.getTranslations()
+            serialized_name: translations
+            groups: [api]
+        getPricesData:
+            exp: object.getPricesData()
+            serialized_name: prices
+            groups: [api]
+        getImagesData:
+            exp: object.getImagesData()
+            serialized_name: images
+            groups: [api]
+        getCollectionsData:
+            exp: object.getCollectionsData()
+            serialized_name: collections
+            groups: [api]
+        getManufacturerData:
+            exp: object.getManufacturerData()
+            serialized_name: manufacturer
+            groups: [api]
+        getParametersConfigData:
+            exp: object.getParametersConfigData()
+            serialized_name: parameters
+            groups: [api]
+        getFlagsData:
+            exp: object.getFlagsData()
+            serialized_name: flags
+            groups: [api]
+        getBenefitSetId:
+            exp: object.getBenefitSetId()
+            serialized_name: benefitSetId
+            groups: [api]
+        getPaperCartridgesData:
+            exp: object.getPaperCartridgesData()
+            serialized_name: paperCartridges
+            groups: [api]
+        getCrossSellingProductsData:
+            exp: object.getCrossSellingProductsData()
+            serialized_name: crossSellingProducts
+            groups: [api]
+        getSimularProductsData:
+            exp: object.getSimularProductsData()
+            serialized_name: similarProducts
+            groups: [api]
+        getProductOptionsData:
+            exp: object.getProductOptionsData()
+            serialized_name: productOptions
+            groups: [api]
+        getCustomerGroupsData:
+            exp: object.getCustomerGroupsData()
+            serialized_name: customerGroups
+            groups: [api]

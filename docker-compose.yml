@@ -132,7 +132,10 @@ services:
             - .env.docker
 
     royal-filter-php:
-        image: devalpin11/pimcore-php:v11.x-latest
+        build:
+            context: .
+            dockerfile: .docker/php/Dockerfile
+        image: royal-filter-php:latest
         container_name: royal-filter-php
         working_dir: /var/www/html
         volumes:
@@ -149,7 +152,10 @@ services:
             - PHP_IDE_CONFIG="serverName=localhost"
 
     royal-filter-php-debug:
-        image: devalpin11/pimcore-php:v11.x-latest
+        build:
+            context: .
+            dockerfile: .docker/php/Dockerfile
+        image: royal-filter-php-debug:latest
         container_name: royal-filter-php-debug
         working_dir: /var/www/html
         volumes:

@@ -1,0 +1,43 @@
+App\Pimcore\Model\DataObject\Collection:
+    exclusion_policy: ALL
+    virtual_properties:
+        getId:
+            exp: object.getId()
+            serialized_name: id
+            groups: [api]
+        getTranslations:
+            exp: object.getTranslations()
+            serialized_name: translations
+            groups: [api]
+        getImageData:
+            exp: object.getImageData()
+            serialized_name: image
+            groups: [api]
+        getParametersConfigData:
+            exp: object.getParametersConfigData()
+            serialized_name: parameters
+            groups: [api]
+        getTextColorHex:
+            exp: object.getTextColorHex()
+            serialized_name: textColor
+            groups: [api]
+        getBackgroundColorHex:
+            exp: object.getBackgroundColorHex()
+            serialized_name: backgroundColor
+            groups: [api]
+        getIcon:
+            exp: object.getIcon()
+            serialized_name: icon
+            groups: [api]
+        getParentCollectionId:
+            exp: object.getParentCollectionId()
+            serialized_name: parentId
+            groups: [api]
+        getChildrenIds:
+            exp: object.getChildrenIds()
+            serialized_name: children
+            groups: [api]
+        getCustomerGroupsData:
+            exp: object.getCustomerGroupsData()
+            serialized_name: customerGroups
+            groups: [api]

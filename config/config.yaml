@@ -1,9 +1,16 @@
 imports:
     - { resource: 'local/' }
 
+pimcore_deepl:
+    deepl_auth_key: '%env(DEEPL_AUTH_KEY)%'
+
+divante_translation:
+    api_key: '%env(DIVANTE_API_KEY)%'
+    source_lang: de
+    provider:  deepl #or deepl_free
+    formality: "default"
 
 pimcore:
-
 # IMPORTANT Notice!
 # Following there are only some examples listed, for a full list of possible options, please run the following command:
 # ./bin/console debug:config pimcore
@@ -22,20 +29,22 @@ pimcore:
 #        zend_date: true
 
 #### CLASS OVERRIDES EXAMPLES
-#    models:
-#        class_overrides:
-#            'Pimcore\Model\DataObject\News': 'App\Model\DataObject\News'
-#            'Pimcore\Model\DataObject\News\Listing': 'App\Model\DataObject\News\Listing'
-#            'Pimcore\Model\DataObject\Folder': 'App\Model\DataObject\Folder'
-#            'Pimcore\Model\Asset\Folder': 'App\Model\Asset\Folder'
-#            'Pimcore\Model\Asset\Image': 'App\Model\Asset\Image'
-#            'Pimcore\Model\Document\Page': 'App\Model\Document\Page'
-#            'Pimcore\Model\Document\Link': 'App\Model\Document\Link'
-#            'Pimcore\Model\Document\Listing': 'App\Model\Document\Listing'
-
+    models:
+        class_overrides:
+            'Pimcore\Model\DataObject\Collection': 'App\Pimcore\Model\DataObject\Collection'
+            'Pimcore\Model\DataObject\RoyalFilter': 'App\Pimcore\Model\DataObject\RoyalFilter'
+            'Pimcore\Model\DataObject\Product': 'App\Pimcore\Model\DataObject\Product'
+            'Pimcore\Model\DataObject\PriceList': 'App\Pimcore\Model\DataObject\PriceList'
+            'Pimcore\Model\DataObject\ProductFlag': 'App\Pimcore\Model\DataObject\ProductFlag'
+            'Pimcore\Model\DataObject\ProductBenefitSet': 'App\Pimcore\Model\DataObject\ProductBenefitSet'
+            'Pimcore\Model\DataObject\BlogPost': 'App\Pimcore\Model\DataObject\BlogPost'
+            'Pimcore\Model\DataObject\BlogCategory': 'App\Pimcore\Model\DataObject\BlogCategory'
+            'Pimcore\Model\DataObject\Whirlpool': 'App\Pimcore\Model\DataObject\Whirlpool'
+            'Pimcore\Model\DataObject\CustomerGroup': 'App\Pimcore\Model\DataObject\CustomerGroup'
 
 #### CUSTOM DOCUMENT EDITABLES
-#    documents:
+    documents:
+        auto_save_interval: 0
 #        allow_trailing_slash: 'yes'
 #        generate_preview: false
 #        tags:
@@ -44,7 +53,8 @@ pimcore:
 
 
 #### CUSTOM OBJECT DATA TYPES
-#    objects:
+    objects:
+        auto_save_interval: 0
 #        class_definitions:
 #            data:
 #                map:

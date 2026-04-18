@@ -4,6 +4,7 @@
  * Fields Summary:
  * - manufacturer [manyToOneRelation]
  * - code [input]
+ * - showInTitle [checkbox]
  */
 
 return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
@@ -111,6 +112,28 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'unique' => false,
              'showCharCount' => false,
              'width' => '',
+             'defaultValueGenerator' => '',
+          )),
+          2 => 
+          \Pimcore\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
+             'name' => 'showInTitle',
+             'title' => 'Show In Title',
+             'tooltip' => '',
+             'mandatory' => false,
+             'noteditable' => false,
+             'index' => false,
+             'locked' => false,
+             'style' => '',
+             'permissions' => NULL,
+             'fieldtype' => '',
+             'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => false,
+             'visibleSearch' => false,
+             'blockedVarsForExport' => 
+            array (
+            ),
+             'defaultValue' => 0,
              'defaultValueGenerator' => '',
           )),
         ),

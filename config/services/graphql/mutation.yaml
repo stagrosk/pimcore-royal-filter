@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        public: false
+        autowire: true
+        autoconfigure: true
+        tags: [ 'kernel.event_subscriber' ]
+
+    App\GraphQL\Mutation\:
+        resource: '../../../src/GraphQL/Mutation'

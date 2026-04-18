@@ -1,18 +1,23 @@
 pimcore:
     general:
-        domain: ''
+        domain: pimcore.royal-filter.com
         redirect_to_maindomain: false
-        language: en
         valid_languages:
             - en
             - de
             - sk
             - cs
+            - pl
+            - hu
         fallback_languages:
             en: ''
             de: en
             sk: en
             cs: en
+            pl: en
+            hu: en
+        required_languages:
+            - en
         default_language: en
         debug_admin_translations: false
     documents:
@@ -24,6 +29,8 @@ pimcore:
             localized:
                 en: ''
                 de: ''
+                sk: ''
+                cs: ''
     objects:
         versions:
             days: null

@@ -1,0 +1,23 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    App\EventSubscriber\AdminInterfaceListener:
+
+    App\EventSubscriber\ProductSubscriber:
+
+    App\EventSubscriber\CollectionSubscriber:
+
+    App\EventSubscriber\RoyalFilterSubscriber:
+
+    App\EventSubscriber\WhirlpoolSubscriber:
+
+    App\EventSubscriber\PriceListSubscriber:
+
+    App\EventSubscriber\ProductFlagSubscriber:
+
+    App\EventSubscriber\ProductBenefitSetSubscriber:
+
+    App\EventSubscriber\CustomerGroupSubscriber:

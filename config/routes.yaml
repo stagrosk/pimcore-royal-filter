@@ -4,3 +4,8 @@ _pimcore:
 app:
     resource: "../src/Controller/"
     type: annotation
+
+deepl_translate_document:
+    methods: [ "POST" ]
+    path: /admin/deeplTranslateDocument
+    controller: App\Controller\DeeplController::deeplTranslateDocument

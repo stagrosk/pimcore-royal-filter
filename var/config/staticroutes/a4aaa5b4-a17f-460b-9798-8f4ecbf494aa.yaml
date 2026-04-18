@@ -1,0 +1,14 @@
+pimcore_static_routes:
+    definitions:
+        a4aaa5b4-a17f-460b-9798-8f4ecbf494aa:
+            name: translations
+            pattern: /translations$/
+            reverse: /translations
+            controller: 'App\Controller\TranslationController::defaultAction'
+            variables: ''
+            defaults: ''
+            siteId: {  }
+            methods: {  }
+            priority: 0
+            creationDate: 1750365893
+            modificationDate: 1750365921

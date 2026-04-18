@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        autoconfigure: true
+        autowire: true
+        public: false
+
+    PimcoreVendureBridgeBundle\EventListeners\PimcoreVendureListener:
+        tags:
+            - { name: kernel.event_subscriber }

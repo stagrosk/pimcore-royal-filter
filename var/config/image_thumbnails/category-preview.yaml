@@ -1,0 +1,31 @@
+pimcore:
+    assets:
+        image:
+            thumbnails:
+                definitions:
+                    category-preview:
+                        items:
+                            -
+                                method: frame
+                                arguments:
+                                    width: 800
+                                    height: 600
+                                    forceResize: true
+                            -
+                                method: setBackgroundColor
+                                arguments:
+                                    color: '#f5f5f5'
+                        medias: {  }
+                        name: category-preview
+                        description: 'Category preview 800x600 (contain with padding)'
+                        group: category
+                        format: JPEG
+                        quality: 90
+                        highResolution: null
+                        preserveColor: false
+                        preserveMetaData: false
+                        rasterizeSVG: false
+                        downloadable: false
+                        modificationDate: 1711497600
+                        creationDate: 1734883200
+                        preserveAnimation: false

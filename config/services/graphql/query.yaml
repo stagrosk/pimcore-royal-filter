@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        public: false
+        autoconfigure: true
+        autowire: true
+        tags: [ 'kernel.event_subscriber' ]
+
+    App\GraphQL\Query\:
+        resource: '../../../src/GraphQL/Query'

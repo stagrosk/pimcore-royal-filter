@@ -1,0 +1,39 @@
+App\Pimcore\Model\DataObject\PriceList:
+    exclusion_policy: ALL
+    virtual_properties:
+        getId:
+            exp: object.getId()
+            serialized_name: id
+            groups: [api]
+        getName:
+            exp: object.getName()
+            serialized_name: name
+            groups: [api]
+        getCurrency:
+            exp: object.getCurrency()
+            serialized_name: currency
+            groups: [api]
+        getBasePricelist:
+            exp: object.getBasePricelist()
+            serialized_name: isBasePricelist
+            groups: [api]
+        getCompareAtMode:
+            exp: object.getCompareAtMode()
+            serialized_name: compareAtMode
+            groups: [api]
+        getAdjustmentType:
+            exp: object.getAdjustmentType()
+            serialized_name: adjustmentType
+            groups: [api]
+        getPercentage:
+            exp: object.getPercentage()
+            serialized_name: percentage
+            groups: [api]
+        getParentPriceListId:
+            exp: object.getParentPriceListId()
+            serialized_name: parentId
+            groups: [api]
+        getChildrenIds:
+            exp: object.getChildrenIds()
+            serialized_name: children
+            groups: [api]

@@ -6,7 +6,7 @@
  *
  * Fields Summary:
  * - title [input]
- * - description [textarea]
+ * - description [wysiwyg]
  * - logo [image]
  */
 
@@ -17,7 +17,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1727018356,
+   'modificationDate' => 1749742065,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -87,11 +87,11 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
             ),
              'unique' => false,
              'showCharCount' => false,
-             'width' => '',
+             'width' => 500,
              'defaultValueGenerator' => '',
           )),
           1 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Textarea::__set_state(array(
+          \Pimcore\Model\DataObject\ClassDefinition\Data\Wysiwyg::__set_state(array(
              'name' => 'description',
              'title' => 'Description',
              'tooltip' => '',
@@ -109,11 +109,11 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'blockedVarsForExport' => 
             array (
             ),
-             'maxLength' => NULL,
-             'showCharCount' => false,
+             'toolbarConfig' => '',
              'excludeFromSearchIndex' => false,
-             'height' => '',
-             'width' => '',
+             'maxCharacters' => '',
+             'height' => 500,
+             'width' => 600,
           )),
           2 => 
           \Pimcore\Model\DataObject\ClassDefinition\Data\Image::__set_state(array(
@@ -162,7 +162,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
      'labelWidth' => 100,
      'labelAlign' => 'left',
   )),
-   'icon' => '',
+   'icon' => '/bundles/pimcoreadmin/img/flat-color-icons/manager.svg',
    'group' => '',
    'showAppLoggerTab' => false,
    'linkGeneratorReference' => '',

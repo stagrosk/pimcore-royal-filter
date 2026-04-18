@@ -1,0 +1,28 @@
+pimcore:
+    assets:
+        image:
+            thumbnails:
+                definitions:
+                    blog-detail:
+                        items:
+                            -
+                                method: cover
+                                arguments:
+                                    width: 1200
+                                    height: 630
+                                    positioning: center
+                                    forceResize: true
+                        medias: {  }
+                        name: blog-detail
+                        description: 'Blog detail/OG image 1200x630 (1.91:1)'
+                        group: blog
+                        format: JPEG
+                        quality: 90
+                        highResolution: null
+                        preserveColor: false
+                        preserveMetaData: false
+                        rasterizeSVG: false
+                        downloadable: false
+                        modificationDate: 1711497600
+                        creationDate: 1711497600
+                        preserveAnimation: false

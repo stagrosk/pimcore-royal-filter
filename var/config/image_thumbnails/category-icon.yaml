@@ -1,0 +1,28 @@
+pimcore:
+    assets:
+        image:
+            thumbnails:
+                definitions:
+                    category-icon:
+                        items:
+                            -
+                                method: cover
+                                arguments:
+                                    width: 56
+                                    height: 56
+                                    positioning: center
+                                    forceResize: true
+                        medias: {  }
+                        name: category-icon
+                        description: 'Category icon 56x56 (1:1)'
+                        group: category
+                        format: SOURCE
+                        quality: 85
+                        highResolution: null
+                        preserveColor: false
+                        preserveMetaData: false
+                        rasterizeSVG: false
+                        downloadable: false
+                        modificationDate: 1734883200
+                        creationDate: 1734883200
+                        preserveAnimation: false

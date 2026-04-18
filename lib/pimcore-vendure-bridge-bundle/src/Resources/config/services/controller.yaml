@@ -1,0 +1,10 @@
+services:
+    _defaults:
+        autoconfigure: true
+        autowire: true
+        public: false
+
+    # auto-register all controllers as services
+    PimcoreVendureBridgeBundle\Controller\:
+        resource: '../../../Controller'
+        tags: [ 'controller.service_arguments' ]

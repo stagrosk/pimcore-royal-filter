@@ -1,0 +1,15 @@
+App\Pimcore\Model\DataObject\ProductBenefitSet:
+    exclusion_policy: ALL
+    virtual_properties:
+        getId:
+            exp: object.getId()
+            serialized_name: id
+            groups: [api]
+        getTranslations:
+            exp: object.getTranslations()
+            serialized_name: translations
+            groups: [api]
+        getBenefitsData:
+            exp: object.getBenefitsData()
+            serialized_name: benefits
+            groups: [api]

@@ -1,0 +1,27 @@
+pimcore:
+    assets:
+        image:
+            thumbnails:
+                definitions:
+                    paralax-content:
+                        items:
+                            -
+                                method: scaleByWidth
+                                arguments:
+                                    width: 1920
+                                    forceResize: false
+                        medias: {  }
+                        name: paralax-content
+                        description: ''
+                        group: content
+                        format: SOURCE
+                        quality: 85
+                        highResolution: null
+                        preserveColor: false
+                        forceProcessICCProfiles: false
+                        preserveMetaData: false
+                        rasterizeSVG: false
+                        downloadable: false
+                        modificationDate: 1773776990
+                        creationDate: 1773776583
+                        preserveAnimation: false

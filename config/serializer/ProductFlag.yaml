@@ -1,0 +1,23 @@
+App\Pimcore\Model\DataObject\ProductFlag:
+    exclusion_policy: ALL
+    virtual_properties:
+        getId:
+            exp: object.getId()
+            serialized_name: id
+            groups: [api]
+        getCode:
+            exp: object.getCode()
+            serialized_name: code
+            groups: [api]
+        getColorHex:
+            exp: object.getColorHex()
+            serialized_name: color
+            groups: [api]
+        getNewsForDays:
+            exp: object.getNewsForDays()
+            serialized_name: newsForDays
+            groups: [api]
+        getTranslations:
+            exp: object.getTranslations()
+            serialized_name: translations
+            groups: [api]

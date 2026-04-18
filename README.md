@@ -119,3 +119,77 @@ If is create/drop database not working because of permissions then is necessary:
 - remove or move folder `var/mysql-data`
 - run containers - will initialize multiple databases and setup correct rights on created db
 - done
+
+---
+
+# Classification Store Translations
+
+Pimcore natívne nepodporuje preklady pre názvy Classification Store groups a keys. Preto bola implementovaná vlastná stratégia pomocou Pimcore Translation systému.
+
+## Ako to funguje
+
+1. **Automatické vytváranie prekladov** - Keď sa pristupuje k produktu alebo kolekcii cez API, `ClassificationStoreTranslationService` automaticky kontroluje, či existujú preklady pre každú classification store group/key
+2. **Ak preklady neexistujú** - Automaticky sa vytvoria v Pimcore prekladoch s anglickou hodnotou ako default pre všetky jazyky
+3. **Prefixes** - Preklady používajú prefixy:
+   - `cs_group_` pre groups (napr. `cs_group_body`)
+   - `cs_key_` pre keys (napr. `cs_key_height`)
+
+## Konzolové príkazy
+
+### Preklad cez DeepL API
+
+```bash
+# Náhľad čo sa bude prekladať (bez zmien)
+php bin/console app:translate-classification-store --dry-run
+
+# Preložiť všetky chýbajúce preklady
+php bin/console app:translate-classification-store
+
+# Preložiť len do konkrétneho jazyka
+php bin/console app:translate-classification-store --language=de
+```
+
+### Manuálna správa prekladov
+
+Preklady je možné spravovať aj priamo v Pimcore admin:
+1. Marketing → Translations → Shared Translations
+2. Filtrovať podľa kľúča `cs_group_` alebo `cs_key_`
+3. Upraviť preklady pre jednotlivé jazyky
+
+## Relevantné súbory
+
+- `src/Service/ClassificationStoreTranslationService.php` - Služba pre správu prekladov
+- `src/Command/TranslateClassificationStoreCommand.php` - Konzolový príkaz pre DeepL preklad
+- `src/Pimcore/DataObject/Calculator/ParametersConfigCalculator.php` - Kalkulátor pre Product metadata
+- `src/Pimcore/Model/DataObject/Collection.php` - Collection model s prekladmi
+
+## API Response formát
+
+```json
+{
+  "group": "body",
+  "groupId": 7,
+  "groupTranslations": {
+    "en": { "name": "Filter body dimensions" },
+    "de": { "name": "Filterkörper Abmessungen" },
+    "sk": { "name": "Rozmery tela filtra" }
+  },
+  "key": "height",
+  "keyId": 2,
+  "keyTranslations": {
+    "en": { "name": "Height" },
+    "de": { "name": "Höhe" },
+    "sk": { "name": "Výška" }
+  },
+  "value": "115 mm",
+  "rawValue": 115,
+  "unit": "mm"
+}
+```
+
+## Konfigurácia
+
+DeepL API kľúč sa nastavuje v `.env` súbore:
+```
+DEEPL_AUTH_KEY=your-deepl-api-key
+```

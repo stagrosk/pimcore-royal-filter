@@ -1,0 +1,30 @@
+{
+  "name": "elevantiq/pimcore-vendure-bridge-bundle",
+  "description": "Pimcore <-> Vendure bridge",
+  "type": "pimcore-bundle",
+  "authors": [
+    {
+      "name": "ALPIN11 New Media GmbH",
+      "email": "devs@alpin11.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require": {
+    "php": ">=7.4",
+    "pimcore/pimcore": "^6.9 || 10.* || 11.*",
+    "friendsofsymfony/rest-bundle": "^3.3",
+    "cocur/slugify": "^4.1",
+    "php-amqplib/php-amqplib": "^3.2",
+    "lexik/jwt-authentication-bundle": "^2.14",
+    "jms/serializer-bundle": "^4.0"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^3.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "PimcoreVendureBridgeBundle\\": "src/"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+pimcore:
+    assets:
+        image:
+            thumbnails:
+                definitions:
+                    product-preview:
+                        items:
+                            -
+                                method: cover
+                                arguments:
+                                    width: 800
+                                    height: 500
+                                    positioning: center
+                                    forceResize: true
+                        medias: {  }
+                        name: product-preview
+                        description: 'Product preview image 800x500 (16:10)'
+                        group: product
+                        format: SOURCE
+                        quality: 85
+                        highResolution: null
+                        preserveColor: false
+                        preserveMetaData: false
+                        rasterizeSVG: false
+                        downloadable: false
+                        modificationDate: 1734883200
+                        creationDate: 1734883200
+                        preserveAnimation: false
