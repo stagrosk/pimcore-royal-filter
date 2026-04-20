@@ -54,8 +54,6 @@ class WhirlpoolToProductMapper extends BaseMapper
         $product->setEan('');
         $product->setSku(sprintf('WRF-%s-%s', $fromObject->getId(), $product->getSku()));
         $product->setStatus(ProductStatusEnum::ACTIVE->value);
-        $product->setIsVirtualProduct(false);
-        $product->setIsGiftCard(false);
         $product->setProductType('whirlpoolFilter');
         $product->setManufacturer($fromObject->getManufacturer());
         $product->setGeneratedFromObject($fromObject);

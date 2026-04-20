@@ -54,8 +54,6 @@ class FilterToProductMapper extends BaseMapper
         $product->setEan('');
         $product->setSku(sprintf('RF-%s', $fromObject->getId()));
         $product->setStatus(ProductStatusEnum::ACTIVE->value);
-        $product->setIsVirtualProduct(false);
-        $product->setIsGiftCard(false);
         $product->setProductType('filter');
         $product->setManufacturer($fromObject->getManufacturer());
         $product->setGeneratedFromObject($fromObject);

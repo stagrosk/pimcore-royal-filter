@@ -40,7 +40,8 @@ abstract class BaseMapper implements MapperInterface
      */
     public function handleCollections(AbstractObject $object, Product $product): void
     {
-        $collection = $object->getCollection();
+        $directCollection = $object->getCollection();
+        $collection = $directCollection;
         $collections = [];
         while ($collection instanceof Collection) {
             $collections[] = $collection;
@@ -48,6 +49,11 @@ abstract class BaseMapper implements MapperInterface
         }
 
         $product->setCollections($collections);
+
+        // inherit customerGroups only from the direct collection
+        if ($directCollection instanceof Collection) {
+            $product->setCustomerGroups($directCollection->getCustomerGroups());
+        }
     }
 
     protected function assignBenefitSetForFilters(Product $product): void
