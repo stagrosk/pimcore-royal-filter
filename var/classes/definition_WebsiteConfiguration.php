@@ -16,6 +16,7 @@
  * --- headline [input]
  * --- links [manyToManyRelation]
  * -- newsletter [wysiwyg]
+ * -- ecomailListId [numeric]
  * - socialMedia [block]
  * -- socialMediaUrl [input]
  * -- socialMediaIcon [image]
@@ -31,7 +32,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1775843162,
+   'modificationDate' => 1776857444,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -486,6 +487,36 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                          'height' => '',
                          'width' => 700,
                       )),
+                      1 => 
+                      \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
+                         'name' => 'ecomailListId',
+                         'title' => 'Ecomail List Id',
+                         'tooltip' => '',
+                         'mandatory' => true,
+                         'noteditable' => false,
+                         'index' => false,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'fieldtype' => '',
+                         'relationType' => false,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'defaultValue' => NULL,
+                         'integer' => true,
+                         'unsigned' => false,
+                         'minValue' => NULL,
+                         'maxValue' => NULL,
+                         'unique' => false,
+                         'decimalSize' => NULL,
+                         'decimalPrecision' => NULL,
+                         'width' => '',
+                         'defaultValueGenerator' => '',
+                      )),
                     ),
                      'region' => NULL,
                      'layout' => NULL,
@@ -875,6 +906,36 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'maxCharacters' => '',
                      'height' => '',
                      'width' => 700,
+                  )),
+                  1 => 
+                  \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
+                     'name' => 'ecomailListId',
+                     'title' => 'Ecomail List Id',
+                     'tooltip' => '',
+                     'mandatory' => true,
+                     'noteditable' => false,
+                     'index' => false,
+                     'locked' => false,
+                     'style' => '',
+                     'permissions' => NULL,
+                     'fieldtype' => '',
+                     'relationType' => false,
+                     'invisible' => false,
+                     'visibleGridView' => false,
+                     'visibleSearch' => false,
+                     'blockedVarsForExport' => 
+                    array (
+                    ),
+                     'defaultValue' => NULL,
+                     'integer' => true,
+                     'unsigned' => false,
+                     'minValue' => NULL,
+                     'maxValue' => NULL,
+                     'unique' => false,
+                     'decimalSize' => NULL,
+                     'decimalPrecision' => NULL,
+                     'width' => '',
+                     'defaultValueGenerator' => '',
                   )),
                 ),
                  'region' => NULL,

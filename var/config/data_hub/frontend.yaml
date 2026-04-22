@@ -8,7 +8,7 @@ pimcore_data_hub:
                 description: ''
                 group: ''
                 sqlObjectCondition: ''
-                modificationDate: 1776366032
+                modificationDate: 1776857996
                 path: null
                 createDate: 1727014466
             schema:
@@ -243,6 +243,12 @@ pimcore_data_hub:
                                         attribute: filterBenefitSet
                                         label: 'Filter benefit set'
                                         dataType: manyToOneRelation
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: ecomailListId
+                                        label: 'Ecomail List Id'
+                                        dataType: numeric
                                     isOperator: false
                 mutationEntities: {  }
                 specialEntities:
