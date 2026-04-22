@@ -1,27 +1,27 @@
 version: '3.4'
 services:
 
-    royal-filter-adminer:
+    infivea-adminer:
         image: adminer:latest
-        container_name: royal-filter-adminer
+        container_name: infivea-adminer
         ports:
             - 8750:8080
         labels:
             - traefik.docker.network=traefik
-            - traefik.frontend.rule=Host:royal-filter-adminer.local-127-0-0-1.nip.io
+            - traefik.frontend.rule=Host:infivea-adminer.local-127-0-0-1.nip.io
             - traefik.enable=true
             - traefik.port=8080
         depends_on:
-            - royal-filter-db
+            - infivea-db
         networks:
             - stagro
             - traefik
         env_file:
             - .env.docker
 
-    royal-filter-elasticsearch:
+    infivea-elasticsearch:
         image: elasticsearch:8.7.0
-        container_name: royal-filter-elasticsearch
+        container_name: infivea-elasticsearch
         volumes:
             - esdata01:/usr/share/elasticsearch/data
         ports:
@@ -36,9 +36,9 @@ services:
         env_file:
             - .env.docker
 
-    royal-filter-rabbitmq:
+    infivea-rabbitmq:
         image: rabbitmq:3-management-alpine
-        container_name: royal-filter-rabbitmq
+        container_name: infivea-rabbitmq
         volumes:
             - ./var/rabbitmq/data/:/var/lib/rabbitmq
         ports:
@@ -46,7 +46,7 @@ services:
             - '15670:15672'
         labels:
             - traefik.docker.network=traefik
-            - traefik.frontend.rule=Host:royal-filter-rabbitmq.local-127-0-0-1.nip.io
+            - traefik.frontend.rule=Host:infivea-rabbitmq.local-127-0-0-1.nip.io
             - traefik.frontend.passHostHeader=true
             - traefik.enable=true
             - traefik.port=15672
@@ -56,9 +56,9 @@ services:
         env_file:
             - .env.docker
 
-    royal-filter-redis:
+    infivea-redis:
         image: redis:6.0-alpine
-        container_name: royal-filter-redis
+        container_name: infivea-redis
         ports:
             - "8970:6379"
         networks:
@@ -67,9 +67,9 @@ services:
         env_file:
             - .env.docker
 
-    royal-filter-db:
+    infivea-db:
         image: mysql:8.0.32
-        container_name: royal-filter-mysql
+        container_name: infivea-mysql
         working_dir: /application
         command: mysqld --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
         volumes:
@@ -84,9 +84,9 @@ services:
         env_file:
             - .env.docker
 
-    royal-filter-webserver:
+    infivea-webserver:
         image: nginx:1-alpine
-        container_name: royal-filter-webserver
+        container_name: infivea-webserver
         working_dir: /var/www/html
         volumes:
             - ./:/var/www/html:cached
@@ -96,21 +96,21 @@ services:
             - "8070:80"
         labels:
             - traefik.docker.network=traefik
-            - traefik.frontend.rule=Host:royal-filter.local-127-0-0-1.nip.io
+            - traefik.frontend.rule=Host:infivea.local-127-0-0-1.nip.io
             - traefik.frontend.passHostHeader=true
             - traefik.enable=true
             - traefik.port=80
         depends_on:
-            - royal-filter-php
+            - infivea-php
         networks:
             - stagro
             - traefik
         env_file:
             - .env.docker
 
-    royal-filter-webserver-debug:
+    infivea-webserver-debug:
         image: nginx:1-alpine
-        container_name: royal-filter-webserver-debug
+        container_name: infivea-webserver-debug
         working_dir: /var/www/html
         volumes:
             - ./:/var/www/html:cached
@@ -120,51 +120,51 @@ services:
             - "8071:80"
         labels:
             - traefik.docker.network=traefik
-            - traefik.frontend.rule=Host:royal-filter-debug.local-127-0-0-1.nip.io
+            - traefik.frontend.rule=Host:infivea-debug.local-127-0-0-1.nip.io
             - traefik.frontend.passHostHeader=true
             - traefik.enable=true
             - traefik.port=80
         depends_on:
-            - royal-filter-php-debug
+            - infivea-php-debug
         networks:
             - traefik
         env_file:
             - .env.docker
 
-    royal-filter-php:
+    infivea-php:
         build:
             context: .
             dockerfile: .docker/php/Dockerfile
-        image: royal-filter-php:latest
-        container_name: royal-filter-php
+        image: infivea-php:latest
+        container_name: infivea-php
         working_dir: /var/www/html
         volumes:
             - ./:/var/www/html:cached
         ports:
             - "35071:9000"
         depends_on:
-            - royal-filter-db
-            - royal-filter-redis
+            - infivea-db
+            - infivea-redis
         networks:
             - stagro
             - traefik
         environment:
             - PHP_IDE_CONFIG="serverName=localhost"
 
-    royal-filter-php-debug:
+    infivea-php-debug:
         build:
             context: .
             dockerfile: .docker/php/Dockerfile
-        image: royal-filter-php-debug:latest
-        container_name: royal-filter-php-debug
+        image: infivea-php-debug:latest
+        container_name: infivea-php-debug
         working_dir: /var/www/html
         volumes:
             - ./:/var/www/html:cached
         ports:
             - "35072:9000"
         depends_on:
-            - royal-filter-db
-            - royal-filter-redis
+            - infivea-db
+            - infivea-redis
         networks:
             - stagro
             - traefik
@@ -173,8 +173,8 @@ services:
         env_file:
             - .env.docker
 
-    royal-filter-mailhog:
-        container_name: royal-filter-mailhog
+    infivea-mailhog:
+        container_name: infivea-mailhog
         image: mailhog/mailhog
         environment:
             - MH_STORAGE=maildir
@@ -184,22 +184,22 @@ services:
             - "1170:1025"
             - "8170:8025"
         depends_on:
-            - royal-filter-webserver
-            - royal-filter-webserver-debug
+            - infivea-webserver
+            - infivea-webserver-debug
         labels:
             - traefik.docker.network=traefik
-            - traefik.frontend.rule=Host:royal-filter-mailhog.local-127-0-0-1.nip.io
+            - traefik.frontend.rule=Host:infivea-mailhog.local-127-0-0-1.nip.io
             - traefik.enable=true
             - traefik.port=8025
         networks:
             - stagro
             - traefik
 
-    royal-filter-supervisord:
+    infivea-supervisord:
         #user: '1000:1000' # set to your uid:gid
         image: pimcore/pimcore:supervisord
         depends_on:
-            - royal-filter-db
+            - infivea-db
         volumes:
             - .:/var/www/html:cached
             - ./.docker/supervisord.conf:/etc/supervisor/conf.d/pimcore.conf:ro
