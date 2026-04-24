@@ -1,7 +1,0 @@
-services:
-    _defaults:
-        autoconfigure: true
-        autowire: true
-        public: false
-
-    PimcoreHeadlessContentBundle\Helper\SlugGenerator:

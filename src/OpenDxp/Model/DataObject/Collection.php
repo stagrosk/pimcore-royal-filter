@@ -8,8 +8,8 @@ use App\Service\ClassificationStoreTranslationService;
 use OpenDxp\Model\DataObject\AbstractObject;
 use OpenDxp\Model\DataObject\Data\RgbaColor;
 use OpenDxp\Tool;
-use PimcoreHeadlessContentBundle\Model\NavigationAwareInterface;
-use PimcoreHeadlessContentBundle\Model\SlugAwareInterface;
+use OpendxpHeadlessContentBundle\Model\NavigationAwareInterface;
+use OpendxpHeadlessContentBundle\Model\SlugAwareInterface;
 
 class Collection extends \OpenDxp\Model\DataObject\Collection implements SlugAwareInterface, NavigationAwareInterface
 {

@@ -2,12 +2,12 @@
 
 namespace App\GraphQL\Helper;
 
-use PimcoreHeadlessContentBundle\Model\NavigationInterface;
+use OpendxpHeadlessContentBundle\Model\NavigationInterface;
 
 class NavigationHelper
 {
     /**
-     * @param \PimcoreHeadlessContentBundle\Model\NavigationInterface $navigation
+     * @param \OpendxpHeadlessContentBundle\Model\NavigationInterface $navigation
      * @param string $language
      *
      * @return string

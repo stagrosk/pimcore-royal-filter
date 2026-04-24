@@ -29,7 +29,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
    'modificationDate' => 1774273019,
    'userOwner' => 2,
    'userModification' => 2,
-   'parentClass' => '\\PimcoreHeadlessContentBundle\\Model\\ContentPage',
+   'parentClass' => '\\OpendxpHeadlessContentBundle\\Model\\ContentPage',
    'implementsInterfaces' => '',
    'listingParentClass' => '',
    'useTraits' => '',

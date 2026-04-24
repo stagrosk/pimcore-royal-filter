@@ -1,0 +1,71 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    OpendxpVendureBridgeBundle\Serialization\Handler\LocalizationHandler:
+        tags:
+            - { name: jms_serializer.handler, type: localizationTitleType, direction: serialization, format: json, method: serializeLocalizationTitleField }
+            - { name: jms_serializer.handler, type: localizationNameType, direction: serialization, format: json, method: serializeLocalizationNameField }
+            - { name: jms_serializer.handler, type: localizationDescriptionShortType, direction: serialization, format: json, method: serializeLocalizationDescriptionShortField }
+            - { name: jms_serializer.handler, type: localizationDescriptionType, direction: serialization, format: json, method: serializeLocalizationDescriptionField }
+            - { name: jms_serializer.handler, type: localizationSeoDescriptionType, direction: serialization, format: json, method: serializeLocalizationSeoDescriptionField }
+            - { name: jms_serializer.handler, type: localizationSlugType, direction: serialization, format: json, method: serializeLocalizationSlugField }
+            - { name: jms_serializer.handler, type: localizationAbsolutePathType, direction: serialization, format: json, method: serializeLocalizationAbsolutePathField }
+
+    OpendxpVendureBridgeBundle\Serialization\Handler\ParentHandler:
+        tags:
+            - { name: jms_serializer.handler, type: parentSameInstanceType, direction: serialization, format: json, method: serializeParentSameInstance }
+            - { name: jms_serializer.handler, type: variantParentType, direction: serialization, format: json, method: serializeVariantParent }
+            - { name: jms_serializer.handler, type: objectAndParentIds, direction: serialization, format: json, method: serializeObjectAndParentIds }
+
+    OpendxpVendureBridgeBundle\Serialization\Handler\PriceHandler:
+        tags:
+            - { name: jms_serializer.handler, type: listPriceType, direction: serialization, format: json, method: serializeListPrice }
+
+    OpendxpVendureBridgeBundle\Serialization\Handler\ObjectBrickHandler:
+        tags:
+            - { name: jms_serializer.handler, type: objectBrickToArrayType, direction: serialization, format: json, method: serializeObjectBrickToArray }
+
+    OpendxpVendureBridgeBundle\Serialization\Handler\RelationsHandler:
+        arguments:
+            - '@doctrine.orm.entity_manager'
+        tags:
+            - { name: jms_serializer.handler, type: relation, direction: serialization, format: json, method: serializeRelation }
+            - { name: jms_serializer.handler, type: relation, direction: deserialization, format: json, method: deserializeRelation }
+            - { name: jms_serializer.handler, type: relation<?>, direction: serialization, format: json, method: serializeRelation }
+            - { name: jms_serializer.handler, type: relation<?>, direction: deserialization, format: json, method: deserializeRelation }
+
+    OpendxpVendureBridgeBundle\Serialization\Handler\OpendxpObjectHandler:
+        tags:
+            - { name: jms_serializer.handler, type: pimcoreObject, direction: serialization, format: json, method: serializeRelation }
+            - { name: jms_serializer.handler, type: pimcoreObjectReturnArray, direction: serialization, format: json, method: serializeRelationReturnArray }
+            - { name: jms_serializer.handler, type: pimcoreObject, direction: deserialization, format: json, method: deserializeRelation }
+            - { name: jms_serializer.handler, type: pimcoreObject<?>, direction: serialization, format: json, method: serializeRelation }
+            - { name: jms_serializer.handler, type: pimcoreObject<?>, direction: deserialization, format: json, method: deserializeRelation }
+
+    OpendxpVendureBridgeBundle\Serialization\Handler\OpendxpDocumentHandler:
+        tags:
+            - { name: jms_serializer.handler, type: pimcoreDocument, direction: serialization, format: json, method: serializeRelation }
+            - { name: jms_serializer.handler, type: pimcoreDocumentReturnArray, direction: serialization, format: json, method: serializeRelationReturnArray }
+            - { name: jms_serializer.handler, type: pimcoreDocument, direction: deserialization, format: json, method: deserializeRelation }
+            - { name: jms_serializer.handler, type: pimcoreDocument<?>, direction: serialization, format: json, method: serializeRelation }
+            - { name: jms_serializer.handler, type: pimcoreDocument<?>, direction: deserialization, format: json, method: deserializeRelation }
+
+    OpendxpVendureBridgeBundle\Serialization\Handler\OpendxpAssetHandler:
+        tags:
+            - { name: jms_serializer.handler, type: pimcoreAsset, direction: serialization, format: json, method: serializeRelation }
+            - { name: jms_serializer.handler, type: pimcoreAssetReturnArray, direction: serialization, format: json, method: serializeRelationReturnArray }
+            - { name: jms_serializer.handler, type: pimcoreAsset, direction: deserialization, format: json, method: deserializeRelation }
+            - { name: jms_serializer.handler, type: pimcoreAsset<?>, direction: serialization, format: json, method: serializeRelation }
+            - { name: jms_serializer.handler, type: pimcoreAsset<?>, direction: deserialization, format: json, method: deserializeRelation }
+
+    OpendxpVendureBridgeBundle\Serialization\Handler\CustomFieldsHandler:
+        tags:
+            - { name: jms_serializer.handler, type: customFieldTypeImagesArray, direction: serialization, format: json, method: serializeCustomFieldTypeImagesArray }
+            - { name: jms_serializer.handler, type: customFieldTypeImageGallery, direction: serialization, format: json, method: serializeCustomFieldTypeImageGallery }
+            - { name: jms_serializer.handler, type: customFieldTypeProducts, direction: serialization, format: json, method: serializeCustomFieldTypeProducts }
+#            - { name: jms_serializer.handler, type: customFieldTypeLocaleString, direction: serialization, format: json, method: serializeCustomFieldTypeLocaleString }
+            - { name: jms_serializer.handler, type: customFieldTypeString, direction: serialization, format: json, method: serializeCustomFieldTypeString }
+            - { name: jms_serializer.handler, type: customFieldTypeNumber, direction: serialization, format: json, method: serializeCustomFieldTypeNumber }

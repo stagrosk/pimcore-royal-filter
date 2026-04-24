@@ -1,0 +1,42 @@
+{
+  "name": "stagro/opendxp-vendure-bridge-bundle",
+  "description": "OpenDXP <-> Vendure bridge",
+  "type": "opendxp-bundle",
+  "license": "GPL-3.0-or-later",
+  "authors": [
+    {
+      "name": "ALPIN11 New Media GmbH",
+      "email": "devs@alpin11.com"
+    },
+    {
+      "name": "Stagro s.r.o",
+      "email": "martin@stagro.sk"
+    }
+  ],
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require": {
+    "php": "~8.3.0 || ~8.4.0",
+    "open-dxp/opendxp": "^1.0",
+    "friendsofsymfony/rest-bundle": "^3.7",
+    "cocur/slugify": "^4.1",
+    "php-amqplib/php-amqplib": "^3.2",
+    "lexik/jwt-authentication-bundle": "^2.14 || ^3.0",
+    "jms/serializer-bundle": "^5.0"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^3.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "OpendxpVendureBridgeBundle\\": "src/"
+    }
+  },
+  "extra": {
+    "opendxp": {
+      "bundles": [
+        "OpendxpVendureBridgeBundle\\OpendxpVendureBridgeBundle"
+      ]
+    }
+  }
+}

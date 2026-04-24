@@ -20,7 +20,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
    'modificationDate' => 1766316434,
    'userOwner' => 2,
    'userModification' => 2,
-   'parentClass' => '\\PimcoreHeadlessContentBundle\\Model\\Navigation',
+   'parentClass' => '\\OpendxpHeadlessContentBundle\\Model\\Navigation',
    'implementsInterfaces' => '',
    'listingParentClass' => '',
    'useTraits' => '',

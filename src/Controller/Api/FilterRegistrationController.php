@@ -6,7 +6,7 @@ namespace App\Controller\Api;
 
 use App\Service\FilterRegistrationNotificationService;
 use App\Service\FilterRegistrationService;
-use PimcoreVendureBridgeBundle\Security\CheckConsumerPermissionsService;
+use OpendxpVendureBridgeBundle\Security\CheckConsumerPermissionsService;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;

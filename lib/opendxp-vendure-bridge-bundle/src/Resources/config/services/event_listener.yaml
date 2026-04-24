@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        autoconfigure: true
+        autowire: true
+        public: false
+
+    OpendxpVendureBridgeBundle\EventListeners\OpendxpVendureListener:
+        tags:
+            - { name: kernel.event_subscriber }

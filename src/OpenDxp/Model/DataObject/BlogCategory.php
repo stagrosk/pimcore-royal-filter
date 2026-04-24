@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\OpenDxp\Model\DataObject;
 
-use PimcoreHeadlessContentBundle\Model\SlugAwareInterface;
+use OpendxpHeadlessContentBundle\Model\SlugAwareInterface;
 
 class BlogCategory extends \OpenDxp\Model\DataObject\BlogCategory implements SlugAwareInterface
 {

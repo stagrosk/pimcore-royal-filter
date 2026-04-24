@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Controller\Api;
 
 use OpenDxp\Model\DataObject\Whirlpool;
-use PimcoreVendureBridgeBundle\Controller\Rest\RestController;
+use OpendxpVendureBridgeBundle\Controller\Rest\RestController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

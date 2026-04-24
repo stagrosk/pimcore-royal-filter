@@ -7,7 +7,7 @@ use OpenDxp\Model\DataObject\AbstractObject;
 use OpenDxp\Model\DataObject\Data\ImageGallery;
 use OpenDxp\Model\DataObject\Fieldcollection;
 use OpenDxp\Tool;
-use PimcoreHeadlessContentBundle\Model\SlugAwareInterface;
+use OpendxpHeadlessContentBundle\Model\SlugAwareInterface;
 
 class Product extends \OpenDxp\Model\DataObject\Product implements SlugAwareInterface
 {

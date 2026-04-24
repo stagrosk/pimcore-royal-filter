@@ -9,7 +9,7 @@ use GraphQL\Type\Definition\ResolveInfo;
 use JetBrains\PhpStorm\ArrayShape;
 use OpenDxp\Model\DataObject\ContentPage;
 use OpenDxp\Tool;
-use PimcoreHeadlessContentBundle\Model\SlugAwareInterface;
+use OpendxpHeadlessContentBundle\Model\SlugAwareInterface;
 
 class ContentPageResolver extends AbstractResolver
 {

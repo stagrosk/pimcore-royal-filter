@@ -7,7 +7,7 @@ use App\GraphQL\Resolver\AbstractResolver;
 use GraphQL\Type\Definition\ResolveInfo;
 use OpenDxp\Model\DataObject\BlogPost;
 use OpenDxp\Tool;
-use PimcoreHeadlessContentBundle\Model\SlugAwareInterface;
+use OpendxpHeadlessContentBundle\Model\SlugAwareInterface;
 
 class BlogPostResolver extends AbstractResolver
 {

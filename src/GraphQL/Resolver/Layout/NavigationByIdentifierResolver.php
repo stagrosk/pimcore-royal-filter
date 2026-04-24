@@ -12,9 +12,9 @@ use OpenDxp\Model\DataObject\ContentPage;
 use OpenDxp\Model\DataObject\NavigationItem;
 use OpenDxp\Model\DataObject\NavigationItem\Listing;
 use OpenDxp\Tool;
-use PimcoreHeadlessContentBundle\Model\NavigationAwareInterface;
-use PimcoreHeadlessContentBundle\Model\NavigationInterface;
-use PimcoreHeadlessContentBundle\Model\SlugAwareInterface;
+use OpendxpHeadlessContentBundle\Model\NavigationAwareInterface;
+use OpendxpHeadlessContentBundle\Model\NavigationInterface;
+use OpendxpHeadlessContentBundle\Model\SlugAwareInterface;
 
 class NavigationByIdentifierResolver extends AbstractResolver
 {
@@ -76,7 +76,7 @@ class NavigationByIdentifierResolver extends AbstractResolver
     }
 
     /**
-     * @param \PimcoreHeadlessContentBundle\Model\NavigationInterface $navigation
+     * @param \OpendxpHeadlessContentBundle\Model\NavigationInterface $navigation
      * @param string $language
      * @param int|null $parentObjectId
      *
@@ -167,7 +167,7 @@ class NavigationByIdentifierResolver extends AbstractResolver
     /**
      * Get canonicals with handles for all language mutations
      *
-     * @param \PimcoreHeadlessContentBundle\Model\SlugAwareInterface $object
+     * @param \OpendxpHeadlessContentBundle\Model\SlugAwareInterface $object
      *
      * @return array
      */
