@@ -1,0 +1,30 @@
+services:
+    _instanceof:
+      OpendxpTranslationBundle\Provider\ProviderInterface:
+          tags: ['translation_bundle.provider']
+
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    OpendxpTranslationBundle\Controller\:
+        resource: '../../Controller'
+        public: true
+        arguments:
+            - '%opendxp_translation.source_lang%'
+            - '%opendxp_translation.provider%'
+        tags: ['controller.service_arguments']
+
+    OpendxpTranslationBundle\Provider\:
+      resource: '../../Provider'
+
+    OpendxpTranslationBundle\Provider\ProviderFactory:
+        arguments:
+            $apiKey: '%opendxp_translation.api_key%'
+            $providers: !tagged translation_bundle.provider
+            $formality: '%opendxp_translation.formality%'
+
+    OpendxpTranslationBundle\EventListener\AdminInterfaceListener:
+      tags:
+        - { name: kernel.event_listener, event: pimcore.bundle_manager.paths.js, method: addJsFiles }

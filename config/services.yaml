@@ -83,7 +83,7 @@ services:
             - '%env(DEEPL_ENDPOINT)%'
 
     App\Service\DeeplProviderService:
-        decorates: 'DivanteTranslationBundle\Provider\DeeplProvider'
+        decorates: 'OpendxpTranslationBundle\Provider\DeeplProvider'
         arguments:
             - '%env(DEEPL_AUTH_KEY)%'
             - '%env(DEEPL_GLOSSARY_KEY)%'

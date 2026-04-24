@@ -1,0 +1,42 @@
+{
+  "name": "stagro/opendxp-translation-bundle",
+  "type": "opendxp-bundle",
+  "license": "GPL-3.0-or-later",
+  "description": "OpenDXP translation bundle (fork of elevantiq/pimcore-translation-bundle)",
+  "keywords": ["opendxp", "translation", "deepl"],
+  "authors": [
+    {
+      "name": "Divante / Piotr Rugala",
+      "email": "piotr@isedo.pl",
+      "role": "Original author"
+    },
+    {
+      "name": "Stagro s.r.o",
+      "email": "martin@stagro.sk",
+      "role": "OpenDXP port"
+    }
+  ],
+  "require": {
+    "php": "~8.3.0 || ~8.4.0",
+    "ext-intl": "*",
+    "ext-json": "*",
+    "open-dxp/opendxp": "^1.0",
+    "guzzlehttp/guzzle": "^7.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "OpendxpTranslationBundle\\": "src/OpendxpTranslationBundle",
+      "Tests\\": "tests"
+    }
+  },
+  "extra": {
+    "opendxp": {
+      "bundles": [
+        "OpendxpTranslationBundle\\OpendxpTranslationBundle"
+      ]
+    }
+  }
+}

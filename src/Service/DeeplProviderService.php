@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Service;
 
-use DivanteTranslationBundle\Exception\TranslationException;
-use DivanteTranslationBundle\Provider\AbstractProvider;
-use DivanteTranslationBundle\Provider\FormalityProviderInterface;
+use OpendxpTranslationBundle\Exception\TranslationException;
+use OpendxpTranslationBundle\Provider\AbstractProvider;
+use OpendxpTranslationBundle\Provider\FormalityProviderInterface;
 
 class DeeplProviderService extends AbstractProvider implements FormalityProviderInterface
 {

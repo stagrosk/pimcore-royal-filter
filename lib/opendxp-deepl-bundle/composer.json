@@ -1,0 +1,35 @@
+{
+    "name": "stagro/opendxp-deepl-bundle",
+    "type": "opendxp-bundle",
+    "license": "GPL-3.0-or-later",
+    "description": "OpenDXP DeepL translation bundle (fork of elevantiq/pimcore-deepl)",
+    "keywords": ["opendxp", "translation", "deepL"],
+    "authors": [
+        {
+            "name": "agorate GmbH",
+            "email": "info@agorate.de",
+            "role": "Original author"
+        },
+        {
+            "name": "Stagro s.r.o",
+            "email": "martin@stagro.sk",
+            "role": "OpenDXP port"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "OpendxpDeeplBundle\\": "src/OpendxpDeeplBundle"
+        }
+    },
+    "require": {
+        "php": "~8.3.0 || ~8.4.0",
+        "open-dxp/opendxp": "^1.0"
+    },
+    "extra": {
+        "opendxp": {
+            "bundles": [
+                "OpendxpDeeplBundle\\OpendxpDeeplBundle"
+            ]
+        }
+    }
+}
