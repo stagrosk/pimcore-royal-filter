@@ -1,4 +1,4 @@
-pimcore:
+opendxp:
     general:
         domain: pimcore.royal-filter.com
         redirect_to_maindomain: false

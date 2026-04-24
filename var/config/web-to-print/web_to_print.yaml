@@ -1,4 +1,4 @@
-pimcore:
+opendxp:
     documents:
         web_to_print:
             enableInDefaultView: false
