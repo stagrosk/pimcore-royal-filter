@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Command;
 
 use App\Service\HomepageProductService;
-use Pimcore\Model\DataObject\ContentPage;
-use Pimcore\Model\DataObject\Fieldcollection\Data\ProductGrid;
+use OpenDxp\Model\DataObject\ContentPage;
+use OpenDxp\Model\DataObject\Fieldcollection\Data\ProductGrid;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;

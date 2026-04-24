@@ -4,9 +4,9 @@ namespace App\GraphQL\Resolver\Layout;
 
 use App\GraphQL\Resolver\AbstractResolver;
 use GraphQL\Type\Definition\ResolveInfo;
-use Pimcore\Model\DataObject\BlogCategory;
-use Pimcore\Model\DataObject\BlogPost;
-use Pimcore\Tool;
+use OpenDxp\Model\DataObject\BlogCategory;
+use OpenDxp\Model\DataObject\BlogPost;
+use OpenDxp\Tool;
 
 class BlogPostListResolver extends AbstractResolver
 {

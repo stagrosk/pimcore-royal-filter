@@ -4,7 +4,7 @@ namespace PimcoreHeadlessContentBundle\EventListener;
 
 use PimcoreHeadlessContentBundle\Helper\SlugGenerator;
 use PimcoreHeadlessContentBundle\Model\SlugAwareInterface;
-use Pimcore\Event\Model\DataObjectEvent;
+use OpenDxp\Event\Model\DataObjectEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class GenerateSlugListener implements EventSubscriberInterface

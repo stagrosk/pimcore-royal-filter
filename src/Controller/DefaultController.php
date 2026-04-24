@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use Pimcore\Bundle\AdminBundle\Controller\Admin\LoginController;
-use Pimcore\Controller\FrontendController;
+use OpenDxp\Bundle\AdminBundle\Controller\Admin\LoginController;
+use OpenDxp\Controller\FrontendController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 

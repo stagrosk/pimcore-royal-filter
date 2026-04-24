@@ -7,14 +7,14 @@ namespace App\Service;
 use App\Pimcore\Helpers\VersionHelper;
 use App\Pimcore\Model\DataObject\RoyalFilter;
 use App\Service\Generator\Mapper\FilterToProductMapper;
-use Pimcore\Model\DataObject\AbstractObject;
-use Pimcore\Model\DataObject\Fieldcollection;
-use Pimcore\Model\DataObject\Fieldcollection\Data\ProductOption as ProductOptionFC;
-use Pimcore\Model\DataObject\Product;
-use Pimcore\Model\DataObject\ProductOption;
-use Pimcore\Model\DataObject\ProductOptionGroup;
-use Pimcore\Model\DataObject\Service;
-use Pimcore\Model\DataObject\Whirlpool;
+use OpenDxp\Model\DataObject\AbstractObject;
+use OpenDxp\Model\DataObject\Fieldcollection;
+use OpenDxp\Model\DataObject\Fieldcollection\Data\ProductOption as ProductOptionFC;
+use OpenDxp\Model\DataObject\Product;
+use OpenDxp\Model\DataObject\ProductOption;
+use OpenDxp\Model\DataObject\ProductOptionGroup;
+use OpenDxp\Model\DataObject\Service;
+use OpenDxp\Model\DataObject\Whirlpool;
 
 class VariantGeneratorService
 {

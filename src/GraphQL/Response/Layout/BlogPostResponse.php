@@ -8,12 +8,12 @@ use App\GraphQL\Type\Fragment\ContentElementFragment;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
-use Pimcore\Bundle\DataHubBundle\GraphQL\ClassTypeDefinitions;
-use Pimcore\Bundle\DataHubBundle\GraphQL\Resolver\QueryType;
-use Pimcore\Bundle\DataHubBundle\GraphQL\Service;
-use Pimcore\Model\DataObject\BlogPost;
-use Pimcore\Model\DataObject\ClassDefinition;
-use Pimcore\Tool;
+use OpenDxp\Bundle\DataHubBundle\GraphQL\ClassTypeDefinitions;
+use OpenDxp\Bundle\DataHubBundle\GraphQL\Resolver\QueryType;
+use OpenDxp\Bundle\DataHubBundle\GraphQL\Service;
+use OpenDxp\Model\DataObject\BlogPost;
+use OpenDxp\Model\DataObject\ClassDefinition;
+use OpenDxp\Tool;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class BlogPostResponse extends AbstractResponse

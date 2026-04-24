@@ -2,12 +2,12 @@
 
 namespace App\GraphQL\Helper;
 
-use Pimcore\Model\DataObject\Data\RgbaColor;
-use Pimcore\Model\DataObject\Fieldcollection\Data\Price;
-use Pimcore\Model\DataObject\Product;
-use Pimcore\Model\DataObject\CustomerGroup;
-use Pimcore\Model\DataObject\ProductFlag;
-use Pimcore\Tool;
+use OpenDxp\Model\DataObject\Data\RgbaColor;
+use OpenDxp\Model\DataObject\Fieldcollection\Data\Price;
+use OpenDxp\Model\DataObject\Product;
+use OpenDxp\Model\DataObject\CustomerGroup;
+use OpenDxp\Model\DataObject\ProductFlag;
+use OpenDxp\Tool;
 
 class ProductFragmentHelper
 {

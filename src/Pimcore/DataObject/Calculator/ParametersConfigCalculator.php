@@ -7,10 +7,10 @@ namespace App\Pimcore\DataObject\Calculator;
 use App\Pimcore\ClassificationStore\ClassificationStoreHelper;
 use App\Pimcore\Model\ClassificationStore\ClassificationStoreMappingItem;
 use App\Service\ClassificationStoreTranslationService;
-use Pimcore\Model\DataObject\ClassDefinition\CalculatorClassInterface;
-use Pimcore\Model\DataObject\Concrete;
-use Pimcore\Model\DataObject\Data\CalculatedValue;
-use Pimcore\Model\DataObject\Product;
+use OpenDxp\Model\DataObject\ClassDefinition\CalculatorClassInterface;
+use OpenDxp\Model\DataObject\Concrete;
+use OpenDxp\Model\DataObject\Data\CalculatedValue;
+use OpenDxp\Model\DataObject\Product;
 
 class ParametersConfigCalculator implements CalculatorClassInterface
 {
@@ -22,7 +22,7 @@ class ParametersConfigCalculator implements CalculatorClassInterface
     private function getTranslationService(): ClassificationStoreTranslationService
     {
         if ($this->translationService === null) {
-            $this->translationService = \Pimcore::getContainer()->get(ClassificationStoreTranslationService::class);
+            $this->translationService = \OpenDxp::getContainer()->get(ClassificationStoreTranslationService::class);
         }
 
         return $this->translationService;

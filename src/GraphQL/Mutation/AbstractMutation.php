@@ -3,8 +3,8 @@
 namespace App\GraphQL\Mutation;
 
 use JetBrains\PhpStorm\ArrayShape;
-use Pimcore\Bundle\DataHubBundle\Event\GraphQL\Model\MutationTypeEvent;
-use Pimcore\Bundle\DataHubBundle\Event\GraphQL\MutationEvents;
+use OpenDxp\Bundle\DataHubBundle\Event\GraphQL\Model\MutationTypeEvent;
+use OpenDxp\Bundle\DataHubBundle\Event\GraphQL\MutationEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 abstract class AbstractMutation implements EventSubscriberInterface
@@ -64,7 +64,7 @@ abstract class AbstractMutation implements EventSubscriberInterface
      */
     public function isAllowed(MutationTypeEvent $event): bool
     {
-        $enabledClientNames = array_merge($this->getEnabledClientNames(), \Pimcore::getContainer()->getParameter('data_hub_enabled_client_names') ?? []);
+        $enabledClientNames = array_merge($this->getEnabledClientNames(), \OpenDxp::getContainer()->getParameter('data_hub_enabled_client_names') ?? []);
 
         if (!empty($enabledClientNames) && !in_array($event->getContext()['clientname'], $enabledClientNames, true)) {
             return false;

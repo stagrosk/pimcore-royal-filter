@@ -2,8 +2,8 @@
 
 namespace App\EventSubscriber;
 
-use Pimcore\Event\BundleManager\PathsEvent;
-use Pimcore\Event\BundleManagerEvents;
+use OpenDxp\Event\BundleManager\PathsEvent;
+use OpenDxp\Event\BundleManagerEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class AdminInterfaceListener implements EventSubscriberInterface

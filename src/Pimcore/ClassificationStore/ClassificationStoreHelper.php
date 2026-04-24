@@ -6,12 +6,12 @@ use App\Pimcore\Model\ClassificationStore\ClassificationStoreMapping;
 use App\Pimcore\Model\ClassificationStore\ClassificationStoreMappingItem;
 use App\Pimcore\Helpers\InheritanceHelper;
 use App\Pimcore\Helpers\VersionHelper;
-use Pimcore\Logger;
-use Pimcore\Model\DataObject\AbstractObject;
-use Pimcore\Model\DataObject\Classificationstore;
-use Pimcore\Model\DataObject\Classificationstore\GroupConfig;
-use Pimcore\Model\DataObject\Classificationstore\KeyConfig;
-use Pimcore\Model\DataObject\Data\QuantityValue;
+use OpenDxp\Logger;
+use OpenDxp\Model\DataObject\AbstractObject;
+use OpenDxp\Model\DataObject\Classificationstore;
+use OpenDxp\Model\DataObject\Classificationstore\GroupConfig;
+use OpenDxp\Model\DataObject\Classificationstore\KeyConfig;
+use OpenDxp\Model\DataObject\Data\QuantityValue;
 
 class ClassificationStoreHelper
 {

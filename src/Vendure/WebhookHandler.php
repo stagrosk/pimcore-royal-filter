@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Vendure;
 
 use App\EventSubscriber\ProductSubscriber;
-use Pimcore\Model\DataObject\Product;
+use OpenDxp\Model\DataObject\Product;
 use Psr\Log\LoggerInterface;
 
 class WebhookHandler

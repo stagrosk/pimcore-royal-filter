@@ -5,7 +5,7 @@ namespace App\GraphQL\Response\Layout;
 use App\GraphQL\Response\AbstractResponse;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\Type;
-use Pimcore\Model\DataObject\BlogCategory;
+use OpenDxp\Model\DataObject\BlogCategory;
 
 class BlogCategoryListResponse extends AbstractResponse
 {

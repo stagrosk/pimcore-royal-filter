@@ -109,7 +109,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'defaultValueGenerator' => '',
              'width' => '',
              'optionsProviderType' => 'class',
-             'optionsProviderClass' => 'App\\Pimcore\\Model\\OptionProviders\\IconOptionsProvider',
+             'optionsProviderClass' => 'App\\OpenDxp\\Model\\OptionProviders\\IconOptionsProvider',
              'optionsProviderData' => '',
           )),
           2 => 

@@ -4,7 +4,7 @@ namespace PimcoreHeadlessContentBundle\Model;
 
 use PimcoreHeadlessContentBundle\Exception\ImplementedByPimcoreException;
 use PimcoreHeadlessContentBundle\Model\Pimcore\AbstractPimcoreModel;
-use Pimcore\Model\DataObject\Fieldcollection;
+use OpenDxp\Model\DataObject\Fieldcollection;
 
 class Navigation extends AbstractPimcoreModel implements NavigationInterface
 {

@@ -3,10 +3,10 @@
 namespace App\Pimcore\Model\DataObject;
 
 use App\Pimcore\DataObject\Calculator\ParametersConfigCalculator;
-use Pimcore\Model\DataObject\AbstractObject;
-use Pimcore\Model\DataObject\Data\ImageGallery;
-use Pimcore\Model\DataObject\Fieldcollection;
-use Pimcore\Tool;
+use OpenDxp\Model\DataObject\AbstractObject;
+use OpenDxp\Model\DataObject\Data\ImageGallery;
+use OpenDxp\Model\DataObject\Fieldcollection;
+use OpenDxp\Tool;
 use PimcoreHeadlessContentBundle\Model\SlugAwareInterface;
 
 class Product extends \Pimcore\Model\DataObject\Product implements SlugAwareInterface

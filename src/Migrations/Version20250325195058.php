@@ -10,8 +10,8 @@ use App\Pimcore\ClassificationStore\ClassificationStoreService;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
-use Pimcore\Model\DataObject\PaperCartridge;
-use Pimcore\Model\DataObject\Whirlpool;
+use OpenDxp\Model\DataObject\PaperCartridge;
+use OpenDxp\Model\DataObject\Whirlpool;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -38,8 +38,8 @@ final class Version20250325195058 extends AbstractMigration
         parent::__construct($connection, $logger);
 
 
-        $this->classificationStoreService = \Pimcore::getContainer()->get(ClassificationStoreService::class);
-        $this->classificationStoreHelper = \Pimcore::getContainer()->get(ClassificationStoreHelper::class);
+        $this->classificationStoreService = \OpenDxp::getContainer()->get(ClassificationStoreService::class);
+        $this->classificationStoreHelper = \OpenDxp::getContainer()->get(ClassificationStoreHelper::class);
     }
 
     public function getDescription(): string
@@ -76,7 +76,7 @@ final class Version20250325195058 extends AbstractMigration
                 }
 
                 if (($iterator % self::BATCH_SIZE) === 0) {
-                    \Pimcore::collectGarbage();
+                    \OpenDxp::collectGarbage();
                     $this->write('-------- BATCH CLEANUP --------');
                 }
             }

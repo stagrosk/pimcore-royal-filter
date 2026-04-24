@@ -2,13 +2,13 @@
 
 namespace PimcoreVendureBridgeBundle\Command;
 
-use Pimcore\Model\Asset\Listing;
-use Pimcore\Model\DataObject\Category;
-use Pimcore\Model\DataObject\Objectbrick\Data\ProductAttributes;
-use Pimcore\Model\DataObject\Price;
-use Pimcore\Model\DataObject\Product;
-use Pimcore\Model\DataObject\Service;
-use Pimcore\Tool;
+use OpenDxp\Model\Asset\Listing;
+use OpenDxp\Model\DataObject\Category;
+use OpenDxp\Model\DataObject\Objectbrick\Data\ProductAttributes;
+use OpenDxp\Model\DataObject\Price;
+use OpenDxp\Model\DataObject\Product;
+use OpenDxp\Model\DataObject\Service;
+use OpenDxp\Tool;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;

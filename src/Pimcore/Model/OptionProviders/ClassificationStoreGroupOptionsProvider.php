@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Pimcore\Model\OptionProviders;
 
-use Pimcore\Model\DataObject\ClassDefinition\Data;
-use Pimcore\Model\DataObject\ClassDefinition\DynamicOptionsProvider\SelectOptionsProviderInterface;
-use Pimcore\Model\DataObject\Classificationstore\GroupConfig;
+use OpenDxp\Model\DataObject\ClassDefinition\Data;
+use OpenDxp\Model\DataObject\ClassDefinition\DynamicOptionsProvider\SelectOptionsProviderInterface;
+use OpenDxp\Model\DataObject\Classificationstore\GroupConfig;
 
 class ClassificationStoreGroupOptionsProvider implements SelectOptionsProviderInterface
 {

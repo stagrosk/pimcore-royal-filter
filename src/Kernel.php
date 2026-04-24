@@ -15,9 +15,9 @@
 
 namespace App;
 
-use Pimcore\Bundle\AdminBundle\PimcoreAdminBundle;
-use Pimcore\HttpKernel\BundleCollection\BundleCollection;
-use Pimcore\Kernel as PimcoreKernel;
+use OpenDxp\Bundle\AdminBundle\PimcoreAdminBundle;
+use OpenDxp\HttpKernel\BundleCollection\BundleCollection;
+use OpenDxp\Kernel as PimcoreKernel;
 
 class Kernel extends PimcoreKernel
 {

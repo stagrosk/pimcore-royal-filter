@@ -2,8 +2,8 @@
 
 namespace App\Pimcore\Model\ClassificationStore;
 
-use Pimcore\Model\DataObject\Classificationstore\GroupConfig;
-use Pimcore\Model\DataObject\Classificationstore\KeyConfig;
+use OpenDxp\Model\DataObject\Classificationstore\GroupConfig;
+use OpenDxp\Model\DataObject\Classificationstore\KeyConfig;
 
 class ClassificationStoreMappingItem
 {

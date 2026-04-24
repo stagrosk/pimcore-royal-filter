@@ -6,16 +6,16 @@ use App\Pimcore\ClassificationStore\ClassificationStoreHelper;
 use App\Pimcore\ClassificationStore\ClassificationStoreService;
 use App\Service\ProductMetadataService;
 use App\Enum\ProductStatusEnum;
-use Pimcore\Model\Asset;
-use Pimcore\Model\DataObject\AbstractObject;
-use Pimcore\Model\DataObject\Country;
-use Pimcore\Model\DataObject\Data\Hotspotimage;
-use Pimcore\Model\DataObject\Data\ImageGallery;
-use Pimcore\Model\DataObject\Product;
-use Pimcore\Model\DataObject\Service;
-use Pimcore\Model\DataObject\Whirlpool;
-use Pimcore\Tool;
-use Pimcore\Translation\Translator;
+use OpenDxp\Model\Asset;
+use OpenDxp\Model\DataObject\AbstractObject;
+use OpenDxp\Model\DataObject\Country;
+use OpenDxp\Model\DataObject\Data\Hotspotimage;
+use OpenDxp\Model\DataObject\Data\ImageGallery;
+use OpenDxp\Model\DataObject\Product;
+use OpenDxp\Model\DataObject\Service;
+use OpenDxp\Model\DataObject\Whirlpool;
+use OpenDxp\Tool;
+use OpenDxp\Translation\Translator;
 
 class WhirlpoolToProductMapper extends BaseMapper
 {

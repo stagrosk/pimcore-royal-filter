@@ -8,14 +8,14 @@ use App\Pimcore\ClassificationStore\ClassificationStoreService;
 use App\Pimcore\Model\DataObject\RoyalFilter;
 use App\Service\ProductMetadataService;
 use App\Enum\ProductStatusEnum;
-use Pimcore\Model\DataObject\AbstractObject;
-use Pimcore\Model\DataObject\Country;
-use Pimcore\Model\DataObject\Data\ImageGallery;
-use Pimcore\Model\DataObject\Folder;
-use Pimcore\Model\DataObject\Product;
-use Pimcore\Model\DataObject\Service;
-use Pimcore\Tool;
-use Pimcore\Translation\Translator;
+use OpenDxp\Model\DataObject\AbstractObject;
+use OpenDxp\Model\DataObject\Country;
+use OpenDxp\Model\DataObject\Data\ImageGallery;
+use OpenDxp\Model\DataObject\Folder;
+use OpenDxp\Model\DataObject\Product;
+use OpenDxp\Model\DataObject\Service;
+use OpenDxp\Tool;
+use OpenDxp\Translation\Translator;
 
 class FilterToProductMapper extends BaseMapper
 {

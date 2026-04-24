@@ -2,8 +2,8 @@
 
 namespace App\Service\Generator\Mapper;
 
-use Pimcore\Model\DataObject\AbstractObject;
-use Pimcore\Model\DataObject\Product;
+use OpenDxp\Model\DataObject\AbstractObject;
+use OpenDxp\Model\DataObject\Product;
 
 interface MapperInterface
 {

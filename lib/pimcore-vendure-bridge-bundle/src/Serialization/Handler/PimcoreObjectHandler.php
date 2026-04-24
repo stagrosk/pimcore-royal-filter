@@ -5,8 +5,8 @@ namespace PimcoreVendureBridgeBundle\Serialization\Handler;
 use JMS\Serializer\Context;
 use JMS\Serializer\JsonDeserializationVisitor;
 use JMS\Serializer\JsonSerializationVisitor;
-use Pimcore\Model\DataObject;
-use Pimcore\Model\DataObject\Concrete;
+use OpenDxp\Model\DataObject;
+use OpenDxp\Model\DataObject\Concrete;
 
 class PimcoreObjectHandler
 {

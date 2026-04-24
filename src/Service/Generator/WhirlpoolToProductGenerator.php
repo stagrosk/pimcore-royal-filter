@@ -6,11 +6,11 @@ use App\Pimcore\Helpers\InheritanceHelper;
 use App\Pimcore\Helpers\VersionHelper;
 use App\Service\Generator\Mapper\WhirlpoolToProductMapper;
 use App\Service\VariantGeneratorService;
-use Pimcore\Logger;
-use Pimcore\Model\DataObject\AbstractObject;
-use Pimcore\Model\DataObject\Product;
-use Pimcore\Model\DataObject\Whirlpool;
-use Pimcore\Model\Document\Listing;
+use OpenDxp\Logger;
+use OpenDxp\Model\DataObject\AbstractObject;
+use OpenDxp\Model\DataObject\Product;
+use OpenDxp\Model\DataObject\Whirlpool;
+use OpenDxp\Model\Document\Listing;
 
 class WhirlpoolToProductGenerator extends BaseProductGenerator
 {

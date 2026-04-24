@@ -2,10 +2,10 @@
 
 namespace App\Pimcore\Model\DataObject;
 
-use Pimcore\Model\DataObject;
-use Pimcore\Model\DataObject\Exception\InheritanceParentNotFoundException;
-use Pimcore\Model\DataObject\Fieldcollection;
-use Pimcore\Model\DataObject\Service;
+use OpenDxp\Model\DataObject;
+use OpenDxp\Model\DataObject\Exception\InheritanceParentNotFoundException;
+use OpenDxp\Model\DataObject\Fieldcollection;
+use OpenDxp\Model\DataObject\Service;
 
 class RoyalFilter extends DataObject\RoyalFilter
 {

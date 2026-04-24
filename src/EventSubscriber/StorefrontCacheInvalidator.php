@@ -6,12 +6,12 @@ namespace App\EventSubscriber;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
-use Pimcore\Event\DataObjectEvents;
-use Pimcore\Event\Model\DataObjectEvent;
-use Pimcore\Event\Model\TranslationEvent;
-use Pimcore\Event\TranslationEvents;
-use Pimcore\Model\DataObject\NavigationItem;
-use Pimcore\Model\DataObject\WebsiteConfiguration;
+use OpenDxp\Event\DataObjectEvents;
+use OpenDxp\Event\Model\DataObjectEvent;
+use OpenDxp\Event\Model\TranslationEvent;
+use OpenDxp\Event\TranslationEvents;
+use OpenDxp\Model\DataObject\NavigationItem;
+use OpenDxp\Model\DataObject\WebsiteConfiguration;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 

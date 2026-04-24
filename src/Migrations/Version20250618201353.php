@@ -6,9 +6,9 @@ namespace App\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
-use Pimcore\Model\DataObject\Adapter;
-use Pimcore\Model\DataObject\Equipment;
-use Pimcore\Model\DataObject\Service;
+use OpenDxp\Model\DataObject\Adapter;
+use OpenDxp\Model\DataObject\Equipment;
+use OpenDxp\Model\DataObject\Service;
 
 /**
  * Auto-generated Migration: Please modify to your needs!

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Pimcore\Model\DataObject;
 
-use Pimcore\Tool;
+use OpenDxp\Tool;
 
 class CustomerGroup extends \Pimcore\Model\DataObject\CustomerGroup
 {

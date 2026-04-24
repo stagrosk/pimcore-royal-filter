@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Command;
 
 use App\Service\ClassificationStoreTranslationService;
-use Pimcore\Model\DataObject\Classificationstore\GroupConfig;
-use Pimcore\Model\DataObject\Classificationstore\KeyConfig;
-use Pimcore\Model\Translation;
-use Pimcore\Tool;
+use OpenDxp\Model\DataObject\Classificationstore\GroupConfig;
+use OpenDxp\Model\DataObject\Classificationstore\KeyConfig;
+use OpenDxp\Model\Translation;
+use OpenDxp\Tool;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;

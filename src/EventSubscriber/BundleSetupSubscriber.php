@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\EventSubscriber;
 
-use Pimcore\Bundle\AdminBundle\PimcoreAdminBundle;
-use Pimcore\Bundle\InstallBundle\Event\BundleSetupEvent;
-use Pimcore\Bundle\InstallBundle\Event\InstallEvents;
+use OpenDxp\Bundle\AdminBundle\PimcoreAdminBundle;
+use OpenDxp\Bundle\InstallBundle\Event\BundleSetupEvent;
+use OpenDxp\Bundle\InstallBundle\Event\InstallEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class BundleSetupSubscriber implements EventSubscriberInterface

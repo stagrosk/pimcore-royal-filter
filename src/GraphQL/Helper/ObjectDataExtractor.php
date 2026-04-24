@@ -4,9 +4,9 @@ namespace App\GraphQL\Helper;
 
 use ArrayObject;
 use GraphQL\Type\Definition\ResolveInfo;
-use Pimcore\Bundle\DataHubBundle\GraphQL\ElementDescriptor;
-use Pimcore\Bundle\DataHubBundle\GraphQL\Service;
-use Pimcore\Model\DataObject\AbstractObject;
+use OpenDxp\Bundle\DataHubBundle\GraphQL\ElementDescriptor;
+use OpenDxp\Bundle\DataHubBundle\GraphQL\Service;
+use OpenDxp\Model\DataObject\AbstractObject;
 
 class ObjectDataExtractor
 {

@@ -4,7 +4,7 @@ namespace PimcoreVendureBridgeBundle\Component\BatchProcessing;
 
 use Countable;
 use Iterator;
-use Pimcore\Model\Listing\AbstractListing;
+use OpenDxp\Model\Listing\AbstractListing;
 
 final class BatchListing implements Iterator, Countable
 {

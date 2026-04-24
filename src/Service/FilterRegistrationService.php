@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Service;
 
-use Pimcore\Model\Asset;
-use Pimcore\Model\DataObject\Data\Hotspotimage;
-use Pimcore\Model\DataObject\Data\ImageGallery;
-use Pimcore\Model\DataObject\FilterRegistration;
-use Pimcore\Model\DataObject\Service;
-use Pimcore\Model\DataObject\Whirlpool;
+use OpenDxp\Model\Asset;
+use OpenDxp\Model\DataObject\Data\Hotspotimage;
+use OpenDxp\Model\DataObject\Data\ImageGallery;
+use OpenDxp\Model\DataObject\FilterRegistration;
+use OpenDxp\Model\DataObject\Service;
+use OpenDxp\Model\DataObject\Whirlpool;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 

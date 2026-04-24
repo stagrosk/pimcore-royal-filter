@@ -5,9 +5,9 @@ namespace App\Pimcore\Model\DataObject;
 use App\Pimcore\ClassificationStore\ClassificationStoreHelper;
 use App\Pimcore\Model\ClassificationStore\ClassificationStoreMappingItem;
 use App\Service\ClassificationStoreTranslationService;
-use Pimcore\Model\DataObject\AbstractObject;
-use Pimcore\Model\DataObject\Data\RgbaColor;
-use Pimcore\Tool;
+use OpenDxp\Model\DataObject\AbstractObject;
+use OpenDxp\Model\DataObject\Data\RgbaColor;
+use OpenDxp\Tool;
 use PimcoreHeadlessContentBundle\Model\NavigationAwareInterface;
 use PimcoreHeadlessContentBundle\Model\SlugAwareInterface;
 
@@ -21,7 +21,7 @@ class Collection extends \Pimcore\Model\DataObject\Collection implements SlugAwa
     private function getTranslationService(): ClassificationStoreTranslationService
     {
         if ($this->translationService === null) {
-            $this->translationService = \Pimcore::getContainer()->get(ClassificationStoreTranslationService::class);
+            $this->translationService = \OpenDxp::getContainer()->get(ClassificationStoreTranslationService::class);
         }
 
         return $this->translationService;

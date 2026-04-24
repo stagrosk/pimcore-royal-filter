@@ -2,9 +2,9 @@
 
 namespace PimcoreVendureBridgeBundle;
 
-use Pimcore\Extension\Bundle\AbstractPimcoreBundle;
-use Pimcore\Extension\Bundle\Installer\InstallerInterface;
-use Pimcore\Routing\RouteReferenceInterface;
+use OpenDxp\Extension\Bundle\AbstractPimcoreBundle;
+use OpenDxp\Extension\Bundle\Installer\InstallerInterface;
+use OpenDxp\Routing\RouteReferenceInterface;
 
 class PimcoreVendureBridgeBundle extends AbstractPimcoreBundle
 {

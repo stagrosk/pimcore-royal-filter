@@ -5,7 +5,7 @@ namespace PimcoreVendureBridgeBundle\Controller\Rest;
 use Doctrine\DBAL\Exception\ConstraintViolationException;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Route;
-use Pimcore\Model\DataObject;
+use OpenDxp\Model\DataObject;
 use PimcoreVendureBridgeBundle\Component\Serializer\JMSSerializerFactory;
 use PimcoreVendureBridgeBundle\Security\CheckConsumerPermissionsService;
 use Psr\Log\LoggerInterface;

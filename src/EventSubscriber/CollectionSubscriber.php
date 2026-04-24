@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\EventSubscriber;
 
-use Pimcore\Event\Model\DataObjectEvent;
-use Pimcore\Model\DataObject\AbstractObject;
-use Pimcore\Model\DataObject\Collection;
+use OpenDxp\Event\Model\DataObjectEvent;
+use OpenDxp\Model\DataObject\AbstractObject;
+use OpenDxp\Model\DataObject\Collection;
 class CollectionSubscriber extends AbstractWebhookSubscriber
 {
     protected function getObjectClass(): string

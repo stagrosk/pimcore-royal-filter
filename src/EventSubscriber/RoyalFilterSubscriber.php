@@ -6,10 +6,10 @@ namespace App\EventSubscriber;
 
 use App\Service\Generator\BaseProductGenerator;
 use App\Service\Generator\FilterToProductGenerator;
-use Pimcore\Event\DataObjectEvents;
-use Pimcore\Event\Model\DataObjectEvent;
-use Pimcore\Model\DataObject\Product;
-use Pimcore\Model\DataObject\RoyalFilter;
+use OpenDxp\Event\DataObjectEvents;
+use OpenDxp\Event\Model\DataObjectEvent;
+use OpenDxp\Model\DataObject\Product;
+use OpenDxp\Model\DataObject\RoyalFilter;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 readonly class RoyalFilterSubscriber implements EventSubscriberInterface

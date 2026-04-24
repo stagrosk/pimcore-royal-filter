@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Service\DeeplProviderService;
-use Pimcore\Bundle\AdminBundle\Controller\AdminAbstractController;
-use Pimcore\Tool;
+use OpenDxp\Bundle\AdminBundle\Controller\AdminAbstractController;
+use OpenDxp\Tool;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;

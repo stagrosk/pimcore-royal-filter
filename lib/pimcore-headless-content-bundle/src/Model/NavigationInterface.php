@@ -3,7 +3,7 @@
 namespace PimcoreHeadlessContentBundle\Model;
 
 use PimcoreHeadlessContentBundle\Model\Pimcore\PimcoreModelInterface;
-use Pimcore\Model\DataObject\Fieldcollection;
+use OpenDxp\Model\DataObject\Fieldcollection;
 
 interface NavigationInterface extends PimcoreModelInterface
 {

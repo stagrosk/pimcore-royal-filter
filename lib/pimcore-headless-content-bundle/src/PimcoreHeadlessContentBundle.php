@@ -2,8 +2,8 @@
 
 namespace PimcoreHeadlessContentBundle;
 
-use Pimcore\Extension\Bundle\AbstractPimcoreBundle;
-use Pimcore\Extension\Bundle\Installer\InstallerInterface;
+use OpenDxp\Extension\Bundle\AbstractPimcoreBundle;
+use OpenDxp\Extension\Bundle\Installer\InstallerInterface;
 
 class PimcoreHeadlessContentBundle extends AbstractPimcoreBundle
 {

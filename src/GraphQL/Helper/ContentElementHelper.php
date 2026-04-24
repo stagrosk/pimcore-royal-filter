@@ -2,25 +2,25 @@
 
 namespace App\GraphQL\Helper;
 
-use Pimcore\Model\Asset;
-use Pimcore\Model\DataObject\ContentPage;
-use Pimcore\Model\DataObject\Data\BlockElement;
-use Pimcore\Model\DataObject\Data\ImageGallery;
-use Pimcore\Model\DataObject\Data\Link;
-use Pimcore\Model\DataObject\Data\RgbaColor;
-use Pimcore\Model\DataObject\Data\Video;
-use Pimcore\Model\DataObject\Fieldcollection\Data\Button;
-use Pimcore\Model\DataObject\Fieldcollection\Data\Headline;
-use Pimcore\Model\DataObject\Fieldcollection\Data\HeroSwiper;
-use Pimcore\Model\DataObject\Fieldcollection\Data\ProductGrid;
-use Pimcore\Model\DataObject\Fieldcollection\Data\Image;
-use Pimcore\Model\DataObject\Fieldcollection\Data\ImageContent;
-use Pimcore\Model\DataObject\Fieldcollection\Data\ParalaxContent;
-use Pimcore\Model\DataObject\Fieldcollection\Data\Script;
-use Pimcore\Model\DataObject\Fieldcollection\Data\Text;
-use Pimcore\Model\DataObject\Fieldcollection\Data\TextWithImage;
-use Pimcore\Model\DataObject\Fieldcollection\Data\CategoryGrid;
-use Pimcore\Model\DataObject\Fieldcollection\Data\Widget;
+use OpenDxp\Model\Asset;
+use OpenDxp\Model\DataObject\ContentPage;
+use OpenDxp\Model\DataObject\Data\BlockElement;
+use OpenDxp\Model\DataObject\Data\ImageGallery;
+use OpenDxp\Model\DataObject\Data\Link;
+use OpenDxp\Model\DataObject\Data\RgbaColor;
+use OpenDxp\Model\DataObject\Data\Video;
+use OpenDxp\Model\DataObject\Fieldcollection\Data\Button;
+use OpenDxp\Model\DataObject\Fieldcollection\Data\Headline;
+use OpenDxp\Model\DataObject\Fieldcollection\Data\HeroSwiper;
+use OpenDxp\Model\DataObject\Fieldcollection\Data\ProductGrid;
+use OpenDxp\Model\DataObject\Fieldcollection\Data\Image;
+use OpenDxp\Model\DataObject\Fieldcollection\Data\ImageContent;
+use OpenDxp\Model\DataObject\Fieldcollection\Data\ParalaxContent;
+use OpenDxp\Model\DataObject\Fieldcollection\Data\Script;
+use OpenDxp\Model\DataObject\Fieldcollection\Data\Text;
+use OpenDxp\Model\DataObject\Fieldcollection\Data\TextWithImage;
+use OpenDxp\Model\DataObject\Fieldcollection\Data\CategoryGrid;
+use OpenDxp\Model\DataObject\Fieldcollection\Data\Widget;
 
 class ContentElementHelper
 {

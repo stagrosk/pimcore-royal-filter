@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
-use Pimcore\Controller\FrontendController;
-use Pimcore\Model\Translation;
-use Pimcore\Tool;
+use OpenDxp\Controller\FrontendController;
+use OpenDxp\Model\Translation;
+use OpenDxp\Tool;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 

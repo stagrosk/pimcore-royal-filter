@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Pimcore\Model\DataObject;
 
-use Pimcore\Model\DataObject\Data\RgbaColor;
-use Pimcore\Tool;
+use OpenDxp\Model\DataObject\Data\RgbaColor;
+use OpenDxp\Tool;
 
 class ProductFlag extends \Pimcore\Model\DataObject\ProductFlag
 {

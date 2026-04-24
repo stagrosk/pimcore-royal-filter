@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Command;
 
 use App\Vendure\WebhookClient;
-use Pimcore\Model\DataObject\Product;
-use Pimcore\Model\DataObject\ProductFlag;
+use OpenDxp\Model\DataObject\Product;
+use OpenDxp\Model\DataObject\ProductFlag;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;

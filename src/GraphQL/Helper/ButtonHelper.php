@@ -2,10 +2,10 @@
 
 namespace App\GraphQL\Helper;
 
-use Pimcore\Model\DataObject\Collection;
-use Pimcore\Model\DataObject\ContentPage;
-use Pimcore\Model\DataObject\Data\Link;
-use Pimcore\Model\Element\AbstractElement;
+use OpenDxp\Model\DataObject\Collection;
+use OpenDxp\Model\DataObject\ContentPage;
+use OpenDxp\Model\DataObject\Data\Link;
+use OpenDxp\Model\Element\AbstractElement;
 
 class ButtonHelper
 {

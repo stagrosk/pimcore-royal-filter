@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
-use Pimcore\Model\DataObject\Classificationstore\GroupConfig;
-use Pimcore\Model\DataObject\Classificationstore\KeyConfig;
-use Pimcore\Model\DataObject\Classificationstore\KeyGroupRelation;
+use OpenDxp\Model\DataObject\Classificationstore\GroupConfig;
+use OpenDxp\Model\DataObject\Classificationstore\KeyConfig;
+use OpenDxp\Model\DataObject\Classificationstore\KeyGroupRelation;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 

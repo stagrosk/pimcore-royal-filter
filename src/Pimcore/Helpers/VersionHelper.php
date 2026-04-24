@@ -2,8 +2,8 @@
 
 namespace App\Pimcore\Helpers;
 
-use Pimcore\Model\DataObject\Concrete;
-use Pimcore\Model\Version;
+use OpenDxp\Model\DataObject\Concrete;
+use OpenDxp\Model\Version;
 
 class VersionHelper
 {

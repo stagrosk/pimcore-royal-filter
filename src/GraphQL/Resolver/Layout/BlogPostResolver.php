@@ -5,8 +5,8 @@ namespace App\GraphQL\Resolver\Layout;
 use App\Exception\TranslatableException;
 use App\GraphQL\Resolver\AbstractResolver;
 use GraphQL\Type\Definition\ResolveInfo;
-use Pimcore\Model\DataObject\BlogPost;
-use Pimcore\Tool;
+use OpenDxp\Model\DataObject\BlogPost;
+use OpenDxp\Tool;
 use PimcoreHeadlessContentBundle\Model\SlugAwareInterface;
 
 class BlogPostResolver extends AbstractResolver

@@ -803,7 +803,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'elementType' => 'input',
                  'calculatorType' => 'class',
                  'calculatorExpression' => '',
-                 'calculatorClass' => 'App\\Pimcore\\DataObject\\Calculator\\ParametersConfigCalculator',
+                 'calculatorClass' => 'App\\OpenDxp\\DataObject\\Calculator\\ParametersConfigCalculator',
                  'columnLength' => 190,
                  'width' => '',
               )),

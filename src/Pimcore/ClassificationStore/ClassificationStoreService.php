@@ -3,18 +3,18 @@
 namespace App\Pimcore\ClassificationStore;
 
 use Cocur\Slugify\Slugify;
-use Pimcore\Model\DataObject\ClassDefinition\Data\Checkbox;
-use Pimcore\Model\DataObject\ClassDefinition\Data\QuantityValue;
-use Pimcore\Model\DataObject\ClassDefinition\Data\Numeric;
-use Pimcore\Model\DataObject\ClassDefinition\Data\Select;
-use Pimcore\Model\DataObject\ClassDefinition\Data\Date;
-use Pimcore\Model\DataObject\ClassDefinition\Data\Input;
-use Pimcore\Model\DataObject\ClassDefinition\Data\TypeDeclarationSupportInterface;
-use Pimcore\Model\DataObject\Classificationstore\CollectionConfig;
-use Pimcore\Model\DataObject\Classificationstore\CollectionGroupRelation;
-use Pimcore\Model\DataObject\Classificationstore\GroupConfig;
-use Pimcore\Model\DataObject\Classificationstore\KeyConfig;
-use Pimcore\Model\DataObject\Classificationstore\KeyGroupRelation;
+use OpenDxp\Model\DataObject\ClassDefinition\Data\Checkbox;
+use OpenDxp\Model\DataObject\ClassDefinition\Data\QuantityValue;
+use OpenDxp\Model\DataObject\ClassDefinition\Data\Numeric;
+use OpenDxp\Model\DataObject\ClassDefinition\Data\Select;
+use OpenDxp\Model\DataObject\ClassDefinition\Data\Date;
+use OpenDxp\Model\DataObject\ClassDefinition\Data\Input;
+use OpenDxp\Model\DataObject\ClassDefinition\Data\TypeDeclarationSupportInterface;
+use OpenDxp\Model\DataObject\Classificationstore\CollectionConfig;
+use OpenDxp\Model\DataObject\Classificationstore\CollectionGroupRelation;
+use OpenDxp\Model\DataObject\Classificationstore\GroupConfig;
+use OpenDxp\Model\DataObject\Classificationstore\KeyConfig;
+use OpenDxp\Model\DataObject\Classificationstore\KeyGroupRelation;
 
 class ClassificationStoreService
 {

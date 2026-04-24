@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Pimcore\Model\DataObject;
 
-use Pimcore\Model\DataObject\AbstractObject;
+use OpenDxp\Model\DataObject\AbstractObject;
 
 class PriceList extends \Pimcore\Model\DataObject\PriceList
 {

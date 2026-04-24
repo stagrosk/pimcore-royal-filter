@@ -75,7 +75,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'defaultValueGenerator' => '',
              'width' => '',
              'optionsProviderType' => 'class',
-             'optionsProviderClass' => 'App\\Pimcore\\Model\\OptionProviders\\ClassificationStoreGroupOptionsProvider',
+             'optionsProviderClass' => 'App\\OpenDxp\\Model\\OptionProviders\\ClassificationStoreGroupOptionsProvider',
              'optionsProviderData' => '',
           )),
           1 =>
@@ -106,7 +106,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'defaultValueGenerator' => '',
              'width' => '',
              'optionsProviderType' => 'class',
-             'optionsProviderClass' => 'App\\Pimcore\\Model\\OptionProviders\\ClassificationStoreKeyOptionsProvider',
+             'optionsProviderClass' => 'App\\OpenDxp\\Model\\OptionProviders\\ClassificationStoreKeyOptionsProvider',
              'optionsProviderData' => '',
           )),
           2 =>
@@ -183,7 +183,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'defaultValueGenerator' => '',
              'width' => '',
              'optionsProviderType' => 'class',
-             'optionsProviderClass' => 'App\\Pimcore\\Model\\OptionProviders\\UnitOptionsProvider',
+             'optionsProviderClass' => 'App\\OpenDxp\\Model\\OptionProviders\\UnitOptionsProvider',
              'optionsProviderData' => '',
           )),
           4 =>

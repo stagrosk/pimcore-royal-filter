@@ -3,7 +3,7 @@
 namespace PimcoreHeadlessContentBundle\Model;
 
 use PimcoreHeadlessContentBundle\Model\Pimcore\ResourceInterface;
-use Pimcore\Model\Element\AbstractElement;
+use OpenDxp\Model\Element\AbstractElement;
 
 interface NavigationLinkItemInterface extends ResourceInterface
 {

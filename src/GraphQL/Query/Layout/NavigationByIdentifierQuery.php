@@ -7,7 +7,7 @@ use App\GraphQL\Resolver\Layout\NavigationByIdentifierResolver as NavigationById
 use App\GraphQL\Response\Layout\NavigationResponse;
 use App\GraphQL\Type\Arguments\Layout\NavigationByIdentifierArgs as NavigationByIdentifierArguments;
 use JetBrains\PhpStorm\ArrayShape;
-use Pimcore\Bundle\DataHubBundle\Event\GraphQL\Model\QueryTypeEvent;
+use OpenDxp\Bundle\DataHubBundle\Event\GraphQL\Model\QueryTypeEvent;
 
 class NavigationByIdentifierQuery extends AbstractQuery
 {

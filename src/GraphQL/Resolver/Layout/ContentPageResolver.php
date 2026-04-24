@@ -7,8 +7,8 @@ use App\GraphQL\Resolver\AbstractResolver;
 use Exception;
 use GraphQL\Type\Definition\ResolveInfo;
 use JetBrains\PhpStorm\ArrayShape;
-use Pimcore\Model\DataObject\ContentPage;
-use Pimcore\Tool;
+use OpenDxp\Model\DataObject\ContentPage;
+use OpenDxp\Tool;
 use PimcoreHeadlessContentBundle\Model\SlugAwareInterface;
 
 class ContentPageResolver extends AbstractResolver

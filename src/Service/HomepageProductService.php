@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Service;
 
-use Pimcore\Model\DataObject\Fieldcollection\Data\ProductGrid;
-use Pimcore\Model\DataObject\Product;
+use OpenDxp\Model\DataObject\Fieldcollection\Data\ProductGrid;
+use OpenDxp\Model\DataObject\Product;
 
 class HomepageProductService
 {

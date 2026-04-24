@@ -4,10 +4,10 @@ namespace App\Service\Generator;
 
 use App\Component\BatchProcessing\BatchListing;
 use App\Service\Generator\Exception\NothingToExportException;
-use Pimcore\Model\DataObject\AbstractObject;
-use Pimcore\Model\DataObject\Concrete;
-use Pimcore\Model\DataObject\Product;
-use Pimcore\Model\Document\Listing;
+use OpenDxp\Model\DataObject\AbstractObject;
+use OpenDxp\Model\DataObject\Concrete;
+use OpenDxp\Model\DataObject\Product;
+use OpenDxp\Model\Document\Listing;
 use Psr\Log\LoggerInterface;
 
 class BaseProductGenerator

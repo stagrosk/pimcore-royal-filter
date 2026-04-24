@@ -6,7 +6,7 @@ use App\GraphQL\Query\AbstractQuery;
 use App\GraphQL\Resolver\Layout\BlogCategoryListResolver;
 use App\GraphQL\Response\Layout\BlogCategoryListResponse;
 use App\GraphQL\Type\Arguments\Layout\BlogCategoryListArgs;
-use Pimcore\Bundle\DataHubBundle\Event\GraphQL\Model\QueryTypeEvent;
+use OpenDxp\Bundle\DataHubBundle\Event\GraphQL\Model\QueryTypeEvent;
 
 class BlogCategoryListQuery extends AbstractQuery
 {

@@ -5,10 +5,10 @@ namespace App\Controller;
 use App\Service\DeeplService;
 use Doctrine\DBAL\Connection;
 use Exception;
-use Pimcore\Controller\FrontendController;
-use Pimcore\Db;
-use Pimcore\Model\Document;
-use Pimcore\Model\Element\ValidationException;
+use OpenDxp\Controller\FrontendController;
+use OpenDxp\Db;
+use OpenDxp\Model\Document;
+use OpenDxp\Model\Element\ValidationException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 

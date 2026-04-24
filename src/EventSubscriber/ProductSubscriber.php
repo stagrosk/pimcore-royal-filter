@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\EventSubscriber;
 
-use Pimcore\Event\DataObjectEvents;
-use Pimcore\Event\Model\DataObjectEvent;
-use Pimcore\Model\DataObject\AbstractObject;
-use Pimcore\Model\DataObject\Concrete;
-use Pimcore\Model\DataObject\CustomerGroup;
-use Pimcore\Model\DataObject\Fieldcollection;
-use Pimcore\Model\DataObject\PriceList;
-use Pimcore\Model\DataObject\Product;
+use OpenDxp\Event\DataObjectEvents;
+use OpenDxp\Event\Model\DataObjectEvent;
+use OpenDxp\Model\DataObject\AbstractObject;
+use OpenDxp\Model\DataObject\Concrete;
+use OpenDxp\Model\DataObject\CustomerGroup;
+use OpenDxp\Model\DataObject\Fieldcollection;
+use OpenDxp\Model\DataObject\PriceList;
+use OpenDxp\Model\DataObject\Product;
 
 class ProductSubscriber extends AbstractWebhookSubscriber
 {

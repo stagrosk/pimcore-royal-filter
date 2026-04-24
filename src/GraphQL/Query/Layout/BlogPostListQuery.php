@@ -6,7 +6,7 @@ use App\GraphQL\Query\AbstractQuery;
 use App\GraphQL\Resolver\Layout\BlogPostListResolver;
 use App\GraphQL\Response\Layout\BlogPostListResponse;
 use App\GraphQL\Type\Arguments\Layout\BlogPostListArgs;
-use Pimcore\Bundle\DataHubBundle\Event\GraphQL\Model\QueryTypeEvent;
+use OpenDxp\Bundle\DataHubBundle\Event\GraphQL\Model\QueryTypeEvent;
 
 class BlogPostListQuery extends AbstractQuery
 {

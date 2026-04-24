@@ -5,7 +5,7 @@ namespace PimcoreVendureBridgeBundle\Serialization\Handler;
 use JMS\Serializer\Context;
 use JMS\Serializer\JsonDeserializationVisitor;
 use JMS\Serializer\JsonSerializationVisitor;
-use Pimcore\Model\Document;
+use OpenDxp\Model\Document;
 
 class PimcoreDocumentHandler
 {

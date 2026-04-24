@@ -7,7 +7,7 @@ use App\GraphQL\Resolver\Layout\ContentPageResolver;
 use App\GraphQL\Response\Layout\ContentPageResponse;
 use App\GraphQL\Type\Arguments\Layout\ContentPageArgs;
 use JetBrains\PhpStorm\ArrayShape;
-use Pimcore\Bundle\DataHubBundle\Event\GraphQL\Model\QueryTypeEvent;
+use OpenDxp\Bundle\DataHubBundle\Event\GraphQL\Model\QueryTypeEvent;
 
 class ContentPageQuery extends AbstractQuery
 {

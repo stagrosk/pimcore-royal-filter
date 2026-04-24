@@ -15,8 +15,8 @@
 
 namespace App\Controller;
 
-use Pimcore\Controller\FrontendController;
-use Pimcore\Model\Document\Hardlink;
+use OpenDxp\Controller\FrontendController;
+use OpenDxp\Model\Document\Hardlink;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 

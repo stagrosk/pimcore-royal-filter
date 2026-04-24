@@ -4,7 +4,7 @@ namespace PimcoreVendureBridgeBundle\Service;
 
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
-use Pimcore\Logger;
+use OpenDxp\Logger;
 
 class AmqpService
 {

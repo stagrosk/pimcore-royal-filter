@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\EventSubscriber;
 
-use Pimcore\Event\Model\DataObjectEvent;
-use Pimcore\Logger;
-use Pimcore\Model\DataObject\AbstractObject;
-use Pimcore\Model\DataObject\PriceList;
+use OpenDxp\Event\Model\DataObjectEvent;
+use OpenDxp\Logger;
+use OpenDxp\Model\DataObject\AbstractObject;
+use OpenDxp\Model\DataObject\PriceList;
 
 class PriceListSubscriber extends AbstractWebhookSubscriber
 {

@@ -8,11 +8,11 @@ use App\GraphQL\Type\Fragment\ContentElementFragment;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
-use Pimcore\Bundle\DataHubBundle\GraphQL\ClassTypeDefinitions;
-use Pimcore\Bundle\DataHubBundle\GraphQL\Resolver\QueryType;
-use Pimcore\Bundle\DataHubBundle\GraphQL\Service;
-use Pimcore\Model\DataObject\ClassDefinition;
-use Pimcore\Model\DataObject\ContentPage;
+use OpenDxp\Bundle\DataHubBundle\GraphQL\ClassTypeDefinitions;
+use OpenDxp\Bundle\DataHubBundle\GraphQL\Resolver\QueryType;
+use OpenDxp\Bundle\DataHubBundle\GraphQL\Service;
+use OpenDxp\Model\DataObject\ClassDefinition;
+use OpenDxp\Model\DataObject\ContentPage;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class ContentPageResponse extends AbstractResponse

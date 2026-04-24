@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PimcoreHeadlessContentBundle\Model\Pimcore;
 
-use Pimcore\Model\DataObject\ClassDefinition;
-use Pimcore\Model\Element\ElementInterface;
+use OpenDxp\Model\DataObject\ClassDefinition;
+use OpenDxp\Model\Element\ElementInterface;
 
 interface PimcoreModelInterface extends ResourceInterface, ElementInterface
 {

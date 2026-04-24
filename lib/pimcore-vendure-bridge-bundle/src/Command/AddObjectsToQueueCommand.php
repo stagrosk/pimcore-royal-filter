@@ -2,7 +2,7 @@
 
 namespace PimcoreVendureBridgeBundle\Command;
 
-use Pimcore\Model\DataObject\AbstractObject;
+use OpenDxp\Model\DataObject\AbstractObject;
 use PimcoreVendureBridgeBundle\Component\BatchProcessing\BatchListing;
 use PimcoreVendureBridgeBundle\Service\AmqpService;
 use Symfony\Component\Console\Command\Command;
@@ -78,7 +78,7 @@ class AddObjectsToQueueCommand extends Command
         $output->writeln('Starting to process objects type: ' . $objectType);
 
         try {
-            $className = 'Pimcore\\Model\\DataObject\\' . $objectType;
+            $className = 'OpenDxp\\Model\\DataObject\\' . $objectType;
             $list = $className::getList();
             $list->setObjectTypes([AbstractObject::OBJECT_TYPE_OBJECT, AbstractObject::OBJECT_TYPE_VARIANT]);
 

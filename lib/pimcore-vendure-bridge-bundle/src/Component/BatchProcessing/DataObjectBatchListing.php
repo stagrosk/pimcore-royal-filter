@@ -4,7 +4,7 @@ namespace PimcoreVendureBridgeBundle\Component\BatchProcessing;
 
 use Countable;
 use Iterator;
-use Pimcore\Model\DataObject;
+use OpenDxp\Model\DataObject;
 
 final class DataObjectBatchListing implements Iterator, Countable
 {

@@ -5,7 +5,7 @@ namespace PimcoreHeadlessContentBundle\Model;
 use PimcoreHeadlessContentBundle\Exception\ImplementedByPimcoreException;
 use PimcoreHeadlessContentBundle\Model\NavigationLinkItemInterface;
 use PimcoreHeadlessContentBundle\Model\Pimcore\AbstractPimcoreFieldcollection;
-use Pimcore\Model\Element\AbstractElement;
+use OpenDxp\Model\Element\AbstractElement;
 
 class NavigationLinkItem extends AbstractPimcoreFieldcollection implements NavigationLinkItemInterface
 {

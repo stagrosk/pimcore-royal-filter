@@ -3,8 +3,8 @@
 namespace App\GraphQL\Query;
 
 use JetBrains\PhpStorm\ArrayShape;
-use Pimcore\Bundle\DataHubBundle\Event\GraphQL\Model\QueryTypeEvent;
-use Pimcore\Bundle\DataHubBundle\Event\GraphQL\QueryEvents;
+use OpenDxp\Bundle\DataHubBundle\Event\GraphQL\Model\QueryTypeEvent;
+use OpenDxp\Bundle\DataHubBundle\Event\GraphQL\QueryEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 abstract class AbstractQuery implements EventSubscriberInterface
@@ -64,7 +64,7 @@ abstract class AbstractQuery implements EventSubscriberInterface
      */
     public function isAllowed(QueryTypeEvent $event): bool
     {
-        $enabledClientNames = array_merge($this->getEnabledClientNames(), \Pimcore::getContainer()->getParameter('data_hub_enabled_client_names') ?? []);
+        $enabledClientNames = array_merge($this->getEnabledClientNames(), \OpenDxp::getContainer()->getParameter('data_hub_enabled_client_names') ?? []);
 
         if (!empty($enabledClientNames) && !in_array($event->getContext()['clientname'], $enabledClientNames, true)) {
             return false;

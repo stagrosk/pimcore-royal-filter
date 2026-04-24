@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Service;
 
-use Pimcore\Model\DataObject\ProductOption;
-use Pimcore\Model\DataObject\ProductOptionGroup;
-use Pimcore\Model\DataObject\Service;
+use OpenDxp\Model\DataObject\ProductOption;
+use OpenDxp\Model\DataObject\ProductOptionGroup;
+use OpenDxp\Model\DataObject\Service;
 
 class ProductOptionService
 {

@@ -5,12 +5,12 @@ namespace App\Service\Generator\Mapper;
 use App\Pimcore\ClassificationStore\ClassificationStoreHelper;
 use App\Pimcore\ClassificationStore\ClassificationStoreService;
 use App\Service\ProductMetadataService;
-use Pimcore\Model\DataObject\AbstractObject;
-use Pimcore\Model\DataObject\Collection;
-use Pimcore\Model\DataObject\Data\Hotspotimage;
-use Pimcore\Model\DataObject\Product;
-use Pimcore\Model\DataObject\ProductBenefitSet;
-use Pimcore\Translation\Translator;
+use OpenDxp\Model\DataObject\AbstractObject;
+use OpenDxp\Model\DataObject\Collection;
+use OpenDxp\Model\DataObject\Data\Hotspotimage;
+use OpenDxp\Model\DataObject\Product;
+use OpenDxp\Model\DataObject\ProductBenefitSet;
+use OpenDxp\Translation\Translator;
 
 abstract class BaseMapper implements MapperInterface
 {

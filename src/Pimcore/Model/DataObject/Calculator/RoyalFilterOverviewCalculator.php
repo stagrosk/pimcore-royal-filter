@@ -4,11 +4,11 @@ namespace App\Pimcore\Model\DataObject\Calculator;
 
 use App\Pimcore\Model\DataObject\RoyalFilter;
 use App\Service\ProductMetadataService;
-use Pimcore\Model\DataObject\ClassDefinition\CalculatorClassInterface;
-use Pimcore\Model\DataObject\Concrete;
-use Pimcore\Model\DataObject\Data\CalculatedValue;
-use Pimcore\Model\DataObject\Fieldcollection\Data\RoyalFilterSetup;
-use Pimcore\Model\DataObject\Whirlpool;
+use OpenDxp\Model\DataObject\ClassDefinition\CalculatorClassInterface;
+use OpenDxp\Model\DataObject\Concrete;
+use OpenDxp\Model\DataObject\Data\CalculatedValue;
+use OpenDxp\Model\DataObject\Fieldcollection\Data\RoyalFilterSetup;
+use OpenDxp\Model\DataObject\Whirlpool;
 
 readonly class RoyalFilterOverviewCalculator implements CalculatorClassInterface
 {
@@ -84,7 +84,7 @@ readonly class RoyalFilterOverviewCalculator implements CalculatorClassInterface
     {
         $dimensions = [];
 
-        $productMetadataService = \Pimcore::getContainer()->get(ProductMetadataService::class);
+        $productMetadataService = \OpenDxp::getContainer()->get(ProductMetadataService::class);
         $mappedParameters = $productMetadataService->getMappedParametersOfParts($royalFilterSetup, $overrides);
 
         $body1Height = isset($mappedParameters['body1']) ? $mappedParameters['body1']['mapping']?->findItemByKeyConfigName('body', 'height') : null;

@@ -108,7 +108,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'elementType' => 'html',
              'calculatorType' => 'class',
              'calculatorExpression' => '',
-             'calculatorClass' => 'App\\Pimcore\\Model\\DataObject\\Calculator\\RoyalFilterOverviewCalculator',
+             'calculatorClass' => 'App\\OpenDxp\\Model\\DataObject\\Calculator\\RoyalFilterOverviewCalculator',
              'columnLength' => 190,
              'width' => '500px',
           )),

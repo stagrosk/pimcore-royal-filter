@@ -4,8 +4,8 @@ namespace PimcoreVendureBridgeBundle\Serialization\Handler;
 
 use JMS\Serializer\Context;
 use JMS\Serializer\JsonSerializationVisitor;
-use Pimcore\Bundle\EcommerceFrameworkBundle\Model\ProductInterface;
-use Pimcore\Model\DataObject;
+use OpenDxp\Bundle\EcommerceFrameworkBundle\Model\ProductInterface;
+use OpenDxp\Model\DataObject;
 use PimcoreVendureBridgeBundle\Model\PimcoreVendureInterface;
 
 class ProductHandler

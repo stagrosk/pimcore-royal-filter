@@ -7,9 +7,9 @@ namespace App\Pimcore\Model\DataObject;
 use App\Pimcore\ClassificationStore\ClassificationStoreHelper;
 use App\Pimcore\Model\ClassificationStore\ClassificationStoreMappingItem;
 use App\Service\ClassificationStoreTranslationService;
-use Pimcore\Model\DataObject\Data\ImageGallery;
-use Pimcore\Model\DataObject\Fieldcollection;
-use Pimcore\Tool;
+use OpenDxp\Model\DataObject\Data\ImageGallery;
+use OpenDxp\Model\DataObject\Fieldcollection;
+use OpenDxp\Tool;
 
 class Whirlpool extends \Pimcore\Model\DataObject\Whirlpool
 {
@@ -18,7 +18,7 @@ class Whirlpool extends \Pimcore\Model\DataObject\Whirlpool
     private function getTranslationService(): ClassificationStoreTranslationService
     {
         if ($this->translationService === null) {
-            $this->translationService = \Pimcore::getContainer()->get(ClassificationStoreTranslationService::class);
+            $this->translationService = \OpenDxp::getContainer()->get(ClassificationStoreTranslationService::class);
         }
 
         return $this->translationService;

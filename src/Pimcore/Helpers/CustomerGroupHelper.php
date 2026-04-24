@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Pimcore\Helpers;
 
-use Pimcore\Model\DataObject\CustomerGroup;
+use OpenDxp\Model\DataObject\CustomerGroup;
 
 class CustomerGroupHelper
 {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Api;
 
-use Pimcore\Model\DataObject\Collection;
+use OpenDxp\Model\DataObject\Collection;
 use PimcoreVendureBridgeBundle\Controller\Rest\RestController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;

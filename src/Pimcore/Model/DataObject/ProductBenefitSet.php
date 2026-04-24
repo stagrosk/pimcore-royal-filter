@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Pimcore\Model\DataObject;
 
-use Pimcore\Model\DataObject\Fieldcollection;
-use Pimcore\Model\DataObject\Fieldcollection\Data\Benefits;
-use Pimcore\Tool;
+use OpenDxp\Model\DataObject\Fieldcollection;
+use OpenDxp\Model\DataObject\Fieldcollection\Data\Benefits;
+use OpenDxp\Tool;
 
 class ProductBenefitSet extends \Pimcore\Model\DataObject\ProductBenefitSet
 {

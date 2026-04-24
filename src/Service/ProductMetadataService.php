@@ -4,15 +4,15 @@ namespace App\Service;
 
 use App\Pimcore\ClassificationStore\ClassificationStoreHelper;
 use App\Pimcore\ClassificationStore\ClassificationStoreService;
-use Pimcore\Model\DataObject\AbstractObject;
-use Pimcore\Model\DataObject\Adapter;
-use Pimcore\Model\DataObject\Body;
-use Pimcore\Model\DataObject\Center;
-use Pimcore\Model\DataObject\Classificationstore;
-use Pimcore\Model\DataObject\Data\QuantityValue;
-use Pimcore\Model\DataObject\Equipment;
-use Pimcore\Model\DataObject\QuantityValue\Unit;
-use Pimcore\Model\DataObject\RoyalFilter;
+use OpenDxp\Model\DataObject\AbstractObject;
+use OpenDxp\Model\DataObject\Adapter;
+use OpenDxp\Model\DataObject\Body;
+use OpenDxp\Model\DataObject\Center;
+use OpenDxp\Model\DataObject\Classificationstore;
+use OpenDxp\Model\DataObject\Data\QuantityValue;
+use OpenDxp\Model\DataObject\Equipment;
+use OpenDxp\Model\DataObject\QuantityValue\Unit;
+use OpenDxp\Model\DataObject\RoyalFilter;
 
 class ProductMetadataService
 {

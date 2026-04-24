@@ -5,11 +5,11 @@ use DivanteTranslationBundle\DivanteTranslationBundle;
 use Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle;
 use FOS\RestBundle\FOSRestBundle;
 use JMS\SerializerBundle\JMSSerializerBundle;
-use Pimcore\Bundle\DataHubBundle\PimcoreDataHubBundle;
-use Pimcore\Bundle\SimpleBackendSearchBundle\PimcoreSimpleBackendSearchBundle;
-use Pimcore\Bundle\StaticRoutesBundle\PimcoreStaticRoutesBundle;
-use Pimcore\Bundle\TinymceBundle\PimcoreTinymceBundle;
-use Pimcore\Bundle\UuidBundle\PimcoreUuidBundle;
+use OpenDxp\Bundle\DataHubBundle\PimcoreDataHubBundle;
+use OpenDxp\Bundle\SimpleBackendSearchBundle\PimcoreSimpleBackendSearchBundle;
+use OpenDxp\Bundle\StaticRoutesBundle\PimcoreStaticRoutesBundle;
+use OpenDxp\Bundle\TinymceBundle\PimcoreTinymceBundle;
+use OpenDxp\Bundle\UuidBundle\PimcoreUuidBundle;
 use PimcoreHeadlessContentBundle\PimcoreHeadlessContentBundle;
 use PimcoreVendureBridgeBundle\PimcoreVendureBridgeBundle;
 

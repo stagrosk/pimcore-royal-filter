@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Service;
 
 use App\Vendure\WebhookClient;
-use Pimcore\Model\DataObject\FilterRegistration;
+use OpenDxp\Model\DataObject\FilterRegistration;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;

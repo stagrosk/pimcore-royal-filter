@@ -4,8 +4,8 @@ namespace PimcoreVendureBridgeBundle\Serialization\Handler;
 
 use JMS\Serializer\Context;
 use JMS\Serializer\JsonSerializationVisitor;
-use Pimcore\Model\DataObject;
-use Pimcore\Tool;
+use OpenDxp\Model\DataObject;
+use OpenDxp\Tool;
 use PimcoreVendureBridgeBundle\Component\Serializer\JMSSerializerFactory;
 use PimcoreVendureBridgeBundle\Model\PimcoreVendureInterface;
 

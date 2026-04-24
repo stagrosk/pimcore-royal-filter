@@ -2,7 +2,7 @@
 
 namespace App\Pimcore\Helpers;
 
-use Pimcore\Model\DataObject;
+use OpenDxp\Model\DataObject;
 
 class InheritanceHelper
 {

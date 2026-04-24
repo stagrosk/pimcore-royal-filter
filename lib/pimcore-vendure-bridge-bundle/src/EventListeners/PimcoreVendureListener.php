@@ -3,7 +3,7 @@
 namespace PimcoreVendureBridgeBundle\EventListeners;
 
 use JetBrains\PhpStorm\ArrayShape;
-use Pimcore\Event\Model\DataObjectEvent;
+use OpenDxp\Event\Model\DataObjectEvent;
 use PimcoreVendureBridgeBundle\Model\PimcoreVendureInterface;
 use PimcoreVendureBridgeBundle\Service\AmqpService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

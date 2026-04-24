@@ -2,5 +2,5 @@ jms_serializer:
     metadata:
         directories:
             App:
-                namespace_prefix: "App\\Pimcore\\Model\\DataObject"
+                namespace_prefix: "App\\OpenDxp\\Model\\DataObject"
                 path: "%kernel.project_dir%/config/serializer"

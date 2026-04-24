@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace App\EventSubscriber;
 
 use App\Vendure\WebhookClient;
-use Pimcore\Event\DataObjectEvents;
-use Pimcore\Event\Model\DataObjectEvent;
-use Pimcore\Logger;
-use Pimcore\Model\DataObject\Concrete;
-use Pimcore\Tool;
+use OpenDxp\Event\DataObjectEvents;
+use OpenDxp\Event\Model\DataObjectEvent;
+use OpenDxp\Logger;
+use OpenDxp\Model\DataObject\Concrete;
+use OpenDxp\Tool;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 abstract class AbstractWebhookSubscriber implements EventSubscriberInterface

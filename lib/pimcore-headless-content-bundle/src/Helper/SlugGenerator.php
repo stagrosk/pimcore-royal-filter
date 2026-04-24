@@ -3,8 +3,8 @@
 namespace PimcoreHeadlessContentBundle\Helper;
 
 use Cocur\Slugify\Slugify;
-use Pimcore\Model\DataObject;
-use Pimcore\Tool;
+use OpenDxp\Model\DataObject;
+use OpenDxp\Tool;
 use PimcoreHeadlessContentBundle\Model\ContentPageInterface;
 use PimcoreHeadlessContentBundle\Model\SlugAwareInterface;
 
