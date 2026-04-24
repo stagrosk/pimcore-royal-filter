@@ -1,0 +1,16 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: true
+
+    # auto-register all helpers
+    App\OpenDxp\Helpers\:
+        resource: '../../src/OpenDxp/Helpers/*'
+
+    # auto-register all classification store classes
+    App\OpenDxp\ClassificationStore\:
+        resource: '../../src/OpenDxp/ClassificationStore/*'
+
+    App\OpenDxp\Model\OptionProviders\:
+        resource: '../../src/OpenDxp/Model/OptionProviders/*'

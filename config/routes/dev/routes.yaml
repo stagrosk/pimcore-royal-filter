@@ -1,2 +1,2 @@
-_pimcore_dev:
-    resource: "@PimcoreCoreBundle/config/routing_dev.yaml"
+_opendxp_dev:
+    resource: "@OpenDxpCoreBundle/config/routing_dev.yaml"

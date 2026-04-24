@@ -1,4 +1,4 @@
-App\Pimcore\Model\DataObject\ProductFlag:
+App\OpenDxp\Model\DataObject\ProductFlag:
     exclusion_policy: ALL
     virtual_properties:
         getId:

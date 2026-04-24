@@ -10,14 +10,14 @@ divante_translation:
     provider:  deepl #or deepl_free
     formality: "default"
 
-pimcore:
+opendxp:
 # IMPORTANT Notice!
 # Following there are only some examples listed, for a full list of possible options, please run the following command:
-# ./bin/console debug:config pimcore
+# ./bin/console debug:config opendxp
 # you can also filter them by path, eg.
-# ./bin/console debug:config pimcore assets
+# ./bin/console debug:config opendxp assets
 # or even more specific:
-# ./bin/console debug:config pimcore assets.image
+# ./bin/console debug:config opendxp assets.image
 
 
 #### TRANSLATIONS
@@ -31,16 +31,16 @@ pimcore:
 #### CLASS OVERRIDES EXAMPLES
     models:
         class_overrides:
-            'Pimcore\Model\DataObject\Collection': 'App\Pimcore\Model\DataObject\Collection'
-            'Pimcore\Model\DataObject\RoyalFilter': 'App\Pimcore\Model\DataObject\RoyalFilter'
-            'Pimcore\Model\DataObject\Product': 'App\Pimcore\Model\DataObject\Product'
-            'Pimcore\Model\DataObject\PriceList': 'App\Pimcore\Model\DataObject\PriceList'
-            'Pimcore\Model\DataObject\ProductFlag': 'App\Pimcore\Model\DataObject\ProductFlag'
-            'Pimcore\Model\DataObject\ProductBenefitSet': 'App\Pimcore\Model\DataObject\ProductBenefitSet'
-            'Pimcore\Model\DataObject\BlogPost': 'App\Pimcore\Model\DataObject\BlogPost'
-            'Pimcore\Model\DataObject\BlogCategory': 'App\Pimcore\Model\DataObject\BlogCategory'
-            'Pimcore\Model\DataObject\Whirlpool': 'App\Pimcore\Model\DataObject\Whirlpool'
-            'Pimcore\Model\DataObject\CustomerGroup': 'App\Pimcore\Model\DataObject\CustomerGroup'
+            'OpenDxp\Model\DataObject\Collection': 'App\OpenDxp\Model\DataObject\Collection'
+            'OpenDxp\Model\DataObject\RoyalFilter': 'App\OpenDxp\Model\DataObject\RoyalFilter'
+            'OpenDxp\Model\DataObject\Product': 'App\OpenDxp\Model\DataObject\Product'
+            'OpenDxp\Model\DataObject\PriceList': 'App\OpenDxp\Model\DataObject\PriceList'
+            'OpenDxp\Model\DataObject\ProductFlag': 'App\OpenDxp\Model\DataObject\ProductFlag'
+            'OpenDxp\Model\DataObject\ProductBenefitSet': 'App\OpenDxp\Model\DataObject\ProductBenefitSet'
+            'OpenDxp\Model\DataObject\BlogPost': 'App\OpenDxp\Model\DataObject\BlogPost'
+            'OpenDxp\Model\DataObject\BlogCategory': 'App\OpenDxp\Model\DataObject\BlogCategory'
+            'OpenDxp\Model\DataObject\Whirlpool': 'App\OpenDxp\Model\DataObject\Whirlpool'
+            'OpenDxp\Model\DataObject\CustomerGroup': 'App\OpenDxp\Model\DataObject\CustomerGroup'
 
 #### CUSTOM DOCUMENT EDITABLES
     documents:

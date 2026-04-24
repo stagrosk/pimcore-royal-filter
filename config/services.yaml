@@ -1,7 +1,7 @@
 imports:
     - { resource: services/vendure.yaml }
     - { resource: services/eventSubscriber.yaml }
-    - { resource: services/pimcore.yaml }
+    - { resource: services/opendxp.yaml }
 
     # GRAPHQL
     - { resource: services/graphql/helper.yaml }
@@ -13,7 +13,7 @@ imports:
 
 parameters:
     secret: XOwtGYfiW8T5d0nlwh8UqQ73yLCCWRMDJMMgvjKY20o=
-    navigation_allowed_pimcore_class_names:
+    navigation_allowed_opendxp_class_names:
         - Collection
         - ContentPage
     data_hub_enabled_client_names:
@@ -77,7 +77,7 @@ services:
 
     App\Service\DeeplService:
         arguments:
-            - '@pimcore.http_client'
+            - '@opendxp.http_client'
             - '%env(DEEPL_AUTH_KEY)%'
             - '%env(DEEPL_GLOSSARY_KEY)%'
             - '%env(DEEPL_ENDPOINT)%'

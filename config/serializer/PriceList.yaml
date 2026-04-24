@@ -1,4 +1,4 @@
-App\Pimcore\Model\DataObject\PriceList:
+App\OpenDxp\Model\DataObject\PriceList:
     exclusion_policy: ALL
     virtual_properties:
         getId:

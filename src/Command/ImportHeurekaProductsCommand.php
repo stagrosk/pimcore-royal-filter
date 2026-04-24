@@ -49,7 +49,7 @@ class ImportHeurekaProductsCommand extends Command
         $dryRun = $input->getOption('dry-run');
         $limit = $input->getOption('limit') ? (int) $input->getOption('limit') : null;
 
-        $xmlPath = PIMCORE_PROJECT_ROOT . '/' . self::XML_PATH;
+        $xmlPath = OPENDXP_PROJECT_ROOT . '/' . self::XML_PATH;
         if (!file_exists($xmlPath)) {
             $io->error('XML file not found: ' . $xmlPath);
             return Command::FAILURE;

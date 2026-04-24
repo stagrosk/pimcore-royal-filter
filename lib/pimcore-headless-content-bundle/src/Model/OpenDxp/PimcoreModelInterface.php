@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PimcoreHeadlessContentBundle\Model\Pimcore;
+namespace PimcoreHeadlessContentBundle\Model\OpenDxp;
 
 use OpenDxp\Model\DataObject\ClassDefinition;
 use OpenDxp\Model\Element\ElementInterface;

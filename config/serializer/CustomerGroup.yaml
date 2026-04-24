@@ -1,4 +1,4 @@
-App\Pimcore\Model\DataObject\CustomerGroup:
+App\OpenDxp\Model\DataObject\CustomerGroup:
     exclusion_policy: ALL
     virtual_properties:
         getId:

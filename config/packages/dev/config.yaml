@@ -13,4 +13,4 @@ framework:
 web_profiler:
     toolbar: true
     intercept_redirects: false
-    excluded_ajax_paths: '^/pimcore-graphql-webservices/'
+    excluded_ajax_paths: '^/opendxp-graphql-webservices/'

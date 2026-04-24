@@ -1,4 +1,4 @@
-App\Pimcore\Model\DataObject\Whirlpool:
+App\OpenDxp\Model\DataObject\Whirlpool:
     exclusion_policy: ALL
     virtual_properties:
         getId:
