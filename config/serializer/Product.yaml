@@ -81,6 +81,10 @@ App\Pimcore\Model\DataObject\Product:
             exp: object.getProductOptionsData()
             serialized_name: productOptions
             groups: [api]
+        getProductTabsData:
+            exp: object.getProductTabsData()
+            serialized_name: productTabs
+            groups: [api]
         getCustomerGroupsData:
             exp: object.getCustomerGroupsData()
             serialized_name: customerGroups

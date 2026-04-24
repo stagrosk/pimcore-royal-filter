@@ -294,6 +294,32 @@ class Product extends \Pimcore\Model\DataObject\Product implements SlugAwareInte
         return $ids;
     }
 
+    public function getProductTabsData(): array
+    {
+        $tabs = [];
+        $productTabs = $this->getProductTabs();
+        $languages = Tool::getValidLanguages();
+
+        if ($productTabs instanceof Fieldcollection) {
+            foreach ($productTabs as $tab) {
+                $translations = [];
+                foreach ($languages as $language) {
+                    $translations[$language] = [
+                        'tabTitle' => method_exists($tab, 'getTabTitle') ? $tab->getTabTitle($language) : null,
+                        'tabData' => method_exists($tab, 'getTabData') ? $tab->getTabData($language) : null,
+                    ];
+                }
+
+                $tabs[] = [
+                    'icon' => method_exists($tab, 'getIcon') ? $tab->getIcon() : null,
+                    'translations' => $translations,
+                ];
+            }
+        }
+
+        return $tabs;
+    }
+
     public function getProductOptionsData(): array
     {
         $options = [];
