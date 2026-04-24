@@ -17,7 +17,7 @@ class ProductFragmentHelper
     /**
      * Transform Product object to ProductFragment array
      *
-     * @param \Pimcore\Model\DataObject\Product $product
+     * @param \OpenDxp\Model\DataObject\Product $product
      * @param string|null $language
      *
      * @return array
@@ -67,7 +67,7 @@ class ProductFragmentHelper
     /**
      * Get first image URL from gallery
      *
-     * @param \Pimcore\Model\DataObject\Product $product
+     * @param \OpenDxp\Model\DataObject\Product $product
      * @param string $thumbnailName
      *
      * @return string|null
@@ -98,7 +98,7 @@ class ProductFragmentHelper
     /**
      * Get all images from gallery
      *
-     * @param \Pimcore\Model\DataObject\Product $product
+     * @param \OpenDxp\Model\DataObject\Product $product
      *
      * @return array
      */
@@ -130,7 +130,7 @@ class ProductFragmentHelper
     /**
      * Get prices from product
      *
-     * @param \Pimcore\Model\DataObject\Product $product
+     * @param \OpenDxp\Model\DataObject\Product $product
      *
      * @return array
      */
@@ -166,7 +166,7 @@ class ProductFragmentHelper
     /**
      * Get collections from product
      *
-     * @param \Pimcore\Model\DataObject\Product $product
+     * @param \OpenDxp\Model\DataObject\Product $product
      * @param string $language
      *
      * @return array
@@ -195,7 +195,7 @@ class ProductFragmentHelper
     /**
      * Get manufacturer from product
      *
-     * @param \Pimcore\Model\DataObject\Product $product
+     * @param \OpenDxp\Model\DataObject\Product $product
      *
      * @return array|null
      */
@@ -216,7 +216,7 @@ class ProductFragmentHelper
     /**
      * Get canonicals with handles for all language mutations
      *
-     * @param \Pimcore\Model\DataObject\Product $product
+     * @param \OpenDxp\Model\DataObject\Product $product
      *
      * @return array
      */

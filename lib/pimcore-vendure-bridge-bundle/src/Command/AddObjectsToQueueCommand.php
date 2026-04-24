@@ -91,7 +91,7 @@ class AddObjectsToQueueCommand extends Command
                 $iterator = 1;
                 $batchListing = new BatchListing($list, self::BATCH_SIZE);
 
-                /** @var \Pimcore\Bundle\EcommerceFrameworkBundle\Model\ProductInterface $object */
+                /** @var \OpenDxp\Bundle\EcommerceFrameworkBundle\Model\ProductInterface $object */
                 foreach ($batchListing as $object) {
                     $output->writeln(sprintf('[QUEUE ADD - %s] Processing item %s/%s => (%s) %s', $objectType, $iterator++, $totalCount, $object->getId(), $object->getFullPath()));
                     if (!$object->isPublished()) {

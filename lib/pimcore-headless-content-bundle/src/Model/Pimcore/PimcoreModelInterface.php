@@ -37,14 +37,14 @@ interface PimcoreModelInterface extends ResourceInterface, ElementInterface
     public function isPublished(): bool;
 
     /**
-     * @param \Pimcore\Model\Element\ElementInterface|null $parent
+     * @param \OpenDxp\Model\Element\ElementInterface|null $parent
      *
      * @return $this
      */
     public function setParent(?ElementInterface $parent): static;
 
     /**
-     * @return \Pimcore\Model\Element\ElementInterface|null
+     * @return \OpenDxp\Model\Element\ElementInterface|null
      */
     public function getParent(): ?ElementInterface;
 
@@ -66,7 +66,7 @@ interface PimcoreModelInterface extends ResourceInterface, ElementInterface
     public function delete(): void;
 
     /**
-     * @return \Pimcore\Model\DataObject\ClassDefinition
+     * @return \OpenDxp\Model\DataObject\ClassDefinition
      */
     public function getClass(): ClassDefinition;
 }

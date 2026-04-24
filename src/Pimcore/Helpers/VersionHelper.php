@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Pimcore\Helpers;
+namespace App\OpenDxp\Helpers;
 
 use OpenDxp\Model\DataObject\Concrete;
 use OpenDxp\Model\Version;
@@ -38,9 +38,9 @@ class VersionHelper
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\Concrete $object
+     * @param \OpenDxp\Model\DataObject\Concrete $object
      *
-     * @return \Pimcore\Model\DataObject\Concrete
+     * @return \OpenDxp\Model\DataObject\Concrete
      */
     public static function getLatestVersion(Concrete $object): Concrete
     {

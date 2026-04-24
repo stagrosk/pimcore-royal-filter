@@ -10,7 +10,7 @@
  * - benefits [fieldcollections]
  */
 
-return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
+return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
    'dao' => NULL,
    'id' => 'product_benefit_set',
    'name' => 'ProductBenefitSet',
@@ -33,7 +33,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'allowVariants' => false,
    'showVariants' => false,
    'layoutDefinitions' => 
-  \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+  \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
      'name' => 'pimcore_root',
      'type' => NULL,
      'region' => NULL,
@@ -47,7 +47,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
      'children' => 
     array (
       0 => 
-      \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+      \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
          'name' => 'Layout',
          'type' => NULL,
          'region' => NULL,
@@ -61,7 +61,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
          'children' => 
         array (
           0 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
              'name' => 'localizedfields',
              'title' => '',
              'tooltip' => NULL,
@@ -82,7 +82,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'children' => 
             array (
               0 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+              \OpenDxp\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
                  'name' => 'title',
                  'title' => 'Title',
                  'tooltip' => '',
@@ -131,7 +131,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'fieldDefinitionsCache' => NULL,
           )),
           1 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Fieldcollections::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Fieldcollections::__set_state(array(
              'name' => 'benefits',
              'title' => 'Benefits',
              'tooltip' => '',
@@ -219,7 +219,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'deletedDataComponents' => 
   array (
     0 => 
-    \Pimcore\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
+    \OpenDxp\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
        'name' => 'icon',
        'title' => 'Icon',
        'tooltip' => '',

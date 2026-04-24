@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Service;
 
-use App\Pimcore\Helpers\VersionHelper;
-use App\Pimcore\Model\DataObject\RoyalFilter;
+use App\OpenDxp\Helpers\VersionHelper;
+use App\OpenDxp\Model\DataObject\RoyalFilter;
 use App\Service\Generator\Mapper\FilterToProductMapper;
 use OpenDxp\Model\DataObject\AbstractObject;
 use OpenDxp\Model\DataObject\Fieldcollection;
@@ -61,7 +61,7 @@ class VariantGeneratorService
                 return;
             }
 
-            /** @var \Pimcore\Model\DataObject\Fieldcollection\Data\RoyalFilterSetup $fieldCollection */
+            /** @var \OpenDxp\Model\DataObject\Fieldcollection\Data\RoyalFilterSetup $fieldCollection */
             foreach ($royalFilterSetups->getItems() as $fieldCollection) {
                 $royalFilterSetup = $fieldCollection->getRoyalFilterSetup();
 

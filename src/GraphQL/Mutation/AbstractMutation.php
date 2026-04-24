@@ -21,7 +21,7 @@ abstract class AbstractMutation implements EventSubscriberInterface
     }
 
     /**
-     * @param \Pimcore\Bundle\DataHubBundle\Event\GraphQL\Model\MutationTypeEvent $event
+     * @param \OpenDxp\Bundle\DataHubBundle\Event\GraphQL\Model\MutationTypeEvent $event
      *
      * @return array
      */
@@ -41,7 +41,7 @@ abstract class AbstractMutation implements EventSubscriberInterface
     }
 
     /**
-     * @param \Pimcore\Bundle\DataHubBundle\Event\GraphQL\Model\MutationTypeEvent $event
+     * @param \OpenDxp\Bundle\DataHubBundle\Event\GraphQL\Model\MutationTypeEvent $event
      */
     public function doPreBuild(MutationTypeEvent $event): void
     {
@@ -58,7 +58,7 @@ abstract class AbstractMutation implements EventSubscriberInterface
     }
 
     /**
-     * @param \Pimcore\Bundle\DataHubBundle\Event\GraphQL\Model\MutationTypeEvent $event
+     * @param \OpenDxp\Bundle\DataHubBundle\Event\GraphQL\Model\MutationTypeEvent $event
      *
      * @return bool
      */

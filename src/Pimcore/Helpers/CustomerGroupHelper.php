@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Pimcore\Helpers;
+namespace App\OpenDxp\Helpers;
 
 use OpenDxp\Model\DataObject\CustomerGroup;
 

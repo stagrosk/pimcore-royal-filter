@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Pimcore\DataObject\Calculator;
+namespace App\OpenDxp\DataObject\Calculator;
 
-use App\Pimcore\ClassificationStore\ClassificationStoreHelper;
-use App\Pimcore\Model\ClassificationStore\ClassificationStoreMappingItem;
+use App\OpenDxp\ClassificationStore\ClassificationStoreHelper;
+use App\OpenDxp\Model\ClassificationStore\ClassificationStoreMappingItem;
 use App\Service\ClassificationStoreTranslationService;
 use OpenDxp\Model\DataObject\ClassDefinition\CalculatorClassInterface;
 use OpenDxp\Model\DataObject\Concrete;

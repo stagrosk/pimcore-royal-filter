@@ -10,7 +10,7 @@
  * - logo [image]
  */
 
-return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
+return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
    'dao' => NULL,
    'id' => 'manufacturer',
    'name' => 'Manufacturer',
@@ -33,7 +33,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'allowVariants' => false,
    'showVariants' => false,
    'layoutDefinitions' => 
-  \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+  \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
      'name' => 'pimcore_root',
      'type' => NULL,
      'region' => NULL,
@@ -47,7 +47,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
      'children' => 
     array (
       0 => 
-      \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+      \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
          'name' => 'Layout',
          'type' => NULL,
          'region' => NULL,
@@ -61,7 +61,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
          'children' => 
         array (
           0 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
              'name' => 'title',
              'title' => 'Title',
              'tooltip' => '',
@@ -91,7 +91,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'defaultValueGenerator' => '',
           )),
           1 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Wysiwyg::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Wysiwyg::__set_state(array(
              'name' => 'description',
              'title' => 'Description',
              'tooltip' => '',
@@ -116,7 +116,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'width' => 600,
           )),
           2 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Image::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Image::__set_state(array(
              'name' => 'logo',
              'title' => 'Logo',
              'tooltip' => '',

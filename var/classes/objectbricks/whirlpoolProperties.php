@@ -17,7 +17,7 @@
  * - uvLamp [checkbox]
  */
 
-return \Pimcore\Model\DataObject\Objectbrick\Definition::__set_state(array(
+return \OpenDxp\Model\DataObject\Objectbrick\Definition::__set_state(array(
    'dao' => NULL,
    'key' => 'whirlpoolProperties',
    'parentClass' => '',
@@ -25,7 +25,7 @@ return \Pimcore\Model\DataObject\Objectbrick\Definition::__set_state(array(
    'title' => 'Base properties',
    'group' => '',
    'layoutDefinitions' => 
-  \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+  \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
      'name' => NULL,
      'type' => NULL,
      'region' => NULL,
@@ -39,7 +39,7 @@ return \Pimcore\Model\DataObject\Objectbrick\Definition::__set_state(array(
      'children' => 
     array (
       0 => 
-      \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+      \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
          'name' => 'Base',
          'type' => NULL,
          'region' => NULL,
@@ -53,7 +53,7 @@ return \Pimcore\Model\DataObject\Objectbrick\Definition::__set_state(array(
          'children' => 
         array (
           0 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
              'name' => 'heatingPerformance',
              'title' => 'Heating Performance',
              'tooltip' => '',
@@ -83,7 +83,7 @@ return \Pimcore\Model\DataObject\Objectbrick\Definition::__set_state(array(
              'defaultValueGenerator' => '',
           )),
           1 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
              'name' => 'dimensions',
              'title' => 'Dimensions',
              'tooltip' => '',
@@ -113,7 +113,7 @@ return \Pimcore\Model\DataObject\Objectbrick\Definition::__set_state(array(
              'defaultValueGenerator' => '',
           )),
           2 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
              'name' => 'waterHeatingRate',
              'title' => 'Water Heating Rate',
              'tooltip' => '',
@@ -143,7 +143,7 @@ return \Pimcore\Model\DataObject\Objectbrick\Definition::__set_state(array(
              'defaultValueGenerator' => '',
           )),
           3 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
              'name' => 'construction',
              'title' => 'Construction',
              'tooltip' => '',
@@ -189,7 +189,7 @@ return \Pimcore\Model\DataObject\Objectbrick\Definition::__set_state(array(
              'optionsProviderData' => '',
           )),
           4 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
              'name' => 'volumeOfWater',
              'title' => 'Volume of water',
              'tooltip' => '',
@@ -219,7 +219,7 @@ return \Pimcore\Model\DataObject\Objectbrick\Definition::__set_state(array(
              'defaultValueGenerator' => '',
           )),
           5 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
              'name' => 'weightWithoutWater',
              'title' => 'Weight without water',
              'tooltip' => '',
@@ -249,7 +249,7 @@ return \Pimcore\Model\DataObject\Objectbrick\Definition::__set_state(array(
              'defaultValueGenerator' => '',
           )),
           6 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
              'name' => 'weightWithWater',
              'title' => 'Weight with water',
              'tooltip' => '',
@@ -279,7 +279,7 @@ return \Pimcore\Model\DataObject\Objectbrick\Definition::__set_state(array(
              'defaultValueGenerator' => '',
           )),
           7 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Multiselect::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Multiselect::__set_state(array(
              'name' => 'jetsType',
              'title' => 'Jets Type',
              'tooltip' => '',
@@ -322,7 +322,7 @@ return \Pimcore\Model\DataObject\Objectbrick\Definition::__set_state(array(
              'optionsProviderData' => '',
           )),
           8 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
              'name' => 'amountOfJets',
              'title' => 'Amount of jets',
              'tooltip' => '',
@@ -352,7 +352,7 @@ return \Pimcore\Model\DataObject\Objectbrick\Definition::__set_state(array(
              'defaultValueGenerator' => '',
           )),
           9 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
              'name' => 'numberOfPersons',
              'title' => 'Number Of Persons',
              'tooltip' => '',
@@ -382,7 +382,7 @@ return \Pimcore\Model\DataObject\Objectbrick\Definition::__set_state(array(
              'defaultValueGenerator' => '',
           )),
           10 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
              'name' => 'solinator',
              'title' => 'Solinator',
              'tooltip' => '',
@@ -404,7 +404,7 @@ return \Pimcore\Model\DataObject\Objectbrick\Definition::__set_state(array(
              'defaultValueGenerator' => '',
           )),
           11 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
              'name' => 'ozonator',
              'title' => 'Ozonator',
              'tooltip' => '',
@@ -426,7 +426,7 @@ return \Pimcore\Model\DataObject\Objectbrick\Definition::__set_state(array(
              'defaultValueGenerator' => '',
           )),
           12 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
              'name' => 'uvLamp',
              'title' => 'UV lamp',
              'tooltip' => '',

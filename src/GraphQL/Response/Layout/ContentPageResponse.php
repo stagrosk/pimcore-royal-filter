@@ -18,7 +18,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 class ContentPageResponse extends AbstractResponse
 {
     /**
-     * @param \Pimcore\Bundle\DataHubBundle\GraphQL\Service $graphQlService
+     * @param \OpenDxp\Bundle\DataHubBundle\GraphQL\Service $graphQlService
      * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
      * @param \App\GraphQL\Helper\ContentElementHelper $contentElementHelper
      *

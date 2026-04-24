@@ -17,7 +17,7 @@
  * --- secondaryButtonLink [link]
  */
 
-return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
+return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
    'dao' => NULL,
    'key' => 'HeroSwiper',
    'parentClass' => '',
@@ -25,7 +25,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
    'title' => '',
    'group' => 'Content',
    'layoutDefinitions' => 
-  \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+  \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
      'name' => NULL,
      'type' => NULL,
      'region' => NULL,
@@ -39,7 +39,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
      'children' => 
     array (
       0 => 
-      \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+      \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
          'name' => 'Layout',
          'type' => NULL,
          'region' => NULL,
@@ -53,7 +53,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
          'children' => 
         array (
           0 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
              'name' => 'localizedfields',
              'title' => '',
              'tooltip' => '',
@@ -74,7 +74,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'children' => 
             array (
               0 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\Block::__set_state(array(
+              \OpenDxp\Model\DataObject\ClassDefinition\Data\Block::__set_state(array(
                  'name' => 'slides',
                  'title' => 'Slides',
                  'tooltip' => '',
@@ -102,7 +102,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                  'children' => 
                 array (
                   0 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+                  \OpenDxp\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
                      'name' => 'title',
                      'title' => 'Title',
                      'tooltip' => '',
@@ -132,7 +132,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                      'defaultValueGenerator' => '',
                   )),
                   1 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+                  \OpenDxp\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
                      'name' => 'subtitle',
                      'title' => 'Subtitle',
                      'tooltip' => '',
@@ -162,7 +162,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                      'defaultValueGenerator' => '',
                   )),
                   2 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Wysiwyg::__set_state(array(
+                  \OpenDxp\Model\DataObject\ClassDefinition\Data\Wysiwyg::__set_state(array(
                      'name' => 'text',
                      'title' => 'Text',
                      'tooltip' => '',
@@ -187,7 +187,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                      'width' => '',
                   )),
                   3 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
+                  \OpenDxp\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
                      'name' => 'asset',
                      'title' => 'Asset',
                      'tooltip' => '',
@@ -233,7 +233,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                      'width' => '',
                   )),
                   4 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Wysiwyg::__set_state(array(
+                  \OpenDxp\Model\DataObject\ClassDefinition\Data\Wysiwyg::__set_state(array(
                      'name' => 'assetText',
                      'title' => 'Asset Text',
                      'tooltip' => '',
@@ -258,7 +258,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                      'width' => '',
                   )),
                   5 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+                  \OpenDxp\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
                      'name' => 'primaryButtonText',
                      'title' => 'Primary Button Text',
                      'tooltip' => '',
@@ -288,7 +288,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                      'defaultValueGenerator' => '',
                   )),
                   6 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Link::__set_state(array(
+                  \OpenDxp\Model\DataObject\ClassDefinition\Data\Link::__set_state(array(
                      'name' => 'primaryButtonLink',
                      'title' => 'Primary Button Link',
                      'tooltip' => '',
@@ -317,7 +317,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                     ),
                   )),
                   7 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
+                  \OpenDxp\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
                      'name' => 'primaryButtonRelation',
                      'title' => 'Primary Button Relation',
                      'tooltip' => '',
@@ -363,7 +363,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                      'width' => '',
                   )),
                   8 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+                  \OpenDxp\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
                      'name' => 'secondaryButtonText',
                      'title' => 'Secondary Button Text',
                      'tooltip' => '',
@@ -393,7 +393,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                      'defaultValueGenerator' => '',
                   )),
                   9 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
+                  \OpenDxp\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
                      'name' => 'secondaryButtonRelation',
                      'title' => 'Secondary Button Relation',
                      'tooltip' => '',
@@ -439,7 +439,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                      'width' => '',
                   )),
                   10 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Link::__set_state(array(
+                  \OpenDxp\Model\DataObject\ClassDefinition\Data\Link::__set_state(array(
                      'name' => 'secondaryButtonLink',
                      'title' => 'Secondary Button Link',
                      'tooltip' => '',

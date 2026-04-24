@@ -10,7 +10,7 @@
  * - unitPrice [numeric]
  */
 
-return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
+return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
    'dao' => NULL,
    'key' => 'Price',
    'parentClass' => '',
@@ -18,7 +18,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
    'title' => '',
    'group' => '',
    'layoutDefinitions' => 
-  \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+  \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
      'name' => NULL,
      'type' => NULL,
      'region' => NULL,
@@ -32,7 +32,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
      'children' => 
     array (
       0 => 
-      \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+      \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
          'name' => 'Layout',
          'type' => NULL,
          'region' => NULL,
@@ -46,7 +46,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
          'children' => 
         array (
           0 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Layout\Text::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Layout\Text::__set_state(array(
              'name' => 'Layout',
              'type' => NULL,
              'region' => NULL,
@@ -71,7 +71,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'border' => false,
           )),
           1 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
              'name' => 'priceList',
              'title' => 'Price List',
              'tooltip' => '',
@@ -113,7 +113,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'width' => '',
           )),
           2 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
              'name' => 'price',
              'title' => 'Price',
              'tooltip' => '',
@@ -143,7 +143,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'defaultValueGenerator' => '',
           )),
           3 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
              'name' => 'compareAtPrice',
              'title' => 'Compare At Price',
              'tooltip' => '',
@@ -173,7 +173,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'defaultValueGenerator' => '',
           )),
           4 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
              'name' => 'wholesalePrice',
              'title' => 'Wholesale Price',
              'tooltip' => '',
@@ -203,7 +203,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'defaultValueGenerator' => '',
           )),
           5 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
              'name' => 'wholesaleSupplierPrice',
              'title' => 'Wholesale Supplier Price',
              'tooltip' => '',
@@ -233,7 +233,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'defaultValueGenerator' => '',
           )),
           6 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
              'name' => 'unitPrice',
              'title' => 'Unit Price',
              'tooltip' => '',

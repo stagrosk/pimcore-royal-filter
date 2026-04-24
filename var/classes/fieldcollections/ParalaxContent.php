@@ -13,7 +13,7 @@
  * - overlay [select]
  */
 
-return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
+return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
    'dao' => NULL,
    'key' => 'ParalaxContent',
    'parentClass' => '',
@@ -21,7 +21,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
    'title' => '',
    'group' => 'Content',
    'layoutDefinitions' => 
-  \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+  \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
      'name' => NULL,
      'type' => NULL,
      'region' => NULL,
@@ -35,7 +35,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
      'children' => 
     array (
       0 => 
-      \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+      \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
          'name' => 'Layout',
          'type' => NULL,
          'region' => NULL,
@@ -49,7 +49,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
          'children' => 
         array (
           0 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
              'name' => 'localizedfields',
              'title' => '',
              'tooltip' => NULL,
@@ -70,7 +70,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'children' => 
             array (
               0 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+              \OpenDxp\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
                  'name' => 'title',
                  'title' => 'Title',
                  'tooltip' => '',
@@ -100,7 +100,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                  'defaultValueGenerator' => '',
               )),
               1 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\Wysiwyg::__set_state(array(
+              \OpenDxp\Model\DataObject\ClassDefinition\Data\Wysiwyg::__set_state(array(
                  'name' => 'text',
                  'title' => 'Text',
                  'tooltip' => '',
@@ -125,7 +125,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                  'width' => '',
               )),
               2 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+              \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
                  'name' => 'Button setup',
                  'type' => NULL,
                  'region' => NULL,
@@ -139,7 +139,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                  'children' => 
                 array (
                   0 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+                  \OpenDxp\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
                      'name' => 'buttonText',
                      'title' => 'Button Text',
                      'tooltip' => '',
@@ -169,7 +169,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                      'defaultValueGenerator' => '',
                   )),
                   1 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Link::__set_state(array(
+                  \OpenDxp\Model\DataObject\ClassDefinition\Data\Link::__set_state(array(
                      'name' => 'buttonLink',
                      'title' => 'Button Link',
                      'tooltip' => '',
@@ -198,7 +198,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                     ),
                   )),
                   2 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
+                  \OpenDxp\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
                      'name' => 'buttonRelation',
                      'title' => 'Button Relation',
                      'tooltip' => '',
@@ -275,7 +275,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'fieldDefinitionsCache' => NULL,
           )),
           1 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
              'name' => 'Assets',
              'type' => NULL,
              'region' => NULL,
@@ -289,7 +289,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'children' => 
             array (
               0 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\Image::__set_state(array(
+              \OpenDxp\Model\DataObject\ClassDefinition\Data\Image::__set_state(array(
                  'name' => 'image',
                  'title' => 'Image',
                  'tooltip' => '',
@@ -312,7 +312,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                  'height' => '',
               )),
               1 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\Video::__set_state(array(
+              \OpenDxp\Model\DataObject\ClassDefinition\Data\Video::__set_state(array(
                  'name' => 'video',
                  'title' => 'Video',
                  'tooltip' => '',
@@ -359,7 +359,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'labelAlign' => 'left',
           )),
           2 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
              'name' => 'overlay',
              'title' => 'Overlay',
              'tooltip' => '',

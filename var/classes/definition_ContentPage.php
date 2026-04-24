@@ -19,7 +19,7 @@
  * - canonicals [manyToManyRelation]
  */
 
-return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
+return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
    'dao' => NULL,
    'id' => 'content_page',
    'name' => 'ContentPage',
@@ -42,7 +42,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'allowVariants' => false,
    'showVariants' => false,
    'layoutDefinitions' => 
-  \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+  \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
      'name' => 'pimcore_root',
      'type' => NULL,
      'region' => NULL,
@@ -56,7 +56,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
      'children' => 
     array (
       0 => 
-      \Pimcore\Model\DataObject\ClassDefinition\Layout\Tabpanel::__set_state(array(
+      \OpenDxp\Model\DataObject\ClassDefinition\Layout\Tabpanel::__set_state(array(
          'name' => 'Layout',
          'type' => NULL,
          'region' => NULL,
@@ -70,7 +70,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
          'children' => 
         array (
           0 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
              'name' => 'Base',
              'type' => NULL,
              'region' => NULL,
@@ -84,7 +84,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'children' => 
             array (
               0 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
+              \OpenDxp\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
                  'name' => 'localizedfields',
                  'title' => '',
                  'tooltip' => '',
@@ -105,7 +105,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'children' => 
                 array (
                   0 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+                  \OpenDxp\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
                      'name' => 'name',
                      'title' => 'Name',
                      'tooltip' => '',
@@ -135,7 +135,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'defaultValueGenerator' => '',
                   )),
                   1 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+                  \OpenDxp\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
                      'name' => 'slug',
                      'title' => 'Slug',
                      'tooltip' => '',
@@ -165,7 +165,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'defaultValueGenerator' => '',
                   )),
                   2 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+                  \OpenDxp\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
                      'name' => 'handle',
                      'title' => 'Handle',
                      'tooltip' => '',
@@ -195,7 +195,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'defaultValueGenerator' => '',
                   )),
                   3 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+                  \OpenDxp\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
                      'name' => 'nameInNavigation',
                      'title' => 'Name In Navigation',
                      'tooltip' => '',
@@ -235,7 +235,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'referencedFields' => 
                 array (
                   0 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
+                  \OpenDxp\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
                      'name' => 'localizedfields',
                      'title' => '',
                      'tooltip' => '',
@@ -256,7 +256,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'children' => 
                     array (
                       0 => 
-                      \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+                      \OpenDxp\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
                          'name' => 'headerTitle',
                          'title' => 'Header Title',
                          'tooltip' => '',
@@ -305,7 +305,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'fieldDefinitionsCache' => NULL,
                   )),
                   1 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
+                  \OpenDxp\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
                      'name' => 'localizedfields',
                      'title' => '',
                      'tooltip' => '',
@@ -326,7 +326,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'children' => 
                     array (
                       0 => 
-                      \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+                      \OpenDxp\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
                          'name' => 'seoTitle',
                          'title' => 'Seo Title',
                          'tooltip' => '',
@@ -356,7 +356,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                          'defaultValueGenerator' => '',
                       )),
                       1 => 
-                      \Pimcore\Model\DataObject\ClassDefinition\Data\Textarea::__set_state(array(
+                      \OpenDxp\Model\DataObject\ClassDefinition\Data\Textarea::__set_state(array(
                          'name' => 'seoDescription',
                          'title' => 'Seo Description',
                          'tooltip' => '',
@@ -421,7 +421,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'labelAlign' => 'left',
           )),
           1 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
              'name' => 'Content Blocks',
              'type' => NULL,
              'region' => NULL,
@@ -435,7 +435,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'children' => 
             array (
               0 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\Fieldcollections::__set_state(array(
+              \OpenDxp\Model\DataObject\ClassDefinition\Data\Fieldcollections::__set_state(array(
                  'name' => 'elements',
                  'title' => 'Elements',
                  'tooltip' => '',
@@ -489,7 +489,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'labelAlign' => 'left',
           )),
           2 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
              'name' => 'Header',
              'type' => NULL,
              'region' => NULL,
@@ -503,7 +503,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'children' => 
             array (
               0 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
+              \OpenDxp\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
                  'name' => 'localizedfields',
                  'title' => '',
                  'tooltip' => '',
@@ -524,7 +524,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'children' => 
                 array (
                   0 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+                  \OpenDxp\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
                      'name' => 'headerTitle',
                      'title' => 'Header Title',
                      'tooltip' => '',
@@ -573,7 +573,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'fieldDefinitionsCache' => NULL,
               )),
               1 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\Hotspotimage::__set_state(array(
+              \OpenDxp\Model\DataObject\ClassDefinition\Data\Hotspotimage::__set_state(array(
                  'name' => 'headerImage',
                  'title' => 'Header image',
                  'tooltip' => '',
@@ -597,7 +597,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'height' => '',
               )),
               2 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
+              \OpenDxp\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
                  'name' => 'headerTitleAccentColor',
                  'title' => 'Header Title Color',
                  'tooltip' => '',
@@ -650,7 +650,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'labelAlign' => 'left',
           )),
           3 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
              'name' => 'SEO',
              'type' => NULL,
              'region' => NULL,
@@ -664,7 +664,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'children' => 
             array (
               0 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
+              \OpenDxp\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
                  'name' => 'localizedfields',
                  'title' => '',
                  'tooltip' => '',
@@ -685,7 +685,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'children' => 
                 array (
                   0 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+                  \OpenDxp\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
                      'name' => 'seoTitle',
                      'title' => 'Seo Title',
                      'tooltip' => '',
@@ -715,7 +715,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'defaultValueGenerator' => '',
                   )),
                   1 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Textarea::__set_state(array(
+                  \OpenDxp\Model\DataObject\ClassDefinition\Data\Textarea::__set_state(array(
                      'name' => 'seoDescription',
                      'title' => 'Seo Description',
                      'tooltip' => '',
@@ -759,7 +759,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'fieldDefinitionsCache' => NULL,
               )),
               1 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToManyRelation::__set_state(array(
+              \OpenDxp\Model\DataObject\ClassDefinition\Data\ManyToManyRelation::__set_state(array(
                  'name' => 'canonicals',
                  'title' => 'Canonicals',
                  'tooltip' => '',

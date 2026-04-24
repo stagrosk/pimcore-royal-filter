@@ -23,7 +23,7 @@ class NavigationByIdentifierResolver extends AbstractResolver
     private array $allowedPimcoreClassNames;
 
     /**
-     * @param \Pimcore\Bundle\DataHubBundle\GraphQL\Service $service
+     * @param \OpenDxp\Bundle\DataHubBundle\GraphQL\Service $service
      * @param array $allowedPimcoreClassNames
      */
     public function __construct(
@@ -87,7 +87,7 @@ class NavigationByIdentifierResolver extends AbstractResolver
         $items = [];
 
         foreach ($navigation->getLinkItems() as $linkItem) {
-            /** @var \Pimcore\Model\DataObject\Concrete $object */
+            /** @var \OpenDxp\Model\DataObject\Concrete $object */
             $object = $linkItem->getRelatedObject();
 
             if (!$object instanceof NavigationAwareInterface) {

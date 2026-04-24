@@ -2,7 +2,7 @@
 
 namespace PimcoreHeadlessContentBundle\Model;
 
-use PimcoreHeadlessContentBundle\Model\Pimcore\PimcoreModelInterface;
+use PimcoreHeadlessContentBundle\Model\OpenDxp\PimcoreModelInterface;
 
 interface SlugAwareInterface extends PimcoreModelInterface
 {

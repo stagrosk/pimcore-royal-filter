@@ -17,7 +17,7 @@ class AdminInterfaceListener implements EventSubscriberInterface
     }
 
     /**
-     * @param \Pimcore\Event\BundleManager\PathsEvent $event
+     * @param \OpenDxp\Event\BundleManager\PathsEvent $event
      */
     public function addCssFiles(PathsEvent $event): void
     {
@@ -31,7 +31,7 @@ class AdminInterfaceListener implements EventSubscriberInterface
     }
 
     /**
-     * @param \Pimcore\Event\BundleManager\PathsEvent $event
+     * @param \OpenDxp\Event\BundleManager\PathsEvent $event
      */
     public function addJsFiles(PathsEvent $event): void
     {

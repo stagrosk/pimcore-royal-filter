@@ -2,8 +2,8 @@
 
 namespace App\Service\Generator;
 
-use App\Pimcore\Helpers\InheritanceHelper;
-use App\Pimcore\Helpers\VersionHelper;
+use App\OpenDxp\Helpers\InheritanceHelper;
+use App\OpenDxp\Helpers\VersionHelper;
 use App\Service\Generator\Mapper\WhirlpoolToProductMapper;
 use App\Service\VariantGeneratorService;
 use OpenDxp\Logger;
@@ -26,11 +26,11 @@ class WhirlpoolToProductGenerator extends BaseProductGenerator
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\Whirlpool $object
+     * @param \OpenDxp\Model\DataObject\Whirlpool $object
      *
-     * @throws \Pimcore\Model\Element\DuplicateFullPathException
+     * @throws \OpenDxp\Model\Element\DuplicateFullPathException
      * @throws \Exception
-     * @return \Pimcore\Model\DataObject\Product
+     * @return \OpenDxp\Model\DataObject\Product
      */
     public function generateProductForObject(AbstractObject $object): Product
     {
@@ -73,9 +73,9 @@ class WhirlpoolToProductGenerator extends BaseProductGenerator
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\Listing|\Pimcore\Model\Document\Listing $list
+     * @param \OpenDxp\Model\DataObject\Listing|\OpenDxp\Model\Document\Listing $list
      */
-    public function prepareListConditions(\Pimcore\Model\DataObject\Listing|Listing $list): void
+    public function prepareListConditions(\OpenDxp\Model\DataObject\Listing|Listing $list): void
     {
         $list->setUnpublished(false);
         $list->addConditionParam('generateAsProduct IS TRUE');

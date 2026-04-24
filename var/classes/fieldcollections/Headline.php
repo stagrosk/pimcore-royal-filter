@@ -8,7 +8,7 @@
  * - textBoxed [checkbox]
  */
 
-return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
+return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
    'dao' => NULL,
    'key' => 'Headline',
    'parentClass' => '',
@@ -16,7 +16,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
    'title' => '',
    'group' => 'Content',
    'layoutDefinitions' => 
-  \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+  \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
      'name' => NULL,
      'type' => NULL,
      'region' => NULL,
@@ -30,7 +30,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
      'children' => 
     array (
       0 => 
-      \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+      \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
          'name' => 'Layout',
          'type' => NULL,
          'region' => NULL,
@@ -44,7 +44,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
          'children' => 
         array (
           0 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
              'name' => 'localizedfields',
              'title' => '',
              'tooltip' => '',
@@ -65,7 +65,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'children' => 
             array (
               0 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+              \OpenDxp\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
                  'name' => 'headline',
                  'title' => 'Headline',
                  'tooltip' => '',
@@ -114,7 +114,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'fieldDefinitionsCache' => NULL,
           )),
           1 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
              'name' => 'headlineType',
              'title' => 'Headline type',
              'tooltip' => '',
@@ -160,7 +160,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'optionsProviderData' => '',
           )),
           2 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
              'name' => 'textBoxed',
              'title' => 'Text boxed',
              'tooltip' => '',

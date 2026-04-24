@@ -12,5 +12,5 @@ foreach (['APP_ENV' => 'test', 'PIMCORE_SKIP_DOTENV_FILE' => true] as $name => $
 }
 require_once PIMCORE_PROJECT_ROOT . '/vendor/autoload.php';
 
-\Pimcore\Bootstrap::setProjectRoot();
-\Pimcore\Bootstrap::bootstrap();
+\OpenDxp\Bootstrap::setProjectRoot();
+\OpenDxp\Bootstrap::bootstrap();

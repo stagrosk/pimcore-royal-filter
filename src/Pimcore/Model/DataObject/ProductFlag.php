@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Pimcore\Model\DataObject;
+namespace App\OpenDxp\Model\DataObject;
 
 use OpenDxp\Model\DataObject\Data\RgbaColor;
 use OpenDxp\Tool;
 
-class ProductFlag extends \Pimcore\Model\DataObject\ProductFlag
+class ProductFlag extends \OpenDxp\Model\DataObject\ProductFlag
 {
     public function getTranslations(): array
     {

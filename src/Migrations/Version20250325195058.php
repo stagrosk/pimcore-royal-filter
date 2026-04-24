@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Migrations;
 
 use App\Component\BatchProcessing\BatchListing;
-use App\Pimcore\ClassificationStore\ClassificationStoreHelper;
-use App\Pimcore\ClassificationStore\ClassificationStoreService;
+use App\OpenDxp\ClassificationStore\ClassificationStoreHelper;
+use App\OpenDxp\ClassificationStore\ClassificationStoreService;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
@@ -88,7 +88,7 @@ final class Version20250325195058 extends AbstractMigration
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\Whirlpool $whirlpool
+     * @param \OpenDxp\Model\DataObject\Whirlpool $whirlpool
      *
      * @throws \Exception
      * @return void
@@ -136,7 +136,7 @@ final class Version20250325195058 extends AbstractMigration
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\PaperCartridge $cartridge
+     * @param \OpenDxp\Model\DataObject\PaperCartridge $cartridge
      *
      * @throws \Exception
      * @return void

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Pimcore\Helpers;
+namespace App\OpenDxp\Helpers;
 
 use OpenDxp\Model\DataObject;
 

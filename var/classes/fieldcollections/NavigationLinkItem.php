@@ -7,7 +7,7 @@
  * - subNavigation [manyToOneRelation]
  */
 
-return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
+return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
    'dao' => NULL,
    'key' => 'NavigationLinkItem',
    'parentClass' => '',
@@ -15,7 +15,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
    'title' => '',
    'group' => 'Navigation',
    'layoutDefinitions' => 
-  \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+  \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
      'name' => NULL,
      'type' => NULL,
      'region' => NULL,
@@ -29,7 +29,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
      'children' => 
     array (
       0 => 
-      \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+      \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
          'name' => 'Layout',
          'type' => NULL,
          'region' => NULL,
@@ -43,7 +43,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
          'children' => 
         array (
           0 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
              'name' => 'isPartner',
              'title' => 'Is Partner',
              'tooltip' => '',
@@ -65,7 +65,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'defaultValueGenerator' => '',
           )),
           1 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
              'name' => 'relatedObject',
              'title' => 'Related Object',
              'tooltip' => '',
@@ -111,7 +111,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'width' => 500,
           )),
           2 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
              'name' => 'subNavigation',
              'title' => 'Sub Navigation',
              'tooltip' => '',

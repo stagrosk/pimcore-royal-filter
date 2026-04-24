@@ -2,10 +2,10 @@
 
 namespace App\Service\Generator\Mapper;
 
-use App\Pimcore\Model\ClassificationStore\ClassificationStoreMappingItem;
-use App\Pimcore\ClassificationStore\ClassificationStoreHelper;
-use App\Pimcore\ClassificationStore\ClassificationStoreService;
-use App\Pimcore\Model\DataObject\RoyalFilter;
+use App\OpenDxp\Model\ClassificationStore\ClassificationStoreMappingItem;
+use App\OpenDxp\ClassificationStore\ClassificationStoreHelper;
+use App\OpenDxp\ClassificationStore\ClassificationStoreService;
+use App\OpenDxp\Model\DataObject\RoyalFilter;
 use App\Service\ProductMetadataService;
 use App\Enum\ProductStatusEnum;
 use OpenDxp\Model\DataObject\AbstractObject;
@@ -20,9 +20,9 @@ use OpenDxp\Translation\Translator;
 class FilterToProductMapper extends BaseMapper
 {
     /**
-     * @param \Pimcore\Translation\Translator $translator
-     * @param \App\Pimcore\ClassificationStore\ClassificationStoreHelper $classificationStoreHelper
-     * @param \App\Pimcore\ClassificationStore\ClassificationStoreService $classificationStoreService
+     * @param \OpenDxp\Translation\Translator $translator
+     * @param \App\OpenDxp\ClassificationStore\ClassificationStoreHelper $classificationStoreHelper
+     * @param \App\OpenDxp\ClassificationStore\ClassificationStoreService $classificationStoreService
      * @param \App\Service\ProductMetadataService $productMetadataService
      */
     public function __construct(
@@ -40,12 +40,12 @@ class FilterToProductMapper extends BaseMapper
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\Product $product
-     * @param \Pimcore\Model\DataObject\AbstractObject|\App\Pimcore\Model\DataObject\RoyalFilter $fromObject
+     * @param \OpenDxp\Model\DataObject\Product $product
+     * @param \OpenDxp\Model\DataObject\AbstractObject|\App\OpenDxp\Model\DataObject\RoyalFilter $fromObject
      * @param array $extraData
      *
-     * @throws \Pimcore\Model\Element\DuplicateFullPathException
-     * @return \Pimcore\Model\DataObject\Product
+     * @throws \OpenDxp\Model\Element\DuplicateFullPathException
+     * @return \OpenDxp\Model\DataObject\Product
      */
     public function mapObjectToProduct(Product $product, AbstractObject|RoyalFilter $fromObject, array $extraData = []): Product
     {
@@ -101,9 +101,9 @@ class FilterToProductMapper extends BaseMapper
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\AbstractObject|\App\Pimcore\Model\DataObject\RoyalFilter $object
+     * @param \OpenDxp\Model\DataObject\AbstractObject|\App\OpenDxp\Model\DataObject\RoyalFilter $object
      *
-     * @return \Pimcore\Model\DataObject\Data\ImageGallery
+     * @return \OpenDxp\Model\DataObject\Data\ImageGallery
      */
     private function prepareImages(AbstractObject|RoyalFilter $object): ImageGallery
     {
@@ -124,8 +124,8 @@ class FilterToProductMapper extends BaseMapper
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\AbstractObject $product
-     * @param \Pimcore\Model\DataObject\AbstractObject $fromObject
+     * @param \OpenDxp\Model\DataObject\AbstractObject $product
+     * @param \OpenDxp\Model\DataObject\AbstractObject $fromObject
      * @param string $language
      *
      * @return string
@@ -151,7 +151,7 @@ class FilterToProductMapper extends BaseMapper
 
         if (!empty($params)) {
             // get first mapping
-            /** @var \App\Pimcore\Model\ClassificationStore\ClassificationStoreMapping $mapping */
+            /** @var \App\OpenDxp\Model\ClassificationStore\ClassificationStoreMapping $mapping */
             $mapping = reset($params)['mapping'];
 
             // add diameter

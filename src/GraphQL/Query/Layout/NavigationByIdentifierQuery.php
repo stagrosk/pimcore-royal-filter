@@ -27,7 +27,7 @@ class NavigationByIdentifierQuery extends AbstractQuery
 
     #[ArrayShape(['type' => "\App\GraphQL\Type\Response\Layout\NavigationResponse", 'args' => 'array|array[]', 'resolve' => 'array'])]
     /**
-     * @param \Pimcore\Bundle\DataHubBundle\Event\GraphQL\Model\QueryTypeEvent $event
+     * @param \OpenDxp\Bundle\DataHubBundle\Event\GraphQL\Model\QueryTypeEvent $event
      *
      * @return array
      */

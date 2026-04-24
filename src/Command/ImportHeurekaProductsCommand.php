@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Command;
 
 use App\Enum\ProductStatusEnum;
-use App\Pimcore\Helpers\VersionHelper;
+use App\OpenDxp\Helpers\VersionHelper;
 use OpenDxp\Model\Asset;
 use OpenDxp\Model\DataObject\AbstractObject;
 use OpenDxp\Model\DataObject\Fieldcollection;

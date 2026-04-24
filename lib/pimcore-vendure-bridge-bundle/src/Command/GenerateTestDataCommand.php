@@ -92,10 +92,10 @@ class GenerateTestDataCommand extends Command
      * @param array $categories
      * @param array $taxes
      * @param array $images
-     * @param \Pimcore\Model\DataObject\Product|null $parentProduct
+     * @param \OpenDxp\Model\DataObject\Product|null $parentProduct
      *
      * @throws \Exception
-     * @return \Pimcore\Model\DataObject\Product
+     * @return \OpenDxp\Model\DataObject\Product
      */
     private function generateProduct(
         array    $categories,
@@ -163,7 +163,7 @@ class GenerateTestDataCommand extends Command
 
     /**
      * @param array $images
-     * @param \Pimcore\Model\DataObject\Product $product
+     * @param \OpenDxp\Model\DataObject\Product $product
      *
      * @return void
      */
@@ -217,7 +217,7 @@ class GenerateTestDataCommand extends Command
      * @param string $productPath
      *
      * @throws \Exception
-     * @return \Pimcore\Model\DataObject\Price[]
+     * @return \OpenDxp\Model\DataObject\Price[]
      */
     private function generateProductPrices(string $productPath): array
     {
@@ -272,10 +272,10 @@ class GenerateTestDataCommand extends Command
 
     /**
      * @param string $categoryName
-     * @param \Pimcore\Model\DataObject\Category|null $categoryParent
+     * @param \OpenDxp\Model\DataObject\Category|null $categoryParent
      *
      * @throws \Exception
-     * @return \Pimcore\Model\DataObject\Category
+     * @return \OpenDxp\Model\DataObject\Category
      */
     private function createCategory(string $categoryName, ?Category $categoryParent = null): Category
     {

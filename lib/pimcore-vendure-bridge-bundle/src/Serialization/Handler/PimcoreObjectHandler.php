@@ -50,7 +50,7 @@ class PimcoreObjectHandler
      * @param array $type
      * @param \JMS\Serializer\Context $context
      *
-     * @return \Pimcore\Model\DataObject|array|\Pimcore\Model\DataObject\AbstractObject|\Pimcore\Model\DataObject\Concrete|null
+     * @return \OpenDxp\Model\DataObject|array|\OpenDxp\Model\DataObject\AbstractObject|\OpenDxp\Model\DataObject\Concrete|null
      */
     public function deserializeRelation(JsonDeserializationVisitor $visitor, $relation, array $type, Context $context): DataObject|array|DataObject\AbstractObject|Concrete|null
     {

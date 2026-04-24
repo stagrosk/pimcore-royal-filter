@@ -25,7 +25,7 @@
  * - filterBenefitSet [manyToOneRelation]
  */
 
-return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
+return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
    'dao' => NULL,
    'id' => 'website_configuration',
    'name' => 'WebsiteConfiguration',
@@ -48,7 +48,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'allowVariants' => false,
    'showVariants' => false,
    'layoutDefinitions' => 
-  \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+  \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
      'name' => 'pimcore_root',
      'type' => NULL,
      'region' => NULL,
@@ -62,7 +62,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
      'children' => 
     array (
       0 => 
-      \Pimcore\Model\DataObject\ClassDefinition\Layout\Tabpanel::__set_state(array(
+      \OpenDxp\Model\DataObject\ClassDefinition\Layout\Tabpanel::__set_state(array(
          'name' => 'Layout',
          'type' => NULL,
          'region' => NULL,
@@ -76,7 +76,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
          'children' => 
         array (
           0 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
              'name' => 'Informations',
              'type' => NULL,
              'region' => NULL,
@@ -90,7 +90,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'children' => 
             array (
               0 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\Fieldcollections::__set_state(array(
+              \OpenDxp\Model\DataObject\ClassDefinition\Data\Fieldcollections::__set_state(array(
                  'name' => 'openingHours',
                  'title' => 'Opening Hours',
                  'tooltip' => '',
@@ -121,7 +121,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'border' => false,
               )),
               1 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
+              \OpenDxp\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
                  'name' => 'localizedfields',
                  'title' => '',
                  'tooltip' => '',
@@ -142,7 +142,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'children' => 
                 array (
                   0 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Wysiwyg::__set_state(array(
+                  \OpenDxp\Model\DataObject\ClassDefinition\Data\Wysiwyg::__set_state(array(
                      'name' => 'contact',
                      'title' => 'Contact',
                      'tooltip' => '',
@@ -167,7 +167,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'width' => 700,
                   )),
                   1 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Wysiwyg::__set_state(array(
+                  \OpenDxp\Model\DataObject\ClassDefinition\Data\Wysiwyg::__set_state(array(
                      'name' => 'company',
                      'title' => 'Company',
                      'tooltip' => '',
@@ -192,7 +192,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'width' => 700,
                   )),
                   2 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+                  \OpenDxp\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
                      'name' => 'welcomeMessage',
                      'title' => 'Welcome Message',
                      'tooltip' => '',
@@ -222,7 +222,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'defaultValueGenerator' => '',
                   )),
                   3 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+                  \OpenDxp\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
                      'name' => 'email',
                      'title' => 'Email',
                      'tooltip' => '',
@@ -252,7 +252,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'defaultValueGenerator' => '',
                   )),
                   4 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+                  \OpenDxp\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
                      'name' => 'phone',
                      'title' => 'Phone',
                      'tooltip' => '',
@@ -292,7 +292,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'referencedFields' => 
                 array (
                   0 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
+                  \OpenDxp\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
                      'name' => 'localizedfields',
                      'title' => '',
                      'tooltip' => '',
@@ -313,7 +313,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'children' => 
                     array (
                       0 => 
-                      \Pimcore\Model\DataObject\ClassDefinition\Data\Block::__set_state(array(
+                      \OpenDxp\Model\DataObject\ClassDefinition\Data\Block::__set_state(array(
                          'name' => 'links',
                          'title' => 'Links',
                          'tooltip' => '',
@@ -341,7 +341,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                          'children' => 
                         array (
                           0 => 
-                          \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+                          \OpenDxp\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
                              'name' => 'headline',
                              'title' => 'Headline',
                              'tooltip' => '',
@@ -371,7 +371,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                              'defaultValueGenerator' => '',
                           )),
                           1 => 
-                          \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToManyRelation::__set_state(array(
+                          \OpenDxp\Model\DataObject\ClassDefinition\Data\ManyToManyRelation::__set_state(array(
                              'name' => 'links',
                              'title' => 'Links',
                              'tooltip' => '',
@@ -442,7 +442,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'fieldDefinitionsCache' => NULL,
                   )),
                   1 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
+                  \OpenDxp\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
                      'name' => 'localizedfields',
                      'title' => '',
                      'tooltip' => '',
@@ -463,7 +463,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'children' => 
                     array (
                       0 => 
-                      \Pimcore\Model\DataObject\ClassDefinition\Data\Wysiwyg::__set_state(array(
+                      \OpenDxp\Model\DataObject\ClassDefinition\Data\Wysiwyg::__set_state(array(
                          'name' => 'newsletter',
                          'title' => 'Newsletter',
                          'tooltip' => '',
@@ -488,7 +488,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                          'width' => 700,
                       )),
                       1 => 
-                      \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
+                      \OpenDxp\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
                          'name' => 'ecomailListId',
                          'title' => 'Ecomail List Id',
                          'tooltip' => '',
@@ -558,7 +558,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'labelAlign' => 'left',
           )),
           1 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
              'name' => 'Links',
              'type' => NULL,
              'region' => NULL,
@@ -572,7 +572,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'children' => 
             array (
               0 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
+              \OpenDxp\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
                  'name' => 'localizedfields',
                  'title' => '',
                  'tooltip' => '',
@@ -593,7 +593,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'children' => 
                 array (
                   0 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Block::__set_state(array(
+                  \OpenDxp\Model\DataObject\ClassDefinition\Data\Block::__set_state(array(
                      'name' => 'links',
                      'title' => 'Links',
                      'tooltip' => '',
@@ -621,7 +621,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'children' => 
                     array (
                       0 => 
-                      \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+                      \OpenDxp\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
                          'name' => 'headline',
                          'title' => 'Headline',
                          'tooltip' => '',
@@ -651,7 +651,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                          'defaultValueGenerator' => '',
                       )),
                       1 => 
-                      \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToManyRelation::__set_state(array(
+                      \OpenDxp\Model\DataObject\ClassDefinition\Data\ManyToManyRelation::__set_state(array(
                          'name' => 'links',
                          'title' => 'Links',
                          'tooltip' => '',
@@ -734,7 +734,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'labelAlign' => 'left',
           )),
           2 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
              'name' => 'Social Media',
              'type' => NULL,
              'region' => NULL,
@@ -748,7 +748,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'children' => 
             array (
               0 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\Block::__set_state(array(
+              \OpenDxp\Model\DataObject\ClassDefinition\Data\Block::__set_state(array(
                  'name' => 'socialMedia',
                  'title' => 'Social Media',
                  'tooltip' => '',
@@ -776,7 +776,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'children' => 
                 array (
                   0 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+                  \OpenDxp\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
                      'name' => 'socialMediaUrl',
                      'title' => 'Social media url',
                      'tooltip' => '',
@@ -806,7 +806,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'defaultValueGenerator' => '',
                   )),
                   1 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Image::__set_state(array(
+                  \OpenDxp\Model\DataObject\ClassDefinition\Data\Image::__set_state(array(
                      'name' => 'socialMediaIcon',
                      'title' => 'Social media icon',
                      'tooltip' => '',
@@ -848,7 +848,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'labelAlign' => 'left',
           )),
           3 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
              'name' => 'Newsletter',
              'type' => NULL,
              'region' => NULL,
@@ -862,7 +862,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'children' => 
             array (
               0 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
+              \OpenDxp\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
                  'name' => 'localizedfields',
                  'title' => '',
                  'tooltip' => '',
@@ -883,7 +883,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'children' => 
                 array (
                   0 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Wysiwyg::__set_state(array(
+                  \OpenDxp\Model\DataObject\ClassDefinition\Data\Wysiwyg::__set_state(array(
                      'name' => 'newsletter',
                      'title' => 'Newsletter',
                      'tooltip' => '',
@@ -908,7 +908,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                      'width' => 700,
                   )),
                   1 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
+                  \OpenDxp\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
                      'name' => 'ecomailListId',
                      'title' => 'Ecomail List Id',
                      'tooltip' => '',
@@ -969,7 +969,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'labelAlign' => 'left',
           )),
           4 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
              'name' => 'ContentPages',
              'type' => NULL,
              'region' => NULL,
@@ -983,7 +983,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'children' => 
             array (
               0 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
+              \OpenDxp\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
                  'name' => 'termsAndConditions',
                  'title' => 'Terms and conditions',
                  'tooltip' => '',
@@ -1025,7 +1025,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
                  'width' => '',
               )),
               1 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
+              \OpenDxp\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
                  'name' => 'personalDataProtection',
                  'title' => 'Personal data protection',
                  'tooltip' => '',
@@ -1079,7 +1079,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'labelAlign' => 'left',
           )),
           5 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
              'name' => 'Defaults',
              'type' => NULL,
              'region' => NULL,
@@ -1093,7 +1093,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'children' => 
             array (
               0 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
+              \OpenDxp\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
                  'name' => 'filterBenefitSet',
                  'title' => 'Filter benefit set',
                  'tooltip' => '',

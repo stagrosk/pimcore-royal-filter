@@ -2,8 +2,8 @@
 
 namespace App\Service\Generator\Mapper;
 
-use App\Pimcore\ClassificationStore\ClassificationStoreHelper;
-use App\Pimcore\ClassificationStore\ClassificationStoreService;
+use App\OpenDxp\ClassificationStore\ClassificationStoreHelper;
+use App\OpenDxp\ClassificationStore\ClassificationStoreService;
 use App\Service\ProductMetadataService;
 use App\Enum\ProductStatusEnum;
 use OpenDxp\Model\Asset;
@@ -20,9 +20,9 @@ use OpenDxp\Translation\Translator;
 class WhirlpoolToProductMapper extends BaseMapper
 {
     /**
-     * @param \Pimcore\Translation\Translator $translator
-     * @param \App\Pimcore\ClassificationStore\ClassificationStoreHelper $classificationStoreHelper
-     * @param \App\Pimcore\ClassificationStore\ClassificationStoreService $classificationStoreService
+     * @param \OpenDxp\Translation\Translator $translator
+     * @param \App\OpenDxp\ClassificationStore\ClassificationStoreHelper $classificationStoreHelper
+     * @param \App\OpenDxp\ClassificationStore\ClassificationStoreService $classificationStoreService
      * @param \App\Service\ProductMetadataService $productMetadataService
      */
     public function __construct(
@@ -40,12 +40,12 @@ class WhirlpoolToProductMapper extends BaseMapper
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\Product $product
-     * @param \Pimcore\Model\DataObject\AbstractObject|\Pimcore\Model\DataObject\Whirlpool $fromObject
+     * @param \OpenDxp\Model\DataObject\Product $product
+     * @param \OpenDxp\Model\DataObject\AbstractObject|\OpenDxp\Model\DataObject\Whirlpool $fromObject
      * @param array $extraData
      *
      * @throws \Exception
-     * @return \Pimcore\Model\DataObject\Product
+     * @return \OpenDxp\Model\DataObject\Product
      */
     public function mapObjectToProduct(Product $product, AbstractObject|Whirlpool $fromObject, array $extraData = []): Product
     {
@@ -101,10 +101,10 @@ class WhirlpoolToProductMapper extends BaseMapper
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\Product $product
-     * @param \Pimcore\Model\DataObject\Whirlpool $object
+     * @param \OpenDxp\Model\DataObject\Product $product
+     * @param \OpenDxp\Model\DataObject\Whirlpool $object
      *
-     * @return \Pimcore\Model\DataObject\Data\ImageGallery
+     * @return \OpenDxp\Model\DataObject\Data\ImageGallery
      */
     private function prepareImages(Product $product, AbstractObject $object): ImageGallery
     {
@@ -123,8 +123,8 @@ class WhirlpoolToProductMapper extends BaseMapper
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\AbstractObject $product
-     * @param \Pimcore\Model\DataObject\AbstractObject $fromObject
+     * @param \OpenDxp\Model\DataObject\AbstractObject $product
+     * @param \OpenDxp\Model\DataObject\AbstractObject $fromObject
      * @param string $language
      *
      * @return string
@@ -133,7 +133,7 @@ class WhirlpoolToProductMapper extends BaseMapper
     {
         $codes = [];
         foreach ($fromObject->getPaperCartridges() as $cartridge) {
-            /** @var \Pimcore\Model\DataObject\Fieldcollection\Data\PaperCartridgeCode $code */
+            /** @var \OpenDxp\Model\DataObject\Fieldcollection\Data\PaperCartridgeCode $code */
             foreach ($cartridge->getCodes() as $code) {
                 if ($code->getShowInTitle() === true) {
                     $codes[] = $code->getCode();

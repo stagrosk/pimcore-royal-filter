@@ -2,7 +2,7 @@
 
 namespace PimcoreHeadlessContentBundle\Model;
 
-use PimcoreHeadlessContentBundle\Model\Pimcore\PimcoreModelInterface;
+use PimcoreHeadlessContentBundle\Model\OpenDxp\PimcoreModelInterface;
 use OpenDxp\Model\DataObject\Fieldcollection;
 
 interface NavigationInterface extends PimcoreModelInterface
@@ -20,12 +20,12 @@ interface NavigationInterface extends PimcoreModelInterface
     public function setIdentifier(?string $identifier): static;
 
     /**
-     * @return \Pimcore\Model\DataObject\Fieldcollection|null
+     * @return \OpenDxp\Model\DataObject\Fieldcollection|null
      */
     public function getLinks(): ?Fieldcollection;
 
     /**
-     * @param \Pimcore\Model\DataObject\Fieldcollection|null $links
+     * @param \OpenDxp\Model\DataObject\Fieldcollection|null $links
      *
      * @return $this
      */

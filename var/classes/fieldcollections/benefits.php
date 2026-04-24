@@ -8,7 +8,7 @@
  * -- texts [textarea]
  */
 
-return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
+return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
    'dao' => NULL,
    'key' => 'benefits',
    'parentClass' => '',
@@ -16,7 +16,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
    'title' => '',
    'group' => '',
    'layoutDefinitions' => 
-  \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+  \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
      'name' => NULL,
      'type' => NULL,
      'region' => NULL,
@@ -30,7 +30,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
      'children' => 
     array (
       0 => 
-      \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+      \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
          'name' => 'Layout',
          'type' => NULL,
          'region' => NULL,
@@ -44,7 +44,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
          'children' => 
         array (
           0 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
              'name' => 'benefitType',
              'title' => 'Benefit Type',
              'tooltip' => '',
@@ -85,7 +85,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'optionsProviderData' => '',
           )),
           1 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
              'name' => 'icon',
              'title' => 'Icon',
              'tooltip' => '',
@@ -113,7 +113,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'optionsProviderData' => '',
           )),
           2 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
              'name' => 'localizedfields',
              'title' => '',
              'tooltip' => NULL,
@@ -134,7 +134,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'children' => 
             array (
               0 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\Textarea::__set_state(array(
+              \OpenDxp\Model\DataObject\ClassDefinition\Data\Textarea::__set_state(array(
                  'name' => 'texts',
                  'title' => 'Texts',
                  'tooltip' => '',

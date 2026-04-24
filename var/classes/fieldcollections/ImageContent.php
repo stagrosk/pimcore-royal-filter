@@ -6,7 +6,7 @@
  * -- imageGallery [imageGallery]
  */
 
-return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
+return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
    'dao' => NULL,
    'key' => 'ImageContent',
    'parentClass' => '',
@@ -14,7 +14,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
    'title' => '',
    'group' => 'Content',
    'layoutDefinitions' =>
-  \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+  \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
      'fieldtype' => 'panel',
      'layout' => NULL,
      'border' => false,
@@ -32,7 +32,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
      'children' =>
     array (
       0 =>
-      \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+      \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
          'fieldtype' => 'panel',
          'layout' => NULL,
          'border' => false,
@@ -50,12 +50,12 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
          'children' =>
         array (
           0 =>
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
              'fieldtype' => 'localizedfields',
              'children' =>
             array (
               0 =>
-              \Pimcore\Model\DataObject\ClassDefinition\Data\ImageGallery::__set_state(array(
+              \OpenDxp\Model\DataObject\ClassDefinition\Data\ImageGallery::__set_state(array(
                  'fieldtype' => 'imageGallery',
                  'width' => '',
                  'height' => '',

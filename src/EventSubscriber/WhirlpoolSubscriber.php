@@ -30,14 +30,14 @@ readonly class WhirlpoolSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @param \Pimcore\Event\Model\DataObjectEvent $event
+     * @param \OpenDxp\Event\Model\DataObjectEvent $event
      *
      * @throws \Exception
      * @return void
      */
     public function onPostUpdate(DataObjectEvent $event): void
     {
-        /** @var \Pimcore\Model\DataObject\Whirlpool $object */
+        /** @var \OpenDxp\Model\DataObject\Whirlpool $object */
         $object = $event->getObject();
 
         // check object type

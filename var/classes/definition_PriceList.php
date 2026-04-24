@@ -13,7 +13,7 @@
  * - percentage [numeric]
  */
 
-return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
+return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
    'dao' => NULL,
    'id' => 'price_list',
    'name' => 'PriceList',
@@ -36,7 +36,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'allowVariants' => false,
    'showVariants' => false,
    'layoutDefinitions' => 
-  \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+  \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
      'name' => 'pimcore_root',
      'type' => NULL,
      'region' => NULL,
@@ -50,7 +50,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
      'children' => 
     array (
       0 => 
-      \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+      \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
          'name' => 'Layout',
          'type' => NULL,
          'region' => NULL,
@@ -64,7 +64,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
          'children' => 
         array (
           0 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
              'name' => 'name',
              'title' => 'Name',
              'tooltip' => '',
@@ -94,7 +94,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'defaultValueGenerator' => '',
           )),
           1 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
              'name' => 'currency',
              'title' => 'Currency',
              'tooltip' => '',
@@ -150,7 +150,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'optionsProviderData' => '',
           )),
           2 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
              'name' => 'basePricelist',
              'title' => 'Base Pricelist',
              'tooltip' => '! Warning ! this price is set as main price on product / variants',
@@ -172,7 +172,7 @@ return \Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'defaultValueGenerator' => '',
           )),
           3 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
              'name' => 'compareAtMode',
              'title' => 'Compare At Mode',
              'tooltip' => 'ADJUSTED
@@ -217,7 +217,7 @@ The compare at prices are set to null unless explicitly defined by a fixed price
              'optionsProviderData' => '',
           )),
           4 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
              'name' => 'adjustmentType',
              'title' => 'Adjustment Type',
              'tooltip' => 'PERCENTAGE_DECREASE
@@ -262,7 +262,7 @@ Percentage increase type. Prices will have a higher value.',
              'optionsProviderData' => '',
           )),
           5 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
              'name' => 'percentage',
              'title' => 'Percentage',
              'tooltip' => '',
@@ -349,7 +349,7 @@ Percentage increase type. Prices will have a higher value.',
    'deletedDataComponents' => 
   array (
     0 => 
-    \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
+    \OpenDxp\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
        'name' => 'roundingDecimals',
        'title' => 'Rounding Decimals',
        'tooltip' => '',

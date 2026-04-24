@@ -29,7 +29,7 @@ class ContentElementHelper
     private const THUMBNAIL_HERO = 'hero-swiper';
     private const THUMBNAIL_PARALAX = 'paralax-content';
 
-    public function getElements(ContentPage|\Pimcore\Model\DataObject\BlogPost $contentPage, string $language): array
+    public function getElements(ContentPage|\OpenDxp\Model\DataObject\BlogPost $contentPage, string $language): array
     {
         $elements = $contentPage->getElements();
         if ($elements === null) {

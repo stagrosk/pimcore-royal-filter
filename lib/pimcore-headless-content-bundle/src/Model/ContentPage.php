@@ -3,7 +3,7 @@
 namespace PimcoreHeadlessContentBundle\Model;
 
 use PimcoreHeadlessContentBundle\Exception\ImplementedByPimcoreException;
-use PimcoreHeadlessContentBundle\Model\Pimcore\AbstractPimcoreModel;
+use PimcoreHeadlessContentBundle\Model\OpenDxp\AbstractPimcoreModel;
 
 class ContentPage extends AbstractPimcoreModel implements ContentPageInterface
 {

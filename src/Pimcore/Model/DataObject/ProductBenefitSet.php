@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Pimcore\Model\DataObject;
+namespace App\OpenDxp\Model\DataObject;
 
 use OpenDxp\Model\DataObject\Fieldcollection;
 use OpenDxp\Model\DataObject\Fieldcollection\Data\Benefits;
 use OpenDxp\Tool;
 
-class ProductBenefitSet extends \Pimcore\Model\DataObject\ProductBenefitSet
+class ProductBenefitSet extends \OpenDxp\Model\DataObject\ProductBenefitSet
 {
     public function getTranslations(): array
     {

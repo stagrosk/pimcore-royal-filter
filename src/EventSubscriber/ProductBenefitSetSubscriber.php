@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\EventSubscriber;
 
-use App\Pimcore\Model\DataObject\ProductBenefitSet;
+use App\OpenDxp\Model\DataObject\ProductBenefitSet;
 
 class ProductBenefitSetSubscriber extends AbstractWebhookSubscriber
 {

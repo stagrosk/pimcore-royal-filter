@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Pimcore\Model\OptionProviders;
+namespace App\OpenDxp\Model\OptionProviders;
 
 use OpenDxp\Model\DataObject\ClassDefinition\Data;
 use OpenDxp\Model\DataObject\ClassDefinition\DynamicOptionsProvider\SelectOptionsProviderInterface;

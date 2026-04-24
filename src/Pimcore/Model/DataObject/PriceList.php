@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Pimcore\Model\DataObject;
+namespace App\OpenDxp\Model\DataObject;
 
 use OpenDxp\Model\DataObject\AbstractObject;
 
-class PriceList extends \Pimcore\Model\DataObject\PriceList
+class PriceList extends \OpenDxp\Model\DataObject\PriceList
 {
     /**
      * Get parent PriceList ID (only if parent is PriceList)

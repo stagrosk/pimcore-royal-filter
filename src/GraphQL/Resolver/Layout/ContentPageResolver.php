@@ -73,7 +73,7 @@ class ContentPageResolver extends AbstractResolver
     /**
      * Get canonicals with handles for all language mutations
      *
-     * @param \Pimcore\Model\DataObject\ContentPage $contentPage
+     * @param \OpenDxp\Model\DataObject\ContentPage $contentPage
      *
      * @return array
      */

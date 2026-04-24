@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Pimcore\ClassificationStore;
+namespace App\OpenDxp\ClassificationStore;
 
-use App\Pimcore\Model\ClassificationStore\ClassificationStoreMapping;
-use App\Pimcore\Model\ClassificationStore\ClassificationStoreMappingItem;
-use App\Pimcore\Helpers\InheritanceHelper;
-use App\Pimcore\Helpers\VersionHelper;
+use App\OpenDxp\Model\ClassificationStore\ClassificationStoreMapping;
+use App\OpenDxp\Model\ClassificationStore\ClassificationStoreMappingItem;
+use App\OpenDxp\Helpers\InheritanceHelper;
+use App\OpenDxp\Helpers\VersionHelper;
 use OpenDxp\Logger;
 use OpenDxp\Model\DataObject\AbstractObject;
 use OpenDxp\Model\DataObject\Classificationstore;
@@ -16,7 +16,7 @@ use OpenDxp\Model\DataObject\Data\QuantityValue;
 class ClassificationStoreHelper
 {
     /**
-     * @param \Pimcore\Model\DataObject\Classificationstore|null $classificationStore
+     * @param \OpenDxp\Model\DataObject\Classificationstore|null $classificationStore
      *
      * @return ClassificationStoreMapping
      */
@@ -113,7 +113,7 @@ class ClassificationStoreHelper
                                 break;
 
                             case 'rgbaColor':
-                                /** @var \Pimcore\Model\DataObject\Data\RgbaColor $rgbaColor */
+                                /** @var \OpenDxp\Model\DataObject\Data\RgbaColor $rgbaColor */
                                 $rgbaColor = $item['default'];
                                 $classificationStoreMappingItem = new ClassificationStoreMappingItem(
                                     $keyConfig,
@@ -153,11 +153,11 @@ class ClassificationStoreHelper
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\AbstractObject $object
+     * @param \OpenDxp\Model\DataObject\AbstractObject $object
      * @param array $keyPairsData
      * @param bool $skipPreSave
      *
-     * @throws \Pimcore\Model\Element\DuplicateFullPathException
+     * @throws \OpenDxp\Model\Element\DuplicateFullPathException
      * @throws \Exception
      * @return void
      */
@@ -178,9 +178,9 @@ class ClassificationStoreHelper
             if (!empty($keyPairsData)) {
                 $activeGroupConfigs = [];
                 foreach ($keyPairsData as $keyPairData) {
-                    /** @var \Pimcore\Model\DataObject\Classificationstore\GroupConfig $groupConfig */
+                    /** @var \OpenDxp\Model\DataObject\Classificationstore\GroupConfig $groupConfig */
                     $groupConfig = $keyPairData['groupConfig'];
-                    /** @var \Pimcore\Model\DataObject\Classificationstore\KeyConfig $keyConfig */
+                    /** @var \OpenDxp\Model\DataObject\Classificationstore\KeyConfig $keyConfig */
                     $keyConfig = $keyPairData['keyConfig'];
 
                     $value = $keyPairData['value'];
@@ -227,8 +227,8 @@ class ClassificationStoreHelper
     /**
      * NOTE: this is solving only active groups with name starting with NUMBER => that means it was created from feature. all other from another source is untouched
      *
-     * @param \Pimcore\Model\DataObject\Classificationstore $classificationStore
-     * @param \Pimcore\Model\DataObject\Classificationstore\GroupConfig[] $activeGroupConfigs
+     * @param \OpenDxp\Model\DataObject\Classificationstore $classificationStore
+     * @param \OpenDxp\Model\DataObject\Classificationstore\GroupConfig[] $activeGroupConfigs
      */
     private function resolveActiveGroups(Classificationstore $classificationStore, array $activeGroupConfigs): void
     {

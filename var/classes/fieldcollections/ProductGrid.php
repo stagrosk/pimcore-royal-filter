@@ -16,7 +16,7 @@
  * - resolvedProducts [manyToManyRelation]
  */
 
-return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
+return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
    'dao' => NULL,
    'key' => 'ProductGrid',
    'parentClass' => '',
@@ -24,7 +24,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
    'title' => '',
    'group' => 'Content',
    'layoutDefinitions' => 
-  \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+  \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
      'name' => NULL,
      'type' => NULL,
      'region' => NULL,
@@ -38,7 +38,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
      'children' => 
     array (
       0 => 
-      \Pimcore\Model\DataObject\ClassDefinition\Layout\Tabpanel::__set_state(array(
+      \OpenDxp\Model\DataObject\ClassDefinition\Layout\Tabpanel::__set_state(array(
          'name' => 'Layout',
          'type' => NULL,
          'region' => NULL,
@@ -52,7 +52,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
          'children' => 
         array (
           0 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
              'name' => 'Base',
              'type' => NULL,
              'region' => NULL,
@@ -66,7 +66,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'children' => 
             array (
               0 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
+              \OpenDxp\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
                  'name' => 'localizedfields',
                  'title' => '',
                  'tooltip' => NULL,
@@ -87,7 +87,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                  'children' => 
                 array (
                   0 => 
-                  \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+                  \OpenDxp\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
                      'name' => 'tabTitle',
                      'title' => 'Tab Title',
                      'tooltip' => 'Section/tab title displayed on the page',
@@ -136,7 +136,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                  'fieldDefinitionsCache' => NULL,
               )),
               1 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToManyRelation::__set_state(array(
+              \OpenDxp\Model\DataObject\ClassDefinition\Data\ManyToManyRelation::__set_state(array(
                  'name' => 'manualProducts',
                  'title' => 'Manual Products',
                  'tooltip' => 'Manually selected products',
@@ -193,7 +193,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'labelAlign' => 'left',
           )),
           1 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
              'name' => 'Settings',
              'type' => NULL,
              'region' => NULL,
@@ -207,7 +207,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'children' => 
             array (
               0 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
+              \OpenDxp\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
                  'name' => 'autoFill',
                  'title' => 'Automaticky doplniť produkty',
                  'tooltip' => 'Automatically fill products based on settings below',
@@ -229,7 +229,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                  'defaultValueGenerator' => '',
               )),
               1 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
+              \OpenDxp\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
                  'name' => 'fillByFlag',
                  'title' => 'Doplniť podľa príznaku',
                  'tooltip' => 'Fill products that have this flag assigned',
@@ -271,7 +271,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                  'width' => '',
               )),
               2 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
+              \OpenDxp\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
                  'name' => 'fillFromCategory',
                  'title' => 'Doplniť produkty z kategórie',
                  'tooltip' => 'Fill products from this collection/category',
@@ -313,7 +313,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                  'width' => '',
               )),
               3 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
+              \OpenDxp\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
                  'name' => 'fillRandom',
                  'title' => 'Doplniť náhodnými produktmi',
                  'tooltip' => 'Fill with random products',
@@ -335,7 +335,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                  'defaultValueGenerator' => '',
               )),
               4 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
+              \OpenDxp\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
                  'name' => 'fillByAge',
                  'title' => 'Doplniť podľa veku produktu',
                  'tooltip' => 'Fill with newest products first',
@@ -357,7 +357,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                  'defaultValueGenerator' => '',
               )),
               5 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
+              \OpenDxp\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
                  'name' => 'fillBestsellers',
                  'title' => 'Doplniť z najpredávanejších',
                  'tooltip' => 'Fill with bestseller products (placeholder for future Vendure sync)',
@@ -379,7 +379,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                  'defaultValueGenerator' => '',
               )),
               6 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
+              \OpenDxp\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
                  'name' => 'fillOnlyAvailable',
                  'title' => 'Doplniť iba dostupnými produktmi',
                  'tooltip' => 'Only include products with status=active',
@@ -401,7 +401,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                  'defaultValueGenerator' => '',
               )),
               7 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
+              \OpenDxp\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
                  'name' => 'maxProducts',
                  'title' => 'Max Products',
                  'tooltip' => 'Maximum number of products to display',
@@ -443,7 +443,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'labelAlign' => 'left',
           )),
           2 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
              'name' => 'ResolvedProducts',
              'type' => NULL,
              'region' => NULL,
@@ -457,7 +457,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'children' => 
             array (
               0 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToManyRelation::__set_state(array(
+              \OpenDxp\Model\DataObject\ClassDefinition\Data\ManyToManyRelation::__set_state(array(
                  'name' => 'resolvedProducts',
                  'title' => 'Resolved Products',
                  'tooltip' => 'Auto-generated by app:regenerate-product-grids command. Do not edit manually.',

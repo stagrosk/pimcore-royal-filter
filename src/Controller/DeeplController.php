@@ -26,7 +26,7 @@ class DeeplController extends FrontendController
     ];
 
     /**
-     * @param \Pimcore\Model\Document\Service $documentService
+     * @param \OpenDxp\Model\Document\Service $documentService
      * @param \App\Service\DeeplService $deeplService
      * @param \Doctrine\DBAL\Connection $db
      */
@@ -42,8 +42,8 @@ class DeeplController extends FrontendController
      *
      * @throws \Doctrine\DBAL\Driver\Exception
      * @throws \Doctrine\DBAL\Exception
-     * @throws \Pimcore\Model\Element\DuplicateFullPathException
-     * @throws \Pimcore\Model\Element\ValidationException
+     * @throws \OpenDxp\Model\Element\DuplicateFullPathException
+     * @throws \OpenDxp\Model\Element\ValidationException
      * @throws \Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface
      * @throws \Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface
      * @throws \Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface
@@ -160,7 +160,7 @@ class DeeplController extends FrontendController
     }
 
     /**
-     * @param \Pimcore\Model\Document $document
+     * @param \OpenDxp\Model\Document $document
      *
      * @throws \Doctrine\DBAL\Exception
      * @return array
@@ -201,7 +201,7 @@ class DeeplController extends FrontendController
     }
 
     /**
-     * @param \Pimcore\Model\Document $document
+     * @param \OpenDxp\Model\Document $document
      * @param array $properties
      * @throws \Doctrine\DBAL\Exception
      */

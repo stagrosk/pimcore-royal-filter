@@ -9,7 +9,7 @@
  * - equipBody2 [manyToOneRelation]
  */
 
-return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
+return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
    'dao' => NULL,
    'key' => 'royalFilterSetup',
    'parentClass' => '',
@@ -17,7 +17,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
    'title' => '',
    'group' => '',
    'layoutDefinitions' => 
-  \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+  \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
      'name' => NULL,
      'type' => NULL,
      'region' => NULL,
@@ -31,7 +31,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
      'children' => 
     array (
       0 => 
-      \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+      \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
          'name' => 'Layout',
          'type' => NULL,
          'region' => NULL,
@@ -45,7 +45,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
          'children' => 
         array (
           0 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
              'name' => 'royalFilterSetup',
              'title' => 'Royal Filter setup',
              'tooltip' => '',
@@ -87,7 +87,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'width' => 400,
           )),
           1 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Data\CalculatedValue::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\CalculatedValue::__set_state(array(
              'name' => 'royalFilterSetupOverview',
              'title' => 'Royal Filter Setup Overview',
              'tooltip' => '',
@@ -113,7 +113,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'width' => '500px',
           )),
           2 => 
-          \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
              'name' => 'Equipment',
              'type' => NULL,
              'region' => NULL,
@@ -127,7 +127,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'children' => 
             array (
               0 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
+              \OpenDxp\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
                  'name' => 'adapter',
                  'title' => 'Adapter',
                  'tooltip' => '',
@@ -169,7 +169,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                  'width' => 750,
               )),
               1 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
+              \OpenDxp\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
                  'name' => 'equipBody1',
                  'title' => 'Equip body1',
                  'tooltip' => '',
@@ -211,7 +211,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                  'width' => 750,
               )),
               2 => 
-              \Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
+              \OpenDxp\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
                  'name' => 'equipBody2',
                  'title' => 'Equip body2',
                  'tooltip' => '',

@@ -10,7 +10,7 @@
  * - fullWidth [checkbox]
  */
 
-return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
+return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
    'dao' => NULL,
    'key' => 'Button',
    'parentClass' => '',
@@ -18,7 +18,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
    'title' => '',
    'group' => 'Content',
    'layoutDefinitions' =>
-  \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+  \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
      'fieldtype' => 'panel',
      'layout' => NULL,
      'border' => false,
@@ -36,7 +36,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
      'children' =>
     array (
       0 =>
-      \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+      \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
          'fieldtype' => 'panel',
          'layout' => NULL,
          'border' => false,
@@ -54,7 +54,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
          'children' =>
         array (
           0 =>
-          \Pimcore\Model\DataObject\ClassDefinition\Data\RgbaColor::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\RgbaColor::__set_state(array(
              'fieldtype' => 'rgbaColor',
              'width' => '',
              'name' => 'color',
@@ -76,7 +76,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
             ),
           )),
           1 =>
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
              'fieldtype' => 'checkbox',
              'defaultValue' => NULL,
              'name' => 'isExternal',
@@ -99,12 +99,12 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'defaultValueGenerator' => '',
           )),
           2 =>
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
              'fieldtype' => 'localizedfields',
              'children' =>
             array (
               0 =>
-              \Pimcore\Model\DataObject\ClassDefinition\Data\Link::__set_state(array(
+              \OpenDxp\Model\DataObject\ClassDefinition\Data\Link::__set_state(array(
                  'fieldtype' => 'link',
                  'name' => 'link',
                  'title' => 'Link',
@@ -161,7 +161,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'labelAlign' => 'left',
           )),
           3 =>
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
              'fieldtype' => 'select',
              'options' =>
             array (
@@ -207,7 +207,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'defaultValueGenerator' => '',
           )),
           4 =>
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
              'fieldtype' => 'checkbox',
              'defaultValue' => 0,
              'name' => 'fullWidth',

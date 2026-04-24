@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Pimcore\Model\DataObject;
+namespace App\OpenDxp\Model\DataObject;
 
 use OpenDxp\Model\DataObject;
 use OpenDxp\Model\DataObject\Exception\InheritanceParentNotFoundException;
@@ -11,7 +11,7 @@ class RoyalFilter extends DataObject\RoyalFilter
 {
     /**
      * @throws \Exception
-     * @return \Pimcore\Model\DataObject\Fieldcollection|null
+     * @return \OpenDxp\Model\DataObject\Fieldcollection|null
      */
     public function getPrices(): ?Fieldcollection
     {

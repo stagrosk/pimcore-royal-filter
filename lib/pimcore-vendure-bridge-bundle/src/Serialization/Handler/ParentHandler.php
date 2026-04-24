@@ -67,7 +67,7 @@ class ParentHandler
     }
 
     /**
-     * @param \Pimcore\Model\DataObject $object
+     * @param \OpenDxp\Model\DataObject $object
      * @param array $ids
      *
      * @return void

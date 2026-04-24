@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace App\Pimcore\Model\DataObject;
+namespace App\OpenDxp\Model\DataObject;
 
-use App\Pimcore\ClassificationStore\ClassificationStoreHelper;
-use App\Pimcore\Model\ClassificationStore\ClassificationStoreMappingItem;
+use App\OpenDxp\ClassificationStore\ClassificationStoreHelper;
+use App\OpenDxp\Model\ClassificationStore\ClassificationStoreMappingItem;
 use App\Service\ClassificationStoreTranslationService;
 use OpenDxp\Model\DataObject\Data\ImageGallery;
 use OpenDxp\Model\DataObject\Fieldcollection;
 use OpenDxp\Tool;
 
-class Whirlpool extends \Pimcore\Model\DataObject\Whirlpool
+class Whirlpool extends \OpenDxp\Model\DataObject\Whirlpool
 {
     private ?ClassificationStoreTranslationService $translationService = null;
 
@@ -126,7 +126,7 @@ class Whirlpool extends \Pimcore\Model\DataObject\Whirlpool
     {
         $product = $this->getProduct();
 
-        if (!$product instanceof \Pimcore\Model\DataObject\Product) {
+        if (!$product instanceof \OpenDxp\Model\DataObject\Product) {
             return null;
         }
 

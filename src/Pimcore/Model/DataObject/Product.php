@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Pimcore\Model\DataObject;
+namespace App\OpenDxp\Model\DataObject;
 
-use App\Pimcore\DataObject\Calculator\ParametersConfigCalculator;
+use App\OpenDxp\DataObject\Calculator\ParametersConfigCalculator;
 use OpenDxp\Model\DataObject\AbstractObject;
 use OpenDxp\Model\DataObject\Data\ImageGallery;
 use OpenDxp\Model\DataObject\Fieldcollection;
 use OpenDxp\Tool;
 use PimcoreHeadlessContentBundle\Model\SlugAwareInterface;
 
-class Product extends \Pimcore\Model\DataObject\Product implements SlugAwareInterface
+class Product extends \OpenDxp\Model\DataObject\Product implements SlugAwareInterface
 {
     /**
      * @param string|null $language
@@ -232,7 +232,7 @@ class Product extends \Pimcore\Model\DataObject\Product implements SlugAwareInte
 
         $ids = [];
         foreach ($flags as $flag) {
-            if ($flag instanceof \Pimcore\Model\DataObject\ProductFlag && $flag->isPublished()) {
+            if ($flag instanceof \OpenDxp\Model\DataObject\ProductFlag && $flag->isPublished()) {
                 $ids[] = $flag->getId();
             }
         }
@@ -244,7 +244,7 @@ class Product extends \Pimcore\Model\DataObject\Product implements SlugAwareInte
     {
         $ids = [];
         foreach ($this->getCrossSellingProducts() as $product) {
-            if ($product instanceof \Pimcore\Model\DataObject\Product && $product->isPublished()) {
+            if ($product instanceof \OpenDxp\Model\DataObject\Product && $product->isPublished()) {
                 $ids[] = $product->getId();
             }
         }
@@ -256,7 +256,7 @@ class Product extends \Pimcore\Model\DataObject\Product implements SlugAwareInte
     {
         $ids = [];
         foreach ($this->getSimularProducts() as $product) {
-            if ($product instanceof \Pimcore\Model\DataObject\Product && $product->isPublished()) {
+            if ($product instanceof \OpenDxp\Model\DataObject\Product && $product->isPublished()) {
                 $ids[] = $product->getId();
             }
         }
@@ -266,7 +266,7 @@ class Product extends \Pimcore\Model\DataObject\Product implements SlugAwareInte
 
     public function getCustomerGroupsData(): array
     {
-        return \App\Pimcore\Helpers\CustomerGroupHelper::getPublishedIds($this->getCustomerGroups());
+        return \App\OpenDxp\Helpers\CustomerGroupHelper::getPublishedIds($this->getCustomerGroups());
     }
 
     public function getBenefitSetId(): ?int

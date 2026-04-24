@@ -18,7 +18,7 @@ class PriceHandler
     public function serializeListPrice(JsonSerializationVisitor $visitor, array $objects, array $type, Context $context): array
     {
         $priceList = [];
-        /** @var \Pimcore\Model\DataObject\Price $price */
+        /** @var \OpenDxp\Model\DataObject\Price $price */
         foreach ($objects as $price) {
             $priceList[] = [
                 'channel' => $price->getChannel(),

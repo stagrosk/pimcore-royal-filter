@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Pimcore\Model\ClassificationStore;
+namespace App\OpenDxp\Model\ClassificationStore;
 
 use OpenDxp\Model\DataObject\Classificationstore\GroupConfig;
 use OpenDxp\Model\DataObject\Classificationstore\KeyConfig;
@@ -8,8 +8,8 @@ use OpenDxp\Model\DataObject\Classificationstore\KeyConfig;
 class ClassificationStoreMappingItem
 {
     /**
-     * @param \Pimcore\Model\DataObject\Classificationstore\KeyConfig $keyConfig
-     * @param \Pimcore\Model\DataObject\Classificationstore\GroupConfig $groupConfig
+     * @param \OpenDxp\Model\DataObject\Classificationstore\KeyConfig $keyConfig
+     * @param \OpenDxp\Model\DataObject\Classificationstore\GroupConfig $groupConfig
      * @param string $label
      * @param string|bool|null $value
      * @param int|float|string|null $rawValue

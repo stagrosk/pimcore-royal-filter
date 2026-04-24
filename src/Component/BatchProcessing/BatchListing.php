@@ -21,7 +21,7 @@ final class BatchListing implements Iterator, Countable
     private array $items = [];
 
     /**
-     * @param \Pimcore\Model\Listing\AbstractListing $list
+     * @param \OpenDxp\Model\Listing\AbstractListing $list
      * @param int $batchSize
      */
     public function __construct(AbstractListing $list, int $batchSize)

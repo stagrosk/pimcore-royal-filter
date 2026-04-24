@@ -13,7 +13,7 @@ class ObjectDataExtractor
     private Service $graphQlService;
 
     /**
-     * @param \Pimcore\Bundle\DataHubBundle\GraphQL\Service $graphQlService
+     * @param \OpenDxp\Bundle\DataHubBundle\GraphQL\Service $graphQlService
      */
     public function __construct(Service $graphQlService)
     {

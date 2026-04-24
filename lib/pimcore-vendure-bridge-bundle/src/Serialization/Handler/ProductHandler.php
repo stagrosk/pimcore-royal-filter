@@ -33,7 +33,7 @@ class ProductHandler
     }
 
     /**
-     * @param \Pimcore\Bundle\EcommerceFrameworkBundle\Model\ProductInterface $product
+     * @param \OpenDxp\Bundle\EcommerceFrameworkBundle\Model\ProductInterface $product
      *
      * @return string
      */

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Pimcore\Model\DataObject;
+namespace App\OpenDxp\Model\DataObject;
 
 use PimcoreHeadlessContentBundle\Model\SlugAwareInterface;
 
-class BlogPost extends \Pimcore\Model\DataObject\BlogPost implements SlugAwareInterface
+class BlogPost extends \OpenDxp\Model\DataObject\BlogPost implements SlugAwareInterface
 {
     public function getSlugValue(?string $language = null): ?string
     {

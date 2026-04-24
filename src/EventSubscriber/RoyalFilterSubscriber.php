@@ -30,14 +30,14 @@ readonly class RoyalFilterSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @param \Pimcore\Event\Model\DataObjectEvent $event
+     * @param \OpenDxp\Event\Model\DataObjectEvent $event
      *
      * @throws \Exception
      * @return void
      */
     public function onPostUpdate(DataObjectEvent $event): void
     {
-        /** @var \Pimcore\Model\DataObject\RoyalFilter $object */
+        /** @var \OpenDxp\Model\DataObject\RoyalFilter $object */
         $object = $event->getObject();
 
         // check object type

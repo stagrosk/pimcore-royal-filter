@@ -21,7 +21,7 @@ abstract class AbstractQuery implements EventSubscriberInterface
     }
 
     /**
-     * @param \Pimcore\Bundle\DataHubBundle\Event\GraphQL\Model\QueryTypeEvent $event
+     * @param \OpenDxp\Bundle\DataHubBundle\Event\GraphQL\Model\QueryTypeEvent $event
      *
      * @return array
      */
@@ -41,7 +41,7 @@ abstract class AbstractQuery implements EventSubscriberInterface
     }
 
     /**
-     * @param \Pimcore\Bundle\DataHubBundle\Event\GraphQL\Model\QueryTypeEvent $event
+     * @param \OpenDxp\Bundle\DataHubBundle\Event\GraphQL\Model\QueryTypeEvent $event
      */
     public function doPreBuild(QueryTypeEvent $event): void
     {
@@ -58,7 +58,7 @@ abstract class AbstractQuery implements EventSubscriberInterface
     }
 
     /**
-     * @param \Pimcore\Bundle\DataHubBundle\Event\GraphQL\Model\QueryTypeEvent $event
+     * @param \OpenDxp\Bundle\DataHubBundle\Event\GraphQL\Model\QueryTypeEvent $event
      *
      * @return bool
      */

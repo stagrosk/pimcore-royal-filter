@@ -32,10 +32,10 @@ class BaseProductGenerator
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\AbstractObject $object
+     * @param \OpenDxp\Model\DataObject\AbstractObject $object
      *
      * @throws \Exception
-     * @return \Pimcore\Model\DataObject\Product
+     * @return \OpenDxp\Model\DataObject\Product
      */
     public function generateProductForObject(AbstractObject $object): Product
     {
@@ -43,13 +43,13 @@ class BaseProductGenerator
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\Listing|\Pimcore\Model\Document\Listing $list
+     * @param \OpenDxp\Model\DataObject\Listing|\OpenDxp\Model\Document\Listing $list
      *
      * @throws \App\Service\Generator\Exception\NothingToExportException
      * @throws \Exception
      * @return bool
      */
-    public function processList(\Pimcore\Model\DataObject\Listing|Listing $list): bool
+    public function processList(\OpenDxp\Model\DataObject\Listing|Listing $list): bool
     {
         $totalCount = $list->getTotalCount();
         $this->getLogger()->notice('Total items to be processed: ' . $totalCount);
@@ -80,9 +80,9 @@ class BaseProductGenerator
     }
 
     /**
-     * @return \Pimcore\Model\DataObject\Listing|\Pimcore\Model\Document\Listing
+     * @return \OpenDxp\Model\DataObject\Listing|\OpenDxp\Model\Document\Listing
      */
-    public function prepareList(): \Pimcore\Model\DataObject\Listing|Listing {
+    public function prepareList(): \OpenDxp\Model\DataObject\Listing|Listing {
         // list
         $list = $this->className::getList();
 
@@ -93,9 +93,9 @@ class BaseProductGenerator
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\Listing|\Pimcore\Model\Document\Listing $list
+     * @param \OpenDxp\Model\DataObject\Listing|\OpenDxp\Model\Document\Listing $list
      */
-    public function prepareListConditions(\Pimcore\Model\DataObject\Listing|Listing $list): void
+    public function prepareListConditions(\OpenDxp\Model\DataObject\Listing|Listing $list): void
     {
         $list->setUnpublished(false);
     }

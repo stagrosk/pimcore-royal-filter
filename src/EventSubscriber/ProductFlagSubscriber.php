@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\EventSubscriber;
 
-use App\Pimcore\Model\DataObject\ProductFlag;
+use App\OpenDxp\Model\DataObject\ProductFlag;
 
 class ProductFlagSubscriber extends AbstractWebhookSubscriber
 {

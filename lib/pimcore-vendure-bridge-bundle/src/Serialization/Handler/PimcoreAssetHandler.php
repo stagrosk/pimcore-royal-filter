@@ -49,7 +49,7 @@ class PimcoreAssetHandler
      * @param array $type
      * @param \JMS\Serializer\Context $context
      *
-     * @return \Pimcore\Model\Asset|array|null
+     * @return \OpenDxp\Model\Asset|array|null
      */
     public function deserializeRelation(JsonDeserializationVisitor $visitor, $relation, array $type, Context $context): Asset|array|null
     {

@@ -2,8 +2,8 @@
 
 namespace App\Service\Generator\Mapper;
 
-use App\Pimcore\ClassificationStore\ClassificationStoreHelper;
-use App\Pimcore\ClassificationStore\ClassificationStoreService;
+use App\OpenDxp\ClassificationStore\ClassificationStoreHelper;
+use App\OpenDxp\ClassificationStore\ClassificationStoreService;
 use App\Service\ProductMetadataService;
 use OpenDxp\Model\DataObject\AbstractObject;
 use OpenDxp\Model\DataObject\Collection;
@@ -19,9 +19,9 @@ abstract class BaseMapper implements MapperInterface
     public const BENEFIT_SET_FILTERS_PATH = '/ProductBenefitSets/ProsAndConsFilters';
 
     /**
-     * @param \Pimcore\Translation\Translator $translator
-     * @param \App\Pimcore\ClassificationStore\ClassificationStoreHelper $classificationStoreHelper
-     * @param \App\Pimcore\ClassificationStore\ClassificationStoreService $classificationStoreService
+     * @param \OpenDxp\Translation\Translator $translator
+     * @param \App\OpenDxp\ClassificationStore\ClassificationStoreHelper $classificationStoreHelper
+     * @param \App\OpenDxp\ClassificationStore\ClassificationStoreService $classificationStoreService
      * @param \App\Service\ProductMetadataService $productMetadataService
      */
     public function __construct(
@@ -33,8 +33,8 @@ abstract class BaseMapper implements MapperInterface
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\AbstractObject $object
-     * @param \Pimcore\Model\DataObject\Product $product
+     * @param \OpenDxp\Model\DataObject\AbstractObject $object
+     * @param \OpenDxp\Model\DataObject\Product $product
      *
      * @return void
      */

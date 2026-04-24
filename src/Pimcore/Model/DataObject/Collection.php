@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Pimcore\Model\DataObject;
+namespace App\OpenDxp\Model\DataObject;
 
-use App\Pimcore\ClassificationStore\ClassificationStoreHelper;
-use App\Pimcore\Model\ClassificationStore\ClassificationStoreMappingItem;
+use App\OpenDxp\ClassificationStore\ClassificationStoreHelper;
+use App\OpenDxp\Model\ClassificationStore\ClassificationStoreMappingItem;
 use App\Service\ClassificationStoreTranslationService;
 use OpenDxp\Model\DataObject\AbstractObject;
 use OpenDxp\Model\DataObject\Data\RgbaColor;
@@ -11,7 +11,7 @@ use OpenDxp\Tool;
 use PimcoreHeadlessContentBundle\Model\NavigationAwareInterface;
 use PimcoreHeadlessContentBundle\Model\SlugAwareInterface;
 
-class Collection extends \Pimcore\Model\DataObject\Collection implements SlugAwareInterface, NavigationAwareInterface
+class Collection extends \OpenDxp\Model\DataObject\Collection implements SlugAwareInterface, NavigationAwareInterface
 {
     private ?ClassificationStoreTranslationService $translationService = null;
 
@@ -184,7 +184,7 @@ class Collection extends \Pimcore\Model\DataObject\Collection implements SlugAwa
 
     public function getCustomerGroupsData(): array
     {
-        return \App\Pimcore\Helpers\CustomerGroupHelper::getPublishedIds($this->getCustomerGroups());
+        return \App\OpenDxp\Helpers\CustomerGroupHelper::getPublishedIds($this->getCustomerGroups());
     }
 
     public function getParentCollectionId(): ?int

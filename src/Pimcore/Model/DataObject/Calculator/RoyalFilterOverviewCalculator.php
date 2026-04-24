@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Pimcore\Model\DataObject\Calculator;
+namespace App\OpenDxp\Model\DataObject\Calculator;
 
-use App\Pimcore\Model\DataObject\RoyalFilter;
+use App\OpenDxp\Model\DataObject\RoyalFilter;
 use App\Service\ProductMetadataService;
 use OpenDxp\Model\DataObject\ClassDefinition\CalculatorClassInterface;
 use OpenDxp\Model\DataObject\Concrete;
@@ -13,8 +13,8 @@ use OpenDxp\Model\DataObject\Whirlpool;
 readonly class RoyalFilterOverviewCalculator implements CalculatorClassInterface
 {
     /**
-     * @param \Pimcore\Model\DataObject\Concrete $object
-     * @param \Pimcore\Model\DataObject\Data\CalculatedValue $context
+     * @param \OpenDxp\Model\DataObject\Concrete $object
+     * @param \OpenDxp\Model\DataObject\Data\CalculatedValue $context
      *
      * @return string
      */
@@ -29,7 +29,7 @@ readonly class RoyalFilterOverviewCalculator implements CalculatorClassInterface
         $locale = $context->getPosition();
 
         $royalFilterSetups = $object->getRoyalFilterSetups()?->getItems();
-        /** @var \Pimcore\Model\DataObject\Fieldcollection\Data\RoyalFilterSetup|null $royalFilterSetupFieldcollection */
+        /** @var \OpenDxp\Model\DataObject\Fieldcollection\Data\RoyalFilterSetup|null $royalFilterSetupFieldcollection */
         $royalFilterSetupFieldcollection = $royalFilterSetups[$context->getIndex()] ?? null;
         if ($royalFilterSetupFieldcollection instanceof RoyalFilterSetup) {
             $royalFilterSetup = $royalFilterSetupFieldcollection->getRoyalFilterSetup();
@@ -64,8 +64,8 @@ readonly class RoyalFilterOverviewCalculator implements CalculatorClassInterface
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\Concrete $object
-     * @param \Pimcore\Model\DataObject\Data\CalculatedValue $context
+     * @param \OpenDxp\Model\DataObject\Concrete $object
+     * @param \OpenDxp\Model\DataObject\Data\CalculatedValue $context
      *
      * @return string
      */
@@ -75,7 +75,7 @@ readonly class RoyalFilterOverviewCalculator implements CalculatorClassInterface
     }
 
     /**
-     * @param \App\Pimcore\Model\DataObject\RoyalFilter $royalFilterSetup
+     * @param \App\OpenDxp\Model\DataObject\RoyalFilter $royalFilterSetup
      * @param array $overrides
      *
      * @return array

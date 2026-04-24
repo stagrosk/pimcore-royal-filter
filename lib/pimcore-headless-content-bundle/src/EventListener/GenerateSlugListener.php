@@ -33,7 +33,7 @@ class GenerateSlugListener implements EventSubscriberInterface
     }
 
     /**
-     * @param \Pimcore\Event\Model\DataObjectEvent $event
+     * @param \OpenDxp\Event\Model\DataObjectEvent $event
      *
      * @throws \Exception
      */

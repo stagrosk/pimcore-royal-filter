@@ -2,8 +2,8 @@
 
 namespace App\Service;
 
-use App\Pimcore\ClassificationStore\ClassificationStoreHelper;
-use App\Pimcore\ClassificationStore\ClassificationStoreService;
+use App\OpenDxp\ClassificationStore\ClassificationStoreHelper;
+use App\OpenDxp\ClassificationStore\ClassificationStoreService;
 use OpenDxp\Model\DataObject\AbstractObject;
 use OpenDxp\Model\DataObject\Adapter;
 use OpenDxp\Model\DataObject\Body;
@@ -20,8 +20,8 @@ class ProductMetadataService
     public const WEIGHT_SUM_PARAMETERS = ['body1', 'bodyMiddle', 'body2', 'center1', 'centerMiddle', 'center2', 'adapter', 'equipBody1', 'equipBody2'];
 
     /**
-     * @param \App\Pimcore\ClassificationStore\ClassificationStoreHelper $classificationStoreHelper
-     * @param \App\Pimcore\ClassificationStore\ClassificationStoreService $classificationStoreService
+     * @param \App\OpenDxp\ClassificationStore\ClassificationStoreHelper $classificationStoreHelper
+     * @param \App\OpenDxp\ClassificationStore\ClassificationStoreService $classificationStoreService
      */
     public function __construct(
         protected readonly ClassificationStoreHelper $classificationStoreHelper,
@@ -30,7 +30,7 @@ class ProductMetadataService
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\AbstractObject $object
+     * @param \OpenDxp\Model\DataObject\AbstractObject $object
      * @param array $partOverrides
      *
      * @return array
@@ -108,7 +108,7 @@ class ProductMetadataService
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\AbstractObject $fromObject
+     * @param \OpenDxp\Model\DataObject\AbstractObject $fromObject
      * @param array $partOverrides
      *
      * @throws \Exception
@@ -120,7 +120,7 @@ class ProductMetadataService
 
         // this is not royalFilterSetup mapping
         if (count($mappedParameters) === 1) {
-            /** @var \App\Pimcore\Model\ClassificationStore\ClassificationStoreMapping $classificationStoreMapping */
+            /** @var \App\OpenDxp\Model\ClassificationStore\ClassificationStoreMapping $classificationStoreMapping */
             $classificationStoreMapping = reset($mappedParameters)['mapping'];
 
             return $classificationStoreMapping->getMappedParametersIndexedByGroupAndKey();
@@ -130,12 +130,12 @@ class ProductMetadataService
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\AbstractObject $product
-     * @param \Pimcore\Model\DataObject\AbstractObject $fromObject
+     * @param \OpenDxp\Model\DataObject\AbstractObject $product
+     * @param \OpenDxp\Model\DataObject\AbstractObject $fromObject
      * @param array $partOverrides
      * @param bool $skipPreSave
      *
-     * @throws \Pimcore\Model\Element\DuplicateFullPathException
+     * @throws \OpenDxp\Model\Element\DuplicateFullPathException
      * @return void
      */
     public function copyMetadata(AbstractObject $product, AbstractObject $fromObject, array $partOverrides = [], bool $skipPreSave = false): void

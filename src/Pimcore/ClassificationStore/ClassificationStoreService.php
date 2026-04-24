@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Pimcore\ClassificationStore;
+namespace App\OpenDxp\ClassificationStore;
 
 use Cocur\Slugify\Slugify;
 use OpenDxp\Model\DataObject\ClassDefinition\Data\Checkbox;
@@ -26,7 +26,7 @@ class ClassificationStoreService
      * @param string $title
      * @param string $unit
      *
-     * @return \Pimcore\Model\DataObject\ClassDefinition\Data\QuantityValue[]
+     * @return \OpenDxp\Model\DataObject\ClassDefinition\Data\QuantityValue[]
      */
     public function createQuantityValueInput(string $code, string $title, string $unit): array
     {
@@ -64,7 +64,7 @@ class ClassificationStoreService
      * @param string $code
      * @param string $title
      *
-     * @return \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric[]
+     * @return \OpenDxp\Model\DataObject\ClassDefinition\Data\Numeric[]
      */
     public function createNumericInput(string $code, string $title): array
     {
@@ -82,7 +82,7 @@ class ClassificationStoreService
      * @param string $code
      * @param string $title
      *
-     * @return \Pimcore\Model\DataObject\ClassDefinition\Data\Date[]
+     * @return \OpenDxp\Model\DataObject\ClassDefinition\Data\Date[]
      */
     public function createDateInput(string $code, string $title): array
     {
@@ -101,7 +101,7 @@ class ClassificationStoreService
      * @param string $title
      * @param array $options
      *
-     * @return \Pimcore\Model\DataObject\ClassDefinition\Data\Select[]
+     * @return \OpenDxp\Model\DataObject\ClassDefinition\Data\Select[]
      */
     public function createSelectValueInput(string $code, string $title, array $options): array
     {
@@ -120,7 +120,7 @@ class ClassificationStoreService
      * @param string $code
      * @param string $title
      *
-     * @return \Pimcore\Model\DataObject\ClassDefinition\Data\Checkbox[]
+     * @return \OpenDxp\Model\DataObject\ClassDefinition\Data\Checkbox[]
      */
     public function createCheckboxValueInput(string $code, string $title): array
     {
@@ -172,7 +172,7 @@ class ClassificationStoreService
     /**
      * @param int $id
      *
-     * @return \Pimcore\Model\DataObject\Classificationstore\KeyConfig|null
+     * @return \OpenDxp\Model\DataObject\Classificationstore\KeyConfig|null
      */
     public function getKeyConfigById(int $id): ?KeyConfig
     {
@@ -184,11 +184,11 @@ class ClassificationStoreService
      *
      * @param int $classificationStoreId
      * @param string $name
-     * @param \Pimcore\Model\DataObject\ClassDefinition\Data\TypeDeclarationSupportInterface|null $input
+     * @param \OpenDxp\Model\DataObject\ClassDefinition\Data\TypeDeclarationSupportInterface|null $input
      * @param string|null $description
      *
      * @throws \Exception
-     * @return \Pimcore\Model\DataObject\Classificationstore\KeyConfig|null
+     * @return \OpenDxp\Model\DataObject\Classificationstore\KeyConfig|null
      */
     public function processKeyConfig(
         int $classificationStoreId,
@@ -257,7 +257,7 @@ class ClassificationStoreService
     /**
      * @param int $id
      *
-     * @return \Pimcore\Model\DataObject\Classificationstore\GroupConfig|null
+     * @return \OpenDxp\Model\DataObject\Classificationstore\GroupConfig|null
      */
     public function getGroupConfigById(int $id): ?GroupConfig
     {
@@ -270,7 +270,7 @@ class ClassificationStoreService
      * @param string|null $description
      *
      * @throws \Exception
-     * @return \Pimcore\Model\DataObject\Classificationstore\GroupConfig
+     * @return \OpenDxp\Model\DataObject\Classificationstore\GroupConfig
      */
     public function processGroupConfig(
         int $classificationStoreId,
@@ -301,7 +301,7 @@ class ClassificationStoreService
      * @param string|null $description
      *
      * @throws \Exception
-     * @return \Pimcore\Model\DataObject\Classificationstore\CollectionConfig
+     * @return \OpenDxp\Model\DataObject\Classificationstore\CollectionConfig
      */
     public function processCollectionConfig(
         int $classificationStoreId,
@@ -325,11 +325,11 @@ class ClassificationStoreService
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\Classificationstore\GroupConfig $groupConfig
-     * @param \Pimcore\Model\DataObject\Classificationstore\CollectionConfig $collectionConfig
+     * @param \OpenDxp\Model\DataObject\Classificationstore\GroupConfig $groupConfig
+     * @param \OpenDxp\Model\DataObject\Classificationstore\CollectionConfig $collectionConfig
      * @param int $sorter
      *
-     * @return \Pimcore\Model\DataObject\Classificationstore\CollectionGroupRelation
+     * @return \OpenDxp\Model\DataObject\Classificationstore\CollectionGroupRelation
      */
     public function processCollectionGroupRelation(
         GroupConfig $groupConfig,
@@ -351,11 +351,11 @@ class ClassificationStoreService
     }
 
     /**
-     * @param \Pimcore\Model\DataObject\Classificationstore\KeyConfig $keyConfig
-     * @param \Pimcore\Model\DataObject\Classificationstore\GroupConfig $groupConfig
+     * @param \OpenDxp\Model\DataObject\Classificationstore\KeyConfig $keyConfig
+     * @param \OpenDxp\Model\DataObject\Classificationstore\GroupConfig $groupConfig
      * @param int $sorter
      *
-     * @return \Pimcore\Model\DataObject\Classificationstore\KeyGroupRelation
+     * @return \OpenDxp\Model\DataObject\Classificationstore\KeyGroupRelation
      */
     public function processKeyGroupRelation(
         KeyConfig $keyConfig,

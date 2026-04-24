@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Pimcore\Model\ClassificationStore;
+namespace App\OpenDxp\Model\ClassificationStore;
 
 class ClassificationStoreMapping
 {
@@ -13,7 +13,7 @@ class ClassificationStoreMapping
     }
 
     /**
-     * @return \App\Pimcore\Model\ClassificationStore\ClassificationStoreMappingItem[]
+     * @return \App\OpenDxp\Model\ClassificationStore\ClassificationStoreMappingItem[]
      */
     public function getClassificationStoreMappingItems(): array
     {
@@ -31,7 +31,7 @@ class ClassificationStoreMapping
     }
 
     /**
-     * @param \App\Pimcore\Model\ClassificationStore\ClassificationStoreMappingItem $classificationStoreMappingItem
+     * @param \App\OpenDxp\Model\ClassificationStore\ClassificationStoreMappingItem $classificationStoreMappingItem
      *
      * @return void
      */
@@ -44,7 +44,7 @@ class ClassificationStoreMapping
      * @param string $groupConfigName
      * @param string $keyConfigName
      *
-     * @return \App\Pimcore\Model\ClassificationStore\ClassificationStoreMappingItem|null
+     * @return \App\OpenDxp\Model\ClassificationStore\ClassificationStoreMappingItem|null
      */
     public function findItemByKeyConfigName(string $groupConfigName, string $keyConfigName): ?ClassificationStoreMappingItem
     {

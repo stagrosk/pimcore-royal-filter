@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Pimcore\Model\DataObject;
+namespace App\OpenDxp\Model\DataObject;
 
 use OpenDxp\Tool;
 
-class CustomerGroup extends \Pimcore\Model\DataObject\CustomerGroup
+class CustomerGroup extends \OpenDxp\Model\DataObject\CustomerGroup
 {
     public function getTranslations(): array
     {

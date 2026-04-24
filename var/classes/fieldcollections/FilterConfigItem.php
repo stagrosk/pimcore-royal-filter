@@ -12,7 +12,7 @@
  * -- label [input]
  */
 
-return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
+return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
    'dao' => NULL,
    'key' => 'FilterConfigItem',
    'parentClass' => '',
@@ -20,7 +20,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
    'title' => '',
    'group' => '',
    'layoutDefinitions' =>
-  \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+  \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
      'name' => NULL,
      'type' => NULL,
      'region' => NULL,
@@ -34,7 +34,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
      'children' =>
     array (
       0 =>
-      \Pimcore\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+      \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
          'name' => 'Layout',
          'type' => NULL,
          'region' => NULL,
@@ -48,7 +48,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
          'children' =>
         array (
           0 =>
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
              'name' => 'parameterGroup',
              'title' => 'Parameter Group',
              'tooltip' => 'Classification Store group identifier (e.g., "whirlpool", "dimensions")',
@@ -79,7 +79,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'optionsProviderData' => '',
           )),
           1 =>
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
              'name' => 'parameterKey',
              'title' => 'Parameter Key',
              'tooltip' => 'Classification Store key identifier (e.g., "height", "diameter")',
@@ -110,7 +110,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'optionsProviderData' => '',
           )),
           2 =>
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
              'name' => 'filterType',
              'title' => 'Filter Type',
              'tooltip' => 'Widget type for this filter',
@@ -156,7 +156,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'optionsProviderData' => '',
           )),
           3 =>
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
              'name' => 'unit',
              'title' => 'Unit',
              'tooltip' => 'Display unit override. If empty, uses unit from parameter data',
@@ -187,7 +187,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'optionsProviderData' => '',
           )),
           4 =>
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
              'name' => 'sortOrder',
              'title' => 'Sort Order',
              'tooltip' => 'Display order in filter panel (lower = higher)',
@@ -217,7 +217,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'defaultValueGenerator' => '',
           )),
           5 =>
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
              'name' => 'isExpanded',
              'title' => 'Is Expanded',
              'tooltip' => 'Whether the filter section is expanded by default',
@@ -239,7 +239,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'defaultValueGenerator' => '',
           )),
           6 =>
-          \Pimcore\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
              'name' => 'localizedfields',
              'title' => '',
              'tooltip' => NULL,
@@ -260,7 +260,7 @@ return \Pimcore\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'children' =>
             array (
               0 =>
-              \Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+              \OpenDxp\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
                  'name' => 'label',
                  'title' => 'Label',
                  'tooltip' => 'Custom label override. If empty, uses the parameter\'s translated name',
