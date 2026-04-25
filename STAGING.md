@@ -117,9 +117,10 @@ sudo apt-get install -y \
     php8.3-opcache php8.3-exif php8.3-imagick \
     acl
 
-# Make 8.3 the default `php` for the ploi user
-sudo update-alternatives --set php /usr/bin/php8.3
-php -v
+# DO NOT switch the system default `php` to 8.3 yet — the legacy Pimcore prod
+# (pimcore.infivea.com) still needs `php` → 8.2. The deploy scripts call
+# /usr/bin/php8.3 explicitly, so they ignore the system default.
+php8.3 -v
 ```
 
 In the staging Ploi site → **PHP version** → 8.3.
@@ -147,7 +148,7 @@ The transport names changed from `pimcore_*` to `opendxp_*`. Replace the existin
 
 ```ini
 [program:pim-staging-messenger]
-command=php /home/ploi/pim-staging.infivea.com/current/bin/console messenger:consume opendxp_core opendxp_maintenance opendxp_scheduled_tasks opendxp_image_optimize opendxp_asset_update --memory-limit=250M --time-limit=3600
+command=/usr/bin/php8.3 /home/ploi/pim-staging.infivea.com/current/bin/console messenger:consume opendxp_core opendxp_maintenance opendxp_scheduled_tasks opendxp_image_optimize opendxp_asset_update --memory-limit=250M --time-limit=3600
 process_name=%(program_name)s_%(process_num)02d
 numprocs=1
 autostart=true
@@ -170,7 +171,7 @@ sudo supervisorctl restart pim-staging-messenger:*
 Replace any `pimcore:maintenance` cron entry with:
 
 ```cron
-*/5 * * * * cd /home/ploi/pim-staging.infivea.com/current && /usr/bin/php bin/console opendxp:maintenance >/dev/null 2>&1
+*/5 * * * * cd /home/ploi/pim-staging.infivea.com/current && /usr/bin/php8.3 bin/console opendxp:maintenance >/dev/null 2>&1
 ```
 
 ## 9. Verification
@@ -186,7 +187,7 @@ curl -sL https://pim-staging.infivea.com/admin/login | grep -oE '<title>[^<]+</t
 
 # DB migrations status
 cd /home/ploi/pim-staging.infivea.com/current
-php bin/console doctrine:migrations:status | grep -E 'New|Unavailable'
+/usr/bin/php8.3 bin/console doctrine:migrations:status | grep -E 'New|Unavailable'
 # Expected: New: 0, Executed Unavailable: 0
 
 # GraphQL endpoint
