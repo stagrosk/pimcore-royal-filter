@@ -1,110 +1,84 @@
 # Ploi nginx templates
 
-Source-of-truth nginx configs for both sites that share the staging server.
-Copy each file into the path commented at the top of that file (Ploi UI or `sudo nano …`).
+Single self-contained vhost per site — no `include /etc/nginx/ssl/<site>;` and no
+`include /etc/nginx/ploi/<site>/{before,server,after}/*;`. Everything lives in one
+file: redirect blocks, ACME well-known overrides, Tailnet block (prod), main app.
 
 ```
 .ploi/nginx/
 ├── prod/
-│   ├── pimcore.infivea.com                       → /etc/nginx/sites-available/pimcore.infivea.com
-│   ├── ssl-redirect.conf                          → /etc/nginx/ssl/pimcore.infivea.com
-│   └── disable-basic-auth-well-known.conf         → /etc/nginx/ploi/pimcore.infivea.com/server/disable-basic-auth-well-known.conf
+│   └── pimcore.infivea.com                        → /etc/nginx/sites-available/pimcore.infivea.com
 └── staging/
     ├── pim-staging.infivea.com.http               → /etc/nginx/sites-available/pim-staging.infivea.com   (BEFORE LE)
-    ├── pim-staging.infivea.com.ssl                → /etc/nginx/sites-available/pim-staging.infivea.com   (AFTER LE swap)
-    ├── ssl-redirect.conf                          → /etc/nginx/ssl/pim-staging.infivea.com               (after LE only)
-    └── disable-basic-auth-well-known.conf         → /etc/nginx/ploi/pim-staging.infivea.com/server/disable-basic-auth-well-known.conf
+    └── pim-staging.infivea.com.ssl                → /etc/nginx/sites-available/pim-staging.infivea.com   (AFTER LE swap)
 ```
 
-## Prod (pimcore.infivea.com) — legacy Pimcore 11
+## Why no Ploi includes
 
-Stays on the old stack until the OpenDXP cut-over. Uses:
-- `php-pimcore10` upstream → `/run/php/php8.2-fpm.sock`
-- Pimcore-style query params (`pimcore_editmode`, `pimcore_preview`, `pimcore_version`)
-- Tailscale tunnel on `:8081` for admin (`/admin` blocked on the public vhost via `return 403;`)
-- LE cert at `/etc/letsencrypt/live/pimcore.infivea.com/`
+Ploi UI sometimes generates `/etc/nginx/ssl/<site>` with full `server { ... }` blocks
+and includes it from inside the main `server { }`. nginx then errors out:
+- `"listen" directive is not allowed here` — when the include lands inside a server block
+- `duplicate listen 0.0.0.0:443` — when Ploi includes the same SSL bundle twice
 
-After fixing the broken vhost (missing `listen 443 ssl http2;` + `ssl_certificate`):
+Inlining everything into one vhost file removes both failure modes. We also drop the
+`/etc/nginx/ploi/<site>/{before,server,after}/*` includes — they were never used for
+anything that this vhost needs.
+
+## Apply on the server
+
+Both sites share the staging server. Each site is one file copy:
+
+### Prod (pimcore.infivea.com — legacy Pimcore 11)
 
 ```bash
 sudo cp .ploi/nginx/prod/pimcore.infivea.com /etc/nginx/sites-available/pimcore.infivea.com
-sudo cp .ploi/nginx/prod/ssl-redirect.conf /etc/nginx/ssl/pimcore.infivea.com
-sudo mkdir -p /etc/nginx/ploi/pimcore.infivea.com/server
-sudo cp .ploi/nginx/prod/disable-basic-auth-well-known.conf \
-        /etc/nginx/ploi/pimcore.infivea.com/server/disable-basic-auth-well-known.conf
-sudo nginx -t && sudo systemctl reload nginx
+sudo nginx -t
+sudo systemctl reload nginx
+curl -I https://pimcore.infivea.com/ | head -3   # expect: HTTP/2 200 / 302 / 403
 ```
 
-## Staging (pim-staging.infivea.com) — OpenDXP
-
-Two flavors. Use `.http` first (BEFORE LE issues a cert) so port 80 listens and the
-ACME HTTP-01 challenge can succeed.
-
-### Phase 1 — bring it up on HTTP
+### Staging — Phase 1 (HTTP, before LE)
 
 ```bash
 sudo cp .ploi/nginx/staging/pim-staging.infivea.com.http \
         /etc/nginx/sites-available/pim-staging.infivea.com
-
-# The basic-auth bypass file is harmless even before SSL, install it now:
-sudo mkdir -p /etc/nginx/ploi/pim-staging.infivea.com/server
-sudo cp .ploi/nginx/staging/disable-basic-auth-well-known.conf \
-        /etc/nginx/ploi/pim-staging.infivea.com/server/disable-basic-auth-well-known.conf
-
-sudo nginx -t && sudo systemctl reload nginx
-
-# Test
-curl -I http://pim-staging.infivea.com/
+sudo nginx -t
+sudo systemctl reload nginx
+curl -I http://pim-staging.infivea.com/ | head -3
 ```
 
-### Phase 2 — issue the cert
+Now issue the cert (Ploi UI → SSL → Let's Encrypt, or `certbot certonly --webroot -w /home/ploi/pim-staging.infivea.com/public -d pim-staging.infivea.com`).
 
-In Ploi UI → **Site → SSL → Let's Encrypt** (or `sudo certbot certonly --webroot -w /home/ploi/pim-staging.infivea.com/public -d pim-staging.infivea.com`).
+Cloudflare must be on **grey cloud (DNS only)** for the duration of the ACME challenge.
 
-Cloudflare must NOT be in orange-cloud (proxied) mode while ACME runs. Switch the
-DNS record to grey-cloud (DNS only) for the duration of the challenge.
-
-### Phase 3 — switch to SSL vhost
+### Staging — Phase 2 (SSL, after LE)
 
 ```bash
 sudo cp .ploi/nginx/staging/pim-staging.infivea.com.ssl \
         /etc/nginx/sites-available/pim-staging.infivea.com
-sudo cp .ploi/nginx/staging/ssl-redirect.conf \
-        /etc/nginx/ssl/pim-staging.infivea.com
-
-sudo nginx -t && sudo systemctl reload nginx
-
-# Test
-curl -I https://pim-staging.infivea.com/
+sudo nginx -t
+sudo systemctl reload nginx
+curl -I https://pim-staging.infivea.com/ | head -3
 ```
 
-## Why the prod vhost broke yesterday
+## Heads-up on Ploi's SSL toggle
 
-The vhost you posted is missing `listen 443 ssl http2;` and the `ssl_certificate` /
-`ssl_certificate_key` directives in the **main** server block (the one with
-`server_name pimcore.infivea.com;`).
+If you click **SSL → Enable** in the Ploi UI for either site, Ploi rewrites
+`/etc/nginx/sites-available/<site>` AND drops a generated
+`/etc/nginx/ssl/<site>` next to it. That generated vhost re-introduces the
+include collision we just removed. The fix: re-paste the matching template
+from this folder back into the Ploi UI's nginx config field, then save.
 
-Likely sequence:
-1. You re-saved the vhost in Ploi UI → Ploi rewrote the block but forgot the listen line
-   (or you toggled SSL off and on, and Ploi didn't replay the listen+cert).
-2. Installing `php8.3-fpm` itself doesn't touch nginx, but `apt` may have run a deferred
-   `systemctl reload nginx` — at that moment nginx re-read the broken config and the
-   site stopped responding on `:443`.
-3. The certbot post-hook then ran `nginx -t`, which **failed**, so the LE renewal
-   couldn't reload nginx for the staging cert either.
+When the cert renewal runs (cron / Ploi automation), it only touches the
+files under `/etc/letsencrypt/`. The vhost stays untouched, so the inlined
+`ssl_certificate` paths keep working.
 
-The fix is to put back `listen 443 ssl http2;` + the cert paths in the main vhost,
-which is exactly what `.ploi/nginx/prod/pimcore.infivea.com` already contains.
+## What changed vs. yesterday's broken vhost
 
-## Why this layout
-
-Ploi splits a single site's config across three locations:
-
-| Path | Purpose |
-|---|---|
-| `/etc/nginx/sites-available/<site>` | main vhost (the file we edit most) |
-| `/etc/nginx/ssl/<site>` | redirect server blocks injected by Ploi when SSL is enabled |
-| `/etc/nginx/ploi/<site>/{before,server,after}/*` | per-site fragments — Ploi UI writes some (rate-limit rules, IP allowlists, etc.); we add `disable-basic-auth-well-known.conf` so cert renewals never get blocked by basic-auth |
-
-Mirroring the layout in this repo keeps the configs reviewable and reproducible without
-clicking through Ploi's UI.
+- Added `listen 443 ssl http2;` + `ssl_certificate{,_key}` to the main app server block
+- Added a `:80 → 301 https://` redirect server (covers the apex AND every subdomain)
+- Added a `:443 www.<host> → 301 non-www` redirect server
+- Added an explicit `location /.well-known/acme-challenge/` block on `:80` so cert
+  renewals never get blocked by basic auth or the catch-all redirect
+- Removed every `include` that pulled in Ploi-generated fragments — those were the
+  source of the parser errors you hit

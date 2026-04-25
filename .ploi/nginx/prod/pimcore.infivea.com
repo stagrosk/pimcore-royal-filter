@@ -1,16 +1,12 @@
 # /etc/nginx/sites-available/pimcore.infivea.com
 #
-# Legacy Pimcore 11 production vhost (php8.2-fpm). Will be retired once we
-# cut over to OpenDXP at pim.infivea.com.
+# Legacy Pimcore 11 production vhost (php8.2-fpm). Fully self-contained:
+# all redirect blocks, the Tailnet block, the main HTTPS server, and the
+# ACME well-known override are inlined here. NO `include /etc/nginx/ssl/...`
+# and NO `include /etc/nginx/ploi/.../{before,server,after}/*;`. Drop this
+# file in 1:1 and reload — nothing else needed in /etc/nginx for this site.
 #
-# IMPORTANT: this file pairs with two other configs that Ploi keeps in
-# separate locations:
-#   /etc/nginx/ssl/pimcore.infivea.com                                   ← see ./ssl-redirect.conf
-#   /etc/nginx/ploi/pimcore.infivea.com/server/disable-basic-auth-well-known.conf
-#                                                                        ← see ./disable-basic-auth-well-known.conf
-
-# Ploi Webserver Configuration, do not remove!
-include /etc/nginx/ploi/pimcore.infivea.com/before/*;
+# Will be retired once we cut over to OpenDXP at pim.infivea.com.
 
 upstream php-pimcore10 {
     server unix:/run/php/php8.2-fpm.sock;
@@ -28,9 +24,34 @@ map $uri $static_page_uri {
     "/"                                     /%home;
 }
 
-# /etc/nginx/ssl/pimcore.infivea.com  ⇢ HTTP→HTTPS + www→non-www redirect blocks
-# Has to live OUTSIDE any `server { }` block (it defines its own server blocks).
-include /etc/nginx/ssl/pimcore.infivea.com;
+# ─── Redirect HTTP → HTTPS (apex + every subdomain) ───
+server {
+    listen 80;
+    listen [::]:80;
+    server_name .pimcore.infivea.com;
+
+    # ACME HTTP-01 challenge for Let's Encrypt renewals — must be served on HTTP.
+    location /.well-known/acme-challenge/ {
+        root /home/ploi/pimcore.infivea.com/public;
+        allow all;
+        auth_basic off;
+        default_type "text/plain";
+    }
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
+}
+
+# ─── Redirect www → non-www on HTTPS ───
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    ssl_certificate     /etc/letsencrypt/live/pimcore.infivea.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/pimcore.infivea.com/privkey.pem;
+    server_name www.pimcore.infivea.com;
+    return 301 https://pimcore.infivea.com$request_uri;
+}
 
 # ─── Tailnet-only admin access (Tailscale Serve: tailnet:443 → localhost:8081) ───
 server {
@@ -102,6 +123,7 @@ server {
     }
 }
 
+# ─── Main public app on HTTPS ───
 server {
     listen 443 ssl http2;
     listen [::]:443 ssl http2;
@@ -125,9 +147,6 @@ server {
     add_header X-Content-Type-Options "nosniff";
 
     charset utf-8;
-
-    # Ploi Configuration, do not remove!
-    include /etc/nginx/ploi/pimcore.infivea.com/server/*;
 
     access_log /var/log/nginx/pimcore.infivea.com-access.log;
     error_log  /var/log/nginx/pimcore.infivea.com-error.log error;
@@ -214,6 +233,3 @@ server {
         stub_status;
     }
 }
-
-# Ploi Webserver Configuration, do not remove!
-include /etc/nginx/ploi/pimcore.infivea.com/after/*;

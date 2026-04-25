@@ -1,10 +1,7 @@
 # /etc/nginx/sites-available/pim-staging.infivea.com
 #
-# OpenDXP staging vhost — HTTP-only variant. Use this BEFORE Let's Encrypt issues
-# the cert. After SSL is enabled in Ploi, swap this file for `pim-staging.infivea.com.ssl`.
-
-# Ploi Webserver Configuration, do not remove!
-include /etc/nginx/ploi/pim-staging.infivea.com/before/*;
+# OpenDXP staging — HTTP-only, fully self-contained. Use BEFORE Let's Encrypt.
+# After SSL is issued, swap to pim-staging.infivea.com.ssl.
 
 upstream php-opendxp-staging {
     server unix:/run/php/php8.3-fpm.sock;
@@ -39,11 +36,15 @@ server {
 
     charset utf-8;
 
-    # Ploi Configuration, do not remove!
-    include /etc/nginx/ploi/pim-staging.infivea.com/server/*;
-
     access_log /var/log/nginx/pim-staging.infivea.com-access.log;
     error_log  /var/log/nginx/pim-staging.infivea.com-error.log error;
+
+    # ACME HTTP-01 challenge — leave this open even when basic-auth is enabled.
+    location /.well-known/acme-challenge/ {
+        allow all;
+        auth_basic off;
+        default_type "text/plain";
+    }
 
     location = /favicon.ico { access_log off; log_not_found off; }
     location = /robots.txt  { access_log off; log_not_found off; }
@@ -121,6 +122,3 @@ server {
         stub_status;
     }
 }
-
-# Ploi Webserver Configuration, do not remove!
-include /etc/nginx/ploi/pim-staging.infivea.com/after/*;

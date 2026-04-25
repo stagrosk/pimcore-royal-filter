@@ -1,15 +1,7 @@
 # /etc/nginx/sites-available/pim-staging.infivea.com
 #
-# OpenDXP staging vhost — SSL-enabled variant. Swap to this AFTER Ploi's
-# Let's Encrypt has issued the cert (Site → SSL → Let's Encrypt).
-#
-# Pairs with:
-#   /etc/nginx/ssl/pim-staging.infivea.com  ← see ./ssl-redirect.conf
-#   /etc/nginx/ploi/pim-staging.infivea.com/server/disable-basic-auth-well-known.conf
-#                                            ← see ./disable-basic-auth-well-known.conf
-
-# Ploi Webserver Configuration, do not remove!
-include /etc/nginx/ploi/pim-staging.infivea.com/before/*;
+# OpenDXP staging — SSL-enabled, fully self-contained. Use AFTER Ploi has
+# issued a Let's Encrypt cert.
 
 upstream php-opendxp-staging {
     server unix:/run/php/php8.3-fpm.sock;
@@ -27,10 +19,36 @@ map $uri $static_page_uri {
     "/"                                     /%home;
 }
 
-# /etc/nginx/ssl/pim-staging.infivea.com  ⇢ HTTP→HTTPS + www→non-www redirect blocks
-# Has to live OUTSIDE any `server { }` block (it defines its own server blocks).
-include /etc/nginx/ssl/pim-staging.infivea.com;
+# ─── Redirect HTTP → HTTPS (apex + every subdomain) ───
+server {
+    listen 80;
+    listen [::]:80;
+    server_name .pim-staging.infivea.com;
 
+    # ACME HTTP-01 challenge for renewals — must stay on HTTP, never redirected.
+    location /.well-known/acme-challenge/ {
+        root /home/ploi/pim-staging.infivea.com/public;
+        allow all;
+        auth_basic off;
+        default_type "text/plain";
+    }
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
+}
+
+# ─── Redirect www → non-www on HTTPS ───
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    ssl_certificate     /etc/letsencrypt/live/pim-staging.infivea.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/pim-staging.infivea.com/privkey.pem;
+    server_name www.pim-staging.infivea.com;
+    return 301 https://pim-staging.infivea.com$request_uri;
+}
+
+# ─── Main public app on HTTPS ───
 server {
     listen 443 ssl http2;
     listen [::]:443 ssl http2;
@@ -54,9 +72,6 @@ server {
     add_header X-Content-Type-Options "nosniff";
 
     charset utf-8;
-
-    # Ploi Configuration, do not remove!
-    include /etc/nginx/ploi/pim-staging.infivea.com/server/*;
 
     access_log /var/log/nginx/pim-staging.infivea.com-access.log;
     error_log  /var/log/nginx/pim-staging.infivea.com-error.log error;
@@ -137,6 +152,3 @@ server {
         stub_status;
     }
 }
-
-# Ploi Webserver Configuration, do not remove!
-include /etc/nginx/ploi/pim-staging.infivea.com/after/*;
