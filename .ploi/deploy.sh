@@ -15,6 +15,16 @@ set -o pipefail
 
 echo "▶ OpenDXP deploy starting in: $(pwd)"
 
+# 0) PHP version sanity — fail fast if the host is still on 8.2
+PHP_MAJOR_MINOR=$(php -r 'echo PHP_MAJOR_VERSION.".".PHP_MINOR_VERSION;')
+case "$PHP_MAJOR_MINOR" in
+    8.3|8.4|8.5) ;;
+    *)
+        echo "❌ PHP $PHP_MAJOR_MINOR detected — OpenDXP requires 8.3+. Install php8.3-fpm and switch the alternative."
+        exit 1
+        ;;
+esac
+
 # 1) Wipe build caches.
 rm -rf var/cache/* var/log/* 2>/dev/null || true
 
