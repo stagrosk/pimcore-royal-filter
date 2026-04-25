@@ -54,10 +54,21 @@ echo "▶ OpenDXP deploy starting in: $(pwd)"
 echo "▶ PHP binary: $PHP ($PHP_MAJOR_MINOR)"
 echo "▶ Composer:   $COMPOSER_BIN"
 
-# 1) Wipe build caches.
+# 1) Pull latest code.
+#    Ploi's atomic-release deploy does this BEFORE calling the script (this becomes
+#    a no-op fast-forward then). For in-place deploys / manual runs / Quick Deploy
+#    this is what actually fetches new commits.
+if [ -d .git ]; then
+    BRANCH="${DEPLOY_BRANCH:-development}"
+    echo "▶ git fetch + reset --hard origin/${BRANCH}"
+    git fetch origin "${BRANCH}"
+    git reset --hard "origin/${BRANCH}"
+fi
+
+# 2) Wipe build caches.
 rm -rf var/cache/* var/log/* 2>/dev/null || true
 
-# 2) Composer install (production-tuned).
+# 3) Composer install (production-tuned).
 "$PHP" -d memory_limit=-1 "$COMPOSER_BIN" install \
     --no-interaction \
     --no-progress \
@@ -66,26 +77,26 @@ rm -rf var/cache/* var/log/* 2>/dev/null || true
     --optimize-autoloader \
     --classmap-authoritative
 
-# 3) Stop messenger workers — supervisord restarts them.
+# 4) Stop messenger workers — supervisord restarts them.
 "$PHP" bin/console messenger:stop-workers || true
 
-# 4) Rebuild OpenDXP class / fieldcollection / brick definitions from var/classes/*.
+# 5) Rebuild OpenDXP class / fieldcollection / brick definitions from var/classes/*.
 "$PHP" bin/console opendxp:deployment:classes-rebuild -c -d -n -f -v
 
-# 5) Run all pending Doctrine migrations (App + OpenDxp namespaces).
+# 6) Run all pending Doctrine migrations (App + OpenDxp namespaces).
 "$PHP" bin/console doctrine:migrations:migrate --no-interaction --allow-no-migration
 
-# 6) DataHub: rebuild workspaces from settings_store.
+# 7) DataHub: rebuild workspaces from settings_store.
 "$PHP" bin/console datahub:configuration:rebuild-workspaces || true
 
-# 7) Public assets (symlinked into public/bundles/).
+# 8) Public assets (symlinked into public/bundles/).
 "$PHP" bin/console assets:install --relative --symlink public
 
-# 8) Final prod cache build.
+# 9) Final prod cache build.
 "$PHP" bin/console cache:clear --env=prod --no-debug
 "$PHP" bin/console cache:warmup --env=prod --no-debug
 
-# 9) Reload PHP-FPM so OPcache picks up the new release.
+# 10) Reload PHP-FPM so OPcache picks up the new release.
 echo "" | sudo -S service "$FPM_SERVICE" reload || true
 
 echo "🚀 OpenDXP deployed successfully."
