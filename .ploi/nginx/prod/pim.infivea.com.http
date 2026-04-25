@@ -3,10 +3,8 @@
 # OpenDXP production vhost — HTTP-only variant. Use BEFORE Let's Encrypt.
 # After SSL is issued, swap to pim.infivea.com.ssl.
 #
-# Side-by-side cut-over from legacy pimcore.infivea.com:
-#   - This site lives at /home/ploi/pim.infivea.com/
-#   - It runs on PHP 8.3 (own FPM pool) — does NOT touch the legacy 8.2 stack.
-#   - When DNS swap is done, deactivate / delete pimcore.infivea.com.
+# Public access is fully locked down even on HTTP — only the ACME HTTP-01
+# challenge path is open. Full app reachable only via Tailnet on :8081.
 
 upstream php-opendxp-prod {
     server unix:/run/php/php8.3-fpm.sock;
@@ -24,48 +22,31 @@ map $uri $static_page_uri {
     "/"                                     /%home;
 }
 
+# ─── Tailnet-only full app (Tailscale Serve: tailnet:443 → localhost:8081) ───
 server {
-    listen 80;
-    listen [::]:80;
+    listen 8081;
+    server_name stagro-s1.tail27695b.ts.net;
 
     root /home/ploi/pim.infivea.com/public;
-    server_name pim.infivea.com;
-
-    index index.php index.html;
+    index index.php;
+    charset utf-8;
     client_max_body_size 100m;
     large_client_header_buffers 4 32k;
+
+    access_log /var/log/nginx/pim.infivea.com-tailnet-access.log;
+    error_log  /var/log/nginx/pim.infivea.com-tailnet-error.log error;
 
     add_header X-Frame-Options "SAMEORIGIN";
     add_header X-XSS-Protection "1; mode=block";
     add_header X-Content-Type-Options "nosniff";
 
-    charset utf-8;
-
-    access_log /var/log/nginx/pim.infivea.com-access.log;
-    error_log  /var/log/nginx/pim.infivea.com-error.log error;
-
-    # ACME HTTP-01 challenge — leave this open even when basic-auth is enabled.
-    location /.well-known/acme-challenge/ {
-        allow all;
-        auth_basic off;
-        default_type "text/plain";
-    }
+    error_page 404 /index.php;
 
     location = /favicon.ico { access_log off; log_not_found off; }
     location = /robots.txt  { access_log off; log_not_found off; }
 
-    error_page 404 /index.php;
-
-    rewrite ^/cache-buster-(?:\d+)/(.*) /$1 last;
-
-    location ~* /var/assets/.*\.php(/|$) {
-        return 404;
-    }
-    location ~* /\.(?!well-known/) {
-        deny all;
-        log_not_found off;
-        access_log off;
-    }
+    location ~* /var/assets/.*\.php(/|$) { return 404; }
+    location ~* /\.(?!well-known/) { deny all; log_not_found off; access_log off; }
     location ~* (?:\.(?:bak|conf(ig)?|dist|fla|in[ci]|log|psd|sh|sql|sw[op])|~)$ {
         deny all;
     }
@@ -89,10 +70,7 @@ server {
         add_header Cache-Control "public";
     }
 
-    # Block public admin access — admin reachable only via Tailnet (will be added with the SSL vhost).
-    location ^~ /admin {
-        return 403;
-    }
+    rewrite ^/cache-buster-(?:\d+)/(.*) /$1 last;
 
     location / {
         error_page 404 /meta/404;
@@ -107,28 +85,31 @@ server {
         include fastcgi.conf;
         set $path_info $fastcgi_path_info;
         fastcgi_param PATH_INFO $path_info;
+        # Tailscale Serve terminates TLS at the tailnet edge.
+        fastcgi_param HTTPS on;
+        fastcgi_param HTTP_X_FORWARDED_PROTO https;
         fastcgi_pass php-opendxp-prod;
         internal;
     }
+}
 
-    location /fpm- {
-        access_log off;
-        include fastcgi_params;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        location /fpm-status {
-            allow 127.0.0.1;
-            deny all;
-            fastcgi_pass php-opendxp-prod;
-        }
-        location /fpm-ping {
-            fastcgi_pass php-opendxp-prod;
-        }
+# ─── Public HTTP :80 — only ACME challenge, everything else 403 ───
+server {
+    listen 80;
+    listen [::]:80;
+    server_name pim.infivea.com www.pim.infivea.com;
+
+    access_log /var/log/nginx/pim.infivea.com-access.log;
+    error_log  /var/log/nginx/pim.infivea.com-error.log error;
+
+    location /.well-known/acme-challenge/ {
+        root /home/ploi/pim.infivea.com/public;
+        allow all;
+        auth_basic off;
+        default_type "text/plain";
     }
 
-    location /nginx-status {
-        allow 127.0.0.1;
-        deny all;
-        access_log off;
-        stub_status;
+    location / {
+        return 403;
     }
 }
