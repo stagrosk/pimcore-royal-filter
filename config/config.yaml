@@ -19,6 +19,11 @@ opendxp:
 # or even more specific:
 # ./bin/console debug:config opendxp assets.image
 
+    # BC for legacy Pimcore password hashes (see OpenDXP 1.0 upgrade notes).
+    # Existing user logins continue to work because hashes were salted with "pimcore".
+    security:
+        password:
+            salt: "pimcore"
 
 #### TRANSLATIONS
 #    translations:
