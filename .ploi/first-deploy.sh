@@ -3,7 +3,12 @@
 #
 # Run ONCE on the production server before the first regular .ploi/deploy.sh:
 #
-#     cd {RELEASE} && bash .ploi/first-deploy.sh
+#     bash /home/ploi/<site>/current/.ploi/first-deploy.sh
+#     # or, equivalent:
+#     cd /home/ploi/<site>/current && bash .ploi/first-deploy.sh
+#
+# The script cd's to the project root (parent of .ploi/) on its own — you can call
+# it from anywhere.
 #
 # Idempotent: safe to re-run if it fails midway. Skips work that's already done.
 #
@@ -12,15 +17,25 @@
 #
 # Optional env:
 #   PHP=/usr/bin/php8.4   # override the PHP binary (default: php8.3)
+#   COMPOSER=/path/to/composer
 
 set -e
 set -o pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
+cd "$PROJECT_ROOT"
+
 PHP="${PHP:-/usr/bin/php8.3}"
-COMPOSER="${COMPOSER:-/usr/bin/composer}"
+COMPOSER="${COMPOSER:-$(command -v composer || true)}"
 
 if [ ! -x "$PHP" ]; then
     echo "❌ $PHP not found. Install php8.3-fpm + php8.3-cli or set PHP=/path/to/php"
+    exit 1
+fi
+
+if [ -z "$COMPOSER" ] || [ ! -f "$COMPOSER" ]; then
+    echo "❌ composer not found in PATH. Set COMPOSER=/path/to/composer"
     exit 1
 fi
 
@@ -31,6 +46,7 @@ fi
 
 echo "▶ OpenDXP first-deploy starting in: $(pwd)"
 echo "▶ PHP binary: $PHP ($($PHP -r 'echo PHP_VERSION;'))"
+echo "▶ Composer:   $COMPOSER"
 
 # 1) Backup database.
 #    --no-tablespaces avoids 'PROCESS privilege' error on least-privilege users.
@@ -81,7 +97,7 @@ fi
 
 # 5) Hand off to the regular deploy script for the rest (classes-rebuild, migrations, cache, FPM).
 echo "▶ Handing off to .ploi/deploy.sh"
-PHP="$PHP" COMPOSER="$COMPOSER" bash "$(dirname "$0")/deploy.sh"
+PHP="$PHP" COMPOSER="$COMPOSER" bash "$SCRIPT_DIR/deploy.sh"
 
 echo "✅ First deploy complete. From now on use the regular deploy script."
 echo "   DB backup is at: ${BACKUP_FILE}"

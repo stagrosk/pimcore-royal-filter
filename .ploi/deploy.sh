@@ -7,21 +7,37 @@
 # Ploi already does the Git fetch + checkout into {RELEASE} before calling this.
 # Do NOT add `git pull` here — Ploi handles it.
 #
+# Manual invocation:
+#     bash /home/ploi/<site>/current/.ploi/deploy.sh
+#
+# The script cd's to the project root (parent of .ploi/) on its own.
+#
 # For a first-time cut-over from Pimcore → OpenDXP, run .ploi/first-deploy.sh ONCE
 # before this script (it adds DB cleanup + var/versions migration).
 #
 # Optional env:
-#   PHP=/usr/bin/php8.4   # override the PHP binary (default: php8.3)
+#   PHP=/usr/bin/php8.4    # override the PHP binary (default: php8.3)
+#   COMPOSER=/path/to/composer
+#   FPM_SERVICE=php8.4-fpm
 
 set -e
 set -o pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
+cd "$PROJECT_ROOT"
+
 PHP="${PHP:-/usr/bin/php8.3}"
-COMPOSER="${COMPOSER:-/usr/bin/composer}"
+COMPOSER="${COMPOSER:-$(command -v composer || true)}"
 FPM_SERVICE="${FPM_SERVICE:-php8.3-fpm}"
 
 if [ ! -x "$PHP" ]; then
     echo "❌ $PHP not found. Install php8.3-fpm + php8.3-cli or set PHP=/path/to/php"
+    exit 1
+fi
+
+if [ -z "$COMPOSER" ] || [ ! -f "$COMPOSER" ]; then
+    echo "❌ composer not found in PATH. Set COMPOSER=/path/to/composer"
     exit 1
 fi
 
@@ -36,6 +52,7 @@ esac
 
 echo "▶ OpenDXP deploy starting in: $(pwd)"
 echo "▶ PHP binary: $PHP ($PHP_MAJOR_MINOR)"
+echo "▶ Composer:   $COMPOSER"
 
 # 1) Wipe build caches.
 rm -rf var/cache/* var/log/* 2>/dev/null || true
