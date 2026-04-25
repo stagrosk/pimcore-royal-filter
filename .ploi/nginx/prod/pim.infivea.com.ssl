@@ -1,0 +1,153 @@
+# /etc/nginx/sites-available/pim.infivea.com
+#
+# OpenDXP production vhost — SSL-enabled variant. Use AFTER Ploi/Let's Encrypt
+# has issued the cert.
+
+upstream php-opendxp-prod {
+    server unix:/run/php/php8.3-fpm.sock;
+}
+
+map $args $static_page_root {
+    default                                 /var/tmp/pages;
+    "~*(^|&)opendxp_editmode=true(&|$)"     /var/nonexistent;
+    "~*(^|&)opendxp_preview=true(&|$)"      /var/nonexistent;
+    "~*(^|&)opendxp_version=[^&]+(&|$)"     /var/nonexistent;
+}
+
+map $uri $static_page_uri {
+    default                                 $uri;
+    "/"                                     /%home;
+}
+
+# ─── Redirect HTTP → HTTPS (apex + every subdomain) ───
+server {
+    listen 80;
+    listen [::]:80;
+    server_name .pim.infivea.com;
+
+    location /.well-known/acme-challenge/ {
+        root /home/ploi/pim.infivea.com/public;
+        allow all;
+        auth_basic off;
+        default_type "text/plain";
+    }
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
+}
+
+# ─── Redirect www → non-www on HTTPS ───
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    ssl_certificate     /etc/letsencrypt/live/pim.infivea.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/pim.infivea.com/privkey.pem;
+    server_name www.pim.infivea.com;
+    return 301 https://pim.infivea.com$request_uri;
+}
+
+# ─── Main public app on HTTPS ───
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    ssl_certificate     /etc/letsencrypt/live/pim.infivea.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/pim.infivea.com/privkey.pem;
+
+    root /home/ploi/pim.infivea.com/public;
+    server_name pim.infivea.com;
+
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers 'ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA:ECDHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES256-SHA:ECDHE-ECDSA-DES-CBC3-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:DES-CBC3-SHA:!DSS';
+    ssl_prefer_server_ciphers on;
+    ssl_dhparam /etc/nginx/dhparams.pem;
+
+    index index.php index.html;
+    client_max_body_size 100m;
+    large_client_header_buffers 4 32k;
+
+    add_header X-Frame-Options "SAMEORIGIN";
+    add_header X-XSS-Protection "1; mode=block";
+    add_header X-Content-Type-Options "nosniff";
+
+    charset utf-8;
+
+    access_log /var/log/nginx/pim.infivea.com-access.log;
+    error_log  /var/log/nginx/pim.infivea.com-error.log error;
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location = /robots.txt  { access_log off; log_not_found off; }
+
+    error_page 404 /index.php;
+
+    rewrite ^/cache-buster-(?:\d+)/(.*) /$1 last;
+
+    location ~* /var/assets/.*\.php(/|$) {
+        return 404;
+    }
+    location ~* /\.(?!well-known/) {
+        deny all;
+        log_not_found off;
+        access_log off;
+    }
+    location ~* (?:\.(?:bak|conf(ig)?|dist|fla|in[ci]|log|psd|sh|sql|sw[op])|~)$ {
+        deny all;
+    }
+
+    location ~* ^/admin/external {
+        rewrite .* /index.php$is_args$args last;
+    }
+
+    location ~* .*/(image|video)-thumb__\d+__.* {
+        try_files /var/tmp/thumbnails$uri /index.php;
+        expires 2w;
+        access_log off;
+        add_header Cache-Control "public";
+    }
+
+    location ~* ^(?!/admin|/asset/webdav)(.+?)\.((?:css|js)(?:\.map)?|jpe?g|gif|png|svgz?|eps|exe|gz|zip|mp\d|m4a|ogg|ogv|webp|webm|pdf|docx?|xlsx?|pptx?)$ {
+        try_files /var/assets$uri $uri =404;
+        expires 2w;
+        access_log off;
+        log_not_found off;
+        add_header Cache-Control "public";
+    }
+
+    location / {
+        error_page 404 /meta/404;
+        try_files $static_page_root$static_page_uri.html $uri /index.php$is_args$args;
+    }
+
+    location ~ ^/index\.php(/|$) {
+        send_timeout 1800;
+        fastcgi_read_timeout 1800;
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        try_files $fastcgi_script_name =404;
+        include fastcgi.conf;
+        set $path_info $fastcgi_path_info;
+        fastcgi_param PATH_INFO $path_info;
+        fastcgi_pass php-opendxp-prod;
+        internal;
+    }
+
+    location /fpm- {
+        access_log off;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        location /fpm-status {
+            allow 127.0.0.1;
+            deny all;
+            fastcgi_pass php-opendxp-prod;
+        }
+        location /fpm-ping {
+            fastcgi_pass php-opendxp-prod;
+        }
+    }
+
+    location /nginx-status {
+        allow 127.0.0.1;
+        deny all;
+        access_log off;
+        stub_status;
+    }
+}
