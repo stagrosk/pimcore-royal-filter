@@ -209,6 +209,7 @@ services:
 
 networks:
     stagro:
+        name: stagro
         internal: true
     traefik:
         external: true
