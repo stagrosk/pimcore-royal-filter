@@ -17,7 +17,7 @@
 #
 # Optional env:
 #   PHP=/usr/bin/php8.4   # override the PHP binary (default: php8.3)
-#   COMPOSER=/path/to/composer
+#   COMPOSER_BIN=/path/to/composer
 
 set -e
 set -o pipefail
@@ -27,15 +27,15 @@ PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
 cd "$PROJECT_ROOT"
 
 PHP="${PHP:-/usr/bin/php8.3}"
-COMPOSER="${COMPOSER:-$(command -v composer || true)}"
+COMPOSER_BIN="${COMPOSER_BIN:-$(command -v composer || true)}"
 
 if [ ! -x "$PHP" ]; then
     echo "❌ $PHP not found. Install php8.3-fpm + php8.3-cli or set PHP=/path/to/php"
     exit 1
 fi
 
-if [ -z "$COMPOSER" ] || [ ! -f "$COMPOSER" ]; then
-    echo "❌ composer not found in PATH. Set COMPOSER=/path/to/composer"
+if [ -z "$COMPOSER_BIN" ] || [ ! -f "$COMPOSER_BIN" ]; then
+    echo "❌ composer not found in PATH. Set COMPOSER_BIN=/path/to/composer"
     exit 1
 fi
 
@@ -46,7 +46,7 @@ fi
 
 echo "▶ OpenDXP first-deploy starting in: $(pwd)"
 echo "▶ PHP binary: $PHP ($($PHP -r 'echo PHP_VERSION;'))"
-echo "▶ Composer:   $COMPOSER"
+echo "▶ Composer:   $COMPOSER_BIN"
 
 # 1) Backup database.
 #    --no-tablespaces avoids 'PROCESS privilege' error on least-privilege users.
@@ -84,7 +84,7 @@ SQL
 
 # 3) Composer install — runs through PHP 8.3 explicitly (the system default may be 8.2).
 echo "▶ composer install"
-"$PHP" -d memory_limit=-1 "$COMPOSER" install \
+"$PHP" -d memory_limit=-1 "$COMPOSER_BIN" install \
     --no-interaction --no-progress --no-dev --prefer-dist --optimize-autoloader
 
 # 4) Migrate serialized version files (var/versions). Idempotent — skips already-OpenDxp ones.
@@ -97,7 +97,7 @@ fi
 
 # 5) Hand off to the regular deploy script for the rest (classes-rebuild, migrations, cache, FPM).
 echo "▶ Handing off to .ploi/deploy.sh"
-PHP="$PHP" COMPOSER="$COMPOSER" bash "$SCRIPT_DIR/deploy.sh"
+PHP="$PHP" COMPOSER_BIN="$COMPOSER_BIN" bash "$SCRIPT_DIR/deploy.sh"
 
 echo "✅ First deploy complete. From now on use the regular deploy script."
 echo "   DB backup is at: ${BACKUP_FILE}"

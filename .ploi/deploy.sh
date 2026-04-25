@@ -17,7 +17,7 @@
 #
 # Optional env:
 #   PHP=/usr/bin/php8.4    # override the PHP binary (default: php8.3)
-#   COMPOSER=/path/to/composer
+#   COMPOSER_BIN=/path/to/composer
 #   FPM_SERVICE=php8.4-fpm
 
 set -e
@@ -28,7 +28,7 @@ PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
 cd "$PROJECT_ROOT"
 
 PHP="${PHP:-/usr/bin/php8.3}"
-COMPOSER="${COMPOSER:-$(command -v composer || true)}"
+COMPOSER_BIN="${COMPOSER_BIN:-$(command -v composer || true)}"
 FPM_SERVICE="${FPM_SERVICE:-php8.3-fpm}"
 
 if [ ! -x "$PHP" ]; then
@@ -36,8 +36,8 @@ if [ ! -x "$PHP" ]; then
     exit 1
 fi
 
-if [ -z "$COMPOSER" ] || [ ! -f "$COMPOSER" ]; then
-    echo "❌ composer not found in PATH. Set COMPOSER=/path/to/composer"
+if [ -z "$COMPOSER_BIN" ] || [ ! -f "$COMPOSER_BIN" ]; then
+    echo "❌ composer not found in PATH. Set COMPOSER_BIN=/path/to/composer"
     exit 1
 fi
 
@@ -52,13 +52,13 @@ esac
 
 echo "▶ OpenDXP deploy starting in: $(pwd)"
 echo "▶ PHP binary: $PHP ($PHP_MAJOR_MINOR)"
-echo "▶ Composer:   $COMPOSER"
+echo "▶ Composer:   $COMPOSER_BIN"
 
 # 1) Wipe build caches.
 rm -rf var/cache/* var/log/* 2>/dev/null || true
 
 # 2) Composer install (production-tuned).
-"$PHP" -d memory_limit=-1 "$COMPOSER" install \
+"$PHP" -d memory_limit=-1 "$COMPOSER_BIN" install \
     --no-interaction \
     --no-progress \
     --no-dev \
