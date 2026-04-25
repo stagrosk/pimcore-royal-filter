@@ -21,7 +21,7 @@ SSH onto the server, then:
 DUMP=/tmp/pimcore_royalfilter-$(date +%Y%m%d-%H%M%S).sql
 
 mysqldump \
-    -u root -p \
+    -h 127.0.0.1 -u root -p \
     --single-transaction --quick --routines --triggers \
     --set-gtid-purged=OFF \
     pimcore_royalfilter > "$DUMP"
@@ -29,18 +29,19 @@ mysqldump \
 echo "Dump size: $(du -h "$DUMP" | cut -f1)"
 
 # Wipe whatever is in staging schema and recreate it cleanly.
-mysql -u root -p <<'SQL'
+mysql -h 127.0.0.1 -u root -p <<'SQL'
 DROP DATABASE IF EXISTS pim_staging;
 CREATE DATABASE pim_staging CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-GRANT ALL PRIVILEGES ON pim_staging.* TO 'pim_staging'@'localhost';
+-- 'pim_staging'@'127.0.0.1' (TCP) instead of @'localhost' (unix socket) — MariaDB / MySQL split.
+GRANT ALL PRIVILEGES ON pim_staging.* TO 'pim_staging'@'127.0.0.1';
 FLUSH PRIVILEGES;
 SQL
 
 # Import prod dump into staging
-mysql -u pim_staging -p pim_staging < "$DUMP"
+mysql -h 127.0.0.1 -u pim_staging -p pim_staging < "$DUMP"
 
 # Sanity check — count tables
-mysql -u pim_staging -p -e "SELECT COUNT(*) AS tables FROM information_schema.tables WHERE table_schema='pim_staging';"
+mysql -h 127.0.0.1 -u pim_staging -p -e "SELECT COUNT(*) AS tables FROM information_schema.tables WHERE table_schema='pim_staging';"
 ```
 
 ## 3. Copy production assets to staging release dir
