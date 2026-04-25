@@ -6,7 +6,7 @@
         success: function (response) {
             var res = Ext.decode(response.responseText);
             if (res.sourceLang) {
-                pimcore.globalmanager.add('translationBundle_sourceLang', res.sourceLang);
+                opendxp.globalmanager.add('translationBundle_sourceLang', res.sourceLang);
             }
         }
     });
@@ -30,13 +30,13 @@ function handleTranslationRequest(id, fieldName, component, type, lang, formalit
     }
 
     if (!text || text.trim() === '') {
-        pimcore.helpers.showNotification(t("info"), "Field is empty, nothing to translate.", "info");
+        opendxp.helpers.showNotification(t("info"), "Field is empty, nothing to translate.", "info");
         return;
     }
 
     var sourceLang = '';
     try {
-        sourceLang = pimcore.globalmanager.get('translationBundle_sourceLang') || '';
+        sourceLang = opendxp.globalmanager.get('translationBundle_sourceLang') || '';
     } catch (e) {}
 
     Ext.Ajax.request({
@@ -68,7 +68,7 @@ function handleTranslationRequest(id, fieldName, component, type, lang, formalit
                         break;
                 }
             } else {
-                pimcore.helpers.showPrettyError('object', t("error"), t("saving_failed"), res.message);
+                opendxp.helpers.showPrettyError('object', t("error"), t("saving_failed"), res.message);
             }
         }
     });
