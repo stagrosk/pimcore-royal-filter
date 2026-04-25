@@ -10,7 +10,7 @@ Assumptions:
 
 ## 1. Cloudflare
 
-Add an A record (or CNAME to the root) for `staging.royal-filter.com` (or whatever subdomain) pointing to the staging server IP. Enable proxy if you want CF SSL.
+Add an A record (or CNAME to the root) for `pim-staging.infivea.com` (or whatever subdomain) pointing to the staging server IP. Enable proxy if you want CF SSL.
 
 ## 2. Copy production DB into staging schema
 
@@ -49,8 +49,8 @@ Pimcore stores binary assets under `public/var/assets/`. They live OUTSIDE the G
 
 ```bash
 # Adjust paths to your Ploi setup
-PROD_DIR=/home/ploi/royal-filter.com/current
-STAGING_DIR=/home/ploi/staging.royal-filter.com/current
+PROD_DIR=/home/ploi/pim.infivea.com/current
+STAGING_DIR=/home/ploi/pim-staging.infivea.com/current
 
 mkdir -p "$STAGING_DIR/public/var" "$STAGING_DIR/var"
 
@@ -136,7 +136,7 @@ In the staging Ploi site → **PHP version** → 8.3.
 After the first Ploi deploy pulls the branch:
 
 ```bash
-cd /home/ploi/staging.royal-filter.com/current
+cd /home/ploi/pim-staging.infivea.com/current
 set -a && source .env && set +a
 bash .ploi/first-deploy.sh
 ```
@@ -153,15 +153,15 @@ This:
 The transport names changed from `pimcore_*` to `opendxp_*`. Replace the existing supervisord program (typical path: `/etc/supervisor/conf.d/<site>-messenger.conf`):
 
 ```ini
-[program:staging-royal-filter-messenger]
-command=php /home/ploi/staging.royal-filter.com/current/bin/console messenger:consume opendxp_core opendxp_maintenance opendxp_scheduled_tasks opendxp_image_optimize opendxp_asset_update --memory-limit=250M --time-limit=3600
+[program:pim-staging-messenger]
+command=php /home/ploi/pim-staging.infivea.com/current/bin/console messenger:consume opendxp_core opendxp_maintenance opendxp_scheduled_tasks opendxp_image_optimize opendxp_asset_update --memory-limit=250M --time-limit=3600
 process_name=%(program_name)s_%(process_num)02d
 numprocs=1
 autostart=true
 autorestart=true
 user=ploi
-stdout_logfile=/home/ploi/staging.royal-filter.com/current/var/log/messenger.log
-stderr_logfile=/home/ploi/staging.royal-filter.com/current/var/log/messenger-error.log
+stdout_logfile=/home/ploi/pim-staging.infivea.com/current/var/log/messenger.log
+stderr_logfile=/home/ploi/pim-staging.infivea.com/current/var/log/messenger-error.log
 ```
 
 Reload:
@@ -169,7 +169,7 @@ Reload:
 ```bash
 sudo supervisorctl reread
 sudo supervisorctl update
-sudo supervisorctl restart staging-royal-filter-messenger:*
+sudo supervisorctl restart pim-staging-messenger:*
 ```
 
 ## 8. Update cron
@@ -177,37 +177,39 @@ sudo supervisorctl restart staging-royal-filter-messenger:*
 Replace any `pimcore:maintenance` cron entry with:
 
 ```cron
-*/5 * * * * cd /home/ploi/staging.royal-filter.com/current && /usr/bin/php bin/console opendxp:maintenance >/dev/null 2>&1
+*/5 * * * * cd /home/ploi/pim-staging.infivea.com/current && /usr/bin/php bin/console opendxp:maintenance >/dev/null 2>&1
 ```
 
 ## 9. Verification
 
 ```bash
 # HTTP
-curl -sI https://staging.royal-filter.com/admin/login | head -1
+curl -sI https://pim-staging.infivea.com/admin/login | head -1
 # Expected: HTTP/2 200
 
 # Title check
-curl -sL https://staging.royal-filter.com/admin/login | grep -oE '<title>[^<]+</title>'
+curl -sL https://pim-staging.infivea.com/admin/login | grep -oE '<title>[^<]+</title>'
 # Expected: <title>Welcome to OpenDXP!</title>
 
 # DB migrations status
-cd /home/ploi/staging.royal-filter.com/current
+cd /home/ploi/pim-staging.infivea.com/current
 php bin/console doctrine:migrations:status | grep -E 'New|Unavailable'
 # Expected: New: 0, Executed Unavailable: 0
 
 # GraphQL endpoint
-curl -X POST https://staging.royal-filter.com/opendxp-graphql-webservices/frontend \
+curl -X POST https://pim-staging.infivea.com/opendxp-graphql-webservices/frontend \
     -H 'Content-Type: application/json' \
     -d '{"query":"{__schema{queryType{name}}}"}'
 # Expected: {"data":{"__schema":{"queryType":{"name":"Query"}}}}
 
 # Worker beats
-sudo supervisorctl status staging-royal-filter-messenger:*
+sudo supervisorctl status pim-staging-messenger:*
 # Expected: RUNNING
 ```
 
-Then login at `https://staging.royal-filter.com/admin` with your existing prod account — works because of `opendxp.security.password.salt: "pimcore"` in `config/config.yaml`.
+Then login at `https://pim-staging.infivea.com/admin` with your existing prod account — works because of `opendxp.security.password.salt: "pimcore"` in `config/config.yaml`.
+
+After login, go to **Settings → System Settings → General** and update **Main domain** from `pimcore.royal-filter.com` to `pim-staging.infivea.com` so generated absolute URLs (e.g. preview links) resolve to the right host.
 
 ## 10. Smoke-test the business-critical flows
 
