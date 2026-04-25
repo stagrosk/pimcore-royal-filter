@@ -1,0 +1,284 @@
+# /etc/nginx/sites-available/pim.infivea.com
+#
+# Ploi-managed nginx vhost for the OpenDXP production site (pim.infivea.com).
+# Translated from the legacy Pimcore vhost: php-pimcore10 → php-opendxp,
+# pimcore_editmode/preview/version → opendxp_*, hostname pimcore.infivea.com → pim.infivea.com,
+# PHP-FPM socket bumped to 8.3.
+#
+# This file is a reference — the real config sits at /etc/nginx/sites-available/pim.infivea.com
+# and Ploi rewrites parts of it (the "Ploi Webserver Configuration, do not remove!" blocks).
+# Use this as the diff target when migrating the live vhost.
+
+# Ploi Webserver Configuration, do not remove!
+include /etc/nginx/ploi/pim.infivea.com/before/*;
+
+upstream php-opendxp {
+    server unix:/run/php/php8.3-fpm.sock;
+}
+
+map $args $static_page_root {
+    default                                 /var/tmp/pages;
+    "~*(^|&)opendxp_editmode=true(&|$)"     /var/nonexistent;
+    "~*(^|&)opendxp_preview=true(&|$)"      /var/nonexistent;
+    "~*(^|&)opendxp_version=[^&]+(&|$)"     /var/nonexistent;
+}
+
+map $uri $static_page_uri {
+    default                                 $uri;
+    "/"                                     /%home;
+}
+
+# ─── Tailnet-only admin access (Tailscale Serve: tailnet:443 → localhost:8081) ───
+server {
+    listen 8081;
+    server_name stagro-s1.tail27695b.ts.net;
+
+    root /home/ploi/pim.infivea.com/public;
+    index index.php;
+    charset utf-8;
+    client_max_body_size 100m;
+
+    access_log /var/log/nginx/pim.infivea.com-tailnet-access.log;
+    error_log  /var/log/nginx/pim.infivea.com-tailnet-error.log error;
+
+    add_header X-Frame-Options "SAMEORIGIN";
+    add_header X-XSS-Protection "1; mode=block";
+    add_header X-Content-Type-Options "nosniff";
+
+    error_page 404 /index.php;
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location = /robots.txt  { access_log off; log_not_found off; }
+
+    # Security — identical to the public block
+    location ~* /var/assets/.*\.php(/|$) { return 404; }
+    location ~* /\.(?!well-known/) { deny all; log_not_found off; access_log off; }
+    location ~* (?:\.(?:bak|conf(ig)?|dist|fla|in[ci]|log|psd|sh|sql|sw[op])|~)$ {
+        deny all;
+    }
+
+    location ~* ^/admin/external {
+        rewrite .* /index.php$is_args$args last;
+    }
+
+    location ~* .*/(image|video)-thumb__\d+__.* {
+        try_files /var/tmp/thumbnails$uri /index.php;
+        expires 2w;
+        access_log off;
+        add_header Cache-Control "public";
+    }
+
+    location ~* ^(?!/admin|/asset/webdav)(.+?)\.((?:css|js)(?:\.map)?|jpe?g|gif|png|svgz?|eps|exe|gz|zip|mp\d|m4a|ogg|ogv|webp|webm|pdf|docx?|xlsx?|pptx?)$ {
+        try_files /var/assets$uri $uri =404;
+        expires 2w;
+        access_log off;
+        log_not_found off;
+        add_header Cache-Control "public";
+    }
+
+    # OpenDXP head-link cache-busting
+    rewrite ^/cache-buster-(?:\d+)/(.*) /$1 last;
+
+    location / {
+        error_page 404 /meta/404;
+        try_files $static_page_root$static_page_uri.html $uri /index.php$is_args$args;
+    }
+
+    location ~ ^/index\.php(/|$) {
+        send_timeout 1800;
+        fastcgi_read_timeout 1800;
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        try_files $fastcgi_script_name =404;
+        include fastcgi.conf;
+        set $path_info $fastcgi_path_info;
+        fastcgi_param PATH_INFO $path_info;
+        # Tailscale Serve terminates TLS at the tailnet edge; OpenDXP/Symfony
+        # needs to know the request was HTTPS so it doesn't generate http:// URLs.
+        fastcgi_param HTTPS on;
+        fastcgi_param HTTP_X_FORWARDED_PROTO https;
+        fastcgi_pass php-opendxp;
+        internal;
+    }
+}
+
+server {
+    #listen 80;
+    #listen [::]:80;
+
+    root /home/ploi/pim.infivea.com/public;
+    server_name pim.infivea.com;
+
+    # LISTEN, SSL Certificate and Key
+    # To run letsencrypt you can use the following command:
+    # certbot certonly -n --expand --nginx -d YOUPROJECT.local
+    # Depending on your OS you might need to install python-certbot-nginx
+    include /etc/nginx/ssl/pim.infivea.com;
+
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers 'ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA:ECDHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES256-SHA:ECDHE-ECDSA-DES-CBC3-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:DES-CBC3-SHA:!DSS';
+    ssl_prefer_server_ciphers on;
+    ssl_dhparam /etc/nginx/dhparams.pem;
+
+    index index.php index.html;
+
+    # Filesize depending on your data
+    client_max_body_size 100m;
+
+    add_header X-Frame-Options "SAMEORIGIN";
+    add_header X-XSS-Protection "1; mode=block";
+    add_header X-Content-Type-Options "nosniff";
+
+    charset utf-8;
+
+    # Ploi Configuration, do not remove!
+    include /etc/nginx/ploi/pim.infivea.com/server/*;
+
+    access_log /var/log/nginx/pim.infivea.com-access.log;
+    error_log  /var/log/nginx/pim.infivea.com-error.log error;
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location = /robots.txt  { access_log off; log_not_found off; }
+
+    error_page 404 /index.php;
+
+    # Protected Assets
+    #
+    ### 1. Option - Restricting access to certain assets completely
+    #
+    # location ~ ^/protected/.* {
+    #   return 403;
+    # }
+    # location ~ ^/var/.*/protected(.*) {
+    #   return 403;
+    # }
+    #
+    # location ~ ^/cache-buster\-[\d]+/protected(.*) {
+    #   return 403;
+    # }
+    #
+    ### 2. Option - Checking permissions before delivery
+    #
+    # rewrite ^(/protected/.*) /index.php$is_args$args last;
+    #
+    # location ~ ^/var/.*/protected(.*) {
+    #   return 403;
+    # }
+    #
+    # location ~ ^/cache-buster\-[\d]+/protected(.*) {
+    #   return 403;
+    # }
+
+    # OpenDXP Head-Link Cache-Busting
+    rewrite ^/cache-buster-(?:\d+)/(.*) /$1 last;
+
+    # Stay secure
+    #
+    # a) don't allow PHP in folders allowing file uploads
+    location ~* /var/assets/.*\.php(/|$) {
+        return 404;
+    }
+    # b) Prevent clients from accessing hidden files (starting with a dot)
+    # Access to `/.well-known/` is allowed.
+    # https://www.mnot.net/blog/2010/04/07/well-known
+    # https://tools.ietf.org/html/rfc5785
+    location ~* /\.(?!well-known/) {
+        deny all;
+        log_not_found off;
+        access_log off;
+    }
+    # c) Prevent clients from accessing to backup/config/source files
+    location ~* (?:\.(?:bak|conf(ig)?|dist|fla|in[ci]|log|psd|sh|sql|sw[op])|~)$ {
+        deny all;
+    }
+
+    # Some Admin Modules need this:
+    # Server Info, Opcache
+    location ~* ^/admin/external {
+        rewrite .* /index.php$is_args$args last;
+    }
+
+    # Thumbnails
+    location ~* .*/(image|video)-thumb__\d+__.* {
+        try_files /var/tmp/thumbnails$uri /index.php;
+        expires 2w;
+        access_log off;
+        add_header Cache-Control "public";
+    }
+
+    # Assets
+    # Allowlist approach so missing files don't go through PHP. If you switch to remote storage
+    # (S3 / GCS), drop this block and configure prefixes per OpenDXP file-storage docs.
+    location ~* ^(?!/admin|/asset/webdav)(.+?)\.((?:css|js)(?:\.map)?|jpe?g|gif|png|svgz?|eps|exe|gz|zip|mp\d|m4a|ogg|ogv|webp|webm|pdf|docx?|xlsx?|pptx?)$ {
+        try_files /var/assets$uri $uri =404;
+        expires 2w;
+        access_log off;
+        log_not_found off;
+        add_header Cache-Control "public";
+    }
+
+    # Block public admin access — admin is reachable only over Tailscale (port 8081 above).
+    location ^~ /admin {
+        return 403;
+    }
+
+    location / {
+        error_page 404 /meta/404;
+        try_files $static_page_root$static_page_uri.html $uri /index.php$is_args$args;
+    }
+
+    # Use this location when the installer has to be run
+    # location ~ /(index|install)\.php(/|$) {
+    #
+    # Use this after initial install is done:
+    location ~ ^/index\.php(/|$) {
+        send_timeout 1800;
+        fastcgi_read_timeout 1800;
+        # regex to split $uri to $fastcgi_script_name and $fastcgi_path_info
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        # Check that the PHP script exists before passing it
+        try_files $fastcgi_script_name =404;
+        # include fastcgi.conf if needed
+        include fastcgi.conf;
+        # Bypass the fact that try_files resets $fastcgi_path_info
+        # see: http://trac.nginx.org/nginx/ticket/321
+        set $path_info $fastcgi_path_info;
+        fastcgi_param PATH_INFO $path_info;
+
+        # Activate these, if using Symlinks and opcache
+        # fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        # fastcgi_param DOCUMENT_ROOT $realpath_root;
+
+        fastcgi_pass php-opendxp;
+        # Prevents URIs that include the front controller. This will 404:
+        # http://domain.tld/index.php/some-path
+        # Remove the internal directive to allow URIs like this
+        internal;
+    }
+
+    # PHP-FPM Status and Ping
+    location /fpm- {
+        access_log off;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        location /fpm-status {
+            allow 127.0.0.1;
+            # add additional IP's or Ranges
+            deny all;
+            fastcgi_pass php-opendxp;
+        }
+        location /fpm-ping {
+            fastcgi_pass php-opendxp;
+        }
+    }
+    # nginx Status
+    # see: https://nginx.org/en/docs/http/ngx_http_stub_status_module.html
+    location /nginx-status {
+        allow 127.0.0.1;
+        deny all;
+        access_log off;
+        stub_status;
+    }
+}
+
+# Ploi Webserver Configuration, do not remove!
+include /etc/nginx/ploi/pim.infivea.com/after/*;
