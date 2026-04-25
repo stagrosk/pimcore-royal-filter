@@ -1,22 +1,24 @@
 #!/usr/bin/env bash
-# Ploi.io deploy script for OpenDXP (post-Pimcore migration).
-# Place this content in Ploi → Site → Deploy Script (or run directly: bash .ploi/deploy.sh)
+# Standard deploy script for OpenDXP — runs on every Ploi deploy after Git pull.
+#
+# Usage in Ploi UI (Site → Deploy Script), keep ONE line:
+#     cd {RELEASE} && bash .ploi/deploy.sh
+#
+# Ploi already does the Git fetch + checkout into {RELEASE} before calling this.
+# Do NOT add `git pull` here — Ploi handles it.
+#
+# For a first-time cut-over from Pimcore → OpenDXP, run .ploi/first-deploy.sh ONCE
+# before this script (it adds DB cleanup + var/versions migration).
 
 set -e
 set -o pipefail
 
-cd "{RELEASE}" 2>/dev/null || cd "$(dirname "$0")/.."
+echo "▶ OpenDXP deploy starting in: $(pwd)"
 
-echo "▶ Deploy starting in: $(pwd)"
-
-# 1) Pull latest code (Ploi already does this; here for safety on manual runs).
-git reset --hard origin/master
-git pull origin master --rebase=false
-
-# 2) Wipe build caches.
+# 1) Wipe build caches.
 rm -rf var/cache/* var/log/* 2>/dev/null || true
 
-# 3) Composer install (production-tuned).
+# 2) Composer install (production-tuned).
 composer install \
     --no-interaction \
     --no-progress \
@@ -25,26 +27,26 @@ composer install \
     --optimize-autoloader \
     --classmap-authoritative
 
-# 4) Stop messenger workers (supervisord will restart them).
+# 3) Stop messenger workers — supervisord restarts them.
 php bin/console messenger:stop-workers || true
 
-# 5) Rebuild OpenDXP class-, fieldcollection- and brick-definitions from var/classes/*.
+# 4) Rebuild OpenDXP class / fieldcollection / brick definitions from var/classes/*.
 php bin/console opendxp:deployment:classes-rebuild -c -d -n -f -v
 
-# 6) Doctrine migrations — run all available (OpenDxp + App namespaces).
+# 5) Run all pending Doctrine migrations (App + OpenDxp namespaces).
 php bin/console doctrine:migrations:migrate --no-interaction --allow-no-migration
 
-# 7) DataHub: rebuild workspaces from settings_store + GraphQL definitions.
+# 6) DataHub: rebuild workspaces from settings_store.
 php bin/console datahub:configuration:rebuild-workspaces || true
 
-# 8) Public assets (symlinked).
+# 7) Public assets (symlinked into public/bundles/).
 php bin/console assets:install --relative --symlink public
 
-# 9) Final cache warm-up in prod env.
+# 8) Final prod cache build.
 php bin/console cache:clear --env=prod --no-debug
 php bin/console cache:warmup --env=prod --no-debug
 
-# 10) Reload PHP-FPM so OPcache picks up the new release.
+# 9) Reload PHP-FPM so OPcache picks up the new release.
 echo "" | sudo -S service php8.3-fpm reload || true
 
 echo "🚀 OpenDXP deployed successfully."

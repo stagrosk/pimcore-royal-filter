@@ -33,21 +33,13 @@ Composer 2.7+, MySQL 8.0+, Redis, RabbitMQ, supervisord — same as before.
    ```
 2. **Replace `.env`** with the contents of `.env.prod.example` and fill in real secrets.
 3. **First deploy must run from the migration branch** (`feat/opendxp-migration`) until merged to `master`.
-4. **Bundle marker cleanup** (one-shot, only if the host had Pimcore installed before):
-   ```sql
-   -- run in the production DB
-   UPDATE settings_store SET id = REPLACE(id, 'BUNDLE_INSTALLED__Pimcore', 'BUNDLE_INSTALLED__OpenDxp')
-    WHERE id LIKE 'BUNDLE_INSTALLED__Pimcore%';
-   DELETE FROM settings_store WHERE id LIKE 'BUNDLE_INSTALLED__OpenDxp%Pimcore%Bundle';
-   DELETE FROM migration_versions WHERE version REGEXP '^Pimcore\\\\Bundle\\\\(Core|DataHub|Uuid)Bundle\\\\';
-   TRUNCATE TABLE cache_items;
-   ```
-   The Doctrine migration `App\Migrations\Version20260424OpenDxpRename` does the same automatically — but running it pre-deploy avoids the migrator’s warning about “116 previously executed unavailable migrations”.
-5. **Migrate serialized version files** (only if you keep `var/versions/` between releases — Ploi typically wipes it, but we don't):
+4. **First-time cut-over**: run [`.ploi/first-deploy.sh`](.ploi/first-deploy.sh) ONCE on the server. It backs up the DB, cleans `settings_store` + `migration_versions`, migrates `var/versions/` serialized dumps, then hands off to the regular `.ploi/deploy.sh`. Run it manually over SSH from the release directory:
    ```bash
-   php bin/console app:migrate-version-files --dry-run
-   php bin/console app:migrate-version-files
+   cd /home/ploi/<site>/current
+   source .env
+   bash .ploi/first-deploy.sh
    ```
+   (The script is idempotent — safe to re-run if interrupted.)
 
 ## Ploi.io configuration
 
@@ -57,7 +49,15 @@ Paste the contents of [`.env.prod.example`](.env.prod.example) and replace place
 
 ### Site → Deploy Script
 
-Replace the existing script with the contents of [`.ploi/deploy.sh`](.ploi/deploy.sh). Key differences vs the old Pimcore one:
+Both scripts live in the repo, so the Ploi field stays minimal. Use **one line**:
+
+```bash
+cd {RELEASE} && bash .ploi/deploy.sh
+```
+
+`{RELEASE}` is Ploi's placeholder for the release directory (Ploi expands it before invocation). The actual deploy steps live in [`.ploi/deploy.sh`](.ploi/deploy.sh) — no need to copy them into the Ploi UI.
+
+Key differences vs the old Pimcore script:
 
 | Old Pimcore script | New OpenDXP script | Why |
 |---|---|---|
