@@ -1,10 +1,7 @@
-FROM opendxp/opendxp:php8.3-supervisord-latest
+FROM opendxp/opendxp:php8.3-debug-latest
 
-# Install pdo_mysql extension
-RUN docker-php-ext-install pdo_mysql
-
-# Install ACL utilities for file permission management
-RUN rm -f /etc/apt/sources.list.d/mysql.list && apt-get update && apt-get install -y acl && rm -rf /var/lib/apt/lists/*
+# Install ACL utilities for file permission management (pdo_mysql is already in the OpenDXP base image)
+RUN apt-get update && apt-get install -y --no-install-recommends acl && rm -rf /var/lib/apt/lists/*
 
 # Set default ACL on asset directories so www-data can always read/write/delete
 COPY .docker/php/entrypoint.sh /usr/local/bin/custom-entrypoint.sh

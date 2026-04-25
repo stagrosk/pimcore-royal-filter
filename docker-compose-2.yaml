@@ -8,16 +8,13 @@ services:
         working_dir: /application
         command: [ mysqld, --character-set-server=utf8mb4, --collation-server=utf8mb4_unicode_ci, --innodb-file-per-table=1 ]
         volumes:
-            - pimcore-database:/var/lib/mysql
+            - opendxp-database:/var/lib/mysql
         environment:
             - MYSQL_ROOT_PASSWORD=ROOT
             - MYSQL_DATABASE=pimcore
             - MYSQL_USER=pimcore
             - MYSQL_PASSWORD=pimcore
         healthcheck:
-            # The service is considered healthy when:
-            # - connection to pimcore db can be established, and
-            # - we can run a simple SQL query.
             test: [ "CMD-SHELL", "mysql -h db -u$$MYSQL_USER -p$$MYSQL_PASSWORD $$MYSQL_DATABASE -e 'SHOW TABLES;'" ]
             interval: 10s
             retries: 6
@@ -36,17 +33,17 @@ services:
 
     php:
         #user: '1000:1000' # set to your uid:gid
-        image: pimcore/pimcore:php8.2-debug-latest
+        image: opendxp/opendxp:php8.3-debug-latest
         environment:
             COMPOSER_HOME: /var/www/html
             PHP_IDE_CONFIG: serverName=localhost
             # Feed installer configuration via ENV variables.
-            # See: https://pimcore.com/docs/pimcore/current/Development_Documentation/Getting_Started/Advanced_Installation_Topics.html#page_Advanced-Installation-Topics
-            PIMCORE_INSTALL_MYSQL_USERNAME: pimcore
-            PIMCORE_INSTALL_MYSQL_PASSWORD: pimcore
-            PIMCORE_INSTALL_MYSQL_PORT: 3306
-            PIMCORE_INSTALL_MYSQL_HOST_SOCKET: db
-            PIMCORE_INSTALL_MYSQL_DATABASE: pimcore
+            # See: https://github.com/open-dxp/opendxp/tree/1.x/doc/01_Getting_Started/02_Advanced_Installation_Topics
+            OPENDXP_INSTALL_MYSQL_USERNAME: pimcore
+            OPENDXP_INSTALL_MYSQL_PASSWORD: pimcore
+            OPENDXP_INSTALL_MYSQL_PORT: 3306
+            OPENDXP_INSTALL_MYSQL_HOST_SOCKET: db
+            OPENDXP_INSTALL_MYSQL_DATABASE: pimcore
         depends_on:
             db:
                 condition: service_healthy
@@ -55,13 +52,13 @@ services:
 
     supervisord:
         #user: '1000:1000' # set to your uid:gid
-        image: pimcore/pimcore:php8.2-supervisord-latest
+        image: opendxp/opendxp:php8.3-supervisord-latest
         depends_on:
             db:
                 condition: service_healthy
         volumes:
             - .:/var/www/html
-            - ./.docker/supervisord.conf:/etc/supervisor/conf.d/pimcore.conf:ro
+            - ./.docker/supervisord.conf:/etc/supervisor/conf.d/opendxp.conf:ro
 
     # The following two services are used for testing.
     # We restrict these services to the test profile only, so we don't spin them up with every `docker compose up`.
@@ -70,26 +67,26 @@ services:
         profiles: [ 'test' ]
         extends: db
         volumes:
-            - pimcore-test-database:/var/lib/mysql
+            - opendxp-test-database:/var/lib/mysql
 
     test-php:
         profiles: [ 'test' ]
         extends: php
         environment:
             APP_ENV: test
-            PIMCORE_TEST_DB_DSN: ${PIMCORE_TEST_DB_DSN:-mysql://pimcore:pimcore@test-db/pimcore}
-            PIMCORE_INSTALL_ADMIN_USERNAME: pimcore
-            PIMCORE_INSTALL_ADMIN_PASSWORD: pimcore
-            PIMCORE_INSTALL_MYSQL_HOST_SOCKET: test-db
+            OPENDXP_TEST_DB_DSN: ${OPENDXP_TEST_DB_DSN:-mysql://pimcore:pimcore@test-db/pimcore}
+            OPENDXP_INSTALL_ADMIN_USERNAME: pimcore
+            OPENDXP_INSTALL_ADMIN_PASSWORD: pimcore
+            OPENDXP_INSTALL_MYSQL_HOST_SOCKET: test-db
         depends_on:
             test-db:
                 condition: service_healthy
         volumes:
-            - pimcore-test-var:/var/www/html/var
-            - pimcore-test-public-var:/var/www/html/public/var
+            - opendxp-test-var:/var/www/html/var
+            - opendxp-test-public-var:/var/www/html/public/var
 
 volumes:
-    pimcore-database:
-    pimcore-test-database:
-    pimcore-test-var:
-    pimcore-test-public-var:
+    opendxp-database:
+    opendxp-test-database:
+    opendxp-test-var:
+    opendxp-test-public-var:
