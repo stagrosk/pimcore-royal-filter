@@ -68,11 +68,14 @@ STAGING_DIR=/home/ploi/pim-staging.infivea.com/current
 
 mkdir -p "$STAGING_DIR/public/var" "$STAGING_DIR/var"
 
-# Assets (images, PDFs, ...) — can be a few GB; takes a while
-rsync -aP --delete "$PROD_DIR/public/var/assets/"   "$STAGING_DIR/public/var/assets/"
+# Assets (images, PDFs, ...) — can be a few GB; takes a while.
+# DROP `--delete` if you want to KEEP files that exist only on staging (e.g. test uploads
+# you've made through the staging admin UI). With `--delete` rsync mirrors prod 1:1 and
+# wipes anything in staging that's not present on prod.
+rsync -aP "$PROD_DIR/public/var/assets/"   "$STAGING_DIR/public/var/assets/"
 
 # Optional: thumbnails (regen-able, but speeds up first page load)
-rsync -aP --delete "$PROD_DIR/public/var/tmp/"      "$STAGING_DIR/public/var/tmp/"
+rsync -aP "$PROD_DIR/public/var/tmp/"      "$STAGING_DIR/public/var/tmp/"
 
 # Versions (if you want to keep version history visible in staging)
 rsync -aP "$PROD_DIR/var/versions/" "$STAGING_DIR/var/versions/"
