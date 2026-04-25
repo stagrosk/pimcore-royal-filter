@@ -4,8 +4,8 @@ Quick, copy-paste-friendly steps for spinning up the OpenDXP staging environment
 
 Assumptions:
 - Production DB on the same host = `pimcore_royalfilter` (live, has data)
-- Staging DB exists but empty = `pim-staging` (note the dash — must be backtick-quoted in SQL)
-- Staging DB user already provisioned with `GRANT ALL ON \`pim-staging\`.*` = `pim_staging` (underscore in user name)
+- Staging DB exists but empty = `pim_staging`
+- Staging DB user already provisioned with `GRANT ALL ON pim_staging.*` = `pim_staging`
 - Staging Ploi site already exists and points the document root to `public/`
 
 ## 1. Cloudflare
@@ -29,19 +29,18 @@ mysqldump \
 echo "Dump size: $(du -h "$DUMP" | cut -f1)"
 
 # Wipe whatever is in staging schema and recreate it cleanly.
-# `pim-staging` has a dash — backtick-quote it everywhere in SQL.
 mysql -u root -p <<'SQL'
-DROP DATABASE IF EXISTS `pim-staging`;
-CREATE DATABASE `pim-staging` CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-GRANT ALL PRIVILEGES ON `pim-staging`.* TO 'pim_staging'@'localhost';
+DROP DATABASE IF EXISTS pim_staging;
+CREATE DATABASE pim_staging CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+GRANT ALL PRIVILEGES ON pim_staging.* TO 'pim_staging'@'localhost';
 FLUSH PRIVILEGES;
 SQL
 
 # Import prod dump into staging
-mysql -u pim_staging -p pim-staging < "$DUMP"
+mysql -u pim_staging -p pim_staging < "$DUMP"
 
 # Sanity check — count tables
-mysql -u pim_staging -p -e "SELECT COUNT(*) AS tables FROM information_schema.tables WHERE table_schema='pim-staging';"
+mysql -u pim_staging -p -e "SELECT COUNT(*) AS tables FROM information_schema.tables WHERE table_schema='pim_staging';"
 ```
 
 ## 3. Copy production assets to staging release dir
@@ -77,7 +76,7 @@ sudo chown -R ploi:ploi "$STAGING_DIR/public/var" "$STAGING_DIR/var"
 Paste contents of [`.env.staging.example`](.env.staging.example) into Ploi → Environment and replace every `__REPLACE_ME__` with the real secret.
 
 Key staging-specific values already preset in the file:
-- `DB_NAME=pim-staging`, `DB_USER=pim_staging`
+- `DB_NAME=pim_staging`, `DB_USER=pim_staging`
 - `STOREFRONT_URL=https://staging-storefront.royal-filter.com`
 - Other secrets (DeepL, PIMCORE_API_KEY, PIMCORE_BRIDGE_WEBHOOK_SECRET, CACHE_INVALIDATE_SECRET) — must be set, ideally **different** from production.
 
@@ -119,7 +118,7 @@ bash .ploi/first-deploy.sh
 ```
 
 This:
-1. Backs up `pim-staging` to `/tmp/pim-staging-pre-opendxp-<timestamp>.sql`
+1. Backs up `pim_staging` to `/tmp/pim_staging-pre-opendxp-<timestamp>.sql`
 2. Runs the SQL housekeeping (settings_store, migration_versions, cache_items)
 3. `composer install --no-dev`
 4. Migrates `var/versions/` (str_replace `Pimcore\` → `OpenDxp\`)
