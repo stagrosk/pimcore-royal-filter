@@ -349,7 +349,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
      'labelWidth' => 100,
      'labelAlign' => 'left',
   )),
-   'icon' => '/bundles/pimcoreadmin/img/flat-color-icons/globe.svg',
+   'icon' => '/bundles/opendxpadmin/img/flat-color-icons/globe.svg',
    'group' => '',
    'showAppLoggerTab' => false,
    'linkGeneratorReference' => '',

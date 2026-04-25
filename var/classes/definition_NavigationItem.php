@@ -216,7 +216,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
      'labelWidth' => 100,
      'labelAlign' => 'left',
   )),
-   'icon' => '/bundles/pimcoreadmin/img/flat-color-icons/menu.svg',
+   'icon' => '/bundles/opendxpadmin/img/flat-color-icons/menu.svg',
    'group' => 'Content',
    'showAppLoggerTab' => false,
    'linkGeneratorReference' => '',
