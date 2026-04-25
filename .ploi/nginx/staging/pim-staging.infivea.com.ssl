@@ -1,7 +1,11 @@
 # /etc/nginx/sites-available/pim-staging.infivea.com
 #
-# OpenDXP staging — SSL-enabled, fully self-contained. Use AFTER Ploi has
-# issued a Let's Encrypt cert.
+# OpenDXP staging vhost — SSL-enabled, **public-facing access fully locked down**.
+# Both `/` and `/admin` return 403 on the public Internet. The full app
+# is reachable ONLY through the Tailnet on :8082 via Tailscale Serve:
+#   sudo tailscale serve --bg --https=8443 http://localhost:8082
+#
+# Why port 8082 (not 8081)? Prod (pim.infivea.com) already owns 8081 on the same host.
 
 upstream php-opendxp-staging {
     server unix:/run/php/php8.3-fpm.sock;
@@ -19,78 +23,33 @@ map $uri $static_page_uri {
     "/"                                     /%home;
 }
 
-# ─── Redirect HTTP → HTTPS (apex + every subdomain) ───
+# ─── Tailnet-only full app (Tailscale Serve: tailnet:8443 → localhost:8082) ───
+# Enable on the server with:
+#   sudo tailscale serve --bg --https=8443 http://localhost:8082
 server {
-    listen 80;
-    listen [::]:80;
-    server_name .pim-staging.infivea.com;
-
-    # ACME HTTP-01 challenge for renewals — must stay on HTTP, never redirected.
-    location /.well-known/acme-challenge/ {
-        root /home/ploi/pim-staging.infivea.com/public;
-        allow all;
-        auth_basic off;
-        default_type "text/plain";
-    }
-
-    location / {
-        return 301 https://$host$request_uri;
-    }
-}
-
-# ─── Redirect www → non-www on HTTPS ───
-server {
-    listen 443 ssl http2;
-    listen [::]:443 ssl http2;
-    ssl_certificate     /etc/letsencrypt/live/pim-staging.infivea.com/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/pim-staging.infivea.com/privkey.pem;
-    server_name www.pim-staging.infivea.com;
-    return 301 https://pim-staging.infivea.com$request_uri;
-}
-
-# ─── Main public app on HTTPS ───
-server {
-    listen 443 ssl http2;
-    listen [::]:443 ssl http2;
-    ssl_certificate     /etc/letsencrypt/live/pim-staging.infivea.com/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/pim-staging.infivea.com/privkey.pem;
+    listen 8082;
+    server_name stagro-s1.tail27695b.ts.net;
 
     root /home/ploi/pim-staging.infivea.com/public;
-    server_name pim-staging.infivea.com;
-
-    ssl_protocols TLSv1.2 TLSv1.3;
-    ssl_ciphers 'ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA:ECDHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES256-SHA:ECDHE-ECDSA-DES-CBC3-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:DES-CBC3-SHA:!DSS';
-    ssl_prefer_server_ciphers on;
-    ssl_dhparam /etc/nginx/dhparams.pem;
-
-    index index.php index.html;
+    index index.php;
+    charset utf-8;
     client_max_body_size 100m;
     large_client_header_buffers 4 32k;
+
+    access_log /var/log/nginx/pim-staging.infivea.com-tailnet-access.log;
+    error_log  /var/log/nginx/pim-staging.infivea.com-tailnet-error.log error;
 
     add_header X-Frame-Options "SAMEORIGIN";
     add_header X-XSS-Protection "1; mode=block";
     add_header X-Content-Type-Options "nosniff";
 
-    charset utf-8;
-
-    access_log /var/log/nginx/pim-staging.infivea.com-access.log;
-    error_log  /var/log/nginx/pim-staging.infivea.com-error.log error;
+    error_page 404 /index.php;
 
     location = /favicon.ico { access_log off; log_not_found off; }
     location = /robots.txt  { access_log off; log_not_found off; }
 
-    error_page 404 /index.php;
-
-    rewrite ^/cache-buster-(?:\d+)/(.*) /$1 last;
-
-    location ~* /var/assets/.*\.php(/|$) {
-        return 404;
-    }
-    location ~* /\.(?!well-known/) {
-        deny all;
-        log_not_found off;
-        access_log off;
-    }
+    location ~* /var/assets/.*\.php(/|$) { return 404; }
+    location ~* /\.(?!well-known/) { deny all; log_not_found off; access_log off; }
     location ~* (?:\.(?:bak|conf(ig)?|dist|fla|in[ci]|log|psd|sh|sql|sw[op])|~)$ {
         deny all;
     }
@@ -114,6 +73,8 @@ server {
         add_header Cache-Control "public";
     }
 
+    rewrite ^/cache-buster-(?:\d+)/(.*) /$1 last;
+
     location / {
         error_page 404 /meta/404;
         try_files $static_page_root$static_page_uri.html $uri /index.php$is_args$args;
@@ -127,28 +88,48 @@ server {
         include fastcgi.conf;
         set $path_info $fastcgi_path_info;
         fastcgi_param PATH_INFO $path_info;
+        # Tailscale Serve terminates TLS at the tailnet edge.
+        fastcgi_param HTTPS on;
+        fastcgi_param HTTP_X_FORWARDED_PROTO https;
         fastcgi_pass php-opendxp-staging;
         internal;
     }
+}
 
-    location /fpm- {
-        access_log off;
-        include fastcgi_params;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        location /fpm-status {
-            allow 127.0.0.1;
-            deny all;
-            fastcgi_pass php-opendxp-staging;
-        }
-        location /fpm-ping {
-            fastcgi_pass php-opendxp-staging;
-        }
+# ─── HTTP :80 — ACME challenge + redirect everything else to HTTPS ───
+server {
+    listen 80;
+    listen [::]:80;
+    server_name .pim-staging.infivea.com;
+
+    location /.well-known/acme-challenge/ {
+        root /home/ploi/pim-staging.infivea.com/public;
+        allow all;
+        auth_basic off;
+        default_type "text/plain";
     }
 
-    location /nginx-status {
-        allow 127.0.0.1;
-        deny all;
-        access_log off;
-        stub_status;
+    location / {
+        return 301 https://$host$request_uri;
     }
+}
+
+# ─── HTTPS :443 — block everything from the public Internet ───
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    ssl_certificate     /etc/letsencrypt/live/pim-staging.infivea.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/pim-staging.infivea.com/privkey.pem;
+
+    server_name pim-staging.infivea.com www.pim-staging.infivea.com;
+
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_prefer_server_ciphers on;
+
+    access_log /var/log/nginx/pim-staging.infivea.com-access.log;
+    error_log  /var/log/nginx/pim-staging.infivea.com-error.log error;
+
+    # Hard block for all public traffic.
+    # Real app is on the Tailnet — see :8082 server block above.
+    return 403;
 }

@@ -1,7 +1,11 @@
 # /etc/nginx/sites-available/pim-staging.infivea.com
 #
-# OpenDXP staging — HTTP-only, fully self-contained. Use BEFORE Let's Encrypt.
+# OpenDXP staging vhost — HTTP-only variant. Use BEFORE Let's Encrypt.
 # After SSL is issued, swap to pim-staging.infivea.com.ssl.
+#
+# Public access fully locked down even on HTTP — only the ACME HTTP-01 challenge
+# is served. Full app reachable only via Tailnet on :8082
+# (`sudo tailscale serve --bg --https=8443 http://localhost:8082`).
 
 upstream php-opendxp-staging {
     server unix:/run/php/php8.3-fpm.sock;
@@ -19,48 +23,31 @@ map $uri $static_page_uri {
     "/"                                     /%home;
 }
 
+# ─── Tailnet-only full app (Tailscale Serve: tailnet:8443 → localhost:8082) ───
 server {
-    listen 80;
-    listen [::]:80;
+    listen 8082;
+    server_name stagro-s1.tail27695b.ts.net;
 
     root /home/ploi/pim-staging.infivea.com/public;
-    server_name pim-staging.infivea.com;
-
-    index index.php index.html;
+    index index.php;
+    charset utf-8;
     client_max_body_size 100m;
     large_client_header_buffers 4 32k;
+
+    access_log /var/log/nginx/pim-staging.infivea.com-tailnet-access.log;
+    error_log  /var/log/nginx/pim-staging.infivea.com-tailnet-error.log error;
 
     add_header X-Frame-Options "SAMEORIGIN";
     add_header X-XSS-Protection "1; mode=block";
     add_header X-Content-Type-Options "nosniff";
 
-    charset utf-8;
-
-    access_log /var/log/nginx/pim-staging.infivea.com-access.log;
-    error_log  /var/log/nginx/pim-staging.infivea.com-error.log error;
-
-    # ACME HTTP-01 challenge — leave this open even when basic-auth is enabled.
-    location /.well-known/acme-challenge/ {
-        allow all;
-        auth_basic off;
-        default_type "text/plain";
-    }
+    error_page 404 /index.php;
 
     location = /favicon.ico { access_log off; log_not_found off; }
     location = /robots.txt  { access_log off; log_not_found off; }
 
-    error_page 404 /index.php;
-
-    rewrite ^/cache-buster-(?:\d+)/(.*) /$1 last;
-
-    location ~* /var/assets/.*\.php(/|$) {
-        return 404;
-    }
-    location ~* /\.(?!well-known/) {
-        deny all;
-        log_not_found off;
-        access_log off;
-    }
+    location ~* /var/assets/.*\.php(/|$) { return 404; }
+    location ~* /\.(?!well-known/) { deny all; log_not_found off; access_log off; }
     location ~* (?:\.(?:bak|conf(ig)?|dist|fla|in[ci]|log|psd|sh|sql|sw[op])|~)$ {
         deny all;
     }
@@ -84,6 +71,8 @@ server {
         add_header Cache-Control "public";
     }
 
+    rewrite ^/cache-buster-(?:\d+)/(.*) /$1 last;
+
     location / {
         error_page 404 /meta/404;
         try_files $static_page_root$static_page_uri.html $uri /index.php$is_args$args;
@@ -97,28 +86,31 @@ server {
         include fastcgi.conf;
         set $path_info $fastcgi_path_info;
         fastcgi_param PATH_INFO $path_info;
+        # Tailscale Serve terminates TLS at the tailnet edge.
+        fastcgi_param HTTPS on;
+        fastcgi_param HTTP_X_FORWARDED_PROTO https;
         fastcgi_pass php-opendxp-staging;
         internal;
     }
+}
 
-    location /fpm- {
-        access_log off;
-        include fastcgi_params;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        location /fpm-status {
-            allow 127.0.0.1;
-            deny all;
-            fastcgi_pass php-opendxp-staging;
-        }
-        location /fpm-ping {
-            fastcgi_pass php-opendxp-staging;
-        }
+# ─── Public HTTP :80 — only ACME challenge, everything else 403 ───
+server {
+    listen 80;
+    listen [::]:80;
+    server_name pim-staging.infivea.com www.pim-staging.infivea.com;
+
+    access_log /var/log/nginx/pim-staging.infivea.com-access.log;
+    error_log  /var/log/nginx/pim-staging.infivea.com-error.log error;
+
+    location /.well-known/acme-challenge/ {
+        root /home/ploi/pim-staging.infivea.com/public;
+        allow all;
+        auth_basic off;
+        default_type "text/plain";
     }
 
-    location /nginx-status {
-        allow 127.0.0.1;
-        deny all;
-        access_log off;
-        stub_status;
+    location / {
+        return 403;
     }
 }
