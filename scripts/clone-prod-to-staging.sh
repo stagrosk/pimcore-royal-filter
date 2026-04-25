@@ -1,24 +1,33 @@
 #!/usr/bin/env bash
-# Clone production DB → staging DB.
+# Clone production DB + filesystem assets → staging.
 #
 # Reads credentials from each site's .env (no hardcoded secrets).
-# Same MySQL host assumed (per PROD.md side-by-side setup).
+# Same MySQL host & same server assumed (per PROD.md side-by-side setup).
 #
 # Usage:
-#     bash scripts/clone-prod-to-staging.sh                # interactive (asks confirmation)
+#     bash scripts/clone-prod-to-staging.sh                # full clone (DB + files)
 #     bash scripts/clone-prod-to-staging.sh --yes          # non-interactive
+#     bash scripts/clone-prod-to-staging.sh --db-only      # skip rsync
+#     bash scripts/clone-prod-to-staging.sh --files-only   # skip DB
 #     PROD_ENV=/path/.env STAGING_ENV=/path/.env bash scripts/clone-prod-to-staging.sh
 #
 # Default env locations:
 #     PROD_ENV     = ~/pim.infivea.com/.env
 #     STAGING_ENV  = ~/pim-staging.infivea.com/.env
 #
+# What it syncs (per PROD.md cut-over guide):
+#     public/var/assets/   user-uploaded media (images, PDFs, …)  — required
+#     public/var/tmp/      thumbnails (regen-able but slow first hit)
+#     var/versions/        OpenDXP version history
+#     var/email-log/       email logs (optional, small)
+#
 # Steps:
 #   1. parse DB_* from both .env files
-#   2. mysqldump prod (single-transaction, no DEFINER, no GTID, no tablespaces)
-#   3. backup current staging DB to /tmp before load (safety net)
+#   2. backup current staging DB → /tmp before drop (rollback safety)
+#   3. mysqldump prod (single-transaction, no DEFINER, no GTID, no tablespaces)
 #   4. drop & recreate staging schema, load prod dump
-#   5. clean up dump files (kept in /tmp for 24h via filename mtime)
+#   5. rsync prod → staging asset/thumb/versions dirs (--delete = mirror)
+#   6. fixup ownership + cache reminders
 
 set -euo pipefail
 
@@ -30,11 +39,15 @@ TMP_DIR="${TMPDIR:-/tmp}"
 PROD_DUMP="$TMP_DIR/clone-prod-${TS}.sql"
 STAGING_BACKUP="$TMP_DIR/staging-backup-${TS}.sql"
 ASSUME_YES=0
+DO_DB=1
+DO_FILES=1
 
 for arg in "$@"; do
     case "$arg" in
-        -y|--yes) ASSUME_YES=1 ;;
-        -h|--help) sed -n '2,30p' "$0"; exit 0 ;;
+        -y|--yes)        ASSUME_YES=1 ;;
+        --db-only)       DO_FILES=0 ;;
+        --files-only)    DO_DB=0 ;;
+        -h|--help)       sed -n '2,33p' "$0"; exit 0 ;;
         *) echo "unknown arg: $arg"; exit 1 ;;
     esac
 done
@@ -42,11 +55,10 @@ done
 die() { echo "❌ $*" >&2; exit 1; }
 hr()  { printf '%.0s─' {1..60}; echo; }
 
-# ── 1. Parse DB_* vars from a .env file safely (no eval) ──────────────────
+# ── parse DB_* vars from a .env file safely (no eval) ────────────────────
 parse_env() {
     local file="$1"
     [ -f "$file" ] || die "env file not found: $file"
-    # Match DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT — ignore quotes.
     awk -F= '
         /^DB_(HOST|PORT|NAME|USER|PASSWORD)=/ {
             val=$2
@@ -81,64 +93,120 @@ STAGING_DB_PORT="${STAGING_DB_PORT:-3306}"
 
 [ "$PROD_DB_NAME" = "$STAGING_DB_NAME" ] && die "prod and staging DB names are identical — refusing"
 
+# Site roots derived from .env file location (sibling to project root).
+PROD_ROOT="$(dirname "$(realpath "$PROD_ENV")")"
+STAGING_ROOT="$(dirname "$(realpath "$STAGING_ENV")")"
+[ "$PROD_ROOT" = "$STAGING_ROOT" ] && die "prod and staging share the same project root — refusing"
+
+# Dirs to mirror (relative to project root). Skipped if source missing.
+SYNC_PATHS=(
+    "public/var/assets/"
+    "public/var/tmp/"
+    "var/versions/"
+    "var/email-log/"
+)
+
 hr
 echo "▶ Source (PROD):    ${PROD_DB_USER}@${PROD_DB_HOST}:${PROD_DB_PORT}/${PROD_DB_NAME}"
+echo "                    $PROD_ROOT"
 echo "▶ Target (STAGING): ${STAGING_DB_USER}@${STAGING_DB_HOST}:${STAGING_DB_PORT}/${STAGING_DB_NAME}"
-echo "▶ Dump:             $PROD_DUMP"
-echo "▶ Staging backup:   $STAGING_BACKUP"
+echo "                    $STAGING_ROOT"
+echo "▶ Mode:             DB=$DO_DB  Files=$DO_FILES"
+[ "$DO_DB" = 1 ] && echo "▶ Dump:             $PROD_DUMP"
+[ "$DO_DB" = 1 ] && echo "▶ Staging backup:   $STAGING_BACKUP"
+if [ "$DO_FILES" = 1 ]; then
+    echo "▶ Sync paths:"
+    for p in "${SYNC_PATHS[@]}"; do
+        SRC="$PROD_ROOT/$p"
+        if [ -d "$SRC" ]; then
+            SIZE=$(du -sh "$SRC" 2>/dev/null | cut -f1)
+            echo "    $p  ($SIZE)"
+        else
+            echo "    $p  (skip — missing on prod)"
+        fi
+    done
+fi
 hr
 
 if [ "$ASSUME_YES" -ne 1 ]; then
-    read -r -p "Proceed? Staging DB will be DROPPED & RECREATED. [y/N] " ans
+    [ "$DO_DB" = 1 ] && WARN="Staging DB will be DROPPED & RECREATED."
+    [ "$DO_FILES" = 1 ] && WARN="${WARN:+$WARN }Files in staging will be MIRRORED (--delete)."
+    read -r -p "Proceed? $WARN [y/N] " ans
     [[ "$ans" =~ ^[Yy]$ ]] || die "aborted"
 fi
 
-# ── 2. Backup current staging (rollback safety) ──────────────────────────
-echo "▶ Backing up current staging DB..."
-MYSQL_PWD="$STAGING_DB_PASSWORD" mysqldump \
-    -h "$STAGING_DB_HOST" -P "$STAGING_DB_PORT" -u "$STAGING_DB_USER" \
-    --single-transaction --quick --routines --triggers \
-    --set-gtid-purged=OFF --no-tablespaces --column-statistics=0 \
-    "$STAGING_DB_NAME" > "$STAGING_BACKUP"
-echo "  ✓ saved $(du -h "$STAGING_BACKUP" | cut -f1) → $STAGING_BACKUP"
+# ── DB clone ─────────────────────────────────────────────────────────────
+if [ "$DO_DB" = 1 ]; then
+    echo "▶ Backing up current staging DB..."
+    MYSQL_PWD="$STAGING_DB_PASSWORD" mysqldump \
+        -h "$STAGING_DB_HOST" -P "$STAGING_DB_PORT" -u "$STAGING_DB_USER" \
+        --single-transaction --quick --routines --triggers \
+        --set-gtid-purged=OFF --no-tablespaces --column-statistics=0 \
+        "$STAGING_DB_NAME" > "$STAGING_BACKUP"
+    echo "  ✓ saved $(du -h "$STAGING_BACKUP" | cut -f1) → $STAGING_BACKUP"
 
-# ── 3. Dump production ───────────────────────────────────────────────────
-echo "▶ Dumping prod DB..."
-MYSQL_PWD="$PROD_DB_PASSWORD" mysqldump \
-    -h "$PROD_DB_HOST" -P "$PROD_DB_PORT" -u "$PROD_DB_USER" \
-    --single-transaction --quick --routines --triggers \
-    --set-gtid-purged=OFF --no-tablespaces --column-statistics=0 \
-    "$PROD_DB_NAME" \
-    | sed -E 's/\sDEFINER\s*=\s*`[^`]+`@`[^`]+`//g; s/SQL SECURITY DEFINER/SQL SECURITY INVOKER/g' \
-    > "$PROD_DUMP"
-echo "  ✓ saved $(du -h "$PROD_DUMP" | cut -f1) → $PROD_DUMP"
+    echo "▶ Dumping prod DB..."
+    MYSQL_PWD="$PROD_DB_PASSWORD" mysqldump \
+        -h "$PROD_DB_HOST" -P "$PROD_DB_PORT" -u "$PROD_DB_USER" \
+        --single-transaction --quick --routines --triggers \
+        --set-gtid-purged=OFF --no-tablespaces --column-statistics=0 \
+        "$PROD_DB_NAME" \
+        | sed -E 's/\sDEFINER\s*=\s*`[^`]+`@`[^`]+`//g; s/SQL SECURITY DEFINER/SQL SECURITY INVOKER/g' \
+        > "$PROD_DUMP"
+    echo "  ✓ saved $(du -h "$PROD_DUMP" | cut -f1) → $PROD_DUMP"
 
-# ── 4. Drop & recreate staging schema, load dump ─────────────────────────
-echo "▶ Dropping & recreating $STAGING_DB_NAME..."
-MYSQL_PWD="$STAGING_DB_PASSWORD" mysql \
-    -h "$STAGING_DB_HOST" -P "$STAGING_DB_PORT" -u "$STAGING_DB_USER" \
-    -e "DROP DATABASE IF EXISTS \`$STAGING_DB_NAME\`; CREATE DATABASE \`$STAGING_DB_NAME\` CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;"
+    echo "▶ Dropping & recreating $STAGING_DB_NAME..."
+    MYSQL_PWD="$STAGING_DB_PASSWORD" mysql \
+        -h "$STAGING_DB_HOST" -P "$STAGING_DB_PORT" -u "$STAGING_DB_USER" \
+        -e "DROP DATABASE IF EXISTS \`$STAGING_DB_NAME\`; CREATE DATABASE \`$STAGING_DB_NAME\` CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;"
 
-echo "▶ Loading prod dump into staging..."
-MYSQL_PWD="$STAGING_DB_PASSWORD" mysql \
-    -h "$STAGING_DB_HOST" -P "$STAGING_DB_PORT" -u "$STAGING_DB_USER" \
-    "$STAGING_DB_NAME" < "$PROD_DUMP"
+    echo "▶ Loading prod dump into staging..."
+    MYSQL_PWD="$STAGING_DB_PASSWORD" mysql \
+        -h "$STAGING_DB_HOST" -P "$STAGING_DB_PORT" -u "$STAGING_DB_USER" \
+        "$STAGING_DB_NAME" < "$PROD_DUMP"
 
-# ── 5. Sanity check ──────────────────────────────────────────────────────
-TABLES=$(MYSQL_PWD="$STAGING_DB_PASSWORD" mysql -N \
-    -h "$STAGING_DB_HOST" -P "$STAGING_DB_PORT" -u "$STAGING_DB_USER" \
-    -e "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema='$STAGING_DB_NAME';")
-echo "  ✓ staging now has $TABLES tables"
+    TABLES=$(MYSQL_PWD="$STAGING_DB_PASSWORD" mysql -N \
+        -h "$STAGING_DB_HOST" -P "$STAGING_DB_PORT" -u "$STAGING_DB_USER" \
+        -e "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema='$STAGING_DB_NAME';")
+    echo "  ✓ staging now has $TABLES tables"
+fi
+
+# ── Filesystem sync ──────────────────────────────────────────────────────
+if [ "$DO_FILES" = 1 ]; then
+    command -v rsync >/dev/null || die "rsync not installed"
+    for p in "${SYNC_PATHS[@]}"; do
+        SRC="$PROD_ROOT/$p"
+        DST="$STAGING_ROOT/$p"
+        if [ ! -d "$SRC" ]; then
+            echo "▶ Skip $p (missing on prod)"
+            continue
+        fi
+        echo "▶ Sync $p ..."
+        mkdir -p "$DST"
+        # -a: archive (perms, times, symlinks, recursive)
+        # --delete: remove files on target that no longer exist on source
+        # --info=progress2: single-line progress
+        # --human-readable: nicer sizes
+        rsync -a --delete --info=progress2 --human-readable "$SRC" "$DST" \
+            || die "rsync failed for $p"
+        echo "  ✓ $(du -sh "$DST" | cut -f1)"
+    done
+fi
 
 hr
-echo "🚀 Done. Rollback if needed:"
-echo "   MYSQL_PWD='\$STAGING_PWD' mysql -h $STAGING_DB_HOST -u $STAGING_DB_USER \\"
-echo "       -e \"DROP DATABASE \`$STAGING_DB_NAME\`; CREATE DATABASE \`$STAGING_DB_NAME\`;\""
-echo "   MYSQL_PWD='\$STAGING_PWD' mysql -h $STAGING_DB_HOST -u $STAGING_DB_USER \\"
-echo "       $STAGING_DB_NAME < $STAGING_BACKUP"
+echo "🚀 Done."
+[ "$DO_DB" = 1 ] && {
+    echo "▶ DB rollback if needed:"
+    echo "   MYSQL_PWD='\$STAGING_PWD' mysql -h $STAGING_DB_HOST -u $STAGING_DB_USER \\"
+    echo "       -e \"DROP DATABASE \`$STAGING_DB_NAME\`; CREATE DATABASE \`$STAGING_DB_NAME\`;\""
+    echo "   MYSQL_PWD='\$STAGING_PWD' mysql -h $STAGING_DB_HOST -u $STAGING_DB_USER \\"
+    echo "       $STAGING_DB_NAME < $STAGING_BACKUP"
+}
 hr
-echo "▶ NEXT: clear staging app cache + reindex backend search:"
-echo "   cd ~/pim-staging.infivea.com"
+echo "▶ NEXT in $STAGING_ROOT:"
 echo "   rm -f var/admin/minified_javascript_core_*.js"
+echo "   rm -rf var/cache/*"
 echo "   php bin/console cache:clear --env=prod --no-debug"
+echo "   php bin/console cache:warmup --env=prod --no-debug"
 echo "   php bin/console messenger:stop-workers"
+echo "   echo '' | sudo -S service php8.3-fpm reload"
