@@ -74,36 +74,12 @@ sudo chown -R ploi:ploi "$STAGING_DIR/public/var" "$STAGING_DIR/var"
 `feat/opendxp-migration` (until merged to `master`)
 
 ### Site → Environment
-Paste from [`.env.prod.example`](.env.prod.example) and substitute:
+Paste contents of [`.env.staging.example`](.env.staging.example) into Ploi → Environment and replace every `__REPLACE_ME__` with the real secret.
 
-```dotenv
-APP_ENV=prod
-APP_DEBUG=false
-OPENDXP_DEV_MODE=false
-
-DB_HOST=127.0.0.1
-DB_NAME=pim-staging
-DB_USER=pim_staging
-DB_PASSWORD=__from_password_manager__
-DB_PORT=3306
-DB_SERVER_VERSION=8.0.26
-
-DEEPL_AUTH_KEY=__your_deepl_key__
-DEEPL_ENDPOINT=https://api.deepl.com/v2/translate
-
-# Point to the staging Vendure / Storefront if you have them, else reuse prod URLs:
-VENDURE_HOST=https://vendure.royal-filter.com
-PIMCORE_API_KEY=__must_match_vendure_side__
-PIMCORE_BRIDGE_WEBHOOK_SECRET=__must_match_vendure_side__
-STOREFRONT_URL=https://staging-storefront.royal-filter.com
-CACHE_INVALIDATE_SECRET=__must_match_storefront_side__
-
-MESSENGER_DSN=amqp://guest:guest@127.0.0.1:5672/%2f/messages
-AMQP_HOST=127.0.0.1
-AMQP_PORT=5672
-AMQP_USER=guest
-AMQP_PASSWORD=guest
-```
+Key staging-specific values already preset in the file:
+- `DB_NAME=pim-staging`, `DB_USER=pim_staging`
+- `STOREFRONT_URL=https://staging-storefront.royal-filter.com`
+- Other secrets (DeepL, PIMCORE_API_KEY, PIMCORE_BRIDGE_WEBHOOK_SECRET, CACHE_INVALIDATE_SECRET) — must be set, ideally **different** from production.
 
 ### Site → Deploy Script
 
