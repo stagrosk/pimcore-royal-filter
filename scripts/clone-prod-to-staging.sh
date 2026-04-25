@@ -9,7 +9,11 @@
 #     bash scripts/clone-prod-to-staging.sh --yes          # non-interactive
 #     bash scripts/clone-prod-to-staging.sh --db-only      # skip rsync
 #     bash scripts/clone-prod-to-staging.sh --files-only   # skip DB
+#     bash scripts/clone-prod-to-staging.sh --keep-days=7  # prune dumps older than N days (default 14, 0 = keep all)
 #     PROD_ENV=/path/.env STAGING_ENV=/path/.env bash scripts/clone-prod-to-staging.sh
+#
+# Cron example (Sunday 03:30, log to /var/log):
+#     30 3 * * 0 bash /home/ploi/pim.infivea.com/scripts/clone-prod-to-staging.sh --yes >> /var/log/clone-prod-to-staging.log 2>&1
 #
 # Default env locations:
 #     PROD_ENV     = ~/pim.infivea.com/.env
@@ -41,13 +45,15 @@ STAGING_BACKUP="$TMP_DIR/staging-backup-${TS}.sql"
 ASSUME_YES=0
 DO_DB=1
 DO_FILES=1
+KEEP_DAYS=14   # delete dumps older than N days from $TMP_DIR
 
 for arg in "$@"; do
     case "$arg" in
         -y|--yes)        ASSUME_YES=1 ;;
         --db-only)       DO_FILES=0 ;;
         --files-only)    DO_DB=0 ;;
-        -h|--help)       sed -n '2,33p' "$0"; exit 0 ;;
+        --keep-days=*)   KEEP_DAYS="${arg#*=}" ;;
+        -h|--help)       sed -n '2,35p' "$0"; exit 0 ;;
         *) echo "unknown arg: $arg"; exit 1 ;;
     esac
 done
@@ -191,6 +197,20 @@ if [ "$DO_FILES" = 1 ]; then
             || die "rsync failed for $p"
         echo "  ✓ $(du -sh "$DST" | cut -f1)"
     done
+fi
+
+# ── Cleanup old dumps (keep only KEEP_DAYS days of history) ──────────────
+if [ "$KEEP_DAYS" -gt 0 ]; then
+    echo "▶ Pruning dumps older than ${KEEP_DAYS} days from $TMP_DIR ..."
+    DELETED=$(find "$TMP_DIR" -maxdepth 1 -type f \
+        \( -name 'clone-prod-*.sql' -o -name 'staging-backup-*.sql' \) \
+        -mtime "+${KEEP_DAYS}" -print -delete | wc -l)
+    echo "  ✓ removed ${DELETED} file(s)"
+    REMAINING=$(find "$TMP_DIR" -maxdepth 1 -type f \
+        \( -name 'clone-prod-*.sql' -o -name 'staging-backup-*.sql' \) \
+        | wc -l)
+    REMAINING_SIZE=$(du -shc "$TMP_DIR"/clone-prod-*.sql "$TMP_DIR"/staging-backup-*.sql 2>/dev/null | tail -1 | cut -f1)
+    echo "  ✓ ${REMAINING} dump(s) remain (${REMAINING_SIZE:-0})"
 fi
 
 hr
