@@ -118,7 +118,7 @@ Replace the old `pimcore:maintenance` cron entry:
 ## What the migration does NOT change
 
 - Database schema (tables/columns) — OpenDXP keeps Pimcore's schema 1:1
-- DB credentials / DB name (`pimcore_staging` stays `pimcore_staging`)
+- DB credentials / DB name (`pim-staging` stays `pim-staging`)
 - ExtJS admin URL paths (`/admin/*`)
 - DataHub URL prefix is `/opendxp-graphql-webservices/{client}` instead of `/pimcore-graphql-webservices/…` — **this is a public contract change** if anything outside the storefront calls the GraphQL endpoint by URL. Update consumers accordingly.
 - Vendure bridge URL prefix changed: `/api/pimcore-vendure-bridge/categoryList` → `/api/opendxp-vendure-bridge/categoryList`. Update Vendure consumers if they use this endpoint.

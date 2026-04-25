@@ -4,8 +4,8 @@ Quick, copy-paste-friendly steps for spinning up the OpenDXP staging environment
 
 Assumptions:
 - Production DB on the same host = `pimcore_royalfilter` (live, has data)
-- Staging DB exists but empty = `pimcore_staging`
-- Staging DB user already provisioned with `GRANT ALL ON pimcore_staging.*` = `pimcore_staging`
+- Staging DB exists but empty = `pim-staging` (note the dash — must be backtick-quoted in SQL)
+- Staging DB user already provisioned with `GRANT ALL ON \`pim-staging\`.*` = `pim_staging` (underscore in user name)
 - Staging Ploi site already exists and points the document root to `public/`
 
 ## 1. Cloudflare
@@ -28,19 +28,20 @@ mysqldump \
 
 echo "Dump size: $(du -h "$DUMP" | cut -f1)"
 
-# Wipe whatever is in staging schema and recreate it cleanly
-mysql -u root -p <<SQL
-DROP DATABASE IF EXISTS pimcore_staging;
-CREATE DATABASE pimcore_staging CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-GRANT ALL PRIVILEGES ON pimcore_staging.* TO 'pimcore_staging'@'localhost';
+# Wipe whatever is in staging schema and recreate it cleanly.
+# `pim-staging` has a dash — backtick-quote it everywhere in SQL.
+mysql -u root -p <<'SQL'
+DROP DATABASE IF EXISTS `pim-staging`;
+CREATE DATABASE `pim-staging` CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+GRANT ALL PRIVILEGES ON `pim-staging`.* TO 'pim_staging'@'localhost';
 FLUSH PRIVILEGES;
 SQL
 
 # Import prod dump into staging
-mysql -u pimcore_staging -p pimcore_staging < "$DUMP"
+mysql -u pim_staging -p pim-staging < "$DUMP"
 
 # Sanity check — count tables
-mysql -u pimcore_staging -p -e "SELECT COUNT(*) AS tables FROM information_schema.tables WHERE table_schema='pimcore_staging';"
+mysql -u pim_staging -p -e "SELECT COUNT(*) AS tables FROM information_schema.tables WHERE table_schema='pim-staging';"
 ```
 
 ## 3. Copy production assets to staging release dir
@@ -81,21 +82,21 @@ APP_DEBUG=false
 OPENDXP_DEV_MODE=false
 
 DB_HOST=127.0.0.1
-DB_NAME=pimcore_staging
-DB_USER=pimcore_staging
-DB_PASSWORD=<staging-password>
+DB_NAME=pim-staging
+DB_USER=pim_staging
+DB_PASSWORD=__from_password_manager__
 DB_PORT=3306
 DB_SERVER_VERSION=8.0.26
 
-DEEPL_AUTH_KEY=<your-key>
+DEEPL_AUTH_KEY=__your_deepl_key__
 DEEPL_ENDPOINT=https://api.deepl.com/v2/translate
 
 # Point to the staging Vendure / Storefront if you have them, else reuse prod URLs:
 VENDURE_HOST=https://vendure.royal-filter.com
-PIMCORE_API_KEY=<must match Vendure side>
-PIMCORE_BRIDGE_WEBHOOK_SECRET=<must match Vendure side>
+PIMCORE_API_KEY=__must_match_vendure_side__
+PIMCORE_BRIDGE_WEBHOOK_SECRET=__must_match_vendure_side__
 STOREFRONT_URL=https://staging-storefront.royal-filter.com
-CACHE_INVALIDATE_SECRET=<must match Storefront side>
+CACHE_INVALIDATE_SECRET=__must_match_storefront_side__
 
 MESSENGER_DSN=amqp://guest:guest@127.0.0.1:5672/%2f/messages
 AMQP_HOST=127.0.0.1
@@ -142,7 +143,7 @@ bash .ploi/first-deploy.sh
 ```
 
 This:
-1. Backs up `pimcore_staging` to `/tmp/pimcore_staging-pre-opendxp-<timestamp>.sql`
+1. Backs up `pim-staging` to `/tmp/pim-staging-pre-opendxp-<timestamp>.sql`
 2. Runs the SQL housekeeping (settings_store, migration_versions, cache_items)
 3. `composer install --no-dev`
 4. Migrates `var/versions/` (str_replace `Pimcore\` → `OpenDxp\`)
