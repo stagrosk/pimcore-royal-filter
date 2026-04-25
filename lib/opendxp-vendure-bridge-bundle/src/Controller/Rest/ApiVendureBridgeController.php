@@ -2,20 +2,16 @@
 
 namespace OpendxpVendureBridgeBundle\Controller\Rest;
 
-use FOS\RestBundle\Controller\Annotations\Route;
 use OpenDxp\Model\DataObject\Category\Listing;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\Routing\Attribute\Route;
 
-/**
- * @Route("/api/pimcore-vendure-bridge")
- */
+#[Route('/api/opendxp-vendure-bridge')]
 class ApiVendureBridgeController extends RestController
 {
-    /**
-     * @Route("/categoryList", methods={"GET"})
-     */
+    #[Route('/categoryList', methods: ['GET'])]
     public function categoryListAction(Request $request): Response
     {
         if (!$this->checkConsumerPermissionsService->performSecurityCheck($request)) {

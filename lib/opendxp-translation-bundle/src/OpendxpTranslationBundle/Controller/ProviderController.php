@@ -4,11 +4,9 @@ namespace OpendxpTranslationBundle\Controller;
 
 use OpenDxp\Bundle\AdminBundle\Controller\AdminAbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
-/**
- * @Route("/admin")
- */
+#[Route('/admin')]
 final class ProviderController extends AdminAbstractController
 {
     private string $sourceLanguage;
@@ -20,9 +18,7 @@ final class ProviderController extends AdminAbstractController
         $this->provider = $provider;
     }
 
-    /**
-     * @Route("/translate-provider", methods={"GET"})
-     */
+    #[Route('/translate-provider', methods: ['GET'])]
     public function translationProviderInfoAction(): JsonResponse
     {
         return $this->adminJson([

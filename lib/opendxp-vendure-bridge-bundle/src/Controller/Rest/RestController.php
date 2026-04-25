@@ -4,8 +4,8 @@ namespace OpendxpVendureBridgeBundle\Controller\Rest;
 
 use Doctrine\DBAL\Exception\ConstraintViolationException;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
-use FOS\RestBundle\Controller\Annotations\Route;
 use OpenDxp\Model\DataObject;
+use Symfony\Component\Routing\Attribute\Route;
 use OpendxpVendureBridgeBundle\Component\Serializer\JMSSerializerFactory;
 use OpendxpVendureBridgeBundle\Security\CheckConsumerPermissionsService;
 use Psr\Log\LoggerInterface;
@@ -40,14 +40,7 @@ abstract class RestController extends AbstractFOSRestController
         $this->checkConsumerPermissionsService = $checkConsumerPermissionsService;
     }
 
-    /**
-     * @Route("/", methods={"GET"})
-     *
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @throws \JsonException
-     * @return \Symfony\Component\HttpFoundation\JsonResponse|\Symfony\Component\HttpFoundation\Response
-     */
+    #[Route('/', methods: ['GET'])]
     public function indexAction(Request $request): JsonResponse|Response
     {
         if (!$this->checkConsumerPermissionsService->performSecurityCheck($request)) {

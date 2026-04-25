@@ -1,3 +1,3 @@
 opendxp_translation_bundle:
     resource: "@OpendxpTranslationBundle/Controller/"
-    type: annotation
+    type: attribute
