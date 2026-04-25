@@ -87,14 +87,14 @@ sudo chown -R ploi:ploi "$STAGING_DIR/public/var" "$STAGING_DIR/var"
 ## 4. Configure Ploi staging site
 
 ### Site → Branch
-`feat/opendxp-migration` (until merged to `master`)
+`development` (staging tracks this; `master` is reserved for the eventual prod release)
 
 ### Site → Environment
 Paste contents of [`.env.staging.example`](.env.staging.example) into Ploi → Environment and replace every `__REPLACE_ME__` with the real secret.
 
 Key staging-specific values already preset in the file:
 - `DB_NAME=pim_staging`, `DB_USER=pim_staging`
-- `STOREFRONT_URL=https://staging-storefront.royal-filter.com`
+- `STOREFRONT_URL=https://staging-storefront.infivea.com`
 - Other secrets (DeepL, PIMCORE_API_KEY, PIMCORE_BRIDGE_WEBHOOK_SECRET, CACHE_INVALIDATE_SECRET) — must be set, ideally **different** from production.
 
 ### Site → Deploy Script
@@ -202,7 +202,7 @@ sudo supervisorctl status pim-staging-messenger:*
 
 Then login at `https://pim-staging.infivea.com/admin` with your existing prod account — works because of `opendxp.security.password.salt: "pimcore"` in `config/config.yaml`.
 
-After login, go to **Settings → System Settings → General** and update **Main domain** from `pimcore.royal-filter.com` to `pim-staging.infivea.com` so generated absolute URLs (e.g. preview links) resolve to the right host.
+After login, go to **Settings → System Settings → General** and update **Main domain** from `pim.infivea.com` to `pim-staging.infivea.com` so generated absolute URLs (e.g. preview links) resolve to the right host.
 
 ## 10. Smoke-test the business-critical flows
 

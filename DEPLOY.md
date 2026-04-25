@@ -32,7 +32,7 @@ Composer 2.7+, MySQL 8.0+, Redis, RabbitMQ, supervisord — same as before.
    mysqldump -h 127.0.0.1 -u $DB_USER -p $DB_NAME > pre-opendxp-$(date +%Y%m%d-%H%M%S).sql
    ```
 2. **Replace `.env`** with the contents of `.env.prod.example` and fill in real secrets.
-3. **First deploy must run from the migration branch** (`feat/opendxp-migration`) until merged to `master`.
+3. **Branch strategy**: `development` is the staging-ready trunk (already has the OpenDXP migration). Production (`master`) gets a tag from `development` once staging UAT signs off.
 4. **First-time cut-over**: run [`.ploi/first-deploy.sh`](.ploi/first-deploy.sh) ONCE on the server. It backs up the DB, cleans `settings_store` + `migration_versions`, migrates `var/versions/` serialized dumps, then hands off to the regular `.ploi/deploy.sh`. Run it manually over SSH from the release directory:
    ```bash
    cd /home/ploi/<site>/current
