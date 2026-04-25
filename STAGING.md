@@ -24,7 +24,11 @@ mysqldump \
     -h 127.0.0.1 -u root -p \
     --single-transaction --quick --routines --triggers \
     --set-gtid-purged=OFF \
-    pimcore_royalfilter > "$DUMP"
+    --no-tablespaces \
+    --column-statistics=0 \
+    pimcore_royalfilter \
+    | sed -E 's/\sDEFINER\s*=\s*`[^`]+`@`[^`]+`//g; s/SQL SECURITY DEFINER/SQL SECURITY INVOKER/g' \
+    > "$DUMP"
 
 echo "Dump size: $(du -h "$DUMP" | cut -f1)"
 
@@ -43,6 +47,15 @@ mysql -h 127.0.0.1 -u pim_staging -p pim_staging < "$DUMP"
 # Sanity check — count tables
 mysql -h 127.0.0.1 -u pim_staging -p -e "SELECT COUNT(*) AS tables FROM information_schema.tables WHERE table_schema='pim_staging';"
 ```
+
+**If you already have a dump that errors with `Access denied; you need (at least one of) the SUPER or SET_USER_ID privilege(s)`**, sanitize it post-hoc and retry:
+
+```bash
+sed -i -E 's/\sDEFINER\s*=\s*`[^`]+`@`[^`]+`//g; s/SQL SECURITY DEFINER/SQL SECURITY INVOKER/g' "$DUMP"
+mysql -h 127.0.0.1 -u pim_staging -p pim_staging < "$DUMP"
+```
+
+The `DEFINER=` clauses on triggers/views can only be set by a user with `SUPER` (or `SET_USER_ID` on MySQL 8.2+); stripping them lets the importing user own the objects instead.
 
 ## 3. Copy production assets to staging release dir
 
