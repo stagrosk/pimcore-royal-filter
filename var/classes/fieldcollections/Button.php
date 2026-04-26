@@ -17,11 +17,8 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
    'implementsInterfaces' => '',
    'title' => '',
    'group' => 'Content',
-   'layoutDefinitions' =>
+   'layoutDefinitions' => 
   \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
-     'fieldtype' => 'panel',
-     'layout' => NULL,
-     'border' => false,
      'name' => NULL,
      'type' => NULL,
      'region' => NULL,
@@ -33,13 +30,10 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
      'bodyStyle' => NULL,
      'datatype' => 'layout',
      'permissions' => NULL,
-     'children' =>
+     'children' => 
     array (
-      0 =>
+      0 => 
       \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
-         'fieldtype' => 'panel',
-         'layout' => NULL,
-         'border' => false,
          'name' => 'Layout',
          'type' => NULL,
          'region' => NULL,
@@ -51,12 +45,10 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
          'bodyStyle' => '',
          'datatype' => 'layout',
          'permissions' => NULL,
-         'children' =>
+         'children' => 
         array (
-          0 =>
+          0 => 
           \OpenDxp\Model\DataObject\ClassDefinition\Data\RgbaColor::__set_state(array(
-             'fieldtype' => 'rgbaColor',
-             'width' => '',
              'name' => 'color',
              'title' => 'Color',
              'tooltip' => '',
@@ -66,19 +58,17 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'locked' => false,
              'style' => '',
              'permissions' => NULL,
-             'datatype' => 'data',
              'relationType' => false,
              'invisible' => false,
              'visibleGridView' => false,
              'visibleSearch' => false,
-             'blockedVarsForExport' =>
+             'blockedVarsForExport' => 
             array (
             ),
+             'width' => '',
           )),
-          1 =>
+          1 => 
           \OpenDxp\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
-             'fieldtype' => 'checkbox',
-             'defaultValue' => NULL,
              'name' => 'isExternal',
              'title' => 'Is External',
              'tooltip' => '',
@@ -88,24 +78,38 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'locked' => false,
              'style' => '',
              'permissions' => NULL,
-             'datatype' => 'data',
              'relationType' => false,
              'invisible' => false,
              'visibleGridView' => false,
              'visibleSearch' => false,
-             'blockedVarsForExport' =>
+             'blockedVarsForExport' => 
             array (
             ),
+             'defaultValue' => NULL,
              'defaultValueGenerator' => '',
           )),
-          2 =>
+          2 => 
           \OpenDxp\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
-             'fieldtype' => 'localizedfields',
-             'children' =>
+             'name' => 'localizedfields',
+             'title' => '',
+             'tooltip' => '',
+             'mandatory' => false,
+             'noteditable' => false,
+             'index' => false,
+             'locked' => false,
+             'style' => '',
+             'permissions' => NULL,
+             'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => true,
+             'visibleSearch' => true,
+             'blockedVarsForExport' => 
             array (
-              0 =>
+            ),
+             'children' => 
+            array (
+              0 => 
               \OpenDxp\Model\DataObject\ClassDefinition\Data\Link::__set_state(array(
-                 'fieldtype' => 'link',
                  'name' => 'link',
                  'title' => 'Link',
                  'tooltip' => '',
@@ -115,78 +119,38 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                  'locked' => false,
                  'style' => '',
                  'permissions' => NULL,
-                 'datatype' => 'data',
                  'relationType' => false,
                  'invisible' => false,
                  'visibleGridView' => false,
                  'visibleSearch' => false,
-                 'blockedVarsForExport' =>
+                 'blockedVarsForExport' => 
                 array (
                 ),
+                 'allowedTypes' => NULL,
+                 'allowedTargets' => NULL,
+                 'disabledFields' => NULL,
               )),
             ),
-             'name' => 'localizedfields',
              'region' => NULL,
              'layout' => NULL,
-             'title' => '',
-             'width' => '',
-             'height' => '',
              'maxTabs' => NULL,
              'border' => false,
              'provideSplitView' => false,
-             'tabPosition' => NULL,
+             'tabPosition' => 'top',
              'hideLabelsWhenTabsReached' => NULL,
-             'referencedFields' =>
+             'referencedFields' => 
             array (
             ),
-             'fieldDefinitionsCache' => NULL,
              'permissionView' => NULL,
              'permissionEdit' => NULL,
-             'tooltip' => '',
-             'mandatory' => false,
-             'noteditable' => false,
-             'index' => NULL,
-             'locked' => false,
-             'style' => '',
-             'permissions' => NULL,
-             'datatype' => 'data',
-             'relationType' => false,
-             'invisible' => false,
-             'visibleGridView' => true,
-             'visibleSearch' => true,
-             'blockedVarsForExport' =>
-            array (
-            ),
              'labelWidth' => 0,
              'labelAlign' => 'left',
-          )),
-          3 =>
-          \OpenDxp\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
-             'fieldtype' => 'select',
-             'options' =>
-            array (
-              0 =>
-              array (
-                'key' => 'left',
-                'value' => 'left',
-              ),
-              1 =>
-              array (
-                'key' => 'center',
-                'value' => 'center',
-              ),
-              2 =>
-              array (
-                'key' => 'right',
-                'value' => 'right',
-              ),
-            ),
              'width' => '',
-             'defaultValue' => 'left',
-             'optionsProviderClass' => '',
-             'optionsProviderData' => '',
-             'columnLength' => 190,
-             'dynamicOptions' => false,
+             'height' => '',
+             'fieldDefinitionsCache' => NULL,
+          )),
+          3 => 
+          \OpenDxp\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
              'name' => 'position',
              'title' => 'Position',
              'tooltip' => '',
@@ -196,20 +160,42 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'locked' => false,
              'style' => '',
              'permissions' => NULL,
-             'datatype' => 'data',
              'relationType' => false,
              'invisible' => false,
              'visibleGridView' => false,
              'visibleSearch' => false,
-             'blockedVarsForExport' =>
+             'blockedVarsForExport' => 
             array (
             ),
+             'options' => 
+            array (
+              0 => 
+              array (
+                'key' => 'left',
+                'value' => 'left',
+              ),
+              1 => 
+              array (
+                'key' => 'center',
+                'value' => 'center',
+              ),
+              2 => 
+              array (
+                'key' => 'right',
+                'value' => 'right',
+              ),
+            ),
+             'defaultValue' => 'left',
+             'columnLength' => 190,
+             'dynamicOptions' => false,
              'defaultValueGenerator' => '',
+             'width' => '',
+             'optionsProviderType' => NULL,
+             'optionsProviderClass' => '',
+             'optionsProviderData' => '',
           )),
-          4 =>
+          4 => 
           \OpenDxp\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
-             'fieldtype' => 'checkbox',
-             'defaultValue' => 0,
              'name' => 'fullWidth',
              'title' => 'Full Width',
              'tooltip' => '',
@@ -219,36 +205,45 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'locked' => false,
              'style' => '',
              'permissions' => NULL,
-             'datatype' => 'data',
              'relationType' => false,
              'invisible' => false,
              'visibleGridView' => false,
              'visibleSearch' => false,
-             'blockedVarsForExport' =>
+             'blockedVarsForExport' => 
             array (
             ),
+             'defaultValue' => 0,
              'defaultValueGenerator' => '',
           )),
         ),
          'locked' => false,
-         'blockedVarsForExport' =>
+         'blockedVarsForExport' => 
         array (
         ),
+         'fieldtype' => 'panel',
+         'layout' => NULL,
+         'border' => false,
          'icon' => '',
          'labelWidth' => 0,
          'labelAlign' => 'left',
       )),
     ),
      'locked' => false,
-     'blockedVarsForExport' =>
+     'blockedVarsForExport' => 
     array (
     ),
+     'fieldtype' => 'panel',
+     'layout' => NULL,
+     'border' => false,
      'icon' => NULL,
      'labelWidth' => 100,
      'labelAlign' => 'left',
   )),
-   'generateTypeDeclarations' => true,
-   'blockedVarsForExport' =>
+   'fieldDefinitionsCache' => NULL,
+   'blockedVarsForExport' => 
+  array (
+  ),
+   'activeDispatchingEvents' => 
   array (
   ),
 ));

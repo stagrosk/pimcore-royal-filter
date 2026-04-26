@@ -13,7 +13,7 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
    'implementsInterfaces' => '',
    'title' => '',
    'group' => 'Content',
-   'layoutDefinitions' =>
+   'layoutDefinitions' => 
   \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
      'name' => NULL,
      'type' => NULL,
@@ -26,9 +26,9 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
      'bodyStyle' => NULL,
      'datatype' => 'layout',
      'permissions' => NULL,
-     'children' =>
+     'children' => 
     array (
-      0 =>
+      0 => 
       \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
          'name' => 'Layout',
          'type' => NULL,
@@ -41,31 +41,29 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
          'bodyStyle' => '',
          'datatype' => 'layout',
          'permissions' => NULL,
-         'children' =>
+         'children' => 
         array (
-          0 =>
+          0 => 
           \OpenDxp\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
              'name' => 'localizedfields',
              'title' => '',
              'tooltip' => NULL,
-             'mandatory' => NULL,
-             'noteditable' => NULL,
-             'index' => NULL,
+             'mandatory' => false,
+             'noteditable' => false,
+             'index' => false,
              'locked' => false,
              'style' => NULL,
              'permissions' => NULL,
-             'datatype' => 'data',
-             'fieldtype' => 'localizedfields',
              'relationType' => false,
              'invisible' => false,
              'visibleGridView' => true,
              'visibleSearch' => true,
-             'blockedVarsForExport' =>
+             'blockedVarsForExport' => 
             array (
             ),
-             'children' =>
+             'children' => 
             array (
-              0 =>
+              0 => 
               \OpenDxp\Model\DataObject\ClassDefinition\Data\Image::__set_state(array(
                  'name' => 'image',
                  'title' => 'Image',
@@ -76,41 +74,39 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                  'locked' => false,
                  'style' => '',
                  'permissions' => NULL,
-                 'datatype' => 'data',
-                 'fieldtype' => 'image',
                  'relationType' => false,
                  'invisible' => false,
                  'visibleGridView' => false,
                  'visibleSearch' => false,
-                 'blockedVarsForExport' =>
+                 'blockedVarsForExport' => 
                 array (
                 ),
+                 'uploadPath' => '',
                  'width' => '',
                  'height' => '',
-                 'uploadPath' => '',
               )),
             ),
              'region' => NULL,
              'layout' => NULL,
-             'width' => '',
-             'height' => '',
              'maxTabs' => NULL,
              'border' => false,
              'provideSplitView' => false,
-             'tabPosition' => NULL,
+             'tabPosition' => 'top',
              'hideLabelsWhenTabsReached' => NULL,
-             'referencedFields' =>
+             'referencedFields' => 
             array (
             ),
-             'fieldDefinitionsCache' => NULL,
              'permissionView' => NULL,
              'permissionEdit' => NULL,
              'labelWidth' => 0,
              'labelAlign' => 'left',
+             'width' => '',
+             'height' => '',
+             'fieldDefinitionsCache' => NULL,
           )),
         ),
          'locked' => false,
-         'blockedVarsForExport' =>
+         'blockedVarsForExport' => 
         array (
         ),
          'fieldtype' => 'panel',
@@ -122,7 +118,7 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
       )),
     ),
      'locked' => false,
-     'blockedVarsForExport' =>
+     'blockedVarsForExport' => 
     array (
     ),
      'fieldtype' => 'panel',
@@ -132,8 +128,11 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
      'labelWidth' => 100,
      'labelAlign' => 'left',
   )),
-   'generateTypeDeclarations' => true,
-   'blockedVarsForExport' =>
+   'fieldDefinitionsCache' => NULL,
+   'blockedVarsForExport' => 
+  array (
+  ),
+   'activeDispatchingEvents' => 
   array (
   ),
 ));

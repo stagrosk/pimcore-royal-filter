@@ -12,7 +12,7 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
    'implementsInterfaces' => '',
    'title' => '',
    'group' => 'Content',
-   'layoutDefinitions' =>
+   'layoutDefinitions' => 
   \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
      'name' => NULL,
      'type' => NULL,
@@ -24,9 +24,10 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
      'collapsed' => false,
      'bodyStyle' => NULL,
      'datatype' => 'layout',
-     'children' =>
+     'permissions' => NULL,
+     'children' => 
     array (
-      0 =>
+      0 => 
       \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
          'name' => 'Layout',
          'type' => NULL,
@@ -38,9 +39,10 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
          'collapsed' => false,
          'bodyStyle' => '',
          'datatype' => 'layout',
-         'children' =>
+         'permissions' => NULL,
+         'children' => 
         array (
-          0 =>
+          0 => 
           \OpenDxp\Model\DataObject\ClassDefinition\Data\ManyToManyRelation::__set_state(array(
              'name' => 'categories',
              'title' => 'Categories',
@@ -51,17 +53,16 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'locked' => false,
              'style' => '',
              'permissions' => NULL,
-             'fieldtype' => '',
              'relationType' => true,
              'invisible' => false,
              'visibleGridView' => false,
              'visibleSearch' => false,
-             'blockedVarsForExport' =>
+             'blockedVarsForExport' => 
             array (
             ),
-             'classes' =>
+             'classes' => 
             array (
-              0 =>
+              0 => 
               array (
                 'classes' => 'Collection',
               ),
@@ -74,11 +75,11 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'allowToClearRelation' => true,
              'objectsAllowed' => true,
              'assetsAllowed' => false,
-             'assetTypes' =>
+             'assetTypes' => 
             array (
             ),
              'documentsAllowed' => false,
-             'documentTypes' =>
+             'documentTypes' => 
             array (
             ),
              'enableTextSelection' => false,
@@ -87,7 +88,7 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
           )),
         ),
          'locked' => false,
-         'blockedVarsForExport' =>
+         'blockedVarsForExport' => 
         array (
         ),
          'fieldtype' => 'panel',
@@ -99,7 +100,7 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
       )),
     ),
      'locked' => false,
-     'blockedVarsForExport' =>
+     'blockedVarsForExport' => 
     array (
     ),
      'fieldtype' => 'panel',
@@ -110,10 +111,10 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
      'labelAlign' => 'left',
   )),
    'fieldDefinitionsCache' => NULL,
-   'blockedVarsForExport' =>
+   'blockedVarsForExport' => 
   array (
   ),
-   'activeDispatchingEvents' =>
+   'activeDispatchingEvents' => 
   array (
   ),
 ));
