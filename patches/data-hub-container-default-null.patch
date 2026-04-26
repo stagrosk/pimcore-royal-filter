@@ -1,0 +1,28 @@
+Subject: [PATCH] ContainerAwareTrait: default $container to null
+
+`Block::getFieldType` (and a few other callers) construct DataObjectType
+classes directly without going through the DI container. Those instances
+never get setContainer() called, so the typed `?ContainerInterface
+$container;` property stays uninitialized. The first read inside
+`prepareField()` triggers PHP's "must not be accessed before
+initialization" fatal under strict_types=1.
+
+Initializing the property to null lets uninitialized callers proceed;
+downstream code already handles a null container (it's typed nullable
+on purpose).
+
+Tracking: report upstream at github.com/open-dxp/data-hub-bundle.
+---
+diff --git a/src/DependencyInjection/ContainerAwareTrait.php b/src/DependencyInjection/ContainerAwareTrait.php
+index 1111111..2222222 100644
+--- a/src/DependencyInjection/ContainerAwareTrait.php
++++ b/src/DependencyInjection/ContainerAwareTrait.php
+@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
+
+ trait ContainerAwareTrait
+ {
+-    protected ?ContainerInterface $container;
++    protected ?ContainerInterface $container = null;
+
+     public function setContainer(?ContainerInterface $container): void
+     {

@@ -17,7 +17,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1766316434,
+   'modificationDate' => 1777217220,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '\\OpendxpHeadlessContentBundle\\Model\\Navigation',
@@ -34,7 +34,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
    'showVariants' => false,
    'layoutDefinitions' => 
   \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
-     'name' => 'pimcore_root',
+     'name' => 'opendxp_root',
      'type' => NULL,
      'region' => NULL,
      'title' => NULL,
@@ -44,6 +44,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
      'collapsed' => false,
      'bodyStyle' => NULL,
      'datatype' => 'layout',
+     'permissions' => NULL,
      'children' => 
     array (
       0 => 
@@ -58,6 +59,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
          'collapsed' => false,
          'bodyStyle' => '',
          'datatype' => 'layout',
+         'permissions' => NULL,
          'children' => 
         array (
           0 => 
@@ -72,6 +74,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
              'collapsed' => false,
              'bodyStyle' => '',
              'datatype' => 'layout',
+             'permissions' => NULL,
              'children' => 
             array (
               0 => 
@@ -85,7 +88,6 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                  'locked' => false,
                  'style' => '',
                  'permissions' => NULL,
-                 'fieldtype' => '',
                  'relationType' => false,
                  'invisible' => false,
                  'visibleGridView' => false,
@@ -115,7 +117,6 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                  'locked' => false,
                  'style' => '',
                  'permissions' => NULL,
-                 'fieldtype' => '',
                  'relationType' => false,
                  'invisible' => false,
                  'visibleGridView' => false,
@@ -150,6 +151,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
              'collapsed' => false,
              'bodyStyle' => '',
              'datatype' => 'layout',
+             'permissions' => NULL,
              'children' => 
             array (
               0 => 
@@ -163,7 +165,6 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                  'locked' => false,
                  'style' => '',
                  'permissions' => NULL,
-                 'fieldtype' => '',
                  'relationType' => false,
                  'invisible' => false,
                  'visibleGridView' => false,
@@ -249,28 +250,6 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
    'enableGridLocking' => false,
    'deletedDataComponents' => 
   array (
-    0 => 
-    \OpenDxp\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
-       'name' => 'isPartners',
-       'title' => 'Is Partners',
-       'tooltip' => '',
-       'mandatory' => false,
-       'noteditable' => false,
-       'index' => false,
-       'locked' => false,
-       'style' => '',
-       'permissions' => NULL,
-       'fieldtype' => '',
-       'relationType' => false,
-       'invisible' => false,
-       'visibleGridView' => false,
-       'visibleSearch' => false,
-       'blockedVarsForExport' => 
-      array (
-      ),
-       'defaultValue' => 0,
-       'defaultValueGenerator' => '',
-    )),
   ),
    'blockedVarsForExport' => 
   array (
