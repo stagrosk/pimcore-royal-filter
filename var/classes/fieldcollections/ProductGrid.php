@@ -35,6 +35,7 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
      'collapsed' => false,
      'bodyStyle' => NULL,
      'datatype' => 'layout',
+     'permissions' => NULL,
      'children' => 
     array (
       0 => 
@@ -49,6 +50,7 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
          'collapsed' => false,
          'bodyStyle' => '',
          'datatype' => 'layout',
+         'permissions' => NULL,
          'children' => 
         array (
           0 => 
@@ -63,6 +65,7 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'collapsed' => false,
              'bodyStyle' => '',
              'datatype' => 'layout',
+             'permissions' => NULL,
              'children' => 
             array (
               0 => 
@@ -76,7 +79,6 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                  'locked' => false,
                  'style' => NULL,
                  'permissions' => NULL,
-                 'fieldtype' => '',
                  'relationType' => false,
                  'invisible' => false,
                  'visibleGridView' => true,
@@ -97,7 +99,6 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                      'locked' => false,
                      'style' => '',
                      'permissions' => NULL,
-                     'fieldtype' => '',
                      'relationType' => false,
                      'invisible' => false,
                      'visibleGridView' => false,
@@ -146,7 +147,6 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                  'locked' => false,
                  'style' => '',
                  'permissions' => NULL,
-                 'fieldtype' => '',
                  'relationType' => true,
                  'invisible' => false,
                  'visibleGridView' => false,
@@ -204,6 +204,7 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'collapsed' => false,
              'bodyStyle' => '',
              'datatype' => 'layout',
+             'permissions' => NULL,
              'children' => 
             array (
               0 => 
@@ -217,7 +218,6 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                  'locked' => false,
                  'style' => '',
                  'permissions' => NULL,
-                 'fieldtype' => '',
                  'relationType' => false,
                  'invisible' => false,
                  'visibleGridView' => false,
@@ -239,7 +239,6 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                  'locked' => false,
                  'style' => '',
                  'permissions' => NULL,
-                 'fieldtype' => '',
                  'relationType' => true,
                  'invisible' => false,
                  'visibleGridView' => false,
@@ -281,7 +280,6 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                  'locked' => false,
                  'style' => '',
                  'permissions' => NULL,
-                 'fieldtype' => '',
                  'relationType' => true,
                  'invisible' => false,
                  'visibleGridView' => false,
@@ -323,7 +321,6 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                  'locked' => false,
                  'style' => '',
                  'permissions' => NULL,
-                 'fieldtype' => '',
                  'relationType' => false,
                  'invisible' => false,
                  'visibleGridView' => false,
@@ -345,7 +342,6 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                  'locked' => false,
                  'style' => '',
                  'permissions' => NULL,
-                 'fieldtype' => '',
                  'relationType' => false,
                  'invisible' => false,
                  'visibleGridView' => false,
@@ -367,7 +363,6 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                  'locked' => false,
                  'style' => '',
                  'permissions' => NULL,
-                 'fieldtype' => '',
                  'relationType' => false,
                  'invisible' => false,
                  'visibleGridView' => false,
@@ -389,7 +384,6 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                  'locked' => false,
                  'style' => '',
                  'permissions' => NULL,
-                 'fieldtype' => '',
                  'relationType' => false,
                  'invisible' => false,
                  'visibleGridView' => false,
@@ -411,7 +405,6 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                  'locked' => false,
                  'style' => '',
                  'permissions' => NULL,
-                 'fieldtype' => '',
                  'relationType' => false,
                  'invisible' => false,
                  'visibleGridView' => false,
@@ -454,6 +447,7 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'collapsed' => false,
              'bodyStyle' => '',
              'datatype' => 'layout',
+             'permissions' => NULL,
              'children' => 
             array (
               0 => 
@@ -467,7 +461,6 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                  'locked' => false,
                  'style' => '',
                  'permissions' => NULL,
-                 'fieldtype' => '',
                  'relationType' => true,
                  'invisible' => false,
                  'visibleGridView' => false,
@@ -492,18 +485,10 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                  'assetsAllowed' => false,
                  'assetTypes' => 
                 array (
-                  0 => 
-                  array (
-                    'assetTypes' => '',
-                  ),
                 ),
                  'documentsAllowed' => false,
                  'documentTypes' => 
                 array (
-                  0 => 
-                  array (
-                    'documentTypes' => '',
-                  ),
                 ),
                  'enableTextSelection' => false,
                  'width' => '',
