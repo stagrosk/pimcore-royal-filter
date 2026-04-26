@@ -21,7 +21,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1775319818,
+   'modificationDate' => 1777217211,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -38,7 +38,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
    'showVariants' => false,
    'layoutDefinitions' => 
   \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
-     'name' => 'pimcore_root',
+     'name' => 'opendxp_root',
      'type' => NULL,
      'region' => NULL,
      'title' => NULL,
@@ -48,6 +48,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
      'collapsed' => false,
      'bodyStyle' => NULL,
      'datatype' => 'layout',
+     'permissions' => NULL,
      'children' => 
     array (
       0 => 
@@ -62,6 +63,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
          'collapsed' => false,
          'bodyStyle' => '',
          'datatype' => 'layout',
+         'permissions' => NULL,
          'children' => 
         array (
           0 => 
@@ -76,6 +78,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
              'collapsed' => false,
              'bodyStyle' => '',
              'datatype' => 'layout',
+             'permissions' => NULL,
              'children' => 
             array (
               0 => 
@@ -89,7 +92,6 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                  'locked' => false,
                  'style' => '',
                  'permissions' => NULL,
-                 'fieldtype' => '',
                  'relationType' => false,
                  'invisible' => false,
                  'visibleGridView' => true,
@@ -110,7 +112,6 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                      'locked' => false,
                      'style' => '',
                      'permissions' => NULL,
-                     'fieldtype' => '',
                      'relationType' => false,
                      'invisible' => false,
                      'visibleGridView' => false,
@@ -140,7 +141,6 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                      'locked' => false,
                      'style' => '',
                      'permissions' => NULL,
-                     'fieldtype' => '',
                      'relationType' => false,
                      'invisible' => false,
                      'visibleGridView' => false,
@@ -165,7 +165,6 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                      'locked' => false,
                      'style' => '',
                      'permissions' => NULL,
-                     'fieldtype' => '',
                      'relationType' => false,
                      'invisible' => false,
                      'visibleGridView' => false,
@@ -184,7 +183,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                      'width' => '',
                      'defaultValueGenerator' => '',
                   )),
-                  3 =>
+                  3 => 
                   \OpenDxp\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
                      'name' => 'handle',
                      'title' => 'Handle',
@@ -195,18 +194,17 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                      'locked' => false,
                      'style' => '',
                      'permissions' => NULL,
-                     'fieldtype' => '',
                      'relationType' => false,
                      'invisible' => false,
                      'visibleGridView' => false,
                      'visibleSearch' => false,
-                     'blockedVarsForExport' =>
+                     'blockedVarsForExport' => 
                     array (
                     ),
                      'defaultValue' => NULL,
                      'columnLength' => 190,
                      'regex' => '',
-                     'regexFlags' =>
+                     'regexFlags' => 
                     array (
                     ),
                      'unique' => false,
@@ -244,7 +242,6 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                  'locked' => false,
                  'style' => '',
                  'permissions' => NULL,
-                 'fieldtype' => '',
                  'relationType' => false,
                  'invisible' => false,
                  'visibleGridView' => false,
@@ -267,7 +264,6 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                  'locked' => false,
                  'style' => '',
                  'permissions' => NULL,
-                 'fieldtype' => '',
                  'relationType' => false,
                  'invisible' => false,
                  'visibleGridView' => false,

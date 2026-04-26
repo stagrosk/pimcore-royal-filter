@@ -8,7 +8,7 @@ opendxp_data_hub:
                 description: ''
                 group: ''
                 sqlObjectCondition: ''
-                modificationDate: 1776857996
+                modificationDate: 1777212852
                 path: null
                 createDate: 1727014466
             schema:
@@ -46,12 +46,6 @@ opendxp_data_hub:
                                     attributes:
                                         attribute: handle
                                         label: Handle
-                                        dataType: input
-                                    isOperator: false
-                                -
-                                    attributes:
-                                        attribute: absolutePath
-                                        label: 'Absolute Path'
                                         dataType: input
                                     isOperator: false
                                 -

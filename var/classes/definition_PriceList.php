@@ -20,7 +20,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1770554011,
+   'modificationDate' => 1777217228,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -37,7 +37,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
    'showVariants' => false,
    'layoutDefinitions' => 
   \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
-     'name' => 'pimcore_root',
+     'name' => 'opendxp_root',
      'type' => NULL,
      'region' => NULL,
      'title' => NULL,
@@ -47,6 +47,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
      'collapsed' => false,
      'bodyStyle' => NULL,
      'datatype' => 'layout',
+     'permissions' => NULL,
      'children' => 
     array (
       0 => 
@@ -61,6 +62,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
          'collapsed' => false,
          'bodyStyle' => '',
          'datatype' => 'layout',
+         'permissions' => NULL,
          'children' => 
         array (
           0 => 
@@ -74,7 +76,6 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
              'locked' => false,
              'style' => '',
              'permissions' => NULL,
-             'fieldtype' => '',
              'relationType' => false,
              'invisible' => false,
              'visibleGridView' => false,
@@ -104,7 +105,6 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
              'locked' => false,
              'style' => '',
              'permissions' => NULL,
-             'fieldtype' => '',
              'relationType' => false,
              'invisible' => false,
              'visibleGridView' => false,
@@ -160,7 +160,6 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
              'locked' => false,
              'style' => '',
              'permissions' => NULL,
-             'fieldtype' => '',
              'relationType' => false,
              'invisible' => false,
              'visibleGridView' => false,
@@ -186,7 +185,6 @@ The compare at prices are set to null unless explicitly defined by a fixed price
              'locked' => false,
              'style' => '',
              'permissions' => NULL,
-             'fieldtype' => '',
              'relationType' => false,
              'invisible' => false,
              'visibleGridView' => true,
@@ -231,7 +229,6 @@ Percentage increase type. Prices will have a higher value.',
              'locked' => false,
              'style' => '',
              'permissions' => NULL,
-             'fieldtype' => '',
              'relationType' => false,
              'invisible' => false,
              'visibleGridView' => false,
@@ -272,7 +269,6 @@ Percentage increase type. Prices will have a higher value.',
              'locked' => false,
              'style' => '',
              'permissions' => NULL,
-             'fieldtype' => '',
              'relationType' => false,
              'invisible' => false,
              'visibleGridView' => false,
@@ -348,36 +344,6 @@ Percentage increase type. Prices will have a higher value.',
    'enableGridLocking' => false,
    'deletedDataComponents' => 
   array (
-    0 => 
-    \OpenDxp\Model\DataObject\ClassDefinition\Data\Numeric::__set_state(array(
-       'name' => 'roundingDecimals',
-       'title' => 'Rounding Decimals',
-       'tooltip' => '',
-       'mandatory' => false,
-       'noteditable' => false,
-       'index' => false,
-       'locked' => false,
-       'style' => '',
-       'permissions' => NULL,
-       'fieldtype' => '',
-       'relationType' => false,
-       'invisible' => false,
-       'visibleGridView' => false,
-       'visibleSearch' => false,
-       'blockedVarsForExport' => 
-      array (
-      ),
-       'defaultValue' => 2,
-       'integer' => true,
-       'unsigned' => false,
-       'minValue' => 0.0,
-       'maxValue' => 4.0,
-       'unique' => false,
-       'decimalSize' => NULL,
-       'decimalPrecision' => NULL,
-       'width' => '',
-       'defaultValueGenerator' => '',
-    )),
   ),
    'blockedVarsForExport' => 
   array (
