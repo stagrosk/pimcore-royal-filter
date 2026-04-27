@@ -38,10 +38,10 @@ OpendxpVendureBridgeBundle:
     resource: '@OpendxpVendureBridgeBundle/Resources/config/routes.yaml'
 ```
 
-## Messenger
-Messenger add data object to queue on `preUpdate / postDelete` event. Necessary is to implement on data object `\OpendxpVendureBridgeBundle\Models\OpendxpVendureInterface` interface
+## Webhook flow
+Direct HTTP webhooks to Vendure are sent by `App\EventSubscriber\AbstractWebhookSubscriber` (in the host app, not this bundle). Vendure receives the webhook and pulls full data via the REST endpoints in this bundle (see `Controller/Rest/`). Data objects must implement `\OpendxpVendureBridgeBundle\Model\OpendxpVendureInterface`.
 
-NOTICE: handler to consume messages is not implemented! will be processed from vendure system (rabbitMQ AMQP queue processing)
+The previous AMQP/RabbitMQ pipeline was removed (April 2026) — there was no consumer.
 
 ## Custom serializer handlers
 In bundle is prepared few custom handlers to process data from dataojects.

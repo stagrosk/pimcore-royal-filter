@@ -1,7 +1,4 @@
 imports:
     - { resource: services/base.yaml }
-    - { resource: services/command.yaml }
-    - { resource: services/event_listener.yaml }
     - { resource: services/controller.yaml }
     - { resource: services/serialization.yaml }
-    - { resource: services/services.yaml }

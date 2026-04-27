@@ -6,10 +6,7 @@ services:
 
     OpendxpVendureBridgeBundle\:
         resource: '../../../*'
-        # EventListeners excluded — AMQP path is unused (no consumer) and the
-        # subscriber's Pimcore-era event names (pimcore.dataobject.postUpdate/Delete)
-        # do not fire in OpenDXP. Direct webhooks go via App\EventSubscriber\AbstractWebhookSubscriber.
-        exclude: '../../../{DependencyInjection,EventListeners}'
+        exclude: '../../../{DependencyInjection}'
 
     OpendxpVendureBridgeBundle\Security\CheckConsumerPermissionsService:
         arguments:
