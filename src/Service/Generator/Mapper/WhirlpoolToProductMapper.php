@@ -4,6 +4,7 @@ namespace App\Service\Generator\Mapper;
 
 use App\OpenDxp\ClassificationStore\ClassificationStoreHelper;
 use App\OpenDxp\ClassificationStore\ClassificationStoreService;
+use App\Service\Generator\ProductFolderResolver;
 use App\Service\ProductMetadataService;
 use App\Enum\ProductStatusEnum;
 use OpenDxp\Model\Asset;
@@ -24,18 +25,21 @@ class WhirlpoolToProductMapper extends BaseMapper
      * @param \App\OpenDxp\ClassificationStore\ClassificationStoreHelper $classificationStoreHelper
      * @param \App\OpenDxp\ClassificationStore\ClassificationStoreService $classificationStoreService
      * @param \App\Service\ProductMetadataService $productMetadataService
+     * @param \App\Service\Generator\ProductFolderResolver $productFolderResolver
      */
     public function __construct(
         Translator $translator,
         ClassificationStoreHelper $classificationStoreHelper,
         ClassificationStoreService $classificationStoreService,
-        ProductMetadataService $productMetadataService
+        ProductMetadataService $productMetadataService,
+        ProductFolderResolver $productFolderResolver,
     ) {
         parent::__construct(
             $translator,
             $classificationStoreHelper,
             $classificationStoreService,
-            $productMetadataService
+            $productMetadataService,
+            $productFolderResolver,
         );
     }
 
@@ -89,12 +93,8 @@ class WhirlpoolToProductMapper extends BaseMapper
         // images
         $product->setImageGallery($this->prepareImages($product, $fromObject));
 
-        // pimcore base - preserve collection hierarchy without root folder
-        $collectionPath = $fromObject->getCollection()->getFullPath();
-        $pathParts = explode('/', trim($collectionPath, '/'));
-        array_shift($pathParts); // remove root folder (e.g. "Collections")
-        $path = implode('/', $pathParts);
-        $product->setParent(Service::createFolderByPath($path));
+        // pimcore base - mirror source object hierarchy under whirlpool products root
+        $product->setParent($this->productFolderResolver->resolveParentFolder($fromObject, ProductFolderResolver::PRODUCTS_ROOT_WHIRLPOOL));
         $product->setKey(Service::getValidKey(sprintf('WRF-%s', str_replace(' ', '-', $product->getTitle())), 'object'));
 
         return $product;

@@ -6,6 +6,7 @@ use App\OpenDxp\Model\ClassificationStore\ClassificationStoreMappingItem;
 use App\OpenDxp\ClassificationStore\ClassificationStoreHelper;
 use App\OpenDxp\ClassificationStore\ClassificationStoreService;
 use App\OpenDxp\Model\DataObject\RoyalFilter;
+use App\Service\Generator\ProductFolderResolver;
 use App\Service\ProductMetadataService;
 use App\Enum\ProductStatusEnum;
 use OpenDxp\Model\DataObject\AbstractObject;
@@ -24,18 +25,21 @@ class FilterToProductMapper extends BaseMapper
      * @param \App\OpenDxp\ClassificationStore\ClassificationStoreHelper $classificationStoreHelper
      * @param \App\OpenDxp\ClassificationStore\ClassificationStoreService $classificationStoreService
      * @param \App\Service\ProductMetadataService $productMetadataService
+     * @param \App\Service\Generator\ProductFolderResolver $productFolderResolver
      */
     public function __construct(
         Translator $translator,
         ClassificationStoreHelper $classificationStoreHelper,
         ClassificationStoreService $classificationStoreService,
-        ProductMetadataService $productMetadataService
+        ProductMetadataService $productMetadataService,
+        ProductFolderResolver $productFolderResolver,
     ) {
         parent::__construct(
             $translator,
             $classificationStoreHelper,
             $classificationStoreService,
-            $productMetadataService
+            $productMetadataService,
+            $productFolderResolver,
         );
     }
 
@@ -89,12 +93,8 @@ class FilterToProductMapper extends BaseMapper
         // prices
         $product->setPrices($fromObject->getPrices());
 
-        // pimcore base - preserve collection hierarchy without root folder
-        $collectionPath = $fromObject->getCollection()->getFullPath();
-        $pathParts = explode('/', trim($collectionPath, '/'));
-        array_shift($pathParts); // remove root folder (e.g. "Collections")
-        $path = implode('/', $pathParts);
-        $product->setParent(Service::createFolderByPath($path));
+        // pimcore base - mirror source object hierarchy under Products root
+        $product->setParent($this->productFolderResolver->resolveParentFolder($fromObject, ProductFolderResolver::PRODUCTS_ROOT_FILTER));
         $product->setKey(Service::getValidKey(sprintf('RF-%s', str_replace(' ', '-', $product->getTitle())), 'object'));
 
         return $product;
@@ -154,10 +154,12 @@ class FilterToProductMapper extends BaseMapper
             /** @var \App\OpenDxp\Model\ClassificationStore\ClassificationStoreMapping $mapping */
             $mapping = reset($params)['mapping'];
 
-            // add diameter
+            // add body dimensions only if the setup actually has a body part
             $height = $mapping->findItemByKeyConfigName('body', 'height');
             $diameter = $mapping->findItemByKeyConfigName('body', 'diameter');
-            $dimensions = sprintf('%s x ⌀%s', $height->getValue(), $diameter->getValue());
+            if ($height instanceof ClassificationStoreMappingItem && $diameter instanceof ClassificationStoreMappingItem) {
+                $dimensions = sprintf('%s x ⌀%s', $height->getValue(), $diameter->getValue());
+            }
 
             // -> added center dimension to title
             $centerDiameterFrom = $mapping->findItemByKeyConfigName('center', 'centerDiameterFrom');
@@ -171,9 +173,10 @@ class FilterToProductMapper extends BaseMapper
                     $centerDimensions .= sprintf('->⌀%s', $centerDiameterTo->getValue());
                 }
 
-                $extraParams[] = $this->translator->trans('product_title_filter_center', [
+                // strip outer parens so the wrapping below doesn't double them up
+                $extraParams[] = trim($this->translator->trans('product_title_filter_center', [
                     '%dimensions%' => $centerDimensions
-                ], 'messages', $language);
+                ], 'messages', $language), " ()");
             }
         }
 

@@ -4,6 +4,7 @@ namespace App\Service\Generator\Mapper;
 
 use App\OpenDxp\ClassificationStore\ClassificationStoreHelper;
 use App\OpenDxp\ClassificationStore\ClassificationStoreService;
+use App\Service\Generator\ProductFolderResolver;
 use App\Service\ProductMetadataService;
 use OpenDxp\Model\DataObject\AbstractObject;
 use OpenDxp\Model\DataObject\Collection;
@@ -23,12 +24,14 @@ abstract class BaseMapper implements MapperInterface
      * @param \App\OpenDxp\ClassificationStore\ClassificationStoreHelper $classificationStoreHelper
      * @param \App\OpenDxp\ClassificationStore\ClassificationStoreService $classificationStoreService
      * @param \App\Service\ProductMetadataService $productMetadataService
+     * @param \App\Service\Generator\ProductFolderResolver $productFolderResolver
      */
     public function __construct(
         protected readonly Translator $translator,
         protected readonly ClassificationStoreHelper $classificationStoreHelper,
         protected readonly ClassificationStoreService $classificationStoreService,
-        protected readonly ProductMetadataService $productMetadataService
+        protected readonly ProductMetadataService $productMetadataService,
+        protected readonly ProductFolderResolver $productFolderResolver,
     ) {
     }
 
