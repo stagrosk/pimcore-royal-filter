@@ -4,14 +4,18 @@ declare(strict_types=1);
 
 namespace App\EventSubscriber;
 
+use App\OpenDxp\Helpers\VersionHelper;
 use OpenDxp\Event\DataObjectEvents;
 use OpenDxp\Event\Model\DataObjectEvent;
+use OpenDxp\Logger;
 use OpenDxp\Model\DataObject\AbstractObject;
 use OpenDxp\Model\DataObject\Concrete;
 use OpenDxp\Model\DataObject\CustomerGroup;
 use OpenDxp\Model\DataObject\Fieldcollection;
 use OpenDxp\Model\DataObject\PriceList;
 use OpenDxp\Model\DataObject\Product;
+use OpenDxp\Model\DataObject\RoyalFilter;
+use OpenDxp\Model\DataObject\Whirlpool;
 
 class ProductSubscriber extends AbstractWebhookSubscriber
 {
@@ -27,12 +31,23 @@ class ProductSubscriber extends AbstractWebhookSubscriber
         return 'ProductSubscriber';
     }
 
+    /**
+     * Source object IDs whose POST_UPDATE we want to skip in this request.
+     * Set when we manually disable generation during a Product deletion so the
+     * subsequent source save (triggered by clearing the product relation) does not
+     * fire generation/cleanup logic in the RoyalFilter/Whirlpool subscribers.
+     *
+     * @var array<int, true>
+     */
+    public static array $skipSourceUpdateForObjectIds = [];
+
     public static function getSubscribedEvents(): array
     {
         return [
             DataObjectEvents::PRE_ADD => ['onPreAdd'],
             DataObjectEvents::PRE_UPDATE => ['onPreUpdate'],
             DataObjectEvents::POST_UPDATE => ['onPostUpdate'],
+            DataObjectEvents::PRE_DELETE => ['onPreDelete'],
             DataObjectEvents::POST_DELETE => ['onPostDelete'],
         ];
     }
@@ -65,6 +80,45 @@ class ProductSubscriber extends AbstractWebhookSubscriber
         }
 
         $this->validateBasePriceList($object);
+    }
+
+    /**
+     * When a product is deleted manually (not as part of a regeneration cycle),
+     * also disable auto-regeneration on the source RoyalFilter/Whirlpool.
+     * Otherwise the next save on the source - including pimcore's relation cleanup
+     * after deletion - re-runs the generator and recreates the product.
+     */
+    public function onPreDelete(DataObjectEvent $event): void
+    {
+        $product = $event->getObject();
+        if (!$product instanceof Product) {
+            return;
+        }
+
+        // variants are owned by their master product's generator, leave them alone
+        if ($product->getType() === AbstractObject::OBJECT_TYPE_VARIANT) {
+            return;
+        }
+
+        $source = $product->getGeneratedFromObject();
+        if (!$source instanceof RoyalFilter && !$source instanceof Whirlpool) {
+            return;
+        }
+
+        if ($source->getGenerateAsProduct() !== true) {
+            return;
+        }
+
+        Logger::notice(sprintf(
+            '[ProductSubscriber] Disabling generateAsProduct on source #%d after manual delete of product #%d',
+            $source->getId(),
+            $product->getId()
+        ));
+
+        self::$skipSourceUpdateForObjectIds[$source->getId()] = true;
+        $source->setGenerateAsProduct(false);
+        $source->setProduct(null);
+        VersionHelper::useVersioning(static fn () => $source->save(), false);
     }
 
     protected function onBeforeProcess(Concrete $object): void

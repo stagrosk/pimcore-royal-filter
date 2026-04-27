@@ -45,6 +45,11 @@ readonly class WhirlpoolSubscriber implements EventSubscriberInterface
             return;
         }
 
+        // skip when the save was triggered by ProductSubscriber to disable auto-regeneration after manual delete
+        if (isset(\App\EventSubscriber\ProductSubscriber::$skipSourceUpdateForObjectIds[$object->getId()])) {
+            return;
+        }
+
         if ($object->isPublished() && $object->getGenerateAsProduct() === true) {
             $this->generator->generateProductForObject($object);
         }
