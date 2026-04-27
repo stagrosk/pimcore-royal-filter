@@ -105,6 +105,15 @@ class ProductSubscriber extends AbstractWebhookSubscriber
             return;
         }
 
+        // Only react when the source actually points at this product. The generator
+        // also calls delete() on stale/orphan products it finds via getByGeneratedFromObject -
+        // in that case the source's `product` field is null (or another product) and we must
+        // not touch generateAsProduct, otherwise the in-progress generation gets cancelled.
+        $currentProduct = $source->getProduct();
+        if (!$currentProduct instanceof Product || $currentProduct->getId() !== $product->getId()) {
+            return;
+        }
+
         if ($source->getGenerateAsProduct() !== true) {
             return;
         }
