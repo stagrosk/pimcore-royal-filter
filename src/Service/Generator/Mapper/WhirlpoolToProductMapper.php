@@ -76,8 +76,12 @@ class WhirlpoolToProductMapper extends BaseMapper
         $this->productMetadataService->copyMetadata($product, $fromObject, $extraData['partOverrides'] ?? [], true);
 
         // title (must be after metadata - dimensions resolved from classification store)/ description / seo
+        // skip title generation per language when operator locked it via disableTitleGenerator
+        $generateTitle = $product->getDisableTitleGenerator() !== true;
         foreach (Tool::getValidLanguages() as $language) {
-            $product->setTitle($this->prepareTitle($product, $fromObject, $language), $language);
+            if ($generateTitle) {
+                $product->setTitle($this->prepareTitle($product, $fromObject, $language), $language);
+            }
             $product->setShortDescription($fromObject->getShortDescription($language), $language);
             $product->setDescription($fromObject->getDescription($language), $language);
 //            $product->setSeoTitle($product->getTitle($language), $language);

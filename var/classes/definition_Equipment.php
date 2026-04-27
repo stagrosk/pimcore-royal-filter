@@ -5,6 +5,7 @@
  * Variants: no
  *
  * Fields Summary:
+ * - equipmentType [select]
  * - localizedfields [localizedfields]
  * -- title [input]
  * - code [input]
@@ -20,7 +21,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1777217191,
+   'modificationDate' => 1777301067,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -81,6 +82,51 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
              'children' => 
             array (
               0 => 
+              \OpenDxp\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
+                 'name' => 'equipmentType',
+                 'title' => 'Equipment Type',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+                 'blockedVarsForExport' => 
+                array (
+                ),
+                 'options' => 
+                array (
+                  0 => 
+                  array (
+                    'key' => 'Adapter',
+                    'value' => 'adapter',
+                  ),
+                  1 => 
+                  array (
+                    'key' => 'Handle',
+                    'value' => 'handle',
+                  ),
+                  2 => 
+                  array (
+                    'key' => '',
+                    'value' => '',
+                  ),
+                ),
+                 'defaultValue' => '',
+                 'columnLength' => 190,
+                 'dynamicOptions' => false,
+                 'defaultValueGenerator' => '',
+                 'width' => '',
+                 'optionsProviderType' => 'configure',
+                 'optionsProviderClass' => '',
+                 'optionsProviderData' => '',
+              )),
+              1 => 
               \OpenDxp\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
                  'name' => 'localizedfields',
                  'title' => '',
@@ -148,7 +194,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                  'height' => '',
                  'fieldDefinitionsCache' => NULL,
               )),
-              1 => 
+              2 => 
               \OpenDxp\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
                  'name' => 'code',
                  'title' => 'Code',
@@ -177,7 +223,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                  'width' => '',
                  'defaultValueGenerator' => '',
               )),
-              2 => 
+              3 => 
               \OpenDxp\Model\DataObject\ClassDefinition\Data\Classificationstore::__set_state(array(
                  'name' => 'Metadata',
                  'title' => 'Metadata',

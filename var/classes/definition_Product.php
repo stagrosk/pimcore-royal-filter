@@ -10,6 +10,7 @@
  * - ean [input]
  * - productType [select]
  * - sku [input]
+ * - disableTitleGenerator [checkbox]
  * - localizedfields [localizedfields]
  * -- title [input]
  * -- shortDescription [textarea]
@@ -48,7 +49,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1777217231,
+   'modificationDate' => 1777301610,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -369,6 +370,27 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                      'children' => 
                     array (
                       0 => 
+                      \OpenDxp\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
+                         'name' => 'disableTitleGenerator',
+                         'title' => 'Disable Title Generator',
+                         'tooltip' => 'V pripade produktu generovane zo setupu alebo virivky preskoci prepisanie nazvu',
+                         'mandatory' => false,
+                         'noteditable' => false,
+                         'index' => false,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'relationType' => false,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'defaultValue' => 0,
+                         'defaultValueGenerator' => '',
+                      )),
+                      1 => 
                       \OpenDxp\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
                          'name' => 'localizedfields',
                          'title' => '',

@@ -10,6 +10,7 @@ use App\Service\Generator\ProductFolderResolver;
 use App\Service\ProductMetadataService;
 use App\Enum\ProductStatusEnum;
 use OpenDxp\Model\DataObject\AbstractObject;
+use OpenDxp\Model\DataObject\Adapter;
 use OpenDxp\Model\DataObject\Country;
 use OpenDxp\Model\DataObject\Data\ImageGallery;
 use OpenDxp\Model\DataObject\Folder;
@@ -76,8 +77,12 @@ class FilterToProductMapper extends BaseMapper
         $this->productMetadataService->copyMetadata($product, $fromObject, $extraData['partOverrides'] ?? [], true);
 
         // title (must be after metadata - dimensions resolved from classification store)/ description / seo
+        // skip title generation per language when operator locked it via disableTitleGenerator
+        $generateTitle = $product->getDisableTitleGenerator() !== true;
         foreach (Tool::getValidLanguages() as $language) {
-            $product->setTitle($this->prepareTitle($product, $fromObject, $language), $language);
+            if ($generateTitle) {
+                $product->setTitle($this->prepareTitle($product, $fromObject, $language), $language);
+            }
             $product->setShortDescription($fromObject->getShortDescription($language), $language);
             $product->setDescription($fromObject->getDescription($language), $language);
 //            $product->setSeoTitle($product->getTitle($language), $language);
@@ -132,59 +137,48 @@ class FilterToProductMapper extends BaseMapper
      */
     public function prepareTitle(AbstractObject $product, AbstractObject $fromObject, string $language): string
     {
-        $params = $this->productMetadataService->getMappedParametersOfParts($product);
-
-        // TODO: nacitat vsetky dependencies kde je filter pouzity na virivke a z virivky nacitat kody
-//        $codes = [];
-//        foreach ($object->getPaperCartridges() as $cartridge) {
-//            foreach ($cartridge->getCodes() as $code) {
-//                if ($code->getShowInTitle() === true) {
-//                    $codes[] = $code;
+        // body/center dimensions hidden from the title - they are visible directly on the product detail
+        // and were producing very long names. Adapter name is used as the differentiator instead.
+//        $params = $this->productMetadataService->getMappedParametersOfParts($product);
+//
+//        $dimensions = '';
+//        $extraParams = [];
+//
+//        if (!empty($params)) {
+//            /** @var \App\OpenDxp\Model\ClassificationStore\ClassificationStoreMapping $mapping */
+//            $mapping = reset($params)['mapping'];
+//
+//            $height = $mapping->findItemByKeyConfigName('body', 'height');
+//            $diameter = $mapping->findItemByKeyConfigName('body', 'diameter');
+//            if ($height instanceof ClassificationStoreMappingItem && $diameter instanceof ClassificationStoreMappingItem) {
+//                $dimensions = sprintf('%s x ⌀%s', $height->getValue(), $diameter->getValue());
+//            }
+//
+//            $centerDiameterFrom = $mapping->findItemByKeyConfigName('center', 'centerDiameterFrom');
+//            if ($centerDiameterFrom instanceof ClassificationStoreMappingItem) {
+//                $centerDimensions = sprintf('⌀%s', $centerDiameterFrom->getValue());
+//
+//                $centerDiameterTo = $mapping->findItemByKeyConfigName('center', 'centerDiameterTo');
+//                if ($centerDiameterTo instanceof ClassificationStoreMappingItem
+//                    && $centerDiameterFrom->getValue() !== $centerDiameterTo->getValue()
+//                ) {
+//                    $centerDimensions .= sprintf('->⌀%s', $centerDiameterTo->getValue());
 //                }
+//
+//                $extraParams[] = trim($this->translator->trans('product_title_filter_center', [
+//                    '%dimensions%' => $centerDimensions
+//                ], 'messages', $language), " ()");
 //            }
 //        }
-//        // unique
-//        $codes = array_unique($codes);
-
-        $dimensions = '';
-        $extraParams = [];
-
-        if (!empty($params)) {
-            // get first mapping
-            /** @var \App\OpenDxp\Model\ClassificationStore\ClassificationStoreMapping $mapping */
-            $mapping = reset($params)['mapping'];
-
-            // add body dimensions only if the setup actually has a body part
-            $height = $mapping->findItemByKeyConfigName('body', 'height');
-            $diameter = $mapping->findItemByKeyConfigName('body', 'diameter');
-            if ($height instanceof ClassificationStoreMappingItem && $diameter instanceof ClassificationStoreMappingItem) {
-                $dimensions = sprintf('%s x ⌀%s', $height->getValue(), $diameter->getValue());
-            }
-
-            // -> added center dimension to title
-            $centerDiameterFrom = $mapping->findItemByKeyConfigName('center', 'centerDiameterFrom');
-            if ($centerDiameterFrom instanceof ClassificationStoreMappingItem) {
-                $centerDimensions = sprintf('⌀%s', $centerDiameterFrom->getValue());
-
-                $centerDiameterTo = $mapping->findItemByKeyConfigName('center', 'centerDiameterTo');
-                if ($centerDiameterTo instanceof ClassificationStoreMappingItem
-                    && $centerDiameterFrom->getValue() !== $centerDiameterTo->getValue()
-                ) {
-                    $centerDimensions .= sprintf('->⌀%s', $centerDiameterTo->getValue());
-                }
-
-                // strip outer parens so the wrapping below doesn't double them up
-                $extraParams[] = trim($this->translator->trans('product_title_filter_center', [
-                    '%dimensions%' => $centerDimensions
-                ], 'messages', $language), " ()");
-            }
-        }
 
         $title = $fromObject->getTitle($language);
 
-        $params = array_filter([$dimensions, ...array_values($extraParams)]);
-        if (!empty($params)) {
-            $title .= ' (' . implode(', ', $params) . ')';
+        $adapter = $fromObject instanceof RoyalFilter ? $fromObject->getAdapter() : null;
+        if ($adapter instanceof Adapter) {
+            $adapterTitle = $adapter->getTitle($language);
+            if (!empty($adapterTitle)) {
+                $title .= ' (' . $adapterTitle . ')';
+            }
         }
 
         return $title;
