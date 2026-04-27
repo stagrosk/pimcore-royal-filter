@@ -27,4 +27,4 @@ services:
 
     OpendxpTranslationBundle\EventListener\AdminInterfaceListener:
       tags:
-        - { name: kernel.event_listener, event: pimcore.bundle_manager.paths.js, method: addJsFiles }
+        - { name: kernel.event_listener, event: opendxp.bundle_manager.paths.js, method: addJsFiles }

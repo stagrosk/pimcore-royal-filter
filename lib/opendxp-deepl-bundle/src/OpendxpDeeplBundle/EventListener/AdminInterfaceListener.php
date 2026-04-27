@@ -15,7 +15,7 @@ class AdminInterfaceListener
             array_merge(
                 $event->getPaths(),
                 [
-                    '/bundles/pimcoredeepl/js/deepl-translation/startup.js',
+                    '/bundles/opendxpdeepl/js/deepl-translation/startup.js',
                 ]
             )
         );
