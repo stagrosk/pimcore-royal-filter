@@ -39,6 +39,9 @@
 # composer
 /vendor/
 
+# auto-generated safety file — created by OpenDXP on cache warmup
+/.htaccess
+
 # PhpStorm / IDEA
 .idea
 # NetBeans
