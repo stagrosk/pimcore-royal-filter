@@ -4,6 +4,7 @@ namespace OpendxpHeadlessContentBundle\EventListener;
 
 use OpendxpHeadlessContentBundle\Helper\SlugGenerator;
 use OpendxpHeadlessContentBundle\Model\SlugAwareInterface;
+use OpenDxp\Event\DataObjectEvents;
 use OpenDxp\Event\Model\DataObjectEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -26,7 +27,7 @@ class GenerateSlugListener implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            'pimcore.dataobject.preUpdate' => [
+            DataObjectEvents::PRE_UPDATE => [
                 'onPreUpdate',
             ],
         ];

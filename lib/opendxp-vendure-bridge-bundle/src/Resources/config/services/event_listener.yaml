@@ -4,6 +4,16 @@ services:
         autowire: true
         public: false
 
-    OpendxpVendureBridgeBundle\EventListeners\OpendxpVendureListener:
-        tags:
-            - { name: kernel.event_subscriber }
+    # AMQP-based event listener — disabled after migration to OpenDXP because:
+    # 1. The Pimcore-era event names (pimcore.dataobject.postUpdate/Delete) it subscribed to
+    #    are not dispatched by OpenDXP (which only fires opendxp.dataobject.*).
+    # 2. There is no RabbitMQ consumer in this project that reads the update/delete
+    #    queues, so even with corrected events the messages would just pile up.
+    # 3. Direct webhooks to Vendure are sent via App\EventSubscriber\AbstractWebhookSubscriber
+    #    which uses the correct DataObjectEvents constants.
+    # To re-enable AMQP path: also fix the event names in OpendxpVendureListener.php and
+    # add a RabbitMQ consumer that reads the 'update'/'delete' queues.
+    #
+    # OpendxpVendureBridgeBundle\EventListeners\OpendxpVendureListener:
+    #     tags:
+    #         - { name: kernel.event_subscriber }
