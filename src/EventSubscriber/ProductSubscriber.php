@@ -65,6 +65,7 @@ class ProductSubscriber extends AbstractWebhookSubscriber
     {
         return [
             DataObjectEvents::PRE_ADD => ['onPreAdd'],
+            DataObjectEvents::POST_ADD => ['onPostUpdate'],
             DataObjectEvents::PRE_UPDATE => ['onPreUpdate'],
             DataObjectEvents::POST_UPDATE => ['onPostUpdate'],
             DataObjectEvents::PRE_DELETE => ['onPreDelete'],

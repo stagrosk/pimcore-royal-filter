@@ -31,6 +31,7 @@ abstract class AbstractWebhookSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
+            DataObjectEvents::POST_ADD => ['onPostUpdate'],
             DataObjectEvents::POST_UPDATE => ['onPostUpdate'],
             DataObjectEvents::POST_DELETE => ['onPostDelete'],
         ];
