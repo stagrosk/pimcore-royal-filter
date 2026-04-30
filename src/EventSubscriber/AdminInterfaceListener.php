@@ -42,6 +42,7 @@ class AdminInterfaceListener implements EventSubscriberInterface
                     '/admin-static/js/notification-override.js',
                     '/admin-static/js/filter-config-dependent-select.js',
                     '/admin-static/js/translation-override.js',
+                    '/admin-static/js/icon-combo.js',
                 ]
             )
         );

@@ -1,0 +1,1462 @@
+{
+  "generated": "2026-04-30T14:14:57.288Z",
+  "totalCount": 206,
+  "sets": {
+    "lucide": {
+      "count": 79,
+      "prefix": "lucide:",
+      "reactPackage": "react-icons/lu",
+      "source": "https://lucide.dev"
+    },
+    "remix": {
+      "count": 127,
+      "prefix": "ri:",
+      "reactPackage": "react-icons/ri",
+      "source": "https://remixicon.com"
+    }
+  },
+  "icons": [
+    {
+      "id": "lucide:arrow-left",
+      "label": "Arrow left",
+      "set": "lucide",
+      "react": "LuArrowLeft",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:arrow-right",
+      "label": "Arrow right",
+      "set": "lucide",
+      "react": "LuArrowRight",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:award",
+      "label": "Award",
+      "set": "lucide",
+      "react": "LuAward",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:badge-percent",
+      "label": "Badge percent",
+      "set": "lucide",
+      "react": "LuBadgePercent",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:ban",
+      "label": "Ban",
+      "set": "lucide",
+      "react": "LuBan",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:bath",
+      "label": "Bath",
+      "set": "lucide",
+      "react": "LuBath",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:book-open",
+      "label": "Book open",
+      "set": "lucide",
+      "react": "LuBookOpen",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:bug",
+      "label": "Bug",
+      "set": "lucide",
+      "react": "LuBug",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:calendar",
+      "label": "Calendar",
+      "set": "lucide",
+      "react": "LuCalendar",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:camera",
+      "label": "Camera",
+      "set": "lucide",
+      "react": "LuCamera",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:check",
+      "label": "Check",
+      "set": "lucide",
+      "react": "LuCheck",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:chevron-down",
+      "label": "Chevron down",
+      "set": "lucide",
+      "react": "LuChevronDown",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:chevron-left",
+      "label": "Chevron left",
+      "set": "lucide",
+      "react": "LuChevronLeft",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:chevron-right",
+      "label": "Chevron right",
+      "set": "lucide",
+      "react": "LuChevronRight",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:chevron-up",
+      "label": "Chevron up",
+      "set": "lucide",
+      "react": "LuChevronUp",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:circle-alert",
+      "label": "Circle alert",
+      "set": "lucide",
+      "react": "LuCircleAlert",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:circle-check",
+      "label": "Circle check",
+      "set": "lucide",
+      "react": "LuCircleCheck",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:circle-check-big",
+      "label": "Circle check big",
+      "set": "lucide",
+      "react": "LuCircleCheckBig",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:circle-help",
+      "label": "Circle help",
+      "set": "lucide",
+      "react": "LuCircleHelp",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:circle-x",
+      "label": "Circle x",
+      "set": "lucide",
+      "react": "LuCircleX",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:clock",
+      "label": "Clock",
+      "set": "lucide",
+      "react": "LuClock",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:copy",
+      "label": "Copy",
+      "set": "lucide",
+      "react": "LuCopy",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:droplets",
+      "label": "Droplets",
+      "set": "lucide",
+      "react": "LuDroplets",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:eye",
+      "label": "Eye",
+      "set": "lucide",
+      "react": "LuEye",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:eye-off",
+      "label": "Eye off",
+      "set": "lucide",
+      "react": "LuEyeOff",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:factory",
+      "label": "Factory",
+      "set": "lucide",
+      "react": "LuFactory",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:filter",
+      "label": "Filter",
+      "set": "lucide",
+      "react": "LuFilter",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:flag",
+      "label": "Flag",
+      "set": "lucide",
+      "react": "LuFlag",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:flame",
+      "label": "Flame",
+      "set": "lucide",
+      "react": "LuFlame",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:flask-conical",
+      "label": "Flask conical",
+      "set": "lucide",
+      "react": "LuFlaskConical",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:gift",
+      "label": "Gift",
+      "set": "lucide",
+      "react": "LuGift",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:handshake",
+      "label": "Handshake",
+      "set": "lucide",
+      "react": "LuHandshake",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:heart",
+      "label": "Heart",
+      "set": "lucide",
+      "react": "LuHeart",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:house",
+      "label": "House",
+      "set": "lucide",
+      "react": "LuHouse",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:image",
+      "label": "Image",
+      "set": "lucide",
+      "react": "LuImage",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:info",
+      "label": "Info",
+      "set": "lucide",
+      "react": "LuInfo",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:leaf",
+      "label": "Leaf",
+      "set": "lucide",
+      "react": "LuLeaf",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:loader",
+      "label": "Loader",
+      "set": "lucide",
+      "react": "LuLoader",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:loader-circle",
+      "label": "Loader circle",
+      "set": "lucide",
+      "react": "LuLoaderCircle",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:mail",
+      "label": "Mail",
+      "set": "lucide",
+      "react": "LuMail",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:message-circle",
+      "label": "Message circle",
+      "set": "lucide",
+      "react": "LuMessageCircle",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:minus",
+      "label": "Minus",
+      "set": "lucide",
+      "react": "LuMinus",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:package",
+      "label": "Package",
+      "set": "lucide",
+      "react": "LuPackage",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:pencil",
+      "label": "Pencil",
+      "set": "lucide",
+      "react": "LuPencil",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:phone",
+      "label": "Phone",
+      "set": "lucide",
+      "react": "LuPhone",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:play",
+      "label": "Play",
+      "set": "lucide",
+      "react": "LuPlay",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:plus",
+      "label": "Plus",
+      "set": "lucide",
+      "react": "LuPlus",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:rotate-ccw",
+      "label": "Rotate ccw",
+      "set": "lucide",
+      "react": "LuRotateCcw",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:ruler",
+      "label": "Ruler",
+      "set": "lucide",
+      "react": "LuRuler",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:search",
+      "label": "Search",
+      "set": "lucide",
+      "react": "LuSearch",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:search-x",
+      "label": "Search x",
+      "set": "lucide",
+      "react": "LuSearchX",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:send",
+      "label": "Send",
+      "set": "lucide",
+      "react": "LuSend",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:share-2",
+      "label": "Share 2",
+      "set": "lucide",
+      "react": "LuShare2",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:shield",
+      "label": "Shield",
+      "set": "lucide",
+      "react": "LuShield",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:shield-alert",
+      "label": "Shield alert",
+      "set": "lucide",
+      "react": "LuShieldAlert",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:shield-check",
+      "label": "Shield check",
+      "set": "lucide",
+      "react": "LuShieldCheck",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:shopping-bag",
+      "label": "Shopping bag",
+      "set": "lucide",
+      "react": "LuShoppingBag",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:shopping-cart",
+      "label": "Shopping cart",
+      "set": "lucide",
+      "react": "LuShoppingCart",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:shower-head",
+      "label": "Shower head",
+      "set": "lucide",
+      "react": "LuShowerHead",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:sliders-horizontal",
+      "label": "Sliders horizontal",
+      "set": "lucide",
+      "react": "LuSlidersHorizontal",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:sparkles",
+      "label": "Sparkles",
+      "set": "lucide",
+      "react": "LuSparkles",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:square-pen",
+      "label": "Square pen",
+      "set": "lucide",
+      "react": "LuSquarePen",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:star",
+      "label": "Star",
+      "set": "lucide",
+      "react": "LuStar",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:sun",
+      "label": "Sun",
+      "set": "lucide",
+      "react": "LuSun",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:tag",
+      "label": "Tag",
+      "set": "lucide",
+      "react": "LuTag",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:thermometer",
+      "label": "Thermometer",
+      "set": "lucide",
+      "react": "LuThermometer",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:thumbs-down",
+      "label": "Thumbs down",
+      "set": "lucide",
+      "react": "LuThumbsDown",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:thumbs-up",
+      "label": "Thumbs up",
+      "set": "lucide",
+      "react": "LuThumbsUp",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:timer",
+      "label": "Timer",
+      "set": "lucide",
+      "react": "LuTimer",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:trash-2",
+      "label": "Trash 2",
+      "set": "lucide",
+      "react": "LuTrash2",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:trending-up",
+      "label": "Trending up",
+      "set": "lucide",
+      "react": "LuTrendingUp",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:triangle-alert",
+      "label": "Triangle alert",
+      "set": "lucide",
+      "react": "LuTriangleAlert",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:truck",
+      "label": "Truck",
+      "set": "lucide",
+      "react": "LuTruck",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:user",
+      "label": "User",
+      "set": "lucide",
+      "react": "LuUser",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:warehouse",
+      "label": "Warehouse",
+      "set": "lucide",
+      "react": "LuWarehouse",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:waves",
+      "label": "Waves",
+      "set": "lucide",
+      "react": "LuWaves",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:wind",
+      "label": "Wind",
+      "set": "lucide",
+      "react": "LuWind",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:x",
+      "label": "X",
+      "set": "lucide",
+      "react": "LuX",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "lucide:zap",
+      "label": "Zap",
+      "set": "lucide",
+      "react": "LuZap",
+      "reactPackage": "react-icons/lu"
+    },
+    {
+      "id": "ri:add-line",
+      "label": "Add line",
+      "set": "remix",
+      "react": "RiAddLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:alert-line",
+      "label": "Alert line",
+      "set": "remix",
+      "react": "RiAlertLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:archive-line",
+      "label": "Archive line",
+      "set": "remix",
+      "react": "RiArchiveLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:arrow-down-sline",
+      "label": "Arrow down sline",
+      "set": "remix",
+      "react": "RiArrowDownSLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:arrow-go-back-line",
+      "label": "Arrow go back line",
+      "set": "remix",
+      "react": "RiArrowGoBackLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:arrow-left-line",
+      "label": "Arrow left line",
+      "set": "remix",
+      "react": "RiArrowLeftLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:arrow-left-right-line",
+      "label": "Arrow left right line",
+      "set": "remix",
+      "react": "RiArrowLeftRightLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:arrow-left-sline",
+      "label": "Arrow left sline",
+      "set": "remix",
+      "react": "RiArrowLeftSLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:arrow-right-line",
+      "label": "Arrow right line",
+      "set": "remix",
+      "react": "RiArrowRightLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:arrow-right-sline",
+      "label": "Arrow right sline",
+      "set": "remix",
+      "react": "RiArrowRightSLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:arrow-up-double-line",
+      "label": "Arrow up double line",
+      "set": "remix",
+      "react": "RiArrowUpDoubleLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:arrow-up-down-line",
+      "label": "Arrow up down line",
+      "set": "remix",
+      "react": "RiArrowUpDownLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:arrow-up-sline",
+      "label": "Arrow up sline",
+      "set": "remix",
+      "react": "RiArrowUpSLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:attachment-line",
+      "label": "Attachment line",
+      "set": "remix",
+      "react": "RiAttachmentLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:bank-card-2-line",
+      "label": "Bank card 2 line",
+      "set": "remix",
+      "react": "RiBankCard2Line",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:bank-card-line",
+      "label": "Bank card line",
+      "set": "remix",
+      "react": "RiBankCardLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:bank-line",
+      "label": "Bank line",
+      "set": "remix",
+      "react": "RiBankLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:box-3-line",
+      "label": "Box 3 line",
+      "set": "remix",
+      "react": "RiBox3Line",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:building-line",
+      "label": "Building line",
+      "set": "remix",
+      "react": "RiBuildingLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:camera-line",
+      "label": "Camera line",
+      "set": "remix",
+      "react": "RiCameraLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:camera-off-line",
+      "label": "Camera off line",
+      "set": "remix",
+      "react": "RiCameraOffLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:chat-3-line",
+      "label": "Chat 3 line",
+      "set": "remix",
+      "react": "RiChat3Line",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:check-double-line",
+      "label": "Check double line",
+      "set": "remix",
+      "react": "RiCheckDoubleLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:check-line",
+      "label": "Check line",
+      "set": "remix",
+      "react": "RiCheckLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:checkbox-circle-fill",
+      "label": "Checkbox circle fill",
+      "set": "remix",
+      "react": "RiCheckboxCircleFill",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:checkbox-circle-line",
+      "label": "Checkbox circle line",
+      "set": "remix",
+      "react": "RiCheckboxCircleLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:close-circle-fill",
+      "label": "Close circle fill",
+      "set": "remix",
+      "react": "RiCloseCircleFill",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:close-circle-line",
+      "label": "Close circle line",
+      "set": "remix",
+      "react": "RiCloseCircleLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:close-line",
+      "label": "Close line",
+      "set": "remix",
+      "react": "RiCloseLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:coupon-2-line",
+      "label": "Coupon 2 line",
+      "set": "remix",
+      "react": "RiCoupon2Line",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:coupon-3-line",
+      "label": "Coupon 3 line",
+      "set": "remix",
+      "react": "RiCoupon3Line",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:customer-service-2-line",
+      "label": "Customer service 2 line",
+      "set": "remix",
+      "react": "RiCustomerService2Line",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:delete-bin-2-line",
+      "label": "Delete bin 2 line",
+      "set": "remix",
+      "react": "RiDeleteBin2Line",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:delete-bin-line",
+      "label": "Delete bin line",
+      "set": "remix",
+      "react": "RiDeleteBinLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:download-2-line",
+      "label": "Download 2 line",
+      "set": "remix",
+      "react": "RiDownload2Line",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:download-line",
+      "label": "Download line",
+      "set": "remix",
+      "react": "RiDownloadLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:edit-line",
+      "label": "Edit line",
+      "set": "remix",
+      "react": "RiEditLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:error-warning-line",
+      "label": "Error warning line",
+      "set": "remix",
+      "react": "RiErrorWarningLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:exchange-line",
+      "label": "Exchange line",
+      "set": "remix",
+      "react": "RiExchangeLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:external-link-line",
+      "label": "External link line",
+      "set": "remix",
+      "react": "RiExternalLinkLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:eye-line",
+      "label": "Eye line",
+      "set": "remix",
+      "react": "RiEyeLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:facebook-fill",
+      "label": "Facebook fill",
+      "set": "remix",
+      "react": "RiFacebookFill",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:file-copy-line",
+      "label": "File copy line",
+      "set": "remix",
+      "react": "RiFileCopyLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:file-download-line",
+      "label": "File download line",
+      "set": "remix",
+      "react": "RiFileDownloadLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:file-list-3-line",
+      "label": "File list 3 line",
+      "set": "remix",
+      "react": "RiFileList3Line",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:file-list-line",
+      "label": "File list line",
+      "set": "remix",
+      "react": "RiFileListLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:file-pdf-2-line",
+      "label": "File pdf 2 line",
+      "set": "remix",
+      "react": "RiFilePdf2Line",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:file-text-line",
+      "label": "File text line",
+      "set": "remix",
+      "react": "RiFileTextLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:file-warning-line",
+      "label": "File warning line",
+      "set": "remix",
+      "react": "RiFileWarningLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:filter-3-line",
+      "label": "Filter 3 line",
+      "set": "remix",
+      "react": "RiFilter3Line",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:filter-line",
+      "label": "Filter line",
+      "set": "remix",
+      "react": "RiFilterLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:flashlight-line",
+      "label": "Flashlight line",
+      "set": "remix",
+      "react": "RiFlashlightLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:gift-line",
+      "label": "Gift line",
+      "set": "remix",
+      "react": "RiGiftLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:global-line",
+      "label": "Global line",
+      "set": "remix",
+      "react": "RiGlobalLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:heart-3-line",
+      "label": "Heart 3 line",
+      "set": "remix",
+      "react": "RiHeart3Line",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:heart-fill",
+      "label": "Heart fill",
+      "set": "remix",
+      "react": "RiHeartFill",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:heart-line",
+      "label": "Heart line",
+      "set": "remix",
+      "react": "RiHeartLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:home-2-fill",
+      "label": "Home 2 fill",
+      "set": "remix",
+      "react": "RiHome2Fill",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:home-2-line",
+      "label": "Home 2 line",
+      "set": "remix",
+      "react": "RiHome2Line",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:home-4-line",
+      "label": "Home 4 line",
+      "set": "remix",
+      "react": "RiHome4Line",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:home-line",
+      "label": "Home line",
+      "set": "remix",
+      "react": "RiHomeLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:inbox-line",
+      "label": "Inbox line",
+      "set": "remix",
+      "react": "RiInboxLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:information-line",
+      "label": "Information line",
+      "set": "remix",
+      "react": "RiInformationLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:layout-column-line",
+      "label": "Layout column line",
+      "set": "remix",
+      "react": "RiLayoutColumnLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:layout-grid-line",
+      "label": "Layout grid line",
+      "set": "remix",
+      "react": "RiLayoutGridLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:linkedin-fill",
+      "label": "Linkedin fill",
+      "set": "remix",
+      "react": "RiLinkedinFill",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:list-check",
+      "label": "List check",
+      "set": "remix",
+      "react": "RiListCheck",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:loader-4-line",
+      "label": "Loader 4 line",
+      "set": "remix",
+      "react": "RiLoader4Line",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:lock-line",
+      "label": "Lock line",
+      "set": "remix",
+      "react": "RiLockLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:login-box-line",
+      "label": "Login box line",
+      "set": "remix",
+      "react": "RiLoginBoxLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:logout-box-rline",
+      "label": "Logout box rline",
+      "set": "remix",
+      "react": "RiLogoutBoxRLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:mail-check-line",
+      "label": "Mail check line",
+      "set": "remix",
+      "react": "RiMailCheckLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:mail-fill",
+      "label": "Mail fill",
+      "set": "remix",
+      "react": "RiMailFill",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:mail-line",
+      "label": "Mail line",
+      "set": "remix",
+      "react": "RiMailLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:mail-send-line",
+      "label": "Mail send line",
+      "set": "remix",
+      "react": "RiMailSendLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:map-pin-2-line",
+      "label": "Map pin 2 line",
+      "set": "remix",
+      "react": "RiMapPin2Line",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:map-pin-line",
+      "label": "Map pin line",
+      "set": "remix",
+      "react": "RiMapPinLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:menu-line",
+      "label": "Menu line",
+      "set": "remix",
+      "react": "RiMenuLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:message-2-line",
+      "label": "Message 2 line",
+      "set": "remix",
+      "react": "RiMessage2Line",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:moon-line",
+      "label": "Moon line",
+      "set": "remix",
+      "react": "RiMoonLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:notification-3-line",
+      "label": "Notification 3 line",
+      "set": "remix",
+      "react": "RiNotification3Line",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:percent-line",
+      "label": "Percent line",
+      "set": "remix",
+      "react": "RiPercentLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:phone-fill",
+      "label": "Phone fill",
+      "set": "remix",
+      "react": "RiPhoneFill",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:phone-line",
+      "label": "Phone line",
+      "set": "remix",
+      "react": "RiPhoneLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:play-line",
+      "label": "Play line",
+      "set": "remix",
+      "react": "RiPlayLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:price-tag-3-line",
+      "label": "Price tag 3 line",
+      "set": "remix",
+      "react": "RiPriceTag3Line",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:qr-code-line",
+      "label": "Qr code line",
+      "set": "remix",
+      "react": "RiQrCodeLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:question-line",
+      "label": "Question line",
+      "set": "remix",
+      "react": "RiQuestionLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:refresh-line",
+      "label": "Refresh line",
+      "set": "remix",
+      "react": "RiRefreshLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:refund-2-line",
+      "label": "Refund 2 line",
+      "set": "remix",
+      "react": "RiRefund2Line",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:refund-line",
+      "label": "Refund line",
+      "set": "remix",
+      "react": "RiRefundLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:reply-line",
+      "label": "Reply line",
+      "set": "remix",
+      "react": "RiReplyLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:ruler-line",
+      "label": "Ruler line",
+      "set": "remix",
+      "react": "RiRulerLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:search-2-fill",
+      "label": "Search 2 fill",
+      "set": "remix",
+      "react": "RiSearch2Fill",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:search-2-line",
+      "label": "Search 2 line",
+      "set": "remix",
+      "react": "RiSearch2Line",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:search-line",
+      "label": "Search line",
+      "set": "remix",
+      "react": "RiSearchLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:secure-payment-line",
+      "label": "Secure payment line",
+      "set": "remix",
+      "react": "RiSecurePaymentLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:send-plane-line",
+      "label": "Send plane line",
+      "set": "remix",
+      "react": "RiSendPlaneLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:settings-4-line",
+      "label": "Settings 4 line",
+      "set": "remix",
+      "react": "RiSettings4Line",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:shield-check-line",
+      "label": "Shield check line",
+      "set": "remix",
+      "react": "RiShieldCheckLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:shield-keyhole-line",
+      "label": "Shield keyhole line",
+      "set": "remix",
+      "react": "RiShieldKeyholeLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:shield-line",
+      "label": "Shield line",
+      "set": "remix",
+      "react": "RiShieldLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:shopping-bag-3-line",
+      "label": "Shopping bag 3 line",
+      "set": "remix",
+      "react": "RiShoppingBag3Line",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:shopping-bag-fill",
+      "label": "Shopping bag fill",
+      "set": "remix",
+      "react": "RiShoppingBagFill",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:shopping-bag-line",
+      "label": "Shopping bag line",
+      "set": "remix",
+      "react": "RiShoppingBagLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:shopping-cart-2-line",
+      "label": "Shopping cart 2 line",
+      "set": "remix",
+      "react": "RiShoppingCart2Line",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:shopping-cart-line",
+      "label": "Shopping cart line",
+      "set": "remix",
+      "react": "RiShoppingCartLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:sparkling-line",
+      "label": "Sparkling line",
+      "set": "remix",
+      "react": "RiSparklingLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:star-fill",
+      "label": "Star fill",
+      "set": "remix",
+      "react": "RiStarFill",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:star-half-fill",
+      "label": "Star half fill",
+      "set": "remix",
+      "react": "RiStarHalfFill",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:star-line",
+      "label": "Star line",
+      "set": "remix",
+      "react": "RiStarLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:store-2-line",
+      "label": "Store 2 line",
+      "set": "remix",
+      "react": "RiStore2Line",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:subtract-line",
+      "label": "Subtract line",
+      "set": "remix",
+      "react": "RiSubtractLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:sun-line",
+      "label": "Sun line",
+      "set": "remix",
+      "react": "RiSunLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:time-fill",
+      "label": "Time fill",
+      "set": "remix",
+      "react": "RiTimeFill",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:time-line",
+      "label": "Time line",
+      "set": "remix",
+      "react": "RiTimeLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:tools-line",
+      "label": "Tools line",
+      "set": "remix",
+      "react": "RiToolsLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:truck-line",
+      "label": "Truck line",
+      "set": "remix",
+      "react": "RiTruckLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:twitter-fill",
+      "label": "Twitter fill",
+      "set": "remix",
+      "react": "RiTwitterFill",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:user-add-line",
+      "label": "User add line",
+      "set": "remix",
+      "react": "RiUserAddLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:user-fill",
+      "label": "User fill",
+      "set": "remix",
+      "react": "RiUserFill",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:user-line",
+      "label": "User line",
+      "set": "remix",
+      "react": "RiUserLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:verified-badge-line",
+      "label": "Verified badge line",
+      "set": "remix",
+      "react": "RiVerifiedBadgeLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:video-line",
+      "label": "Video line",
+      "set": "remix",
+      "react": "RiVideoLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:vip-crown-line",
+      "label": "Vip crown line",
+      "set": "remix",
+      "react": "RiVipCrownLine",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:wallet-3-line",
+      "label": "Wallet 3 line",
+      "set": "remix",
+      "react": "RiWallet3Line",
+      "reactPackage": "react-icons/ri"
+    },
+    {
+      "id": "ri:whatsapp-fill",
+      "label": "Whatsapp fill",
+      "set": "remix",
+      "react": "RiWhatsappFill",
+      "reactPackage": "react-icons/ri"
+    }
+  ]
+}
