@@ -1,0 +1,4 @@
+framework:
+    # Pin PHP's date_default_timezone at kernel boot so it does not depend on
+    # the host's php.ini being correctly configured. Affects both web (FPM) and CLI.
+    default_timezone: '%env(APP_TIMEZONE)%'
