@@ -5,7 +5,7 @@ namespace App\Service\Generator\Mapper;
 use App\OpenDxp\Model\ClassificationStore\ClassificationStoreMappingItem;
 use App\OpenDxp\ClassificationStore\ClassificationStoreHelper;
 use App\OpenDxp\ClassificationStore\ClassificationStoreService;
-use App\OpenDxp\Model\DataObject\RoyalFilter;
+use App\OpenDxp\Model\DataObject\FilterSet;
 use App\Service\Generator\ProductFolderResolver;
 use App\Service\ProductMetadataService;
 use App\Enum\ProductStatusEnum;
@@ -46,13 +46,13 @@ class FilterToProductMapper extends BaseMapper
 
     /**
      * @param \OpenDxp\Model\DataObject\Product $product
-     * @param \OpenDxp\Model\DataObject\AbstractObject|\App\OpenDxp\Model\DataObject\RoyalFilter $fromObject
+     * @param \OpenDxp\Model\DataObject\AbstractObject|\App\OpenDxp\Model\DataObject\FilterSet $fromObject
      * @param array $extraData
      *
      * @throws \OpenDxp\Model\Element\DuplicateFullPathException
      * @return \OpenDxp\Model\DataObject\Product
      */
-    public function mapObjectToProduct(Product $product, AbstractObject|RoyalFilter $fromObject, array $extraData = []): Product
+    public function mapObjectToProduct(Product $product, AbstractObject|FilterSet $fromObject, array $extraData = []): Product
     {
         // base
         $product->setPublished(true);
@@ -106,11 +106,11 @@ class FilterToProductMapper extends BaseMapper
     }
 
     /**
-     * @param \OpenDxp\Model\DataObject\AbstractObject|\App\OpenDxp\Model\DataObject\RoyalFilter $object
+     * @param \OpenDxp\Model\DataObject\AbstractObject|\App\OpenDxp\Model\DataObject\FilterSet $object
      *
      * @return \OpenDxp\Model\DataObject\Data\ImageGallery
      */
-    private function prepareImages(AbstractObject|RoyalFilter $object): ImageGallery
+    private function prepareImages(AbstractObject|FilterSet $object): ImageGallery
     {
         $allImages = array_merge(
             $object->getImageGallery()?->getItems() ?? [],
@@ -173,7 +173,7 @@ class FilterToProductMapper extends BaseMapper
 
         $title = $fromObject->getTitle($language);
 
-        $adapter = $fromObject instanceof RoyalFilter ? $fromObject->getAdapter() : null;
+        $adapter = $fromObject instanceof FilterSet ? $fromObject->getAdapter() : null;
         if ($adapter instanceof Adapter) {
             $adapterTitle = $adapter->getTitle($language);
             if (!empty($adapterTitle)) {

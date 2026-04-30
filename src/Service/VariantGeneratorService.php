@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Service;
 
 use App\OpenDxp\Helpers\VersionHelper;
-use App\OpenDxp\Model\DataObject\RoyalFilter;
+use App\OpenDxp\Model\DataObject\FilterSet;
 use App\Service\Generator\Mapper\FilterToProductMapper;
 use OpenDxp\Model\DataObject\AbstractObject;
 use OpenDxp\Model\DataObject\Fieldcollection;
@@ -45,7 +45,7 @@ class VariantGeneratorService
         // Get object from which product was generated
         $fromObject = $masterProduct->getGeneratedFromObject();
 
-        if ($fromObject instanceof RoyalFilter) {
+        if ($fromObject instanceof FilterSet) {
             // Single variant from RoyalFilter
             $variantsData[] = [
                 'royalFilterSetup' => $fromObject,
@@ -65,7 +65,7 @@ class VariantGeneratorService
             foreach ($royalFilterSetups->getItems() as $fieldCollection) {
                 $royalFilterSetup = $fieldCollection->getRoyalFilterSetup();
 
-                if (!$royalFilterSetup instanceof RoyalFilter) {
+                if (!$royalFilterSetup instanceof FilterSet) {
                     continue;
                 }
 
@@ -171,7 +171,7 @@ class VariantGeneratorService
      */
     private function handleVariantProduct(array $variantData): void
     {
-        /** @var RoyalFilter $royalFilterSetup */
+        /** @var FilterSet $royalFilterSetup */
         $royalFilterSetup = $variantData['royalFilterSetup'];
         /** @var Product $masterProduct */
         $masterProduct = $variantData['masterProduct'];
@@ -209,11 +209,11 @@ class VariantGeneratorService
      * Find existing variant product by royal filter setup
      *
      * @param Product $masterProduct
-     * @param RoyalFilter $royalFilterSetup
+     * @param FilterSet $royalFilterSetup
      *
      * @return Product|null
      */
-    private function findExistingVariant(Product $masterProduct, RoyalFilter $royalFilterSetup): ?Product
+    private function findExistingVariant(Product $masterProduct, FilterSet $royalFilterSetup): ?Product
     {
         $expectedSku = sprintf('V-%s', $royalFilterSetup->getId());
 

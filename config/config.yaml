@@ -37,7 +37,7 @@ opendxp:
     models:
         class_overrides:
             'OpenDxp\Model\DataObject\Collection': 'App\OpenDxp\Model\DataObject\Collection'
-            'OpenDxp\Model\DataObject\RoyalFilter': 'App\OpenDxp\Model\DataObject\RoyalFilter'
+            'OpenDxp\Model\DataObject\FilterSet': 'App\OpenDxp\Model\DataObject\FilterSet'
             'OpenDxp\Model\DataObject\Product': 'App\OpenDxp\Model\DataObject\Product'
             'OpenDxp\Model\DataObject\PriceList': 'App\OpenDxp\Model\DataObject\PriceList'
             'OpenDxp\Model\DataObject\ProductFlag': 'App\OpenDxp\Model\DataObject\ProductFlag'

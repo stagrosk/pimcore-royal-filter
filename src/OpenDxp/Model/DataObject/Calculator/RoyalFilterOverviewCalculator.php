@@ -2,7 +2,7 @@
 
 namespace App\OpenDxp\Model\DataObject\Calculator;
 
-use App\OpenDxp\Model\DataObject\RoyalFilter;
+use App\OpenDxp\Model\DataObject\FilterSet;
 use App\Service\ProductMetadataService;
 use OpenDxp\Model\DataObject\ClassDefinition\CalculatorClassInterface;
 use OpenDxp\Model\DataObject\Concrete;
@@ -75,12 +75,12 @@ readonly class RoyalFilterOverviewCalculator implements CalculatorClassInterface
     }
 
     /**
-     * @param \App\OpenDxp\Model\DataObject\RoyalFilter $royalFilterSetup
+     * @param \App\OpenDxp\Model\DataObject\FilterSet $royalFilterSetup
      * @param array $overrides
      *
      * @return array
      */
-    private function calculateFinalDimensions(RoyalFilter $royalFilterSetup, array $overrides = []): array
+    private function calculateFinalDimensions(FilterSet $royalFilterSetup, array $overrides = []): array
     {
         $dimensions = [];
 

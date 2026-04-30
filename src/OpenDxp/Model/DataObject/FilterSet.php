@@ -7,7 +7,7 @@ use OpenDxp\Model\DataObject\Exception\InheritanceParentNotFoundException;
 use OpenDxp\Model\DataObject\Fieldcollection;
 use OpenDxp\Model\DataObject\Service;
 
-class RoyalFilter extends DataObject\RoyalFilter
+class FilterSet extends DataObject\FilterSet
 {
     /**
      * @throws \Exception
