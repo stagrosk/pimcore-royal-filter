@@ -10,6 +10,8 @@
  * - ean [input]
  * - productType [select]
  * - sku [input]
+ * - madeIn [country]
+ * - manufacturer [manyToOneRelation]
  * - disableTitleGenerator [checkbox]
  * - localizedfields [localizedfields]
  * -- title [input]
@@ -22,15 +24,14 @@
  * -- handle404 [input]
  * - productTabs [fieldcollections]
  * - parametersConfig [calculatedValue]
- * - manufacturer [manyToOneRelation]
- * - madeIn [country]
  * - collections [manyToManyRelation]
  * - flags [manyToManyRelation]
  * - customerGroups [manyToManyRelation]
- * - paperCartridges [manyToManyObjectRelation]
  * - benefictSet [manyToOneRelation]
  * - crossSellingProducts [manyToManyRelation]
  * - simularProducts [manyToManyRelation]
+ * - productSet [fieldcollections]
+ * - paperCartridges [manyToManyObjectRelation]
  * - productOptions [fieldcollections]
  * - metadata [classificationstore]
  * - extraParameters [fieldcollections]
@@ -49,7 +50,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1777301610,
+   'modificationDate' => 1777477252,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -212,7 +213,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                      'documentTypes' => 
                     array (
                     ),
-                     'width' => 500,
+                     'width' => 1200,
                   )),
                   2 => 
                   \OpenDxp\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
@@ -326,6 +327,75 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                      'showCharCount' => false,
                      'width' => 300,
                      'defaultValueGenerator' => '',
+                  )),
+                  5 => 
+                  \OpenDxp\Model\DataObject\ClassDefinition\Data\Country::__set_state(array(
+                     'name' => 'madeIn',
+                     'title' => 'Made In',
+                     'tooltip' => '',
+                     'mandatory' => false,
+                     'noteditable' => false,
+                     'index' => false,
+                     'locked' => false,
+                     'style' => '',
+                     'permissions' => NULL,
+                     'relationType' => false,
+                     'invisible' => false,
+                     'visibleGridView' => false,
+                     'visibleSearch' => false,
+                     'blockedVarsForExport' => 
+                    array (
+                    ),
+                     'defaultValue' => NULL,
+                     'columnLength' => 190,
+                     'dynamicOptions' => false,
+                     'defaultValueGenerator' => '',
+                     'width' => 300,
+                     'optionsProviderType' => NULL,
+                     'optionsProviderClass' => NULL,
+                     'optionsProviderData' => NULL,
+                     'restrictTo' => '',
+                  )),
+                  6 => 
+                  \OpenDxp\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
+                     'name' => 'manufacturer',
+                     'title' => 'Manufacturer',
+                     'tooltip' => '',
+                     'mandatory' => false,
+                     'noteditable' => false,
+                     'index' => false,
+                     'locked' => false,
+                     'style' => '',
+                     'permissions' => NULL,
+                     'relationType' => true,
+                     'invisible' => false,
+                     'visibleGridView' => false,
+                     'visibleSearch' => false,
+                     'blockedVarsForExport' => 
+                    array (
+                    ),
+                     'classes' => 
+                    array (
+                      0 => 
+                      array (
+                        'classes' => 'Manufacturer',
+                      ),
+                    ),
+                     'displayMode' => 'grid',
+                     'pathFormatterClass' => '',
+                     'assetInlineDownloadAllowed' => false,
+                     'assetUploadPath' => '',
+                     'allowToClearRelation' => true,
+                     'objectsAllowed' => true,
+                     'assetsAllowed' => false,
+                     'assetTypes' => 
+                    array (
+                    ),
+                     'documentsAllowed' => false,
+                     'documentTypes' => 
+                    array (
+                    ),
+                     'width' => 1200,
                   )),
                 ),
                  'locked' => false,
@@ -585,7 +655,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                           0 => 
                           \OpenDxp\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
                              'name' => 'localizedfields',
-                             'title' => 'Handle',
+                             'title' => '',
                              'tooltip' => NULL,
                              'mandatory' => false,
                              'noteditable' => false,
@@ -704,8 +774,8 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                              'permissionEdit' => NULL,
                              'labelWidth' => 100,
                              'labelAlign' => 'left',
-                             'width' => 750,
-                             'height' => 200,
+                             'width' => '',
+                             'height' => '',
                              'fieldDefinitionsCache' => NULL,
                           )),
                         ),
@@ -713,7 +783,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                          'permissionEdit' => NULL,
                          'labelWidth' => 100,
                          'labelAlign' => 'left',
-                         'width' => 900,
+                         'width' => '',
                          'height' => '',
                          'fieldDefinitionsCache' => NULL,
                       )),
@@ -848,373 +918,558 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
              'children' => 
             array (
               0 => 
-              \OpenDxp\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
-                 'name' => 'manufacturer',
-                 'title' => 'Manufacturer',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'relationType' => true,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-                 'blockedVarsForExport' => 
-                array (
-                ),
-                 'classes' => 
-                array (
-                  0 => 
-                  array (
-                    'classes' => 'Manufacturer',
-                  ),
-                ),
-                 'displayMode' => 'grid',
-                 'pathFormatterClass' => '',
-                 'assetInlineDownloadAllowed' => false,
-                 'assetUploadPath' => '',
-                 'allowToClearRelation' => true,
-                 'objectsAllowed' => true,
-                 'assetsAllowed' => false,
-                 'assetTypes' => 
-                array (
-                ),
-                 'documentsAllowed' => false,
-                 'documentTypes' => 
-                array (
-                ),
-                 'width' => '',
-              )),
-              1 => 
-              \OpenDxp\Model\DataObject\ClassDefinition\Data\Country::__set_state(array(
-                 'name' => 'madeIn',
-                 'title' => 'Made In',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-                 'blockedVarsForExport' => 
-                array (
-                ),
-                 'defaultValue' => NULL,
-                 'columnLength' => 190,
-                 'dynamicOptions' => false,
-                 'defaultValueGenerator' => '',
-                 'width' => 300,
-                 'optionsProviderType' => NULL,
-                 'optionsProviderClass' => NULL,
-                 'optionsProviderData' => NULL,
-                 'restrictTo' => '',
-              )),
-              2 => 
-              \OpenDxp\Model\DataObject\ClassDefinition\Data\ManyToManyRelation::__set_state(array(
-                 'name' => 'collections',
-                 'title' => 'Collections',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'relationType' => true,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-                 'blockedVarsForExport' => 
-                array (
-                ),
-                 'classes' => 
-                array (
-                  0 => 
-                  array (
-                    'classes' => 'Collection',
-                  ),
-                ),
-                 'displayMode' => NULL,
-                 'pathFormatterClass' => '',
-                 'maxItems' => NULL,
-                 'assetInlineDownloadAllowed' => false,
-                 'assetUploadPath' => '',
-                 'allowToClearRelation' => true,
-                 'objectsAllowed' => true,
-                 'assetsAllowed' => false,
-                 'assetTypes' => 
-                array (
-                ),
-                 'documentsAllowed' => false,
-                 'documentTypes' => 
-                array (
-                ),
-                 'enableTextSelection' => false,
+              \OpenDxp\Model\DataObject\ClassDefinition\Layout\Tabpanel::__set_state(array(
+                 'name' => 'Layout',
+                 'type' => NULL,
+                 'region' => NULL,
+                 'title' => '',
                  'width' => '',
                  'height' => '',
-              )),
-              3 => 
-              \OpenDxp\Model\DataObject\ClassDefinition\Data\ManyToManyRelation::__set_state(array(
-                 'name' => 'flags',
-                 'title' => 'Flags',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
+                 'collapsible' => false,
+                 'collapsed' => false,
+                 'bodyStyle' => '',
+                 'datatype' => 'layout',
                  'permissions' => NULL,
-                 'relationType' => true,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
+                 'children' => 
+                array (
+                  0 => 
+                  \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+                     'name' => 'Base',
+                     'type' => NULL,
+                     'region' => NULL,
+                     'title' => 'Base',
+                     'width' => '',
+                     'height' => '',
+                     'collapsible' => false,
+                     'collapsed' => false,
+                     'bodyStyle' => '',
+                     'datatype' => 'layout',
+                     'permissions' => NULL,
+                     'children' => 
+                    array (
+                      0 => 
+                      \OpenDxp\Model\DataObject\ClassDefinition\Data\ManyToManyRelation::__set_state(array(
+                         'name' => 'collections',
+                         'title' => 'Collections',
+                         'tooltip' => '',
+                         'mandatory' => false,
+                         'noteditable' => false,
+                         'index' => false,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'relationType' => true,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'classes' => 
+                        array (
+                          0 => 
+                          array (
+                            'classes' => 'Collection',
+                          ),
+                        ),
+                         'displayMode' => NULL,
+                         'pathFormatterClass' => '',
+                         'maxItems' => NULL,
+                         'assetInlineDownloadAllowed' => false,
+                         'assetUploadPath' => '',
+                         'allowToClearRelation' => true,
+                         'objectsAllowed' => true,
+                         'assetsAllowed' => false,
+                         'assetTypes' => 
+                        array (
+                          0 => 
+                          array (
+                            'assetTypes' => '',
+                          ),
+                        ),
+                         'documentsAllowed' => false,
+                         'documentTypes' => 
+                        array (
+                          0 => 
+                          array (
+                            'documentTypes' => '',
+                          ),
+                        ),
+                         'enableTextSelection' => false,
+                         'width' => 1100,
+                         'height' => '',
+                      )),
+                      1 => 
+                      \OpenDxp\Model\DataObject\ClassDefinition\Data\ManyToManyRelation::__set_state(array(
+                         'name' => 'flags',
+                         'title' => 'Flags',
+                         'tooltip' => '',
+                         'mandatory' => false,
+                         'noteditable' => false,
+                         'index' => false,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'relationType' => true,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'classes' => 
+                        array (
+                          0 => 
+                          array (
+                            'classes' => 'ProductFlag',
+                          ),
+                        ),
+                         'displayMode' => NULL,
+                         'pathFormatterClass' => '',
+                         'maxItems' => NULL,
+                         'assetInlineDownloadAllowed' => false,
+                         'assetUploadPath' => '',
+                         'allowToClearRelation' => true,
+                         'objectsAllowed' => true,
+                         'assetsAllowed' => false,
+                         'assetTypes' => 
+                        array (
+                          0 => 
+                          array (
+                            'assetTypes' => '',
+                          ),
+                        ),
+                         'documentsAllowed' => false,
+                         'documentTypes' => 
+                        array (
+                          0 => 
+                          array (
+                            'documentTypes' => '',
+                          ),
+                        ),
+                         'enableTextSelection' => false,
+                         'width' => 1100,
+                         'height' => '',
+                      )),
+                      2 => 
+                      \OpenDxp\Model\DataObject\ClassDefinition\Data\ManyToManyRelation::__set_state(array(
+                         'name' => 'customerGroups',
+                         'title' => 'Customer Groups',
+                         'tooltip' => '',
+                         'mandatory' => false,
+                         'noteditable' => false,
+                         'index' => false,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'relationType' => true,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'classes' => 
+                        array (
+                          0 => 
+                          array (
+                            'classes' => 'CustomerGroup',
+                          ),
+                        ),
+                         'displayMode' => NULL,
+                         'pathFormatterClass' => '',
+                         'maxItems' => NULL,
+                         'assetInlineDownloadAllowed' => false,
+                         'assetUploadPath' => '',
+                         'allowToClearRelation' => true,
+                         'objectsAllowed' => true,
+                         'assetsAllowed' => false,
+                         'assetTypes' => 
+                        array (
+                          0 => 
+                          array (
+                            'assetTypes' => '',
+                          ),
+                        ),
+                         'documentsAllowed' => false,
+                         'documentTypes' => 
+                        array (
+                          0 => 
+                          array (
+                            'documentTypes' => '',
+                          ),
+                        ),
+                         'enableTextSelection' => false,
+                         'width' => 1100,
+                         'height' => '',
+                      )),
+                      3 => 
+                      \OpenDxp\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
+                         'name' => 'benefictSet',
+                         'title' => 'Benefict Set',
+                         'tooltip' => '',
+                         'mandatory' => false,
+                         'noteditable' => false,
+                         'index' => false,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'relationType' => true,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'classes' => 
+                        array (
+                          0 => 
+                          array (
+                            'classes' => 'ProductBenefitSet',
+                          ),
+                        ),
+                         'displayMode' => 'grid',
+                         'pathFormatterClass' => '',
+                         'assetInlineDownloadAllowed' => false,
+                         'assetUploadPath' => '',
+                         'allowToClearRelation' => true,
+                         'objectsAllowed' => true,
+                         'assetsAllowed' => false,
+                         'assetTypes' => 
+                        array (
+                        ),
+                         'documentsAllowed' => false,
+                         'documentTypes' => 
+                        array (
+                        ),
+                         'width' => 1100,
+                      )),
+                    ),
+                     'locked' => false,
+                     'blockedVarsForExport' => 
+                    array (
+                    ),
+                     'fieldtype' => 'panel',
+                     'layout' => NULL,
+                     'border' => false,
+                     'icon' => '',
+                     'labelWidth' => 100,
+                     'labelAlign' => 'left',
+                  )),
+                  1 => 
+                  \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+                     'name' => 'CrossSelling / Simular',
+                     'type' => NULL,
+                     'region' => NULL,
+                     'title' => 'CrossSelling / Simular',
+                     'width' => '',
+                     'height' => '',
+                     'collapsible' => false,
+                     'collapsed' => false,
+                     'bodyStyle' => '',
+                     'datatype' => 'layout',
+                     'permissions' => NULL,
+                     'children' => 
+                    array (
+                      0 => 
+                      \OpenDxp\Model\DataObject\ClassDefinition\Data\ManyToManyRelation::__set_state(array(
+                         'name' => 'crossSellingProducts',
+                         'title' => 'Cross Selling Products',
+                         'tooltip' => '',
+                         'mandatory' => false,
+                         'noteditable' => false,
+                         'index' => false,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'relationType' => true,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'classes' => 
+                        array (
+                          0 => 
+                          array (
+                            'classes' => 'Product',
+                          ),
+                        ),
+                         'displayMode' => NULL,
+                         'pathFormatterClass' => '',
+                         'maxItems' => NULL,
+                         'assetInlineDownloadAllowed' => false,
+                         'assetUploadPath' => '',
+                         'allowToClearRelation' => true,
+                         'objectsAllowed' => true,
+                         'assetsAllowed' => false,
+                         'assetTypes' => 
+                        array (
+                          0 => 
+                          array (
+                            'assetTypes' => '',
+                          ),
+                        ),
+                         'documentsAllowed' => false,
+                         'documentTypes' => 
+                        array (
+                          0 => 
+                          array (
+                            'documentTypes' => '',
+                          ),
+                        ),
+                         'enableTextSelection' => false,
+                         'width' => 1100,
+                         'height' => '',
+                      )),
+                      1 => 
+                      \OpenDxp\Model\DataObject\ClassDefinition\Data\ManyToManyRelation::__set_state(array(
+                         'name' => 'simularProducts',
+                         'title' => 'Simular Products',
+                         'tooltip' => '',
+                         'mandatory' => false,
+                         'noteditable' => false,
+                         'index' => false,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'relationType' => true,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'classes' => 
+                        array (
+                          0 => 
+                          array (
+                            'classes' => 'Product',
+                          ),
+                        ),
+                         'displayMode' => NULL,
+                         'pathFormatterClass' => '',
+                         'maxItems' => NULL,
+                         'assetInlineDownloadAllowed' => false,
+                         'assetUploadPath' => '',
+                         'allowToClearRelation' => true,
+                         'objectsAllowed' => true,
+                         'assetsAllowed' => false,
+                         'assetTypes' => 
+                        array (
+                          0 => 
+                          array (
+                            'assetTypes' => '',
+                          ),
+                        ),
+                         'documentsAllowed' => false,
+                         'documentTypes' => 
+                        array (
+                          0 => 
+                          array (
+                            'documentTypes' => '',
+                          ),
+                        ),
+                         'enableTextSelection' => false,
+                         'width' => 1100,
+                         'height' => '',
+                      )),
+                    ),
+                     'locked' => false,
+                     'blockedVarsForExport' => 
+                    array (
+                    ),
+                     'fieldtype' => 'panel',
+                     'layout' => NULL,
+                     'border' => false,
+                     'icon' => '',
+                     'labelWidth' => 100,
+                     'labelAlign' => 'left',
+                  )),
+                  2 => 
+                  \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+                     'name' => 'Product Set',
+                     'type' => NULL,
+                     'region' => NULL,
+                     'title' => 'Product Set',
+                     'width' => '',
+                     'height' => '',
+                     'collapsible' => false,
+                     'collapsed' => false,
+                     'bodyStyle' => '',
+                     'datatype' => 'layout',
+                     'permissions' => NULL,
+                     'children' => 
+                    array (
+                      0 => 
+                      \OpenDxp\Model\DataObject\ClassDefinition\Layout\Text::__set_state(array(
+                         'name' => 'Layout',
+                         'type' => NULL,
+                         'region' => NULL,
+                         'title' => '',
+                         'width' => '',
+                         'height' => '',
+                         'collapsible' => false,
+                         'collapsed' => false,
+                         'bodyStyle' => '',
+                         'datatype' => 'layout',
+                         'permissions' => NULL,
+                         'children' => 
+                        array (
+                        ),
+                         'locked' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'fieldtype' => 'text',
+                         'html' => '​<div class="alert alert-info">Only for productType = ProductSet</div>',
+                         'renderingClass' => '',
+                         'renderingData' => '',
+                         'border' => false,
+                      )),
+                      1 => 
+                      \OpenDxp\Model\DataObject\ClassDefinition\Data\Fieldcollections::__set_state(array(
+                         'name' => 'productSet',
+                         'title' => 'Product Set',
+                         'tooltip' => '',
+                         'mandatory' => false,
+                         'noteditable' => false,
+                         'index' => false,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'relationType' => false,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'allowedTypes' => 
+                        array (
+                          0 => 'productSetItem',
+                        ),
+                         'lazyLoading' => true,
+                         'maxItems' => NULL,
+                         'disallowAddRemove' => false,
+                         'disallowReorder' => false,
+                         'collapsed' => false,
+                         'collapsible' => false,
+                         'border' => false,
+                      )),
+                    ),
+                     'locked' => false,
+                     'blockedVarsForExport' => 
+                    array (
+                    ),
+                     'fieldtype' => 'panel',
+                     'layout' => NULL,
+                     'border' => false,
+                     'icon' => '',
+                     'labelWidth' => 100,
+                     'labelAlign' => 'left',
+                  )),
+                  3 => 
+                  \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
+                     'name' => 'Paper Cartridges',
+                     'type' => NULL,
+                     'region' => NULL,
+                     'title' => 'Paper Cartridges',
+                     'width' => '',
+                     'height' => '',
+                     'collapsible' => false,
+                     'collapsed' => false,
+                     'bodyStyle' => '',
+                     'datatype' => 'layout',
+                     'permissions' => NULL,
+                     'children' => 
+                    array (
+                      0 => 
+                      \OpenDxp\Model\DataObject\ClassDefinition\Layout\Text::__set_state(array(
+                         'name' => 'Layout',
+                         'type' => NULL,
+                         'region' => NULL,
+                         'title' => '',
+                         'width' => '',
+                         'height' => '',
+                         'collapsible' => false,
+                         'collapsed' => false,
+                         'bodyStyle' => '',
+                         'datatype' => 'layout',
+                         'permissions' => NULL,
+                         'children' => 
+                        array (
+                        ),
+                         'locked' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'fieldtype' => 'text',
+                         'html' => '​<div class="alert alert-info">Only for productType = Whirlpool filter</div>',
+                         'renderingClass' => '',
+                         'renderingData' => '',
+                         'border' => false,
+                      )),
+                      1 => 
+                      \OpenDxp\Model\DataObject\ClassDefinition\Data\ManyToManyObjectRelation::__set_state(array(
+                         'name' => 'paperCartridges',
+                         'title' => 'Paper Cartridges',
+                         'tooltip' => '',
+                         'mandatory' => false,
+                         'noteditable' => false,
+                         'index' => false,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'relationType' => true,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'classes' => 
+                        array (
+                          0 => 
+                          array (
+                            'classes' => 'PaperCartridge',
+                          ),
+                        ),
+                         'displayMode' => 'grid',
+                         'pathFormatterClass' => '',
+                         'maxItems' => NULL,
+                         'visibleFields' => 'id,title,length,diameter',
+                         'allowToCreateNewObject' => false,
+                         'allowToClearRelation' => true,
+                         'optimizedAdminLoading' => false,
+                         'enableTextSelection' => false,
+                         'visibleFieldDefinitions' => 
+                        array (
+                        ),
+                         'width' => 1100,
+                         'height' => '',
+                      )),
+                    ),
+                     'locked' => false,
+                     'blockedVarsForExport' => 
+                    array (
+                    ),
+                     'fieldtype' => 'panel',
+                     'layout' => NULL,
+                     'border' => false,
+                     'icon' => '',
+                     'labelWidth' => 100,
+                     'labelAlign' => 'left',
+                  )),
+                ),
+                 'locked' => false,
                  'blockedVarsForExport' => 
                 array (
                 ),
-                 'classes' => 
-                array (
-                  0 => 
-                  array (
-                    'classes' => 'ProductFlag',
-                  ),
-                ),
-                 'displayMode' => NULL,
-                 'pathFormatterClass' => '',
-                 'maxItems' => NULL,
-                 'assetInlineDownloadAllowed' => false,
-                 'assetUploadPath' => '',
-                 'allowToClearRelation' => true,
-                 'objectsAllowed' => true,
-                 'assetsAllowed' => false,
-                 'assetTypes' => 
-                array (
-                ),
-                 'documentsAllowed' => false,
-                 'documentTypes' => 
-                array (
-                ),
-                 'enableTextSelection' => false,
-                 'width' => '',
-                 'height' => '',
-              )),
-              4 => 
-              \OpenDxp\Model\DataObject\ClassDefinition\Data\ManyToManyRelation::__set_state(array(
-                 'name' => 'customerGroups',
-                 'title' => 'Customer Groups',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'relationType' => true,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-                 'blockedVarsForExport' => 
-                array (
-                ),
-                 'classes' => 
-                array (
-                  0 => 
-                  array (
-                    'classes' => 'CustomerGroup',
-                  ),
-                ),
-                 'displayMode' => NULL,
-                 'pathFormatterClass' => '',
-                 'maxItems' => NULL,
-                 'assetInlineDownloadAllowed' => false,
-                 'assetUploadPath' => '',
-                 'allowToClearRelation' => true,
-                 'objectsAllowed' => true,
-                 'assetsAllowed' => false,
-                 'assetTypes' => 
-                array (
-                ),
-                 'documentsAllowed' => false,
-                 'documentTypes' => 
-                array (
-                ),
-                 'enableTextSelection' => false,
-                 'width' => '',
-                 'height' => '',
-              )),
-              5 => 
-              \OpenDxp\Model\DataObject\ClassDefinition\Data\ManyToManyObjectRelation::__set_state(array(
-                 'name' => 'paperCartridges',
-                 'title' => 'Paper Cartridges',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'relationType' => true,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-                 'blockedVarsForExport' => 
-                array (
-                ),
-                 'classes' => 
-                array (
-                  0 => 
-                  array (
-                    'classes' => 'PaperCartridge',
-                  ),
-                ),
-                 'displayMode' => 'grid',
-                 'pathFormatterClass' => '',
-                 'maxItems' => NULL,
-                 'visibleFields' => 'id,title,length,diameter',
-                 'allowToCreateNewObject' => false,
-                 'allowToClearRelation' => true,
-                 'optimizedAdminLoading' => false,
-                 'enableTextSelection' => false,
-                 'visibleFieldDefinitions' => 
-                array (
-                ),
-                 'width' => '',
-                 'height' => '',
-              )),
-              6 => 
-              \OpenDxp\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
-                 'name' => 'benefictSet',
-                 'title' => 'Benefict Set',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'relationType' => true,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-                 'blockedVarsForExport' => 
-                array (
-                ),
-                 'classes' => 
-                array (
-                  0 => 
-                  array (
-                    'classes' => 'ProductBenefitSet',
-                  ),
-                ),
-                 'displayMode' => 'grid',
-                 'pathFormatterClass' => '',
-                 'assetInlineDownloadAllowed' => false,
-                 'assetUploadPath' => '',
-                 'allowToClearRelation' => true,
-                 'objectsAllowed' => true,
-                 'assetsAllowed' => false,
-                 'assetTypes' => 
-                array (
-                ),
-                 'documentsAllowed' => false,
-                 'documentTypes' => 
-                array (
-                ),
-                 'width' => '',
-              )),
-              7 => 
-              \OpenDxp\Model\DataObject\ClassDefinition\Data\ManyToManyRelation::__set_state(array(
-                 'name' => 'crossSellingProducts',
-                 'title' => 'Cross Selling Products',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'relationType' => true,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-                 'blockedVarsForExport' => 
-                array (
-                ),
-                 'classes' => 
-                array (
-                  0 => 
-                  array (
-                    'classes' => 'Product',
-                  ),
-                ),
-                 'displayMode' => NULL,
-                 'pathFormatterClass' => '',
-                 'maxItems' => NULL,
-                 'assetInlineDownloadAllowed' => false,
-                 'assetUploadPath' => '',
-                 'allowToClearRelation' => true,
-                 'objectsAllowed' => true,
-                 'assetsAllowed' => false,
-                 'assetTypes' => 
-                array (
-                ),
-                 'documentsAllowed' => false,
-                 'documentTypes' => 
-                array (
-                ),
-                 'enableTextSelection' => false,
-                 'width' => '',
-                 'height' => '',
-              )),
-              8 => 
-              \OpenDxp\Model\DataObject\ClassDefinition\Data\ManyToManyRelation::__set_state(array(
-                 'name' => 'simularProducts',
-                 'title' => 'Simular Products',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'relationType' => true,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-                 'blockedVarsForExport' => 
-                array (
-                ),
-                 'classes' => 
-                array (
-                  0 => 
-                  array (
-                    'classes' => 'Product',
-                  ),
-                ),
-                 'displayMode' => NULL,
-                 'pathFormatterClass' => '',
-                 'maxItems' => NULL,
-                 'assetInlineDownloadAllowed' => false,
-                 'assetUploadPath' => '',
-                 'allowToClearRelation' => true,
-                 'objectsAllowed' => true,
-                 'assetsAllowed' => false,
-                 'assetTypes' => 
-                array (
-                ),
-                 'documentsAllowed' => false,
-                 'documentTypes' => 
-                array (
-                ),
-                 'enableTextSelection' => false,
-                 'width' => '',
-                 'height' => '',
+                 'fieldtype' => 'tabpanel',
+                 'border' => false,
+                 'tabPosition' => 'top',
               )),
             ),
              'locked' => false,
@@ -1246,7 +1501,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
               0 => 
               \OpenDxp\Model\DataObject\ClassDefinition\Data\Fieldcollections::__set_state(array(
                  'name' => 'productOptions',
-                 'title' => 'Product Options',
+                 'title' => 'Product Variant Options',
                  'tooltip' => '',
                  'mandatory' => false,
                  'noteditable' => false,
@@ -1633,58 +1888,24 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
              'children' => 
             array (
               0 => 
-              \OpenDxp\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
-                 'name' => 'apiId',
-                 'title' => 'Api Id',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => true,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-                 'blockedVarsForExport' => 
-                array (
-                ),
-                 'defaultValue' => NULL,
-                 'columnLength' => 190,
-                 'regex' => '',
-                 'regexFlags' => 
-                array (
-                ),
-                 'unique' => false,
-                 'showCharCount' => false,
+              \OpenDxp\Model\DataObject\ClassDefinition\Layout\Fieldset::__set_state(array(
+                 'name' => 'Synchronization',
+                 'type' => NULL,
+                 'region' => NULL,
+                 'title' => 'Synchronization',
                  'width' => '',
-                 'defaultValueGenerator' => '',
-              )),
-              1 => 
-              \OpenDxp\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
-                 'name' => 'localizedfields',
-                 'title' => 'Handle',
-                 'tooltip' => NULL,
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => NULL,
+                 'height' => '',
+                 'collapsible' => false,
+                 'collapsed' => false,
+                 'bodyStyle' => '',
+                 'datatype' => 'layout',
                  'permissions' => NULL,
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => true,
-                 'visibleSearch' => true,
-                 'blockedVarsForExport' => 
-                array (
-                ),
                  'children' => 
                 array (
                   0 => 
                   \OpenDxp\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
-                     'name' => 'slug',
-                     'title' => 'Slug',
+                     'name' => 'apiId',
+                     'title' => 'Api Id',
                      'tooltip' => '',
                      'mandatory' => false,
                      'noteditable' => true,
@@ -1699,7 +1920,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                      'blockedVarsForExport' => 
                     array (
                     ),
-                     'defaultValue' => NULL,
+                     'defaultValue' => '',
                      'columnLength' => 190,
                      'regex' => '',
                      'regexFlags' => 
@@ -1707,85 +1928,167 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                     ),
                      'unique' => false,
                      'showCharCount' => false,
-                     'width' => 400,
-                     'defaultValueGenerator' => '',
-                  )),
-                  1 => 
-                  \OpenDxp\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
-                     'name' => 'handle',
-                     'title' => 'Handle',
-                     'tooltip' => '',
-                     'mandatory' => false,
-                     'noteditable' => true,
-                     'index' => true,
-                     'locked' => false,
-                     'style' => '',
-                     'permissions' => NULL,
-                     'relationType' => false,
-                     'invisible' => false,
-                     'visibleGridView' => false,
-                     'visibleSearch' => false,
-                     'blockedVarsForExport' => 
-                    array (
-                    ),
-                     'defaultValue' => NULL,
-                     'columnLength' => 190,
-                     'regex' => '',
-                     'regexFlags' => 
-                    array (
-                    ),
-                     'unique' => false,
-                     'showCharCount' => false,
-                     'width' => 400,
-                     'defaultValueGenerator' => '',
-                  )),
-                  2 => 
-                  \OpenDxp\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
-                     'name' => 'handle404',
-                     'title' => '404 Handle',
-                     'tooltip' => '',
-                     'mandatory' => false,
-                     'noteditable' => false,
-                     'index' => true,
-                     'locked' => false,
-                     'style' => '',
-                     'permissions' => NULL,
-                     'relationType' => false,
-                     'invisible' => false,
-                     'visibleGridView' => false,
-                     'visibleSearch' => false,
-                     'blockedVarsForExport' => 
-                    array (
-                    ),
-                     'defaultValue' => NULL,
-                     'columnLength' => 190,
-                     'regex' => '',
-                     'regexFlags' => 
-                    array (
-                    ),
-                     'unique' => false,
-                     'showCharCount' => false,
-                     'width' => 400,
+                     'width' => '',
                      'defaultValueGenerator' => '',
                   )),
                 ),
-                 'region' => NULL,
-                 'layout' => NULL,
-                 'maxTabs' => NULL,
-                 'border' => false,
-                 'provideSplitView' => false,
-                 'tabPosition' => 'top',
-                 'hideLabelsWhenTabsReached' => NULL,
-                 'referencedFields' => 
+                 'locked' => false,
+                 'blockedVarsForExport' => 
                 array (
                 ),
-                 'permissionView' => NULL,
-                 'permissionEdit' => NULL,
+                 'fieldtype' => 'fieldset',
                  'labelWidth' => 100,
                  'labelAlign' => 'left',
-                 'width' => 750,
-                 'height' => 200,
-                 'fieldDefinitionsCache' => NULL,
+              )),
+              1 => 
+              \OpenDxp\Model\DataObject\ClassDefinition\Layout\Fieldset::__set_state(array(
+                 'name' => 'Slug and Handles',
+                 'type' => NULL,
+                 'region' => NULL,
+                 'title' => 'Slug and Handles',
+                 'width' => '',
+                 'height' => '',
+                 'collapsible' => false,
+                 'collapsed' => false,
+                 'bodyStyle' => '',
+                 'datatype' => 'layout',
+                 'permissions' => NULL,
+                 'children' => 
+                array (
+                  0 => 
+                  \OpenDxp\Model\DataObject\ClassDefinition\Data\Localizedfields::__set_state(array(
+                     'name' => 'localizedfields',
+                     'title' => '',
+                     'tooltip' => NULL,
+                     'mandatory' => false,
+                     'noteditable' => false,
+                     'index' => false,
+                     'locked' => false,
+                     'style' => NULL,
+                     'permissions' => NULL,
+                     'relationType' => false,
+                     'invisible' => false,
+                     'visibleGridView' => true,
+                     'visibleSearch' => true,
+                     'blockedVarsForExport' => 
+                    array (
+                    ),
+                     'children' => 
+                    array (
+                      0 => 
+                      \OpenDxp\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+                         'name' => 'slug',
+                         'title' => 'Slug',
+                         'tooltip' => '',
+                         'mandatory' => false,
+                         'noteditable' => true,
+                         'index' => false,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'relationType' => false,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'defaultValue' => NULL,
+                         'columnLength' => 190,
+                         'regex' => '',
+                         'regexFlags' => 
+                        array (
+                        ),
+                         'unique' => false,
+                         'showCharCount' => false,
+                         'width' => 400,
+                         'defaultValueGenerator' => '',
+                      )),
+                      1 => 
+                      \OpenDxp\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+                         'name' => 'handle',
+                         'title' => 'Handle',
+                         'tooltip' => '',
+                         'mandatory' => false,
+                         'noteditable' => true,
+                         'index' => true,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'relationType' => false,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'defaultValue' => NULL,
+                         'columnLength' => 190,
+                         'regex' => '',
+                         'regexFlags' => 
+                        array (
+                        ),
+                         'unique' => false,
+                         'showCharCount' => false,
+                         'width' => 400,
+                         'defaultValueGenerator' => '',
+                      )),
+                      2 => 
+                      \OpenDxp\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
+                         'name' => 'handle404',
+                         'title' => '404 Handle',
+                         'tooltip' => '',
+                         'mandatory' => false,
+                         'noteditable' => false,
+                         'index' => true,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'relationType' => false,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' => 
+                        array (
+                        ),
+                         'defaultValue' => NULL,
+                         'columnLength' => 190,
+                         'regex' => '',
+                         'regexFlags' => 
+                        array (
+                        ),
+                         'unique' => false,
+                         'showCharCount' => false,
+                         'width' => 400,
+                         'defaultValueGenerator' => '',
+                      )),
+                    ),
+                     'region' => NULL,
+                     'layout' => NULL,
+                     'maxTabs' => NULL,
+                     'border' => false,
+                     'provideSplitView' => false,
+                     'tabPosition' => 'top',
+                     'hideLabelsWhenTabsReached' => NULL,
+                     'referencedFields' => 
+                    array (
+                    ),
+                     'permissionView' => NULL,
+                     'permissionEdit' => NULL,
+                     'labelWidth' => 100,
+                     'labelAlign' => 'left',
+                     'width' => '',
+                     'height' => '',
+                     'fieldDefinitionsCache' => NULL,
+                  )),
+                ),
+                 'locked' => false,
+                 'blockedVarsForExport' => 
+                array (
+                ),
+                 'fieldtype' => 'fieldset',
+                 'labelWidth' => 100,
+                 'labelAlign' => 'left',
               )),
             ),
              'locked' => false,
