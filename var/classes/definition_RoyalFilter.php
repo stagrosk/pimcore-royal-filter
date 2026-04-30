@@ -29,11 +29,11 @@
 return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
    'dao' => NULL,
    'id' => 'royal_filter',
-   'name' => 'FilterSet',
+   'name' => 'RoyalFilter',
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1777472236,
+   'modificationDate' => 1777540724,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',

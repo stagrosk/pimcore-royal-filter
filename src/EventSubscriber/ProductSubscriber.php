@@ -33,6 +33,25 @@ class ProductSubscriber extends AbstractWebhookSubscriber
     }
 
     /**
+     * Skip the delete webhook to Vendure when the product has no apiId,
+     * meaning Vendure has never seen this product (e.g. unpublished copies that
+     * were never synced). Without apiId there is nothing to delete on the other side.
+     */
+    protected function sendWebhookDelete(Concrete $object): void
+    {
+        if ($object instanceof Product && empty($object->getApiId())) {
+            Logger::info(sprintf(
+                '[%s] DELETE skipped - product #%d has no apiId, never synced to Vendure',
+                $this->getLogPrefix(),
+                $object->getId()
+            ));
+            return;
+        }
+
+        parent::sendWebhookDelete($object);
+    }
+
+    /**
      * Source object IDs whose POST_UPDATE we want to skip in this request.
      * Set when we manually disable generation during a Product deletion so the
      * subsequent source save (triggered by clearing the product relation) does not
