@@ -29,11 +29,11 @@
 return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
    'dao' => NULL,
    'id' => 'royal_filter',
-   'name' => 'RoyalFilter',
+   'name' => 'FilterSet',
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1777301553,
+   'modificationDate' => 1777472236,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -1027,7 +1027,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
      'labelAlign' => 'left',
   )),
    'icon' => '',
-   'group' => '',
+   'group' => 'Ecommerce',
    'showAppLoggerTab' => false,
    'linkGeneratorReference' => '',
    'previewGeneratorReference' => '',
@@ -1059,27 +1059,6 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
    'enableGridLocking' => false,
    'deletedDataComponents' => 
   array (
-    0 => 
-    \OpenDxp\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
-       'name' => 'ignoreTitleGenerator',
-       'title' => 'Ignore Title Generator',
-       'tooltip' => 'Preskoci pregenerovanie nazvu ak uz produkt existuje a bol mu nastaveny rucne nazov.',
-       'mandatory' => false,
-       'noteditable' => false,
-       'index' => false,
-       'locked' => false,
-       'style' => '',
-       'permissions' => NULL,
-       'relationType' => false,
-       'invisible' => false,
-       'visibleGridView' => false,
-       'visibleSearch' => false,
-       'blockedVarsForExport' => 
-      array (
-      ),
-       'defaultValue' => 0,
-       'defaultValueGenerator' => '',
-    )),
   ),
    'blockedVarsForExport' => 
   array (
