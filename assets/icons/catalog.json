@@ -1,6 +1,6 @@
 {
   "generated": "2026-04-30T14:14:57.288Z",
-  "totalCount": 206,
+  "totalCount": 201,
   "sets": {
     "lucide": {
       "count": 79,
@@ -9,7 +9,7 @@
       "source": "https://lucide.dev"
     },
     "remix": {
-      "count": 127,
+      "count": 122,
       "prefix": "ri:",
       "reactPackage": "react-icons/ri",
       "source": "https://remixicon.com"
@@ -591,13 +591,6 @@
       "reactPackage": "react-icons/ri"
     },
     {
-      "id": "ri:arrow-down-sline",
-      "label": "Arrow down sline",
-      "set": "remix",
-      "react": "RiArrowDownSLine",
-      "reactPackage": "react-icons/ri"
-    },
-    {
       "id": "ri:arrow-go-back-line",
       "label": "Arrow go back line",
       "set": "remix",
@@ -619,24 +612,10 @@
       "reactPackage": "react-icons/ri"
     },
     {
-      "id": "ri:arrow-left-sline",
-      "label": "Arrow left sline",
-      "set": "remix",
-      "react": "RiArrowLeftSLine",
-      "reactPackage": "react-icons/ri"
-    },
-    {
       "id": "ri:arrow-right-line",
       "label": "Arrow right line",
       "set": "remix",
       "react": "RiArrowRightLine",
-      "reactPackage": "react-icons/ri"
-    },
-    {
-      "id": "ri:arrow-right-sline",
-      "label": "Arrow right sline",
-      "set": "remix",
-      "react": "RiArrowRightSLine",
       "reactPackage": "react-icons/ri"
     },
     {
@@ -651,13 +630,6 @@
       "label": "Arrow up down line",
       "set": "remix",
       "react": "RiArrowUpDownLine",
-      "reactPackage": "react-icons/ri"
-    },
-    {
-      "id": "ri:arrow-up-sline",
-      "label": "Arrow up sline",
-      "set": "remix",
-      "react": "RiArrowUpSLine",
       "reactPackage": "react-icons/ri"
     },
     {
@@ -1057,13 +1029,6 @@
       "label": "Login box line",
       "set": "remix",
       "react": "RiLoginBoxLine",
-      "reactPackage": "react-icons/ri"
-    },
-    {
-      "id": "ri:logout-box-rline",
-      "label": "Logout box rline",
-      "set": "remix",
-      "react": "RiLogoutBoxRLine",
       "reactPackage": "react-icons/ri"
     },
     {
