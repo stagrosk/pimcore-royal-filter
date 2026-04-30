@@ -46,7 +46,7 @@ class VariantGeneratorService
         $fromObject = $masterProduct->getGeneratedFromObject();
 
         if ($fromObject instanceof FilterSet) {
-            // Single variant from RoyalFilter
+            // Single variant from FilterSet
             $variantsData[] = [
                 'royalFilterSetup' => $fromObject,
                 'masterProduct' => $masterProduct,

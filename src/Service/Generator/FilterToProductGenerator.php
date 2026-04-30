@@ -7,8 +7,8 @@ use App\OpenDxp\Helpers\VersionHelper;
 use App\Service\Generator\Mapper\FilterToProductMapper;
 use OpenDxp\Logger;
 use OpenDxp\Model\DataObject\AbstractObject;
+use OpenDxp\Model\DataObject\FilterSet;
 use OpenDxp\Model\DataObject\Product;
-use OpenDxp\Model\DataObject\RoyalFilter;
 use OpenDxp\Model\Document\Listing;
 
 class FilterToProductGenerator extends BaseProductGenerator
@@ -19,11 +19,11 @@ class FilterToProductGenerator extends BaseProductGenerator
     public function __construct(
         private readonly FilterToProductMapper    $filterMapper,
     ) {
-        $this->setClassName(RoyalFilter::class);
+        $this->setClassName(FilterSet::class);
     }
 
     /**
-     * @param \OpenDxp\Model\DataObject\RoyalFilter $object
+     * @param \OpenDxp\Model\DataObject\FilterSet $object
      *
      * @throws \Exception
      * @return \OpenDxp\Model\DataObject\Product

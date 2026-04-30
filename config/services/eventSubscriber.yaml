@@ -10,7 +10,7 @@ services:
 
     App\EventSubscriber\CollectionSubscriber:
 
-    App\EventSubscriber\RoyalFilterSubscriber:
+    App\EventSubscriber\FilterSetSubscriber:
 
     App\EventSubscriber\WhirlpoolSubscriber:
 

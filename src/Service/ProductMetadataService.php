@@ -11,8 +11,8 @@ use OpenDxp\Model\DataObject\Center;
 use OpenDxp\Model\DataObject\Classificationstore;
 use OpenDxp\Model\DataObject\Data\QuantityValue;
 use OpenDxp\Model\DataObject\Equipment;
+use OpenDxp\Model\DataObject\FilterSet;
 use OpenDxp\Model\DataObject\QuantityValue\Unit;
-use OpenDxp\Model\DataObject\RoyalFilter;
 
 class ProductMetadataService
 {
@@ -39,7 +39,7 @@ class ProductMetadataService
     {
         $params = [];
 
-        if ($object instanceof RoyalFilter) {
+        if ($object instanceof FilterSet) {
             if ($object->getBody1() instanceof Body) {
                 $params['body1'] = [
                     'items' => $object->getBody1()->getMetadata()?->getItems(),

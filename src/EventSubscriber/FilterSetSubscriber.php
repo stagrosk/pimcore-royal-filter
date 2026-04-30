@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace App\EventSubscriber;
 
-use App\Service\Generator\BaseProductGenerator;
 use App\Service\Generator\FilterToProductGenerator;
 use OpenDxp\Event\DataObjectEvents;
 use OpenDxp\Event\Model\DataObjectEvent;
+use OpenDxp\Model\DataObject\FilterSet;
 use OpenDxp\Model\DataObject\Product;
-use OpenDxp\Model\DataObject\RoyalFilter;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-readonly class RoyalFilterSubscriber implements EventSubscriberInterface
+readonly class FilterSetSubscriber implements EventSubscriberInterface
 {
     /**
      * @param \App\Service\Generator\FilterToProductGenerator $generator
@@ -37,11 +36,11 @@ readonly class RoyalFilterSubscriber implements EventSubscriberInterface
      */
     public function onPostUpdate(DataObjectEvent $event): void
     {
-        /** @var \OpenDxp\Model\DataObject\RoyalFilter $object */
+        /** @var \OpenDxp\Model\DataObject\FilterSet $object */
         $object = $event->getObject();
 
         // check object type
-        if (!$object instanceof RoyalFilter) {
+        if (!$object instanceof FilterSet) {
             return;
         }
 
