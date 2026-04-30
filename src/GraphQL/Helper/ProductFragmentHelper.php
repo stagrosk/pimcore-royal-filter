@@ -155,8 +155,7 @@ class ProductFragmentHelper
                 'priceListName' => $priceList?->getName(),
                 'price' => $priceItem->getPrice(),
                 'compareAtPrice' => $priceItem->getCompareAtPrice(),
-                'wholesalePrice' => $priceItem->getWholesalePrice(),
-                'unitPrice' => $priceItem->getUnitPrice(),
+                'purchasePrice' => $priceItem->getPurchasePrice(),
             ];
         }
 

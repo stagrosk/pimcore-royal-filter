@@ -186,13 +186,9 @@ class ProductFragment
                         'type' => Type::float(),
                         'description' => 'Compare at price (original/crossed out price)',
                     ],
-                    'wholesalePrice' => [
+                    'purchasePrice' => [
                         'type' => Type::float(),
-                        'description' => 'Wholesale price',
-                    ],
-                    'unitPrice' => [
-                        'type' => Type::float(),
-                        'description' => 'Unit price',
+                        'description' => 'Purchase price - used for margin statistics',
                     ],
                 ],
             ]);

@@ -12,6 +12,7 @@ use OpenDxp\Model\DataObject\AbstractObject;
 use OpenDxp\Model\DataObject\Concrete;
 use OpenDxp\Model\DataObject\CustomerGroup;
 use OpenDxp\Model\DataObject\Fieldcollection;
+use OpenDxp\Model\DataObject\Fieldcollection\Data\Price;
 use OpenDxp\Model\DataObject\PriceList;
 use OpenDxp\Model\DataObject\Product;
 use OpenDxp\Model\DataObject\RoyalFilter;
@@ -60,6 +61,9 @@ class ProductSubscriber extends AbstractWebhookSubscriber
             return;
         }
 
+        $this->ensureUniqueSku($object);
+        $this->applyDiscountLogic($object);
+
         $existingGroups = $object->getCustomerGroups();
         if (!empty($existingGroups)) {
             return;
@@ -71,6 +75,51 @@ class ProductSubscriber extends AbstractWebhookSubscriber
         }
     }
 
+    /**
+     * On copy/duplicate Pimcore should null unique fields, but in practice the SKU often
+     * still ends up identical (e.g. when the field gets re-populated by another listener
+     * or when copy goes through a path that skips the nulling). Auto-suffix here so the
+     * unique constraint never blocks a user copy.
+     */
+    private function ensureUniqueSku(Product $product): void
+    {
+        $sku = $product->getSku();
+        if ($sku === null || $sku === '') {
+            return;
+        }
+
+        $candidate = $sku;
+        $suffix = 1;
+        while ($this->skuExists($candidate, $product)) {
+            $suffix++;
+            $candidate = $sku . '-copy' . ($suffix > 2 ? '-' . ($suffix - 1) : '');
+        }
+
+        if ($candidate !== $sku) {
+            $product->setSku($candidate);
+        }
+    }
+
+    private function skuExists(string $sku, Product $exclude): bool
+    {
+        $listing = Product::getList();
+        $listing->setUnpublished(true);
+        $listing->setObjectTypes([
+            AbstractObject::OBJECT_TYPE_OBJECT,
+            AbstractObject::OBJECT_TYPE_VARIANT,
+        ]);
+
+        $excludeId = $exclude->getId();
+        if ($excludeId) {
+            $listing->setCondition('sku = ? AND oo_id != ?', [$sku, $excludeId]);
+        } else {
+            $listing->setCondition('sku = ?', [$sku]);
+        }
+        $listing->setLimit(1);
+
+        return $listing->getTotalCount() > 0;
+    }
+
     public function onPreUpdate(DataObjectEvent $event): void
     {
         $object = $event->getObject();
@@ -79,7 +128,62 @@ class ProductSubscriber extends AbstractWebhookSubscriber
             return;
         }
 
+        $this->applyDiscountLogic($object);
         $this->validateBasePriceList($object);
+    }
+
+    /**
+     * Recompute price/compareAtPrice on every Price item based on applyDiscountPercentage.
+     *
+     * - discount set, no compareAtPrice yet: snapshot current price into compareAtPrice and
+     *   compute new discounted price.
+     * - discount changed and compareAtPrice already set: recompute price from compareAtPrice.
+     * - discount cleared: restore price from compareAtPrice and clear compareAtPrice.
+     */
+    private function applyDiscountLogic(Product $object): void
+    {
+        $prices = $object->getPrices();
+        if (!$prices instanceof Fieldcollection) {
+            return;
+        }
+
+        foreach ($prices->getItems() as $priceItem) {
+            if ($priceItem instanceof Price) {
+                $this->recalculatePriceFromDiscount($priceItem);
+            }
+        }
+    }
+
+    private function recalculatePriceFromDiscount(Price $item): void
+    {
+        $discount = $item->getApplyDiscountPercentage();
+        $price = $item->getPrice();
+        $compareAt = $item->getCompareAtPrice();
+
+        // discount cleared - restore original price from compareAtPrice
+        if ($discount === null || $discount <= 0.0) {
+            if ($compareAt !== null && $compareAt > 0.0) {
+                $item->setPrice($compareAt);
+                $item->setCompareAtPrice(null);
+            }
+            return;
+        }
+
+        if ($discount >= 100.0) {
+            return;
+        }
+
+        // first-time discount: capture current price as the original
+        if ($compareAt === null || $compareAt <= 0.0) {
+            if ($price === null || $price <= 0.0) {
+                return;
+            }
+            $compareAt = $price;
+        }
+
+        $newPrice = round($compareAt * (1 - $discount / 100), 2);
+        $item->setPrice($newPrice);
+        $item->setCompareAtPrice($compareAt);
     }
 
     /**

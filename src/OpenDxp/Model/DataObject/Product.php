@@ -64,9 +64,7 @@ class Product extends \OpenDxp\Model\DataObject\Product implements SlugAwareInte
                     'priceListId' => $priceList?->getId(),
                     'price' => method_exists($priceItem, 'getPrice') ? $priceItem->getPrice() : null,
                     'compareAtPrice' => method_exists($priceItem, 'getCompareAtPrice') ? $priceItem->getCompareAtPrice() : null,
-                    'wholesalePrice' => method_exists($priceItem, 'getWholesalePrice') ? $priceItem->getWholesalePrice() : null,
-                    'wholesaleSupplierPrice' => method_exists($priceItem, 'getWholesaleSupplierPrice') ? $priceItem->getWholesaleSupplierPrice() : null,
-                    'unitPrice' => method_exists($priceItem, 'getUnitPrice') ? $priceItem->getUnitPrice() : null,
+                    'purchasePrice' => method_exists($priceItem, 'getPurchasePrice') ? $priceItem->getPurchasePrice() : null,
                 ];
             }
         }
