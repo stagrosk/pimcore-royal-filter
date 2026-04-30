@@ -50,7 +50,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1777477252,
+   'modificationDate' => 1777544246,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -196,7 +196,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                       ),
                       1 => 
                       array (
-                        'classes' => 'RoyalFilter',
+                        'classes' => 'FilterSet',
                       ),
                     ),
                      'displayMode' => 'grid',
@@ -233,7 +233,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                      'blockedVarsForExport' => 
                     array (
                     ),
-                     'defaultValue' => NULL,
+                     'defaultValue' => '',
                      'columnLength' => 190,
                      'regex' => '',
                      'regexFlags' => 
@@ -317,7 +317,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                      'blockedVarsForExport' => 
                     array (
                     ),
-                     'defaultValue' => NULL,
+                     'defaultValue' => '',
                      'columnLength' => 190,
                      'regex' => '',
                      'regexFlags' => 
@@ -498,7 +498,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                              'blockedVarsForExport' => 
                             array (
                             ),
-                             'defaultValue' => NULL,
+                             'defaultValue' => '',
                              'columnLength' => 190,
                              'regex' => '',
                              'regexFlags' => 
@@ -590,7 +590,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                                  'blockedVarsForExport' => 
                                 array (
                                 ),
-                                 'defaultValue' => NULL,
+                                 'defaultValue' => '',
                                  'columnLength' => 190,
                                  'regex' => '',
                                  'regexFlags' => 
@@ -619,7 +619,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                                  'blockedVarsForExport' => 
                                 array (
                                 ),
-                                 'defaultValue' => NULL,
+                                 'defaultValue' => '',
                                  'columnLength' => 500,
                                  'regex' => '',
                                  'regexFlags' => 
