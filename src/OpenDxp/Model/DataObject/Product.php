@@ -100,6 +100,101 @@ class Product extends \OpenDxp\Model\DataObject\Product implements SlugAwareInte
     }
 
     /**
+     * Get downloads data for serialization (asset relation -> file metadata).
+     *
+     * @return array
+     */
+    public function getDownloadsData(): array
+    {
+        return $this->serializeAssetRelation($this->getDownloads());
+    }
+
+    /**
+     * Get manuals data for serialization (asset relation -> file metadata).
+     *
+     * @return array
+     */
+    public function getManualsData(): array
+    {
+        return $this->serializeAssetRelation($this->getManuals());
+    }
+
+    /**
+     * Friendly extension labels for the most common mime types we ship in
+     * downloads/manuals. Anything not mapped falls back to the filename
+     * extension (or null).
+     */
+    private const MIME_TYPE_EXTENSIONS = [
+        'image/svg+xml' => 'svg',
+        'image/jpeg' => 'jpg',
+        'image/png' => 'png',
+        'image/webp' => 'webp',
+        'image/gif' => 'gif',
+        'application/pdf' => 'pdf',
+        'application/zip' => 'zip',
+        'application/x-zip-compressed' => 'zip',
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document' => 'docx',
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' => 'xlsx',
+        'application/vnd.openxmlformats-officedocument.presentationml.presentation' => 'pptx',
+        'application/msword' => 'doc',
+        'application/vnd.ms-excel' => 'xls',
+        'application/vnd.ms-powerpoint' => 'ppt',
+        'text/calendar' => 'ics',
+        'text/csv' => 'csv',
+        'text/plain' => 'txt',
+        'video/mp4' => 'mp4',
+        'audio/mpeg' => 'mp3',
+    ];
+
+    /**
+     * Serialize an array of assets into the format the storefront consumes.
+     * Reads optional `title` property on the asset for the display name; falls
+     * back to the asset filename. URL is intentionally a relative path - the
+     * storefront resolves the absolute href on its side.
+     *
+     * @param array<int, mixed> $assets
+     *
+     * @return array<int, array{id: int, title: string, filename: string, extension: string|null, mimeType: string|null, url: string}>
+     */
+    private function serializeAssetRelation(array $assets): array
+    {
+        $items = [];
+        foreach ($assets as $asset) {
+            if (!$asset instanceof \OpenDxp\Model\Asset) {
+                continue;
+            }
+
+            $title = $asset->getProperty('title');
+            if (!is_string($title) || $title === '') {
+                $title = $asset->getFilename();
+            }
+
+            $items[] = [
+                'id' => $asset->getId(),
+                'title' => $title,
+                'filename' => $asset->getFilename(),
+                'extension' => $this->resolveExtension($asset),
+                'mimeType' => $asset->getMimeType(),
+                'url' => $asset->getFullPath(),
+            ];
+        }
+
+        return $items;
+    }
+
+    private function resolveExtension(\OpenDxp\Model\Asset $asset): ?string
+    {
+        $mime = $asset->getMimeType();
+        if (is_string($mime) && isset(self::MIME_TYPE_EXTENSIONS[$mime])) {
+            return self::MIME_TYPE_EXTENSIONS[$mime];
+        }
+
+        $ext = pathinfo((string) $asset->getFilename(), PATHINFO_EXTENSION);
+
+        return $ext !== '' ? strtolower($ext) : null;
+    }
+
+    /**
      * Get collections data for serialization (only IDs for import)
      *
      * @return array

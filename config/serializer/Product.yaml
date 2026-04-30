@@ -45,6 +45,14 @@ App\OpenDxp\Model\DataObject\Product:
             exp: object.getImagesData()
             serialized_name: images
             groups: [api]
+        getDownloadsData:
+            exp: object.getDownloadsData()
+            serialized_name: downloads
+            groups: [api]
+        getManualsData:
+            exp: object.getManualsData()
+            serialized_name: manuals
+            groups: [api]
         getCollectionsData:
             exp: object.getCollectionsData()
             serialized_name: collections
