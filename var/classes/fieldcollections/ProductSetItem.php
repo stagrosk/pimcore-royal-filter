@@ -8,7 +8,7 @@
 
 return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
    'dao' => NULL,
-   'key' => 'productSetItem',
+   'key' => 'ProductSetItem',
    'parentClass' => '',
    'implementsInterfaces' => '',
    'title' => '',
