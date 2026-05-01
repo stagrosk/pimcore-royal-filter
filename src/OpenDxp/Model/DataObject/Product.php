@@ -441,9 +441,9 @@ class Product extends \OpenDxp\Model\DataObject\Product implements SlugAwareInte
     }
 
     /**
-     * Get product set data for serialization (list of items with product id and quantity)
+     * Get product set data for serialization (list of items with product id, Vendure apiId and quantity)
      *
-     * @return array<int, array{productId: int, quantity: float|null}>
+     * @return array<int, array{productId: int, apiId: string|null, quantity: float|null}>
      */
     public function getProductSetData(): array
     {
@@ -463,6 +463,7 @@ class Product extends \OpenDxp\Model\DataObject\Product implements SlugAwareInte
 
                 $items[] = [
                     'productId' => $product->getId(),
+                    'apiId' => $product->getApiId(),
                     'quantity' => method_exists($item, 'getQuantity') ? $item->getQuantity() : null,
                 ];
             }
