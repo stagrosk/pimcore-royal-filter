@@ -148,8 +148,90 @@ class ProductSubscriber extends AbstractWebhookSubscriber
             return;
         }
 
+        // clearProductSetPriceFields must run before applyDiscountLogic:
+        // discount logic short-circuits when price === null, so clearing
+        // first prevents stale 0-values from being interpreted as a real price.
+        $this->clearProductSetPriceFields($object);
         $this->applyDiscountLogic($object);
         $this->validateBasePriceList($object);
+        $this->validatePriceRequired($object);
+    }
+
+    /**
+     * For productsSet null out price / compareAtPrice / purchasePrice on every
+     * Price item. Admin hides those fields client-side but the form still
+     * submits 0 for hidden numeric inputs - persisting that would leak into
+     * the API.
+     */
+    private function clearProductSetPriceFields(Product $object): void
+    {
+        if ($object->getProductType() !== 'productsSet') {
+            return;
+        }
+
+        $prices = $object->getPrices();
+        if (!$prices instanceof Fieldcollection) {
+            return;
+        }
+
+        $cleared = false;
+        foreach ($prices->getItems() as $priceItem) {
+            if (!$priceItem instanceof Price) {
+                continue;
+            }
+
+            if ($priceItem->getPrice() !== null
+                || $priceItem->getCompareAtPrice() !== null
+                || $priceItem->getPurchasePrice() !== null
+            ) {
+                $cleared = true;
+            }
+
+            $priceItem->setPrice(null);
+            $priceItem->setCompareAtPrice(null);
+            $priceItem->setPurchasePrice(null);
+        }
+
+        if ($cleared) {
+            Logger::notice(sprintf(
+                '[ProductSubscriber] Cleared price/compareAtPrice/purchasePrice on product #%d (productType=productsSet)',
+                $object->getId()
+            ));
+        }
+    }
+
+    /**
+     * For non-productsSet products require a positive price on every Price item.
+     * (Price field is no longer mandatory at class level so productsSet items
+     * can have only applyDiscountPercentage. Admin form submits 0 for empty
+     * numeric inputs, so 0 must be rejected as well as null.)
+     */
+    private function validatePriceRequired(Product $object): void
+    {
+        if ($object->getProductType() === 'productsSet') {
+            return;
+        }
+
+        $prices = $object->getPrices();
+        if (!$prices instanceof Fieldcollection) {
+            return;
+        }
+
+        foreach ($prices->getItems() as $priceItem) {
+            if (!$priceItem instanceof Price) {
+                continue;
+            }
+
+            $price = $priceItem->getPrice();
+            if ($price === null || $price <= 0.0) {
+                $priceList = $priceItem->getPriceList();
+                throw new \RuntimeException(sprintf(
+                    'Product "%s" musí mať vyplnenú cenu (Price) v cenníku "%s"',
+                    $object->getKey(),
+                    $priceList?->getName() ?? '-'
+                ));
+            }
+        }
     }
 
     /**

@@ -43,6 +43,7 @@ class AdminInterfaceListener implements EventSubscriberInterface
                     '/admin-static/js/filter-config-dependent-select.js',
                     '/admin-static/js/translation-override.js',
                     '/admin-static/js/icon-combo.js',
+                    '/admin-static/js/product-set-hide-price.js',
                 ]
             )
         );
