@@ -413,6 +413,37 @@ class Product extends \OpenDxp\Model\DataObject\Product implements SlugAwareInte
         return $tabs;
     }
 
+    /**
+     * Get product set data for serialization (list of items with product id and quantity)
+     *
+     * @return array<int, array{productId: int, quantity: float|null}>
+     */
+    public function getProductSetData(): array
+    {
+        $items = [];
+        $productSet = $this->getProductSet();
+
+        if ($productSet instanceof Fieldcollection) {
+            foreach ($productSet as $item) {
+                if (!method_exists($item, 'getProduct')) {
+                    continue;
+                }
+
+                $product = $item->getProduct();
+                if (!$product instanceof \OpenDxp\Model\DataObject\Product || !$product->isPublished()) {
+                    continue;
+                }
+
+                $items[] = [
+                    'productId' => $product->getId(),
+                    'quantity' => method_exists($item, 'getQuantity') ? $item->getQuantity() : null,
+                ];
+            }
+        }
+
+        return $items;
+    }
+
     public function getProductOptionsData(): array
     {
         $options = [];

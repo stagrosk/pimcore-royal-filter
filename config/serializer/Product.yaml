@@ -97,3 +97,7 @@ App\OpenDxp\Model\DataObject\Product:
             exp: object.getCustomerGroupsData()
             serialized_name: customerGroups
             groups: [api]
+        getProductSetData:
+            exp: object.getProductSetData()
+            serialized_name: productSet
+            groups: [api]
