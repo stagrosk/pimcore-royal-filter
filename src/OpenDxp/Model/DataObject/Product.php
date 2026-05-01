@@ -441,9 +441,11 @@ class Product extends \OpenDxp\Model\DataObject\Product implements SlugAwareInte
     }
 
     /**
-     * Get product set data for serialization (list of items with product id, Vendure apiId and quantity)
+     * Get product set data for serialization. Each item carries both the
+     * Pimcore object id and the Vendure apiId so the storefront can resolve
+     * either side without a lookup.
      *
-     * @return array<int, array{productId: int, apiId: string|null, quantity: float|null}>
+     * @return array<int, array{pimcoreId: int, apiId: string|null, quantity: float|null}>
      */
     public function getProductSetData(): array
     {
@@ -462,7 +464,7 @@ class Product extends \OpenDxp\Model\DataObject\Product implements SlugAwareInte
                 }
 
                 $items[] = [
-                    'productId' => $product->getId(),
+                    'pimcoreId' => $product->getId(),
                     'apiId' => $product->getApiId(),
                     'quantity' => method_exists($item, 'getQuantity') ? $item->getQuantity() : null,
                 ];
