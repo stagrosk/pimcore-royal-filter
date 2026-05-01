@@ -50,7 +50,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1777629472,
+   'modificationDate' => 1777544246,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -982,10 +982,18 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                          'assetsAllowed' => false,
                          'assetTypes' => 
                         array (
+                          0 => 
+                          array (
+                            'assetTypes' => '',
+                          ),
                         ),
                          'documentsAllowed' => false,
                          'documentTypes' => 
                         array (
+                          0 => 
+                          array (
+                            'documentTypes' => '',
+                          ),
                         ),
                          'enableTextSelection' => false,
                          'width' => 1100,
@@ -1026,10 +1034,18 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                          'assetsAllowed' => false,
                          'assetTypes' => 
                         array (
+                          0 => 
+                          array (
+                            'assetTypes' => '',
+                          ),
                         ),
                          'documentsAllowed' => false,
                          'documentTypes' => 
                         array (
+                          0 => 
+                          array (
+                            'documentTypes' => '',
+                          ),
                         ),
                          'enableTextSelection' => false,
                          'width' => 1100,
@@ -1070,10 +1086,18 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                          'assetsAllowed' => false,
                          'assetTypes' => 
                         array (
+                          0 => 
+                          array (
+                            'assetTypes' => '',
+                          ),
                         ),
                          'documentsAllowed' => false,
                          'documentTypes' => 
                         array (
+                          0 => 
+                          array (
+                            'documentTypes' => '',
+                          ),
                         ),
                          'enableTextSelection' => false,
                          'width' => 1100,
@@ -1182,10 +1206,18 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                          'assetsAllowed' => false,
                          'assetTypes' => 
                         array (
+                          0 => 
+                          array (
+                            'assetTypes' => '',
+                          ),
                         ),
                          'documentsAllowed' => false,
                          'documentTypes' => 
                         array (
+                          0 => 
+                          array (
+                            'documentTypes' => '',
+                          ),
                         ),
                          'enableTextSelection' => false,
                          'width' => 1100,
@@ -1226,10 +1258,18 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                          'assetsAllowed' => false,
                          'assetTypes' => 
                         array (
+                          0 => 
+                          array (
+                            'assetTypes' => '',
+                          ),
                         ),
                          'documentsAllowed' => false,
                          'documentTypes' => 
                         array (
+                          0 => 
+                          array (
+                            'documentTypes' => '',
+                          ),
                         ),
                          'enableTextSelection' => false,
                          'width' => 1100,
@@ -1308,7 +1348,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                         ),
                          'allowedTypes' => 
                         array (
-                          0 => 'ProductSetItem',
+                          0 => 'productSetItem',
                         ),
                          'lazyLoading' => true,
                          'maxItems' => NULL,
@@ -2116,50 +2156,6 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
    'enableGridLocking' => false,
    'deletedDataComponents' => 
   array (
-    0 => 
-    \OpenDxp\Model\DataObject\ClassDefinition\Data\ManyToManyRelation::__set_state(array(
-       'name' => 'productQuestionsAndAnswers',
-       'title' => 'Product Questions And Answers',
-       'tooltip' => '',
-       'mandatory' => false,
-       'noteditable' => false,
-       'index' => false,
-       'locked' => false,
-       'style' => '',
-       'permissions' => NULL,
-       'relationType' => true,
-       'invisible' => false,
-       'visibleGridView' => false,
-       'visibleSearch' => false,
-       'blockedVarsForExport' => 
-      array (
-      ),
-       'classes' => 
-      array (
-        0 => 
-        array (
-          'classes' => 'ProductQA',
-        ),
-      ),
-       'displayMode' => NULL,
-       'pathFormatterClass' => '',
-       'maxItems' => NULL,
-       'assetInlineDownloadAllowed' => false,
-       'assetUploadPath' => '',
-       'allowToClearRelation' => true,
-       'objectsAllowed' => true,
-       'assetsAllowed' => false,
-       'assetTypes' => 
-      array (
-      ),
-       'documentsAllowed' => false,
-       'documentTypes' => 
-      array (
-      ),
-       'enableTextSelection' => false,
-       'width' => '',
-       'height' => '',
-    )),
   ),
    'blockedVarsForExport' => 
   array (
