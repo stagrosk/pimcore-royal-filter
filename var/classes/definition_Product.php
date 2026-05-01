@@ -50,7 +50,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1777544246,
+   'modificationDate' => 1777644076,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -323,7 +323,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                      'regexFlags' => 
                     array (
                     ),
-                     'unique' => true,
+                     'unique' => false,
                      'showCharCount' => false,
                      'width' => 300,
                      'defaultValueGenerator' => '',
@@ -982,18 +982,10 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                          'assetsAllowed' => false,
                          'assetTypes' => 
                         array (
-                          0 => 
-                          array (
-                            'assetTypes' => '',
-                          ),
                         ),
                          'documentsAllowed' => false,
                          'documentTypes' => 
                         array (
-                          0 => 
-                          array (
-                            'documentTypes' => '',
-                          ),
                         ),
                          'enableTextSelection' => false,
                          'width' => 1100,
@@ -1034,18 +1026,10 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                          'assetsAllowed' => false,
                          'assetTypes' => 
                         array (
-                          0 => 
-                          array (
-                            'assetTypes' => '',
-                          ),
                         ),
                          'documentsAllowed' => false,
                          'documentTypes' => 
                         array (
-                          0 => 
-                          array (
-                            'documentTypes' => '',
-                          ),
                         ),
                          'enableTextSelection' => false,
                          'width' => 1100,
@@ -1086,18 +1070,10 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                          'assetsAllowed' => false,
                          'assetTypes' => 
                         array (
-                          0 => 
-                          array (
-                            'assetTypes' => '',
-                          ),
                         ),
                          'documentsAllowed' => false,
                          'documentTypes' => 
                         array (
-                          0 => 
-                          array (
-                            'documentTypes' => '',
-                          ),
                         ),
                          'enableTextSelection' => false,
                          'width' => 1100,
@@ -1206,18 +1182,10 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                          'assetsAllowed' => false,
                          'assetTypes' => 
                         array (
-                          0 => 
-                          array (
-                            'assetTypes' => '',
-                          ),
                         ),
                          'documentsAllowed' => false,
                          'documentTypes' => 
                         array (
-                          0 => 
-                          array (
-                            'documentTypes' => '',
-                          ),
                         ),
                          'enableTextSelection' => false,
                          'width' => 1100,
@@ -1258,18 +1226,10 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                          'assetsAllowed' => false,
                          'assetTypes' => 
                         array (
-                          0 => 
-                          array (
-                            'assetTypes' => '',
-                          ),
                         ),
                          'documentsAllowed' => false,
                          'documentTypes' => 
                         array (
-                          0 => 
-                          array (
-                            'documentTypes' => '',
-                          ),
                         ),
                          'enableTextSelection' => false,
                          'width' => 1100,

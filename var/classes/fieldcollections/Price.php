@@ -67,7 +67,7 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
             array (
             ),
              'fieldtype' => 'text',
-             'html' => '<div class="alert alert-warning">Je potrebne zadavat ceny s dph alebo bez dph na zaklade nastavenia kanalu! Aktualne su vsetky kanale nastavene, ze davame ceny S DPH!</div>',
+             'html' => '<div class="alert alert-warning">Je potrebné zadávať ceny S DPH alebo BEZ DPH na základe nastavenia kanálu vo Vendure! Aktuálne sú všetky kanále nastavené, že dávame ceny S DPH!</div><div class="alert alert-warning">Pri produktovom sete sa nenastavuje žiadna cena na v cenníku, len zľava. Všetko je počítané vo Vendure na základe cien produktov v sete a konkretnej zľavy!</div>',
              'renderingClass' => '',
              'renderingData' => '',
              'border' => false,
@@ -133,7 +133,7 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                  'name' => 'price',
                  'title' => 'Price',
                  'tooltip' => 'MOC price',
-                 'mandatory' => true,
+                 'mandatory' => false,
                  'noteditable' => false,
                  'index' => false,
                  'locked' => false,

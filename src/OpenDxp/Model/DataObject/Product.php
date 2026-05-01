@@ -56,17 +56,44 @@ class Product extends \OpenDxp\Model\DataObject\Product implements SlugAwareInte
         $prices = [];
         $pricesCollection = $this->getPrices();
 
-        if ($pricesCollection instanceof Fieldcollection) {
-            foreach ($pricesCollection as $priceItem) {
-                $priceList = method_exists($priceItem, 'getPriceList') ? $priceItem->getPriceList() : null;
+        if (!$pricesCollection instanceof Fieldcollection) {
+            return $prices;
+        }
 
-                $prices[] = [
-                    'priceListId' => $priceList?->getId(),
-                    'price' => method_exists($priceItem, 'getPrice') ? $priceItem->getPrice() : null,
-                    'compareAtPrice' => method_exists($priceItem, 'getCompareAtPrice') ? $priceItem->getCompareAtPrice() : null,
-                    'purchasePrice' => method_exists($priceItem, 'getPurchasePrice') ? $priceItem->getPurchasePrice() : null,
-                ];
+        $isProductSet = $this->getProductType() === 'productsSet';
+
+        // For productsSet the price/compareAtPrice/purchasePrice are computed
+        // on the storefront from the items in the set, so they're always
+        // omitted from the API regardless of stored value (legacy products may
+        // still have a 0 persisted from the admin form).
+        $optional = $isProductSet
+            ? ['applyDiscountPercentage' => 'getApplyDiscountPercentage']
+            : [
+                'price' => 'getPrice',
+                'compareAtPrice' => 'getCompareAtPrice',
+                'purchasePrice' => 'getPurchasePrice',
+                'applyDiscountPercentage' => 'getApplyDiscountPercentage',
+            ];
+
+        foreach ($pricesCollection as $priceItem) {
+            $priceList = method_exists($priceItem, 'getPriceList') ? $priceItem->getPriceList() : null;
+
+            $entry = ['priceListId' => $priceList?->getId()];
+
+            foreach ($optional as $key => $getter) {
+                if (!method_exists($priceItem, $getter)) {
+                    continue;
+                }
+
+                $value = $priceItem->$getter();
+                if ($value === null) {
+                    continue;
+                }
+
+                $entry[$key] = $value;
             }
+
+            $prices[] = $entry;
         }
 
         return $prices;
@@ -414,9 +441,11 @@ class Product extends \OpenDxp\Model\DataObject\Product implements SlugAwareInte
     }
 
     /**
-     * Get product set data for serialization (list of items with product id and quantity)
+     * Get product set data for serialization. Each item carries both the
+     * Pimcore object id and the Vendure apiId so the storefront can resolve
+     * either side without a lookup.
      *
-     * @return array<int, array{productId: int, quantity: float|null}>
+     * @return array<int, array{pimcoreId: int, apiId: string|null, quantity: float|null}>
      */
     public function getProductSetData(): array
     {
@@ -435,7 +464,8 @@ class Product extends \OpenDxp\Model\DataObject\Product implements SlugAwareInte
                 }
 
                 $items[] = [
-                    'productId' => $product->getId(),
+                    'pimcoreId' => $product->getId(),
+                    'apiId' => $product->getApiId(),
                     'quantity' => method_exists($item, 'getQuantity') ? $item->getQuantity() : null,
                 ];
             }
