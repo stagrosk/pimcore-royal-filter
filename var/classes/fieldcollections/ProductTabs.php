@@ -115,7 +115,7 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                  'toolbarConfig' => '',
                  'excludeFromSearchIndex' => false,
                  'maxCharacters' => '',
-                 'height' => '',
+                 'height' => 600,
                  'width' => '',
               )),
             ),
