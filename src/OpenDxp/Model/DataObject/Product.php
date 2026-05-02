@@ -464,7 +464,7 @@ class Product extends \OpenDxp\Model\DataObject\Product implements SlugAwareInte
                 }
 
                 $items[] = [
-                    'pimcoreId' => $product->getId(),
+                    'id' => $product->getId(),
                     'apiId' => $product->getApiId(),
                     'quantity' => method_exists($item, 'getQuantity') ? $item->getQuantity() : null,
                 ];
