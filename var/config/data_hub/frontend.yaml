@@ -8,7 +8,7 @@ opendxp_data_hub:
                 description: ''
                 group: ''
                 sqlObjectCondition: ''
-                modificationDate: 1777212852
+                modificationDate: 1777809893
                 path: null
                 createDate: 1727014466
             schema:
@@ -180,12 +180,6 @@ opendxp_data_hub:
                                     isOperator: false
                                 -
                                     attributes:
-                                        attribute: newsletter
-                                        label: Newsletter
-                                        dataType: wysiwyg
-                                    isOperator: false
-                                -
-                                    attributes:
                                         attribute: socialMedia
                                         label: 'Social Media'
                                         dataType: block
@@ -237,12 +231,6 @@ opendxp_data_hub:
                                         attribute: filterBenefitSet
                                         label: 'Filter benefit set'
                                         dataType: manyToOneRelation
-                                    isOperator: false
-                                -
-                                    attributes:
-                                        attribute: ecomailListId
-                                        label: 'Ecomail List Id'
-                                        dataType: numeric
                                     isOperator: false
                 mutationEntities: {  }
                 specialEntities:
