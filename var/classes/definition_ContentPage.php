@@ -446,7 +446,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                  'blockedVarsForExport' => 
                 array (
                 ),
-                 'allowedTypes' => 
+                 'allowedTypes' =>
                 array (
                   0 => 'Headline',
                   1 => 'Button',
@@ -460,6 +460,24 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                   9 => 'ParalaxContent',
                   10 => 'ProductGrid',
                   11 => 'CategoryGrid',
+                  12 => 'LegalHero',
+                  13 => 'LegalHighlights',
+                  14 => 'LegalSection',
+                  15 => 'ContactHero',
+                  16 => 'ContactQuickCards',
+                  17 => 'ContactLocations',
+                  18 => 'ContactForm',
+                  19 => 'ContactAdvisor',
+                  20 => 'ContactFaqShortcuts',
+                  21 => 'ContactTrust',
+                  22 => 'AboutHero',
+                  23 => 'AboutTimeline',
+                  24 => 'AboutStatsBar',
+                  25 => 'AboutValues',
+                  26 => 'AboutWhyUs',
+                  27 => 'AboutTeam',
+                  28 => 'AboutReviewsTeaser',
+                  29 => 'AboutCtaBanner',
                 ),
                  'lazyLoading' => true,
                  'maxItems' => NULL,

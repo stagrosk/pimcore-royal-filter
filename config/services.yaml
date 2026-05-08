@@ -97,3 +97,19 @@ services:
         arguments:
             $deeplApiKey: '%env(DEEPL_AUTH_KEY)%'
             $sourceLanguage: 'en'
+
+    #
+    # GraphQL data-hub Link override:
+    # Resolves Link.path to the localized handle of internal ContentPage targets,
+    # falling back to fullpath for assets/documents/objects without a handle.
+    # Language is taken from LocaleService (set via top-level `defaultLanguage` arg).
+    #
+    App\GraphQL\DataHub\LinkResolver:
+        arguments:
+            - '@OpenDxp\Bundle\DataHubBundle\GraphQL\Service'
+
+    App\GraphQL\DataHub\LinkFieldConfigGenerator:
+        decorates: 'opendxp.datahub.graphql.dataobjectquerytypegenerator_datatype_link'
+        arguments:
+            - '@OpenDxp\Bundle\DataHubBundle\GraphQL\Service'
+            - '@App\GraphQL\DataHub\LinkResolver'
