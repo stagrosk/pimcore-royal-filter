@@ -8,7 +8,7 @@
  * -- primaryButtonLabel [input]
  * -- primaryButtonHref [link]
  * -- secondaryButtonLabel [input]
- * -- secondaryButtonIconName [input]
+ * -- secondaryButtonIcon [select]
  * -- secondaryButtonHref [link]
  */
 
@@ -210,10 +210,10 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                  'defaultValueGenerator' => '',
               )),
               5 => 
-              \OpenDxp\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
-                 'name' => 'secondaryButtonIconName',
-                 'title' => 'Secondary button icon (Lucide)',
-                 'tooltip' => 'optional',
+              \OpenDxp\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
+                 'name' => 'secondaryButtonIcon',
+                 'title' => 'Secondary button icon',
+                 'tooltip' => '',
                  'mandatory' => false,
                  'noteditable' => false,
                  'index' => false,
@@ -227,16 +227,14 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
                  'blockedVarsForExport' => 
                 array (
                 ),
-                 'defaultValue' => NULL,
+                 'defaultValue' => '',
                  'columnLength' => 100,
-                 'regex' => '',
-                 'regexFlags' => 
-                array (
-                ),
-                 'unique' => false,
-                 'showCharCount' => false,
-                 'width' => '',
+                 'dynamicOptions' => false,
                  'defaultValueGenerator' => '',
+                 'width' => '',
+                 'optionsProviderType' => 'class',
+                 'optionsProviderClass' => 'App\\OpenDxp\\Model\\OptionProviders\\IconOptionsProvider',
+                 'optionsProviderData' => '',
               )),
               6 => 
               \OpenDxp\Model\DataObject\ClassDefinition\Data\Link::__set_state(array(
