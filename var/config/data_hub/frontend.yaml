@@ -156,33 +156,21 @@ opendxp_data_hub:
                                     isOperator: false
                                 -
                                     attributes:
-                                        attribute: contact
-                                        label: Contact
-                                        dataType: wysiwyg
-                                    isOperator: false
-                                -
-                                    attributes:
-                                        attribute: company
-                                        label: Company
-                                        dataType: wysiwyg
-                                    isOperator: false
-                                -
-                                    attributes:
-                                        attribute: headline
-                                        label: Headline
+                                        attribute: brandTagline
+                                        label: 'Brand tagline'
                                         dataType: input
                                     isOperator: false
                                 -
                                     attributes:
-                                        attribute: links
-                                        label: Links
-                                        dataType: manyToManyRelation
+                                        attribute: brandDescription
+                                        label: 'Brand description'
+                                        dataType: textarea
                                     isOperator: false
                                 -
                                     attributes:
-                                        attribute: socialMedia
-                                        label: 'Social Media'
-                                        dataType: block
+                                        attribute: welcomeMessage
+                                        label: 'Welcome Message'
+                                        dataType: input
                                     isOperator: false
                                 -
                                     attributes:
@@ -198,6 +186,36 @@ opendxp_data_hub:
                                     isOperator: false
                                 -
                                     attributes:
+                                        attribute: addressStreet
+                                        label: 'Address street'
+                                        dataType: input
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: addressZip
+                                        label: 'Address ZIP'
+                                        dataType: input
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: addressCity
+                                        label: 'Address city'
+                                        dataType: input
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: addressCountry
+                                        label: 'Address country'
+                                        dataType: input
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: socialMedia
+                                        label: 'Social Media'
+                                        dataType: block
+                                    isOperator: false
+                                -
+                                    attributes:
                                         attribute: socialMediaUrl
                                         label: 'Social media url'
                                         dataType: input
@@ -210,8 +228,38 @@ opendxp_data_hub:
                                     isOperator: false
                                 -
                                     attributes:
-                                        attribute: welcomeMessage
-                                        label: 'Welcome Message'
+                                        attribute: legalName
+                                        label: 'Legal name'
+                                        dataType: input
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: companyId
+                                        label: 'IČO'
+                                        dataType: input
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: taxId
+                                        label: 'DIČ'
+                                        dataType: input
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: vatId
+                                        label: 'IČ DPH'
+                                        dataType: input
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: registrationNote
+                                        label: 'Registration note'
+                                        dataType: input
+                                    isOperator: false
+                                -
+                                    attributes:
+                                        attribute: copyrightText
+                                        label: 'Copyright text'
                                         dataType: input
                                     isOperator: false
                                 -
