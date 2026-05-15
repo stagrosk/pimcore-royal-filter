@@ -140,41 +140,12 @@ class FilterToProductMapper extends BaseMapper
      */
     public function prepareTitle(AbstractObject $product, AbstractObject $fromObject, string $language): string
     {
-        // body/center dimensions hidden from the title - they are visible directly on the product detail
-        // and were producing very long names. Adapter name is used as the differentiator instead.
-//        $params = $this->productMetadataService->getMappedParametersOfParts($product);
-//
-//        $dimensions = '';
-//        $extraParams = [];
-//
-//        if (!empty($params)) {
-//            /** @var \App\OpenDxp\Model\ClassificationStore\ClassificationStoreMapping $mapping */
-//            $mapping = reset($params)['mapping'];
-//
-//            $height = $mapping->findItemByKeyConfigName('body', 'height');
-//            $diameter = $mapping->findItemByKeyConfigName('body', 'diameter');
-//            if ($height instanceof ClassificationStoreMappingItem && $diameter instanceof ClassificationStoreMappingItem) {
-//                $dimensions = sprintf('%s x ⌀%s', $height->getValue(), $diameter->getValue());
-//            }
-//
-//            $centerDiameterFrom = $mapping->findItemByKeyConfigName('center', 'centerDiameterFrom');
-//            if ($centerDiameterFrom instanceof ClassificationStoreMappingItem) {
-//                $centerDimensions = sprintf('⌀%s', $centerDiameterFrom->getValue());
-//
-//                $centerDiameterTo = $mapping->findItemByKeyConfigName('center', 'centerDiameterTo');
-//                if ($centerDiameterTo instanceof ClassificationStoreMappingItem
-//                    && $centerDiameterFrom->getValue() !== $centerDiameterTo->getValue()
-//                ) {
-//                    $centerDimensions .= sprintf('->⌀%s', $centerDiameterTo->getValue());
-//                }
-//
-//                $extraParams[] = trim($this->translator->trans('product_title_filter_center', [
-//                    '%dimensions%' => $centerDimensions
-//                ], 'messages', $language), " ()");
-//            }
-//        }
-
         $title = $fromObject->getTitle($language);
+
+        $dimensions = $this->resolveBodyDimensions($product);
+        if ($dimensions !== '') {
+            $title .= ' ' . $dimensions;
+        }
 
         $adapter = $fromObject instanceof FilterSet ? $fromObject->getAdapter() : null;
         if ($adapter instanceof Adapter) {
@@ -185,5 +156,31 @@ class FilterToProductMapper extends BaseMapper
         }
 
         return $title;
+    }
+
+    /**
+     * Resolve body height × diameter from the product's classification store,
+     * so variants (with their own body overrides) end up with distinguishable titles.
+     */
+    private function resolveBodyDimensions(AbstractObject $product): string
+    {
+        $params = $this->productMetadataService->getMappedParametersOfParts($product);
+        if (empty($params)) {
+            return '';
+        }
+
+        /** @var \App\OpenDxp\Model\ClassificationStore\ClassificationStoreMapping $mapping */
+        $mapping = reset($params)['mapping'];
+
+        $height = $mapping->findItemByKeyConfigName('body', 'height');
+        $diameter = $mapping->findItemByKeyConfigName('body', 'diameter');
+
+        if (!$height instanceof ClassificationStoreMappingItem
+            || !$diameter instanceof ClassificationStoreMappingItem
+        ) {
+            return '';
+        }
+
+        return sprintf('%s x ⌀%s', $height->getValue(), $diameter->getValue());
     }
 }

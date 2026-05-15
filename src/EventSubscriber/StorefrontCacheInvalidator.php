@@ -18,7 +18,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class StorefrontCacheInvalidator implements EventSubscriberInterface
 {
-    private const NAVIGATION_IDENTIFIERS = ['root', 'navigationTopbar', 'navigationFooter'];
     private const ESHOP_TRANSLATION_PREFIX = 'eshop-';
 
     private Client $httpClient;
@@ -50,16 +49,10 @@ class StorefrontCacheInvalidator implements EventSubscriberInterface
         $obj = $event->getObject();
 
         if ($obj instanceof NavigationItem) {
-            $identifier = $obj->getIdentifier();
-            if (in_array($identifier, self::NAVIGATION_IDENTIFIERS, true)) {
-                $this->invalidate('navigation');
-                return;
-            }
-            // also invalidate for child nav items (they live under root nav objects)
-            $parent = $obj->getParent();
-            if ($parent instanceof NavigationItem && in_array($parent->getIdentifier(), self::NAVIGATION_IDENTIFIERS, true)) {
-                $this->invalidate('navigation');
-            }
+            // Any NavigationItem change can affect a menu — sub-navigations are
+            // wired via `subNavigation` relations, not the parent-child tree, so we
+            // can't reliably narrow this down by identifier or parent.
+            $this->invalidate('navigation');
             return;
         }
 

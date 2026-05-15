@@ -36,10 +36,14 @@ class ProductSubscriber extends AbstractWebhookSubscriber
      * Skip the delete webhook to Vendure when the product has no apiId,
      * meaning Vendure has never seen this product (e.g. unpublished copies that
      * were never synced). Without apiId there is nothing to delete on the other side.
+     *
+     * Variants typically don't get their own apiId (Vendure's webhook callback
+     * targets master products only), so fall back to the parent's apiId — if the
+     * master was synced, the variant was synced as a ProductVariant under it.
      */
     protected function sendWebhookDelete(Concrete $object): void
     {
-        if ($object instanceof Product && empty($object->getApiId())) {
+        if ($object instanceof Product && empty($this->resolveApiIdForDelete($object))) {
             Logger::info(sprintf(
                 '[%s] DELETE skipped - product #%d has no apiId, never synced to Vendure',
                 $this->getLogPrefix(),
@@ -49,6 +53,22 @@ class ProductSubscriber extends AbstractWebhookSubscriber
         }
 
         parent::sendWebhookDelete($object);
+    }
+
+    private function resolveApiIdForDelete(Product $product): ?string
+    {
+        $apiId = $product->getApiId();
+        if (!empty($apiId)) {
+            return $apiId;
+        }
+
+        if ($product->getType() !== AbstractObject::OBJECT_TYPE_VARIANT) {
+            return null;
+        }
+
+        $parent = $product->getParent();
+
+        return $parent instanceof Product ? $parent->getApiId() : null;
     }
 
     /**
