@@ -2,8 +2,8 @@
 
 /**
  * Fields Summary:
- * - royalFilterSetup [manyToOneRelation]
- * - royalFilterSetupOverview [calculatedValue]
+ * - filterSet [manyToOneRelation]
+ * - filterSetOverview [calculatedValue]
  * - adapter [manyToOneRelation]
  * - equipBody1 [manyToOneRelation]
  * - equipBody2 [manyToOneRelation]
@@ -48,8 +48,8 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
         array (
           0 => 
           \OpenDxp\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
-             'name' => 'royalFilterSetup',
-             'title' => 'Royal Filter setup',
+             'name' => 'filterSet',
+             'title' => 'FilterSet',
              'tooltip' => '',
              'mandatory' => false,
              'noteditable' => false,
@@ -68,7 +68,7 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
             array (
               0 => 
               array (
-                'classes' => 'RoyalFilter',
+                'classes' => 'FilterSet',
               ),
             ),
              'displayMode' => 'grid',
@@ -89,8 +89,8 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
           )),
           1 => 
           \OpenDxp\Model\DataObject\ClassDefinition\Data\CalculatedValue::__set_state(array(
-             'name' => 'royalFilterSetupOverview',
-             'title' => 'Royal Filter Setup Overview',
+             'name' => 'filterSetOverview',
+             'title' => 'Filter Set Overview',
              'tooltip' => '',
              'mandatory' => false,
              'noteditable' => false,

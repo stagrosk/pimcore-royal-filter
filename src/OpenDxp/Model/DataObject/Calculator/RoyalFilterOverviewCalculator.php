@@ -32,30 +32,31 @@ readonly class RoyalFilterOverviewCalculator implements CalculatorClassInterface
         /** @var \OpenDxp\Model\DataObject\Fieldcollection\Data\RoyalFilterSetup|null $royalFilterSetupFieldcollection */
         $royalFilterSetupFieldcollection = $royalFilterSetups[$context->getIndex()] ?? null;
         if ($royalFilterSetupFieldcollection instanceof RoyalFilterSetup) {
-            $royalFilterSetup = $royalFilterSetupFieldcollection->getRoyalFilterSetup();
+            $filterSet = $royalFilterSetupFieldcollection->getFilterSet();
+            if ($filterSet instanceof FilterSet) {
+                $overrides = [
+                    'adapter' => $royalFilterSetupFieldcollection->getAdapter(),
+                    'equipBody1' => $royalFilterSetupFieldcollection->getEquipBody1(),
+                    'equipBody2' => $royalFilterSetupFieldcollection->getEquipBody2(),
+                ];
 
-            $overrides = [
-                'adapter' => $royalFilterSetupFieldcollection->getAdapter(),
-                'equipBody1' => $royalFilterSetupFieldcollection->getEquipBody1(),
-                'equipBody2' => $royalFilterSetupFieldcollection->getEquipBody2(),
-            ];
+                $dimensions = $this->calculateFinalDimensions($filterSet, $overrides);
 
-            $dimensions = $this->calculateFinalDimensions($royalFilterSetup, $overrides);
+                $html = '<table class="royal-filter-overview">';
+                $html .= '<tr><td>Total height:</td><td>' . ($dimensions['body']['height'] ? $dimensions['body']['height'] . ' ' . $dimensions['body']['unit'] : '-') . '</td></tr>';
+                $html .= '<tr><td>Diameter:</td><td>' . $dimensions['body']['diameter'] . ' ' . $dimensions['body']['diameterUnit'] . '</td></tr>';
 
-            $html = '<table class="royal-filter-overview">';
-            $html .= '<tr><td>Total height:</td><td>' . ($dimensions['body']['height'] ? $dimensions['body']['height'] . ' ' . $dimensions['body']['unit'] : '-') . '</td></tr>';
-            $html .= '<tr><td>Diameter:</td><td>' . $dimensions['body']['diameter'] . ' ' . $dimensions['body']['diameterUnit'] . '</td></tr>';
+                if ($dimensions['center']['diameterFrom1'] !== $dimensions['center']['diameterTo1']) {
+                    $html .= '<tr><td>Center:</td><td>' . $dimensions['center']['diameterFrom1'] . $dimensions['center']['diameterFrom1Unit'] . ' -> '  . $dimensions['center']['diameterTo1'] . $dimensions['center']['diameterTo1Unit']. '</td></tr>';
+                } else {
+                    $html .= '<tr><td>Center:</td><td>' . $dimensions['center']['diameterFrom1'] . $dimensions['center']['diameterFrom1Unit'] . '</td></tr>';
+                }
 
-            if ($dimensions['center']['diameterFrom1'] !== $dimensions['center']['diameterTo1']) {
-                $html .= '<tr><td>Center:</td><td>' . $dimensions['center']['diameterFrom1'] . $dimensions['center']['diameterFrom1Unit'] . ' -> '  . $dimensions['center']['diameterTo1'] . $dimensions['center']['diameterTo1Unit']. '</td></tr>';
-            } else {
-                $html .= '<tr><td>Center:</td><td>' . $dimensions['center']['diameterFrom1'] . $dimensions['center']['diameterFrom1Unit'] . '</td></tr>';
+                $equipBody1 = $filterSet->getEquipBody1();
+                $equipBody2 = $filterSet->getEquipBody2();
+                $html .= $equipBody1 ? '<tr><td>Top equipment:</td><td>' . $equipBody1->getTitle($locale) . '</td></tr>' : '';
+                $html .= $equipBody2 ? '<tr><td>Bottom equipment:</td><td>' . $equipBody2->getTitle($locale) . '</td></tr>' : '';
             }
-
-            $equipBody1 = $royalFilterSetup->getEquipBody1();
-            $equipBody2 = $royalFilterSetup->getEquipBody2();
-            $html .= $equipBody1 ? '<tr><td>Top equipment:</td><td>' . $equipBody1->getTitle($locale) . '</td></tr>' : '';
-            $html .= $equipBody2 ? '<tr><td>Bottom equipment:</td><td>' . $equipBody2->getTitle($locale) . '</td></tr>' : '';
 
             $html .= '</table>';
         }
@@ -75,17 +76,17 @@ readonly class RoyalFilterOverviewCalculator implements CalculatorClassInterface
     }
 
     /**
-     * @param \App\OpenDxp\Model\DataObject\FilterSet $royalFilterSetup
+     * @param \App\OpenDxp\Model\DataObject\FilterSet $filterSet
      * @param array $overrides
      *
      * @return array
      */
-    private function calculateFinalDimensions(FilterSet $royalFilterSetup, array $overrides = []): array
+    private function calculateFinalDimensions(FilterSet $filterSet, array $overrides = []): array
     {
         $dimensions = [];
 
         $productMetadataService = \OpenDxp::getContainer()->get(ProductMetadataService::class);
-        $mappedParameters = $productMetadataService->getMappedParametersOfParts($royalFilterSetup, $overrides);
+        $mappedParameters = $productMetadataService->getMappedParametersOfParts($filterSet, $overrides);
 
         $body1Height = isset($mappedParameters['body1']) ? $mappedParameters['body1']['mapping']?->findItemByKeyConfigName('body', 'height') : null;
         $body2Height = isset($mappedParameters['body2']) ? $mappedParameters['body2']['mapping']?->findItemByKeyConfigName('body', 'height') : null;
