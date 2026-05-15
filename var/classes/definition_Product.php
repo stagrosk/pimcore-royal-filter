@@ -50,7 +50,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1777644076,
+   'modificationDate' => 1778766806,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -1366,7 +1366,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                         array (
                         ),
                          'fieldtype' => 'text',
-                         'html' => '​<div class="alert alert-info">Only for productType = Whirlpool filter</div>',
+                         'html' => '<div class="alert alert-info">Only for productType = Filter / Whirlpool filter</div>',
                          'renderingClass' => '',
                          'renderingData' => '',
                          'border' => false,

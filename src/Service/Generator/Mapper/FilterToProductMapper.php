@@ -89,6 +89,9 @@ class FilterToProductMapper extends BaseMapper
 //            $product->setSeoDescription($product->getDescription($language), $language);
         }
 
+        // paper cartridges
+        $product->setPaperCartridges($fromObject->getPaperCartridges());
+
         // benefit set
         $this->assignBenefitSetForFilters($product);
 

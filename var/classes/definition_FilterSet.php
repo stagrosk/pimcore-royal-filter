@@ -15,6 +15,7 @@
  * - product [manyToOneRelation]
  * - generateAsProduct [checkbox]
  * - Prices [fieldcollections]
+ * - paperCartridges [manyToManyObjectRelation]
  * - body1 [manyToOneRelation]
  * - bodyMiddle [manyToOneRelation]
  * - body2 [manyToOneRelation]
@@ -33,7 +34,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1777542719,
+   'modificationDate' => 1778746651,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -532,6 +533,45 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                  'children' => 
                 array (
                   0 => 
+                  \OpenDxp\Model\DataObject\ClassDefinition\Data\ManyToManyObjectRelation::__set_state(array(
+                     'name' => 'paperCartridges',
+                     'title' => 'Paper Cartridges',
+                     'tooltip' => '',
+                     'mandatory' => false,
+                     'noteditable' => false,
+                     'index' => false,
+                     'locked' => false,
+                     'style' => '',
+                     'permissions' => NULL,
+                     'relationType' => true,
+                     'invisible' => false,
+                     'visibleGridView' => false,
+                     'visibleSearch' => false,
+                     'blockedVarsForExport' => 
+                    array (
+                    ),
+                     'classes' => 
+                    array (
+                      0 => 
+                      array (
+                        'classes' => 'PaperCartridge',
+                      ),
+                    ),
+                     'displayMode' => 'grid',
+                     'pathFormatterClass' => '',
+                     'maxItems' => NULL,
+                     'visibleFields' => 'id,title,length,diameter,centerDiameter',
+                     'allowToCreateNewObject' => false,
+                     'allowToClearRelation' => true,
+                     'optimizedAdminLoading' => true,
+                     'enableTextSelection' => true,
+                     'visibleFieldDefinitions' => 
+                    array (
+                    ),
+                     'width' => 600,
+                     'height' => '',
+                  )),
+                  1 => 
                   \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
                      'name' => 'Bodies',
                      'type' => NULL,
@@ -681,7 +721,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                      'labelWidth' => 100,
                      'labelAlign' => 'left',
                   )),
-                  1 => 
+                  2 => 
                   \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
                      'name' => 'Centers',
                      'type' => NULL,
@@ -831,7 +871,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                      'labelWidth' => 100,
                      'labelAlign' => 'left',
                   )),
-                  2 => 
+                  3 => 
                   \OpenDxp\Model\DataObject\ClassDefinition\Layout\Panel::__set_state(array(
                      'name' => 'Equipment',
                      'type' => NULL,
