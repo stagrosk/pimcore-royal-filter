@@ -10,6 +10,7 @@ use OpenDxp\Event\DataObjectEvents;
 use OpenDxp\Event\Model\DataObjectEvent;
 use OpenDxp\Event\Model\TranslationEvent;
 use OpenDxp\Event\TranslationEvents;
+use OpenDxp\Model\DataObject\ContentPage;
 use OpenDxp\Model\DataObject\NavigationItem;
 use OpenDxp\Model\DataObject\WebsiteConfiguration;
 use Psr\Log\LoggerInterface;
@@ -64,6 +65,15 @@ class StorefrontCacheInvalidator implements EventSubscriberInterface
 
         if ($obj instanceof WebsiteConfiguration) {
             $this->invalidate('config');
+            return;
+        }
+
+        if ($obj instanceof ContentPage) {
+            // Note: parent tree moves/renames and changes to externally referenced
+            // relations (media, linked objects) won't trigger this — they only get
+            // picked up after the 15-min TTL on the storefront-side Map cache.
+            $this->invalidate('content-pages');
+            return;
         }
     }
 

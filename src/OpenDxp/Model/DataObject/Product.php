@@ -2,7 +2,10 @@
 
 namespace App\OpenDxp\Model\DataObject;
 
+use App\OpenDxp\ClassificationStore\ClassificationStoreHelper;
 use App\OpenDxp\DataObject\Calculator\ParametersConfigCalculator;
+use App\OpenDxp\Model\ClassificationStore\ClassificationStoreMappingItem;
+use App\Service\ClassificationStoreTranslationService;
 use OpenDxp\Model\DataObject\AbstractObject;
 use OpenDxp\Model\DataObject\Data\ImageGallery;
 use OpenDxp\Model\DataObject\Fieldcollection;
@@ -11,6 +14,17 @@ use OpendxpHeadlessContentBundle\Model\SlugAwareInterface;
 
 class Product extends \OpenDxp\Model\DataObject\Product implements SlugAwareInterface
 {
+    private ?ClassificationStoreTranslationService $translationService = null;
+
+    private function getTranslationService(): ClassificationStoreTranslationService
+    {
+        if ($this->translationService === null) {
+            $this->translationService = \OpenDxp::getContainer()->get(ClassificationStoreTranslationService::class);
+        }
+
+        return $this->translationService;
+    }
+
     /**
      * @param string|null $language
      *
@@ -404,14 +418,127 @@ class Product extends \OpenDxp\Model\DataObject\Product implements SlugAwareInte
             return [];
         }
 
-        $ids = [];
+        $languages = Tool::getValidLanguages();
+        $result = [];
+
         foreach ($cartridges as $cartridge) {
-            if ($cartridge->isPublished()) {
-                $ids[] = $cartridge->getId();
+            if (!$cartridge->isPublished()) {
+                continue;
+            }
+
+            $codes = [];
+            $codesCollection = $cartridge->getCodes();
+            if ($codesCollection instanceof Fieldcollection) {
+                foreach ($codesCollection as $codeItem) {
+                    $codes[] = [
+                        'code' => method_exists($codeItem, 'getCode') ? $codeItem->getCode() : null,
+                        'showInTitle' => method_exists($codeItem, 'getShowInTitle') ? $codeItem->getShowInTitle() : false,
+                    ];
+                }
+            }
+
+            $translations = [];
+            foreach ($languages as $language) {
+                $translations[$language] = [
+                    'title' => $cartridge->getTitle($language),
+                ];
+            }
+
+            $result[] = [
+                'pimcoreId' => $cartridge->getId(),
+                'translations' => $translations,
+                'codes' => $codes,
+                'defaultImage' => $this->serializeCartridgeAsset($cartridge->getDefaultImage()),
+                'images' => $this->serializeCartridgeImageGallery($cartridge->getImages()),
+                'parameters' => $this->mapCartridgeParameters($cartridge),
+            ];
+        }
+
+        return $result;
+    }
+
+    private function serializeCartridgeAsset(?\OpenDxp\Model\Asset $asset): ?array
+    {
+        if ($asset === null) {
+            return null;
+        }
+
+        return [
+            'id' => $asset->getId(),
+            'filename' => $asset->getFilename(),
+            'path' => $asset->getFullPath(),
+            'mimeType' => $asset->getMimeType(),
+        ];
+    }
+
+    private function serializeCartridgeImageGallery(?ImageGallery $gallery): array
+    {
+        if (!$gallery instanceof ImageGallery) {
+            return [];
+        }
+
+        $images = [];
+        foreach ($gallery->getItems() as $hotspotImage) {
+            $asset = $hotspotImage->getImage();
+            $serialized = $this->serializeCartridgeAsset($asset);
+            if ($serialized !== null) {
+                $images[] = $serialized;
             }
         }
 
-        return $ids;
+        return $images;
+    }
+
+    private function mapCartridgeParameters(\OpenDxp\Model\DataObject\PaperCartridge $cartridge): array
+    {
+        $metadata = $cartridge->getMetadata();
+        if ($metadata === null) {
+            return [];
+        }
+
+        $classificationStoreHelper = new ClassificationStoreHelper();
+        $mapping = $classificationStoreHelper->getClassificationStoreMapped($metadata);
+        $items = $mapping->getClassificationStoreMappingItems();
+
+        $parameters = [];
+        foreach ($items as $item) {
+            $parameters[] = $this->mapClassificationStoreItem($item);
+        }
+
+        return $parameters;
+    }
+
+    private function mapClassificationStoreItem(ClassificationStoreMappingItem $item): array
+    {
+        $keyConfig = $item->getKeyConfig();
+        $groupConfig = $item->getGroupConfig();
+        $translationService = $this->getTranslationService();
+
+        $groupTranslations = $translationService->getGroupTranslations(
+            $groupConfig->getName(),
+            $groupConfig->getDescription() ?: $groupConfig->getName()
+        );
+
+        $keyTranslations = $translationService->getKeyTranslations(
+            $keyConfig->getName(),
+            $keyConfig->getTitle() ?: $keyConfig->getName()
+        );
+
+        return [
+            'group' => $groupConfig->getName(),
+            'groupId' => $groupConfig->getId(),
+            'groupTranslations' => $groupTranslations,
+            'key' => $keyConfig->getName(),
+            'keyId' => $keyConfig->getId(),
+            'keyTranslations' => $keyTranslations,
+            'label' => $item->getLabel(),
+            'type' => $keyConfig->getType(),
+            'value' => $item->getValue(),
+            'rawValue' => $item->getRawValue(),
+            'unit' => $item->getUnit(),
+            'unitLongName' => $item->getUnitLongName(),
+            'optionValue' => $item->getOptionValue(),
+        ];
     }
 
     public function getProductTabsData(): array

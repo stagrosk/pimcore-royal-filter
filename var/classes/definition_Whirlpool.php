@@ -32,7 +32,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1777217205,
+   'modificationDate' => 1778832095,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
