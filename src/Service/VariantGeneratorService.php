@@ -7,6 +7,7 @@ namespace App\Service;
 use App\OpenDxp\Helpers\VersionHelper;
 use App\OpenDxp\Model\DataObject\FilterSet;
 use App\Service\Generator\Mapper\FilterToProductMapper;
+use OpenDxp\Logger;
 use OpenDxp\Model\DataObject\AbstractObject;
 use OpenDxp\Model\DataObject\Fieldcollection;
 use OpenDxp\Model\DataObject\Fieldcollection\Data\ProductOption as ProductOptionFC;
@@ -48,7 +49,7 @@ class VariantGeneratorService
         if ($fromObject instanceof FilterSet) {
             // Single variant from FilterSet
             $variantsData[] = [
-                'royalFilterSetup' => $fromObject,
+                'filterSet' => $fromObject,
                 'masterProduct' => $masterProduct,
                 'partOverrides' => [],
                 'variantOptions' => [],
@@ -57,20 +58,15 @@ class VariantGeneratorService
             // Multiple variants from Whirlpool setups
             $royalFilterSetups = $fromObject->getRoyalFilterSetups();
 
-            if ($royalFilterSetups === null) {
-                return;
-            }
-
             /** @var \OpenDxp\Model\DataObject\Fieldcollection\Data\RoyalFilterSetup $fieldCollection */
-            foreach ($royalFilterSetups->getItems() as $fieldCollection) {
-                $royalFilterSetup = $fieldCollection->getRoyalFilterSetup();
-
-                if (!$royalFilterSetup instanceof FilterSet) {
+            foreach ($royalFilterSetups?->getItems() ?? [] as $fieldCollection) {
+                $filterSet = $fieldCollection->getFilterSet();
+                if (!$filterSet instanceof FilterSet) {
                     continue;
                 }
 
                 $variantsData[] = [
-                    'royalFilterSetup' => $royalFilterSetup,
+                    'filterSet' => $filterSet,
                     'masterProduct' => $masterProduct,
                     'partOverrides' => [
                         'adapter' => $fieldCollection->getAdapter(),
@@ -82,18 +78,51 @@ class VariantGeneratorService
             }
         }
 
-        if (empty($variantsData)) {
-            return;
-        }
-
         // If we have more than 1 variant, calculate options from differences
         if (count($variantsData) > 1) {
             $variantsData = $this->resolveVariantOptions($variantsData);
         }
 
         // Create/update variant products
+        $expectedSkus = [];
         foreach ($variantsData as $variantData) {
+            $expectedSkus[] = sprintf('V-%s', $variantData['filterSet']->getId());
             $this->handleVariantProduct($variantData);
+        }
+
+        // Remove orphan variants whose source setup was deleted
+        $this->removeOrphanVariants($masterProduct, $expectedSkus);
+    }
+
+    /**
+     * Delete variant children of master that no longer match any expected SKU
+     *
+     * @param Product $masterProduct
+     * @param string[] $expectedSkus
+     *
+     * @return void
+     * @throws \Exception
+     */
+    private function removeOrphanVariants(Product $masterProduct, array $expectedSkus): void
+    {
+        foreach ($masterProduct->getChildren([AbstractObject::OBJECT_TYPE_VARIANT], true) as $child) {
+            if (!$child instanceof Product) {
+                continue;
+            }
+
+            if (in_array($child->getSku(), $expectedSkus, true)) {
+                continue;
+            }
+
+            Logger::notice(sprintf(
+                '[VariantGeneratorService] - Removing orphan variant: %s (master: %s)',
+                $child->getKey(),
+                $masterProduct->getKey()
+            ));
+
+            VersionHelper::useVersioning(function () use ($child) {
+                $child->delete();
+            }, false);
         }
     }
 
@@ -114,7 +143,7 @@ class VariantGeneratorService
             $tempProduct = new Product();
             $this->productMetadataService->copyMetadata(
                 $tempProduct,
-                $variantData['royalFilterSetup'],
+                $variantData['filterSet'],
                 $variantData['partOverrides'],
                 true // skip pre-save
             );
@@ -171,13 +200,13 @@ class VariantGeneratorService
      */
     private function handleVariantProduct(array $variantData): void
     {
-        /** @var FilterSet $royalFilterSetup */
-        $royalFilterSetup = $variantData['royalFilterSetup'];
+        /** @var FilterSet $filterSet */
+        $filterSet = $variantData['filterSet'];
         /** @var Product $masterProduct */
         $masterProduct = $variantData['masterProduct'];
 
         // Try to find existing variant
-        $variantProduct = $this->findExistingVariant($masterProduct, $royalFilterSetup);
+        $variantProduct = $this->findExistingVariant($masterProduct, $filterSet);
 
         if (!$variantProduct instanceof Product) {
             $variantProduct = new Product();
@@ -186,15 +215,15 @@ class VariantGeneratorService
         // Map royal filter to product
         $this->filterToProductMapper->mapObjectToProduct(
             $variantProduct,
-            $royalFilterSetup,
+            $filterSet,
             ['extraData' => ['partOverrides' => $variantData['partOverrides']]]
         );
 
         // Set variant properties
         $variantProduct->setParent($masterProduct);
         $variantProduct->setType(AbstractObject::OBJECT_TYPE_VARIANT);
-        $variantProduct->setSku(sprintf('V-%s', $royalFilterSetup->getId()));
-        $variantProduct->setKey(Service::getValidKey(sprintf('V-%s', $royalFilterSetup->getKey()), 'object'));
+        $variantProduct->setSku(sprintf('V-%s', $filterSet->getId()));
+        $variantProduct->setKey(Service::getValidKey(sprintf('V-%s', $filterSet->getKey()), 'object'));
 
         // Handle product options
         $this->assignProductOptions($variantProduct, $variantData['variantOptions']);
@@ -209,13 +238,13 @@ class VariantGeneratorService
      * Find existing variant product by royal filter setup
      *
      * @param Product $masterProduct
-     * @param FilterSet $royalFilterSetup
+     * @param FilterSet $filterSet
      *
      * @return Product|null
      */
-    private function findExistingVariant(Product $masterProduct, FilterSet $royalFilterSetup): ?Product
+    private function findExistingVariant(Product $masterProduct, FilterSet $filterSet): ?Product
     {
-        $expectedSku = sprintf('V-%s', $royalFilterSetup->getId());
+        $expectedSku = sprintf('V-%s', $filterSet->getId());
 
         foreach ($masterProduct->getChildren([AbstractObject::OBJECT_TYPE_VARIANT]) as $child) {
             if ($child instanceof Product && $child->getSku() === $expectedSku) {
