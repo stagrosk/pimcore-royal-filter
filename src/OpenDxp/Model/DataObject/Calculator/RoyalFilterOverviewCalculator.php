@@ -34,13 +34,7 @@ readonly class RoyalFilterOverviewCalculator implements CalculatorClassInterface
         if ($royalFilterSetupFieldcollection instanceof RoyalFilterSetup) {
             $filterSet = $royalFilterSetupFieldcollection->getFilterSet();
             if ($filterSet instanceof FilterSet) {
-                $overrides = [
-                    'adapter' => $royalFilterSetupFieldcollection->getAdapter(),
-                    'equipBody1' => $royalFilterSetupFieldcollection->getEquipBody1(),
-                    'equipBody2' => $royalFilterSetupFieldcollection->getEquipBody2(),
-                ];
-
-                $dimensions = $this->calculateFinalDimensions($filterSet, $overrides);
+                $dimensions = $this->calculateFinalDimensions($filterSet);
 
                 $html = '<table class="royal-filter-overview">';
                 $html .= '<tr><td>Total height:</td><td>' . ($dimensions['body']['height'] ? $dimensions['body']['height'] . ' ' . $dimensions['body']['unit'] : '-') . '</td></tr>';
@@ -77,16 +71,15 @@ readonly class RoyalFilterOverviewCalculator implements CalculatorClassInterface
 
     /**
      * @param \App\OpenDxp\Model\DataObject\FilterSet $filterSet
-     * @param array $overrides
      *
      * @return array
      */
-    private function calculateFinalDimensions(FilterSet $filterSet, array $overrides = []): array
+    private function calculateFinalDimensions(FilterSet $filterSet): array
     {
         $dimensions = [];
 
         $productMetadataService = \OpenDxp::getContainer()->get(ProductMetadataService::class);
-        $mappedParameters = $productMetadataService->getMappedParametersOfParts($filterSet, $overrides);
+        $mappedParameters = $productMetadataService->getMappedParametersOfParts($filterSet);
 
         $body1Height = isset($mappedParameters['body1']) ? $mappedParameters['body1']['mapping']?->findItemByKeyConfigName('body', 'height') : null;
         $body2Height = isset($mappedParameters['body2']) ? $mappedParameters['body2']['mapping']?->findItemByKeyConfigName('body', 'height') : null;

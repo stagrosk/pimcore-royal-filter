@@ -16,7 +16,6 @@ use OpenDxp\Model\DataObject\Fieldcollection\Data\Price;
 use OpenDxp\Model\DataObject\PriceList;
 use OpenDxp\Model\DataObject\Product;
 use OpenDxp\Model\DataObject\FilterSet;
-use OpenDxp\Model\DataObject\Whirlpool;
 
 class ProductSubscriber extends AbstractWebhookSubscriber
 {
@@ -75,7 +74,7 @@ class ProductSubscriber extends AbstractWebhookSubscriber
      * Source object IDs whose POST_UPDATE we want to skip in this request.
      * Set when we manually disable generation during a Product deletion so the
      * subsequent source save (triggered by clearing the product relation) does not
-     * fire generation/cleanup logic in the FilterSet/Whirlpool subscribers.
+     * fire generation/cleanup logic in the FilterSet subscriber.
      *
      * @var array<int, true>
      */
@@ -310,7 +309,7 @@ class ProductSubscriber extends AbstractWebhookSubscriber
 
     /**
      * When a product is deleted manually (not as part of a regeneration cycle),
-     * also disable auto-regeneration on the source FilterSet/Whirlpool.
+     * also disable auto-regeneration on the source FilterSet.
      * Otherwise the next save on the source - including pimcore's relation cleanup
      * after deletion - re-runs the generator and recreates the product.
      */
@@ -327,7 +326,7 @@ class ProductSubscriber extends AbstractWebhookSubscriber
         }
 
         $source = $product->getGeneratedFromObject();
-        if (!$source instanceof FilterSet && !$source instanceof Whirlpool) {
+        if (!$source instanceof FilterSet) {
             return;
         }
 

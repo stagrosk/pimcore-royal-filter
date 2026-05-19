@@ -50,7 +50,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1778766806,
+   'modificationDate' => 1779199601,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -262,29 +262,24 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                      'blockedVarsForExport' => 
                     array (
                     ),
-                     'options' => 
+                     'options' =>
                     array (
-                      0 => 
+                      0 =>
                       array (
                         'key' => 'Product',
                         'value' => 'product',
                       ),
-                      1 => 
+                      1 =>
                       array (
                         'key' => 'Filter',
                         'value' => 'filter',
                       ),
-                      2 => 
-                      array (
-                        'key' => 'Whirlpool filter',
-                        'value' => 'whirlpoolFilter',
-                      ),
-                      3 => 
+                      2 =>
                       array (
                         'key' => 'Chemistry',
                         'value' => 'chemistry',
                       ),
-                      4 => 
+                      3 =>
                       array (
                         'key' => 'Products set',
                         'value' => 'productsSet',
