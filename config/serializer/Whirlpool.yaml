@@ -29,13 +29,9 @@ App\OpenDxp\Model\DataObject\Whirlpool:
             exp: object.getCustomerImagesData()
             serialized_name: customerImages
             groups: [api]
-        getProductApiId:
-            exp: object.getProductApiId()
-            serialized_name: productApiId
-            groups: [api]
-        getGenerateAsProduct:
-            exp: object.getGenerateAsProduct()
-            serialized_name: generateAsProduct
+        getProductsData:
+            exp: object.getProductsData()
+            serialized_name: products
             groups: [api]
         getCollectionId:
             exp: object.getCollectionId()

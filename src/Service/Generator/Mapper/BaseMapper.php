@@ -61,8 +61,7 @@ abstract class BaseMapper implements MapperInterface
 
     protected function assignBenefitSetForFilters(Product $product): void
     {
-        $type = $product->getProductType();
-        if ($type !== 'filter' && $type !== 'whirlpoolFilter') {
+        if ($product->getProductType() !== 'filter') {
             return;
         }
 

@@ -29,6 +29,10 @@ App\OpenDxp\Model\DataObject\Collection:
             exp: object.getIcon()
             serialized_name: icon
             groups: [api]
+        getListingModeValue:
+            exp: object.getListingModeValue()
+            serialized_name: listingMode
+            groups: [api]
         getParentCollectionId:
             exp: object.getParentCollectionId()
             serialized_name: parentId

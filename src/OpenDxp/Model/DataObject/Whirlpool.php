@@ -9,6 +9,9 @@ use App\OpenDxp\Model\ClassificationStore\ClassificationStoreMappingItem;
 use App\Service\ClassificationStoreTranslationService;
 use OpenDxp\Model\DataObject\Data\ImageGallery;
 use OpenDxp\Model\DataObject\Fieldcollection;
+use OpenDxp\Model\DataObject\Fieldcollection\Data\RoyalFilterSetup;
+use OpenDxp\Model\DataObject\FilterSet;
+use OpenDxp\Model\DataObject\Product;
 use OpenDxp\Tool;
 
 class Whirlpool extends \OpenDxp\Model\DataObject\Whirlpool
@@ -122,15 +125,51 @@ class Whirlpool extends \OpenDxp\Model\DataObject\Whirlpool
         return $images;
     }
 
-    public function getProductApiId(): ?string
+    /**
+     * Filter products linked to this whirlpool via the royalFilterSetups fieldcollection.
+     * Each entry is one Whirlpool–FilterSet join row:
+     *   - filterSetId / generateAsProduct identify the FilterSet and its intent
+     *   - filterVerified is a per-Whirlpool annotation on this specific pairing
+     *   - product is the generated Pimcore/Vendure product, or null when not yet generated
+     *
+     * @return array<int, array{filterSetId: int|null, generateAsProduct: bool, filterVerified: bool, product: array{pimcoreId: int, apiId: string|null, sku: string|null}|null}>
+     */
+    public function getProductsData(): array
     {
-        $product = $this->getProduct();
+        $result = [];
 
-        if (!$product instanceof \OpenDxp\Model\DataObject\Product) {
-            return null;
+        $setups = $this->getRoyalFilterSetups();
+        if (!$setups instanceof Fieldcollection) {
+            return $result;
         }
 
-        return $product->getApiId();
+        foreach ($setups as $setup) {
+            if (!$setup instanceof RoyalFilterSetup) {
+                continue;
+            }
+
+            $filterSet = $setup->getFilterSet();
+            if (!$filterSet instanceof FilterSet) {
+                continue;
+            }
+
+            $product = $filterSet->getProduct();
+
+            $result[] = [
+                'filterSetId' => $filterSet->getId(),
+                'generateAsProduct' => (bool) $filterSet->getGenerateAsProduct(),
+                'filterVerified' => (bool) $setup->getFilterVerified(),
+                'product' => $product instanceof Product
+                    ? [
+                        'pimcoreId' => $product->getId(),
+                        'apiId' => $product->getApiId(),
+                        'sku' => $product->getSku(),
+                    ]
+                    : null,
+            ];
+        }
+
+        return $result;
     }
 
     public function getCollectionId(): ?int

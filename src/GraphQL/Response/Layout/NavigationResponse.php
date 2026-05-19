@@ -83,6 +83,10 @@ class NavigationResponse extends AbstractResponse
                 'type' => Type::string(),
                 'description' => 'Description of the category',
             ],
+            'listingMode' => [
+                'type' => Type::string(),
+                'description' => 'FE listing flow hint: "products" (default) or "whirlpools" (special ES index)',
+            ],
         ];
     }
 

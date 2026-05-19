@@ -116,6 +116,7 @@ class NavigationByIdentifierResolver extends AbstractResolver
                 'imageTile' => $this->getImageUrl($object, 'category-tile'),
                 'imagePreview' => $this->getImageUrl($object, 'category-preview'),
                 'description' => method_exists($object, 'getDescription') ? $object->getDescription($language) : null,
+                'listingMode' => method_exists($object, 'getListingModeValue') ? $object->getListingModeValue() : 'products',
             ];
 
             if ($object instanceof ContentPage) {

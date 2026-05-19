@@ -13,6 +13,7 @@
  * - textColor [rgbaColor]
  * - backgroundColor [rgbaColor]
  * - icon [select]
+ * - listingMode [select]
  * - filterConfig [fieldcollections]
  * - metadata [classificationstore]
  * - customerGroups [manyToManyRelation]
@@ -26,7 +27,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
    'title' => '',
    'description' => '',
    'creationDate' => NULL,
-   'modificationDate' => 1777217223,
+   'modificationDate' => 1778875212,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -321,7 +322,7 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                          'invisible' => false,
                          'visibleGridView' => false,
                          'visibleSearch' => false,
-                         'blockedVarsForExport' => 
+                         'blockedVarsForExport' =>
                         array (
                         ),
                          'defaultValue' => NULL,
@@ -331,6 +332,46 @@ return \OpenDxp\Model\DataObject\ClassDefinition::__set_state(array(
                          'width' => '',
                          'optionsProviderType' => 'class',
                          'optionsProviderClass' => 'App\\OpenDxp\\Model\\OptionProviders\\IconOptionsProvider',
+                         'optionsProviderData' => '',
+                      )),
+                      4 =>
+                      \OpenDxp\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
+                         'name' => 'listingMode',
+                         'title' => 'Listing mode',
+                         'tooltip' => 'Tells the frontend which listing flow to use for this collection',
+                         'mandatory' => false,
+                         'noteditable' => false,
+                         'index' => false,
+                         'locked' => false,
+                         'style' => '',
+                         'permissions' => NULL,
+                         'relationType' => false,
+                         'invisible' => false,
+                         'visibleGridView' => false,
+                         'visibleSearch' => false,
+                         'blockedVarsForExport' =>
+                        array (
+                        ),
+                         'options' =>
+                        array (
+                          0 =>
+                          array (
+                            'key' => 'Products',
+                            'value' => 'products',
+                          ),
+                          1 =>
+                          array (
+                            'key' => 'Whirlpools',
+                            'value' => 'whirlpools',
+                          ),
+                        ),
+                         'defaultValue' => 'products',
+                         'columnLength' => 190,
+                         'dynamicOptions' => false,
+                         'defaultValueGenerator' => '',
+                         'width' => '',
+                         'optionsProviderType' => 'configure',
+                         'optionsProviderClass' => '',
                          'optionsProviderData' => '',
                       )),
                     ),

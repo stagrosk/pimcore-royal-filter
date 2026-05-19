@@ -58,6 +58,20 @@ class Collection extends \OpenDxp\Model\DataObject\Collection implements SlugAwa
     }
 
     /**
+     * Listing mode for the FE — tells the frontend which search/listing flow to use:
+     *  - "products"   (default) — standard product listing with parameter facets
+     *  - "whirlpools" — dedicated whirlpool ES index with whirlpool facets
+     *
+     * Falls back to "products" for legacy rows where the column is still NULL.
+     */
+    public function getListingModeValue(): string
+    {
+        $value = $this->getListingMode();
+
+        return is_string($value) && $value !== '' ? $value : 'products';
+    }
+
+    /**
      * Get translations for all languages
      *
      * @return array

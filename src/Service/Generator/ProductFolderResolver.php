@@ -9,7 +9,6 @@ use OpenDxp\Model\DataObject\Service;
 class ProductFolderResolver
 {
     public const PRODUCTS_ROOT_FILTER = 'Products';
-    public const PRODUCTS_ROOT_WHIRLPOOL = 'Products/Filters-by-whirlpools';
 
     /**
      * Mirror the source object's parent folder hierarchy under a new root.
@@ -25,7 +24,7 @@ class ProductFolderResolver
         // start from the object's own full path so we always see the real hierarchy
         $sourceParts = explode('/', trim($source->getFullPath(), '/'));
         array_pop($sourceParts);   // drop object's own key (the leaf)
-        array_shift($sourceParts); // drop source root folder (e.g. "RoyalFilterSetups", "Whirlpools")
+        array_shift($sourceParts); // drop source root folder (e.g. "RoyalFilterSetups")
 
         $targetParts = explode('/', trim($targetRoot, '/'));
         $path = '/' . implode('/', array_merge($targetParts, $sourceParts));
