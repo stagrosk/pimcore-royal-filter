@@ -12,6 +12,8 @@ services:
 
     App\EventSubscriber\FilterSetSubscriber:
 
+    App\EventSubscriber\WhirlpoolSubscriber:
+
     App\EventSubscriber\PriceListSubscriber:
 
     App\EventSubscriber\ProductFlagSubscriber:
