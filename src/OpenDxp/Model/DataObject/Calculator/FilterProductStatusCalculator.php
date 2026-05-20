@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\OpenDxp\Model\DataObject\Calculator;
 
 use App\OpenDxp\Model\DataObject\FilterSet;
+use OpenDxp\Model\DataObject\AbstractObject;
 use OpenDxp\Model\DataObject\ClassDefinition\CalculatorClassInterface;
 use OpenDxp\Model\DataObject\Concrete;
 use OpenDxp\Model\DataObject\Data\CalculatedValue;
@@ -35,14 +36,29 @@ readonly class FilterProductStatusCalculator implements CalculatorClassInterface
         $generate = $filterSet->getGenerateAsProduct() === true;
 
         if ($product instanceof Product) {
+            $isVariant = $product->getType() === AbstractObject::OBJECT_TYPE_VARIANT;
+            $kind = $isVariant ? 'Variant' : 'Master';
             $apiId = $product->getApiId();
+
             $lines = [
+                sprintf('Kind: %s', $kind),
                 sprintf('Product #%d', $product->getId()),
                 sprintf('SKU: %s', htmlspecialchars((string) $product->getSku(), ENT_QUOTES)),
                 $apiId ? sprintf('Vendure apiId: %s', htmlspecialchars($apiId, ENT_QUOTES)) : 'Vendure apiId: not synced yet',
             ];
 
-            return $this->renderBox('ok', 'Filter product exists.', $lines);
+            if ($isVariant) {
+                $master = $product->getParent();
+                if ($master instanceof Product) {
+                    $lines[] = sprintf(
+                        'Master #%d (SKU: %s)',
+                        $master->getId(),
+                        htmlspecialchars((string) $master->getSku(), ENT_QUOTES)
+                    );
+                }
+            }
+
+            return $this->renderBox('ok', sprintf('Filter product exists (%s).', $kind), $lines);
         }
 
         if ($generate) {
