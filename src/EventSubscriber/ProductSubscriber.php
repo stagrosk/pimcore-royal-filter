@@ -100,6 +100,7 @@ class ProductSubscriber extends AbstractWebhookSubscriber
             return;
         }
 
+        $this->syncTypeWithParent($object);
         $this->ensureUniqueSku($object);
         $this->applyDiscountLogic($object);
 
@@ -112,6 +113,35 @@ class ProductSubscriber extends AbstractWebhookSubscriber
         if (!empty($autoGroups)) {
             $object->setCustomerGroups($autoGroups);
         }
+    }
+
+    /**
+     * Pimcore's tree drag-and-drop moves an object but does not flip its `type` to match
+     * the new parent. A Product child of another Product must be a variant; a Product
+     * child of a folder must be a regular object. Without this sync the admin shows the
+     * wrong icon, listings include children that shouldn't be there, and our own variant
+     * detection (e.g. FilterProductStatusCalculator) reports the wrong kind.
+     */
+    private function syncTypeWithParent(Product $product): void
+    {
+        $parent = $product->getParent();
+        $expectedType = $parent instanceof Product
+            ? AbstractObject::OBJECT_TYPE_VARIANT
+            : AbstractObject::OBJECT_TYPE_OBJECT;
+
+        if ($product->getType() === $expectedType) {
+            return;
+        }
+
+        Logger::notice(sprintf(
+            '[ProductSubscriber] Syncing product %s type from "%s" to "%s" (parent: %s)',
+            $product->getId() ? '#' . $product->getId() : 'new',
+            (string) $product->getType(),
+            $expectedType,
+            $parent instanceof Product ? 'Product #' . $parent->getId() : 'Folder/root'
+        ));
+
+        $product->setType($expectedType);
     }
 
     /**
@@ -166,6 +196,8 @@ class ProductSubscriber extends AbstractWebhookSubscriber
         if (!$object instanceof Product) {
             return;
         }
+
+        $this->syncTypeWithParent($object);
 
         // clearProductSetPriceFields must run before applyDiscountLogic:
         // discount logic short-circuits when price === null, so clearing
