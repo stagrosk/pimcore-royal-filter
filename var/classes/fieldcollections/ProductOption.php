@@ -2,7 +2,6 @@
 
 /**
  * Fields Summary:
- * - productOptionGroup [manyToOneRelation]
  * - productOption [manyToOneRelation]
  */
 
@@ -45,47 +44,6 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
         array (
           0 => 
           \OpenDxp\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
-             'name' => 'productOptionGroup',
-             'title' => 'Product Option Group',
-             'tooltip' => '',
-             'mandatory' => false,
-             'noteditable' => false,
-             'index' => false,
-             'locked' => false,
-             'style' => '',
-             'permissions' => NULL,
-             'relationType' => true,
-             'invisible' => false,
-             'visibleGridView' => false,
-             'visibleSearch' => false,
-             'blockedVarsForExport' => 
-            array (
-            ),
-             'classes' => 
-            array (
-              0 => 
-              array (
-                'classes' => 'ProductOptionGroup',
-              ),
-            ),
-             'displayMode' => 'grid',
-             'pathFormatterClass' => '',
-             'assetInlineDownloadAllowed' => false,
-             'assetUploadPath' => '',
-             'allowToClearRelation' => true,
-             'objectsAllowed' => true,
-             'assetsAllowed' => false,
-             'assetTypes' => 
-            array (
-            ),
-             'documentsAllowed' => false,
-             'documentTypes' => 
-            array (
-            ),
-             'width' => '',
-          )),
-          1 => 
-          \OpenDxp\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
              'name' => 'productOption',
              'title' => 'Product Option',
              'tooltip' => '',
@@ -123,7 +81,7 @@ return \OpenDxp\Model\DataObject\Fieldcollection\Definition::__set_state(array(
              'documentTypes' => 
             array (
             ),
-             'width' => '',
+             'width' => 800,
           )),
         ),
          'locked' => false,
