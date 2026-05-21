@@ -6,9 +6,12 @@ use App\OpenDxp\ClassificationStore\ClassificationStoreHelper;
 use App\OpenDxp\DataObject\Calculator\ParametersConfigCalculator;
 use App\OpenDxp\Model\ClassificationStore\ClassificationStoreMappingItem;
 use App\Service\ClassificationStoreTranslationService;
+use OpenDxp\Model\Asset\Image;
 use OpenDxp\Model\DataObject\AbstractObject;
 use OpenDxp\Model\DataObject\Data\ImageGallery;
 use OpenDxp\Model\DataObject\Fieldcollection;
+use OpenDxp\Model\DataObject\ProductOption;
+use OpenDxp\Model\DataObject\ProductOptionGroup;
 use OpenDxp\Tool;
 use OpendxpHeadlessContentBundle\Model\SlugAwareInterface;
 
@@ -609,42 +612,63 @@ class Product extends \OpenDxp\Model\DataObject\Product implements SlugAwareInte
 
         if ($productOptions instanceof Fieldcollection) {
             foreach ($productOptions as $option) {
-                $optionGroup = method_exists($option, 'getProductOptionGroup') ? $option->getProductOptionGroup() : null;
                 $optionValue = method_exists($option, 'getProductOption') ? $option->getProductOption() : null;
-
-                if ($optionGroup && $optionValue) {
-                    // Get translations for group
-                    $groupTranslations = [];
-                    foreach ($languages as $language) {
-                        $groupTranslations[$language] = [
-                            'name' => $optionGroup->getName($language),
-                        ];
-                    }
-
-                    // Get translations for option
-                    $optionTranslations = [];
-                    foreach ($languages as $language) {
-                        $optionTranslations[$language] = [
-                            'name' => $optionValue->getName($language),
-                        ];
-                    }
-
-                    $options[] = [
-                        'group' => [
-                            'id' => $optionGroup->getId(),
-                            'code' => $optionGroup->getCode(),
-                            'translations' => $groupTranslations,
-                        ],
-                        'option' => [
-                            'id' => $optionValue->getId(),
-                            'code' => $optionValue->getCode(),
-                            'translations' => $optionTranslations,
-                        ],
-                    ];
+                if (!$optionValue instanceof ProductOption || !$optionValue->isPublished()) {
+                    continue;
                 }
+
+                // Group is always an ancestor of the option in the tree, so we no longer
+                // store it as a separate relation on the fieldcollection. Walk up parents
+                // to tolerate folders inserted between group and option (e.g. A-Z buckets).
+                $optionGroup = $this->resolveProductOptionGroup($optionValue);
+                if (!$optionGroup instanceof ProductOptionGroup || !$optionGroup->isPublished()) {
+                    continue;
+                }
+
+                $groupTranslations = [];
+                $optionTranslations = [];
+                foreach ($languages as $language) {
+                    $groupTranslations[$language] = ['name' => $optionGroup->getName($language)];
+                    $optionTranslations[$language] = ['name' => $optionValue->getName($language)];
+                }
+
+                $image = $optionValue->getImage();
+                $imageData = $image instanceof Image ? [
+                    'id' => $image->getId(),
+                    'filename' => $image->getFilename(),
+                    'path' => $image->getFullPath(),
+                    'mimeType' => $image->getMimeType(),
+                ] : null;
+
+                $options[] = [
+                    'group' => [
+                        'id' => $optionGroup->getId(),
+                        'code' => $optionGroup->getCode(),
+                        'translations' => $groupTranslations,
+                    ],
+                    'option' => [
+                        'id' => $optionValue->getId(),
+                        'code' => $optionValue->getCode(),
+                        'translations' => $optionTranslations,
+                        'image' => $imageData,
+                    ],
+                ];
             }
         }
 
         return $options;
+    }
+
+    private function resolveProductOptionGroup(ProductOption $option): ?ProductOptionGroup
+    {
+        $node = $option->getParent();
+        while ($node !== null) {
+            if ($node instanceof ProductOptionGroup) {
+                return $node;
+            }
+            $node = $node->getParent();
+        }
+
+        return null;
     }
 }
