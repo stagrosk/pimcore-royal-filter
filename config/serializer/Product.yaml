@@ -101,3 +101,7 @@ App\OpenDxp\Model\DataObject\Product:
             exp: object.getProductSetData()
             serialized_name: productSet
             groups: [api]
+        getFilterCompositionData:
+            exp: object.getFilterCompositionData()
+            serialized_name: filterComposition
+            groups: [api]
