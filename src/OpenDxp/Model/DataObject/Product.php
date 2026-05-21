@@ -8,8 +8,10 @@ use App\OpenDxp\Model\ClassificationStore\ClassificationStoreMappingItem;
 use App\Service\ClassificationStoreTranslationService;
 use OpenDxp\Model\Asset\Image;
 use OpenDxp\Model\DataObject\AbstractObject;
+use OpenDxp\Model\DataObject\Concrete;
 use OpenDxp\Model\DataObject\Data\ImageGallery;
 use OpenDxp\Model\DataObject\Fieldcollection;
+use OpenDxp\Model\DataObject\FilterSet;
 use OpenDxp\Model\DataObject\ProductOption;
 use OpenDxp\Model\DataObject\ProductOptionGroup;
 use OpenDxp\Tool;
@@ -670,5 +672,64 @@ class Product extends \OpenDxp\Model\DataObject\Product implements SlugAwareInte
         }
 
         return null;
+    }
+
+    /**
+     * For filter products (productType=filter), expose how the underlying FilterSet is
+     * composed so the FE can render and reason about the parts:
+     *  - body1 / bodyMiddle / body2:           cartridge tubes (bottom / extension / top-flipped)
+     *  - centerBody1 / centerBodyMiddle / centerBody2: filling material inside each body
+     *  - adapter:                              connection adapter (typically one)
+     *  - equipBody1 / equipBody2:              extras like grills or handles
+     *
+     * Returns null for non-filter products or when the source FilterSet is missing.
+     *
+     * @return array<string, array{id: int, key: string, translations: array<string, array{title: ?string}>}|null>|null
+     */
+    public function getFilterCompositionData(): ?array
+    {
+        if ($this->getProductType() !== 'filter') {
+            return null;
+        }
+
+        $filterSet = $this->getGeneratedFromObject();
+        if (!$filterSet instanceof FilterSet) {
+            return null;
+        }
+
+        return [
+            'body1' => $this->serializeFilterPart($filterSet->getBody1()),
+            'bodyMiddle' => $this->serializeFilterPart($filterSet->getBodyMiddle()),
+            'body2' => $this->serializeFilterPart($filterSet->getBody2()),
+            'centerBody1' => $this->serializeFilterPart($filterSet->getCenterBody1()),
+            'centerBodyMiddle' => $this->serializeFilterPart($filterSet->getCenterBodyMiddle()),
+            'centerBody2' => $this->serializeFilterPart($filterSet->getCenterBody2()),
+            'adapter' => $this->serializeFilterPart($filterSet->getAdapter()),
+            'equipBody1' => $this->serializeFilterPart($filterSet->getEquipBody1()),
+            'equipBody2' => $this->serializeFilterPart($filterSet->getEquipBody2()),
+        ];
+    }
+
+    /**
+     * @return array{id: int, key: string, translations: array<string, array{title: ?string}>}|null
+     */
+    private function serializeFilterPart(mixed $part): ?array
+    {
+        if (!$part instanceof Concrete || !$part->isPublished()) {
+            return null;
+        }
+
+        $translations = [];
+        foreach (Tool::getValidLanguages() as $language) {
+            $translations[$language] = [
+                'title' => method_exists($part, 'getTitle') ? $part->getTitle($language) : null,
+            ];
+        }
+
+        return [
+            'id' => $part->getId(),
+            'key' => $part->getKey(),
+            'translations' => $translations,
+        ];
     }
 }
